@@ -39,6 +39,8 @@ public class Map : MonoBehaviour {
                 cells[r, c] = new Cell(new Vector2Int(r, c), cellPos, cellType);
                 if (cellType != CellType.WALK) {
                     GameObject tile = Object.Instantiate(tileCopy, transform);
+                    tile.name = string.Format("Cube {0}, {1}", r, c);
+                    tile.transform.SetParent(mapBase.transform);
                     tile.transform.position = cells[r, c].Position;
                     tile.transform.localScale *= cellSize;
                 }
