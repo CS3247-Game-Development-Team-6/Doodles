@@ -25,6 +25,20 @@ public class EnemyMovement : MonoBehaviour
         // delta time is time passed since last frame
         transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
 
-        
+        if (Vector3.Distance(transform.position, target.position) <= 0.2f)
+        {
+            GetNextWaypoint();
+        }
+    }
+
+    void GetNextWaypoint()
+    {
+        if (waypointIndex >= Waypoints.points.Length - 1) 
+        {
+            Destroy(gameObject);
+            return;
+        }
+        waypointIndex++;
+        target = Waypoints.points[waypointIndex];
     }
 }
