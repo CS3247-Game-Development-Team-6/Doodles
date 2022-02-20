@@ -16,6 +16,7 @@ public class Map : MonoBehaviour {
         HashSet<GameObject> pathMarkerObjects = new HashSet<GameObject>();
         foreach (Collider coll in colliders) {
             if (coll.gameObject != mapBase) {
+                Debug.Log(coll.gameObject);
                 pathMarkerObjects.Add(coll.gameObject);
             }
         }
