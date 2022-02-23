@@ -15,6 +15,7 @@ public class Cell {
     private Vector2Int index;
     private Vector3 position;
     private CellType type;
+    private bool isFog;
 
     public Vector3 Position {
         get { return position; }
@@ -30,9 +31,10 @@ public class Cell {
         this.type = CellType.NONE;
     }
 
-    public Cell(Vector2Int index, Vector3 position, CellType type) {
+    public Cell(Vector2Int index, Vector3 position, CellType type, bool isFog) {
         this.index = index;
         this.position = position;
         this.type = type;
+        this.isFog = isFog;
     }
 }
