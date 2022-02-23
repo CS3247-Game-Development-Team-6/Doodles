@@ -1024,7 +1024,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   m_Layer: 0
-  m_Name: aw
+  m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1865,6 +1865,7 @@ MonoBehaviour:
   firePoint: {fileID: 1492768790}
   bulletPrefab: {fileID: 3833045344010415125, guid: 9f7d8365b67af4c478b04373797cfd39, type: 3}
   bulletForce: 4
+  shootingCooldown: 0.5
   camera: {fileID: 963194227}
 --- !u!1 &2091044108
 GameObject:
