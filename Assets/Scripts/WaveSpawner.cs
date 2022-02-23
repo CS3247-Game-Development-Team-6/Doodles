@@ -13,7 +13,7 @@ public class WaveSpawner : MonoBehaviour
     public Text waveCountdownText;
 
     // decrease with time
-    private float countdownTimer = 2f;
+    private float countdownTimer = 3f;
 
     // waveNumber = number of enemy
     private int waveIndex = 0;
@@ -37,7 +37,7 @@ public class WaveSpawner : MonoBehaviour
         for (int i = 0; i < waveIndex; i++)
         {
             SpawnEnemy();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.5f);
         }
         waveIndex++;
     }

@@ -1,21 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class EnemyMovement : MonoBehaviour
+
+public class Enemy : MonoBehaviour
 {
     public float speed = 1f;
-
-    public int health = 100;
+    
+    public float initHealth = 100;
 
     public int lootValue = 50;
 
+    private float health;
     private Transform target;
     private int waypointIndex = 0;
+
+    [Header("Unity Stuff")]
+    public Image healthBar;
 
     public void TakeDamage(int amount)
     {
         health -= amount;
+
+        // float number between 0 and 1
+        healthBar.fillAmount = health / initHealth;
 
         if (health <= 0)
         {
@@ -33,6 +42,8 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        health = initHealth;
+
         // first target, which is first waypoint in Waypoints
         target = Waypoints.points[0];
     }
