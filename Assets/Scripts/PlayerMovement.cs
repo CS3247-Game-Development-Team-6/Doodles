@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour {
                 lastMoveDirection = moveDirection;
             }
 
-            if (Input.GetKeyDown(KeyCode.F)) {
+            if (Input.GetKeyDown(KeyCode.F)) { // tentatively tied to key F for testing purposes
                 isDashing = true;
             }
             
@@ -109,6 +109,7 @@ public class PlayerMovement : MonoBehaviour {
         case State.Normal:
             rigidBody.velocity = moveDirection * playerSpeed;
 
+            // Dashing would be a replacement or an upgrade to rolling for now
             if (isDashing) {
                 Vector3 dashPosition = transform.position + lastMoveDirection * dashAmount;
 
