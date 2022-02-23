@@ -6,8 +6,29 @@ public class EnemyMovement : MonoBehaviour
 {
     public float speed = 1f;
 
+    public int health = 100;
+
+    public int lootValue = 50;
+
     private Transform target;
     private int waypointIndex = 0;
+
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die ()
+    {
+        // TODO: add ink
+
+        Destroy(gameObject);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -35,10 +56,17 @@ public class EnemyMovement : MonoBehaviour
     {
         if (waypointIndex >= Waypoints.points.Length - 1) 
         {
-            Destroy(gameObject);
+            EndPath();
             return;
         }
         waypointIndex++;
         target = Waypoints.points[waypointIndex];
+    }
+
+    void EndPath()
+    {
+        // TODO: remove base hp
+
+        Destroy(gameObject);
     }
 }
