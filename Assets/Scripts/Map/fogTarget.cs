@@ -19,7 +19,7 @@ public class fogTarget : MonoBehaviour
     void Update()
     {
         // Left click is detected
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(1))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
