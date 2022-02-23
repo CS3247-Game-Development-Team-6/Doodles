@@ -4,45 +4,128 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
     
-    public float playerSpeed;
-    public float sprintSpeed = 4f;
-    public float walkSpeed = 2f;
-    private bool isMoving = false;
-    private bool isSprinting =false;
-    
-    public Animator anim;
-    public Rigidbody rigidBody;
+    [SerializeField] private LayerMask dashLayerMask;
+    [SerializeField] private LayerMask groundLayerMask;
 
+    // states
+    private enum State {
+        Normal,
+        Rolling,
+    }
+    private State state;
+
+    // movement values
+    private float playerSpeed;
+    public float sprintSpeed = 8f;
+    public float walkSpeed = 4f;
+    public float dashAmount = 3f;
+    public float initialRollSpeed = 50f;
+    public float currentRollSpeed;
+
+    // boolean checks
+    private bool isMoving = false;
+    private bool isSprinting = false;
+    private bool isDashing = false;
+    
+    // player attributes
+    private Animator anim;
+    private Rigidbody rigidBody;
+    public Camera camera;
+
+    // directions and positions
     private Vector3 moveDirection;
+    private Vector3 lastMoveDirection;
+    private Vector3 rollDirection;
+    private Vector3 mousePositionVector;
 
     // Start is called before the first frame update
-    void Start() {
+    private void Awake() {
         playerSpeed = walkSpeed;
         // anim = GetComponent<Animator>();
-        // rigidBody = GetComponent<Rigidbody>();
+        rigidBody = GetComponent<Rigidbody>();
+        state = State.Normal;
     }
 
     // Update is called once per frame
-    void Update() {
+    private void Update() {
         ProcessInputs();
+        Ray mouseRay = camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
+            mousePositionVector = raycastHit.point;
+            //mousePositionVector.y = transform.position.y; // set to same vertical height as player
+        }
+        Debug.Log(Physics.Raycast(mouseRay, out RaycastHit test, float.MaxValue, groundLayerMask));
+        Debug.Log(mousePositionVector);
     }
 
     // Update is called at a fixed rate
-    void FixedUpdate() {
+    private void FixedUpdate() {
         Move();
+
+        Vector3 lookDirection = mousePositionVector - rigidBody.position;
+        float angle = Mathf.Atan2(lookDirection.z, lookDirection.x) * Mathf.Rad2Deg - 90f;
+        // rigidBody.rotation = angle; // TODO: player should not rotate; should change sprite instead
     }
 
-    void ProcessInputs() {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = 0;
-        float moveZ = Input.GetAxisRaw("Vertical");
+    private void ProcessInputs() {
+        switch (state) {
+        case State.Normal:
+            float moveX = Input.GetAxisRaw("Horizontal");
+            float moveY = 0;
+            float moveZ = Input.GetAxisRaw("Vertical");
 
-        moveDirection = new Vector3(moveX, moveY, moveZ).normalized;
+            moveDirection = new Vector3(moveX, moveY, moveZ).normalized;
+            if (moveDirection.x != 0 || moveDirection.z != 0) {
+                // is moving
+                lastMoveDirection = moveDirection;
+            }
+
+            if (Input.GetKeyDown(KeyCode.F)) { // tentatively tied to key F for testing purposes
+                isDashing = true;
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                rollDirection = lastMoveDirection;
+                currentRollSpeed = initialRollSpeed;
+                state = State.Rolling;
+            }
+            break;
+
+        case State.Rolling:
+            float speedDropMultiplier = 10f;
+            currentRollSpeed -= currentRollSpeed * speedDropMultiplier * Time.deltaTime;
+            
+            float rollSpeedMinimum = 20f;
+            if (currentRollSpeed < rollSpeedMinimum) {
+                state = State.Normal;
+            }
+            break;
+        }
+        
     }
 
-    void Move() {
-        rigidBody.velocity = new Vector3(moveDirection.x * playerSpeed, 
-                moveDirection.y * playerSpeed, 
-                moveDirection.z * playerSpeed);
+    private void Move() {
+        switch(state) {
+        case State.Normal:
+            rigidBody.velocity = moveDirection * playerSpeed;
+
+            // Dashing would be a replacement or an upgrade to rolling for now
+            if (isDashing) {
+                Vector3 dashPosition = transform.position + lastMoveDirection * dashAmount;
+
+                RaycastHit2D raycastHit2d = Physics2D.Raycast(transform.position, moveDirection, dashAmount, dashLayerMask);
+                if (raycastHit2d.collider != null) {
+                    // hit something
+                    dashPosition = raycastHit2d.point;
+                }
+                rigidBody.MovePosition(dashPosition);
+                isDashing = false;
+            }
+            break;
+
+        case State.Rolling:
+            rigidBody.velocity = rollDirection * currentRollSpeed;
+            break;
+        }
     }
 }
