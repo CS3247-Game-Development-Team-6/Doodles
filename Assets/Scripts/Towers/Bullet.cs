@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 
     private Transform target;
     public float speed = 70f;
+    [SerializeField] private int bulletDamage;
 
     public void Seek(Transform _target) 
     { 
@@ -16,7 +17,7 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target != null) 
+        if (target == null) 
         { 
             Destroy(gameObject);
             return;
@@ -24,11 +25,10 @@ public class Bullet : MonoBehaviour
 
         Vector3 dir = target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
-
+        
         if (dir.magnitude <= distanceThisFrame)
         {
             HitTarget();
-            return;
         }
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
@@ -36,6 +36,11 @@ public class Bullet : MonoBehaviour
 
     void HitTarget() 
     {
-        Destroy(gameObject);
+        if (target.CompareTag("Enemy"))
+        {
+            target.GetComponent<Enemy>().TakeDamage(bulletDamage);
+        }
+
+        Destroy(gameObject);    // destroys the bullet
     }
 }
