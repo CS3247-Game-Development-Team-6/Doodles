@@ -18,7 +18,7 @@ public class fogTarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Left click is detected
+        // Right click is detected
         if(Input.GetMouseButtonDown(1))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);

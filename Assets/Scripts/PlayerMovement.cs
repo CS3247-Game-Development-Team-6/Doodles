@@ -8,29 +8,32 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private LayerMask groundLayerMask;
 
     // states
-    private enum State {
+    private enum State { // used for player actions that cannot be interrupted
         Normal,
         Rolling,
     }
     private State state;
 
-    // movement values
+    // player movement values
     private float playerSpeed;
-    public float sprintSpeed = 8f;
+    public float sprintSpeed = 8f; // TODO: add sprinting if needed in the future
     public float walkSpeed = 4f;
     public float dashAmount = 3f;
     public float initialRollSpeed = 50f;
     public float currentRollSpeed;
 
+    // player values
+    private float buildDistance = 10f;
+
     // boolean checks
-    private bool isMoving = false;
-    private bool isSprinting = false;
+    private bool isSprinting = false; // TODO: add sprinting if needed in the future
     private bool isDashing = false;
+    private bool isBuilding = false;
     
-    // player attributes
+    // player unity object attributes
     private Animator anim;
     private Rigidbody rigidBody;
-    public Camera camera;
+    public Camera playerCamera;
 
     // directions and positions
     private Vector3 moveDirection;
@@ -49,13 +52,14 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     private void Update() {
         ProcessInputs();
-        Ray mouseRay = camera.ScreenPointToRay(Input.mousePosition);
+        Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
             mousePositionVector = raycastHit.point;
-            //mousePositionVector.y = transform.position.y; // set to same vertical height as player
+            // mousePositionVector.y = transform.position.y; // set to same vertical height as player
         }
-        Debug.Log(Physics.Raycast(mouseRay, out RaycastHit test, float.MaxValue, groundLayerMask));
-        Debug.Log(mousePositionVector);
+        
+        // Debug.Log(Physics.Raycast(mouseRay, out RaycastHit test, float.MaxValue, groundLayerMask));
+        // Debug.Log(mousePositionVector);
     }
 
     // Update is called at a fixed rate
@@ -76,11 +80,11 @@ public class PlayerMovement : MonoBehaviour {
 
             moveDirection = new Vector3(moveX, moveY, moveZ).normalized;
             if (moveDirection.x != 0 || moveDirection.z != 0) {
-                // is moving
-                lastMoveDirection = moveDirection;
+                // player is moving
+                lastMoveDirection = moveDirection; // used for movement actions when not moving
             }
 
-            if (Input.GetKeyDown(KeyCode.F)) { // tentatively tied to key F for testing purposes
+            if (Input.GetKeyDown(KeyCode.F)) { // TODO: dashing tentatively tied to key F for testing
                 isDashing = true;
             }
             
@@ -88,6 +92,19 @@ public class PlayerMovement : MonoBehaviour {
                 rollDirection = lastMoveDirection;
                 currentRollSpeed = initialRollSpeed;
                 state = State.Rolling;
+            }
+
+            if (Input.GetMouseButtonDown(1)) { // right click
+                Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
+                    if (raycastHit.collider.gameObject.name.Contains("TowerCell")) { // right clicked on a TowerCell
+                        Debug.Log("Clicked on " + raycastHit.collider.gameObject.name);
+                        GameObject towerCell = raycastHit.collider.gameObject;
+                        Vector3 mouseTowerCellPosition = raycastHit.point;
+                        buildTowerAttempt(mouseTowerCellPosition, towerCell);
+                    }
+                }
             }
             break;
 
@@ -127,5 +144,13 @@ public class PlayerMovement : MonoBehaviour {
             rigidBody.velocity = rollDirection * currentRollSpeed;
             break;
         }
+    }
+
+    private void buildTowerAttempt(Vector3 mouseTowerCellPosition, GameObject towerCell) {
+        if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { // player too far from tower cell
+            return;
+        }
+
+        // towerCell.GetComponent<Cell>().buildTower()); // TODO: get buildTower() working
     }
 }
