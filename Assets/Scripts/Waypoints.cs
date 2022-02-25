@@ -5,9 +5,9 @@ using UnityEngine;
 public class Waypoints : MonoBehaviour
 {
     public static Transform[] points;
+    public Map map;
     
-    void Awake ()
-    {
+    void Awake() {
         // assign array waypoints
         points = new Transform[transform.childCount];
         for (int i = 0; i < points.Length; i++)
@@ -15,15 +15,20 @@ public class Waypoints : MonoBehaviour
             points[i] = transform.GetChild(i);
         }
     }
-    // // Start is called before the first frame update
-    // void Start()
-    // {
-        
-    // }
 
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
+    private void Start() {
+        Cell[] waypointCells = new Cell[points.Length];
+        int n = waypointCells.Length;
+        for (int i = 0; i < n; i++) {
+            Transform waypoint = points[i];
+            if (Physics.Raycast(waypoint.position, Vector3.down, out RaycastHit hit, Mathf.Infinity)) {
+                // if the waypoint hits the plane right below
+                if (hit.transform.Equals(map.mapBase.transform)) {
+                    waypointCells[i] = map.GetCellFromWorldPosition(hit.point);
+                }
+            }
+        }
+        map.SetWaypoints(waypointCells);
+    }
+
 }
