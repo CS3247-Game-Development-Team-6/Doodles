@@ -16,14 +16,17 @@ public class PlayerMovement : MonoBehaviour {
 
     // player movement values
     private float playerSpeed;
-    public float sprintSpeed = 8f; // TODO: add sprinting if needed in the future
-    public float walkSpeed = 4f;
-    public float dashAmount = 3f;
-    public float initialRollSpeed = 50f;
-    public float currentRollSpeed;
+    private float sprintSpeed = 8f; // TODO: add sprinting if needed in the future
+    private float walkSpeed = 4f;
+    private float dashAmount = 3f;
+    private float initialRollSpeed = 50f;
+    private float currentRollSpeed;
 
     // player values
     private float buildDistance = 10f;
+    private float buildDuration = 3f;
+    private float currentBuildDuration = 0f;
+    private GameObject currentTowerCell; // current cell that the player is interacting with
 
     // boolean checks
     private bool isSprinting = false; // TODO: add sprinting if needed in the future
@@ -65,10 +68,12 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called at a fixed rate
     private void FixedUpdate() {
         Move();
+        Build();
 
         Vector3 lookDirection = mousePositionVector - rigidBody.position;
         float angle = Mathf.Atan2(lookDirection.z, lookDirection.x) * Mathf.Rad2Deg - 90f;
         // rigidBody.rotation = angle; // TODO: player should not rotate; should change sprite instead
+        // TODO: add player sprite animation
     }
 
     private void ProcessInputs() {
@@ -102,13 +107,18 @@ public class PlayerMovement : MonoBehaviour {
                         Debug.Log("Clicked on " + raycastHit.collider.gameObject.name);
                         GameObject towerCell = raycastHit.collider.gameObject;
                         Vector3 mouseTowerCellPosition = raycastHit.point;
-                        buildTowerAttempt(mouseTowerCellPosition, towerCell);
+                        BuildTowerAttempt(mouseTowerCellPosition, towerCell);
                     }
                 }
+            }
+
+            if (Input.GetMouseButtonDown(0)) { // left click (tied to attacking action)
+                isBuilding = false; // interrupts building action
             }
             break;
 
         case State.Rolling:
+            // TODO: add player rolling animation
             float speedDropMultiplier = 10f;
             currentRollSpeed -= currentRollSpeed * speedDropMultiplier * Time.deltaTime;
             
@@ -126,8 +136,16 @@ public class PlayerMovement : MonoBehaviour {
         case State.Normal:
             rigidBody.velocity = moveDirection * playerSpeed;
 
+            // TODO: add player moving animation
+
+            if (rigidBody.velocity.magnitude > 0.2) {
+                isBuilding = false; // interrupt building action
+            }
+
             // Dashing would be a replacement or an upgrade to rolling for now
             if (isDashing) {
+                isBuilding = false; // interrupt building action
+
                 Vector3 dashPosition = transform.position + lastMoveDirection * dashAmount;
 
                 RaycastHit2D raycastHit2d = Physics2D.Raycast(transform.position, moveDirection, dashAmount, dashLayerMask);
@@ -136,6 +154,7 @@ public class PlayerMovement : MonoBehaviour {
                     dashPosition = raycastHit2d.point;
                 }
                 rigidBody.MovePosition(dashPosition);
+                // TODO: add player dashing animation
                 isDashing = false;
             }
             break;
@@ -146,11 +165,31 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    private void buildTowerAttempt(Vector3 mouseTowerCellPosition, GameObject towerCell) {
+    private void BuildTowerAttempt(Vector3 mouseTowerCellPosition, GameObject towerCell) {
         if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { // player too far from tower cell
             return;
         }
 
-        // towerCell.GetComponent<Cell>().buildTower()); // TODO: get buildTower() working
+        if (isBuilding) { // player already building a tower
+            return;
+        }
+
+        currentTowerCell = towerCell;
+        currentBuildDuration = buildDuration;
+        isBuilding = true;
+    }
+
+    private void Build() {
+        if (!isBuilding) { // player not building anything
+            return;
+        }
+
+        // TODO: add player building animation
+
+        currentBuildDuration -= Time.deltaTime;
+        if (currentBuildDuration <= 0) {
+            // towerCell.GetComponent<Cell>().buildTower()); // TODO: get buildTower() working
+            isBuilding = false;
+        }
     }
 }
