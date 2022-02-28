@@ -978,19 +978,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
   m_PrefabInstance: {fileID: 1420561544975628534}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1065614416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1065614415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae8404737c26e4d46a1a69f2ce05b010, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderer: {fileID: 0}
 --- !u!114 &1065614421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1439,6 +1426,7 @@ GameObject:
   - component: {fileID: 1789031180}
   - component: {fileID: 1789031183}
   - component: {fileID: 1789031179}
+  - component: {fileID: 1789031184}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1460,8 +1448,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!114 &1789031180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1572,6 +1560,19 @@ MonoBehaviour:
   bulletForce: 4
   shootingCooldown: 0.5
   camera: {fileID: 963194227}
+--- !u!65 &1789031184
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789031178}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.25, y: 3, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2091044108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,13 +1690,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1420561545051096230, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
       propertyPath: m_Name
       value: Fog
       objectReference: {fileID: 0}
     - target: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710321457794307956, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710321457794307956, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710321457794307956, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710321457794307956, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1420561545051096226, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
