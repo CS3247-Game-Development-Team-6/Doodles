@@ -20,7 +20,7 @@ public class MapInput : MonoBehaviour {
             if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform.gameObject.name.Contains("Fog")) {
                     // Debug.Log("Clicked on " + hit.transform.gameObject.name);
-                    hit.transform.gameObject.GetComponent<FogTarget>().ClearFog();
+                    hit.transform.gameObject.GetComponent<Fog>().ClearFog();
                 }
             }
         }
