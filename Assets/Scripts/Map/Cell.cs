@@ -3,7 +3,7 @@ using UnityEngine;
 public enum CellType {
     // Can change name 
     WALK,
-    PLANT,
+    BASE,
     NONE
 }
 
@@ -14,8 +14,14 @@ public class Cell {
     // index = (row, col)
     private Vector2Int index;
     private Vector3 position;
-    private CellType type;
-    private bool isFog;
+    public GameObject tile;
+    public GameObject fog;
+    public CellType type;
+    public bool isFog;
+
+    public Vector2Int Index {
+        get { return index; }
+    }
 
     public Vector3 Position {
         get { return position; }

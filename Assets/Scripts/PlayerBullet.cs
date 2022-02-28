@@ -5,17 +5,22 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour {
 
     public GameObject hitEffect; // TODO: get a hit effect for the bullets
+    [SerializeField] private int bulletDamage;
 
     void Start() {
         //Ignore the collisions between layers "Player" and "PlayerBullets"
         Physics.IgnoreLayerCollision(6, 9);
     }
-    void OnCollisionEnter(Collision collision) {
+    void OnCollisionEnter(Collision other) {
         // TODO: implement hit effect
         // Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
         // Destroy(effect, 5f); // destroy after 5 ticks
+        
+        if (other.collider.CompareTag("Enemy"))
+        {
+            other.collider.GetComponentInParent<Enemy>().TakeDamage(bulletDamage);
+        }
+        
         Destroy(gameObject);
-
-        // TODO: add enemy damage
     }
 }
