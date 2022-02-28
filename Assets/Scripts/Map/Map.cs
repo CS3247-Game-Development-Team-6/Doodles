@@ -54,7 +54,7 @@ public class Map : MonoBehaviour {
                 fog.transform.position = cells[r, c].Position;
                 fog.transform.localScale *= cellSize;
                 cell.fog = fog;
-                fog.GetComponent<FogTarget>().cell = cell;
+                fog.GetComponent<Fog>().cell = cell;
 
             }
         }
