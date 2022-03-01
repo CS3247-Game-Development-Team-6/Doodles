@@ -1197,7 +1197,7 @@ GameObject:
   - component: {fileID: 964059295}
   - component: {fileID: 964059294}
   - component: {fileID: 964059297}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TowerCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1796,6 +1796,9 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1024
+  tileLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
   playerCamera: {fileID: 963194227}
 --- !u!212 &1789031181
 SpriteRenderer:

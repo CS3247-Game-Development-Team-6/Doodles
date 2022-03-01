@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour {
     
     [SerializeField] private LayerMask dashLayerMask;
     [SerializeField] private LayerMask groundLayerMask;
+    [SerializeField] private LayerMask tileLayerMask;
 
     // states
     private enum State { // used for player actions that cannot be interrupted
@@ -78,56 +79,57 @@ public class PlayerMovement : MonoBehaviour {
 
     private void ProcessInputs() {
         switch (state) {
-        case State.Normal:
-            float moveX = Input.GetAxisRaw("Horizontal");
-            float moveY = 0;
-            float moveZ = Input.GetAxisRaw("Vertical");
+            case State.Normal:
+                float moveX = Input.GetAxisRaw("Horizontal");
+                float moveY = 0;
+                float moveZ = Input.GetAxisRaw("Vertical");
 
-            moveDirection = new Vector3(moveX, moveY, moveZ).normalized;
-            if (moveDirection.x != 0 || moveDirection.z != 0) {
-                // player is moving
-                lastMoveDirection = moveDirection; // used for movement actions when not moving
-            }
+                moveDirection = new Vector3(moveX, moveY, moveZ).normalized;
+                if (moveDirection.x != 0 || moveDirection.z != 0) {
+                    // player is moving
+                    lastMoveDirection = moveDirection; // used for movement actions when not moving
+                }
 
-            if (Input.GetKeyDown(KeyCode.F)) { // TODO: dashing tentatively tied to key F for testing
-                isDashing = true;
-            }
+                if (Input.GetKeyDown(KeyCode.F)) { // TODO: dashing tentatively tied to key F for testing
+                    isDashing = true;
+                }
             
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                rollDirection = lastMoveDirection;
-                currentRollSpeed = initialRollSpeed;
-                state = State.Rolling;
-            }
+                if (Input.GetKeyDown(KeyCode.Space)) {
+                    rollDirection = lastMoveDirection;
+                    currentRollSpeed = initialRollSpeed;
+                    state = State.Rolling;
+                }
 
-            if (Input.GetMouseButtonDown(1)) { // right click
-                Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
+                if (Input.GetMouseButtonDown(1)) { // right click
+                    Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
-                    if (raycastHit.collider.gameObject.name.Contains("TowerCell")) { // right clicked on a TowerCell
-                        Debug.Log("Clicked on " + raycastHit.collider.gameObject.name);
-                        GameObject towerCell = raycastHit.collider.gameObject;
-                        Vector3 mouseTowerCellPosition = raycastHit.point;
-                        BuildTowerAttempt(mouseTowerCellPosition, towerCell);
+                    if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, tileLayerMask)) {
+                        if (raycastHit.collider.gameObject.layer == 11) { // right clicked on a TowerCell
+                            Debug.Log("Clicked on " + raycastHit.collider.gameObject.name);
+                            GameObject towerCell = raycastHit.collider.gameObject;
+                            Vector3 mouseTowerCellPosition = raycastHit.point;
+                            BuildTowerAttempt(mouseTowerCellPosition, towerCell);
+
+                        }
                     }
                 }
-            }
 
-            if (Input.GetMouseButtonDown(0)) { // left click (tied to attacking action)
-                isBuilding = false; // interrupts building action
-            }
-            break;
+                if (Input.GetMouseButtonDown(0)) { // left click (tied to attacking action)
+                    isBuilding = false; // interrupts building action
+                }
+                break;
 
-        case State.Rolling:
-            // TODO: add player rolling animation
-            float speedDropMultiplier = 10f;
-            currentRollSpeed -= currentRollSpeed * speedDropMultiplier * Time.deltaTime;
+            case State.Rolling:
+                // TODO: add player rolling animation
+                float speedDropMultiplier = 10f;
+                currentRollSpeed -= currentRollSpeed * speedDropMultiplier * Time.deltaTime;
             
-            float rollSpeedMinimum = 20f;
-            if (currentRollSpeed < rollSpeedMinimum) {
-                state = State.Normal;
+                float rollSpeedMinimum = 20f;
+                if (currentRollSpeed < rollSpeedMinimum) {
+                    state = State.Normal;
+                }
+                break;
             }
-            break;
-        }
         
     }
 
@@ -166,6 +168,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void BuildTowerAttempt(Vector3 mouseTowerCellPosition, GameObject towerCell) {
+        Debug.Log((mouseTowerCellPosition - transform.position).magnitude);
+        Debug.Log(buildDistance);
         if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { // player too far from tower cell
             return;
         }
@@ -173,10 +177,10 @@ public class PlayerMovement : MonoBehaviour {
         if (isBuilding) { // player already building a tower
             return;
         }
-
         currentTowerCell = towerCell;
         currentBuildDuration = buildDuration;
         isBuilding = true;
+        Build();
     }
 
     private void Build() {
@@ -185,10 +189,9 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         // TODO: add player building animation
-
         currentBuildDuration -= Time.deltaTime;
         if (currentBuildDuration <= 0) {
-            // towerCell.GetComponent<Cell>().buildTower()); // TODO: get buildTower() working
+            currentTowerCell.GetComponent<Node>().BuildTower(); // TODO: get buildTower() working
             isBuilding = false;
         }
     }

@@ -6,6 +6,7 @@ public class Node : MonoBehaviour
 {
     public Color hoverColor;
     private Color startColor;
+    public Color tooFarColor;
     private Renderer rend;
 
     private GameObject tower;
@@ -27,7 +28,7 @@ public class Node : MonoBehaviour
         rend.material.color = startColor;
     }
 
-    private void OnMouseDown()
+    public void BuildTower()
     {
         if (tower != null) 
         {
@@ -39,9 +40,6 @@ public class Node : MonoBehaviour
 
         // build a tower
         GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
-        Debug.Log(towerToBuild == null);
-        Debug.Log(transform.position);
-        Debug.Log(transform.rotation);
         tower = (GameObject) Instantiate(towerToBuild, transform.position, transform.rotation);
     }
 
