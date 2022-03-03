@@ -12,13 +12,13 @@ public class PlayerShooting : MonoBehaviour {
     public float shootingCooldown = 0.5f; 
     private float currentCooldown = 0f;
 
-    public Camera camera;
+    private Camera camera;
 
     private Vector3 mousePositionVector;
     private Vector3 bulletDirection;
 
     private void Start() {
-        
+        camera = Camera.main;
     }
 
     // Update is called once per frame

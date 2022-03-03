@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -925,6 +925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 767052243}
+  player: {fileID: 1789031185}
 --- !u!1 &817449646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1849,11 +1850,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1789031182}
   - component: {fileID: 1789031181}
+  - component: {fileID: 1789031185}
   - component: {fileID: 1789031180}
   - component: {fileID: 1789031183}
   - component: {fileID: 1789031179}
   - component: {fileID: 1789031184}
-  - component: {fileID: 1789031185}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -1898,6 +1899,7 @@ MonoBehaviour:
   tileLayerMask:
     serializedVersion: 2
     m_Bits: 2048
+  player: {fileID: 1789031185}
   playerCamera: {fileID: 963194227}
 --- !u!212 &1789031181
 SpriteRenderer:
@@ -1958,7 +1960,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789031178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.81, y: 1.32, z: 2.111}
+  m_LocalPosition: {x: 0.81, y: 1.03, z: 2.111}
   m_LocalScale: {x: 0.35241, y: 0.35241, z: 0.35241}
   m_Children:
   - {fileID: 1460109371}
@@ -1984,7 +1986,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3833045344010415125, guid: 9f7d8365b67af4c478b04373797cfd39, type: 3}
   bulletForce: 4
   shootingCooldown: 0.5
-  camera: {fileID: 963194227}
 --- !u!65 &1789031184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2011,6 +2012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 689040356}
+  growthRate: 0.001
 --- !u!1 &1823534487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,6 +2181,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1065614421, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
+      propertyPath: cost
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1420561545051096229, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
       propertyPath: m_RootOrder
       value: 5

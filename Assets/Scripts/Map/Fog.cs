@@ -6,6 +6,7 @@ public class Fog : MonoBehaviour {
 
     public Cell cell;
     public Renderer renderer;
+    public float cost;
 
     void Start() {
         renderer = GetComponent<Renderer>();

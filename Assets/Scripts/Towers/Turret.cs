@@ -10,6 +10,7 @@ public class Turret : MonoBehaviour
     public float range = 15f;
     public Transform rotationBase;
     public float rotationSpeed = 10f;
+    [SerializeField] private float cost = 10f;
 
     [Header("Unity Setup Fields")]
     public string enemyTag = "Enemy";
@@ -17,6 +18,10 @@ public class Turret : MonoBehaviour
     private float fireCountDown = 0f;
     public GameObject bulletPrefab;
     public Transform firePoint;
+
+    public float Cost {
+        get { return cost; }
+    }
 
     // Start is called before the first frame update
     void Start()
