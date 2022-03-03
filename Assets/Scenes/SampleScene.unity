@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -486,8 +486,9 @@ GameObject:
   m_Component:
   - component: {fileID: 477892576}
   - component: {fileID: 477892575}
+  - component: {fileID: 477892577}
   m_Layer: 0
-  m_Name: EnemyWaveManager
+  m_Name: GameMaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -523,6 +524,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &477892577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477892574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f780afe953f12f4693a78c431e9b683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standardTowerPrefab: {fileID: 3129425037732683074, guid: aadaf4df02e91b947b576dcbafc172c4, type: 3}
 --- !u!4 &500101501 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5669645201189362321, guid: 5c6966a955fed8f4a95b999a0d6ec8ab, type: 3}
@@ -1105,22 +1119,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile
       objectReference: {fileID: 0}
-    - target: {fileID: 502436522978573776, guid: e4b9ac79fddadf34d97c9e17c43e926e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 502436522978573776, guid: e4b9ac79fddadf34d97c9e17c43e926e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 502436522978573776, guid: e4b9ac79fddadf34d97c9e17c43e926e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739498453287301660, guid: e4b9ac79fddadf34d97c9e17c43e926e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7163112750596836252, guid: e4b9ac79fddadf34d97c9e17c43e926e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1172,19 +1170,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
   m_PrefabInstance: {fileID: 1420561544975628534}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1065614421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1065614415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8598396c291ed3443ac4a6e619c44d23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderer: {fileID: 0}
 --- !u!4 &1168257486 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5669645201189362321, guid: 5c6966a955fed8f4a95b999a0d6ec8ab, type: 3}
@@ -1757,12 +1742,10 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  sprintSpeed: 4
-  walkSpeed: 10
-  dashAmount: 3
-  initialRollSpeed: 50
-  currentRollSpeed: 0
-  camera: {fileID: 963194227}
+  tileLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  playerCamera: {fileID: 963194227}
 --- !u!212 &1789031181
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2074,42 +2057,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1420561545051096230, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
       propertyPath: m_Name
       value: Fog
       objectReference: {fileID: 0}
-    - target: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1710321457794307956, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1710321457794307956, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
-      propertyPath: m_Constraints
-      value: 126
-      objectReference: {fileID: 0}
-    - target: {fileID: 1710321457794307956, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1710321457794307956, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1420561545051096226, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
