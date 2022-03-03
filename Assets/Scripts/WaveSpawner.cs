@@ -28,7 +28,10 @@ public class WaveSpawner : MonoBehaviour
         }
         countdownTimer -= Time.deltaTime;
 
-        waveCountdownText.text = Mathf.Round(countdownTimer).ToString();
+        countdownTimer = Mathf.Clamp(countdownTimer, 0f, Mathf.Infinity);
+
+        // format 00.00s
+        waveCountdownText.text = string.Format("{0:00.00}", countdownTimer);
     }
 
     // can pause the func execution

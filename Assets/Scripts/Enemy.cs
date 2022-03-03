@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 1f;
+    [SerializeField] private float speed = 1f;
     
-    public float initHealth = 100;
+    [SerializeField] private float initHealth = 100;
 
-    public int lootValue = 50;
+    [SerializeField] private int lootValue = 50;
 
     private float health;
     private Transform target;
@@ -32,14 +32,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // enemy die by physical damage
     void Die ()
     {
         // TODO: add ink
-
+        PlayerStats.Ink += lootValue;
+        
         Destroy(gameObject);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         health = initHealth;
@@ -48,7 +49,7 @@ public class Enemy : MonoBehaviour
         target = Waypoints.points[0];
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         // movement direction to the target waypoint
@@ -74,9 +75,11 @@ public class Enemy : MonoBehaviour
         target = Waypoints.points[waypointIndex];
     }
 
+    // enemy attack the base and destroy
     void EndPath()
     {
-        // TODO: remove base hp
+        // remove base hp
+        PlayerStats.Lives--;
 
         Destroy(gameObject);
     }
