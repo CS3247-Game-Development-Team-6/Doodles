@@ -54,8 +54,8 @@ public class PlayerMovement : MonoBehaviour {
             mousePositionVector = raycastHit.point;
             //mousePositionVector.y = transform.position.y; // set to same vertical height as player
         }
-        Debug.Log(Physics.Raycast(mouseRay, out RaycastHit test, float.MaxValue, groundLayerMask));
-        Debug.Log(mousePositionVector);
+        // Debug.Log(Physics.Raycast(mouseRay, out RaycastHit test, float.MaxValue, groundLayerMask));
+        // Debug.Log(mousePositionVector);
     }
 
     // Update is called at a fixed rate
