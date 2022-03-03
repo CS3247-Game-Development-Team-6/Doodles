@@ -8,7 +8,13 @@ public class Player : MonoBehaviour {
     public const float maxInk = 100f;
     public Image healthSlider;
     public float growthRate;
-    private float ink = 60f;
+    [Range(0, 1)]
+    public float startingAmount = 0.6f;
+    private float ink;
+
+    private void Start() {
+        ink = startingAmount * maxInk;
+    }
 
     public bool hasEnoughInk(float cost) {
         return ink >= cost;
