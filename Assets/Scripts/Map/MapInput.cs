@@ -12,11 +12,10 @@ public class MapInput : MonoBehaviour {
     }
 
     void Update() {
-        // Left click is detected
+        // Right click is detected
         if (Input.GetMouseButtonDown(1)) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            Debug.Log("left");
             if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform.gameObject.name.Contains("Fog")) {
                     // Debug.Log("Clicked on " + hit.transform.gameObject.name);
