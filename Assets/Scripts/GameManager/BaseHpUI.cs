@@ -10,7 +10,10 @@ public class BaseHpUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if the game scales, may need to change implementation using coroutine
-        baseHpText.text = "BASE: " + BaseHp.hp.ToString() + " HP";
+        if (BaseHp.isHpLessThanHalf()) {
+            baseHpText.color= Color.red;
+        }
+        
+        baseHpText.text = "BASE: " + BaseHp.getHp().ToString() + " HP";
     }
 }

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BaseHp : MonoBehaviour
 {
-    public static int hp;
-    [SerializeField] private int startHp = 100;
+    [SerializeField] private static int startHp = 500;
+
+    private static int hp;
 
     void Start()
     {
@@ -15,5 +16,21 @@ public class BaseHp : MonoBehaviour
     public static void receiveDmg(int amount)
     {
         hp -= amount;
+    }
+
+    public static int getHp()
+    {
+        return hp;
+    }
+
+    public static bool isHpLessThanHalf()
+    {
+        float percentage = (float) hp / startHp;
+
+        if (percentage < 0.25f) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

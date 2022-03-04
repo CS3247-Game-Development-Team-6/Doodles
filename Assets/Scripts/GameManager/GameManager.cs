@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
         if (gameEnded)
             return;
 
-        if (BaseHp.hp <= 0) {
+        if (BaseHp.getHp() <= 0) {
             EndGame();
         }
     }
