@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private int lootValue = 50;
 
+    [SerializeField] private int attackBaseDmg = 50;
+
     private float health;
     private Transform target;
     private int waypointIndex = 0;
@@ -77,8 +79,8 @@ public class Enemy : MonoBehaviour
     // enemy attack the base and destroy
     void EndPath()
     {
-        // remove base hp
-        BaseHp.hp--;
+        // decrease base hp
+        BaseHp.receiveDmg(attackBaseDmg);
 
         Destroy(gameObject);
     }

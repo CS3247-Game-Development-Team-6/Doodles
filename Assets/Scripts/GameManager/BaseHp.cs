@@ -11,4 +11,9 @@ public class BaseHp : MonoBehaviour
     {
         hp = startHp;
     }
+
+    public static void receiveDmg(int amount)
+    {
+        hp -= amount;
+    }
 }
