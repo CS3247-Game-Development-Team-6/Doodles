@@ -10,9 +10,11 @@ public class Enemy : MonoBehaviour
     
     [SerializeField] private float initHealth = 100;
 
-    [SerializeField] private int lootValue = 50;
+    [SerializeField] private int inkGained = 50;
 
     [SerializeField] private int attackBaseDmg = 50;
+
+    [SerializeField] private GameObject deathEffect;
 
     private float health;
     private Transform target;
@@ -39,6 +41,8 @@ public class Enemy : MonoBehaviour
     {
         // TODO: add ink
         
+        GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 5f);
         Destroy(gameObject);
     }
 
