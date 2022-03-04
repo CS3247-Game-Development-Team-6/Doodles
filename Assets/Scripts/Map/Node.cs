@@ -28,19 +28,23 @@ public class Node : MonoBehaviour
         rend.material.color = startColor;
     }
 
-    public void BuildTower()
+    public float TowerCost() {
+        GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
+        return towerToBuild.GetComponent<Turret>().Cost;
+    }
+
+    public Turret BuildTower()
     {
         if (tower != null) 
         {
             Debug.Log("Tower cannot be built here! TODO: Show Prompt on screen");
-            return;
+            return null;
         }
-
-        Debug.Log("We are currently here");
 
         // build a tower
         GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
         tower = (GameObject) Instantiate(towerToBuild, transform.position, transform.rotation);
+        return tower.GetComponent<Turret>();
     }
 
 

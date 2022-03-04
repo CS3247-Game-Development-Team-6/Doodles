@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private LayerMask dashLayerMask;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask tileLayerMask;
+    [SerializeField] private Player player;
 
     // states
     private enum State { // used for player actions that cannot be interrupted
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour {
     private float buildDistance = 10f;
     private float buildDuration = 3f;
     private float currentBuildDuration = 0f;
+    private float towerCost = 3f;
     private GameObject currentTowerCell; // current cell that the player is interacting with
 
     // boolean checks
@@ -177,7 +179,12 @@ public class PlayerMovement : MonoBehaviour {
         if (isBuilding) { // player already building a tower
             return;
         }
+
         currentTowerCell = towerCell;
+        if (!player.hasEnoughInk(currentTowerCell.GetComponent<Node>().TowerCost())) {
+            Debug.Log("Not enough ink!");
+            return;
+        }
         currentBuildDuration = buildDuration;
         isBuilding = true;
         Build();
@@ -191,7 +198,9 @@ public class PlayerMovement : MonoBehaviour {
         // TODO: add player building animation
         currentBuildDuration -= Time.deltaTime;
         if (currentBuildDuration <= 0) {
-            currentTowerCell.GetComponent<Node>().BuildTower(); // TODO: get buildTower() working
+            Turret turret = currentTowerCell.GetComponent<Node>().BuildTower(); // TODO: get buildTower() working
+            if (turret != null) 
+                player.ChangeInkAmount(-turret.Cost);
             isBuilding = false;
         }
     }
