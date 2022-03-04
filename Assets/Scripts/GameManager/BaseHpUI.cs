@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LivesUI : MonoBehaviour
+public class BaseHpUI : MonoBehaviour
 {
-    public Text livesText;
+    public Text baseHpText;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,6 @@ public class LivesUI : MonoBehaviour
     void Update()
     {
         // if the game scales, may need to change implementation using coroutine
-        livesText.text = PlayerStats.Lives.ToString() + " LIVES";
+        baseHpText.text = "BASE HP: " + BaseHp.hp.ToString();
     }
 }

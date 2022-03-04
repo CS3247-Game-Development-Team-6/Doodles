@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
         if (gameEnded)
             return;
 
-        if (PlayerStats.Lives <= 0) {
+        if (BaseHp.hp <= 0) {
             EndGame();
         }
     }

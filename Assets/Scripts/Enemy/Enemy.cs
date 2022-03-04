@@ -36,7 +36,6 @@ public class Enemy : MonoBehaviour
     void Die ()
     {
         // TODO: add ink
-        PlayerStats.Ink += lootValue;
         
         Destroy(gameObject);
     }
@@ -79,7 +78,7 @@ public class Enemy : MonoBehaviour
     void EndPath()
     {
         // remove base hp
-        PlayerStats.Lives--;
+        BaseHp.hp--;
 
         Destroy(gameObject);
     }
