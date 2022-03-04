@@ -6,6 +6,7 @@ public class MapInput : MonoBehaviour {
  
     private Camera cam;
     public Map map;
+    public Player player;
 
     void Start() {
         cam = Camera.main;
@@ -18,8 +19,13 @@ public class MapInput : MonoBehaviour {
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform.gameObject.name.Contains("Fog")) {
-                    // Debug.Log("Clicked on " + hit.transform.gameObject.name);
-                    hit.transform.gameObject.GetComponent<Fog>().ClearFog();
+                    Fog fog = hit.transform.gameObject.GetComponent<Fog>();
+                    if (player.hasEnoughInk(fog.cost)) {
+                        player.ChangeInkAmount(-fog.cost);
+                        fog.ClearFog();
+                    } else {
+                        Debug.Log("Not enough ink!");
+                    }
                 }
             }
         }
