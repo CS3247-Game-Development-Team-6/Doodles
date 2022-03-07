@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour {
 
     public GameObject hitEffect; // TODO: get a hit effect for the bullets
-    [SerializeField] private int bulletDamage;
+    private int bulletDamage = 25;
 
     void Start() {
         //Ignore the collisions between layers "Player" and "PlayerBullets"
@@ -16,8 +16,7 @@ public class PlayerBullet : MonoBehaviour {
         // Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
         // Destroy(effect, 5f); // destroy after 5 ticks
         
-        if (other.collider.CompareTag("Enemy"))
-        {
+        if (other.collider.CompareTag("Enemy")) {
             other.collider.GetComponentInParent<Enemy>().TakeDamage(bulletDamage);
         }
         

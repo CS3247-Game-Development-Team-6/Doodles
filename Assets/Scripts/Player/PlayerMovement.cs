@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour {
     
@@ -24,22 +25,23 @@ public class PlayerMovement : MonoBehaviour {
     private float initialRollSpeed = 50f;
     private float currentRollSpeed;
 
-    // player values
-    private float buildDistance = 10f;
-    private float buildDuration = 3f;
-    private float currentBuildDuration = 0f;
-    private float towerCost = 3f;
-    private GameObject currentTowerCell; // current cell that the player is interacting with
-
-    // boolean checks
+    // action boolean checks
     private bool isSprinting = false; // TODO: add sprinting if needed in the future
     private bool isDashing = false;
     private bool isBuilding = false;
-    
+
+    // player build values
+    private float buildDistance = 3f;
+    private float buildDuration = 5f;
+    private float currentBuildDuration = 0f;
+    private GameObject currentTowerCell; // current cell that the player is interacting with
+
     // player unity object attributes
-    private Animator anim;
+    private Animator animator;
     private Rigidbody rigidBody;
     public Camera playerCamera;
+    [Header("TextMeshPro - Text")]
+    public TMP_Text actionTimer;
 
     // directions and positions
     private Vector3 moveDirection;
@@ -50,8 +52,9 @@ public class PlayerMovement : MonoBehaviour {
     // Start is called before the first frame update
     private void Awake() {
         playerSpeed = walkSpeed;
-        // anim = GetComponent<Animator>();
+        // animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody>();
+        actionTimer.text = "";
         state = State.Normal;
     }
 
@@ -107,11 +110,11 @@ public class PlayerMovement : MonoBehaviour {
 
                     if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, tileLayerMask)) {
                         if (raycastHit.collider.gameObject.layer == 11) { // right clicked on a TowerCell
-                            Debug.Log("Clicked on " + raycastHit.collider.gameObject.name);
+                            Debug.Log("Clicked on " + raycastHit.collider.gameObject.name); // TODO: remove debug
+
                             GameObject towerCell = raycastHit.collider.gameObject;
                             Vector3 mouseTowerCellPosition = raycastHit.point;
                             BuildTowerAttempt(mouseTowerCellPosition, towerCell);
-
                         }
                     }
                 }
@@ -170,21 +173,29 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void BuildTowerAttempt(Vector3 mouseTowerCellPosition, GameObject towerCell) {
-        Debug.Log((mouseTowerCellPosition - transform.position).magnitude);
-        Debug.Log(buildDistance);
-        if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { // player too far from tower cell
+        
+        if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { 
+            // player too far from tower cell
             return;
         }
 
-        if (isBuilding) { // player already building a tower
+        if (isBuilding) { 
+            // player already building a tower
             return;
         }
 
         currentTowerCell = towerCell;
         if (!player.hasEnoughInk(currentTowerCell.GetComponent<Node>().TowerCost())) {
+            // player has not enough ink
             Debug.Log("Not enough ink!");
             return;
         }
+
+        if (currentTowerCell.GetComponent<Node>().HasTower()) {
+            // tower cell already has a tower
+            return;
+        }
+
         currentBuildDuration = buildDuration;
         isBuilding = true;
         Build();
@@ -197,10 +208,17 @@ public class PlayerMovement : MonoBehaviour {
 
         // TODO: add player building animation
         currentBuildDuration -= Time.deltaTime;
+        if (currentBuildDuration > 0) {
+            actionTimer.text = (Mathf.Round(currentBuildDuration * 10) / 10).ToString(); // display timer
+        }
+
         if (currentBuildDuration <= 0) {
-            Turret turret = currentTowerCell.GetComponent<Node>().BuildTower(); // TODO: get buildTower() working
-            if (turret != null) 
+            actionTimer.text = ""; // stop displaying timer
+
+            Turret turret = currentTowerCell.GetComponent<Node>().BuildTower();
+            if (turret != null) {
                 player.ChangeInkAmount(-turret.Cost);
+            }
             isBuilding = false;
         }
     }
