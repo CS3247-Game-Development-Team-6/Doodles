@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Text;
 using UnityEngine;
@@ -21,16 +22,23 @@ public class MapGenerator : MonoBehaviour
     public GameObject spawnPrefab;
     public GameObject curvePrefab;
     public GameObject straightPrefab;
+    public GameObject waypointPrefab;
+    public GameObject waypointEmpty;
 
     private Vector2Int gridSize = new Vector2Int(10, 10);   // current implementation only allows for 10x10
     private int[] spawnCoordinates = new int[2]; 
     private int[] baseCoordinates = new int[2];
     private string[,] backendMatrix;
+    private int[,] iterationMatrix;
     
     private NewCell[,] cells;
     private int mapWidth;
     private int mapHeight;
     private int manhattanDist;
+    List<NewCell> curvedCells = new List<NewCell>();    // do not know the length (how many waypoints) so we
+                                                        // init this as a list and later convert to an array.
+                                                        
+    private Vector3[] waypointsPosition;
     
     // Start is called before the first frame update
     void Start()
@@ -41,8 +49,6 @@ public class MapGenerator : MonoBehaviour
         bool foundGoodPath = false;
         while (!foundGoodPath)  // we try finding paths until we have found a path that satisfies our criteria
         {
-            if (foundGoodPath) break;
-        
             (baseCoordinates, spawnCoordinates) = GenerateSpawnAndBase(mapWidth, mapHeight);
             
             int numberOfTries = 0;
@@ -54,6 +60,7 @@ public class MapGenerator : MonoBehaviour
             backendMatrix = CreateMatrix(mapWidth, mapHeight); 
             backendMatrix[spawnCoordinates[1], spawnCoordinates[0]] = "S";
             backendMatrix[baseCoordinates[1], baseCoordinates[0]] = "B";
+            
 
             // variables that are used for generating the path are reset for every try
             int currentX = spawnCoordinates[0];
@@ -62,6 +69,9 @@ public class MapGenerator : MonoBehaviour
             int lengthOfPath = 0;
             int score = 0;
             int thisMove = 0;
+            
+            iterationMatrix = new int[mapWidth, mapHeight];
+            iterationMatrix[currentY, currentX] = 0;   // just put a zero on the spawn
 
             for (int _ = 0; _ < 100; _++)   // for every try, we do 100 random moves before either
                                             // suceeding or abandoning this attempt
@@ -79,12 +89,16 @@ public class MapGenerator : MonoBehaviour
                 if (newX >= 0 && newX < mapWidth && newY >= 0 && newY < mapHeight)    
                     // make sure we do not go out of index bounds
                 {
+
                     if (backendMatrix[newY, newX] == "B")
                     {
                         thisMove = action;
                         string strMove = ConvertMoveToMoveStr(thisMove, lastMove);
                         backendMatrix[previousY, previousX] = strMove;
-
+                        
+                        lengthOfPath++;
+                        iterationMatrix[newY, newX] = lengthOfPath;
+                        
                         foundPath = true;
                         break;  // now we are done with this path and have found path from S -> B!
                     } 
@@ -94,9 +108,10 @@ public class MapGenerator : MonoBehaviour
                         score += ScoreThePath(backendMatrix, newX, newY, mapWidth, mapHeight);
                         currentX = newX;
                         currentY = newY;
-                        //backendMatrix[currentY, currentX] = "N";    // "N" == not yet assigned
                         thisMove = action;
+                        
                         lengthOfPath++;
+                        iterationMatrix[currentY, currentX] = lengthOfPath;
 
                         if (lengthOfPath > 1)
                         {
@@ -115,8 +130,6 @@ public class MapGenerator : MonoBehaviour
                 {
                     
                     Print2DArray(backendMatrix);
-                    Debug.Log(numberOfTries);
-                    Debug.Log(score);
 
                     foundGoodPath = true;
                     
@@ -134,28 +147,41 @@ public class MapGenerator : MonoBehaviour
                 Vector3 cellPos = placeInPosition + Vector3.right * c * cellSize;
                 var typeOfCell = CellTypeNew.NONE;  // default every cell as a NONE-cell
                 var rotationINT = 0;
-
+                int pathNum = 0;
+                
                 var cellCharacter = backendMatrix[c, r];
-                if (cellCharacter == "B") typeOfCell = CellTypeNew.BASE;
-                else if (cellCharacter == "S") typeOfCell = CellTypeNew.SPAWN;
+                if (cellCharacter == "B")
+                {
+                    typeOfCell = CellTypeNew.BASE;
+                    pathNum = iterationMatrix[c, r];
+                }
+                else if (cellCharacter == "S")
+                {
+                    typeOfCell = CellTypeNew.SPAWN;
+                    pathNum = iterationMatrix[c, r];
+                }
                 else if (cellCharacter == "O") typeOfCell = CellTypeNew.NONE;
                 else
                 {
                     (cellCharacter, rotationINT) = ConvertToCell(cellCharacter);
                     if (cellCharacter == "STRAIGHT") typeOfCell = CellTypeNew.STRAIGHTPATH;
-                    if (cellCharacter == "CURVE") typeOfCell = CellTypeNew.CURVEPATH;
+                    if (cellCharacter == "CURVE")
+                    {
+                        typeOfCell = CellTypeNew.CURVEPATH;
+                        pathNum = iterationMatrix[c, r];
+                    }
                 }
 
                 Vector3 newRotation = new Vector3(0, rotationINT, 0);
-                cells[r, c] = new NewCell(cellPos, typeOfCell, false, newRotation);
+                cells[r, c] = new NewCell(cellPos, typeOfCell, false, newRotation, pathNum);
                 
                 NewCell cell = cells[r, c];
 
                 GameObject tileToPlace = tilePrefab;
                 if (typeOfCell == CellTypeNew.NONE) tileToPlace = tilePrefab;
-                if (typeOfCell == CellTypeNew.BASE) tileToPlace = basePrefab;
-                if (typeOfCell == CellTypeNew.SPAWN) tileToPlace = spawnPrefab;
-                if (typeOfCell == CellTypeNew.CURVEPATH) tileToPlace = curvePrefab;
+                if (typeOfCell == CellTypeNew.BASE) {tileToPlace = basePrefab; curvedCells.Add(cell);}
+                if (typeOfCell == CellTypeNew.SPAWN) {tileToPlace = spawnPrefab; curvedCells.Add(cell);}
+                if (typeOfCell == CellTypeNew.CURVEPATH) {tileToPlace = curvePrefab; curvedCells.Add(cell);}
                 if (typeOfCell == CellTypeNew.STRAIGHTPATH) tileToPlace = straightPrefab;
                 
                 GameObject tile = Instantiate(tileToPlace, transform);
@@ -166,13 +192,21 @@ public class MapGenerator : MonoBehaviour
                 tile.transform.localScale *= cellSize;
                 cell.tile = tile;
 
-                //bool boolShow = cell.type == CellTypeNew.CURVEPATH || cell.type == CellTypeNew.STRAIGHTPATH;
-                
-                //cell.tile.SetActive(!boolShow);
-                
+                if (typeOfCell == CellTypeNew.CURVEPATH || typeOfCell == CellTypeNew.STRAIGHTPATH)
+                {
+                    tile.SetActive(false);
+                }
             }
             placeInPosition += Vector3.forward * cellSize;
         }
+        
+        SetWaypoints(curvedCells.ToArray());
+        waypointEmpty.GetComponent<Waypoints>().ActivateWaypoints();
+    }
+
+    public Vector3[] GetWaypointsArr()
+    {
+        return waypointsPosition;
     }
     
     private (int[], int[]) GenerateSpawnAndBase(int w, int h)
@@ -193,6 +227,23 @@ public class MapGenerator : MonoBehaviour
         }
         
         return (baseCoordinates, spawnCoordinates);
+    }
+    
+    public void SetWaypoints(NewCell[] waypointCells) {
+        // sort array based on their order in the path
+        Array.Sort(waypointCells, (oneCell, otherCell) => oneCell.pathOrder.CompareTo(otherCell.pathOrder));
+
+        waypointsPosition = new Vector3[waypointCells.Length];
+
+        for (int i = 0; i < waypointCells.Length; i++)
+        {
+            waypointsPosition[i] = waypointCells[i].position;
+            GameObject waypoint = Instantiate(waypointPrefab, waypointEmpty.transform, true);
+            
+            waypoint.name = $"Waypoint {i}";
+            waypoint.transform.position = waypointCells[i].position;
+
+        }
     }
 
 

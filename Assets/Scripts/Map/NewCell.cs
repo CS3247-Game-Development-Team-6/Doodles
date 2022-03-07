@@ -22,6 +22,7 @@ public class NewCell {
     public bool isFog;
     public Vector3 rotation; 
     public Vector3 position;
+    public int pathOrder;
 
     public Vector2Int Index {
         get { return index; }
@@ -42,10 +43,11 @@ public class NewCell {
     }
     */
 
-    public NewCell(Vector3 pos, CellTypeNew typeOfCell, bool isFoggy, Vector3 rot) {
+    public NewCell(Vector3 pos, CellTypeNew typeOfCell, bool isFoggy, Vector3 rot, int pathNum) {
         position = pos;
         type = typeOfCell;
         isFog = isFoggy;
         rotation = rot;
+        pathOrder = pathNum;
     }
 }

@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
 
     [Header("Unity Stuff")]
     public Image healthBar;
+    
+    public Map map;
 
     public void TakeDamage(int amount)
     {
