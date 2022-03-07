@@ -215,6 +215,8 @@ MonoBehaviour:
   spawnPrefab: {fileID: 6269207307636801995, guid: f7227dc7993d14cf2b6b85bad19a9434, type: 3}
   curvePrefab: {fileID: 1355420953937332540, guid: 006b9dc87e65141f29b53654208c099c, type: 3}
   straightPrefab: {fileID: 7894887961081992580, guid: 4c85730c47d6f47ea907c33ec17975d2, type: 3}
+  waypointPrefab: {fileID: 7330119712648875633, guid: 5c6966a955fed8f4a95b999a0d6ec8ab, type: 3}
+  waypointEmpty: {fileID: 916810571}
 --- !u!1 &138248409
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,59 +566,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &708563200
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 708563202}
-  - component: {fileID: 708563201}
-  m_Layer: 0
-  m_Name: MapGraph
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &708563201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708563200}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd064ef5db66d4d008540f869b929ff6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSize: 1
-  minSpawnToBaseDistance: 15
-  maximumTries: 1000
-  minimumReqScore: 50
-  mapBase: {fileID: 47579319}
-  tilePrefab: {fileID: 453698710756715362, guid: e4b9ac79fddadf34d97c9e17c43e926e, type: 3}
-  basePrefab: {fileID: 8982630539707480919, guid: dc0ef84ca78e84b54a815828442c1b33, type: 3}
-  spawnPrefab: {fileID: 6269207307636801995, guid: f7227dc7993d14cf2b6b85bad19a9434, type: 3}
-  curvePrefab: {fileID: 1355420953937332540, guid: 006b9dc87e65141f29b53654208c099c, type: 3}
-  straightPrefab: {fileID: 7894887961081992580, guid: 4c85730c47d6f47ea907c33ec17975d2, type: 3}
---- !u!4 &708563202
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708563200}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &916810571
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,6 +596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 47579320}
+  gameMaster: {fileID: 657727294}
 --- !u!4 &916810573
 Transform:
   m_ObjectHideFlags: 0
