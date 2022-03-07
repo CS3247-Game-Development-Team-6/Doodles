@@ -4,11 +4,6 @@ import numpy as np
 from PIL import Image
 from matplotlib import pyplot as plt
 
-
-# start_point = (0, 0)
-# end_point = (5, 4)
-
-
 def manhattan(a, b):
     return sum(abs(val1 - val2) for val1, val2 in zip(a, b))
 
@@ -81,26 +76,20 @@ delta_pos = {
     3: (0, 1)  # down
 }
 
-move_name = {
-    0: "left",
-    1: "up",
-    2: "right",
-    3: "down"
-}
-
 
 def score_path(matrix, x, y):
     score = 0
     for i in range(-1, 2):
         for j in range(-1, 2):
             try:
-                if y + i >= 0 and x + j >= 0:
+                if y + i >= 0 and y + i <  and x + j >= 0:
                     if matrix[y + i][x + j] == "O":
                         # matrix[y + i][x + j] = "B"     # for debugging
                         score += 1
                     else:
                         score -= 2
             except IndexError:
+                print("INDEX ERROR")
                 pass
     return score
 
@@ -131,15 +120,9 @@ def find_move_to_move_str(this_move, last_move=None):
 allowed_x_range = range(0, w)
 allowed_y_range = range(0, h)
 
-found_a_path = False
 number_of_tries = 0
-length_of_path = 0
 
 while number_of_tries < 1000:
-    ### RESET MATRIX ###
-    array = make_array()  # creates the starting array
-    change_img(array, start_point[1], start_point[0], image_conversion['spawn'])
-    change_img(array, end_point[1], end_point[0], image_conversion['base'])
 
     # backend-end for move simulations
     position_x, position_y = end_point[0], end_point[1]
@@ -152,13 +135,12 @@ while number_of_tries < 1000:
     path_idx = 1
     score = 0
 
-    current_coords = (start_point[1], start_point[0])
+    current_coords = (end_point[1], end_point[0])
     last_move = None
     this_move = None
 
     for _ in range(100):  # 100 moves per iteration
         previous_coords = current_coords
-
         last_move = this_move
 
         action = random.randint(0, 3)
@@ -166,16 +148,21 @@ while number_of_tries < 1000:
         new_y = position_y + delta_pos[action][1]
         if new_x in allowed_x_range and new_y in allowed_y_range:
             if matrix[new_y][new_x] == "B":
-                found_a_path = True
+                this_move = action
                 str_move = find_move_to_move_str(this_move, last_move)
-                change_img(array, previous_coords[0], previous_coords[1], image_conversion[str_move])
+                matrix[previous_coords[0]][previous_coords[1]] = str_move
+
+                found_a_path = True
                 break
 
-            if matrix[new_y][new_x] != "S" and not isinstance(matrix[new_y][new_x], int):
+            elif matrix[new_y][new_x] == "S":
+                pass
+
+            elif matrix[new_y][new_x] == 'O':
                 score += score_path(matrix, new_x, new_y)
                 position_x = new_x
                 position_y = new_y
-                matrix[position_y][position_x] = path_idx
+                matrix[position_y][position_x] = 'None'
                 current_coords = (position_y, position_x)
                 this_move = action
                 path_idx += 1
@@ -183,13 +170,27 @@ while number_of_tries < 1000:
 
                 if length_of_path > 1:
                     str_move = find_move_to_move_str(this_move, last_move)
-                    change_img(array, previous_coords[0], previous_coords[1], image_conversion[str_move])
+                    matrix[previous_coords[0]][previous_coords[1]] = str_move
 
     if found_a_path:
         man_dist = manhattan(start_point, end_point)
         if man_dist * 2 > length_of_path > man_dist * 1.5 and score > 50:
             print_matrix(matrix)
             print(f'\nScore: {score}')
+
+            array = make_array()
+            change_img(array, start_point[1], start_point[0], image_conversion['base'])
+            change_img(array, end_point[1], end_point[0], image_conversion['spawn'])
+            for j in range(len(matrix)):
+                for i in range(len(matrix[0])):
+                    if matrix[i][j] == "O":
+                        pass
+                    elif matrix[i][j] == "B":
+                        pass
+                    elif matrix[i][j] == "S":
+                        pass
+                    else:
+                        change_img(array, i, j, image_conversion[matrix[i][j]])
             break
 
     number_of_tries += 1

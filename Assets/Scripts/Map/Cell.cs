@@ -26,17 +26,7 @@ public class Cell {
     public Vector3 Position {
         get { return position; }
     }
-
-    public Cell() {
-        this.type = CellType.NONE;
-    }
-
-    public Cell(Vector2Int index, Vector3 position) {
-        this.index = index;
-        this.position = position;
-        this.type = CellType.NONE;
-    }
-
+    
     public Cell(Vector2Int index, Vector3 position, CellType type, bool isFog) {
         this.index = index;
         this.position = position;

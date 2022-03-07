@@ -11,61 +11,60 @@ using Vector3 = UnityEngine.Vector3;
 public class MapGenerator : MonoBehaviour
 {
     public float cellSize = 1.0f;
-    public int minSpawnToBaseDistance = 15;
-    public int maximumTries = 1000; // this can be decreased to prevent going for too long
+    public int minSpawnToBaseDistance = 15; // careful with increasing this more than 15 for a 10*10 grid,
+                                            // may lead to infinite while loop.
+    public int maximumTries = 200; // this can be decreased to prevent going for too long
     public int minimumReqScore = 50;
-    
+    public GameObject mapBase;
+    public GameObject tilePrefab;
+    public GameObject basePrefab;
+    public GameObject spawnPrefab;
+    public GameObject curvePrefab;
+    public GameObject straightPrefab;
+
     private Vector2Int gridSize = new Vector2Int(10, 10);   // current implementation only allows for 10x10
     private int[] spawnCoordinates = new int[2]; 
     private int[] baseCoordinates = new int[2];
     private string[,] backendMatrix;
     
-    private Cell[,] cells;
+    private NewCell[,] cells;
     private int mapWidth;
     private int mapHeight;
     private int manhattanDist;
-
-    // Variables that are used for generating the path
-    private int numberOfTries = 0;
-    private bool foundPath = false;
-    private int lengthOfPath = 0;
-    private int score = 0;
-    private int thisMove = 0;
-
+    
     // Start is called before the first frame update
     void Start()
     {
         mapWidth = gridSize.x;
         mapHeight = gridSize.y;
-        
-        spawnCoordinates = new int[] {Random.Range(0, mapWidth - 1), Random.Range(0, mapHeight - 1)} ;
-        baseCoordinates = new int[] {Random.Range(0, mapWidth - 1), Random.Range(0, mapHeight - 1)} ;
-        manhattanDist = ManhattanDistance(spawnCoordinates[0], baseCoordinates[0], spawnCoordinates[1],
-            baseCoordinates[1]);
 
-        while (manhattanDist < minSpawnToBaseDistance)
+        bool foundGoodPath = false;
+        while (!foundGoodPath)  // we try finding paths until we have found a path that satisfies our criteria
         {
-            // keep on randomizing coordinates for the enemy spawn and the player base until we have found coords that
-            // are far enough away from each other
-            baseCoordinates = new int[] {Random.Range(0, mapWidth - 1), Random.Range(0, mapHeight - 1)} ;
-            spawnCoordinates = new int[] {Random.Range(0, mapWidth - 1), Random.Range(0, mapHeight - 1)};
-            manhattanDist = ManhattanDistance(spawnCoordinates[0], baseCoordinates[0], spawnCoordinates[1],
-                baseCoordinates[1]);
-        }
-
-        backendMatrix = CreateMatrix(mapWidth, mapHeight);
+            if (foundGoodPath) break;
         
-        while (numberOfTries < maximumTries)
+            (baseCoordinates, spawnCoordinates) = GenerateSpawnAndBase(mapWidth, mapHeight);
+            
+            int numberOfTries = 0;
+            while (numberOfTries < maximumTries)    // if we go "maximumTries" without finding a path,
+                                                    // we change the spawn/base points since they probably lead
+                                                    // to a hard time satisfying the criteria.
         {
             // reset the matrix before starting a new "try".
             backendMatrix = CreateMatrix(mapWidth, mapHeight); 
             backendMatrix[spawnCoordinates[1], spawnCoordinates[0]] = "S";
             backendMatrix[baseCoordinates[1], baseCoordinates[0]] = "B";
 
+            // variables that are used for generating the path are reset for every try
             int currentX = spawnCoordinates[0];
             int currentY = spawnCoordinates[1];
-            
-            for (int _ = 0; _ < 100; _++)
+            bool foundPath = false;
+            int lengthOfPath = 0;
+            int score = 0;
+            int thisMove = 0;
+
+            for (int _ = 0; _ < 100; _++)   // for every try, we do 100 random moves before either
+                                            // suceeding or abandoning this attempt
             {
                 int previousX = currentX;
                 int previousY = currentY;
@@ -95,7 +94,7 @@ public class MapGenerator : MonoBehaviour
                         score += ScoreThePath(backendMatrix, newX, newY, mapWidth, mapHeight);
                         currentX = newX;
                         currentY = newY;
-                        backendMatrix[currentY, currentX] = "N";    // "N" == not yet assigned
+                        //backendMatrix[currentY, currentX] = "N";    // "N" == not yet assigned
                         thisMove = action;
                         lengthOfPath++;
 
@@ -103,6 +102,7 @@ public class MapGenerator : MonoBehaviour
                         {
                             string strMove = ConvertMoveToMoveStr(thisMove, lastMove);
                             backendMatrix[previousY, previousX] = strMove;
+                            Print2DArray(backendMatrix);
                         }
                     }
                 }
@@ -113,46 +113,88 @@ public class MapGenerator : MonoBehaviour
             {
                 if (lengthOfPath <= manhattanDist * 2 && lengthOfPath > manhattanDist * 1.5 && score > minimumReqScore)
                 {
+                    
                     Print2DArray(backendMatrix);
+                    Debug.Log(numberOfTries);
                     Debug.Log(score);
+
+                    foundGoodPath = true;
                     
                     break;  // breaks the while loop of "tries". Have found THE path that will be used for this game
-                    
                 }
-
-                
             }
-            
             numberOfTries++;
         }
+        }
 
-
-        /*
-
-        Vector3 basePos = Vector3.forward;  // stub value indicating base is on north edge
-        Vector3 position = transform.position + (Vector3.one * 0.5f) * cellSize;
-        cells = new Cell[gridSize.x, gridSize.y];
+        Vector3 placeInPosition = transform.position + (Vector3.one * 0.5f) * cellSize;
+        cells = new NewCell[gridSize.x, gridSize.y];
         for (int r = 0; r < gridSize.x; r++) {
             for (int c = 0; c < gridSize.y; c++) {
-                Vector3 cellPos = position + Vector3.right * c * cellSize;
-                var typeOfCell = CellType.NONE;  // default every cell as a NONE-cell
-                if (new Vector2Int(r, c) == baseCoordinates)
+                Vector3 cellPos = placeInPosition + Vector3.right * c * cellSize;
+                var typeOfCell = CellTypeNew.NONE;  // default every cell as a NONE-cell
+                var rotationINT = 0;
+
+                var cellCharacter = backendMatrix[c, r];
+                if (cellCharacter == "B") typeOfCell = CellTypeNew.BASE;
+                else if (cellCharacter == "S") typeOfCell = CellTypeNew.SPAWN;
+                else if (cellCharacter == "O") typeOfCell = CellTypeNew.NONE;
+                else
                 {
-                    typeOfCell = CellType.BASE;
+                    (cellCharacter, rotationINT) = ConvertToCell(cellCharacter);
+                    if (cellCharacter == "STRAIGHT") typeOfCell = CellTypeNew.STRAIGHTPATH;
+                    if (cellCharacter == "CURVE") typeOfCell = CellTypeNew.CURVEPATH;
                 }
-                else if (new Vector2Int(r, c) == spawnCoordinates)
-                {
-                    typeOfCell = CellType.SPAWN;
-                }
-                cells[r, c] = new Cell(new Vector2Int(r, c), cellPos, typeOfCell, false);
-                 
+
+                Vector3 newRotation = new Vector3(0, rotationINT, 0);
+                cells[r, c] = new NewCell(cellPos, typeOfCell, false, newRotation);
+                
+                NewCell cell = cells[r, c];
+
+                GameObject tileToPlace = tilePrefab;
+                if (typeOfCell == CellTypeNew.NONE) tileToPlace = tilePrefab;
+                if (typeOfCell == CellTypeNew.BASE) tileToPlace = basePrefab;
+                if (typeOfCell == CellTypeNew.SPAWN) tileToPlace = spawnPrefab;
+                if (typeOfCell == CellTypeNew.CURVEPATH) tileToPlace = curvePrefab;
+                if (typeOfCell == CellTypeNew.STRAIGHTPATH) tileToPlace = straightPrefab;
+                
+                GameObject tile = Instantiate(tileToPlace, transform);
+                tile.name = $"{tileToPlace.ToString()} {r}, {c}";
+                tile.transform.SetParent(mapBase.transform);
+                tile.transform.position = cells[r, c].position;
+                tile.transform.Rotate(cells[r, c].rotation);
+                tile.transform.localScale *= cellSize;
+                cell.tile = tile;
+
+                //bool boolShow = cell.type == CellTypeNew.CURVEPATH || cell.type == CellTypeNew.STRAIGHTPATH;
+                
+                //cell.tile.SetActive(!boolShow);
+                
             }
-            position += Vector3.forward * cellSize;
+            placeInPosition += Vector3.forward * cellSize;
+        }
+    }
+    
+    private (int[], int[]) GenerateSpawnAndBase(int w, int h)
+    {
+        spawnCoordinates = new int[] {Random.Range(0, w - 1), Random.Range(0, h - 1)} ;
+        baseCoordinates = new int[] {Random.Range(0, w - 1), Random.Range(0, h - 1)} ;
+        manhattanDist = ManhattanDistance(spawnCoordinates[0], baseCoordinates[0], spawnCoordinates[1],
+            baseCoordinates[1]);
+
+        while (manhattanDist < minSpawnToBaseDistance)
+        {
+            // keep on randomizing coordinates for the enemy spawn and the player base until we have found coords that
+            // are far enough away from each other
+            baseCoordinates = new int[] {Random.Range(0, mapWidth - 1), Random.Range(0, mapHeight - 1)} ;
+            spawnCoordinates = new int[] {Random.Range(0, mapWidth - 1), Random.Range(0, mapHeight - 1)};
+            manhattanDist = ManhattanDistance(spawnCoordinates[0], baseCoordinates[0], spawnCoordinates[1],
+                baseCoordinates[1]);
         }
         
-        */
-
+        return (baseCoordinates, spawnCoordinates);
     }
+
 
     private string ConvertMoveToMoveStr(int currentMove, int lastMove)
     {
@@ -201,7 +243,7 @@ public class MapGenerator : MonoBehaviour
             case 3:
                 return (axis == "x") ? 0 : 1;  // down
         }
-        Debug.Log("Unintended action");
+        throw new InvalidOperationException("Unintended action");  // this should not happen so we throw error if it would.
         return 0;   // this should not happen
     }
 
@@ -267,5 +309,18 @@ public class MapGenerator : MonoBehaviour
         return matrix;
     }
 
+    private static (string, int) ConvertToCell(string stringAction)
+    {
+        if (stringAction == "rr" || stringAction == "r") return ("STRAIGHT", 0);
+        if (stringAction == "dd" || stringAction == "d") return ("STRAIGHT", 90);
+        if (stringAction == "ll" || stringAction == "l") return ("STRAIGHT", 180);
+        if (stringAction == "uu" || stringAction == "u") return ("STRAIGHT", 270);
 
+        if (stringAction == "ld" || stringAction == "ur") return ("CURVE", 0);
+        if (stringAction == "rd" || stringAction == "ul") return ("CURVE", 90);
+        if (stringAction == "dl" || stringAction == "ru") return ("CURVE", 180);
+        if (stringAction == "lu" || stringAction == "dr") return ("CURVE", 270);
+        
+        throw new InvalidOperationException(stringAction);  // this should not happen so we throw error if it would.
+    }
 }
