@@ -10,6 +10,7 @@ public class Fog : MonoBehaviour {
 
     void Start() {
         renderer = GetComponent<Renderer>();
+
     }
 
     public void ClearFog() {

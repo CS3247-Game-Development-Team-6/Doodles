@@ -1,10 +1,13 @@
+using System;
 using UnityEngine;
 
 public enum CellType {
     // Can change name 
-    WALK,
+    NONE,
+    STRAIGHTPATH,
+    CURVEPATH,
     BASE,
-    NONE
+    SPAWN,
 }
 
 
@@ -13,24 +16,23 @@ public enum CellType {
 public class Cell {
     // index = (row, col)
     private Vector2Int index;
-    private Vector3 position;
     public GameObject tile;
     public GameObject fog;
     public CellType type;
     public bool isFog;
+    public Vector3 rotation; 
+    public Vector3 position;
+    public int pathOrder;
 
-    public Vector2Int Index {
-        get { return index; }
-    }
+    public Vector2Int Index => index;
 
-    public Vector3 Position {
-        get { return position; }
-    }
-    
-    public Cell(Vector2Int index, Vector3 position, CellType type, bool isFog) {
-        this.index = index;
-        this.position = position;
-        this.type = type;
-        this.isFog = isFog;
+    public Vector3 Position { get; }
+
+    public Cell(Vector3 pos, CellType typeOfCell, bool isFoggy, Vector3 rot, int pathNum) {
+        position = pos;
+        type = typeOfCell;
+        isFog = isFoggy;
+        rotation = rot;
+        pathOrder = pathNum;
     }
 }

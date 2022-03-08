@@ -5,8 +5,9 @@ using UnityEngine;
 public class Waypoints : MonoBehaviour
 {
     public static Transform[] points;
-    public Map map;
+    public MapGenerator map;
     public GameObject gameMaster;
+    private bool waypointsActive = false;
 
     
     public void ActivateWaypoints()
@@ -18,12 +19,16 @@ public class Waypoints : MonoBehaviour
         }
 
         gameMaster.GetComponent<WaveSpawner>().spawnPoint = points[0];
-
+        waypointsActive = true;
     }
-    
+
     /* Red markers indicate waypoints, green marker indicates base.
      */
-    private void OnDrawGizmos() {
+    private void OnDrawGizmos()
+    // the gizmos are drawn after waypoints have actually been added
+    // this is done to avoid the error when we try to draw gizmos before we have waypoints placed.
+    {
+        if (!waypointsActive) return;
         Gizmos.color = Color.red;
         int n = transform.childCount;
         for (int i = 0; i < n - 1; i++) {
@@ -32,5 +37,4 @@ public class Waypoints : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(transform.GetChild(n - 1).position, 0.2f);
     }
-
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using UnityEditor.U2D;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
@@ -16,8 +17,10 @@ public class MapGenerator : MonoBehaviour
                                             // may lead to infinite while loop.
     public int maximumTries = 200; // this can be decreased to prevent going for too long
     public int minimumReqScore = 50;
+    public int fogTilesClearedByBase = 10;  // change this to clear more fog around the base when starting
     public GameObject mapBase;
     public GameObject tilePrefab;
+    public GameObject fogPrefab;
     public GameObject basePrefab;
     public GameObject spawnPrefab;
     public GameObject curvePrefab;
@@ -31,11 +34,11 @@ public class MapGenerator : MonoBehaviour
     private string[,] backendMatrix;
     private int[,] iterationMatrix;
     
-    private NewCell[,] cells;
+    private Cell[,] cells;
     private int mapWidth;
     private int mapHeight;
     private int manhattanDist;
-    List<NewCell> curvedCells = new List<NewCell>();    // do not know the length (how many waypoints) so we
+    List<Cell> curvedCells = new List<Cell>();    // do not know the length (how many waypoints) so we
                                                         // init this as a list and later convert to an array.
                                                         
     private Vector3[] waypointsPosition;
@@ -74,7 +77,7 @@ public class MapGenerator : MonoBehaviour
             iterationMatrix[currentY, currentX] = 0;   // just put a zero on the spawn
 
             for (int _ = 0; _ < 100; _++)   // for every try, we do 100 random moves before either
-                                            // suceeding or abandoning this attempt
+                                            // succeeding or abandoning this attempt
             {
                 int previousX = currentX;
                 int previousY = currentY;
@@ -117,7 +120,6 @@ public class MapGenerator : MonoBehaviour
                         {
                             string strMove = ConvertMoveToMoveStr(thisMove, lastMove);
                             backendMatrix[previousY, previousX] = strMove;
-                            Print2DArray(backendMatrix);
                         }
                     }
                 }
@@ -129,7 +131,7 @@ public class MapGenerator : MonoBehaviour
                 if (lengthOfPath <= manhattanDist * 2 && lengthOfPath > manhattanDist * 1.5 && score > minimumReqScore)
                 {
                     
-                    Print2DArray(backendMatrix);
+                    // Print2DArray(backendMatrix);
 
                     foundGoodPath = true;
                     
@@ -141,49 +143,51 @@ public class MapGenerator : MonoBehaviour
         }
 
         Vector3 placeInPosition = transform.position + (Vector3.one * 0.5f) * cellSize;
-        cells = new NewCell[gridSize.x, gridSize.y];
+        cells = new Cell[gridSize.x, gridSize.y];
         for (int r = 0; r < gridSize.x; r++) {
             for (int c = 0; c < gridSize.y; c++) {
                 Vector3 cellPos = placeInPosition + Vector3.right * c * cellSize;
-                var typeOfCell = CellTypeNew.NONE;  // default every cell as a NONE-cell
+                var typeOfCell = CellType.NONE;  // default every cell as a NONE-cell
                 var rotationINT = 0;
                 int pathNum = 0;
                 
                 var cellCharacter = backendMatrix[c, r];
                 if (cellCharacter == "B")
                 {
-                    typeOfCell = CellTypeNew.BASE;
+                    typeOfCell = CellType.BASE;
                     pathNum = iterationMatrix[c, r];
                 }
                 else if (cellCharacter == "S")
                 {
-                    typeOfCell = CellTypeNew.SPAWN;
+                    typeOfCell = CellType.SPAWN;
                     pathNum = iterationMatrix[c, r];
                 }
-                else if (cellCharacter == "O") typeOfCell = CellTypeNew.NONE;
+                else if (cellCharacter == "O") typeOfCell = CellType.NONE;
                 else
                 {
                     (cellCharacter, rotationINT) = ConvertToCell(cellCharacter);
-                    if (cellCharacter == "STRAIGHT") typeOfCell = CellTypeNew.STRAIGHTPATH;
+                    if (cellCharacter == "STRAIGHT") typeOfCell = CellType.STRAIGHTPATH;
                     if (cellCharacter == "CURVE")
                     {
-                        typeOfCell = CellTypeNew.CURVEPATH;
+                        typeOfCell = CellType.CURVEPATH;
                         pathNum = iterationMatrix[c, r];
                     }
                 }
 
                 Vector3 newRotation = new Vector3(0, rotationINT, 0);
-                cells[r, c] = new NewCell(cellPos, typeOfCell, false, newRotation, pathNum);
+                cells[r, c] = new Cell(cellPos, typeOfCell, true, newRotation, pathNum);
+                // note: per default we initialise all tiles as foggy, then clear some close to the base.
                 
-                NewCell cell = cells[r, c];
+                Cell cell = cells[r, c];
 
                 GameObject tileToPlace = tilePrefab;
-                if (typeOfCell == CellTypeNew.NONE) tileToPlace = tilePrefab;
-                if (typeOfCell == CellTypeNew.BASE) {tileToPlace = basePrefab; curvedCells.Add(cell);}
-                if (typeOfCell == CellTypeNew.SPAWN) {tileToPlace = spawnPrefab; curvedCells.Add(cell);}
-                if (typeOfCell == CellTypeNew.CURVEPATH) {tileToPlace = curvePrefab; curvedCells.Add(cell);}
-                if (typeOfCell == CellTypeNew.STRAIGHTPATH) tileToPlace = straightPrefab;
+                if (typeOfCell == CellType.NONE) tileToPlace = tilePrefab;
+                if (typeOfCell == CellType.BASE) {tileToPlace = basePrefab; curvedCells.Add(cell);}
+                if (typeOfCell == CellType.SPAWN) {tileToPlace = spawnPrefab; curvedCells.Add(cell);}
+                if (typeOfCell == CellType.CURVEPATH) {tileToPlace = curvePrefab; curvedCells.Add(cell);}
+                if (typeOfCell == CellType.STRAIGHTPATH) tileToPlace = straightPrefab;
                 
+                // Instantiate the correct tile for every cell
                 GameObject tile = Instantiate(tileToPlace, transform);
                 tile.name = $"{tileToPlace.ToString()} {r}, {c}";
                 tile.transform.SetParent(mapBase.transform);
@@ -191,8 +195,18 @@ public class MapGenerator : MonoBehaviour
                 tile.transform.Rotate(cells[r, c].rotation);
                 tile.transform.localScale *= cellSize;
                 cell.tile = tile;
+                
+                // Instantiate the fog tile for every cell
+                GameObject fog = Instantiate(fogPrefab, transform);
+                fog.name = $"Fog {r}, {c}";
+                fog.transform.SetParent(mapBase.transform);
+                fog.transform.position = cells[r, c].position;
+                fog.transform.localScale *= cellSize;
+                cell.fog = fog;
+                fog.GetComponent<Fog>().cell = cell;
 
-                if (typeOfCell == CellTypeNew.CURVEPATH || typeOfCell == CellTypeNew.STRAIGHTPATH)
+                if (typeOfCell == CellType.CURVEPATH || typeOfCell == CellType.STRAIGHTPATH)
+                // this is to not display all the 2d images used to show where the path is.
                 {
                     tile.SetActive(false);
                 }
@@ -202,13 +216,47 @@ public class MapGenerator : MonoBehaviour
         
         SetWaypoints(curvedCells.ToArray());
         waypointEmpty.GetComponent<Waypoints>().ActivateWaypoints();
+        ClearFogAroundBase(cells, baseCoordinates[1], baseCoordinates[0], mapWidth, mapHeight, 0, fogTilesClearedByBase);
     }
 
-    public Vector3[] GetWaypointsArr()
+    private void Update()
     {
-        return waypointsPosition;
+        for (int r = 0; r < mapWidth; r++) {
+            for (int c = 0; c < mapHeight; c++) {
+                Cell cell = cells[r, c];
+                cell.fog.SetActive(cell.isFog);
+            }
+        }
     }
     
+    private void ClearFogAroundBase(Cell[,] cellMatrix, int x, int y, int w, int h, int numberOfFogCleared, int minCleared)
+    {
+        int lastX = x;
+        int lastY = y;
+        for (int i = -1; i < 2; i++)
+        {
+            for (int j = -1; j < 2; j++)
+            {
+                if (y + i >= 0 && y + i < h && x + j >= 0 && x + j < w)   // to avoid index' out of bounds
+                {
+                    if (cellMatrix[y + i, x + j].isFog && numberOfFogCleared < minCleared) // only do this is there was fog here already
+                    {
+                        cellMatrix[y + i, x + j].isFog = false;
+                        numberOfFogCleared++;
+
+                        lastX = x + j;
+                        lastY = y + i;
+                    }
+                }
+            }
+        }
+
+        if (numberOfFogCleared < minCleared)
+        {
+            ClearFogAroundBase(cellMatrix, lastX, lastY, w, h, numberOfFogCleared, minCleared);
+        } 
+    }
+
     private (int[], int[]) GenerateSpawnAndBase(int w, int h)
     {
         spawnCoordinates = new int[] {Random.Range(0, w - 1), Random.Range(0, h - 1)} ;
@@ -220,8 +268,8 @@ public class MapGenerator : MonoBehaviour
         {
             // keep on randomizing coordinates for the enemy spawn and the player base until we have found coords that
             // are far enough away from each other
-            baseCoordinates = new int[] {Random.Range(0, mapWidth - 1), Random.Range(0, mapHeight - 1)} ;
             spawnCoordinates = new int[] {Random.Range(0, mapWidth - 1), Random.Range(0, mapHeight - 1)};
+            baseCoordinates = new int[] {Random.Range(0, mapWidth - 1), Random.Range(0, mapHeight - 1)} ;
             manhattanDist = ManhattanDistance(spawnCoordinates[0], baseCoordinates[0], spawnCoordinates[1],
                 baseCoordinates[1]);
         }
@@ -229,7 +277,7 @@ public class MapGenerator : MonoBehaviour
         return (baseCoordinates, spawnCoordinates);
     }
     
-    public void SetWaypoints(NewCell[] waypointCells) {
+    public void SetWaypoints(Cell[] waypointCells) {
         // sort array based on their order in the path
         Array.Sort(waypointCells, (oneCell, otherCell) => oneCell.pathOrder.CompareTo(otherCell.pathOrder));
 
@@ -373,5 +421,23 @@ public class MapGenerator : MonoBehaviour
         if (stringAction == "lu" || stringAction == "dr") return ("CURVE", 270);
         
         throw new InvalidOperationException(stringAction);  // this should not happen so we throw error if it would.
+    }
+    
+    /* Grid pattern to visualize Map in editor mode.
+    */
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.cyan;
+        Vector3 position = transform.position;
+        Vector3 width = Vector3.right * cellSize * gridSize.x;
+        Vector3 height = Vector3.forward * cellSize * gridSize.y;
+        for (int r = 0; r <= gridSize.x; r++) {
+            Gizmos.DrawLine(position, position + height);
+            position += Vector3.right * cellSize;
+        }
+        position = transform.position;
+        for (int c = 0; c <= gridSize.y; c++) {
+            Gizmos.DrawLine(position, position + width);
+            position += Vector3.forward * cellSize;
+        }
     }
 }
