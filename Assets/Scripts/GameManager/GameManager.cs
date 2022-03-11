@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static bool gameEnded = false;
+    [SerializeField] private GameObject gameOverUI;
+
+    private static bool isGameEnded;
+
+    void Start() {
+        isGameEnded = false;
+    }
 
     void Update() {
-        if (gameEnded)
+        if (isGameEnded)
             return;
 
         if (Base.getHp() <= 0) {
@@ -16,12 +22,13 @@ public class GameManager : MonoBehaviour
     }
 
     void EndGame() {
-        gameEnded = true;
-        Debug.Log("Game Over!");
+        isGameEnded = true;
+        
+        gameOverUI.SetActive(true);
     }
 
     // for other game scripts to check if the game is ended
-    public static bool isGameEnded() {
-        return gameEnded;
+    public static bool getIsGameEnded() {
+        return isGameEnded;
     }
 }

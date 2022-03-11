@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Base : MonoBehaviour
 {
-    [SerializeField] private static int startHp = 500;
+    public static int startHp = 500;
 
     private static int hp;
 

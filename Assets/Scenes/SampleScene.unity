@@ -326,6 +326,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &550646146 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 550646146, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &689040356 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3773202537855497262, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
@@ -1595,6 +1600,10 @@ PrefabInstance:
       propertyPath: waveCountdownText
       value: 
       objectReference: {fileID: 406906431}
+    - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: gameOverUI
+      value: 
+      objectReference: {fileID: 550646146}
     - target: {fileID: 6600273765185839074, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: m_RootOrder
       value: 7
