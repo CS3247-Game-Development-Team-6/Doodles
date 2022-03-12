@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour {
     */
     [SerializeField] private LayerMask dashLayerMask;
     [SerializeField] private LayerMask groundLayerMask;
-    [SerializeField] private LayerMask tileLayerMask;
+    [SerializeField] private LayerMask tileAndFogLayerMask;
     [SerializeField] private Player player;
 
     // states
@@ -177,7 +177,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetMouseButtonDown(1)) { // right click
             Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, tileLayerMask)) {
+            if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, tileAndFogLayerMask)) {
                 if (raycastHit.collider.gameObject.layer == 11) { // right clicked on a TowerCell
                     Debug.Log("Clicked on " + raycastHit.collider.gameObject.name); // TODO: remove
 

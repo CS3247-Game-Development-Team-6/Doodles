@@ -925,7 +925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 767052243}
-  player: {fileID: 0}
+  player: {fileID: 1789031185}
 --- !u!1 &817449646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,9 +2319,9 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  tileLayerMask:
+  tileAndFogLayerMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 2176
   player: {fileID: 1789031185}
   playerCamera: {fileID: 963194227}
 --- !u!212 &1789031181
@@ -2683,6 +2683,10 @@ PrefabInstance:
     - target: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
       propertyPath: m_Name
       value: Fog
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
