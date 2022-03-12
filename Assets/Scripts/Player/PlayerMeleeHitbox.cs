@@ -10,19 +10,57 @@ public class PlayerMeleeHitbox : MonoBehaviour
     */
     public GameObject hitEffect; // TODO: get a hit effect for melee actions
     private int meleeDamage = 20;
+    private float maxLifeTime = 0.15f;
+    private float currentLifeTime;
+    private List<Collider> colliderList;
+    private bool hasAppliedDamage = false;
 
     void Start() {
         // Ignore the collisions between layers "Player" and "PlayerBullets"
         Physics.IgnoreLayerCollision(6, 9);
+        currentLifeTime = maxLifeTime;
+        colliderList = new List<Collider>();
     }
-    void OnCollisionEnter(Collision other) {
-        // TODO: implement hit effect
-        // Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
-        // Destroy(effect, 5f); // destroy after 5 ticks
-        
-        if (other.collider.CompareTag("Enemy")) {
-            other.collider.GetComponentInParent<Enemy>().TakeDamage(meleeDamage);
+
+    void Update() {
+        CheckLifeTime();
+    }
+
+    void FixedUpdate() {
+        if (currentLifeTime > 0) {
+            currentLifeTime -= Time.deltaTime;
         }
-        Destroy(gameObject);
+    }
+
+    void OnCollisionStay(Collision other) {
+        if (!colliderList.Contains(other.collider)) { 
+            Debug.Log("Collider added!"); // TODO: remove
+            colliderList.Add(other.collider);
+        }
+    }
+
+    private void ApplyDamage() { // apply damage only once
+        if (hasAppliedDamage) {
+            return;
+        }
+
+        foreach (Collider collider in colliderList) {
+            if (collider.CompareTag("Enemy")) {
+                // TODO: implement hit effect
+                // Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
+                // Destroy(effect, 5f); // destroy after 5 ticks
+
+                collider.GetComponentInParent<Enemy>().TakeDamage(meleeDamage);
+            }
+        }
+
+        hasAppliedDamage = true;
+    }
+
+    private void CheckLifeTime() {
+        if (currentLifeTime <= 0) {
+            ApplyDamage();
+            Destroy(gameObject);
+        }
     }
 }

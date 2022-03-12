@@ -9,9 +9,9 @@ public class PlayerMelee : MonoBehaviour {
     [SerializeField] private LayerMask groundLayerMask;
 
     private Transform firePoint; // TODO: firepoint may need changes to rotation
-    public GameObject meleePrefab; // TODO: get an actual melee prefab
+    public GameObject meleeHitboxPrefab; 
 
-    private float bulletForce = 4f;
+    private float meleeRange = 1f;
     private float meleeCooldown = 0.5f; 
     private float currentCooldown = 0f;
 
@@ -41,7 +41,7 @@ public class PlayerMelee : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        meleeDirection = mousePositionVector - firePoint.position;
+        meleeDirection = (mousePositionVector - firePoint.position).normalized;
 
         if (currentCooldown > 0) {
             currentCooldown -= Time.deltaTime;
@@ -58,7 +58,9 @@ public class PlayerMelee : MonoBehaviour {
 
     void MeleeAttack() {
         if (currentCooldown <= 0) {
-            // TODO: add actual melee attack hitbox
+            Vector3 attackPosition = transform.position + meleeDirection * meleeRange; 
+            // TODO: refine size of hitbox
+            GameObject meleeHitbox = Instantiate(meleeHitboxPrefab, attackPosition, firePoint.rotation);
             
             // TODO: add melee animation somewhere
             currentCooldown = meleeCooldown;

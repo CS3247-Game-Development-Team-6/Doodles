@@ -1648,7 +1648,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460109370}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.837604, y: 2.837604, z: 2.837604}
   m_Children: []
@@ -2462,8 +2462,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 0
-  meleePrefab: {fileID: 0}
+    m_Bits: 1024
+  meleeHitboxPrefab: {fileID: 5620837296766614375, guid: 02f4fb382686f2a4cb9055d5f1a44c90, type: 3}
 --- !u!1 &1823534487
 GameObject:
   m_ObjectHideFlags: 0

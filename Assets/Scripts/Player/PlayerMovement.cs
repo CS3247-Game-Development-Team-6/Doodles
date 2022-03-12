@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     This is the main script for the player that handles most inputs for actions
 
     Requires player game object to have a "ActionTimer" game object containing a TMP_Text.
+    Requires player game object to have a "FirePoint" game object containing a Transform.
     */
     [SerializeField] private LayerMask dashLayerMask;
     [SerializeField] private LayerMask groundLayerMask;
@@ -37,7 +38,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool isUsingShooting;
 
     // player build values
-    private float buildDistance = 3f;
+    private float buildDistance = 1f;
     private float buildDuration = 5f;
     private float currentBuildDuration = 0f;
     private GameObject currentTowerCell; // current cell that the player is interacting with
@@ -50,6 +51,7 @@ public class PlayerMovement : MonoBehaviour {
     private TMP_Text actionTimer;
     private PlayerShooting playerShootingScript;
     private PlayerMelee playerMeleeScript;
+    private Transform firePoint;
 
 
     // directions and positions
@@ -74,6 +76,7 @@ public class PlayerMovement : MonoBehaviour {
         playerShootingScript.enableShooting();
         playerMeleeScript.disableMelee();
         isUsingShooting = true;
+        firePoint = GameObject.Find("FirePoint").GetComponent<Transform>();
         
         // set default state
         state = State.Normal;
@@ -97,9 +100,10 @@ public class PlayerMovement : MonoBehaviour {
         Move();
         Build();
 
-        Vector3 lookDirection = mousePositionVector - rigidBody.position;
-        float angle = Mathf.Atan2(lookDirection.z, lookDirection.x) * Mathf.Rad2Deg - 90f;
-        // rigidBody.rotation = angle; // TODO: player should not rotate; should change sprite instead
+        Vector3 lookDirection = (mousePositionVector - rigidBody.position).normalized;
+        float angle = Mathf.Atan2(lookDirection.x, lookDirection.z) * Mathf.Rad2Deg;
+        firePoint.eulerAngles = new Vector3(0, angle, 0);
+        // rigidBody.rotation = new Vector3(0, angle, 0); // TODO: player should not rotate; should change sprite instead
         // TODO: add player sprite animation
     }
 

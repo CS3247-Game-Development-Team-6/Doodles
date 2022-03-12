@@ -12,7 +12,7 @@ public class PlayerShooting : MonoBehaviour {
     public GameObject bulletPrefab; // TODO: get an actual bullet prefab
 
     private float bulletForce = 4f;
-    private float shootingCooldown = 0.5f; 
+    private float shootingCooldown = 0.2f; 
     private float currentCooldown = 0f;
 
     private Camera mainCamera;
