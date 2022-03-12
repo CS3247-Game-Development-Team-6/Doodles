@@ -4,14 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
+    /*
+    Requires player game object to have a "HealthCanvas/HealthBar" game object containing a health bar Image.
+    */
     private float healthAmount;
     private float maxHealth = 100;
 
-    [Header("Health Bar Image")]
-    public Image healthBar;
+    private Image healthBar;
 
     // Start is called before the first frame update
     void Start() {
+        healthBar = GameObject.Find("HealthCanvas/HealthBar").GetComponent<Image>();
         healthAmount = maxHealth;
     }
 

@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBullet : MonoBehaviour {
-
-    public GameObject hitEffect; // TODO: get a hit effect for the bullets
-    private int bulletDamage = 10;
+public class PlayerMeleeHitbox : MonoBehaviour
+{
+    /*
+    --IMPORTANT--
+    Player melee hitbox can be counted under PlayerBullets layer as they serve the same function.
+    */
+    public GameObject hitEffect; // TODO: get a hit effect for melee actions
+    private int meleeDamage = 20;
 
     void Start() {
         // Ignore the collisions between layers "Player" and "PlayerBullets"
@@ -17,9 +21,8 @@ public class PlayerBullet : MonoBehaviour {
         // Destroy(effect, 5f); // destroy after 5 ticks
         
         if (other.collider.CompareTag("Enemy")) {
-            other.collider.GetComponentInParent<Enemy>().TakeDamage(bulletDamage);
+            other.collider.GetComponentInParent<Enemy>().TakeDamage(meleeDamage);
         }
-        
         Destroy(gameObject);
     }
 }

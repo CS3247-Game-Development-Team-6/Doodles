@@ -2275,6 +2275,7 @@ GameObject:
   - component: {fileID: 1789031186}
   - component: {fileID: 1789031180}
   - component: {fileID: 1789031183}
+  - component: {fileID: 1789031187}
   - component: {fileID: 1789031179}
   - component: {fileID: 1789031184}
   m_Layer: 10
@@ -2323,7 +2324,6 @@ MonoBehaviour:
     m_Bits: 2048
   player: {fileID: 1789031185}
   playerCamera: {fileID: 963194227}
-  actionTimer: {fileID: 1546469289}
 --- !u!212 &1789031181
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2407,10 +2407,7 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  firePoint: {fileID: 1460109371}
   bulletPrefab: {fileID: 3833045344010415125, guid: 9f7d8365b67af4c478b04373797cfd39, type: 3}
-  bulletForce: 4
-  shootingCooldown: 0.5
 --- !u!65 &1789031184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2451,7 +2448,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916040b4d525ea24ea528d98f822ec1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 1574525689}
+--- !u!114 &1789031187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789031178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c56256b8170ae543a9d772fd43d5c74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  meleePrefab: {fileID: 0}
 --- !u!1 &1823534487
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,29 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShooting : MonoBehaviour {
+public class PlayerMelee : MonoBehaviour {
     /*
     Requires player game object to have a "FirePoint" game object containing a Transform.
     */
     [SerializeField] private LayerMask groundLayerMask;
 
     private Transform firePoint; // TODO: firepoint may need changes to rotation
-    public GameObject bulletPrefab; // TODO: get an actual bullet prefab
+    public GameObject meleePrefab; // TODO: get an actual melee prefab
 
     private float bulletForce = 4f;
-    private float shootingCooldown = 0.5f; 
+    private float meleeCooldown = 0.5f; 
     private float currentCooldown = 0f;
 
     private Camera mainCamera;
 
     private Vector3 mousePositionVector;
-    private Vector3 bulletDirection;
-    private bool isUsingShooting;
+    private Vector3 meleeDirection;
+    private bool isUsingMelee;
 
     private void Start() {
         firePoint = GameObject.Find("FirePoint").GetComponent<Transform>();
         mainCamera = Camera.main;
-        isUsingShooting = true;
+        isUsingMelee = false;
     }
 
     // Update is called once per frame
@@ -35,34 +35,33 @@ public class PlayerShooting : MonoBehaviour {
             //mousePositionVector.y = transform.position.y; // set to same vertical height as player
         }
 
-        if (isUsingShooting && Input.GetButtonDown("Fire1")) {
-            Shoot();
+        if (isUsingMelee && Input.GetButtonDown("Fire1")) {
+            MeleeAttack();
         }
     }
 
     void FixedUpdate() {
-        bulletDirection = mousePositionVector - firePoint.position;
+        meleeDirection = mousePositionVector - firePoint.position;
 
         if (currentCooldown > 0) {
             currentCooldown -= Time.deltaTime;
         }
     }
 
-    public void enableShooting() {
-        isUsingShooting = true;
+    public void enableMelee() {
+        isUsingMelee = true;
     }
 
-    public void disableShooting() {
-        isUsingShooting = false;
+    public void disableMelee() {
+        isUsingMelee = false;
     }
 
-    private void Shoot() {
+    void MeleeAttack() {
         if (currentCooldown <= 0) {
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            Rigidbody rigidBody = bullet.GetComponent<Rigidbody>();
-            rigidBody.AddForce(bulletDirection * bulletForce, ForceMode.Impulse);
-            // TODO: add shooting animation somewhere
-            currentCooldown = shootingCooldown;
+            // TODO: add actual melee attack hitbox
+            
+            // TODO: add melee animation somewhere
+            currentCooldown = meleeCooldown;
         }
     }
 }
