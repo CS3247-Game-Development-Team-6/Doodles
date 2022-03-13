@@ -33,6 +33,10 @@ public class Node : MonoBehaviour
         return towerToBuild.GetComponent<Turret>().Cost;
     }
 
+    public bool HasTower() {
+        return tower != null;
+    }
+
     public Turret BuildTower()
     {
         if (tower != null) 
