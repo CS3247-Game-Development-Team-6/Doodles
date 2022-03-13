@@ -34,7 +34,6 @@ public class PlayerMeleeHitbox : MonoBehaviour
 
     void OnCollisionStay(Collision other) {
         if (!colliderList.Contains(other.collider)) { 
-            Debug.Log("Collider added!"); // TODO: remove
             colliderList.Add(other.collider);
         }
     }

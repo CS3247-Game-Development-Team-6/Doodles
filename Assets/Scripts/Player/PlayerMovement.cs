@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool isUsingShooting;
 
     // player build values
-    private float buildDistance = 1f;
+    private float buildDistance = 3f;
     private float buildDuration = 5f;
     private float currentBuildDuration = 0f;
     private GameObject currentTowerCell; // current cell that the player is interacting with
@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour {
     private Animator animator;
     private Rigidbody rigidBody;
     public Camera playerCamera;
-    [Header("TextMeshPro - Text")]
     private TMP_Text actionTimer;
     private PlayerShooting playerShootingScript;
     private PlayerMelee playerMeleeScript;
@@ -175,6 +174,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonDown(1)) { // right click
+            Debug.Log("Attempting to build!"); // TODO: remove
             Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, tileAndFogLayerMask)) {
