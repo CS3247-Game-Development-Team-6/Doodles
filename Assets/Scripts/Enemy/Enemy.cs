@@ -83,9 +83,9 @@ public class Enemy : MonoBehaviour
     // enemy attack the base and destroy
     void EndPath()
     {
-        // decrease base hp
-        Base.receiveDmg(attackBaseDmg);
+        //decrease base hp
+        //Base.receiveDmg(attackBaseDmg);
+        //Destroy(gameObject);
 
-        Destroy(gameObject);
     }
 }

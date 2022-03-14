@@ -48,7 +48,13 @@ public class EnemyBullet : MonoBehaviour
         if (_target.CompareTag("Player"))
         {
             Debug.Log("player take damage");
-            //_target.GetComponent<Player>().TakeDamage(bulletDamage);
+            //_target.GetComponent<PlayerHealth>().TakeDamage(bulletDamage);
+        }
+
+        if (_target.CompareTag("Base"))
+        {
+            Debug.Log("base take damage");
+            //_target.GetComponent<Base>().TakeDamage(bulletDamage);
         }
     }
 }
