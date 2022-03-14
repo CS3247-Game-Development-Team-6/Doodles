@@ -27,6 +27,7 @@ public class MapGenerator : MonoBehaviour
     public GameObject straightPrefab;
     public GameObject waypointPrefab;
     public GameObject waypointEmpty;
+    public GameObject playerGameObj;
 
     private Vector2Int gridSize = new Vector2Int(10, 10);   // current implementation only allows for 10x10
     private int[] spawnCoordinates = new int[2]; 
@@ -214,7 +215,13 @@ public class MapGenerator : MonoBehaviour
             placeInPosition += Vector3.forward * cellSize;
         }
         
-        SetWaypoints(curvedCells.ToArray());
+        // construct all the waypoints that the enemies are using to navigate the path
+        var waypointsArr = SetWaypoints(curvedCells.ToArray());
+        
+        // move the player to a tile nearby the base. 
+        playerGameObj.GetComponent<PlayerStartposition>().MovePlayerStartPosition(
+            waypointsArr[waypointsArr.Length - 1], waypointsArr[waypointsArr.Length - 2]); 
+                       
         waypointEmpty.GetComponent<Waypoints>().ActivateWaypoints();
         ClearFogAroundBase(cells, baseCoordinates[1], baseCoordinates[0], mapWidth, mapHeight, 0, fogTilesClearedByBase);
     }
@@ -277,7 +284,7 @@ public class MapGenerator : MonoBehaviour
         return (baseCoordinates, spawnCoordinates);
     }
     
-    public void SetWaypoints(Cell[] waypointCells) {
+    public Vector3[] SetWaypoints(Cell[] waypointCells) {
         // sort array based on their order in the path
         Array.Sort(waypointCells, (oneCell, otherCell) => oneCell.pathOrder.CompareTo(otherCell.pathOrder));
 
@@ -292,6 +299,8 @@ public class MapGenerator : MonoBehaviour
             waypoint.transform.position = waypointCells[i].position;
 
         }
+
+        return waypointsPosition;
     }
 
 
