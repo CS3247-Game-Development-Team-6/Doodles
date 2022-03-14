@@ -35,7 +35,7 @@ public class EnemyShooting : MonoBehaviour
         //TODO: attack base
         
         GameObject[] targets = GameObject.FindGameObjectsWithTag(playerTag);
-        targets.Add(GameObject.FindGameObjectsWithTag(baseTag));
+        //targets.Add(GameObject.FindGameObjectsWithTag(baseTag));
 
         float shortestDistance = Mathf.Infinity;
         GameObject nearestTarget = null;
