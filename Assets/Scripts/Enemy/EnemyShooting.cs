@@ -35,11 +35,32 @@ public class EnemyShooting : MonoBehaviour
         //TODO: attack base
         
         GameObject[] targets = GameObject.FindGameObjectsWithTag(playerTag);
-        //targets.Add(GameObject.FindGameObjectsWithTag(baseTag));
+        GameObject[] bases = GameObject.FindGameObjectsWithTag(baseTag);
 
+        (GameObject, float) result = FindNearestTarget(targets, bases);
+        GameObject nearestTarget = result.Item1;
+        float shortestDistance = result.Item2;
+        
+        if (nearestTarget != null && shortestDistance <= range)
+        {
+            target = nearestTarget.transform;
+        }
+        else 
+        {
+            target = null;
+        }
+    }
+
+
+    // _targets are player
+    // _bases are multiple bases
+    // return tuples of either nearest player/base and shortest distance to the enemy
+    (GameObject, float) FindNearestTarget(GameObject[] _targets, GameObject[] _bases) 
+    {
         float shortestDistance = Mathf.Infinity;
         GameObject nearestTarget = null;
-        foreach (GameObject tempTarget in targets) 
+
+        foreach (GameObject tempTarget in _targets) 
         {
             float distanceToPlayer = Vector3.Distance(transform.position, tempTarget.transform.position);
             if (distanceToPlayer < shortestDistance)
@@ -49,14 +70,17 @@ public class EnemyShooting : MonoBehaviour
             }
         }
 
-        if (nearestTarget != null && shortestDistance <= range)
+        foreach (GameObject tempTarget in _bases) 
         {
-            target = nearestTarget.transform;
+            float distanceToPlayer = Vector3.Distance(transform.position, tempTarget.transform.position);
+            if (distanceToPlayer < shortestDistance)
+            {
+                shortestDistance = distanceToPlayer;
+                nearestTarget = tempTarget;
+            }
         }
-        else 
-        {
-            target = null;
-        }
+
+        return (nearestTarget, shortestDistance);;
     }
     
 
