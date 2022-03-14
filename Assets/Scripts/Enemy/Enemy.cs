@@ -80,12 +80,9 @@ public class Enemy : MonoBehaviour
         target = Waypoints.points[waypointIndex];
     }
 
-    // enemy attack the base and destroy
+    // previously was enemy attack the base and destroy
     void EndPath()
     {
-        //decrease base hp
-        //Base.receiveDmg(attackBaseDmg);
-        //Destroy(gameObject);
-
+        // do nothing
     }
 }

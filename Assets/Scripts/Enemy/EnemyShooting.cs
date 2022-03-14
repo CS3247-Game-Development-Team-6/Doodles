@@ -32,8 +32,6 @@ public class EnemyShooting : MonoBehaviour
     // dont need to find target every frame
     void UpdateTarget() {
         
-        //TODO: attack base
-        
         GameObject[] targets = GameObject.FindGameObjectsWithTag(playerTag);
         GameObject[] bases = GameObject.FindGameObjectsWithTag(baseTag);
 
@@ -105,6 +103,7 @@ public class EnemyShooting : MonoBehaviour
 
     }
 
+    // shoot according to firecountdown timer
     void Shoot () {
         GameObject bulletGO = (GameObject) Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         EnemyBullet bullet = bulletGO.GetComponent<EnemyBullet>();
