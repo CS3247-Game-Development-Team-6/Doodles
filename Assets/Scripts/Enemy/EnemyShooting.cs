@@ -15,6 +15,7 @@ public class EnemyShooting : MonoBehaviour
 
     [Header("Setup Fields")]
     public string playerTag = "Player";
+    public string baseTag = "Base";
 
     public Transform partToRotate;
     public float rotationSpeed = 10f;
@@ -30,9 +31,11 @@ public class EnemyShooting : MonoBehaviour
 
     // dont need to find target every frame
     void UpdateTarget() {
+        
         //TODO: attack base
         
         GameObject[] targets = GameObject.FindGameObjectsWithTag(playerTag);
+        targets.Add(GameObject.FindGameObjectsWithTag(baseTag));
 
         float shortestDistance = Mathf.Infinity;
         GameObject nearestTarget = null;
