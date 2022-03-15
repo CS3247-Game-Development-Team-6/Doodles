@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private int inkGained = 50;
 
-    [SerializeField] private int attackBaseDmg = 50;
+    //[SerializeField] private int attackBaseDmg = 50;
 
     [SerializeField] private GameObject deathEffect;
 
@@ -40,10 +40,14 @@ public class Enemy : MonoBehaviour
     void Die ()
     {
         // TODO: add ink
+
+        // for new wave
+        WaveSpawner.numEnemiesAlive--;
         
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
         Destroy(gameObject);
+  
     }
 
     void Start()
@@ -83,6 +87,8 @@ public class Enemy : MonoBehaviour
     // previously was enemy attack the base and destroy
     void EndPath()
     {
-        // do nothing
+
+        // for new wave
+        //WaveSpawner.numEnemiesAlive--;
     }
 }

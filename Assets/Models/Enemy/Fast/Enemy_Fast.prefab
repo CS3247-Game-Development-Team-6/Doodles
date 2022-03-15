@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 986762576498338959}
   - component: {fileID: 904252060}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy_Fast
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -443,7 +443,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c95ee087d56ed794c8432a2ec53b2f43, type: 2}
+  - {fileID: 2100000, guid: c4ab76b7ccabe5942afcaf419d1ec521, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -490,11 +490,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae588f773893f24419816762fa1dc82d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  initHealth: 100
+  speed: 2
+  initHealth: 50
   inkGained: 50
   attackBaseDmg: 50
-  deathEffect: {fileID: 6496939036694839794, guid: fa175d5aa33423f4a9406bdc4bd544aa, type: 3}
+  deathEffect: {fileID: 6496939036694839794, guid: 2e72e6fd95c8d0e48b55714387846831, type: 3}
   healthBar: {fileID: 1929750958}
 --- !u!114 &904252060
 MonoBehaviour:
@@ -511,6 +511,7 @@ MonoBehaviour:
   range: 1
   fireRate: 1
   playerTag: Player
+  baseTag: Base
   partToRotate: {fileID: 6972352779643815576}
   rotationSpeed: 10
   bulletPrefab: {fileID: 5753786456684779845, guid: d1b0a9d87d22b0c429c49b350d3f735a, type: 3}
