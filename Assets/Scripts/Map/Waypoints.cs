@@ -5,46 +5,38 @@ using UnityEngine;
 public class Waypoints : MonoBehaviour
 {
     public static Transform[] points;
-    public Map map;
-    
-    /* Assigns the array of waypoints.
-     */
-    void Awake() {
+    public MapGenerator map;
+    public GameObject gameMaster;
+    private bool waypointsActive = false;
+
+
+    public void ActivateWaypoints()
+    {
         // assign array waypoints
         points = new Transform[transform.childCount];
-        for (int i = 0; i < points.Length; i++) {
+        for (int i = 0; i < points.Length; i++)
+        {
             points[i] = transform.GetChild(i);
         }
-    }
 
-    /* Get the cell from world position of each waypoint, and sets the map's waypoints.
-     * Must be executed after cells have been initialized (in Map.Awake())
-     */
-    private void Start() {
-        Cell[] waypointCells = new Cell[points.Length];
-        int n = waypointCells.Length;
-        for (int i = 0; i < n; i++) {
-            Transform waypoint = points[i];
-            if (Physics.Raycast(waypoint.position, Vector3.down, out RaycastHit hit, Mathf.Infinity)) {
-                // if the waypoint hits the plane right below
-                if (hit.transform.Equals(map.mapBase.transform)) {
-                    waypointCells[i] = map.GetCellFromWorldPosition(hit.point);
-                }
-            }
-        }
-        map.SetWaypoints(waypointCells);
+        gameMaster.GetComponent<WaveSpawner>().spawnPoint = points[0];
+        waypointsActive = true;
     }
 
     /* Red markers indicate waypoints, green marker indicates base.
      */
-    private void OnDrawGizmos() {
+    private void OnDrawGizmos()
+    // the gizmos are drawn after waypoints have actually been added
+    // this is done to avoid the error when we try to draw gizmos before we have waypoints placed.
+    {
+        if (!waypointsActive) return;
         Gizmos.color = Color.red;
         int n = transform.childCount;
-        for (int i = 0; i < n - 1; i++) {
+        for (int i = 0; i < n - 1; i++)
+        {
             Gizmos.DrawSphere(transform.GetChild(i).position, 0.2f);
         }
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(transform.GetChild(n - 1).position, 0.2f);
     }
-
 }
