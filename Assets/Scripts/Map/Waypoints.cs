@@ -9,12 +9,13 @@ public class Waypoints : MonoBehaviour
     public GameObject gameMaster;
     private bool waypointsActive = false;
 
-    
+
     public void ActivateWaypoints()
     {
         // assign array waypoints
         points = new Transform[transform.childCount];
-        for (int i = 0; i < points.Length; i++) {
+        for (int i = 0; i < points.Length; i++)
+        {
             points[i] = transform.GetChild(i);
         }
 
@@ -31,7 +32,8 @@ public class Waypoints : MonoBehaviour
         if (!waypointsActive) return;
         Gizmos.color = Color.red;
         int n = transform.childCount;
-        for (int i = 0; i < n - 1; i++) {
+        for (int i = 0; i < n - 1; i++)
+        {
             Gizmos.DrawSphere(transform.GetChild(i).position, 0.2f);
         }
         Gizmos.color = Color.green;

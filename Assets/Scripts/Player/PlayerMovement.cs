@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour {
-    
+    /*
+    This is the main script for the player that handles most inputs for actions
+
+    Requires player game object to have a "ActionTimer" game object containing a TMP_Text.
+    Requires player game object to have a "FirePoint" game object containing a Transform.
+    */
     [SerializeField] private LayerMask dashLayerMask;
     [SerializeField] private LayerMask groundLayerMask;
-    [SerializeField] private LayerMask tileLayerMask;
+    [SerializeField] private LayerMask tileAndFogLayerMask;
     [SerializeField] private Player player;
 
     // states
     private enum State { // used for player actions that cannot be interrupted
         Normal,
         Rolling,
+        Attacking,
     }
     private State state;
 
@@ -24,22 +31,27 @@ public class PlayerMovement : MonoBehaviour {
     private float initialRollSpeed = 50f;
     private float currentRollSpeed;
 
-    // player values
-    private float buildDistance = 10f;
-    private float buildDuration = 3f;
-    private float currentBuildDuration = 0f;
-    private float towerCost = 3f;
-    private GameObject currentTowerCell; // current cell that the player is interacting with
-
-    // boolean checks
+    // action boolean checks
     private bool isSprinting = false; // TODO: add sprinting if needed in the future
     private bool isDashing = false;
     private bool isBuilding = false;
-    
+    private bool isUsingShooting;
+
+    // player build values
+    private float buildDistance = 3f;
+    private float buildDuration = 5f;
+    private float currentBuildDuration = 0f;
+    private GameObject currentTowerCell; // current cell that the player is interacting with
+
     // player unity object attributes
-    private Animator anim;
+    private Animator animator;
     private Rigidbody rigidBody;
     public Camera playerCamera;
+    private TMP_Text actionTimer;
+    private PlayerShooting playerShootingScript;
+    private PlayerMelee playerMeleeScript;
+    private Transform firePoint;
+
 
     // directions and positions
     private Vector3 moveDirection;
@@ -48,10 +60,24 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 mousePositionVector;
 
     // Start is called before the first frame update
-    private void Awake() {
+    private void Start() {
         playerSpeed = walkSpeed;
-        // anim = GetComponent<Animator>();
+        // animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody>();
+
+        // initialize action timer text
+        actionTimer = GameObject.Find("ActionTimer").GetComponent<TMP_Text>();
+        actionTimer.text = "";
+
+        // initialize melee and shooting; shooting is default
+        playerShootingScript = GetComponent<PlayerShooting>();
+        playerMeleeScript = GetComponent<PlayerMelee>();
+        playerShootingScript.enableShooting();
+        playerMeleeScript.disableMelee();
+        isUsingShooting = true;
+        firePoint = GameObject.Find("FirePoint").GetComponent<Transform>();
+        
+        // set default state
         state = State.Normal;
     }
 
@@ -73,51 +99,25 @@ public class PlayerMovement : MonoBehaviour {
         Move();
         Build();
 
-        Vector3 lookDirection = mousePositionVector - rigidBody.position;
-        float angle = Mathf.Atan2(lookDirection.z, lookDirection.x) * Mathf.Rad2Deg - 90f;
-        // rigidBody.rotation = angle; // TODO: player should not rotate; should change sprite instead
+        Vector3 lookDirection = (mousePositionVector - rigidBody.position).normalized;
+        float angle = Mathf.Atan2(lookDirection.x, lookDirection.z) * Mathf.Rad2Deg;
+        firePoint.eulerAngles = new Vector3(0, angle, 0);
+        // rigidBody.rotation = new Vector3(0, angle, 0); // TODO: player should not rotate; should change sprite instead
         // TODO: add player sprite animation
     }
 
     private void ProcessInputs() {
         switch (state) {
             case State.Normal:
-                float moveX = Input.GetAxisRaw("Horizontal");
-                float moveY = 0;
-                float moveZ = Input.GetAxisRaw("Vertical");
-
-                moveDirection = new Vector3(moveX, moveY, moveZ).normalized;
-                if (moveDirection.x != 0 || moveDirection.z != 0) {
-                    // player is moving
-                    lastMoveDirection = moveDirection; // used for movement actions when not moving
-                }
-
-                if (Input.GetKeyDown(KeyCode.F)) { // TODO: dashing tentatively tied to key F for testing
-                    isDashing = true;
-                }
-            
-                if (Input.GetKeyDown(KeyCode.Space)) {
-                    rollDirection = lastMoveDirection;
-                    currentRollSpeed = initialRollSpeed;
-                    state = State.Rolling;
-                }
-
-                if (Input.GetMouseButtonDown(1)) { // right click
-                    Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
-
-                    if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, tileLayerMask)) {
-                        if (raycastHit.collider.gameObject.layer == 11) { // right clicked on a TowerCell
-                            Debug.Log("Clicked on " + raycastHit.collider.gameObject.name);
-                            GameObject towerCell = raycastHit.collider.gameObject;
-                            Vector3 mouseTowerCellPosition = raycastHit.point;
-                            BuildTowerAttempt(mouseTowerCellPosition, towerCell);
-
-                        }
-                    }
-                }
+                HandleMovementInputs();
+                HandleBuildInputs();
+                HandleWeaponSwapInputs();
 
                 if (Input.GetMouseButtonDown(0)) { // left click (tied to attacking action)
-                    isBuilding = false; // interrupts building action
+                    moveDirection = Vector3.zero; // prevents character sliding while attacking
+                    // TODO: add animation for attack action
+                    // state = State.Attacking;
+                    // animator.PlayAttackAnimation(attackDirection, () => state = State.Normal);
                 }
                 break;
 
@@ -131,8 +131,79 @@ public class PlayerMovement : MonoBehaviour {
                     state = State.Normal;
                 }
                 break;
+
+            case State.Attacking: // used to wait for attack animations
+                break;
             }
-        
+    }
+
+    private void HandleMovementInputs() {
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = 0;
+        float moveZ = Input.GetAxisRaw("Vertical");
+
+        moveDirection = new Vector3(moveX, moveY, moveZ).normalized;
+        if (moveDirection.x != 0 || moveDirection.z != 0) {
+            // player is moving
+            lastMoveDirection = moveDirection; // used for movement actions when not moving
+        }
+
+        if (Input.GetKeyDown(KeyCode.F)) { // TODO: dashing tentatively tied to key F for testing
+            isDashing = true;
+        }
+    
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            rollDirection = lastMoveDirection;
+            currentRollSpeed = initialRollSpeed;
+            state = State.Rolling;
+        }
+    }
+
+    private void HandleBuildInputs() {
+        if (Input.GetKeyDown(KeyCode.W) ||
+            Input.GetKeyDown(KeyCode.A) || 
+            Input.GetKeyDown(KeyCode.S) || 
+            Input.GetKeyDown(KeyCode.D) || 
+            Input.GetMouseButtonDown(0) || 
+            Input.GetMouseButtonDown(1) ||
+            Input.GetKeyDown(KeyCode.Space) ||
+            Input.GetKeyDown(KeyCode.F)) {
+            // interrupt building action on other action inputs
+            isBuilding = false; 
+            actionTimer.text = "";
+        }
+
+        if (Input.GetMouseButtonDown(1)) { // right click
+            Debug.Log("Attempting to build!"); // TODO: remove
+            Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, tileAndFogLayerMask)) {
+                if (raycastHit.collider.gameObject.layer == 11) { // right clicked on a TowerCell
+                    Debug.Log("Clicked on " + raycastHit.collider.gameObject.name); // TODO: remove
+
+                    GameObject towerCell = raycastHit.collider.gameObject;
+                    Vector3 mouseTowerCellPosition = raycastHit.point;
+                    BuildTowerAttempt(mouseTowerCellPosition, towerCell);
+                }
+            }
+        }
+    }
+
+    private void HandleWeaponSwapInputs() {
+        if (Input.GetKeyDown(KeyCode.Q)) { // use Q to swap weapon
+            Debug.Log("Swapped weapon!"); // TODO: remove
+            if (isUsingShooting) {
+                // currently using shooting, swap to melee
+                playerShootingScript.disableShooting();
+                playerMeleeScript.enableMelee();
+                isUsingShooting = false;
+            } else {
+                // currently using melee, swap to shooting
+                playerShootingScript.enableShooting();
+                playerMeleeScript.disableMelee();
+                isUsingShooting = true;
+            }
+        }
     }
 
     private void Move() {
@@ -143,13 +214,13 @@ public class PlayerMovement : MonoBehaviour {
             // TODO: add player moving animation
 
             if (rigidBody.velocity.magnitude > 0.2) {
-                isBuilding = false; // interrupt building action
+                // interrupt building action
+                isBuilding = false; 
+                actionTimer.text = "";
             }
 
             // Dashing would be a replacement or an upgrade to rolling for now
             if (isDashing) {
-                isBuilding = false; // interrupt building action
-
                 Vector3 dashPosition = transform.position + lastMoveDirection * dashAmount;
 
                 RaycastHit2D raycastHit2d = Physics2D.Raycast(transform.position, moveDirection, dashAmount, dashLayerMask);
@@ -170,21 +241,29 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void BuildTowerAttempt(Vector3 mouseTowerCellPosition, GameObject towerCell) {
-        Debug.Log((mouseTowerCellPosition - transform.position).magnitude);
-        Debug.Log(buildDistance);
-        if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { // player too far from tower cell
+        
+        if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { 
+            // player too far from tower cell
             return;
         }
 
-        if (isBuilding) { // player already building a tower
+        if (isBuilding) { 
+            // player already building a tower
             return;
         }
 
         currentTowerCell = towerCell;
         if (!player.hasEnoughInk(currentTowerCell.GetComponent<Node>().TowerCost())) {
+            // player has not enough ink
             Debug.Log("Not enough ink!");
             return;
         }
+
+        if (currentTowerCell.GetComponent<Node>().HasTower()) {
+            // tower cell already has a tower
+            return;
+        }
+
         currentBuildDuration = buildDuration;
         isBuilding = true;
         Build();
@@ -197,10 +276,17 @@ public class PlayerMovement : MonoBehaviour {
 
         // TODO: add player building animation
         currentBuildDuration -= Time.deltaTime;
+        if (currentBuildDuration > 0) {
+            actionTimer.text = (Mathf.Round(currentBuildDuration * 10) / 10).ToString(); // display timer
+        }
+
         if (currentBuildDuration <= 0) {
-            Turret turret = currentTowerCell.GetComponent<Node>().BuildTower(); // TODO: get buildTower() working
-            if (turret != null) 
+            actionTimer.text = ""; // stop displaying timer
+
+            Turret turret = currentTowerCell.GetComponent<Node>().BuildTower();
+            if (turret != null) {
                 player.ChangeInkAmount(-turret.Cost);
+            }
             isBuilding = false;
         }
     }

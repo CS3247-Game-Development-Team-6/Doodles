@@ -18,7 +18,12 @@ public class PlayerStartposition : MonoBehaviour
         delta = delta.normalized;
 
         startPosition = basePosition - delta;
-        
+
+        var oldPos = gameObject.transform.position;
+
+        startPosition.y += oldPos.y;
+
+
         gameObject.transform.position = startPosition;
     }
 }

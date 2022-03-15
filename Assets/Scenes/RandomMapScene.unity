@@ -198,7 +198,7 @@ MonoBehaviour:
   spawnPrefab: {fileID: 6269207307636801995, guid: f7227dc7993d14cf2b6b85bad19a9434, type: 3}
   curvePrefab: {fileID: 1355420953937332540, guid: 006b9dc87e65141f29b53654208c099c, type: 3}
   straightPrefab: {fileID: 7894887961081992580, guid: 4c85730c47d6f47ea907c33ec17975d2, type: 3}
-  waypointPrefab: {fileID: 7330119712648875633, guid: 5c6966a955fed8f4a95b999a0d6ec8ab, type: 3}
+  waypointPrefab: {fileID: 251543368100660331, guid: 5c6966a955fed8f4a95b999a0d6ec8ab, type: 3}
   waypointEmpty: {fileID: 916810571}
   playerGameObj: {fileID: 1556804005}
 --- !u!1 &138248409
@@ -1046,10 +1046,7 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  firePoint: {fileID: 1405298152}
   bulletPrefab: {fileID: 3833045344010415125, guid: 9f7d8365b67af4c478b04373797cfd39, type: 3}
-  bulletForce: 4
-  shootingCooldown: 0.5
 --- !u!114 &1556804010
 MonoBehaviour:
   m_ObjectHideFlags: 0
