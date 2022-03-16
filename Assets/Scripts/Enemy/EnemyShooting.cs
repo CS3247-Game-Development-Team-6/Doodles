@@ -13,6 +13,9 @@ public class EnemyShooting : MonoBehaviour
     public float fireRate = 1f;
     private float fireCountDown = 0f;
 
+    // when shooting, stop enemy movement
+    public bool isShooting = false;
+
     [Header("Setup Fields")]
     public string playerTag = "Player";
     public string baseTag = "Base";
@@ -84,9 +87,14 @@ public class EnemyShooting : MonoBehaviour
 
     void Update()
     {
-        if (target == null) 
-            return;
-        
+        if (target == null) {
+            // TODO: using partToRotate, to face waypoint
+
+            isShooting = false;
+            return;          
+        }
+
+        isShooting = true;
         // rotate enemy using quaternion
         Vector3 dir = target.position - transform.position;
         Quaternion lookAtRotation = Quaternion.LookRotation(dir);

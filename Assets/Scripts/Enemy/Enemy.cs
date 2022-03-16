@@ -63,6 +63,11 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (GetComponent<EnemyShooting>().isShooting) {
+            // stop movement
+            return;
+        }
+
         // movement direction to the target waypoint
         Vector3 direction = target.position - transform.position;
         
@@ -89,8 +94,6 @@ public class Enemy : MonoBehaviour
     // previously was enemy attack the base and destroy
     void EndPath()
     {
-
-        // for new wave
-        //WaveSpawner.numEnemiesAlive--;
+        // do nothing
     }
 }
