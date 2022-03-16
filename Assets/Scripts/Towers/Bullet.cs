@@ -7,7 +7,8 @@ public class Bullet : MonoBehaviour
 
     private Transform target;
     public float speed = 70f;
-    [SerializeField] private int bulletDamage;
+    [SerializeField] private float bulletDamage;
+    [SerializeField] private StatusEffectData _data;
 
     public void Seek(Transform _target) 
     { 
@@ -38,6 +39,9 @@ public class Bullet : MonoBehaviour
     {
         if (target.CompareTag("Enemy"))
         {
+            var effectable = target.GetComponent<IEffectable>();
+            if (effectable != null) effectable.ApplyEffect(_data);
+
             target.GetComponent<Enemy>().TakeDamage(bulletDamage);
         }
 
