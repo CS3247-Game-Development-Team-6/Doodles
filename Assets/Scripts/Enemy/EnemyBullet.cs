@@ -7,6 +7,8 @@ public class EnemyBullet : MonoBehaviour
 {
     private Transform target;
     public float speed = 70f;
+    public GameObject impactEffect;
+
     [SerializeField] private int bulletDamage = 10;
 
     public void Seek(Transform _target) 
@@ -38,7 +40,9 @@ public class EnemyBullet : MonoBehaviour
 
     void HitTarget() 
     {
-        
+        GameObject effectIns = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
+        Destroy(effectIns, 2f);
+
         Damage(target);
 
         Destroy(gameObject);    // destroys the bullet
