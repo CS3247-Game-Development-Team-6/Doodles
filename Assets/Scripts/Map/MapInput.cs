@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapInput : MonoBehaviour { 
  
     private Camera cam;
-    public Map map;
+    public MapGenerator map;
     public Player player;
 
     void Start() {
