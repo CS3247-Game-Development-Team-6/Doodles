@@ -16,10 +16,6 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private float initHealth = 100;
 
-    [SerializeField] private int attackBaseDmg;         // Serialized for debugging purposes
-
-    [SerializeField] private int initAttack = 50;
-
     [SerializeField] private int defense;
 
     [SerializeField] private int initDefense = 10;
@@ -39,6 +35,9 @@ public class Enemy : MonoBehaviour
 
     private Transform target;
     private int waypointIndex = 0;
+
+    // to reduce bullet damage
+    private GameObject bulletPrefab;
 
     [Header("Unity Stuff")]
     public Image healthBar;
@@ -83,12 +82,12 @@ public class Enemy : MonoBehaviour
 
     public void ReduceAttack(int atkDecreAmount)
     {
-        attackBaseDmg = initAttack - atkDecreAmount;
+        bulletPrefab.GetComponent<EnemyBullet>().ReduceBulletDamage(atkDecreAmount);
     }
 
     public void RestoreAttack()
     {
-        attackBaseDmg = initAttack;
+        bulletPrefab.GetComponent<EnemyBullet>().RestoreBulletDamage();
     }
 
     public void ReduceDefense(int defDecreAmount)
@@ -161,7 +160,6 @@ public class Enemy : MonoBehaviour
         return isWeakened;
     }
 
-    // enemy die by physical damage
     void Die ()
     {
         // TODO: add ink
@@ -180,8 +178,8 @@ public class Enemy : MonoBehaviour
         // Initialize Stats
         health = initHealth;
         speed = initSpeed;
-        attackBaseDmg = initAttack;
         defense = initDefense;
+        bulletPrefab = GetComponentInParent<EnemyShooting>().bulletPrefab;
 
         // first target, which is first waypoint in Waypoints
         target = Waypoints.points[0];

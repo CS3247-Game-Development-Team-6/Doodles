@@ -9,7 +9,13 @@ public class EnemyBullet : MonoBehaviour
     public float speed = 70f;
     public GameObject impactEffect;
 
-    [SerializeField] private int bulletDamage = 10;
+    private int bulletDamage;
+
+    [SerializeField] private int initBulletDamage = 10;
+
+    public void Start() {
+        bulletDamage = initBulletDamage;
+    }
 
     public void Seek(Transform _target) 
     { 
@@ -58,5 +64,13 @@ public class EnemyBullet : MonoBehaviour
         {
             Base.receiveDmg(bulletDamage);
         }
+    }
+
+    public void ReduceBulletDamage(int _damage) {
+        bulletDamage = initBulletDamage - _damage;
+    }
+
+    public void RestoreBulletDamage() {
+        bulletDamage = initBulletDamage;
     }
 }
