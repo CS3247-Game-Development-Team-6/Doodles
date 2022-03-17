@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     public float speed = 70f;
     public GameObject impactEffect;
     [SerializeField] private int bulletDamage;
+    [SerializeField] private StatusEffectData _data;
 
     public void Seek(Transform _target) 
     { 
@@ -42,6 +43,9 @@ public class Bullet : MonoBehaviour
 
         if (target.CompareTag("Enemy"))
         {
+            var effectable = target.GetComponent<IEffectable>();
+            if (effectable != null) effectable.ApplyEffect(_data);
+
             target.GetComponent<Enemy>().TakeDamage(bulletDamage);
         }
 
