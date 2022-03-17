@@ -38,6 +38,9 @@ public class Bullet : MonoBehaviour
 
     void HitTarget() 
     {
+        GameObject impactEffectParticle = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
+        Destroy(impactEffectParticle, 2f);
+
         if (target.CompareTag("Enemy"))
         {
             var effectable = target.GetComponent<IEffectable>();
