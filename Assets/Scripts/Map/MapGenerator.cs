@@ -221,7 +221,7 @@ public class MapGenerator : MonoBehaviour
         // move the player to a tile nearby the base. 
         playerGameObj.GetComponent<PlayerStartposition>().MovePlayerStartPosition(
             waypointsArr[waypointsArr.Length - 1], waypointsArr[waypointsArr.Length - 2]); 
-                       
+        
         waypointEmpty.GetComponent<Waypoints>().ActivateWaypoints();
         ClearFogAroundBase(cells, baseCoordinates[1], baseCoordinates[0], mapWidth, mapHeight, 0, fogTilesClearedByBase);
     }
@@ -290,16 +290,22 @@ public class MapGenerator : MonoBehaviour
 
         waypointsPosition = new Vector3[waypointCells.Length];
 
+        GameObject prevWaypoint = null;
+
         for (int i = 0; i < waypointCells.Length; i++)
         {
             waypointsPosition[i] = waypointCells[i].position;
             GameObject waypoint = Instantiate(waypointPrefab, waypointEmpty.transform, true);
             
             waypoint.name = $"Waypoint {i}";
-            waypoint.transform.position = waypointCells[i].position;
 
+            // for the very last waypoint (the base), we set the waypoint to be a bit closer to the
+            // previous waypoint, for the enemies to target
+            waypoint.transform.position = i == waypointCells.Length - 1 ? changeEnemyTargetWaypoint(waypointCells[i].position, prevWaypoint.transform.position) : waypointCells[i].position;
+            
+            prevWaypoint = waypoint;
         }
-
+        
         return waypointsPosition;
     }
 
@@ -431,7 +437,17 @@ public class MapGenerator : MonoBehaviour
         
         throw new InvalidOperationException(stringAction);  // this should not happen so we throw error if it would.
     }
-    
+
+    private Vector3 changeEnemyTargetWaypoint(Vector3 basePosition, Vector3 closestWaypointPosition)
+    {
+        var delta = basePosition - closestWaypointPosition;
+        
+        delta = delta.normalized;
+        delta *= 0.5f;  // this moves the waypoint 0.5 units towards the closest waypoint. can be in-/decreased.
+        
+        return basePosition - delta;
+    }
+
     /* Grid pattern to visualize Map in editor mode.
     */
     private void OnDrawGizmos() {

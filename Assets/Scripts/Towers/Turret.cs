@@ -16,16 +16,44 @@ public class Turret : MonoBehaviour
     public string enemyTag = "Enemy";
     public float fireRate = 1f;
     private float fireCountDown = 0f;
+    public GameObject currentBullet;
     public GameObject bulletPrefab;
+    public GameObject fireBullet;
+    public GameObject iceBullet;
+    public GameObject waterBullet;
     public Transform firePoint;
 
     public float Cost {
         get { return cost; }
     }
 
+    public void SwapBullet(string element)
+    {
+        switch (element)
+        {
+            case "Fire":
+                currentBullet = fireBullet;
+                break;
+            case "Ice":
+                currentBullet = iceBullet;
+                break;
+            case "Water":
+                currentBullet = waterBullet;
+                break;
+        }
+    }
+
+    public void RestoreBullet()
+    {
+        currentBullet = bulletPrefab;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize bullet type
+        currentBullet = bulletPrefab;
+
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
@@ -58,7 +86,7 @@ public class Turret : MonoBehaviour
 
     void Shoot() 
     {
-        GameObject bulletGO = (GameObject) Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bulletGO = (GameObject)Instantiate(currentBullet, firePoint.position, firePoint.rotation); ;
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         if (bullet != null)
