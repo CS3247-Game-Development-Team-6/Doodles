@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     private Transform target;
     public float speed = 70f;
     public GameObject impactEffect;
-    [SerializeField] private float bulletDamage;
+    [SerializeField] private int bulletDamage;
     [SerializeField] private StatusEffectData _data;
 
     public void Seek(Transform _target) 
