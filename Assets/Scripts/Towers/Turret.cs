@@ -67,6 +67,7 @@ public class Turret : MonoBehaviour
         foreach (GameObject enemy in enemies) 
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (enemy.GetComponent<Enemy>().getInFog()) continue;   // a target is only targeted if it is not in the fog 
             if (distanceToEnemy < shortestDistance)
             {
                 shortestDistance = distanceToEnemy;

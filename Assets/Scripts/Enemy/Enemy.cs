@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool isScalded = false;   // Serialized for debugging purposes
     [SerializeField] private bool isFrozen = false;   // Serialized for debugging purposes
     [SerializeField] private bool isWeakened = false;   // Serialized for debugging purposes
+    [SerializeField] private bool isInFog = true; // Serialized for debugging purposes
 
     private Transform target;
     private int waypointIndex = 0;
@@ -160,6 +161,11 @@ public class Enemy : MonoBehaviour
         return isWeakened;
     }
 
+    public bool getInFog()
+    {
+        return isInFog;
+    }
+
     // enemy die by physical damage
     void Die ()
     {
@@ -196,6 +202,7 @@ public class Enemy : MonoBehaviour
         {
             GetNextWaypoint();
         }
+        
     }
 
     void GetNextWaypoint()
@@ -218,4 +225,35 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /*
+     * When entering fog, the enemy is in the fog
+     */
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Fog"))
+        {
+            isInFog = true;
+        }
+    }
+    
+    /*
+     * When moving from fog to fog, the enemy is still in the fog
+     */
+    private void OnTriggerStay(Collider other)
+    {
+        {
+            isInFog = true;
+        }
+    }
+
+    /*
+     * When the enemy leaves a fog and does not immediately go into a new fog block, the boolean is set to false.
+     */
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Fog"))
+        {
+            isInFog = false;
+        }
+    }
 }
