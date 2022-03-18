@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Node : MonoBehaviour
 {
@@ -11,15 +12,28 @@ public class Node : MonoBehaviour
 
     private GameObject tower;
 
+    BuildManager buildManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        rend= GetComponent<Renderer>();
-        startColor =rend.material.color;
+        rend = GetComponent<Renderer>();
+        startColor = rend.material.color;
+        buildManager = BuildManager.instance;
     }
 
     private void OnMouseEnter()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        if (buildManager.GetTowerToBuild() == null)
+        {
+            return;
+        }
+
         rend.material.color = hoverColor;
     }
 
@@ -39,6 +53,13 @@ public class Node : MonoBehaviour
 
     public Turret BuildTower()
     {
+
+        if (buildManager.GetTowerToBuild() == null) 
+        {
+            Debug.Log("Tower cannot be built here! TODO: Show Prompt on screen");
+            return null;
+        }
+
         if (tower != null) 
         {
             Debug.Log("Tower cannot be built here! TODO: Show Prompt on screen");
@@ -46,7 +67,7 @@ public class Node : MonoBehaviour
         }
 
         // build a tower
-        GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
+        GameObject towerToBuild = buildManager.GetTowerToBuild();
         tower = (GameObject) Instantiate(towerToBuild, transform.position, transform.rotation);
         return tower.GetComponent<Turret>();
     }
