@@ -7,7 +7,7 @@ public class BuildManager : MonoBehaviour
     public static BuildManager instance;
     private GameObject towerToBuild;
     public GameObject standardTowerPrefab;
-    public GameObject standardTowerPrefab2;
+    public GameObject missileLauncherPrefab;
     public GameObject fireTurret;
     public GameObject iceTurret;
     public GameObject waterTurret;
