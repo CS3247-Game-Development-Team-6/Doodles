@@ -5,27 +5,37 @@ using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public Transform enemyPrefab;
+    // keep track of how many enemies alive then only spawn new wave
+    public static int numEnemiesAlive = 0;
+
+    public Wave[] waves;
+
     public Transform spawnPoint;
 
     public float timeBetweenWaves = 5f;
 
     public Text waveCountdownText;
 
-    // decrease with time
+    // decrease with time, countdown for new wave
     private float countdownTimer = 3f;
 
-    // waveNumber = number of enemy
     private int waveIndex = 0;
 
     // Update is called once per frame
     void Update()
     {
+        if (numEnemiesAlive > 0)
+        {
+            return;
+        }
+
         if (countdownTimer <= 0f)
         {
             StartCoroutine(SpawnWave());
             countdownTimer = timeBetweenWaves;
+            return;
         }
+
         countdownTimer -= Time.deltaTime;
 
         countdownTimer = Mathf.Clamp(countdownTimer, 0f, Mathf.Infinity);
@@ -37,16 +47,29 @@ public class WaveSpawner : MonoBehaviour
     // can pause the func execution
     IEnumerator SpawnWave()
     {
-        for (int i = 0; i < waveIndex; i++)
+        // TODO: keep track of how many rounds survive
+
+        Wave waveToSpawn = waves[waveIndex];
+
+        for (int i = 0; i < waveToSpawn.count; i++)
         {
-            SpawnEnemy();
-            yield return new WaitForSeconds(1.5f);
+            SpawnEnemy(waveToSpawn.enemy);
+            yield return new WaitForSeconds(1f / waveToSpawn.rate);
         }
         waveIndex++;
+
+        if (waveIndex == waves.Length)
+        {
+            Debug.Log("LEVEL WON!");
+
+            // disable this script
+            this.enabled = false;
+        }
     }
 
-    void SpawnEnemy()
+    void SpawnEnemy(GameObject _enemy)
     {
-        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(_enemy, spawnPoint.position, spawnPoint.rotation);
+        numEnemiesAlive++;
     }
 }
