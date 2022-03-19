@@ -6,6 +6,7 @@ public class Fog : MonoBehaviour {
 
     public Cell cell;
     public Renderer renderer;
+    public Material defaultMat;
     public float cost;
 
     void Start() {
@@ -24,7 +25,7 @@ public class Fog : MonoBehaviour {
 
     private void OnMouseExit() {
         // Fog reverts its original color if mouse leaves
-        renderer.material.color = new Color32(110, 109, 109, 255);
+        renderer.material.color = defaultMat.color;
     }
 }
 

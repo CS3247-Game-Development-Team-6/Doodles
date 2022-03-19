@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4497019, g: 0.49976808, b: 0.57563424, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -769,13 +769,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.3243311, y: -0.1679209, z: 0.1366831, w: 0.9208309}
+  m_LocalPosition: {x: 0, y: 7.25, z: -2.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 40.032, y: -16.744, z: 10.749}
 --- !u!1 &809511551
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,13 +967,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809511551}
-  m_LocalRotation: {x: 0.39205697, y: -0, z: -0, w: 0.919941}
-  m_LocalPosition: {x: 4.95, y: 9.08, z: -4.56}
+  m_LocalRotation: {x: 0.49821618, y: -0, z: -0, w: 0.8670529}
+  m_LocalPosition: {x: 4.95, y: 11.66, z: -2.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 46.165, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 59.764, y: 0, z: 0}
 --- !u!1 &902795041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,8 +1531,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789031178}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.81, y: 0.758, z: 2.111}
+  m_LocalRotation: {x: 0.27400205, y: -0, z: -0, w: 0.9617291}
+  m_LocalPosition: {x: 0.81, y: 0.82178575, z: 2.0719237}
   m_LocalScale: {x: 0.35241, y: 0.35241, z: 0.35241}
   m_Children:
   - {fileID: 1460109371}
@@ -1541,7 +1541,7 @@ Transform:
   - {fileID: 482092618}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 31.805, y: 0, z: 0}
 --- !u!114 &1789031183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1584,7 +1584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 689040356}
-  growthRate: 0.001
+  growthRate: 0.1
   startingAmount: 0.6
 --- !u!114 &1789031186
 MonoBehaviour:

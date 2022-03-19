@@ -11,11 +11,20 @@ public class Node : MonoBehaviour
 
     private GameObject tower;
 
-    // Start is called before the first frame update
-    void Start()
+    public GameObject[] noneTileModels;
+
+    private void Start()
     {
         rend= GetComponent<Renderer>();
         startColor =rend.material.color;
+
+        GameObject prefab;
+        if (noneTileModels.Length == 0) return;
+        int indexChosen = (int) Random.Range(0, noneTileModels.Length);
+        prefab = noneTileModels[indexChosen];
+        // tileModel = Object.Instantiate(prefab, transform);
+
+        GetComponent<MeshFilter>().sharedMesh = Instantiate(prefab, transform).GetComponent<MeshFilter>().sharedMesh;
     }
 
     private void OnMouseEnter()

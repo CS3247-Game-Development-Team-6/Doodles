@@ -196,6 +196,7 @@ public class MapGenerator : MonoBehaviour
                 tile.transform.Rotate(cells[r, c].rotation);
                 tile.transform.localScale *= cellSize;
                 cell.tile = tile;
+                // tile.GetComponent<Node>().cellType = typeOfCell;
                 
                 // Instantiate the fog tile for every cell
                 GameObject fog = Instantiate(fogPrefab, transform);
@@ -209,7 +210,8 @@ public class MapGenerator : MonoBehaviour
                 if (typeOfCell == CellType.CURVEPATH || typeOfCell == CellType.STRAIGHTPATH)
                 // this is to not display all the 2d images used to show where the path is.
                 {
-                    tile.SetActive(false);
+                    // set to true now to visualise the path with the new asset
+                    tile.SetActive(true);
                 }
             }
             placeInPosition += Vector3.forward * cellSize;
