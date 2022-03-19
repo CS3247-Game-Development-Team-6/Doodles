@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 
     private Transform target;
     public float speed = 70f;
+    public float explosionRadius = 0f;    
     public GameObject impactEffect;
     [SerializeField] private int bulletDamage;
     [SerializeField] private StatusEffectData _data;
@@ -34,12 +35,18 @@ public class Bullet : MonoBehaviour
         }
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        transform.LookAt(target);
     }
 
     void HitTarget() 
     {
         GameObject impactEffectParticle = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(impactEffectParticle, 2f);
+        Destroy(impactEffectParticle, 5f);
+
+        if (explosionRadius > 0f)
+        {
+            Explode();
+        }
 
         if (target.CompareTag("Enemy"))
         {
@@ -50,5 +57,26 @@ public class Bullet : MonoBehaviour
         }
 
         Destroy(gameObject);    // destroys the bullet
+    }
+
+    void Explode()
+    {
+        Collider[] colliders =  Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                var effectable = collider.GetComponent<IEffectable>();
+                if (effectable != null) effectable.ApplyEffect(_data);
+
+                collider.GetComponent<Enemy>().TakeDamage(bulletDamage);
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }
