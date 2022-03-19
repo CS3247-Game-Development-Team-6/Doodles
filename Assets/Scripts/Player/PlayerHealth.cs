@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        healthBar = GameObject.Find("HealthCanvas/HealthBar").GetComponent<Image>();
+        healthBar = GameObject.Find("HealthCanvas/HealthBG/HealthBar").GetComponent<Image>();
         healthAmount = maxHealth;
     }
 
