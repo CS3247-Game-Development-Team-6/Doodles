@@ -7,9 +7,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverUI;
 
     private static bool isGameEnded;
+    public static int rounds;
 
     void Start() {
         isGameEnded = false;
+        rounds = 0;
     }
 
     void Update() {
