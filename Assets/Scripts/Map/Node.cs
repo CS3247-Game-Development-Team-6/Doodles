@@ -7,34 +7,38 @@ public class Node : MonoBehaviour
     public Color hoverColor;
     private Color startColor;
     public Color tooFarColor;
-    private Renderer rend;
 
     private GameObject tower;
+
+    public Vector3 tileOffset = Vector3.zero;
+    public GameObject tileMesh;
+    private Renderer tileRenderer;
+    private GameObject decorationMesh;
 
     public GameObject[] noneTileModels;
 
     private void Start()
     {
-        rend= GetComponent<Renderer>();
-        startColor =rend.material.color;
+        tileRenderer = tileMesh.GetComponent<Renderer>();
+        startColor = tileRenderer.material.color;
 
         GameObject prefab;
         if (noneTileModels.Length == 0) return;
         int indexChosen = (int) Random.Range(0, noneTileModels.Length);
         prefab = noneTileModels[indexChosen];
-        // tileModel = Object.Instantiate(prefab, transform);
 
-        GetComponent<MeshFilter>().sharedMesh = Instantiate(prefab, transform).GetComponent<MeshFilter>().sharedMesh;
+        decorationMesh = Instantiate(prefab, transform.position + tileOffset, transform.rotation);
+        decorationMesh.transform.SetParent(transform);
     }
 
     private void OnMouseEnter()
     {
-        rend.material.color = hoverColor;
+        tileRenderer.material.color = hoverColor;
     }
 
     private void OnMouseExit()
     {
-        rend.material.color = startColor;
+        tileRenderer.material.color = startColor;
     }
 
     public float TowerCost() {
@@ -56,14 +60,9 @@ public class Node : MonoBehaviour
 
         // build a tower
         GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
-        tower = (GameObject) Instantiate(towerToBuild, transform.position, transform.rotation);
+        tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + tileOffset, tileMesh.transform.rotation);
+        Destroy(decorationMesh);
         return tower.GetComponent<Turret>();
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

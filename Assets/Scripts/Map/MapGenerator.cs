@@ -143,7 +143,7 @@ public class MapGenerator : MonoBehaviour
         }
         }
 
-        Vector3 placeInPosition = transform.position + (Vector3.one * 0.5f) * cellSize;
+        Vector3 placeInPosition = transform.position + new Vector3(0.5f, 0, 0.5f) * cellSize;
         cells = new Cell[gridSize.x, gridSize.y];
         for (int r = 0; r < gridSize.x; r++) {
             for (int c = 0; c < gridSize.y; c++) {

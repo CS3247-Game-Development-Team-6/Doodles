@@ -598,7 +598,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482092617}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0, z: 0.04}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 1789031182}
@@ -637,7 +637,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c95ee087d56ed794c8432a2ec53b2f43, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -967,13 +967,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809511551}
-  m_LocalRotation: {x: 0.49821618, y: -0, z: -0, w: 0.8670529}
-  m_LocalPosition: {x: 4.95, y: 11.66, z: -2.43}
+  m_LocalRotation: {x: 0.4542402, y: -0, z: -0, w: 0.8908793}
+  m_LocalPosition: {x: 4.95, y: 11.66, z: -4.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 59.764, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 54.032, y: 0, z: 0}
 --- !u!1 &902795041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,9 +1193,9 @@ MonoBehaviour:
   minimumReqScore: 50
   fogTilesClearedByBase: 10
   mapBase: {fileID: 1040735799}
-  tilePrefab: {fileID: 453698710756715362, guid: e4b9ac79fddadf34d97c9e17c43e926e, type: 3}
+  tilePrefab: {fileID: 7800446164947485080, guid: 1f806d45796febc488124686add56529, type: 3}
   fogPrefab: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
-  basePrefab: {fileID: 8982630539707480919, guid: dc0ef84ca78e84b54a815828442c1b33, type: 3}
+  basePrefab: {fileID: 1880223237805618186, guid: 0b674d8b417dd9e4b8e2c2d51e1a3420, type: 3}
   spawnPrefab: {fileID: 6269207307636801995, guid: f7227dc7993d14cf2b6b85bad19a9434, type: 3}
   curvePrefab: {fileID: 1355420953937332540, guid: 006b9dc87e65141f29b53654208c099c, type: 3}
   straightPrefab: {fileID: 7894887961081992580, guid: 4c85730c47d6f47ea907c33ec17975d2, type: 3}
@@ -1513,12 +1513,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e01d9badb255d0e4b9b13a803e06d2c0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d6312107628496740b148ded0f496a9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.25, y: 2.25}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1532,7 +1532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789031178}
   m_LocalRotation: {x: 0.27400205, y: -0, z: -0, w: 0.9617291}
-  m_LocalPosition: {x: 0.81, y: 0.82178575, z: 2.0719237}
+  m_LocalPosition: {x: 0.81, y: 1.28, z: 2.0719237}
   m_LocalScale: {x: 0.35241, y: 0.35241, z: 0.35241}
   m_Children:
   - {fileID: 1460109371}
@@ -2266,5 +2266,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: standardTowerPrefab
+      value: 
+      objectReference: {fileID: 3129425037732683074, guid: 56234576a7587e74a80da6c80c70d24f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}

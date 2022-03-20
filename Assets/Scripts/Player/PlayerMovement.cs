@@ -178,6 +178,7 @@ public class PlayerMovement : MonoBehaviour {
             Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, tileAndFogLayerMask)) {
+                // Replace with actual tile layer, remove hard coding.
                 if (raycastHit.collider.gameObject.layer == 11) { // right clicked on a TowerCell
                     Debug.Log("Clicked on " + raycastHit.collider.gameObject.name); // TODO: remove
 
