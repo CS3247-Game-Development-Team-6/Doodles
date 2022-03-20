@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Node : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Node : MonoBehaviour
     private GameObject decorationMesh;
 
     public GameObject[] noneTileModels;
+    private BuildManager buildManager;
 
     private void Start()
     {
@@ -29,10 +31,22 @@ public class Node : MonoBehaviour
 
         decorationMesh = Instantiate(prefab, transform.position + tileOffset, transform.rotation);
         decorationMesh.transform.SetParent(transform);
+        
+        buildManager = BuildManager.instance;
     }
 
     private void OnMouseEnter()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        if (buildManager.GetTowerToBuild() == null)
+        {
+            return;
+        }
+
         tileRenderer.material.color = hoverColor;
     }
 
@@ -52,6 +66,13 @@ public class Node : MonoBehaviour
 
     public Turret BuildTower()
     {
+
+        if (buildManager.GetTowerToBuild() == null) 
+        {
+            Debug.Log("Tower cannot be built here! TODO: Show Prompt on screen");
+            return null;
+        }
+
         if (tower != null) 
         {
             Debug.Log("Tower cannot be built here! TODO: Show Prompt on screen");
@@ -59,7 +80,7 @@ public class Node : MonoBehaviour
         }
 
         // build a tower
-        GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
+        GameObject towerToBuild = buildManager.GetTowerToBuild();
         tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + tileOffset, tileMesh.transform.rotation);
         Destroy(decorationMesh);
         return tower.GetComponent<Turret>();

@@ -7,12 +7,10 @@ public class BuildManager : MonoBehaviour
     public static BuildManager instance;
     private GameObject towerToBuild;
     public GameObject standardTowerPrefab;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        towerToBuild = standardTowerPrefab;
-    }
+    public GameObject missileLauncherPrefab;
+    public GameObject fireTurret;
+    public GameObject iceTurret;
+    public GameObject waterTurret;
 
     private void Awake()
     {
@@ -29,9 +27,30 @@ public class BuildManager : MonoBehaviour
         return towerToBuild;
     }
 
+    public void SetTowerToBuild(GameObject turrent)
+    {
+        towerToBuild = turrent; 
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        // For Testing Purposes (May be removed in the future)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            towerToBuild = standardTowerPrefab;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            towerToBuild = fireTurret;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            towerToBuild = iceTurret;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            towerToBuild = waterTurret;
+        }
     }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 692284368}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2858829928886858843}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: RotationBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 5304459356461797228}
   - component: {fileID: 511956163234067787}
   - component: {fileID: 1934491628374420688}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,8 +155,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2316578440359528440}
   - component: {fileID: 919132148231362459}
-  m_Layer: 14
-  m_Name: Turret
+  m_Layer: 0
+  m_Name: FireTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,8 +195,12 @@ MonoBehaviour:
   rotationSpeed: 10
   cost: 10
   enemyTag: Enemy
-  fireRate: 1
-  bulletPrefab: {fileID: 1315704262782356680, guid: 15933ea65b9f01a43b40db8526c3df63, type: 3}
+  fireRate: 0.5
+  currentBullet: {fileID: 0}
+  bulletPrefab: {fileID: 1315704262782356680, guid: 5f6ecc1421dc70c4bb5c03a659ac2260, type: 3}
+  fireBullet: {fileID: 1315704262782356680, guid: 5f6ecc1421dc70c4bb5c03a659ac2260, type: 3}
+  iceBullet: {fileID: 1315704262782356680, guid: db28156f666cd00438d1be534f9e8cf0, type: 3}
+  waterBullet: {fileID: 1315704262782356680, guid: b5139372f4c51ef4193668c4a2588e74, type: 3}
   firePoint: {fileID: 692284368}
 --- !u!1 &6827239260012379622
 GameObject:
@@ -209,7 +213,7 @@ GameObject:
   - component: {fileID: 1885597461194222887}
   - component: {fileID: 342005144841805902}
   - component: {fileID: 2997060616537261612}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}

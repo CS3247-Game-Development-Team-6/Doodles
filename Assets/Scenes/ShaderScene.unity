@@ -598,7 +598,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482092617}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0, z: 0.04}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 1789031182}
@@ -815,8 +815,14 @@ MonoBehaviour:
   filterMode: 0
   renderTextureDepth: 24
   cameraClearFlags: 2
-  background: {r: 0, g: 0, b: 0, a: 1}
+  background:
+    r: 0
+    g: 0
+    b: 0
+    a: 1
   targetTexture: _RenderTexture
+  renderTexture: {fileID: 0}
+  camera: {fileID: 0}
 --- !u!114 &809511553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,6 +853,10 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+  m_PreviousLayer: 12
+  m_PreviousPriority: 0
+  m_TempColliders: []
+  m_InternalProfile: {fileID: 0}
 --- !u!114 &809511555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,7 +871,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volumeTrigger: {fileID: 809511558}
   volumeLayer:
-    serializedVersion: 2
     m_Bits: 4096
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
@@ -871,6 +880,9 @@ MonoBehaviour:
     sharpness: 0.25
     stationaryBlending: 0.95
     motionBlending: 0.85
+    <jitter>k__BackingField: {x: 0, y: 0}
+    m_ResetHistory: 1
+    <sampleIndex>k__BackingField: 0
   subpixelMorphologicalAntialiasing:
     quality: 2
   fastApproximateAntialiasing:
@@ -879,21 +891,18 @@ MonoBehaviour:
   fog:
     enabled: 1
     excludeSkybox: 1
+  dithering:
+    m_NoiseTextureIndex: 0
   debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
+    lightMeter: {<output>k__BackingField: {fileID: 0}, requested: 0, width: 512, height: 256, showCurves: 1}
+    histogram: {<output>k__BackingField: {fileID: 0}, requested: 0, width: 512, height: 256, channel: 3}
+    waveform: {<output>k__BackingField: {fileID: 0}, requested: 0, exposure: 0.12, height: 256}
+    vectorscope: {<output>k__BackingField: {fileID: 0}, requested: 0, size: 256, exposure: 0.12}
+    frameWidth: 0
+    frameHeight: 0
+    <debugOverlayTarget>k__BackingField: {fileID: 0}
+    <debugOverlayActive>k__BackingField: 0
+    <debugOverlay>k__BackingField: 0
     overlaySettings:
       linearDepth: 0
       motionColorIntensity: 4
@@ -909,6 +918,12 @@ MonoBehaviour:
   - assemblyQualifiedName: PostProcessOutline, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_AfterStackBundles: []
+  <cameraDepthFlags>k__BackingField: 0
+  <haveBundlesBeenInited>k__BackingField: 0
+  m_Camera: {fileID: 809511557}
+  m_SettingsUpdateNeeded: 1
+  m_IsRenderingInSceneView: 0
+  m_NaNKilled: 0
 --- !u!81 &809511556
 AudioListener:
   m_ObjectHideFlags: 0
@@ -967,13 +982,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809511551}
-  m_LocalRotation: {x: 0.4542402, y: -0, z: -0, w: 0.8908793}
-  m_LocalPosition: {x: 4.95, y: 11.66, z: -4.37}
+  m_LocalRotation: {x: 0.49821618, y: -0, z: -0, w: 0.8670529}
+  m_LocalPosition: {x: 4.95, y: 11.66, z: -2.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 54.032, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 59.764, y: 0, z: 0}
 --- !u!1 &902795041
 GameObject:
   m_ObjectHideFlags: 0
