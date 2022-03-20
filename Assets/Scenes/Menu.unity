@@ -684,7 +684,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 610.9537}
+  m_SizeDelta: {x: 0, y: 671.999}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &927983270
 GameObject:
@@ -1247,7 +1247,9 @@ MonoBehaviour:
     to enemies for 5 seconds\r\nIce                - Slows enemies for 5 seconds\r\nWater          
     - Decreases enemy attack for 5 seconds\r\nFire + Ice      - Decreases enemy defense
     for 5 seconds\r\nFire + Water - Deal Burst DoT (immediately deals the total damage
-    of DoT)\r\nWater + Ice  - Freezes enemies for 3 seconds\r"
+    of DoT)\r\nWater + Ice  - Freezes enemies for 3 seconds\r\n\nElement indicators
+    on top of towers distinguishes their elements, default(white), fire(orange),
+    ice(light blue), water(deep blue)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
