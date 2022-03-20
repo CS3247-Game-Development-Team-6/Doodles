@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
     public GameObject gameplayCanvas;
+    public GameObject raycastOccluder;
 
     // Update is called once per frame
     void Update()
@@ -29,6 +30,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         gameplayCanvas.SetActive(true);
+        raycastOccluder.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -37,14 +39,15 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         gameplayCanvas.SetActive(false);
+        raycastOccluder.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
 
     public void LoadMenu()
     {
-        GameIsPaused = false;
-        Time.timeScale = 1f;
+        Resume();
+        raycastOccluder.SetActive(false);
         SceneManager.LoadScene(0);
     }
 
