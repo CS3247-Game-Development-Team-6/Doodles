@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1810,7 +1810,7 @@ MonoBehaviour:
   minimumReqScore: 50
   fogTilesClearedByBase: 10
   mapBase: {fileID: 1040735799}
-  tilePrefab: {fileID: 453698710756715362, guid: e4b9ac79fddadf34d97c9e17c43e926e, type: 3}
+  tilePrefab: {fileID: 7800446164947485080, guid: 1f806d45796febc488124686add56529, type: 3}
   fogPrefab: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
   basePrefab: {fileID: 8982630539707480919, guid: dc0ef84ca78e84b54a815828442c1b33, type: 3}
   spawnPrefab: {fileID: 6269207307636801995, guid: f7227dc7993d14cf2b6b85bad19a9434, type: 3}
@@ -2188,6 +2188,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   player: {fileID: 1789031185}
+  buildDuration: 5
   playerCamera: {fileID: 963194227}
 --- !u!212 &1789031181
 SpriteRenderer:
