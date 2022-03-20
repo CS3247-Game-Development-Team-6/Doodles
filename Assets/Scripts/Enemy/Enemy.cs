@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private int initDefense = 10;
 
-    [SerializeField] private int inkGained = 50;
+    [SerializeField] private float inkGained = 1f;
 
 
     [SerializeField] private GameObject deathEffect;
@@ -162,7 +162,9 @@ public class Enemy : MonoBehaviour
 
     void Die ()
     {
-        // TODO: add ink
+        // add ink
+        Player playerScript = GameObject.Find("Player").GetComponent<Player>();
+        playerScript.AddInk(inkGained);
 
         // for new wave
         WaveSpawner.numEnemiesAlive--;
