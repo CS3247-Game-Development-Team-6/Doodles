@@ -12,6 +12,7 @@ public class Node : MonoBehaviour
     private GameObject tower;
 
     public Vector3 tileOffset = Vector3.zero;
+    public Vector3 towerOffset = Vector3.zero;
     public GameObject tileMesh;
     private Renderer tileRenderer;
     private GameObject decorationMesh;
@@ -81,7 +82,7 @@ public class Node : MonoBehaviour
 
         // build a tower
         GameObject towerToBuild = buildManager.GetTowerToBuild();
-        tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + tileOffset, tileMesh.transform.rotation);
+        tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, tileMesh.transform.rotation);
         Destroy(decorationMesh);
         return tower.GetComponent<Turret>();
     }
