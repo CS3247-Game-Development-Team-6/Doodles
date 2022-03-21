@@ -8,38 +8,33 @@ public class Node : MonoBehaviour
     public Color hoverColor;
     private Color startColor;
     public Color tooFarColor;
-    private Renderer rend;
 
     private GameObject tower;
+    public Cell cell;
 
-    BuildManager buildManager;
+    public Vector3 tileOffset = Vector3.zero;
+    public Vector3 towerOffset = Vector3.zero;
+    public GameObject tileMesh;
+    private Renderer tileRenderer;
+    private GameObject decorationMesh;
 
-    // Start is called before the first frame update
-    void Start()
+    public GameObject[] noneTileModels;
+    private BuildManager buildManager;
+
+    private void Start()
     {
-        rend = GetComponent<Renderer>();
-        startColor = rend.material.color;
+        tileRenderer = tileMesh.GetComponent<Renderer>();
+        startColor = tileRenderer.material.color;
+
+        GameObject prefab;
+        if (noneTileModels.Length == 0) return;
+        int indexChosen = (int) Random.Range(0, noneTileModels.Length);
+        prefab = noneTileModels[indexChosen];
+
+        decorationMesh = Instantiate(prefab, transform.position + tileOffset, transform.rotation);
+        decorationMesh.transform.SetParent(transform);
+        
         buildManager = BuildManager.instance;
-    }
-
-    private void OnMouseEnter()
-    {
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
-
-        if (buildManager.GetTowerToBuild() == null)
-        {
-            return;
-        }
-
-        rend.material.color = hoverColor;
-    }
-
-    private void OnMouseExit()
-    {
-        rend.material.color = startColor;
     }
 
     public float TowerCost() {
@@ -68,14 +63,21 @@ public class Node : MonoBehaviour
 
         // build a tower
         GameObject towerToBuild = buildManager.GetTowerToBuild();
-        tower = (GameObject) Instantiate(towerToBuild, transform.position, transform.rotation);
+        tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, tileMesh.transform.rotation);
+        Destroy(decorationMesh);
         return tower.GetComponent<Turret>();
     }
 
+    private void OnMouseEnter() {
+        if (EventSystem.current.IsPointerOverGameObject() || buildManager.GetTowerToBuild() == null) {
+            return;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        tileRenderer.material.color = hoverColor;
     }
+
+    private void OnMouseExit() {
+        tileRenderer.material.color = startColor;
+    }
+
 }

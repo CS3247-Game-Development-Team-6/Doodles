@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour {
 
     // player build values
     private float buildDistance = 3f;
+    [SerializeField]
     private float buildDuration = 5f;
     private float currentBuildDuration = 0f;
     private GameObject currentTowerCell; // current cell that the player is interacting with
@@ -87,6 +88,7 @@ public class PlayerMovement : MonoBehaviour {
         Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
             mousePositionVector = raycastHit.point;
+            Debug.DrawLine(mouseRay.origin, raycastHit.point);
             // mousePositionVector.y = transform.position.y; // set to same vertical height as player
         }
         
@@ -164,8 +166,8 @@ public class PlayerMovement : MonoBehaviour {
             Input.GetKeyDown(KeyCode.A) || 
             Input.GetKeyDown(KeyCode.S) || 
             Input.GetKeyDown(KeyCode.D) || 
-            Input.GetMouseButtonDown(0) || 
-            Input.GetMouseButtonDown(1) ||
+            // Input.GetMouseButtonDown(0) || 
+            // Input.GetMouseButtonDown(1) ||
             Input.GetKeyDown(KeyCode.Space) ||
             Input.GetKeyDown(KeyCode.F)) {
             // interrupt building action on other action inputs
@@ -173,20 +175,26 @@ public class PlayerMovement : MonoBehaviour {
             actionTimer.text = "";
         }
 
+        /*
+        Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
         if (Input.GetMouseButtonDown(1)) { // right click
             Debug.Log("Attempting to build!"); // TODO: remove
-            Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, tileAndFogLayerMask)) {
-                if (raycastHit.collider.gameObject.layer == 11) { // right clicked on a TowerCell
+            if (Physics.Raycast(mouseRay, out RaycastHit raycastHit)) {
+                // Replace with actual tile layer, remove hard coding.
+                if (raycastHit.collider.gameObject.GetComponent<Node>() != null) {
+                // if (raycastHit.collider.gameObject.layer == 11) { // right clicked on a TowerCell
                     Debug.Log("Clicked on " + raycastHit.collider.gameObject.name); // TODO: remove
 
                     GameObject towerCell = raycastHit.collider.gameObject;
+                    Node node = towerCell.GetComponent<Node>();
+                    node.HighlightEnter();
                     Vector3 mouseTowerCellPosition = raycastHit.point;
                     BuildTowerAttempt(mouseTowerCellPosition, towerCell);
                 }
             }
         }
+        */
     }
 
     private void HandleWeaponSwapInputs() {
@@ -240,15 +248,17 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    private void BuildTowerAttempt(Vector3 mouseTowerCellPosition, GameObject towerCell) {
+    public void BuildTowerAttempt(Vector3 mouseTowerCellPosition, GameObject towerCell) {
         
         if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { 
+            Debug.Log("Out of range.");
             // player too far from tower cell
             return;
         }
 
         if (isBuilding) { 
             // player already building a tower
+            Debug.Log("Already building tower.");
             return;
         }
 
@@ -261,10 +271,13 @@ public class PlayerMovement : MonoBehaviour {
 
         if (currentTowerCell.GetComponent<Node>().HasTower()) {
             // tower cell already has a tower
+            Debug.Log("Tower already built.");
             return;
         }
 
         currentBuildDuration = buildDuration;
+        Debug.Log("Attempt to build...");
+        Debug.Log(towerCell);
         isBuilding = true;
         Build();
     }

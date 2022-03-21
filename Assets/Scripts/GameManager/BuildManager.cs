@@ -24,6 +24,8 @@ public class BuildManager : MonoBehaviour
             return;
         }
         instance = this;
+        towerToBuild = standardTowerPrefab;
+        currentTowerType = towerToBuild;
     }
 
     public GameObject GetTowerToBuild()
@@ -57,41 +59,27 @@ public class BuildManager : MonoBehaviour
         // For Testing Purposes (May be removed in the future)
         if (GetCurrentTowerType() == standardTowerPrefab)
         {
-            Debug.Log("in normal turret branch");
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
+            // Debug.Log("in normal turret branch");
+            if (Input.GetKeyDown(KeyCode.Alpha1)) {
                 SetTowerToBuild(standardTowerPrefab);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
+            } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
                 SetTowerToBuild(fireTurret);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
+            } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
                 SetTowerToBuild(iceTurret);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
+            } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
                 SetTowerToBuild(waterTurret);
             }
         }
         else if (GetCurrentTowerType() == missileLauncherPrefab)
         {
-            Debug.Log("in missile launcher branch");
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
+            // Debug.Log("in missile launcher branch");
+            if (Input.GetKeyDown(KeyCode.Alpha1)) {
                 SetTowerToBuild(missileLauncherPrefab);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
+            } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
                 SetTowerToBuild(fireMissileLauncher);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
+            } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
                 SetTowerToBuild(iceMissileLauncher);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
+            } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
                 SetTowerToBuild(waterMissileLauncher);
             }
         }

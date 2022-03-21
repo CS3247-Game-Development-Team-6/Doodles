@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
-using UnityEditor.U2D;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
@@ -143,7 +142,7 @@ public class MapGenerator : MonoBehaviour
         }
         }
 
-        Vector3 placeInPosition = transform.position + (Vector3.one * 0.5f) * cellSize;
+        Vector3 placeInPosition = transform.position + new Vector3(0.5f, 0, 0.5f) * cellSize;
         cells = new Cell[gridSize.x, gridSize.y];
         for (int r = 0; r < gridSize.x; r++) {
             for (int c = 0; c < gridSize.y; c++) {
@@ -196,6 +195,7 @@ public class MapGenerator : MonoBehaviour
                 tile.transform.Rotate(cells[r, c].rotation);
                 tile.transform.localScale *= cellSize;
                 cell.tile = tile;
+                if (typeOfCell == CellType.NONE) tile.GetComponent<Node>().cell = cell;
                 
                 // Instantiate the fog tile for every cell
                 GameObject fog = Instantiate(fogPrefab, transform);
@@ -209,7 +209,8 @@ public class MapGenerator : MonoBehaviour
                 if (typeOfCell == CellType.CURVEPATH || typeOfCell == CellType.STRAIGHTPATH)
                 // this is to not display all the 2d images used to show where the path is.
                 {
-                    tile.SetActive(false);
+                    // set to true now to visualise the path with the new asset
+                    tile.SetActive(true);
                 }
             }
             placeInPosition += Vector3.forward * cellSize;
@@ -346,8 +347,7 @@ public class MapGenerator : MonoBehaviour
 
     private static int DeltaPosition(int action, string axis)
     {
-        switch (action)
-        {
+        switch (action) {
             case 0:
                 return (axis == "x") ? -1 : 0;  // left
             case 1:
@@ -356,9 +356,9 @@ public class MapGenerator : MonoBehaviour
                 return (axis == "x") ? 1 : 0;  // right
             case 3:
                 return (axis == "x") ? 0 : 1;  // down
+            default:
+                throw new InvalidOperationException("Unintended action");  // this should not happen so we throw error if it would.
         }
-        throw new InvalidOperationException("Unintended action");  // this should not happen so we throw error if it would.
-        return 0;   // this should not happen
     }
 
     private static void Print2DArray(string[,] matrix)
