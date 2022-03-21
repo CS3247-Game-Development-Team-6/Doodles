@@ -7,6 +7,7 @@ public class Waypoints : MonoBehaviour
     public static Transform[] points;
     public MapGenerator map;
     public GameObject gameMaster;
+    private Vector3 offset = new Vector3(0, 0.3f, 0);
     private bool waypointsActive = false;
 
 
@@ -16,6 +17,7 @@ public class Waypoints : MonoBehaviour
         points = new Transform[transform.childCount];
         for (int i = 0; i < points.Length; i++)
         {
+            transform.GetChild(i).position += offset;
             points[i] = transform.GetChild(i);
         }
 

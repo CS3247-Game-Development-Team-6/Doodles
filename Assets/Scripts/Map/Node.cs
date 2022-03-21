@@ -10,6 +10,7 @@ public class Node : MonoBehaviour
     public Color tooFarColor;
 
     private GameObject tower;
+    public Cell cell;
 
     public Vector3 tileOffset = Vector3.zero;
     public Vector3 towerOffset = Vector3.zero;
@@ -68,13 +69,7 @@ public class Node : MonoBehaviour
     }
 
     private void OnMouseEnter() {
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
-
-        if (buildManager.GetTowerToBuild() == null)
-        {
+        if (EventSystem.current.IsPointerOverGameObject() || buildManager.GetTowerToBuild() == null) {
             return;
         }
 

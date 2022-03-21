@@ -8,9 +8,6 @@ public class MapInput : MonoBehaviour {
     public MapGenerator map;
     public Player player;
 
-    private Fog fogHighlighted = null;
-    private Node nodeHighlighted = null;
-
     void Start() {
         cam = Camera.main;
     }
@@ -32,6 +29,10 @@ public class MapInput : MonoBehaviour {
                         Debug.Log("Not enough ink!");
                     }
                 } else if (node != null) {
+                    if (node.cell.isFog) {
+                        Debug.Log("Fog present. Remove fog first.");
+                        return;
+                    }
                     Vector3 mouseTowerCellPosition = hit.point;
                     player.Movement.BuildTowerAttempt(mouseTowerCellPosition, hit.collider.gameObject);
                 }

@@ -5,14 +5,8 @@ using UnityEngine;
 public class Fog : MonoBehaviour {
 
     public Cell cell;
-    public Renderer renderer;
     public Material defaultMat;
     public float cost;
-
-    void Start() {
-        renderer = GetComponent<Renderer>();
-
-    }
 
     public void ClearFog() {
         cell.isFog = false;
@@ -31,12 +25,12 @@ public class Fog : MonoBehaviour {
 
     private void OnMouseEnter() {
         // Fog turns red if hovered over with mouse
-        renderer.material.color = Color.red;
+        GetComponent<Renderer>().material.color = Color.red;
     }
 
     private void OnMouseExit() {
         // Fog reverts its original color if mouse leaves
-        renderer.material.color = defaultMat.color;
+        GetComponent<Renderer>().material.color = defaultMat.color;
     }
 }
 

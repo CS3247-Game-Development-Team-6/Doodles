@@ -967,7 +967,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.2
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -1213,13 +1213,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809511551}
-  m_LocalRotation: {x: 0.49821618, y: -0, z: -0, w: 0.8670529}
-  m_LocalPosition: {x: 4.95, y: 11.66, z: -2.43}
+  m_LocalRotation: {x: 0.38773358, y: -0, z: -0, w: 0.92177147}
+  m_LocalPosition: {x: 4.95, y: 8.59, z: -4.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 59.764, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45.627, y: 0, z: 0}
 --- !u!1 &832949845
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,7 +2044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1006083860}
-  gameplayCanvas: {fileID: 0}
+  gameplayCanvas: {fileID: 3773202538542358475}
   raycastOccluder: {fileID: 26158120}
 --- !u!114 &1325715651
 MonoBehaviour:
@@ -2172,6 +2172,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1448140994 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1059972131, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1460109370
 GameObject:
   m_ObjectHideFlags: 0
@@ -2445,11 +2450,12 @@ GameObject:
   - component: {fileID: 1789031183}
   - component: {fileID: 1789031186}
   - component: {fileID: 1789031187}
+  - component: {fileID: 1789031188}
   - component: {fileID: 1789031179}
   - component: {fileID: 1789031184}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2553,7 +2559,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789031178}
   m_LocalRotation: {x: 0.27400205, y: -0, z: -0, w: 0.9617291}
-  m_LocalPosition: {x: 0.81, y: 1.28, z: 2.0719237}
+  m_LocalPosition: {x: 0.81, y: 1.117, z: 1.971}
   m_LocalScale: {x: 0.35241, y: 0.35241, z: 0.35241}
   m_Children:
   - {fileID: 1460109371}
@@ -2634,6 +2640,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cf6ce614676e47adb869237d7be92f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1789031188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789031178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 916040b4d525ea24ea528d98f822ec1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1838362328
@@ -3220,6 +3238,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 550646148, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: gameCanvas
+      value: 
+      objectReference: {fileID: 1448140994}
+    - target: {fileID: 550646148, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: shopCanvas
+      value: 
+      objectReference: {fileID: 1448140994}
+    - target: {fileID: 550646148, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: raycastOccluder
+      value: 
+      objectReference: {fileID: 26158120}
     - target: {fileID: 1059972131, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3245,12 +3275,48 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1800086425317640487, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800086425317640487, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800086425317640487, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1306252974}
     - target: {fileID: 1800086425317640487, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1306252974}
+    - target: {fileID: 1800086425317640487, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800086425317640487, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetTowerToBuild
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800086425317640487, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetCurrentTowerType
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800086425317640487, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: BuildManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800086425317640487, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 2689636279851204399, guid: 6bcec35a2c2d14f439fd18a476e24ed0, type: 3}
+    - target: {fileID: 1800086425317640487, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773202538498999640, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_Name
+      value: SetBasicTurret
       objectReference: {fileID: 0}
     - target: {fileID: 3773202538498999641, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3269,12 +3335,48 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3773202538498999646, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773202538498999646, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773202538498999646, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1306252974}
     - target: {fileID: 3773202538498999646, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1306252974}
+    - target: {fileID: 3773202538498999646, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773202538498999646, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetTowerToBuild
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773202538498999646, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetCurrentTowerType
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773202538498999646, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: BuildManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773202538498999646, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 5135174605016635187, guid: 606a79db4dfc00e4fb105b7a58af8dfc, type: 3}
+    - target: {fileID: 3773202538498999646, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 5135174605016635187, guid: 606a79db4dfc00e4fb105b7a58af8dfc, type: 3}
+    - target: {fileID: 3773202538498999646, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3773202538672404983, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3370,6 +3472,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+--- !u!1 &3773202538542358475 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3773202538948704351, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5244389774292442137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3439,6 +3546,10 @@ PrefabInstance:
       value: GameMaster
       objectReference: {fileID: 0}
     - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: offset.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 0}
@@ -3495,16 +3606,40 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: iceTurret
+      value: 
+      objectReference: {fileID: 5135174605016635187, guid: b1cf6a113a5f7ff4e9dab12c277866d6, type: 3}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: fireTurret
+      value: 
+      objectReference: {fileID: 5135174605016635187, guid: a9a26f0a25ebe6146a83e57250c82bf0, type: 3}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waterTurret
+      value: 
+      objectReference: {fileID: 5135174605016635187, guid: b509d7e982a9cf34eb717034cc13c9ba, type: 3}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: defaultTower
       value: 
-      objectReference: {fileID: 3129425037732683074, guid: aadaf4df02e91b947b576dcbafc172c4, type: 3}
+      objectReference: {fileID: 5135174605016635187, guid: 606a79db4dfc00e4fb105b7a58af8dfc, type: 3}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: iceMissileLauncher
+      value: 
+      objectReference: {fileID: 2689636279851204399, guid: cf05377ca8e7ec94ea04c3f66d3042c3, type: 3}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: fireMissileLauncher
+      value: 
+      objectReference: {fileID: 2689636279851204399, guid: 738e77460b6f3294e8aa3378f6910d24, type: 3}
     - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: standardTowerPrefab
       value: 
-      objectReference: {fileID: 3129425037732683074, guid: aadaf4df02e91b947b576dcbafc172c4, type: 3}
+      objectReference: {fileID: 5135174605016635187, guid: 606a79db4dfc00e4fb105b7a58af8dfc, type: 3}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waterMissileLauncher
+      value: 
+      objectReference: {fileID: 2689636279851204399, guid: 89a25ac1f47a5a845a9dd3f795047cd1, type: 3}
     - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: missileLauncherPrefab
       value: 
-      objectReference: {fileID: 3129425037732683074, guid: 56234576a7587e74a80da6c80c70d24f, type: 3}
+      objectReference: {fileID: 2689636279851204399, guid: 6bcec35a2c2d14f439fd18a476e24ed0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
