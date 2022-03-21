@@ -226,6 +226,7 @@ public class MapGenerator : MonoBehaviour
             for (int c = 0; c < mapHeight; c++) {
                 Cell cell = cells[r, c];
                 cell.fog.SetActive(cell.isFog);
+                cell.tile.SetActive(!cell.isFog);
             }
         }
     }
