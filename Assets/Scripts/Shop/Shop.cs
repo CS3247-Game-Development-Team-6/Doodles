@@ -11,7 +11,7 @@ public class Shop : MonoBehaviour
         buildManager = BuildManager.instance;
     }
 
-    public void SetTurrentToBuild() 
+    public void SetTurretToBuild() 
     {
         buildManager.SetTowerToBuild(buildManager.standardTowerPrefab);
     }
