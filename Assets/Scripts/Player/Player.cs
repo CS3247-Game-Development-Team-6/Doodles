@@ -11,6 +11,10 @@ public class Player : MonoBehaviour {
     [Range(0, 1)]
     public float startingAmount = 0.6f;
     private float ink;
+    [SerializeField]
+    private PlayerMovement movement;
+
+    public PlayerMovement Movement => movement;
 
     private void Start() {
         ink = startingAmount * maxInk;

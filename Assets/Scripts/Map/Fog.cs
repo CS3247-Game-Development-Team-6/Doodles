@@ -17,6 +17,17 @@ public class Fog : MonoBehaviour {
     public void ClearFog() {
         cell.isFog = false;
     }
+    
+    /*
+    public void HighlightEnter() {
+        renderer.material.color = Color.red;
+    }
+    
+    public void HighlightExit() {
+        // Fog reverts its original color if mouse leaves
+        renderer.material.color = defaultMat.color;
+    }
+    */
 
     private void OnMouseEnter() {
         // Fog turns red if hovered over with mouse

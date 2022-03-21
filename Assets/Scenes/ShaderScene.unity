@@ -1598,6 +1598,7 @@ MonoBehaviour:
   healthSlider: {fileID: 689040356}
   growthRate: 0.1
   startingAmount: 0.6
+  movement: {fileID: 1789031180}
 --- !u!114 &1789031186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2334,6 +2335,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: defaultTower
+      value: 
+      objectReference: {fileID: 3129425037732683074, guid: aadaf4df02e91b947b576dcbafc172c4, type: 3}
     - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: standardTowerPrefab
       value: 

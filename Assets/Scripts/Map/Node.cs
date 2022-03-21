@@ -36,26 +36,6 @@ public class Node : MonoBehaviour
         buildManager = BuildManager.instance;
     }
 
-    private void OnMouseEnter()
-    {
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
-
-        if (buildManager.GetTowerToBuild() == null)
-        {
-            return;
-        }
-
-        tileRenderer.material.color = hoverColor;
-    }
-
-    private void OnMouseExit()
-    {
-        tileRenderer.material.color = startColor;
-    }
-
     public float TowerCost() {
         GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
         return towerToBuild.GetComponent<Turret>().Cost;
@@ -85,6 +65,24 @@ public class Node : MonoBehaviour
         tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, tileMesh.transform.rotation);
         Destroy(decorationMesh);
         return tower.GetComponent<Turret>();
+    }
+
+    private void OnMouseEnter() {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        if (buildManager.GetTowerToBuild() == null)
+        {
+            return;
+        }
+
+        tileRenderer.material.color = hoverColor;
+    }
+
+    private void OnMouseExit() {
+        tileRenderer.material.color = startColor;
     }
 
 }

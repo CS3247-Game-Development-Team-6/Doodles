@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
+    public GameObject defaultTower;
     private GameObject towerToBuild;
     public GameObject standardTowerPrefab;
     public GameObject missileLauncherPrefab;
@@ -20,6 +21,7 @@ public class BuildManager : MonoBehaviour
             return;
         }
         instance = this;
+        towerToBuild = defaultTower;
     }
 
     public GameObject GetTowerToBuild()

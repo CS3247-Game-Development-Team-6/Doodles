@@ -8,6 +8,9 @@ public class MapInput : MonoBehaviour {
     public MapGenerator map;
     public Player player;
 
+    private Fog fogHighlighted = null;
+    private Node nodeHighlighted = null;
+
     void Start() {
         cam = Camera.main;
     }
@@ -18,14 +21,19 @@ public class MapInput : MonoBehaviour {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {
-                if (hit.transform.gameObject.name.Contains("Fog")) {
-                    Fog fog = hit.transform.gameObject.GetComponent<Fog>();
+                Fog fog = hit.transform.gameObject.GetComponent<Fog>();
+                Node node = hit.transform.gameObject.GetComponent<Node>();
+                if (fog != null) {
                     if (player.hasEnoughInk(fog.cost)) {
                         player.ChangeInkAmount(-fog.cost);
                         fog.ClearFog();
-                    } else {
+                    }
+                    else {
                         Debug.Log("Not enough ink!");
                     }
+                } else if (node != null) {
+                    Vector3 mouseTowerCellPosition = hit.point;
+                    player.Movement.BuildTowerAttempt(mouseTowerCellPosition, hit.collider.gameObject);
                 }
             }
         }
