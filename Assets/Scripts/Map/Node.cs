@@ -46,6 +46,10 @@ public class Node : MonoBehaviour
         return tower != null;
     }
 
+    public void ToggleObjectView(bool visible) {
+        decorationMesh.SetActive(visible);
+    }
+
     public Turret BuildTower()
     {
 

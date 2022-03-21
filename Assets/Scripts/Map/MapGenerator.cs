@@ -205,13 +205,6 @@ public class MapGenerator : MonoBehaviour
                 fog.transform.localScale *= cellSize;
                 cell.fog = fog;
                 fog.GetComponent<Fog>().cell = cell;
-
-                if (typeOfCell == CellType.CURVEPATH || typeOfCell == CellType.STRAIGHTPATH)
-                // this is to not display all the 2d images used to show where the path is.
-                {
-                    // set to true now to visualise the path with the new asset
-                    tile.SetActive(true);
-                }
             }
             placeInPosition += Vector3.forward * cellSize;
         }
