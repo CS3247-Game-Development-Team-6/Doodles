@@ -37,11 +37,14 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
-        pauseMenuUI.SetActive(true);
-        gameplayCanvas.SetActive(false);
-        raycastOccluder.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
+        if (!GameManager.getIsGameEnded())
+        {
+            pauseMenuUI.SetActive(true);
+            gameplayCanvas.SetActive(false);
+            raycastOccluder.SetActive(true);
+            Time.timeScale = 0f;
+            GameIsPaused = true;
+        }
     }
 
     public void LoadMenu()
