@@ -59,9 +59,9 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void QuitGame()
+    public void Retry()
     {
-        Debug.Log("Quit!");
-        Application.Quit();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    
 }
