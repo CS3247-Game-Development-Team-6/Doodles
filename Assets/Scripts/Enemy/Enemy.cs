@@ -44,6 +44,10 @@ public class Enemy : MonoBehaviour
     
     public MapGenerator map;
 
+    public GameObject model;
+
+    public Animator animator;
+
     public void TakeDamage(float amount)
     {
         health = health - amount + defense;
@@ -183,6 +187,10 @@ public class Enemy : MonoBehaviour
         defense = initDefense;
         bulletPrefab = GetComponentInParent<EnemyShooting>().bulletPrefab;
 
+        // initialize model and animator
+        model = transform.GetChild(2).gameObject;
+        animator = model.GetComponent<Animator>();
+
         // first target, which is first waypoint in Waypoints
         target = Waypoints.points[0];
     }
@@ -191,13 +199,20 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (GetComponent<EnemyShooting>().isShooting) {
+            // animate
+            animator.SetBool("shooting", true);
+
             // stop movement
             return;
         }
+        animator.SetBool("shooting", false);
 
         // movement direction to the target waypoint
         Vector3 direction = target.position - transform.position;
-        
+        Quaternion lookAtRotation = Quaternion.LookRotation(direction);
+        Vector3 rotation = Quaternion.Lerp(model.transform.rotation, lookAtRotation, Time.deltaTime * 10f).eulerAngles;
+        model.transform.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+
         // delta time is time passed since last frame
         transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
 

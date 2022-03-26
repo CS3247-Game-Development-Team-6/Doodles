@@ -22,6 +22,8 @@ public class EnemyShooting : MonoBehaviour
 
     public Transform partToRotate;
     public float rotationSpeed = 10f;
+    public GameObject model;
+    public Transform rangeCenter;
 
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -30,6 +32,8 @@ public class EnemyShooting : MonoBehaviour
     void Start()
     {
         InvokeRepeating ("UpdateTarget", 0f, 0.5f);
+        model = transform.GetChild(2).gameObject;
+        rangeCenter = transform.GetChild(3).gameObject.transform;
     }
 
     // dont need to find target every frame
@@ -63,7 +67,7 @@ public class EnemyShooting : MonoBehaviour
 
         foreach (GameObject tempTarget in _targets) 
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, tempTarget.transform.position);
+            float distanceToPlayer = Vector3.Distance(rangeCenter.position, tempTarget.transform.position);
             if (distanceToPlayer < shortestDistance)
             {
                 shortestDistance = distanceToPlayer;
@@ -73,7 +77,8 @@ public class EnemyShooting : MonoBehaviour
 
         foreach (GameObject tempTarget in _bases) 
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, tempTarget.transform.position);
+            // range from the model
+            float distanceToPlayer = Vector3.Distance(rangeCenter.position, tempTarget.transform.position);
             if (distanceToPlayer < shortestDistance)
             {
                 shortestDistance = distanceToPlayer;
@@ -88,18 +93,20 @@ public class EnemyShooting : MonoBehaviour
     void Update()
     {
         if (target == null) {
-            // TODO: using partToRotate, to face waypoint
 
             isShooting = false;
             return;          
         }
 
         isShooting = true;
+
         // rotate enemy using quaternion
         Vector3 dir = target.position - transform.position;
         Quaternion lookAtRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookAtRotation, Time.deltaTime * rotationSpeed).eulerAngles;
+        
         partToRotate.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+        model.transform.rotation = Quaternion.Euler(model.transform.rotation.x, rotation.y, rotation.z);
 
         if (fireCountDown <= 0f) 
         {
@@ -113,6 +120,8 @@ public class EnemyShooting : MonoBehaviour
 
     // shoot according to firecountdown timer
     void Shoot () {
+
+        //TODO: remove bullet for melee enemy
         GameObject bulletGO = (GameObject) Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         EnemyBullet bullet = bulletGO.GetComponent<EnemyBullet>();
 
@@ -124,6 +133,6 @@ public class EnemyShooting : MonoBehaviour
 
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.DrawWireSphere(rangeCenter.position, range);
     }
 }
