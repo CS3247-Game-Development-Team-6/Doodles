@@ -6,6 +6,8 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
     private GameObject towerToBuild;
+    private Node selectedNode;
+    public NodeUI nodeUI;
     private GameObject currentTowerType;
     public GameObject standardTowerPrefab;
     public GameObject missileLauncherPrefab;
@@ -33,9 +35,28 @@ public class BuildManager : MonoBehaviour
         return towerToBuild;
     }
 
+    public void SelectNode(Node node) 
+    {
+        if (selectedNode == node)
+        {
+            DeselectNode();
+            return;
+        }
+        Debug.Log("User has selected this tower");
+        selectedNode = node;
+        nodeUI.SetTarget(node);
+    }
+
+    public void DeselectNode()
+    { 
+        selectedNode = null;
+        nodeUI.Hide();
+    }
+
     public void SetTowerToBuild(GameObject tower)
     {
         towerToBuild = tower; 
+        DeselectNode();
     }
 
     public GameObject GetCurrentTowerType()
