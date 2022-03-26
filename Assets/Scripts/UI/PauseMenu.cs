@@ -5,11 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
+    public static bool GameIsPaused;
 
     public GameObject pauseMenuUI;
     public GameObject gameplayCanvas;
     public GameObject raycastOccluder;
+
+    void Start()
+    {
+        Resume();   // Unfreeze game
+    }
 
     // Update is called once per frame
     void Update()
