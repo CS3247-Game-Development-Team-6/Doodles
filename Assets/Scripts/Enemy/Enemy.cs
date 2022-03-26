@@ -26,12 +26,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject deathEffect;
 
     // Flags for status effects
-    [SerializeField] private bool isScorched = false;   // Serialized for debugging purposes
-    [SerializeField] private bool isChilled = false;    // Serialized for debugging purposes
-    [SerializeField] private bool isDrenched = false;   // Serialized for debugging purposes
-    [SerializeField] private bool isScalded = false;   // Serialized for debugging purposes
-    [SerializeField] private bool isFrozen = false;   // Serialized for debugging purposes
-    [SerializeField] private bool isWeakened = false;   // Serialized for debugging purposes
+    private bool isScorched = false;
+    private bool isChilled = false;
+    private bool isDrenched = false;
+    private bool isScalded = false;
+    private bool isFrozen = false;
+    private bool isWeakened = false;
 
     private Transform target;
     private int waypointIndex = 0;
