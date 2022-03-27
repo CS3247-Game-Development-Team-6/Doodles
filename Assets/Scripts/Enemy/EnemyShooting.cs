@@ -22,7 +22,9 @@ public class EnemyShooting : MonoBehaviour
 
     public Transform partToRotate;
     public float rotationSpeed = 10f;
+
     public GameObject model;
+    public Animator animator;
     public Transform rangeCenter;
 
     public GameObject bulletPrefab;
@@ -33,7 +35,10 @@ public class EnemyShooting : MonoBehaviour
     {
         InvokeRepeating ("UpdateTarget", 0f, 0.5f);
         model = transform.GetChild(2).gameObject;
+        animator = model.GetComponent<Animator>();
         rangeCenter = transform.GetChild(3).gameObject.transform;
+
+        fireCountDown = 1f / fireRate;
     }
 
     // dont need to find target every frame
@@ -120,6 +125,8 @@ public class EnemyShooting : MonoBehaviour
 
     // shoot according to firecountdown timer
     void Shoot () {
+        // animate
+        animator.SetTrigger("shoot");
 
         //TODO: remove bullet for melee enemy
         GameObject bulletGO = (GameObject) Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
@@ -129,6 +136,7 @@ public class EnemyShooting : MonoBehaviour
         {
             bullet.Seek(target);
         }
+        
     }
 
     void OnDrawGizmosSelected() {

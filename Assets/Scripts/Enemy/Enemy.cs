@@ -45,7 +45,6 @@ public class Enemy : MonoBehaviour
     public MapGenerator map;
 
     public GameObject model;
-
     public Animator animator;
 
     public void TakeDamage(float amount)
@@ -199,13 +198,12 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (GetComponent<EnemyShooting>().isShooting) {
-            // animate
-            animator.SetBool("shooting", true);
-
             // stop movement
+            animator.SetBool("isWalking", false);
             return;
         }
-        animator.SetBool("shooting", false);
+
+        animator.SetBool("isWalking", true);
 
         // movement direction to the target waypoint
         Vector3 direction = target.position - transform.position;
@@ -237,6 +235,7 @@ public class Enemy : MonoBehaviour
     void EndPath()
     {
         // do nothing
+        animator.SetBool("isWalking", false);
     }
 
 }

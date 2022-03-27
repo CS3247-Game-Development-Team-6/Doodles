@@ -554,13 +554,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 1.25
-  fireRate: 0.1
+  fireRate: 0.3
   isShooting: 0
   playerTag: Player
   baseTag: Base
   partToRotate: {fileID: 6972352779643815576}
   rotationSpeed: 10
   model: {fileID: 919132147805593998}
+  animator: {fileID: 0}
   rangeCenter: {fileID: 5262377362576877855}
   bulletPrefab: {fileID: 5753786456684779845, guid: ccfd9cae814f8d04882ac19ea0c68e3d, type: 3}
   firePoint: {fileID: 5410826820070449313}
