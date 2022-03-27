@@ -44,6 +44,7 @@ public class PlayerMeleeHitbox : MonoBehaviour
         }
 
         foreach (Collider collider in colliderList) {
+            if (!collider) continue;    // should not continue if the game object has already been destroyed.
             if (collider.CompareTag("Enemy")) {
                 // TODO: implement hit effect
                 // Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
