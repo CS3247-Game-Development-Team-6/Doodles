@@ -6,13 +6,14 @@ public class NodeUI : MonoBehaviour
 {
     public GameObject ui;
     private Node target;
+    public Vector3 manualOffset;
 
     public void SetTarget(Node _target)
     {
 
         target = _target;
 
-        transform.position = target.GetTowerBuildPosition();
+        transform.position = target.GetTowerBuildPosition() + manualOffset;
 
         if (target.hasTowerBuilt())
         {
