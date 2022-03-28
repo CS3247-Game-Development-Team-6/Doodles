@@ -1,155 +1,163 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
 using System.Text;
+using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 public class MapGenerator : MonoBehaviour
 {
     public float cellSize = 1.0f;
-    public int minSpawnToBaseDistance = 15; // careful with increasing this more than 15 for a 10*10 grid,
-                                            // may lead to infinite while loop.
-    public int maximumTries = 200; // this can be decreased to prevent going for too long
-    public int minimumReqScore = 50;
-    public int fogTilesClearedByBase = 10;  // change this to clear more fog around the base when starting
-    public GameObject mapBase;
-    public GameObject tilePrefab;
-    public GameObject fogPrefab;
-    public GameObject basePrefab;
-    public GameObject spawnPrefab;
-    public GameObject curvePrefab;
-    public GameObject straightPrefab;
-    public GameObject waypointPrefab;
-    public GameObject waypointEmpty;
-    public GameObject playerGameObj;
+    
+    // careful with increasing this more than 15 for a 10*10 grid, may lead to infinite while loop.
+    private int minSpawnToBaseDistance = 12; 
+    
+    // this can be decreased to prevent going for too long, this is how many attempts of finding path before finding 
+    // new locations for base and enemy spawn.
+    [SerializeField] private int maximumTries = 1000; 
+    
+    // the minimum score of a path for being accepted as a good path, this is based on a heuristic of scoring paths 
+    // higher that spread out paths more.
+    [SerializeField] private int minimumReqScore = 50;
+    
+    // change this to clear more fog around the base when starting the game
+    [SerializeField] private int fogTilesClearedByBase = 15;
+    
+    [SerializeField] private GameObject mapBase;
+    [SerializeField] private GameObject tilePrefab;
+    [SerializeField] private GameObject fogPrefab;
+    [SerializeField] private GameObject basePrefab;
+    [SerializeField] private GameObject spawnPrefab;
+    [SerializeField] private GameObject curvePrefab;
+    [SerializeField] private GameObject straightPrefab;
+    [SerializeField] private GameObject waypointPrefab;
+    [SerializeField] private GameObject waypointEmpty;
+    [SerializeField] private GameObject playerGameObj;
 
-    private Vector2Int gridSize = new Vector2Int(10, 10);   // current implementation only allows for 10x10
+    private Vector2Int gridSize = new Vector2Int(10, 10);   // NOTE: current implementation only allows for 10x10
     private int[] spawnCoordinates = new int[2]; 
     private int[] baseCoordinates = new int[2];
     private string[,] backendMatrix;
     private int[,] iterationMatrix;
-    
     private Cell[,] cells;
+    private Vector3[] waypointsPosition;
     private int mapWidth;
     private int mapHeight;
     private int manhattanDist;
-    List<Cell> curvedCells = new List<Cell>();    // do not know the length (how many waypoints) so we
-                                                        // init this as a list and later convert to an array.
-                                                        
-    private Vector3[] waypointsPosition;
+
+    // do not know the length (how many waypoints) so we init this as a list and later convert to an array.
+    private readonly List<Cell> curvedCells = new List<Cell>();    
     
     // Start is called before the first frame update
     void Start()
     {
         mapWidth = gridSize.x;
         mapHeight = gridSize.y;
+        
+        // a quick check before starting to make sure we are not aiming for an unachievable path length
+        var maximumPlausibleDistance = mapWidth + mapHeight - (mapWidth + mapHeight) / 4;
+        if ( minSpawnToBaseDistance > maximumPlausibleDistance)
+        {
+            minSpawnToBaseDistance = maximumPlausibleDistance;
+        }
 
         bool foundGoodPath = false;
         while (!foundGoodPath)  // we try finding paths until we have found a path that satisfies our criteria
         {
             (baseCoordinates, spawnCoordinates) = GenerateSpawnAndBase(mapWidth, mapHeight);
-            
             int numberOfTries = 0;
-            while (numberOfTries < maximumTries)    // if we go "maximumTries" without finding a path,
-                                                    // we change the spawn/base points since they probably lead
-                                                    // to a hard time satisfying the criteria.
-        {
-            // reset the matrix before starting a new "try".
-            backendMatrix = CreateMatrix(mapWidth, mapHeight); 
-            backendMatrix[spawnCoordinates[1], spawnCoordinates[0]] = "S";
-            backendMatrix[baseCoordinates[1], baseCoordinates[0]] = "B";
             
-
-            // variables that are used for generating the path are reset for every try
-            int currentX = spawnCoordinates[0];
-            int currentY = spawnCoordinates[1];
-            bool foundPath = false;
-            int lengthOfPath = 0;
-            int score = 0;
-            int thisMove = 0;
-            
-            iterationMatrix = new int[mapWidth, mapHeight];
-            iterationMatrix[currentY, currentX] = 0;   // just put a zero on the spawn
-
-            for (int _ = 0; _ < 100; _++)   // for every try, we do 100 random moves before either
-                                            // succeeding or abandoning this attempt
+            // if we go "maximumTries" without finding a path, we change the spawn/base points since they probably lead
+            // to a hard time satisfying the criteria.
+            while (numberOfTries < maximumTries)    
             {
-                int previousX = currentX;
-                int previousY = currentY;
+                // reset the matrix before starting a new "try".
+                backendMatrix = CreateMatrix(mapWidth, mapHeight); 
+                backendMatrix[spawnCoordinates[1], spawnCoordinates[0]] = "S";  // enemy spawn position
+                backendMatrix[baseCoordinates[1], baseCoordinates[0]] = "B";    // player base position
 
-                int lastMove = thisMove;
+                // variables that are used for generating the path are reset for every try
+                int currentX = spawnCoordinates[0];
+                int currentY = spawnCoordinates[1];
+                bool foundPath = false;
+                int lengthOfPath = 0;
+                int score = 0;
+                int thisMove = 0;
+            
+                iterationMatrix = new int[mapWidth, mapHeight];
+                iterationMatrix[currentY, currentX] = 0;   // just put a zero on the spawn
 
-                int action = Random.Range(0, 3);    // there are 4 possible moves: {left, up, right, down}
-
-                int newX = currentX + DeltaPosition(action, "x");
-                int newY = currentY + DeltaPosition(action, "y");
-
-                if (newX >= 0 && newX < mapWidth && newY >= 0 && newY < mapHeight)    
-                    // make sure we do not go out of index bounds
+                // for every try, we do 100 random moves before either succeeding or abandoning this attempt
+                for (int _ = 0; _ < 100; _++)   
                 {
+                    int previousX = currentX;
+                    int previousY = currentY;
 
-                    if (backendMatrix[newY, newX] == "B")
-                    {
-                        thisMove = action;
-                        string strMove = ConvertMoveToMoveStr(thisMove, lastMove);
-                        backendMatrix[previousY, previousX] = strMove;
-                        
-                        lengthOfPath++;
-                        iterationMatrix[newY, newX] = lengthOfPath;
-                        
-                        foundPath = true;
-                        break;  // now we are done with this path and have found path from S -> B!
-                    } 
-                    
-                    if (backendMatrix[newY, newX] == "O")
-                    {
-                        score += ScoreThePath(backendMatrix, newX, newY, mapWidth, mapHeight);
-                        currentX = newX;
-                        currentY = newY;
-                        thisMove = action;
-                        
-                        lengthOfPath++;
-                        iterationMatrix[currentY, currentX] = lengthOfPath;
+                    int lastMove = thisMove;
 
-                        if (lengthOfPath > 1)
+                    int action = Random.Range(0, 4);    // there are 4 possible moves: {0:left, 1:up, 2:right, 3:down}
+
+                    int newX = currentX + DeltaPosition(action, "x");
+                    int newY = currentY + DeltaPosition(action, "y");
+
+                    // make sure we do not go out of index bounds
+                    if (newX >= 0 && newX < mapWidth && newY >= 0 && newY < mapHeight)    
+                    {
+                        if (backendMatrix[newY, newX] == "B")
                         {
+                            thisMove = action;
                             string strMove = ConvertMoveToMoveStr(thisMove, lastMove);
                             backendMatrix[previousY, previousX] = strMove;
+                        
+                            lengthOfPath++;
+                            iterationMatrix[newY, newX] = lengthOfPath;
+                        
+                            foundPath = true;
+                            break;  // now we are done with this path and have found path from S -> B!
+                        } 
+                    
+                        if (backendMatrix[newY, newX] == "O")
+                        {
+                            score += ScoreThePath(backendMatrix, newX, newY, mapWidth, mapHeight);
+                            currentX = newX;
+                            currentY = newY;
+                            thisMove = action;
+                        
+                            lengthOfPath++;
+                            iterationMatrix[currentY, currentX] = lengthOfPath;
+
+                            if (lengthOfPath > 1)
+                            {
+                                string strMove = ConvertMoveToMoveStr(thisMove, lastMove);
+                                backendMatrix[previousY, previousX] = strMove;
+                            }
                         }
                     }
+
                 }
 
-            }
-
-            if (foundPath)
-            {
-                if (lengthOfPath <= manhattanDist * 2 && lengthOfPath > manhattanDist * 1.5 && score > minimumReqScore)
+                if (foundPath)
                 {
-                    
-                    // Print2DArray(backendMatrix);
-
-                    foundGoodPath = true;
-                    
-                    break;  // breaks the while loop of "tries". Have found THE path that will be used for this game
+                    if (lengthOfPath <= manhattanDist * 2 && lengthOfPath > manhattanDist * 1.5 && score > minimumReqScore)
+                    {
+                        foundGoodPath = true;
+                        break;  // breaks the while loop of "tries". Have found THE path that will be used for this game
+                    }
                 }
+                numberOfTries++;
             }
-            numberOfTries++;
-        }
         }
 
         Vector3 placeInPosition = transform.position + new Vector3(0.5f, 0, 0.5f) * cellSize;
         cells = new Cell[gridSize.x, gridSize.y];
+        
         for (int r = 0; r < gridSize.x; r++) {
             for (int c = 0; c < gridSize.y; c++) {
                 Vector3 cellPos = placeInPosition + Vector3.right * c * cellSize;
                 var typeOfCell = CellType.NONE;  // default every cell as a NONE-cell
                 var rotationINT = 0;
-                int pathNum = 0;
+                var pathNum = 0;
                 
                 var cellCharacter = backendMatrix[c, r];
                 if (cellCharacter == "B")
@@ -176,7 +184,7 @@ public class MapGenerator : MonoBehaviour
 
                 Vector3 newRotation = new Vector3(0, rotationINT, 0);
                 cells[r, c] = new Cell(cellPos, typeOfCell, true, newRotation, pathNum);
-                // note: per default we initialise all tiles as foggy, then clear some close to the base.
+                // NOTE: per default we initialise all tiles as foggy, then clear some close to the base.
                 
                 Cell cell = cells[r, c];
 
@@ -189,7 +197,7 @@ public class MapGenerator : MonoBehaviour
                 
                 // Instantiate the correct tile for every cell
                 GameObject tile = Instantiate(tileToPlace, transform);
-                tile.name = $"{tileToPlace.ToString()} {r}, {c}";
+                tile.name = $"{tileToPlace} {r}, {c}";
                 tile.transform.SetParent(mapBase.transform);
                 tile.transform.position = cells[r, c].position;
                 tile.transform.Rotate(cells[r, c].rotation);
@@ -216,8 +224,11 @@ public class MapGenerator : MonoBehaviour
         playerGameObj.GetComponent<PlayerStartposition>().MovePlayerStartPosition(
             waypointsArr[waypointsArr.Length - 1], waypointsArr[waypointsArr.Length - 2]); 
         
+        // sets the waypoints and activates, triggers a change of the enemy's spawn position etc.
         waypointEmpty.GetComponent<Waypoints>().ActivateWaypoints();
-        ClearFogAroundBase(cells, baseCoordinates[1], baseCoordinates[0], mapWidth, mapHeight, 0, fogTilesClearedByBase);
+
+        // remove fog around the base, the amount of fog is declared in fogTilesClearedByBase.
+        ClearFogAroundBase(cells, baseCoordinates[1], baseCoordinates[0], mapWidth, mapHeight, fogTilesClearedByBase);
     }
 
     private void Update()
@@ -231,55 +242,52 @@ public class MapGenerator : MonoBehaviour
         }
     }
     
-    private void ClearFogAroundBase(Cell[,] cellMatrix, int x, int y, int w, int h, int numberOfFogCleared, int minCleared)
+    private static void ClearFogAroundBase(Cell[,] cellMatrix, int x, int y, int w, int h, int minCleared)
     {
-        int lastX = x;
-        int lastY = y;
-        for (int i = -1; i < 2; i++)
+        // clears fog around the base until a minimum amount has been cleared. clears it in a circle with an increasing
+        // radius until enough fog have been cleared.
+        var numberOfFogCleared = 0;
+        var radius = 1;
+        while (numberOfFogCleared < minCleared)
         {
-            for (int j = -1; j < 2; j++)
+            for (int i = -1 * radius; i < radius + 1; i++)
             {
-                if (y + i >= 0 && y + i < h && x + j >= 0 && x + j < w)   // to avoid index' out of bounds
+                for (int j = -1 * radius; j < radius + 1; j++)
                 {
-                    if (cellMatrix[y + i, x + j].isFog && numberOfFogCleared < minCleared) // only do this is there was fog here already
+                    if (y + i >= 0 && y + i < h && x + j >= 0 && x + j < w) 
+                        // to avoid index' out of bounds
                     {
-                        cellMatrix[y + i, x + j].isFog = false;
-                        numberOfFogCleared++;
-
-                        lastX = x + j;
-                        lastY = y + i;
+                        if (cellMatrix[y + i, x + j].isFog &&
+                            numberOfFogCleared < minCleared) 
+                            // only do this is there was fog here already
+                        {
+                            cellMatrix[y + i, x + j].isFog = false;
+                            numberOfFogCleared++;
+                        }
                     }
                 }
             }
-        }
 
-        if (numberOfFogCleared < minCleared)
-        {
-            ClearFogAroundBase(cellMatrix, lastX, lastY, w, h, numberOfFogCleared, minCleared);
-        } 
+            radius++;
+        }
     }
 
     private (int[], int[]) GenerateSpawnAndBase(int w, int h)
     {
-        spawnCoordinates = new int[] {Random.Range(0, w - 1), Random.Range(0, h - 1)} ;
-        baseCoordinates = new int[] {Random.Range(0, w - 1), Random.Range(0, h - 1)} ;
+        spawnCoordinates = new[] {Random.Range(0, h), Random.Range(0, w)} ;
+        baseCoordinates = new[] {Random.Range(0, h/2 - 1), Random.Range(0, w)} ;
+
         manhattanDist = ManhattanDistance(spawnCoordinates[0], baseCoordinates[0], spawnCoordinates[1],
             baseCoordinates[1]);
-
-        while (manhattanDist < minSpawnToBaseDistance)
-        {
-            // keep on randomizing coordinates for the enemy spawn and the player base until we have found coords that
-            // are far enough away from each other
-            spawnCoordinates = new int[] {Random.Range(0, mapWidth - 1), Random.Range(0, mapHeight - 1)};
-            baseCoordinates = new int[] {Random.Range(0, mapWidth - 1), Random.Range(0, mapHeight - 1)} ;
-            manhattanDist = ManhattanDistance(spawnCoordinates[0], baseCoordinates[0], spawnCoordinates[1],
-                baseCoordinates[1]);
-        }
         
-        return (baseCoordinates, spawnCoordinates);
+        // keep on randomizing coordinates for the enemy spawn and the player base using recursion
+        // until we have found coords that are far enough away from each other
+        return manhattanDist < minSpawnToBaseDistance
+            ? GenerateSpawnAndBase(w,h)
+            : (baseCoordinates, spawnCoordinates);
     }
-    
-    public Vector3[] SetWaypoints(Cell[] waypointCells) {
+
+    private Vector3[] SetWaypoints(Cell[] waypointCells) {
         // sort array based on their order in the path
         Array.Sort(waypointCells, (oneCell, otherCell) => oneCell.pathOrder.CompareTo(otherCell.pathOrder));
 
@@ -296,8 +304,11 @@ public class MapGenerator : MonoBehaviour
 
             // for the very last waypoint (the base), we set the waypoint to be a bit closer to the
             // previous waypoint, for the enemies to target
-            waypoint.transform.position = i == waypointCells.Length - 1 ? changeEnemyTargetWaypoint(waypointCells[i].position, prevWaypoint.transform.position) : waypointCells[i].position;
-            
+            if (waypoint.transform != null)
+                    waypoint.transform.position = i == waypointCells.Length - 1
+                        ? changeEnemyTargetWaypoint(waypointCells[i].position, prevWaypoint.transform.position)
+                        : waypointCells[i].position;
+
             prevWaypoint = waypoint;
         }
         
@@ -305,37 +316,40 @@ public class MapGenerator : MonoBehaviour
     }
 
 
-    private string ConvertMoveToMoveStr(int currentMove, int lastMove)
+    private static string ConvertMoveToMoveStr(int currentMove, int lastMove)
     {
-        string strMove = "";
-        if (lastMove == 0)
+        var strMove = "";
+        switch (lastMove)
         {
-            strMove += "l";
-        } else if (lastMove == 1)
-        {
-            strMove += "u";
-        } else if (lastMove == 2)
-        {
-            strMove += "r";
-        } else if (lastMove == 3)
-        {
-            strMove += "d";
+            case 0:
+                strMove += "l";
+                break;
+            case 1:
+                strMove += "u";
+                break;
+            case 2:
+                strMove += "r";
+                break;
+            case 3:
+                strMove += "d";
+                break;
         }
         
-        if (currentMove == 0)
+        switch (currentMove)
         {
-            strMove += "l";
-        } else if (currentMove == 1)
-        {
-            strMove += "u";
-        } else if (currentMove == 2)
-        {
-            strMove += "r";
-        } else if (currentMove == 3)
-        {
-            strMove += "d";
+            case 0:
+                strMove += "l";
+                break;
+            case 1:
+                strMove += "u";
+                break;
+            case 2:
+                strMove += "r";
+                break;
+            case 3:
+                strMove += "d";
+                break;
         }
-
         return strMove;
     }
 
@@ -355,7 +369,9 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    [UsedImplicitly]
     private static void Print2DArray(string[,] matrix)
+    // can be used to print the backend matrix for an easy visual 
     {
         StringBuilder sb = new StringBuilder();
 
