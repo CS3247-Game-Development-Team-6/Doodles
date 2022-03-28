@@ -23,6 +23,10 @@ public class Base : MonoBehaviour
         return hp;
     }
 
+    public static int getHpPercentage() {
+        return hp / startHp;
+    }
+
     public static bool isHpLessThanHalf()
     {
         float percentage = (float) hp / startHp;
