@@ -32,6 +32,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool isScalded = false;   // Serialized for debugging purposes
     [SerializeField] private bool isFrozen = false;   // Serialized for debugging purposes
     [SerializeField] private bool isWeakened = false;   // Serialized for debugging purposes
+    public bool isInFog = true;
+    private MeshRenderer ballMeshRenderer;
+    private Transform ballParentTransform;
 
     private Transform target;
     private int waypointIndex = 0;
@@ -160,6 +163,11 @@ public class Enemy : MonoBehaviour
         return isWeakened;
     }
 
+    public bool getInFog()
+    {
+        return isInFog;
+    }
+
     void Die ()
     {
         // add ink
@@ -183,6 +191,9 @@ public class Enemy : MonoBehaviour
         defense = initDefense;
         bulletPrefab = GetComponentInParent<EnemyShooting>().bulletPrefab;
 
+        ballMeshRenderer = gameObject.GetComponent<MeshRenderer>();
+        ballParentTransform = gameObject.transform;
+
         // first target, which is first waypoint in Waypoints
         target = Waypoints.points[0];
     }
@@ -205,6 +216,9 @@ public class Enemy : MonoBehaviour
         {
             GetNextWaypoint();
         }
+        
+        // enemy is visible if not in fog, hence its visibility is the negation of the isInFog bool.
+        setEnemyVisibility(!isInFog);
     }
 
     void GetNextWaypoint()
@@ -222,6 +236,48 @@ public class Enemy : MonoBehaviour
     void EndPath()
     {
         // do nothing
+    }
+    
+    /*
+     * When entering fog, the enemy is in the fog
+     */
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Fog"))
+        {
+            isInFog = true;
+        }
+    }
+
+    /*
+     * When moving from fog to fog, the enemy is still in the fog
+     */
+    private void OnTriggerStay(Collider other)
+    {
+         if (other.CompareTag("Fog"))
+         {
+             isInFog = true;
+         }
+    }
+
+    /*
+     * When the enemy leaves a fog and does not immediately go into a new fog block, the boolean is set to false.
+     */
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Fog"))
+        {
+            isInFog = false;
+        }
+    }
+
+    private void setEnemyVisibility(bool isVisible)
+    {
+        ballMeshRenderer.enabled = isVisible;
+        foreach (Transform childrenTransform in ballParentTransform)
+        {
+            childrenTransform.gameObject.SetActive(isVisible);
+        }
     }
 
 }
