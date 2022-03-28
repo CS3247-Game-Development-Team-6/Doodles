@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour {
         Normal,
         Rolling,
         Attacking,
+        Paused,
     }
     private State state;
 
@@ -52,6 +53,7 @@ public class PlayerMovement : MonoBehaviour {
     private PlayerShooting playerShootingScript;
     private PlayerMelee playerMeleeScript;
     private Transform firePoint;
+    private PauseMenu pauseMenu;
 
 
     // directions and positions
@@ -77,6 +79,9 @@ public class PlayerMovement : MonoBehaviour {
         playerMeleeScript.disableMelee();
         isUsingShooting = true;
         firePoint = GameObject.Find("FirePoint").GetComponent<Transform>();
+
+        // initialize reference to pause menu
+        pauseMenu = GameObject.Find("PauseCanvas").GetComponent<PauseMenu>();
         
         // set default state
         state = State.Normal;
@@ -84,30 +89,62 @@ public class PlayerMovement : MonoBehaviour {
 
     // Update is called once per frame
     private void Update() {
-        ProcessInputs();
-        Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
-            mousePositionVector = raycastHit.point;
-            Debug.DrawLine(mouseRay.origin, raycastHit.point);
-            // mousePositionVector.y = transform.position.y; // set to same vertical height as player
+        UpdatePauseState(); // update whether game is paused
+
+        switch (state) {
+            default:
+                // game is running normally
+                ProcessInputs();
+                Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
+                    mousePositionVector = raycastHit.point;
+                    Debug.DrawLine(mouseRay.origin, raycastHit.point);
+                    // mousePositionVector.y = transform.position.y; // set to same vertical height as player
+                }
+                
+                // Debug.Log(Physics.Raycast(mouseRay, out RaycastHit test, float.MaxValue, groundLayerMask));
+                // Debug.Log(mousePositionVector);
+                break;
+
+            case State.Paused:
+                // game is paused, pause all updates for player
+                break;
         }
-        
-        // Debug.Log(Physics.Raycast(mouseRay, out RaycastHit test, float.MaxValue, groundLayerMask));
-        // Debug.Log(mousePositionVector);
     }
 
     // Update is called at a fixed rate
     private void FixedUpdate() {
-        Move();
-        Build();
+        switch (state) {
+            default:
+                Move();
+                Build();
 
-        Vector3 lookDirection = (mousePositionVector - rigidBody.position).normalized;
-        float angle = Mathf.Atan2(lookDirection.x, lookDirection.z) * Mathf.Rad2Deg;
-        firePoint.eulerAngles = new Vector3(0, angle, 0);
-        // rigidBody.rotation = new Vector3(0, angle, 0); // TODO: player should not rotate; should change sprite instead
-        // TODO: add player sprite animation
+                Vector3 lookDirection = (mousePositionVector - rigidBody.position).normalized;
+                float angle = Mathf.Atan2(lookDirection.x, lookDirection.z) * Mathf.Rad2Deg;
+                firePoint.eulerAngles = new Vector3(0, angle, 0);
+                // rigidBody.rotation = new Vector3(0, angle, 0); // TODO: player should not rotate; should change sprite instead
+                // TODO: add player sprite animation
+                break;
+            case State.Paused:
+            // game is paused, pause all updates for player
+            break;
+        }
+        
     }
 
+    private void UpdatePauseState() {
+        if (pauseMenu.IsPaused()) {
+            // game is paused
+            state = State.Paused;
+            playerShootingScript.Pause();
+            playerMeleeScript.Pause();
+        } else {
+            // game is not paused
+            state = State.Normal;
+            playerShootingScript.Resume();
+            playerMeleeScript.Resume();
+        }
+    }
     private void ProcessInputs() {
         switch (state) {
             case State.Normal:
@@ -251,8 +288,8 @@ public class PlayerMovement : MonoBehaviour {
     public void BuildTowerAttempt(Vector3 mouseTowerCellPosition, GameObject towerCell) {
         
         if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { 
-            Debug.Log("Out of range.");
             // player too far from tower cell
+            Debug.Log("Out of range.");
             return;
         }
 
