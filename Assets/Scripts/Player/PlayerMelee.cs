@@ -21,31 +21,59 @@ public class PlayerMelee : MonoBehaviour {
     private Vector3 meleeDirection;
     private bool isUsingMelee;
 
+    // states
+    private enum State { 
+        Normal,
+        Paused,
+    }
+    private State state;
+
     private void Start() {
         firePoint = GameObject.Find("FirePoint").GetComponent<Transform>();
         mainCamera = Camera.main;
         isUsingMelee = false;
+        state = State.Normal;
     }
 
     // Update is called once per frame
     void Update() {
-        Ray mouseRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
-            mousePositionVector = raycastHit.point;
-            //mousePositionVector.y = transform.position.y; // set to same vertical height as player
-        }
+        switch (state) {
+            default:
+                Ray mouseRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
+                    mousePositionVector = raycastHit.point;
+                    //mousePositionVector.y = transform.position.y; // set to same vertical height as player
+                }
 
-        if (isUsingMelee && Input.GetButtonDown("Fire1")) {
-            MeleeAttack();
+                if (isUsingMelee && Input.GetButtonDown("Fire1")) {
+                    MeleeAttack();
+                }
+                break;
+            case State.Paused:
+                break;
         }
     }
 
     void FixedUpdate() {
-        meleeDirection = (mousePositionVector - firePoint.position).normalized;
+        switch (state) {
+            default:
+                meleeDirection = (mousePositionVector - firePoint.position).normalized;
 
-        if (currentCooldown > 0) {
-            currentCooldown -= Time.deltaTime;
+                if (currentCooldown > 0) {
+                    currentCooldown -= Time.deltaTime;
+                }
+                break;
+            case State.Paused:
+                break;
         }
+    }
+
+    public void Pause() {
+        state = State.Paused;
+    }
+
+    public void Resume() {
+        state = State.Normal;
     }
 
     public void enableMelee() {
