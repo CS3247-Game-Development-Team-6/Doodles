@@ -43,11 +43,6 @@ public class WaveSpawner : MonoBehaviour
         waveCountdownIndicator.rawValue = (int)(countdownTimer * 100);
         waveCountdownIndicator.maxValue = (int)(timeBetweenWaves * 100);
 
-        Debug.Log("raw");
-        Debug.Log(waveCountdownIndicator.rawValue);
-        Debug.Log("max");
-        Debug.Log(waveCountdownIndicator.maxValue);
-
         // format 00.00s
         waveCountdownText.text = string.Format("{0:00.00}", countdownTimer);
     }
