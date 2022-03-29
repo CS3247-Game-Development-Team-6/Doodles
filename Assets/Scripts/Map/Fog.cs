@@ -7,30 +7,21 @@ public class Fog : MonoBehaviour {
     public Cell cell;
     public Material defaultMat;
     public float cost;
+    [SerializeField] private Color tint;
+    public Renderer objectToTint;
 
     public void ClearFog() {
         cell.isFog = false;
     }
     
-    /*
-    public void HighlightEnter() {
-        renderer.material.color = Color.red;
-    }
-    
-    public void HighlightExit() {
-        // Fog reverts its original color if mouse leaves
-        renderer.material.color = defaultMat.color;
-    }
-    */
-
     private void OnMouseEnter() {
         // Fog turns red if hovered over with mouse
-        GetComponent<Renderer>().material.color = Color.red;
+        objectToTint.material.color = tint;
     }
 
     private void OnMouseExit() {
         // Fog reverts its original color if mouse leaves
-        GetComponent<Renderer>().material.color = defaultMat.color;
+        objectToTint.material.color = defaultMat.color;
     }
 }
 

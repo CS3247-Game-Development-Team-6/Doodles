@@ -49,6 +49,7 @@ MonoBehaviour:
   hoverColor: {r: 0, g: 0.43661022, b: 1, a: 0}
   tooFarColor: {r: 1, g: 0, b: 0, a: 0}
   tileOffset: {x: 0, y: 0.1, z: 0}
+  towerOffset: {x: 0, y: 0, z: 0}
   tileMesh: {fileID: 8761624580356428861}
   noneTileModels: []
 --- !u!1 &8761624580356428861
@@ -276,7 +277,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: dc042c60761898144a1d606e8c427347, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 7211448773848044386, guid: 93b4b4287ae2a8f4d818cfce730de8e9, type: 3}
+      objectReference: {fileID: 2100000, guid: 4f5efdfef8f1edb41b21cde26f52a689, type: 2}
     - target: {fileID: 919132149155446097, guid: dc042c60761898144a1d606e8c427347, type: 3}
       propertyPath: m_Name
       value: detail_tree

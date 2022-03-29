@@ -22,7 +22,7 @@ public class Node : MonoBehaviour
     public GameObject[] noneTileModels;
     private BuildManager buildManager;
 
-    public Vector3 towerBuildPosition;
+    private Vector3 towerBuildPosition;
 
     private void Start()
     {
@@ -78,7 +78,7 @@ public class Node : MonoBehaviour
         GameObject towerToBuild = buildManager.GetTowerToBuild();
         towerBuildPosition = tileMesh.transform.position + towerOffset;
         isTowerBuilt = true;
-        tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, tileMesh.transform.rotation);
+        tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, Quaternion.identity);
         Destroy(decorationMesh);
         return tower.GetComponent<Turret>();
     }
