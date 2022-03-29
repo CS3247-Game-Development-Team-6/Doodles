@@ -9,7 +9,7 @@ public class PlayerMeleeHitbox : MonoBehaviour
     Player melee hitbox can be counted under PlayerBullets layer as they serve the same function.
     */
     public GameObject hitEffect; // TODO: get a hit effect for melee actions
-    private int meleeDamage = 20;
+    private int meleeDamage = 30;
     private float maxLifeTime = 0.15f;
     private float currentLifeTime;
     private List<Collider> colliderList;
@@ -44,7 +44,7 @@ public class PlayerMeleeHitbox : MonoBehaviour
         }
 
         foreach (Collider collider in colliderList) {
-            if (collider.CompareTag("Enemy")) {
+            if (collider.CompareTag("Enemy") && collider.gameObject != null) {
                 // TODO: implement hit effect
                 // Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
                 // Destroy(effect, 5f); // destroy after 5 ticks
