@@ -9,6 +9,7 @@ public class Node : MonoBehaviour
     private Color startColor;
     public Color tooFarColor;
 
+    private bool isTowerBuilt = false;
     private GameObject tower;
     public Cell cell;
 
@@ -20,6 +21,8 @@ public class Node : MonoBehaviour
 
     public GameObject[] noneTileModels;
     private BuildManager buildManager;
+
+    public Vector3 towerBuildPosition;
 
     private void Start()
     {
@@ -37,12 +40,18 @@ public class Node : MonoBehaviour
         buildManager = BuildManager.instance;
     }
 
+    public bool hasTowerBuilt()
+    {
+        return isTowerBuilt;
+    }
+
     public float TowerCost() {
         GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
         return towerToBuild.GetComponent<Turret>().Cost;
     }
 
     public bool HasTower() {
+        buildManager.SelectNode(this);
         return tower != null;
     }
 
@@ -67,9 +76,16 @@ public class Node : MonoBehaviour
 
         // build a tower
         GameObject towerToBuild = buildManager.GetTowerToBuild();
+        towerBuildPosition = tileMesh.transform.position + towerOffset;
+        isTowerBuilt = true;
         tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, tileMesh.transform.rotation);
         Destroy(decorationMesh);
         return tower.GetComponent<Turret>();
+    }
+
+    public Vector3 GetTowerBuildPosition()
+    {
+        return towerBuildPosition;
     }
 
     private void OnMouseEnter() {

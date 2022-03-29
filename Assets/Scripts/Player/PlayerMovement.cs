@@ -313,8 +313,8 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         currentBuildDuration = buildDuration;
-        Debug.Log("Attempt to build...");
-        Debug.Log(towerCell);
+/*        Debug.Log("Attempt to build...");
+        Debug.Log(towerCell);*/
         isBuilding = true;
         Build();
     }
