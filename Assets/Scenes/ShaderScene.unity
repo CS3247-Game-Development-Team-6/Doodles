@@ -1132,6 +1132,17 @@ MonoBehaviour:
   criticalLevel: 0.3
   rawValue: 0
   maxValue: 0
+--- !u!114 &941677297 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5553060649945844835, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,6 +1816,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1373582469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2576709304485457252, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1373582471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373582469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e531edb85ac1ec54aa8308b4a07efb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  slider: {fileID: 941677297}
+  criticalColor: {r: 0, g: 0, b: 0, a: 0}
+  normalColor: {r: 0.7607844, g: 1, b: 0.72156864, a: 1}
+  criticalTextColor: {r: 0, g: 0, b: 0, a: 0}
+  normalTextColor: {r: 0, g: 0, b: 0, a: 0}
+  criticalLevel: 0
+  rawValue: 0
+  maxValue: 0
 --- !u!1 &1420675846
 GameObject:
   m_ObjectHideFlags: 0
@@ -2926,6 +2963,10 @@ PrefabInstance:
       propertyPath: waveCountdownText
       value: 
       objectReference: {fileID: 406906431}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waveCountdownIndicator
+      value: 
+      objectReference: {fileID: 1373582471}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: gameOverUI
       value: 
