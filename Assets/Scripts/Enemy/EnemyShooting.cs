@@ -115,7 +115,8 @@ public class EnemyShooting : MonoBehaviour
 
         if (fireCountDown <= 0f) 
         {
-            Shoot();
+            StartCoroutine(Shoot());
+
             fireCountDown = 1f / fireRate;
         }
 
@@ -124,11 +125,17 @@ public class EnemyShooting : MonoBehaviour
     }
 
     // shoot according to firecountdown timer
-    void Shoot () {
+    IEnumerator Shoot () {
         // animate
         animator.SetTrigger("shoot");
 
-        //TODO: remove bullet for melee enemy
+        // wait for animation ends
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+            yield return null;
+
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+            yield return null;
+
         GameObject bulletGO = (GameObject) Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         EnemyBullet bullet = bulletGO.GetComponent<EnemyBullet>();
 
