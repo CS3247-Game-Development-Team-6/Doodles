@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool isFrozen = false;   // Serialized for debugging purposes
     [SerializeField] private bool isWeakened = false;   // Serialized for debugging purposes
     public bool isInFog = true;
-    private MeshRenderer ballMeshRenderer;
+    //private MeshRenderer ballMeshRenderer;
     private Transform ballParentTransform;
 
     private Transform target;
@@ -198,7 +198,7 @@ public class Enemy : MonoBehaviour
         model = transform.GetChild(2).gameObject;
         animator = model.GetComponent<Animator>();
 
-        ballMeshRenderer = gameObject.GetComponent<MeshRenderer>();
+        //ballMeshRenderer = gameObject.GetComponent<MeshRenderer>();
         ballParentTransform = gameObject.transform;
 
         // first target, which is first waypoint in Waypoints
@@ -287,7 +287,7 @@ public class Enemy : MonoBehaviour
 
     private void setEnemyVisibility(bool isVisible)
     {
-        ballMeshRenderer.enabled = isVisible;
+        //ballMeshRenderer.enabled = isVisible;
         foreach (Transform childrenTransform in ballParentTransform)
         {
             childrenTransform.gameObject.SetActive(isVisible);

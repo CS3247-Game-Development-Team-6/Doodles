@@ -47,16 +47,16 @@ public class EnemyBullet : MonoBehaviour
 
     void HitTarget() 
     {
-        GameObject effectIns = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(effectIns, 2f);
-
-        Damage(target);
-
         if (bulletDamage >= 200)
         {
             // boss bullet
             CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
         }
+
+        GameObject effectIns = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
+        Destroy(effectIns, 2f);
+
+        Damage(target);
 
         Destroy(gameObject);    // destroys the bullet
     }
