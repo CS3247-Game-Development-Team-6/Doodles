@@ -75,9 +75,9 @@ public class PlayerMovement : MonoBehaviour {
         // initialize melee and shooting; shooting is default
         playerShootingScript = GetComponent<PlayerShooting>();
         playerMeleeScript = GetComponent<PlayerMelee>();
-        playerShootingScript.enableShooting();
-        playerMeleeScript.disableMelee();
-        isUsingShooting = true;
+        playerShootingScript.disableShooting();
+        playerMeleeScript.enableMelee();
+        isUsingShooting = false;
         firePoint = GameObject.Find("FirePoint").GetComponent<Transform>();
 
         // initialize reference to pause menu

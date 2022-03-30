@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMelee : MonoBehaviour {
     /*
@@ -31,7 +32,7 @@ public class PlayerMelee : MonoBehaviour {
     private void Start() {
         firePoint = GameObject.Find("FirePoint").GetComponent<Transform>();
         mainCamera = Camera.main;
-        isUsingMelee = false;
+        isUsingMelee = true;
         state = State.Normal;
     }
 
@@ -45,7 +46,7 @@ public class PlayerMelee : MonoBehaviour {
                     //mousePositionVector.y = transform.position.y; // set to same vertical height as player
                 }
 
-                if (isUsingMelee && Input.GetButtonDown("Fire1")) {
+                if (!IsPointerOverUIObject() && isUsingMelee && Input.GetButtonDown("Fire1")) {
                     MeleeAttack();
                 }
                 break;
@@ -93,5 +94,15 @@ public class PlayerMelee : MonoBehaviour {
             // TODO: add melee animation somewhere
             currentCooldown = meleeCooldown;
         }
+    }
+
+    private bool IsPointerOverUIObject() {
+        // the ray cast appears to require only eventData.position.
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+    
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 }
