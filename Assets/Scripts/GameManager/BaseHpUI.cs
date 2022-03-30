@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BaseHpUI : MonoBehaviour
 {
     public Text baseHpText;
+    public Image baseHpSlider;
 
     // Update is called once per frame
     void Update()
@@ -15,5 +16,6 @@ public class BaseHpUI : MonoBehaviour
         }
         
         baseHpText.text = "BASE: " + Base.getHp().ToString() + " HP";
+        baseHpSlider.fillAmount = Base.getHpPercentage();
     }
 }
