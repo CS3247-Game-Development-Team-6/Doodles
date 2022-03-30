@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Base : MonoBehaviour
 {
+    [SerializeField] private IndicatorUI playerBaseIndicator;
     public static int startHp = 500;
 
     private static int hp;
@@ -11,6 +12,12 @@ public class Base : MonoBehaviour
     void Start()
     {
         hp = startHp;
+        playerBaseIndicator.maxValue = startHp;
+        playerBaseIndicator.rawValue = hp;
+    }
+
+    private void Update() {
+        playerBaseIndicator.rawValue = hp;
     }
 
     public static void receiveDmg(int amount)
@@ -21,6 +28,10 @@ public class Base : MonoBehaviour
     public static int getHp()
     {
         return hp;
+    }
+
+    public static float getHpPercentage() {
+        return (float)hp / startHp;
     }
 
     public static bool isHpLessThanHalf()
