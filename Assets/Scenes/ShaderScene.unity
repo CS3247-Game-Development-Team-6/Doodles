@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4497019, g: 0.49976808, b: 0.57563424, a: 1}
+  m_IndirectSpecularColor: {r: 0.44970167, g: 0.49976736, b: 0.5756334, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1037,6 +1037,7 @@ GameObject:
   - component: {fileID: 809511554}
   - component: {fileID: 809511553}
   - component: {fileID: 809511552}
+  - component: {fileID: 809511559}
   m_Layer: 12
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1213,13 +1214,29 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809511551}
-  m_LocalRotation: {x: 0.39929244, y: -0, z: -0, w: 0.9168236}
-  m_LocalPosition: {x: 4.95, y: 9.31, z: -3.96}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 2035720920}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 47.068, y: 0, z: 0}
+--- !u!114 &809511559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809511551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultPosInfluence: {x: 0.15, y: 0.15, z: 0.15}
+  DefaultRotInfluence: {x: 1, y: 1, z: 1}
+  RestPositionOffset: {x: 0, y: 0, z: 0}
+  RestRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &832949845
 GameObject:
   m_ObjectHideFlags: 0
@@ -3063,6 +3080,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007609016}
   m_CullTransparentMesh: 1
+--- !u!1 &2035720919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2035720920}
+  m_Layer: 12
+  m_Name: CameraHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2035720920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035720919}
+  m_LocalRotation: {x: 0.39929244, y: -0, z: -0, w: 0.9168236}
+  m_LocalPosition: {x: 4.95, y: 9.31, z: -3.96}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 809511558}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2075829308
 PrefabInstance:
   m_ObjectHideFlags: 0
