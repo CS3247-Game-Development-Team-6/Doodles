@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GameoverManager : MonoBehaviour
 {
@@ -10,8 +11,20 @@ public class GameoverManager : MonoBehaviour
     void OnEnable()
     {
         wavesText.text = GameManager.rounds.ToString();
-        Time.timeScale = 0f;
+        
         raycastOccluder.SetActive(true);
+        //Time.timeScale = 0f;
+        StartCoroutine(PauseGame());
+    }
+
+    IEnumerator PauseGame()
+    {
+        //yield on a new YieldInstruction that waits for seconds.
+        //for camera shaking
+        yield return new WaitForSeconds(1.5f);
+
+        // pause
+        Time.timeScale = 0f;
     }
 
     public void Retry() {
