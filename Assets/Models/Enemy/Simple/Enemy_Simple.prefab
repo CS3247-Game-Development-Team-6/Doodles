@@ -537,6 +537,7 @@ MonoBehaviour:
   isScalded: 0
   isFrozen: 0
   isWeakened: 0
+  isInFog: 1
   healthBar: {fileID: 1929750958}
   map: {fileID: 0}
   model: {fileID: 307223001}
@@ -555,12 +556,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 1.2
   fireRate: 0.9
+  attackAnimationName: Attack
+  attackAnimationExitTime: 1
   isShooting: 0
   playerTag: Player
   baseTag: Base
   partToRotate: {fileID: 6972352779643815576}
   rotationSpeed: 10
   model: {fileID: 307223001}
+  animator: {fileID: 0}
   rangeCenter: {fileID: 8459295564286405711}
   bulletPrefab: {fileID: 5753786456684779845, guid: d1b0a9d87d22b0c429c49b350d3f735a, type: 3}
   firePoint: {fileID: 5410826820070449313}

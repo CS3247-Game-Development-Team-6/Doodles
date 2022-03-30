@@ -11,6 +11,9 @@ public class EnemyShooting : MonoBehaviour
     [Header("Attributes")]
     public float range = 1f;
     public float fireRate = 1f;
+    public string attackAnimationName = "Attack";
+    public float attackAnimationExitTime = 0.75f;
+
     private float fireCountDown = 0f;
 
     // when shooting, stop enemy movement
@@ -100,6 +103,9 @@ public class EnemyShooting : MonoBehaviour
         if (target == null) {
 
             isShooting = false;
+            // reset after player moving away
+            fireCountDown = 1f / fireRate;
+
             return;          
         }
 
@@ -130,10 +136,10 @@ public class EnemyShooting : MonoBehaviour
         animator.SetTrigger("shoot");
 
         // wait for animation ends
-        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName(attackAnimationName))
             yield return null;
 
-        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < attackAnimationExitTime)
             yield return null;
 
         GameObject bulletGO = (GameObject) Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
