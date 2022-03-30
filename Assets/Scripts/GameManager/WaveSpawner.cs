@@ -15,6 +15,7 @@ public class WaveSpawner : MonoBehaviour
     public float timeBetweenWaves = 5f;
 
     public Text waveCountdownText;
+    public IndicatorUI waveCountdownIndicator;
 
     // decrease with time, countdown for new wave
     private float countdownTimer = 3f;
@@ -44,6 +45,8 @@ public class WaveSpawner : MonoBehaviour
         countdownTimer -= Time.deltaTime;
 
         countdownTimer = Mathf.Clamp(countdownTimer, 0f, Mathf.Infinity);
+        waveCountdownIndicator.rawValue = (int)(countdownTimer * 100);
+        waveCountdownIndicator.maxValue = (int)(timeBetweenWaves * 100);
 
         // format 00.00s
         waveCountdownText.text = string.Format("{0:00.00}", countdownTimer);
