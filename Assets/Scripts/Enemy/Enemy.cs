@@ -39,6 +39,9 @@ public class Enemy : MonoBehaviour
     private Transform target;
     private int waypointIndex = 0;
 
+    private int lastXCoord = 0;
+    private int lastYCoord = 0;
+    
     // to reduce bullet damage
     private GameObject bulletPrefab;
 
@@ -46,6 +49,7 @@ public class Enemy : MonoBehaviour
     public Image healthBar;
     
     public MapGenerator map;
+    private Cell[,] cells;
 
     public GameObject model;
     public Animator animator;
@@ -203,6 +207,9 @@ public class Enemy : MonoBehaviour
 
         // first target, which is first waypoint in Waypoints
         target = Waypoints.points[0];
+        
+        // get a reference to all cells for checking if a tile is fogged or not
+        cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
     }
 
 
@@ -224,14 +231,34 @@ public class Enemy : MonoBehaviour
 
         // delta time is time passed since last frame
         transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
+        
+        var currentPosition = transform.position;
 
-        if (Vector3.Distance(transform.position, target.position) <= 0.2f)
+        if (Vector3.Distance(currentPosition, target.position) <= 0.2f)
         {
             GetNextWaypoint();
+        }
+
+        int currentXCoord = Convert.ToInt32(Math.Floor(currentPosition.x));
+        int currentYCoord = Convert.ToInt32(Math.Floor(currentPosition.z));
+
+        if (currentXCoord != lastXCoord || currentYCoord != lastYCoord)
+        {
+            lastXCoord = currentXCoord;
+            lastYCoord = currentYCoord;
+            Debug.Log((lastXCoord, lastYCoord));
+            isInFog = GetCurrentTileFogged(currentXCoord, currentYCoord);
         }
         
         // enemy is visible if not in fog, hence its visibility is the negation of the isInFog bool.
         setEnemyVisibility(!isInFog);
+        
+    }
+
+    private bool GetCurrentTileFogged(int xCoord, int yCoord)
+    {
+        Cell cell = cells[yCoord, xCoord];
+        return cell.isFog;
     }
 
     void GetNextWaypoint()
@@ -250,39 +277,6 @@ public class Enemy : MonoBehaviour
     {
         // do nothing
         animator.SetBool("isWalking", false);
-    }
-    
-    /*
-     * When entering fog, the enemy is in the fog
-     */
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Fog"))
-        {
-            isInFog = true;
-        }
-    }
-
-    /*
-     * When moving from fog to fog, the enemy is still in the fog
-     */
-    private void OnTriggerStay(Collider other)
-    {
-         if (other.CompareTag("Fog"))
-         {
-             isInFog = true;
-         }
-    }
-
-    /*
-     * When the enemy leaves a fog and does not immediately go into a new fog block, the boolean is set to false.
-     */
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Fog"))
-        {
-            isInFog = false;
-        }
     }
 
     private void setEnemyVisibility(bool isVisible)
