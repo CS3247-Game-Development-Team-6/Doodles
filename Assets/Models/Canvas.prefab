@@ -2227,6 +2227,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 550646147}
     m_Modifications:
+    - target: {fileID: 1756075774465528135, guid: 30932e599b8ab7b4cbe5f902efbd2347, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 550646148}
+    - target: {fileID: 1756075774465528135, guid: 30932e599b8ab7b4cbe5f902efbd2347, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Retry
+      objectReference: {fileID: 0}
     - target: {fileID: 2978493357914218449, guid: 30932e599b8ab7b4cbe5f902efbd2347, type: 3}
       propertyPath: m_Name
       value: RetryBG
@@ -2332,6 +2340,14 @@ PrefabInstance:
     - target: {fileID: 3948551521030929718, guid: a58db1d9398a37b4f8421e821e4a1c4e, type: 3}
       propertyPath: m_Name
       value: MenuBG
+      objectReference: {fileID: 0}
+    - target: {fileID: 7106594092403005899, guid: a58db1d9398a37b4f8421e821e4a1c4e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 550646148}
+    - target: {fileID: 7106594092403005899, guid: a58db1d9398a37b4f8421e821e4a1c4e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Menu
       objectReference: {fileID: 0}
     - target: {fileID: 7863295365405866221, guid: a58db1d9398a37b4f8421e821e4a1c4e, type: 3}
       propertyPath: m_Pivot.x
