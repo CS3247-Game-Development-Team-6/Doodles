@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NodeUI : MonoBehaviour
 {
     public GameObject ui;
     private Node target;
+
     public Vector3 manualOffset;
+    public Sprite fireDefault;
+    public Sprite fireActive;
+    public Sprite iceDefault;
+    public Sprite iceActive;
+    public Sprite waterDefault;
+    public Sprite waterActive;
 
     public void SetTarget(Node _target)
     {
@@ -19,6 +27,48 @@ public class NodeUI : MonoBehaviour
         {
             Debug.Log("We are currently displaying it here: " + transform.position);
             ui.SetActive(true);
+            if (target.tower.GetComponent<Turret>().currentBullet.tag == "Fire")
+            {
+                Debug.Log("Current selected bullet is fire");
+                Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
+                Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
+                Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
+
+                fireButton.GetComponent<Image>().sprite = fireActive;
+                iceButton.GetComponent<Image>().sprite = iceDefault;
+                waterButton.GetComponent<Image>().sprite = waterDefault;
+
+            }
+            else if (target.tower.GetComponent<Turret>().currentBullet.tag == "Ice")
+            {
+                Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
+                Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
+                Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
+
+                fireButton.GetComponent<Image>().sprite = fireDefault;
+                iceButton.GetComponent<Image>().sprite = iceActive;
+                waterButton.GetComponent<Image>().sprite = waterDefault;
+            }
+            else if (target.tower.GetComponent<Turret>().currentBullet.tag == "Water")
+            {
+                Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
+                Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
+                Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
+
+                fireButton.GetComponent<Image>().sprite = fireDefault;
+                iceButton.GetComponent<Image>().sprite = iceDefault;
+                waterButton.GetComponent<Image>().sprite = waterActive;
+            }
+            else 
+            {
+                Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
+                Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
+                Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
+
+                fireButton.GetComponent<Image>().sprite = fireDefault;
+                iceButton.GetComponent<Image>().sprite = iceDefault;
+                waterButton.GetComponent<Image>().sprite = waterDefault;
+            }
         }
     }
 

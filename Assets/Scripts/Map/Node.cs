@@ -10,7 +10,7 @@ public class Node : MonoBehaviour
     public Color tooFarColor;
 
     private bool isTowerBuilt = false;
-    private GameObject tower;
+    public GameObject tower;
     public Cell cell;
 
     public Vector3 tileOffset = Vector3.zero;
