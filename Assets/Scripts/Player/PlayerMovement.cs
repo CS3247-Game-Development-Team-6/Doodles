@@ -39,9 +39,9 @@ public class PlayerMovement : MonoBehaviour {
     private bool isUsingShooting;
 
     // player build values
-    private float buildDistance = 3f;
+    private float buildDistance = 1.5f;
     [SerializeField]
-    private float buildDuration = 5f;
+    private float buildDuration = 4f;
     private float currentBuildDuration = 0f;
     private GameObject currentTowerCell; // current cell that the player is interacting with
 
@@ -132,6 +132,10 @@ public class PlayerMovement : MonoBehaviour {
         
     }
 
+    public float GetBuildDistance() {
+        return buildDistance;
+    }
+
     private void UpdatePauseState() {
         if (pauseMenu.IsPaused()) {
             // game is paused
@@ -211,7 +215,8 @@ public class PlayerMovement : MonoBehaviour {
             isBuilding = false; 
             actionTimer.text = "";
         }
-
+        
+        // Moved to MapInput.cs
         /*
         Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
         if (Input.GetMouseButtonDown(1)) { // right click
@@ -226,7 +231,7 @@ public class PlayerMovement : MonoBehaviour {
                     GameObject towerCell = raycastHit.collider.gameObject;
                     Node node = towerCell.GetComponent<Node>();
                     node.HighlightEnter();
-                    Vector3 mouseTowerCellPosition = raycastHit.point;
+                    Vector3 mouseTowerCellPosition = raycastHit.collider.gameObject.transform.position;
                     BuildTowerAttempt(mouseTowerCellPosition, towerCell);
                 }
             }

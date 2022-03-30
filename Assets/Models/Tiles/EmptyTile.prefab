@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9e8655fe760a84d979fe02de93f176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 0, g: 0.43661022, b: 1, a: 0}
+  hoverColor: {r: 0.008862853, g: 1, b: 0, a: 0}
   tooFarColor: {r: 1, g: 0, b: 0, a: 0}
   tileOffset: {x: 0, y: 0.1, z: 0}
   towerOffset: {x: 0, y: 0.25, z: 0}
@@ -54,6 +54,7 @@ MonoBehaviour:
   - {fileID: 7800446164947485080, guid: 57c42af1ed8995e43836076ee546eff5, type: 3}
   - {fileID: 7800446164947485080, guid: 10a750061c5a8b9429f88bcf5e6e1de4, type: 3}
   - {fileID: 7800446164947485080, guid: 60ee3a52da4f95648929d92f7b6ca7ef, type: 3}
+  towerBuildPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &5757989866526037988
 BoxCollider:
   m_ObjectHideFlags: 0

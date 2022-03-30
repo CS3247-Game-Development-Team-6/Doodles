@@ -21,6 +21,8 @@ public class Node : MonoBehaviour
 
     public GameObject[] noneTileModels;
     private BuildManager buildManager;
+    private PlayerMovement playerMovement;
+    private GameObject playerObject;
 
     public Vector3 towerBuildPosition;
 
@@ -38,6 +40,8 @@ public class Node : MonoBehaviour
         decorationMesh.transform.SetParent(transform);
         
         buildManager = BuildManager.instance;
+        playerObject = GameObject.Find("Player");
+        playerMovement = playerObject.GetComponent<PlayerMovement>();
     }
 
     public bool hasTowerBuilt()
@@ -93,7 +97,11 @@ public class Node : MonoBehaviour
             return;
         }
 
-        tileRenderer.material.color = hoverColor;
+        if ((transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()) {
+            tileRenderer.material.color = tooFarColor;
+        } else {
+            tileRenderer.material.color = hoverColor;
+        }
     }
 
     private void OnMouseExit() {
