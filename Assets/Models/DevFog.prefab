@@ -60,8 +60,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8598396c291ed3443ac4a6e619c44d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMat: {fileID: 2100000, guid: 8b2a0cbd4a8f32e419638c6925096348, type: 2}
+  defaultMat: {fileID: 2100000, guid: 49cc1adab0a4d3f439b430c98594d602, type: 2}
   cost: 10
+  tint: {r: 0.9433962, g: 0.39753166, b: 0.39753166, a: 1}
+  objectToTint: {fileID: 5654406162382948362}
 --- !u!198 &6545443886263608466
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -760,12 +762,12 @@ ParticleSystem:
     m_Mesh: {fileID: 0}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
-    m_Sprite: {fileID: 0}
+    m_Sprite: {fileID: 21300000, guid: 0558743bcd9e5854b9429410bfd20150, type: 3}
     m_SpriteRenderer: {fileID: 0}
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
-    m_Texture: {fileID: 0}
+    m_Texture: {fileID: 2800000, guid: 0558743bcd9e5854b9429410bfd20150, type: 3}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
     m_TextureUVChannel: 0
