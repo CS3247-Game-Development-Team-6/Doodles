@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour {
     private bool isDashing = false;
     private bool isBuilding = false;
     private bool isUsingShooting;
+    private bool isAttacking = false;
+    private bool isPaused = false;
 
     // player build values
     private float buildDistance = 1.5f;
@@ -44,6 +46,10 @@ public class PlayerMovement : MonoBehaviour {
     private float buildDuration = 4f;
     private float currentBuildDuration = 0f;
     private GameObject currentTowerCell; // current cell that the player is interacting with
+
+    // player attack values
+    private float attackDuration = 0.15f;
+    private float currentAttackDuration = 0f;
 
     // player unity object attributes
     private Animator animator;
@@ -118,6 +124,7 @@ public class PlayerMovement : MonoBehaviour {
             default:
                 Move();
                 Build();
+                Attack();
 
                 Vector3 lookDirection = (mousePositionVector - rigidBody.position).normalized;
                 float angle = Mathf.Atan2(lookDirection.x, lookDirection.z) * Mathf.Rad2Deg;
@@ -138,12 +145,19 @@ public class PlayerMovement : MonoBehaviour {
 
     private void UpdatePauseState() {
         if (pauseMenu.IsPaused()) {
-            // game is paused
+            // game is paused, update state
+            isPaused = true;
             state = State.Paused;
             playerShootingScript.Pause();
             playerMeleeScript.Pause();
         } else {
             // game is not paused
+            if (!isPaused) { // game is already unpaused, do not update state
+                return;
+            }
+
+            // update state
+            isPaused = false;
             state = State.Normal;
             playerShootingScript.Resume();
             playerMeleeScript.Resume();
@@ -155,18 +169,12 @@ public class PlayerMovement : MonoBehaviour {
                 HandleMovementInputs();
                 HandleBuildInputs();
                 HandleWeaponSwapInputs();
-
-                if (Input.GetMouseButtonDown(0)) { // left click (tied to attacking action)
-                    moveDirection = Vector3.zero; // prevents character sliding while attacking
-                    // TODO: add animation for attack action
-                    // state = State.Attacking;
-                    // animator.PlayAttackAnimation(attackDirection, () => state = State.Normal);
-                }
+                HandleAttackInputs();
                 break;
 
             case State.Rolling:
                 // TODO: add player rolling animation
-                float speedDropMultiplier = 10f;
+                float speedDropMultiplier = 20f;
                 currentRollSpeed -= currentRollSpeed * speedDropMultiplier * Time.deltaTime;
             
                 float rollSpeedMinimum = 20f;
@@ -256,6 +264,17 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    private void HandleAttackInputs() {
+        if (Input.GetMouseButtonDown(0)) { // left click (tied to attacking action)
+            moveDirection = Vector3.zero; // prevents character sliding while attacking
+            // TODO: add animation for attack action
+            currentAttackDuration = attackDuration;
+            state = State.Attacking;
+            isAttacking = true;
+            // animator.PlayAttackAnimation(attackDirection, () => state = State.Normal);
+        }
+    }
+
     private void Move() {
         switch(state) {
         case State.Normal:
@@ -286,6 +305,10 @@ public class PlayerMovement : MonoBehaviour {
 
         case State.Rolling:
             rigidBody.velocity = rollDirection * currentRollSpeed;
+            break;
+
+        case State.Attacking:
+            rigidBody.velocity = Vector3.zero;
             break;
         }
     }
@@ -343,6 +366,18 @@ public class PlayerMovement : MonoBehaviour {
                 player.ChangeInkAmount(-turret.Cost);
             }
             isBuilding = false;
+        }
+    }
+
+    private void Attack() { // used to prevent player input for a short duration when attacking
+        if (!isAttacking) { // player is not attacking
+            return;
+        }
+
+        currentAttackDuration -= Time.deltaTime;
+        if (currentAttackDuration <= 0) {
+            state = State.Normal;
+            isAttacking = false;
         }
     }
 }

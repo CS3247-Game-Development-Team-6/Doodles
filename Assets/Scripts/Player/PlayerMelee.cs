@@ -10,7 +10,7 @@ public class PlayerMelee : MonoBehaviour {
     [SerializeField] private LayerMask groundLayerMask;
 
     private Transform firePoint; // TODO: firepoint may need changes to rotation
-    public GameObject meleeHitboxPrefab; 
+    public GameObject meleeHitboxPrefab;
 
     private float meleeRange = 1f;
     private float meleeCooldown = 0.5f; 
