@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[System.Serializable]
+public class TileType {
+    public GameObject tilePrefab;
+    // the difference between freqMax and the 
+    // previous element's freqMax is its actual frequency.
+    [Range(0, 1)] public float frequencyMax;
+}
+
 public class Node : MonoBehaviour
 {
     public Color hoverColor;
@@ -19,7 +27,8 @@ public class Node : MonoBehaviour
     private Renderer tileRenderer;
     private GameObject decorationMesh;
 
-    public GameObject[] noneTileModels;
+    public GameObject defaultTile;
+    public TileType[] tileTypes;
     private BuildManager buildManager;
 
     private Vector3 towerBuildPosition;
@@ -29,10 +38,18 @@ public class Node : MonoBehaviour
         tileRenderer = tileMesh.GetComponent<Renderer>();
         startColor = tileRenderer.material.color;
 
-        GameObject prefab;
-        if (noneTileModels.Length == 0) return;
-        int indexChosen = (int) Random.Range(0, noneTileModels.Length);
-        prefab = noneTileModels[indexChosen];
+        GameObject prefab = defaultTile;
+        
+        if (tileTypes.Length > 1) {
+            float freq = Random.Range(0f, 1f);
+            prefab = tileTypes[0].tilePrefab;
+            for (int i = 1; i < tileTypes.Length; i++) {
+                if (tileTypes[i-1].frequencyMax < freq && tileTypes[i].frequencyMax >= freq) {
+                    prefab = tileTypes[i].tilePrefab;
+                    break;
+                }
+            }
+        }
 
         decorationMesh = Instantiate(prefab, transform.position + tileOffset, transform.rotation);
         decorationMesh.transform.SetParent(transform);

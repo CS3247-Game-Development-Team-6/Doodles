@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 496863202770866905}
-  - component: {fileID: 8340330906510976786}
   m_Layer: 0
   m_Name: OneTree
   m_TagString: Untagged
@@ -34,24 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8340330906510976786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7800446164947485080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef9e8655fe760a84d979fe02de93f176, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverColor: {r: 0, g: 0.43661022, b: 1, a: 0}
-  tooFarColor: {r: 1, g: 0, b: 0, a: 0}
-  tileOffset: {x: 0, y: 0.1, z: 0}
-  towerOffset: {x: 0, y: 0, z: 0}
-  tileMesh: {fileID: 8761624580356428861}
-  noneTileModels: []
 --- !u!1 &8761624580356428861
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,15 +189,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 343e813012f70204980a1bc09dc0f2cd, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 343e813012f70204980a1bc09dc0f2cd, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 343e813012f70204980a1bc09dc0f2cd, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 343e813012f70204980a1bc09dc0f2cd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -258,6 +239,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5754084199372789682, guid: 343e813012f70204980a1bc09dc0f2cd, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1633998200799585996, guid: fd718648687d15f49aa5bf338c47a675, type: 3}
     - target: {fileID: 919132149155446097, guid: 343e813012f70204980a1bc09dc0f2cd, type: 3}
       propertyPath: m_Name
       value: tree_detailed_dark

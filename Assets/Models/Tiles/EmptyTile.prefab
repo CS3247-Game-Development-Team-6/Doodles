@@ -50,13 +50,18 @@ MonoBehaviour:
   tileOffset: {x: 0, y: 0.1, z: 0}
   towerOffset: {x: 0, y: 0.05, z: 0}
   tileMesh: {fileID: 8761624580356428861}
-  noneTileModels:
-  - {fileID: 7800446164947485080, guid: 57c42af1ed8995e43836076ee546eff5, type: 3}
-  - {fileID: 7800446164947485080, guid: 10a750061c5a8b9429f88bcf5e6e1de4, type: 3}
-  - {fileID: 7800446164947485080, guid: 60ee3a52da4f95648929d92f7b6ca7ef, type: 3}
-  - {fileID: 7800446164947485080, guid: 6c2ca2a0c3dc478448ebfaf12a4a251c, type: 3}
-  - {fileID: 7800446164947485080, guid: e312240d450dbc54baaf77ae8d86e1d2, type: 3}
-  - {fileID: 7800446164947485080, guid: a6fa8d8ecc15cfb44831a6a405ea0183, type: 3}
+  defaultTile: {fileID: 7800446164947485080, guid: 10a750061c5a8b9429f88bcf5e6e1de4, type: 3}
+  tileTypes:
+  - tilePrefab: {fileID: 7800446164947485080, guid: 57c42af1ed8995e43836076ee546eff5, type: 3}
+    frequencyMax: 0.15
+  - tilePrefab: {fileID: 7800446164947485080, guid: 6c2ca2a0c3dc478448ebfaf12a4a251c, type: 3}
+    frequencyMax: 0.4
+  - tilePrefab: {fileID: 7800446164947485080, guid: 60ee3a52da4f95648929d92f7b6ca7ef, type: 3}
+    frequencyMax: 0.5
+  - tilePrefab: {fileID: 7800446164947485080, guid: a6fa8d8ecc15cfb44831a6a405ea0183, type: 3}
+    frequencyMax: 0.9
+  - tilePrefab: {fileID: 7800446164947485080, guid: e312240d450dbc54baaf77ae8d86e1d2, type: 3}
+    frequencyMax: 1
 --- !u!65 &5757989866526037988
 BoxCollider:
   m_ObjectHideFlags: 0
