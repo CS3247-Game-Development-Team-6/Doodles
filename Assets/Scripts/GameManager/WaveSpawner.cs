@@ -7,6 +7,7 @@ public class WaveSpawner : MonoBehaviour
 {
     // keep track of how many enemies alive then only spawn new wave
     public static int numEnemiesAlive = 0;
+    public static bool isSpawningEnemy = false;
 
     public Wave[] waves;
 
@@ -25,7 +26,7 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (numEnemiesAlive > 0)
+        if (numEnemiesAlive > 0 || isSpawningEnemy)
         {
             return;
         }
@@ -53,6 +54,8 @@ public class WaveSpawner : MonoBehaviour
         //keep track of how many rounds survive
         GameManager.rounds++;
 
+        isSpawningEnemy = true;
+
         Wave waveToSpawn = waves[waveIndex];
 
         for (int i = 0; i < waveToSpawn.count; i++)
@@ -61,6 +64,8 @@ public class WaveSpawner : MonoBehaviour
             yield return new WaitForSeconds(1f / waveToSpawn.rate);
         }
         waveIndex++;
+
+        isSpawningEnemy = false;
 
         if (waveIndex == waves.Length)
         {
