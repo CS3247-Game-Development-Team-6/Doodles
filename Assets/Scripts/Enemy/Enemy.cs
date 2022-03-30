@@ -33,12 +33,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool isFrozen = false;   // Serialized for debugging purposes
     [SerializeField] private bool isWeakened = false;   // Serialized for debugging purposes
     public bool isInFog = true;
-    private MeshRenderer ballMeshRenderer;
+    //private MeshRenderer ballMeshRenderer;
     private Transform ballParentTransform;
 
     private Transform target;
     private int waypointIndex = 0;
 
+    private int lastXCoord = 0;
+    private int lastYCoord = 0;
+    
     // to reduce bullet damage
     private GameObject bulletPrefab;
 
@@ -46,6 +49,10 @@ public class Enemy : MonoBehaviour
     public Image healthBar;
     
     public MapGenerator map;
+    private Cell[,] cells;
+
+    public GameObject model;
+    public Animator animator;
 
     public void TakeDamage(float amount)
     {
@@ -191,11 +198,18 @@ public class Enemy : MonoBehaviour
         defense = initDefense;
         bulletPrefab = GetComponentInParent<EnemyShooting>().bulletPrefab;
 
-        ballMeshRenderer = gameObject.GetComponent<MeshRenderer>();
+        // initialize model and animator
+        model = transform.GetChild(2).gameObject;
+        animator = model.GetComponent<Animator>();
+
+        //ballMeshRenderer = gameObject.GetComponent<MeshRenderer>();
         ballParentTransform = gameObject.transform;
 
         // first target, which is first waypoint in Waypoints
         target = Waypoints.points[0];
+        
+        // get a reference to all cells for checking if a tile is fogged or not
+        cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
     }
 
 
@@ -203,22 +217,48 @@ public class Enemy : MonoBehaviour
     {
         if (GetComponent<EnemyShooting>().isShooting) {
             // stop movement
+            animator.SetBool("isWalking", false);
             return;
         }
 
+        animator.SetBool("isWalking", true);
+
         // movement direction to the target waypoint
         Vector3 direction = target.position - transform.position;
-        
+        Quaternion lookAtRotation = Quaternion.LookRotation(direction);
+        Vector3 rotation = Quaternion.Lerp(model.transform.rotation, lookAtRotation, Time.deltaTime * 10f).eulerAngles;
+        model.transform.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+
         // delta time is time passed since last frame
         transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
+        
+        var currentPosition = transform.position;
 
-        if (Vector3.Distance(transform.position, target.position) <= 0.2f)
+        if (Vector3.Distance(currentPosition, target.position) <= 0.2f)
         {
             GetNextWaypoint();
+        }
+
+        int currentXCoord = Convert.ToInt32(Math.Floor(currentPosition.x));
+        int currentYCoord = Convert.ToInt32(Math.Floor(currentPosition.z));
+
+        if (currentXCoord != lastXCoord || currentYCoord != lastYCoord)
+        {
+            lastXCoord = currentXCoord;
+            lastYCoord = currentYCoord;
+            Debug.Log((lastXCoord, lastYCoord));
+            isInFog = GetCurrentTileFogged(currentXCoord, currentYCoord);
         }
         
         // enemy is visible if not in fog, hence its visibility is the negation of the isInFog bool.
         setEnemyVisibility(!isInFog);
+        
+    }
+
+    private bool GetCurrentTileFogged(int xCoord, int yCoord)
+    {
+        Cell cell = cells[yCoord, xCoord];
+        return cell.isFog;
     }
 
     void GetNextWaypoint()
@@ -236,44 +276,12 @@ public class Enemy : MonoBehaviour
     void EndPath()
     {
         // do nothing
-    }
-    
-    /*
-     * When entering fog, the enemy is in the fog
-     */
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Fog"))
-        {
-            isInFog = true;
-        }
-    }
-
-    /*
-     * When moving from fog to fog, the enemy is still in the fog
-     */
-    private void OnTriggerStay(Collider other)
-    {
-         if (other.CompareTag("Fog"))
-         {
-             isInFog = true;
-         }
-    }
-
-    /*
-     * When the enemy leaves a fog and does not immediately go into a new fog block, the boolean is set to false.
-     */
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Fog"))
-        {
-            isInFog = false;
-        }
+        animator.SetBool("isWalking", false);
     }
 
     private void setEnemyVisibility(bool isVisible)
     {
-        ballMeshRenderer.enabled = isVisible;
+        //ballMeshRenderer.enabled = isVisible;
         foreach (Transform childrenTransform in ballParentTransform)
         {
             childrenTransform.gameObject.SetActive(isVisible);

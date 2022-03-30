@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 // similar to tower bullet, but diff target
 public class EnemyBullet : MonoBehaviour
@@ -46,6 +47,12 @@ public class EnemyBullet : MonoBehaviour
 
     void HitTarget() 
     {
+        if (bulletDamage >= 200)
+        {
+            // boss bullet
+            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
+        }
+
         GameObject effectIns = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(effectIns, 2f);
 
