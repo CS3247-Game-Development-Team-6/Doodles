@@ -10,7 +10,7 @@ public class PlayerMeleeHitbox : MonoBehaviour
     */
     public GameObject hitEffect; // TODO: get a hit effect for melee actions
     private int meleeDamage = 30;
-    private float maxLifeTime = 0.15f;
+    private float maxLifeTime = 0.20f;
     private float currentLifeTime;
     private List<Collider> colliderList;
     private bool hasAppliedDamage = false;

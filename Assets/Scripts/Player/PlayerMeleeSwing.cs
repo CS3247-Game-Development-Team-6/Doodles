@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMeleeSwing : MonoBehaviour
 {   
-    public float swingDuration = 0.15f; // used as life time of swing
-    public float swingAngle = 75f;
+    public float swingDuration = 0.20f; // used as life time of swing
+    public float swingAngle = 80f;
     private float targetAngle;
     private float currentLifeTime = 0f;
 
