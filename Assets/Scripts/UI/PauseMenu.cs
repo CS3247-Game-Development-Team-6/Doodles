@@ -5,11 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
+    public static bool GameIsPaused;
 
     public GameObject pauseMenuUI;
     public GameObject gameplayCanvas;
     public GameObject raycastOccluder;
+
+    void Start()
+    {
+        Resume();   // Unfreeze game
+    }
 
     // Update is called once per frame
     void Update()
@@ -43,11 +48,14 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
-        pauseMenuUI.SetActive(true);
-        gameplayCanvas.SetActive(false);
-        raycastOccluder.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
+        if (!GameManager.getIsGameEnded())
+        {
+            pauseMenuUI.SetActive(true);
+            gameplayCanvas.SetActive(false);
+            raycastOccluder.SetActive(true);
+            Time.timeScale = 0f;
+            GameIsPaused = true;
+        }
     }
 
     public void LoadMenu()
@@ -57,13 +65,12 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void QuitGame()
+    public void Retry()
     {
-        Debug.Log("Quit!");
-        Application.Quit();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
     public bool IsPaused() {
         return GameIsPaused;
     }
+
 }
