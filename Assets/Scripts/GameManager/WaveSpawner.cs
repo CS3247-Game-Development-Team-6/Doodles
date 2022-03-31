@@ -37,6 +37,17 @@ public class WaveSpawner : MonoBehaviour
             return;
         }
 
+        // win the game
+        if (waveIndex == waves.Length)
+        {
+            Debug.Log("LEVEL WON!");
+
+            GetComponent<GameManager>().WinGame();
+
+            // disable this script
+            this.enabled = false;
+        }
+
         if (countdownTimer <= 0f)
         {
             StartCoroutine(SpawnWave());
@@ -73,13 +84,6 @@ public class WaveSpawner : MonoBehaviour
 
         isSpawningEnemy = false;
 
-        if (waveIndex == waves.Length)
-        {
-            Debug.Log("LEVEL WON!");
-
-            // disable this script
-            this.enabled = false;
-        }
     }
 
     void SpawnEnemy(GameObject _enemy)
