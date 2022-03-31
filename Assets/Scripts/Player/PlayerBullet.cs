@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour {
 
     public GameObject hitEffect; // TODO: get a hit effect for the bullets
+
     private int bulletDamage = 20;
+
     private float maxLifeTime = 10f;
     private float currentLifeTime;
 

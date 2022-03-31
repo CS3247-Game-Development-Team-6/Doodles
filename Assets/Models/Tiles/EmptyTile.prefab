@@ -45,16 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9e8655fe760a84d979fe02de93f176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 0.008862853, g: 1, b: 0, a: 0}
-  tooFarColor: {r: 1, g: 0, b: 0, a: 0}
+  hoverColor: {r: 0.7607844, g: 1, b: 0.72156864, a: 1}
+  tooFarColor: {r: 0.9433962, g: 0.39753166, b: 0.39753166, a: 1}
   tileOffset: {x: 0, y: 0.1, z: 0}
-  towerOffset: {x: 0, y: 0.25, z: 0}
+  towerOffset: {x: 0, y: 0.05, z: 0}
   tileMesh: {fileID: 8761624580356428861}
-  noneTileModels:
-  - {fileID: 7800446164947485080, guid: 57c42af1ed8995e43836076ee546eff5, type: 3}
-  - {fileID: 7800446164947485080, guid: 10a750061c5a8b9429f88bcf5e6e1de4, type: 3}
-  - {fileID: 7800446164947485080, guid: 60ee3a52da4f95648929d92f7b6ca7ef, type: 3}
-  towerBuildPosition: {x: 0, y: 0, z: 0}
+  defaultTile: {fileID: 7800446164947485080, guid: 10a750061c5a8b9429f88bcf5e6e1de4, type: 3}
+  tileTypes:
+  - tilePrefab: {fileID: 7800446164947485080, guid: 57c42af1ed8995e43836076ee546eff5, type: 3}
+    frequencyMax: 0.15
+  - tilePrefab: {fileID: 7800446164947485080, guid: 6c2ca2a0c3dc478448ebfaf12a4a251c, type: 3}
+    frequencyMax: 0.4
+  - tilePrefab: {fileID: 7800446164947485080, guid: 60ee3a52da4f95648929d92f7b6ca7ef, type: 3}
+    frequencyMax: 0.5
+  - tilePrefab: {fileID: 7800446164947485080, guid: a6fa8d8ecc15cfb44831a6a405ea0183, type: 3}
+    frequencyMax: 0.9
+  - tilePrefab: {fileID: 7800446164947485080, guid: e312240d450dbc54baaf77ae8d86e1d2, type: 3}
+    frequencyMax: 1
 --- !u!65 &5757989866526037988
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -11,6 +11,9 @@ public class EnemyShooting : MonoBehaviour
     [Header("Attributes")]
     public float range = 1f;
     public float fireRate = 1f;
+    public string attackAnimationName = "Attack";
+    public float attackAnimationExitTime = 0.75f;
+
     private float fireCountDown = 0f;
 
     // when shooting, stop enemy movement
@@ -23,6 +26,10 @@ public class EnemyShooting : MonoBehaviour
     public Transform partToRotate;
     public float rotationSpeed = 10f;
 
+    public GameObject model;
+    public Animator animator;
+    public Transform rangeCenter;
+
     public GameObject bulletPrefab;
     public Transform firePoint;
 
@@ -30,6 +37,11 @@ public class EnemyShooting : MonoBehaviour
     void Start()
     {
         InvokeRepeating ("UpdateTarget", 0f, 0.5f);
+        model = transform.GetChild(2).gameObject;
+        animator = model.GetComponent<Animator>();
+        rangeCenter = transform.GetChild(3).gameObject.transform;
+
+        fireCountDown = 1f / fireRate;
     }
 
     // dont need to find target every frame
@@ -63,7 +75,7 @@ public class EnemyShooting : MonoBehaviour
 
         foreach (GameObject tempTarget in _targets) 
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, tempTarget.transform.position);
+            float distanceToPlayer = Vector3.Distance(rangeCenter.position, tempTarget.transform.position);
             if (distanceToPlayer < shortestDistance)
             {
                 shortestDistance = distanceToPlayer;
@@ -73,7 +85,8 @@ public class EnemyShooting : MonoBehaviour
 
         foreach (GameObject tempTarget in _bases) 
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, tempTarget.transform.position);
+            // range from the model
+            float distanceToPlayer = Vector3.Distance(rangeCenter.position, tempTarget.transform.position);
             if (distanceToPlayer < shortestDistance)
             {
                 shortestDistance = distanceToPlayer;
@@ -88,22 +101,28 @@ public class EnemyShooting : MonoBehaviour
     void Update()
     {
         if (target == null) {
-            // TODO: using partToRotate, to face waypoint
 
             isShooting = false;
+            // reset after player moving away
+            fireCountDown = 1f / fireRate;
+
             return;          
         }
 
         isShooting = true;
+
         // rotate enemy using quaternion
         Vector3 dir = target.position - transform.position;
         Quaternion lookAtRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookAtRotation, Time.deltaTime * rotationSpeed).eulerAngles;
+        
         partToRotate.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+        model.transform.rotation = Quaternion.Euler(model.transform.rotation.x, rotation.y, rotation.z);
 
         if (fireCountDown <= 0f) 
         {
-            Shoot();
+            StartCoroutine(Shoot());
+
             fireCountDown = 1f / fireRate;
         }
 
@@ -112,7 +131,17 @@ public class EnemyShooting : MonoBehaviour
     }
 
     // shoot according to firecountdown timer
-    void Shoot () {
+    IEnumerator Shoot () {
+        // animate
+        animator.SetTrigger("shoot");
+
+        // wait for animation ends
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName(attackAnimationName))
+            yield return null;
+
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < attackAnimationExitTime)
+            yield return null;
+
         GameObject bulletGO = (GameObject) Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         EnemyBullet bullet = bulletGO.GetComponent<EnemyBullet>();
 
@@ -120,10 +149,11 @@ public class EnemyShooting : MonoBehaviour
         {
             bullet.Seek(target);
         }
+        
     }
 
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.DrawWireSphere(rangeCenter.position, range);
     }
 }

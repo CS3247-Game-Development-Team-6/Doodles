@@ -41,9 +41,8 @@ public class PlayerMovement : MonoBehaviour {
     private bool isPaused = false;
 
     // player build values
-    private float buildDistance = 1.5f;
-    [SerializeField]
-    private float buildDuration = 4f;
+    [SerializeField] private float buildDistance = 1.5f;
+    [SerializeField] private float buildDuration = 4f;
     private float currentBuildDuration = 0f;
     private GameObject currentTowerCell; // current cell that the player is interacting with
 

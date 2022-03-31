@@ -458,6 +458,11 @@ public class MapGenerator : MonoBehaviour
         return basePosition - delta;
     }
 
+    public Cell[,] GetCells()
+    {
+        return cells;
+    }
+
     /* Grid pattern to visualize Map in editor mode.
     */
     private void OnDrawGizmos() {

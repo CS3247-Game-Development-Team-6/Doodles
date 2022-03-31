@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WaveSpawner : MonoBehaviour
 {
     // keep track of how many enemies alive then only spawn new wave
-    public static int numEnemiesAlive = 0;
+    public static int numEnemiesAlive;
 
     public Wave[] waves;
 
@@ -15,11 +15,17 @@ public class WaveSpawner : MonoBehaviour
     public float timeBetweenWaves = 5f;
 
     public Text waveCountdownText;
+    public IndicatorUI waveCountdownIndicator;
 
     // decrease with time, countdown for new wave
     private float countdownTimer = 3f;
 
     private int waveIndex = 0;
+
+    void Start()
+    {
+        numEnemiesAlive = 0;
+    }
 
     // Update is called once per frame
     void Update()
@@ -39,6 +45,8 @@ public class WaveSpawner : MonoBehaviour
         countdownTimer -= Time.deltaTime;
 
         countdownTimer = Mathf.Clamp(countdownTimer, 0f, Mathf.Infinity);
+        waveCountdownIndicator.rawValue = (int)(countdownTimer * 100);
+        waveCountdownIndicator.maxValue = (int)(timeBetweenWaves * 100);
 
         // format 00.00s
         waveCountdownText.text = string.Format("{0:00.00}", countdownTimer);
