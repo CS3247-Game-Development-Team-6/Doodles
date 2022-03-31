@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour {
     private GameObject currentTowerCell; // current cell that the player is interacting with
 
     // player attack values
-    private float attackDuration = 0.15f;
+    private float attackDuration = 0.2f;
     private float currentAttackDuration = 0f;
 
     // player unity object attributes

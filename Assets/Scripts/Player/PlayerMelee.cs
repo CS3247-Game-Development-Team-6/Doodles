@@ -11,6 +11,7 @@ public class PlayerMelee : MonoBehaviour {
 
     private Transform firePoint; // TODO: firepoint may need changes to rotation
     public GameObject meleeHitboxPrefab;
+    public GameObject meleeWeaponPrefab;
 
     private float meleeRange = 1f;
     private float meleeCooldown = 0.5f; 
@@ -87,9 +88,12 @@ public class PlayerMelee : MonoBehaviour {
 
     void MeleeAttack() {
         if (currentCooldown <= 0) {
-            Vector3 attackPosition = transform.position + meleeDirection * meleeRange; 
+            Vector3 hitboxPosition = transform.position + meleeDirection * meleeRange; 
+            Vector3 weaponPosition = transform.position + meleeDirection * (meleeRange/2); 
             // TODO: refine size of hitbox
-            GameObject meleeHitbox = Instantiate(meleeHitboxPrefab, attackPosition, firePoint.rotation);
+            Vector3 meleeRotation = new Vector3(90, firePoint.eulerAngles.y, firePoint.eulerAngles.z);
+            GameObject meleeHitbox = Instantiate(meleeHitboxPrefab, hitboxPosition, firePoint.rotation);
+            GameObject meleeWeapon = Instantiate(meleeWeaponPrefab, weaponPosition, Quaternion.Euler(meleeRotation));
             
             // TODO: add melee animation somewhere
             currentCooldown = meleeCooldown;

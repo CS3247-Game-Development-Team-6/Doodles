@@ -33,7 +33,7 @@ public class PlayerMeleeHitbox : MonoBehaviour
     }
 
     void OnCollisionStay(Collision other) {
-        if (!colliderList.Contains(other.collider)) { 
+        if (other.collider.CompareTag("Enemy") && !colliderList.Contains(other.collider)) { 
             colliderList.Add(other.collider);
         }
     }
