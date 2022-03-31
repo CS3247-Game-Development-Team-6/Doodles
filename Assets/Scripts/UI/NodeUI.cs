@@ -15,6 +15,9 @@ public class NodeUI : MonoBehaviour
     public Sprite iceActive;
     public Sprite waterDefault;
     public Sprite waterActive;
+    public Sprite towerRadius;
+    public Sprite missleRadius;
+
 
     public void SetTarget(Node _target)
     {
@@ -27,6 +30,8 @@ public class NodeUI : MonoBehaviour
         {
             Debug.Log("We are currently displaying it here: " + transform.position);
             ui.SetActive(true);
+
+
             if (target.tower.GetComponent<Turret>().currentBullet.tag == "Fire")
             {
                 Debug.Log("Current selected bullet is fire");
@@ -68,6 +73,17 @@ public class NodeUI : MonoBehaviour
                 fireButton.GetComponent<Image>().sprite = fireDefault;
                 iceButton.GetComponent<Image>().sprite = iceDefault;
                 waterButton.GetComponent<Image>().sprite = waterDefault;
+            }
+
+            if (target.tower.tag == "Missile")
+            {
+                Image attackRadius = GameObject.Find("/NodeUI/Canvas/RadiusCanvas/AttackRadius").GetComponent<Image>();
+                attackRadius.sprite = missleRadius;
+            }
+            else if (target.tower.tag == "Turret")
+            {
+                Image attackRadius = GameObject.Find("/NodeUI/Canvas/RadiusCanvas/AttackRadius").GetComponent<Image>();
+                attackRadius.sprite = towerRadius;
             }
         }
     }
