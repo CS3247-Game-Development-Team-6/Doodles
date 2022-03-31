@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class WaveSpawner : MonoBehaviour
 {
     // keep track of how many enemies alive then only spawn new wave
-    public static int numEnemiesAlive = 0;
+
+    public static int numEnemiesAlive;
     public static bool isSpawningEnemy = false;
 
     public Wave[] waves;
@@ -22,6 +23,11 @@ public class WaveSpawner : MonoBehaviour
     private float countdownTimer = 3f;
 
     private int waveIndex = 0;
+
+    void Start()
+    {
+        numEnemiesAlive = 0;
+    }
 
     // Update is called once per frame
     void Update()
