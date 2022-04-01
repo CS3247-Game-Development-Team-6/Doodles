@@ -75,6 +75,7 @@ public class BuildManager : MonoBehaviour
         // Check if enough ink
         if (!player.hasEnoughInk(cost))
         {
+            Debug.Log("This is trigger");
             return;
         }
 
@@ -98,13 +99,15 @@ public class BuildManager : MonoBehaviour
 
     public void buildFireTurret()
     {
+        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());
+
         // Check if already added element
         if (nodeUI.target.GetIsAddedElement())
         {
             return;
         }
 
-        Debug.Log("No element added yet, adding now.");
+        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -130,19 +133,21 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        nodeUI.target.SetIsAddedElement(true);
         SwapTower(this.towerToBuild, this.playerGO);
+        nodeUI.target.SetIsAddedElement(true);
     }
 
     public void buildIceTurret()
     {
+        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());
+
         // Check if already added element
         if (nodeUI.target.GetIsAddedElement())
         {
             return;
         }
 
-        Debug.Log("No element added yet, adding now.");
+        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -168,19 +173,21 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        nodeUI.target.SetIsAddedElement(true);
         SwapTower(this.towerToBuild, this.playerGO);
+        nodeUI.target.SetIsAddedElement(true);
     }
 
     public void buildWaterTurret()
     {
+        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());
+
         // Check if already added element
         if (nodeUI.target.GetIsAddedElement())
         {
             return;
         }
 
-        Debug.Log("No element added yet, adding now.");
+        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -206,13 +213,13 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        nodeUI.target.SetIsAddedElement(true);
         SwapTower(this.towerToBuild, this.playerGO);
+        nodeUI.target.SetIsAddedElement(true);
     }
 
     public void UpgradeTower()
     {
-        if (nodeUI.target.GetIsUpgraded())
+        if (nodeUI.target.GetIsUpgraded() && nodeUI.target.GetIsAddedElement())
         {
             return;
         }
@@ -262,8 +269,8 @@ public class BuildManager : MonoBehaviour
                 towerToBuild = upWaterMissileLauncher;
             }
         }
-        nodeUI.target.SetIsUpgraded(true);
         SwapTower(this.towerToBuild, this.playerGO);
+        nodeUI.target.SetIsUpgraded(true);
     }
 
     
