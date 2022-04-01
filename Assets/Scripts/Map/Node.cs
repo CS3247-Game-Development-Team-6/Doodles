@@ -137,9 +137,6 @@ public class Node : MonoBehaviour
             Debug.Log("Player not enough ink to upgrade");
             return;
         }
-
-        tower.GetComponent<Turret>().Upgrade();
-
     }
 
     public Vector3 GetTowerBuildPosition()

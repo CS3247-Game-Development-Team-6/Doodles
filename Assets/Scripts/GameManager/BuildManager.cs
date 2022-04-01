@@ -17,6 +17,14 @@ public class BuildManager : MonoBehaviour
     public GameObject fireMissileLauncher;
     public GameObject iceMissileLauncher;
     public GameObject waterMissileLauncher;
+    public GameObject upStandardTowerPrefab;
+    public GameObject upFireTurret;
+    public GameObject upIceTurret;
+    public GameObject upWaterTurret;
+    public GameObject upMissileLauncher;
+    public GameObject upFireMissileLauncher;
+    public GameObject upIceMissileLauncher;
+    public GameObject upWaterMissileLauncher;
 
     private void Awake()
     {
@@ -161,4 +169,5 @@ public class BuildManager : MonoBehaviour
         selectedNode.setIsTowerBuilt(false);
         DeselectNode();
     }
+
 }

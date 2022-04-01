@@ -107,6 +107,5 @@ public class NodeUI : MonoBehaviour
 
     public void UpgradeTower() 
     {
-        target.UpgradeTurret();
     }
 }
