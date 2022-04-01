@@ -1805,7 +1805,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellSize: 1
-  minSpawnToBaseDistance: 12
   maximumTries: 1000
   minimumReqScore: 50
   fogTilesClearedByBase: 10
@@ -2302,6 +2301,7 @@ MonoBehaviour:
   healthSlider: {fileID: 689040356}
   growthRate: 0.1
   startingAmount: 0.6
+  movement: {fileID: 0}
 --- !u!114 &1789031186
 MonoBehaviour:
   m_ObjectHideFlags: 0
