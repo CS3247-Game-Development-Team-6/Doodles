@@ -11,6 +11,7 @@ public class Turret : MonoBehaviour
     public Transform rotationBase;
     public float rotationSpeed = 10f;
     [SerializeField] private float cost = 10f;
+    public float upgradeCost;
 
     [Header("Unity Setup Fields")]
     public string enemyTag = "Enemy";
@@ -22,6 +23,35 @@ public class Turret : MonoBehaviour
     public GameObject iceBullet;
     public GameObject waterBullet;
     public Transform firePoint;
+
+
+    public enum State{
+        Default,
+        Upgrade1,
+        Upgrade2
+    };
+    public State currentState = State.Default;
+    public GameObject upgrade1Tower;
+    public GameObject upgrade2Tower;
+
+    public void Upgrade()
+    {
+        if (currentState == State.Default)
+        {
+            currentState = State.Upgrade1;
+            Debug.Log("State is upgrade1");
+        }
+        else if (currentState == State.Upgrade1)
+        {
+            currentState = State.Upgrade2;
+            Debug.Log("State is upgrade2");
+        }
+        else if (currentState == State.Upgrade2) 
+        {
+            Debug.Log("Cannot upgrade further");
+        }
+
+    }
 
     public float Cost {
         get { return cost; }

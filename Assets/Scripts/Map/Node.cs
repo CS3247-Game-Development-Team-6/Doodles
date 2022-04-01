@@ -100,6 +100,24 @@ public class Node : MonoBehaviour
         return tower.GetComponent<Turret>();
     }
 
+    public void UpgradeTurret()
+    {
+        if (tower == null)
+        {
+            Debug.Log("No tower is found at this cell");
+            return;
+        }
+
+        if (!GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().hasEnoughInk(tower.GetComponent<Turret>().upgradeCost))
+        {
+            Debug.Log("Player not enough ink to upgrade");
+            return;
+        }
+
+        tower.GetComponent<Turret>().Upgrade();
+
+    }
+
     public Vector3 GetTowerBuildPosition()
     {
         return towerBuildPosition;
