@@ -75,7 +75,6 @@ public class BuildManager : MonoBehaviour
         // Check if enough ink
         if (!player.hasEnoughInk(cost))
         {
-            Debug.Log("This is trigger");
             return;
         }
 
@@ -99,7 +98,7 @@ public class BuildManager : MonoBehaviour
 
     public void buildFireTurret()
     {
-        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());
+/*        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());*/
 
         // Check if already added element
         if (nodeUI.target.GetIsAddedElement())
@@ -107,7 +106,7 @@ public class BuildManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());
+/*        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());*/
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -133,13 +132,19 @@ public class BuildManager : MonoBehaviour
             }
         }
 
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
+        {
+/*            Debug.Log("No cash no upgrade");*/
+            return;
+        }
+
         SwapTower(this.towerToBuild, this.playerGO);
         nodeUI.target.SetIsAddedElement(true);
     }
 
     public void buildIceTurret()
     {
-        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());
+/*        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());*/
 
         // Check if already added element
         if (nodeUI.target.GetIsAddedElement())
@@ -147,7 +152,7 @@ public class BuildManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());
+/*        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());*/
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -173,13 +178,19 @@ public class BuildManager : MonoBehaviour
             }
         }
 
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
+        {
+/*            Debug.Log("No cash no upgrade");*/
+            return;
+        }
+
         SwapTower(this.towerToBuild, this.playerGO);
         nodeUI.target.SetIsAddedElement(true);
     }
 
     public void buildWaterTurret()
     {
-        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());
+/*        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());*/
 
         // Check if already added element
         if (nodeUI.target.GetIsAddedElement())
@@ -187,7 +198,7 @@ public class BuildManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());
+/*        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());*/
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -211,6 +222,12 @@ public class BuildManager : MonoBehaviour
             {
                 towerToBuild = upWaterMissileLauncher;
             }
+        }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
+        {
+/*            Debug.Log("No cash no upgrade");*/
+            return;
         }
 
         SwapTower(this.towerToBuild, this.playerGO);
@@ -269,6 +286,13 @@ public class BuildManager : MonoBehaviour
                 towerToBuild = upWaterMissileLauncher;
             }
         }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
+        {
+/*            Debug.Log("No cash no upgrade");*/
+            return;
+        }
+
         SwapTower(this.towerToBuild, this.playerGO);
         nodeUI.target.SetIsUpgraded(true);
     }
