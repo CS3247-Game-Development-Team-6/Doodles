@@ -50,7 +50,7 @@ public class WaveSpawner : MonoBehaviour
 
         if (countdownTimer <= 0f)
         {
-            StartCoroutine(SpawnWave());
+            SpawnWave();
             countdownTimer = timeBetweenWaves;
             return;
         }
@@ -66,7 +66,7 @@ public class WaveSpawner : MonoBehaviour
     }
 
     // can pause the func execution
-    IEnumerator SpawnWave()
+    void SpawnWave()
     {
         //keep track of how many rounds survive
         GameManager.rounds++;
@@ -75,20 +75,18 @@ public class WaveSpawner : MonoBehaviour
 
         Wave waveToSpawn = waves[waveIndex];
 
-        for (int i = 0; i < waveToSpawn.count; i++)
-        {
-            SpawnEnemy(waveToSpawn.enemy);
-            yield return new WaitForSeconds(1f / waveToSpawn.rate);
-        }
+        StartCoroutine(waveToSpawn.StartWave(this));
+
         waveIndex++;
 
         isSpawningEnemy = false;
 
     }
 
-    void SpawnEnemy(GameObject _enemy)
+    public void SpawnEnemy(GameObject _enemy)
     {
         Instantiate(_enemy, spawnPoint.position, spawnPoint.rotation);
         numEnemiesAlive++;
     }
+
 }
