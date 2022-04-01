@@ -104,14 +104,4 @@ public class NodeUI : MonoBehaviour
     {
         
     }
-
-    public void UpgradeTower() 
-    {
-        if (target.tower == null)
-        {
-            return;
-        }
-
-
-    }
 }

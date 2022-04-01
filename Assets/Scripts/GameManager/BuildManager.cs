@@ -172,6 +172,19 @@ public class BuildManager : MonoBehaviour
         SwapTower(this.towerToBuild, this.playerGO);
     }
 
+    public void UpgradeTower()
+    { 
+        if (selectedNode.GetIsUpgraded())
+        {
+            return;
+        }
+
+        if (currentTowerType.GetComponent<Turret>().bulletPrefab.tag == "Basic")
+        {
+            towerToBuild = upTowerPrefab;
+        }
+    }
+
     
 
     public void DestroyTower()

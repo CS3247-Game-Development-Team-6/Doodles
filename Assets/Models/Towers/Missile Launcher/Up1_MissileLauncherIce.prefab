@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2689636279851204398}
   m_Layer: 0
   m_Name: Up1_MissileLauncherIce
-  m_TagString: Untagged
+  m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,13 +49,10 @@ MonoBehaviour:
   rotationBase: {fileID: 6558211265028124858}
   rotationSpeed: 5
   cost: 15
+  upgradeCost: 10
   enemyTag: Enemy
   fireRate: 0.5
-  currentBullet: {fileID: 0}
   bulletPrefab: {fileID: 5149562609060439765, guid: 720ff82ec149bf5498b57112a3078402, type: 3}
-  fireBullet: {fileID: 5149562609060439765, guid: 681c687178be50d4884650e5bd0e0ade, type: 3}
-  iceBullet: {fileID: 5149562609060439765, guid: 720ff82ec149bf5498b57112a3078402, type: 3}
-  waterBullet: {fileID: 5149562609060439765, guid: 08ed0a4e6064a084ea43dde318343e1b, type: 3}
   firePoint: {fileID: 4227821330133215318}
 --- !u!1 &2704744479067009122
 GameObject:

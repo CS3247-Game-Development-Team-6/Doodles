@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 5911250546372479925}
   m_Layer: 0
   m_Name: Up1_TurretWater
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,13 +193,10 @@ MonoBehaviour:
   rotationBase: {fileID: 7984372079992035439}
   rotationSpeed: 10
   cost: 10
+  upgradeCost: 10
   enemyTag: Enemy
   fireRate: 1
-  currentBullet: {fileID: 1315704262782356680, guid: 15933ea65b9f01a43b40db8526c3df63, type: 3}
   bulletPrefab: {fileID: 1315704262782356680, guid: b5139372f4c51ef4193668c4a2588e74, type: 3}
-  fireBullet: {fileID: 1315704262782356680, guid: 5f6ecc1421dc70c4bb5c03a659ac2260, type: 3}
-  iceBullet: {fileID: 1315704262782356680, guid: db28156f666cd00438d1be534f9e8cf0, type: 3}
-  waterBullet: {fileID: 1315704262782356680, guid: b5139372f4c51ef4193668c4a2588e74, type: 3}
   firePoint: {fileID: 4276231600001898912}
 --- !u!1001 &891320893522086505
 PrefabInstance:

@@ -19,6 +19,7 @@ public class Node : MonoBehaviour
 
     private bool isTowerBuilt = false;
     private bool isAddedElement = false;
+    private bool isUpgraded = false;
     public GameObject tower;
     public Cell cell;
 
@@ -92,6 +93,17 @@ public class Node : MonoBehaviour
     {
         isAddedElement = b;
     }
+
+    public bool GetIsUpgraded()
+    {
+        return isUpgraded;
+    }
+
+    public void SetIsUpgraded(bool b)
+    { 
+        isUpgraded = b;
+    }
+
     public float TowerCost() {
         GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
         return towerToBuild.GetComponent<Turret>().Cost;
