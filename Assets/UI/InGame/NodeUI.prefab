@@ -778,8 +778,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5253943536085481801}
-        m_TargetAssemblyTypeName: NodeUI, Assembly-CSharp
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
         m_MethodName: UpgradeTower
         m_Mode: 1
         m_Arguments:
@@ -968,6 +968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 5253943536834382600}
+  target: {fileID: 0}
   manualOffset: {x: 0, y: 0, z: 1}
   fireDefault: {fileID: 21300000, guid: eace385b694764d439657ec190a851f7, type: 3}
   fireActive: {fileID: 21300000, guid: 871e386ebd9809c45a17db1cf277dc14, type: 3}
@@ -977,6 +978,11 @@ MonoBehaviour:
   waterActive: {fileID: 21300000, guid: 00a2794ea16fe2942b834f6318c0ce38, type: 3}
   towerRadius: {fileID: 21300000, guid: 44f1e17605d263a46a724e394fc7e96a, type: 3}
   missleRadius: {fileID: 21300000, guid: a46dc9d1e4e923544b4d4620dbf75852, type: 3}
+  iceDisable: {fileID: 21300000, guid: 90011919f83bb834c860612d686769b3, type: 3}
+  waterDisable: {fileID: 21300000, guid: 22f2509cbbd9a6f4da949ddbd5ff7a7b, type: 3}
+  fireDisable: {fileID: 21300000, guid: 6ed70b278693f024ab9a4cb2ba935665, type: 3}
+  upgradeDisable: {fileID: 21300000, guid: bb04f84d301f70b41be513d6e7f291b0, type: 3}
+  upgradeDefault: {fileID: 21300000, guid: 03a583774c87d794091578f1d51630e5, type: 3}
 --- !u!1 &5253943536834382600
 GameObject:
   m_ObjectHideFlags: 0

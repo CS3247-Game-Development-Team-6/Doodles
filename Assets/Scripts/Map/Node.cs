@@ -151,6 +151,7 @@ public class Node : MonoBehaviour
         }
         Debug.Log("I'm in node.cs SwapTower()");
         GameObject towerToBuild = buildManager.GetTowerToBuild();
+        Debug.Log(towerToBuild.name);
         tower = (GameObject)Instantiate(towerToBuild, towerBuildPosition, Quaternion.identity);
     }
 
