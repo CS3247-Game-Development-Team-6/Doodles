@@ -6,6 +6,7 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
     private GameObject towerToBuild;
+    public GameObject playerGO;
     private Node selectedNode;
     public NodeUI nodeUI;
     private GameObject currentTowerType;
@@ -68,83 +69,108 @@ public class BuildManager : MonoBehaviour
         currentTowerType = tower;
     }
 
-    // Update is called once per frame
-    void Update()
+    // Change tower elements
+    public void SwapTower(GameObject towerToBuild, GameObject playerGO)
     {
-        HandleTurretChange();
+        float cost = towerToBuild.GetComponent<Turret>().GetSwapElementCost();
+        Player player = playerGO.GetComponent<Player>();
+        // Check if enough ink
+        if (!player.hasEnoughInk(cost))
+        {
+            return;
+        }
+
+        // Get rid of original tower
+        selectedNode.DestroyTower();
+
+        // Build new tower with correct element
+        selectedNode.SwapTower();
+
+        player.ChangeInkAmount(-cost);
+
+        selectedNode.SetIsAddedElement(true);
+
+        // Reset towerToBuild
+        if (towerToBuild.GetComponent<Turret>().name.Contains("Turret"))
+            this.towerToBuild = standardTowerPrefab;
+        else if (towerToBuild.GetComponent<Turret>().name.Contains("MissileLauncher"))
+            this.towerToBuild = missileLauncherPrefab;
+
+        // Hide nodeUI
+        DeselectNode();
     }
 
-    private void HandleTurretChange()
+    public void buildFireTurret()
     {
-        // For Testing Purposes (May be removed in the future)
-        if (GetCurrentTowerType() == standardTowerPrefab)
-        {
-            // Debug.Log("in normal turret branch");
-            if (Input.GetKeyDown(KeyCode.Alpha1)) {
-                SetTowerToBuild(standardTowerPrefab);
-            } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-                SetTowerToBuild(fireTurret);
-            } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-                SetTowerToBuild(iceTurret);
-            } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
-                SetTowerToBuild(waterTurret);
-            }
-        }
-        else if (GetCurrentTowerType() == missileLauncherPrefab)
-        {
-            // Debug.Log("in missile launcher branch");
-            if (Input.GetKeyDown(KeyCode.Alpha1)) {
-                SetTowerToBuild(missileLauncherPrefab);
-            } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-                SetTowerToBuild(fireMissileLauncher);
-            } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-                SetTowerToBuild(iceMissileLauncher);
-            } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
-                SetTowerToBuild(waterMissileLauncher);
-            }
-        }
-    }
 
-    public void setFireTurret()
-    {
+        // Check if already added element
+        if (selectedNode.GetIsAddedElement())
+        {
+            return;
+        }
+        // Set respective towers
         if (currentTowerType == standardTowerPrefab)
         {
-            SetTowerToBuild(fireTurret);
+            towerToBuild = fireTurret;
         }
         else if (currentTowerType == missileLauncherPrefab)
         {
-            SetTowerToBuild(fireMissileLauncher);
+            towerToBuild = fireMissileLauncher;
         }
+
+        SwapTower(this.towerToBuild, this.playerGO);
     }
 
-    public void setIceTurret()
+    public void buildIceTurret()
     {
+        // Check if already added element
+        if (selectedNode.GetIsAddedElement())
+        {
+            return;
+        }
+
+        // Set respective towers
         if (currentTowerType == standardTowerPrefab)
         {
-            SetTowerToBuild(iceTurret);
+            towerToBuild = iceTurret;
         }
         else if (currentTowerType == missileLauncherPrefab)
         {
-            SetTowerToBuild(iceMissileLauncher);
+            towerToBuild = iceMissileLauncher;
         }
+
+        SwapTower(this.towerToBuild, this.playerGO);
     }
 
-    public void setWaterTurret()
+    public void buildWaterTurret()
     {
+        // Check if already added element
+        if (selectedNode.GetIsAddedElement())
+        {
+            return;
+        }
+
+        // Set respective towers
         if (currentTowerType == standardTowerPrefab)
         {
-            SetTowerToBuild(waterTurret);
+            towerToBuild = waterTurret;
         }
         else if (currentTowerType == missileLauncherPrefab)
         {
-            SetTowerToBuild(waterMissileLauncher);
+            towerToBuild = waterMissileLauncher;
         }
+
+        SwapTower(this.towerToBuild, this.playerGO);
     }
+
+    
 
     public void DestroyTower()
     {
         selectedNode.DestroyTower();
-        selectedNode.setIsTowerBuilt(false);
+        selectedNode.SetIsTowerBuilt(false);
+        selectedNode.SetIsAddedElement(false);
+        // Hide nodeUI
         DeselectNode();
     }
 }
