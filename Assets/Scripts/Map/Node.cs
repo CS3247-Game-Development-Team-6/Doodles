@@ -30,6 +30,8 @@ public class Node : MonoBehaviour
     public GameObject defaultTile;
     public TileType[] tileTypes;
     private BuildManager buildManager;
+    private PlayerMovement playerMovement;
+    private GameObject playerObject;
 
     private Vector3 towerBuildPosition;
 
@@ -55,6 +57,8 @@ public class Node : MonoBehaviour
         decorationMesh.transform.SetParent(transform);
         
         buildManager = BuildManager.instance;
+        playerObject = GameObject.Find("Player");
+        playerMovement = playerObject.GetComponent<PlayerMovement>();
     }
 
     public GameObject GetTower()
@@ -143,12 +147,16 @@ public class Node : MonoBehaviour
         return towerBuildPosition;
     }
 
-    private void OnMouseEnter() {
+    private void OnMouseOver() {
         if (EventSystem.current.IsPointerOverGameObject() || buildManager.GetTowerToBuild() == null) {
             return;
         }
 
-        tileRenderer.material.color = hoverColor;
+        if ((transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()) {
+            tileRenderer.material.color = tooFarColor;
+        } else {
+            tileRenderer.material.color = hoverColor;
+        }
     }
 
     private void OnMouseExit() {

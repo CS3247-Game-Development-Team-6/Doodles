@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class WaveSpawner : MonoBehaviour
 {
     // keep track of how many enemies alive then only spawn new wave
+
     public static int numEnemiesAlive;
+    public static bool isSpawningEnemy = false;
 
     public Wave[] waves;
 
@@ -30,9 +32,20 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (numEnemiesAlive > 0)
+        if (numEnemiesAlive > 0 || isSpawningEnemy)
         {
             return;
+        }
+
+        // win the game
+        if (waveIndex == waves.Length)
+        {
+            Debug.Log("LEVEL WON!");
+
+            GetComponent<GameManager>().WinGame();
+
+            // disable this script
+            this.enabled = false;
         }
 
         if (countdownTimer <= 0f)
@@ -58,6 +71,8 @@ public class WaveSpawner : MonoBehaviour
         //keep track of how many rounds survive
         GameManager.rounds++;
 
+        isSpawningEnemy = true;
+
         Wave waveToSpawn = waves[waveIndex];
 
         for (int i = 0; i < waveToSpawn.count; i++)
@@ -67,13 +82,8 @@ public class WaveSpawner : MonoBehaviour
         }
         waveIndex++;
 
-        if (waveIndex == waves.Length)
-        {
-            Debug.Log("LEVEL WON!");
+        isSpawningEnemy = false;
 
-            // disable this script
-            this.enabled = false;
-        }
     }
 
     void SpawnEnemy(GameObject _enemy)
