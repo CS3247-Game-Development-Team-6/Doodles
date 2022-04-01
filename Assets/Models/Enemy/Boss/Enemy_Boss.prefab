@@ -526,7 +526,7 @@ MonoBehaviour:
   speed: 1
   initSpeed: 0.5
   health: 0
-  initHealth: 1000
+  initHealth: 3000
   defense: 0
   initDefense: 50
   inkGained: 100
@@ -537,6 +537,7 @@ MonoBehaviour:
   isScalded: 0
   isFrozen: 0
   isWeakened: 0
+  isInFog: 1
   healthBar: {fileID: 1929750958}
   map: {fileID: 0}
   model: {fileID: 919132147805593998}
@@ -555,6 +556,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 1.25
   fireRate: 0.3
+  attackAnimationName: Attack
+  attackAnimationExitTime: 0.75
   isShooting: 0
   playerTag: Player
   baseTag: Base
