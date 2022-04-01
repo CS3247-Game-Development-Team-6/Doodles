@@ -75,6 +75,14 @@ public class BuildManager : MonoBehaviour
         HandleTurretChange();
     }
 
+    public void SetToBuildStandardTower() {
+        towerToBuild = standardTowerPrefab;
+    }
+
+    public void SetToBuildMissileLauncher() {
+        towerToBuild = missileLauncherPrefab;
+    }
+
     private void HandleTurretChange()
     {
         // For Testing Purposes (May be removed in the future)
