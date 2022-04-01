@@ -151,5 +151,6 @@ public class BuildManager : MonoBehaviour
         }
         selectedNode.DestroyTower();
         selectedNode.setIsTowerBuilt(false);
+        DeselectNode();
     }
 }
