@@ -35,16 +35,16 @@ public class Turret : MonoBehaviour
         if (currentState == State.Default)
         {
             currentState = State.Upgrade1;
-            Debug.Log("State is upgrade1");
+/*            Debug.Log("State is upgrade1");*/
         }
         else if (currentState == State.Upgrade1)
         {
             currentState = State.Upgrade2;
-            Debug.Log("State is upgrade2");
+/*            Debug.Log("State is upgrade2");*/
         }
         else if (currentState == State.Upgrade2) 
         {
-            Debug.Log("Cannot upgrade further");
+/*            Debug.Log("Cannot upgrade further");*/
         }
 
     }

@@ -28,7 +28,7 @@ public class NodeUI : MonoBehaviour
 
         if (target.getIsTowerBuilt())
         {
-            Debug.Log("We are currently displaying it here: " + transform.position);
+/*            Debug.Log("We are currently displaying it here: " + transform.position);*/
             ui.SetActive(true);
 
 

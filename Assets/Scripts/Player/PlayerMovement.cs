@@ -316,26 +316,26 @@ public class PlayerMovement : MonoBehaviour {
         
         if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { 
             // player too far from tower cell
-            Debug.Log("Out of range.");
+/*            Debug.Log("Out of range.");*/
             return;
         }
 
         if (isBuilding) { 
             // player already building a tower
-            Debug.Log("Already building tower.");
+/*            Debug.Log("Already building tower.");*/
             return;
         }
 
         currentTowerCell = towerCell;
         if (!player.hasEnoughInk(currentTowerCell.GetComponent<Node>().TowerCost())) {
             // player has not enough ink
-            Debug.Log("Not enough ink!");
+/*            Debug.Log("Not enough ink!");*/
             return;
         }
 
         if (currentTowerCell.GetComponent<Node>().HasTower()) {
             // tower cell already has a tower
-            Debug.Log("Tower already built.");
+/*            Debug.Log("Tower already built.");*/
             return;
         }
 

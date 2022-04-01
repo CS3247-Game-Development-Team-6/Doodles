@@ -144,7 +144,7 @@ public class BuildManager : MonoBehaviour
 
     public void DestroyTower()
     {
-        Debug.Log("Im here!");
+/*        Debug.Log("Im here!");*/
         if (selectedNode.GetTower() == null)
         {
             Debug.Log("There's no tower in the node!");
