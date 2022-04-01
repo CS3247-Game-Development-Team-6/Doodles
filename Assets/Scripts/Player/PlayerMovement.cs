@@ -285,6 +285,11 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    /////////////////////////////////////
+    //
+    // Building-related functions
+    //
+    /////////////////////////////////////
     public void BuildTowerAttempt(Vector3 mouseTowerCellPosition, GameObject towerCell) {
         
         if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { 
