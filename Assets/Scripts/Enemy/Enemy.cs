@@ -248,7 +248,7 @@ public class Enemy : MonoBehaviour
         {
             lastXCoord = currentXCoord;
             lastYCoord = currentYCoord;
-            Debug.Log((lastXCoord, lastYCoord));
+/*            Debug.Log((lastXCoord, lastYCoord));*/
             isInFog = GetCurrentTileFogged(currentXCoord, currentYCoord);
         }
         

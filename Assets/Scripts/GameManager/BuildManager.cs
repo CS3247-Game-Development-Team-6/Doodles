@@ -42,7 +42,7 @@ public class BuildManager : MonoBehaviour
             DeselectNode();
             return;
         }
-        Debug.Log("User has selected this tower");
+/*        Debug.Log("User has selected this tower");*/
         selectedNode = node;
         nodeUI.SetTarget(node);
     }
