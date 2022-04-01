@@ -7,7 +7,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {    
     [SerializeField] private string header;
     
-    [Multiline()]
+    [Multiline]
     [SerializeField] private string content;
 
     

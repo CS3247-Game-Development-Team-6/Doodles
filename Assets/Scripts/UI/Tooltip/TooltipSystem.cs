@@ -7,27 +7,27 @@ using UnityEngine.UI;
 
 public class TooltipSystem : MonoBehaviour
 {
-    private static TooltipSystem current;
+    private static TooltipSystem _current;
 
     public Tooltip tooltip;
     
 
     private void Awake()
     {
-        current = this;
-        current.tooltip.gameObject.SetActive(true); // added this line to hide the default tooltip from the Editor
-        current.tooltip.SetVisibility(false);
+        _current = this;
+        _current.tooltip.gameObject.SetActive(true); // added this line to hide the default tooltip from the Editor
+        _current.tooltip.SetVisibility(false);
     }
 
     public static void Show(string content, string header="")
     {
-        current.tooltip.SetText(content, header);
-        current.tooltip.SetVisibility(true);
+        _current.tooltip.SetText(content, header);
+        _current.tooltip.SetVisibility(true);
     }
 
     public static void Hide()
     {
-        current.tooltip.SetVisibility(false);
+        _current.tooltip.SetVisibility(false);
     }
 
 

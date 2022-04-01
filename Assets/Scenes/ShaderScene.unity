@@ -1452,6 +1452,22 @@ MonoBehaviour:
   criticalLevel: 0.3
   rawValue: 0
   maxValue: 0
+--- !u!114 &889571986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889571981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Ink O' Meter
+  content: This is the amount of ink that you currently have. It's your currency
+    that you use to draw towers and clear fog. Use it wisely. It regenerates over
+    time and by defeating enemies.
 --- !u!114 &941677297 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5553060649945844835, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
@@ -2871,6 +2887,21 @@ MonoBehaviour:
   criticalLevel: 0
   rawValue: 0
   maxValue: 0
+--- !u!114 &1923195208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923195203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Health
+  content: This is the base's health. Keep it alive, there are enemies out there
+    who wants to damage your base.
 --- !u!1 &2007609016
 GameObject:
   m_ObjectHideFlags: 0
@@ -3300,6 +3331,10 @@ PrefabInstance:
     - target: {fileID: 1288790776874782330, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_Name
       value: BaseHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288790776874782330, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1800086425317640480, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_AnchorMax.y
