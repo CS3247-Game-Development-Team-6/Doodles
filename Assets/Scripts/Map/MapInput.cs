@@ -33,7 +33,7 @@ public class MapInput : MonoBehaviour {
                         Debug.Log("Fog present. Remove fog first.");
                         return;
                     }
-                    Vector3 mouseTowerCellPosition = hit.point;
+                    Vector3 mouseTowerCellPosition = hit.collider.gameObject.transform.position;
                     player.Movement.BuildTowerAttempt(mouseTowerCellPosition, hit.collider.gameObject);
                 }
             }
