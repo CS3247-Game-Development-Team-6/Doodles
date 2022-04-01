@@ -57,14 +57,34 @@ public class Node : MonoBehaviour
         buildManager = BuildManager.instance;
     }
 
-    public bool hasTowerBuilt()
+    public GameObject GetTower()
+    {
+        return tower;
+    }
+    public void DestroyTower()
+    {
+        Destroy(this.tower);
+        tower = null;
+    }
+    public bool getIsTowerBuilt()
     {
         return isTowerBuilt;
+    }
+
+    public void setIsTowerBuilt(bool b)
+    {
+        isTowerBuilt = b;
     }
 
     public float TowerCost() {
         GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
         return towerToBuild.GetComponent<Turret>().Cost;
+    }
+
+    public float SwapTowerElementCost()
+    {
+        GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
+        return towerToBuild.GetComponent<Turret>().GetSwapElementCost();
     }
 
     public bool HasTower() {
@@ -94,9 +114,9 @@ public class Node : MonoBehaviour
         // build a tower
         GameObject towerToBuild = buildManager.GetTowerToBuild();
         towerBuildPosition = tileMesh.transform.position + towerOffset;
-        isTowerBuilt = true;
+        setIsTowerBuilt(true);
         tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, Quaternion.identity);
-        Destroy(decorationMesh);
+        Destroy(decorationMesh);    // Destroy current node's asset
         return tower.GetComponent<Turret>();
     }
 

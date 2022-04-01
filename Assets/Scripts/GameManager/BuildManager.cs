@@ -104,5 +104,52 @@ public class BuildManager : MonoBehaviour
                 SetTowerToBuild(waterMissileLauncher);
             }
         }
-    } 
+    }
+
+    public void setFireTurret()
+    {
+        if (currentTowerType == standardTowerPrefab)
+        {
+            SetTowerToBuild(fireTurret);
+        }
+        else if (currentTowerType == missileLauncherPrefab)
+        {
+            SetTowerToBuild(fireMissileLauncher);
+        }
+    }
+
+    public void setIceTurret()
+    {
+        if (currentTowerType == standardTowerPrefab)
+        {
+            SetTowerToBuild(iceTurret);
+        }
+        else if (currentTowerType == missileLauncherPrefab)
+        {
+            SetTowerToBuild(iceMissileLauncher);
+        }
+    }
+
+    public void setWaterTurret()
+    {
+        if (currentTowerType == standardTowerPrefab)
+        {
+            SetTowerToBuild(waterTurret);
+        }
+        else if (currentTowerType == missileLauncherPrefab)
+        {
+            SetTowerToBuild(waterMissileLauncher);
+        }
+    }
+
+    public void DestroyTower()
+    {
+        Debug.Log("Im here!");
+        if (selectedNode.GetTower() == null)
+        {
+            Debug.Log("There's no tower in the node!");
+        }
+        selectedNode.DestroyTower();
+        selectedNode.setIsTowerBuilt(false);
+    }
 }
