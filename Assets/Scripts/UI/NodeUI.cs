@@ -32,7 +32,7 @@ public class NodeUI : MonoBehaviour
             ui.SetActive(true);
 
 
-            if (target.tower.GetComponent<Turret>().currentBullet.tag == "Fire")
+            if (target.tower.GetComponent<Turret>().bulletPrefab.tag == "Fire")
             {
                 Debug.Log("Current selected bullet is fire");
                 Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
@@ -44,7 +44,7 @@ public class NodeUI : MonoBehaviour
                 waterButton.GetComponent<Image>().sprite = waterDefault;
 
             }
-            else if (target.tower.GetComponent<Turret>().currentBullet.tag == "Ice")
+            else if (target.tower.GetComponent<Turret>().bulletPrefab.tag == "Ice")
             {
                 Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
                 Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
@@ -54,7 +54,7 @@ public class NodeUI : MonoBehaviour
                 iceButton.GetComponent<Image>().sprite = iceActive;
                 waterButton.GetComponent<Image>().sprite = waterDefault;
             }
-            else if (target.tower.GetComponent<Turret>().currentBullet.tag == "Water")
+            else if (target.tower.GetComponent<Turret>().bulletPrefab.tag == "Water")
             {
                 Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
                 Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
