@@ -76,10 +76,12 @@ public class BuildManager : MonoBehaviour
     }
 
     public void SetToBuildStandardTower() {
+        currentTowerType = standardTowerPrefab;
         towerToBuild = standardTowerPrefab;
     }
 
     public void SetToBuildMissileLauncher() {
+        currentTowerType = missileLauncherPrefab;
         towerToBuild = missileLauncherPrefab;
     }
 
@@ -88,7 +90,6 @@ public class BuildManager : MonoBehaviour
         // For Testing Purposes (May be removed in the future)
         if (GetCurrentTowerType() == standardTowerPrefab)
         {
-            // Debug.Log("in normal turret branch");
             if (Input.GetKeyDown(KeyCode.Alpha1)) {
                 SetTowerToBuild(standardTowerPrefab);
             } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
@@ -101,7 +102,6 @@ public class BuildManager : MonoBehaviour
         }
         else if (GetCurrentTowerType() == missileLauncherPrefab)
         {
-            // Debug.Log("in missile launcher branch");
             if (Input.GetKeyDown(KeyCode.Alpha1)) {
                 SetTowerToBuild(missileLauncherPrefab);
             } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
