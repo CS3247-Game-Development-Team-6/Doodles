@@ -18,6 +18,15 @@ public class BuildManager : MonoBehaviour
     public GameObject fireMissileLauncher;
     public GameObject iceMissileLauncher;
     public GameObject waterMissileLauncher;
+    public GameObject upTowerPrefab;
+    public GameObject upMissileLauncherPrefab;
+    public GameObject upFireTurret;
+    public GameObject upIceTurret;
+    public GameObject upWaterTurret;
+    public GameObject upFireMissileLauncher;
+    public GameObject upIceMissileLauncher;
+    public GameObject upWaterMissileLauncher;
+
 
     private void Awake()
     {
