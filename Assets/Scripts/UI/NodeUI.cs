@@ -15,7 +15,7 @@ public class NodeUI : MonoBehaviour
 
         transform.position = target.GetTowerBuildPosition() + manualOffset;
 
-        if (target.hasTowerBuilt())
+        if (target.GetIsTowerBuilt())
         {
             Debug.Log("We are currently displaying it here: " + transform.position);
             ui.SetActive(true);
