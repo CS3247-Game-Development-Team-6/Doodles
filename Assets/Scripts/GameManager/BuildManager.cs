@@ -117,14 +117,29 @@ public class BuildManager : MonoBehaviour
         {
             return;
         }
+
         // Set respective towers
-        if (currentTowerType == standardTowerPrefab)
+        if (!selectedNode.GetIsUpgraded())
         {
-            towerToBuild = fireTurret;
+            if (selectedNode.tower.tag == "Turret")
+            {
+                towerToBuild = fireTurret;
+            }
+            else if (selectedNode.tower.tag == "Missile")
+            {
+                towerToBuild = fireMissileLauncher;
+            }
         }
-        else if (currentTowerType == missileLauncherPrefab)
+        else
         {
-            towerToBuild = fireMissileLauncher;
+            if (selectedNode.tower.tag == "Turret")
+            {
+                towerToBuild = upFireTurret;
+            }
+            else if (selectedNode.tower.tag == "Missile")
+            {
+                towerToBuild = upFireMissileLauncher;
+            }
         }
 
         SwapTower(this.towerToBuild, this.playerGO);
@@ -139,13 +154,27 @@ public class BuildManager : MonoBehaviour
         }
 
         // Set respective towers
-        if (currentTowerType == standardTowerPrefab)
+        if (!selectedNode.GetIsUpgraded())
         {
-            towerToBuild = iceTurret;
+            if (selectedNode.tower.tag == "Turret")
+            {
+                towerToBuild = iceTurret;
+            }
+            else if (selectedNode.tower.tag == "Missile")
+            {
+                towerToBuild = iceMissileLauncher;
+            }
         }
-        else if (currentTowerType == missileLauncherPrefab)
+        else
         {
-            towerToBuild = iceMissileLauncher;
+            if (selectedNode.tower.tag == "Turret")
+            {
+                towerToBuild = upIceTurret;
+            }
+            else if (selectedNode.tower.tag == "Missile")
+            {
+                towerToBuild = upIceMissileLauncher;
+            }
         }
 
         SwapTower(this.towerToBuild, this.playerGO);
@@ -160,13 +189,27 @@ public class BuildManager : MonoBehaviour
         }
 
         // Set respective towers
-        if (currentTowerType == standardTowerPrefab)
+        if (!selectedNode.GetIsUpgraded())
         {
-            towerToBuild = waterTurret;
+            if (selectedNode.tower.tag == "Turret")
+            {
+                towerToBuild = waterTurret;
+            }
+            else if (selectedNode.tower.tag == "Missile")
+            {
+                towerToBuild = waterMissileLauncher;
+            }
         }
-        else if (currentTowerType == missileLauncherPrefab)
-        {
-            towerToBuild = waterMissileLauncher;
+        else
+        { 
+            if (selectedNode.tower.tag == "Turret")
+            {
+                towerToBuild = upWaterTurret;
+            } 
+            else if (selectedNode.tower.tag == "Missile")
+            {
+                towerToBuild = upWaterMissileLauncher;
+            }
         }
 
         SwapTower(this.towerToBuild, this.playerGO);
@@ -179,10 +222,53 @@ public class BuildManager : MonoBehaviour
             return;
         }
 
-        if (currentTowerType.GetComponent<Turret>().bulletPrefab.tag == "Basic")
+        if (selectedNode.tower.tag == "Turret")
         {
-            towerToBuild = upTowerPrefab;
+            if (selectedNode.tower.GetComponent<Turret>().bulletPrefab.tag == "Basic")
+            {
+                towerToBuild = upTowerPrefab;
+            }
+
+            else if (selectedNode.tower.GetComponent<Turret>().bulletPrefab.tag == "Fire")
+            {
+                towerToBuild = upFireTurret;
+            }
+
+            else if (selectedNode.tower.GetComponent<Turret>().bulletPrefab.tag == "Ice")
+            {
+                towerToBuild = upIceTurret;
+            }
+
+            else if (selectedNode.tower.GetComponent<Turret>().bulletPrefab.tag == "Water")
+            {
+                towerToBuild = upWaterTurret;
+            }
         }
+
+        else if (selectedNode.tower.tag == "Missile")
+        {
+            if (selectedNode.tower.GetComponent<Turret>().bulletPrefab.tag == "Basic")
+            {
+                towerToBuild = upMissileLauncherPrefab;
+            }
+
+            else if (selectedNode.tower.GetComponent<Turret>().bulletPrefab.tag == "Fire")
+            {
+                towerToBuild = upFireMissileLauncher;
+            }
+
+            else if (selectedNode.tower.GetComponent<Turret>().bulletPrefab.tag == "Ice")
+            {
+                towerToBuild = upIceMissileLauncher;
+            }
+
+            else if (selectedNode.tower.GetComponent<Turret>().bulletPrefab.tag == "Water")
+            {
+                towerToBuild = upWaterMissileLauncher;
+            }
+        }
+
+        SwapTower(this.towerToBuild, this.playerGO);
     }
 
     
