@@ -11,19 +11,14 @@ public class Turret : MonoBehaviour
     public Transform rotationBase;
     public float rotationSpeed = 10f;
     [SerializeField] private float cost = 10f;
-    public float upgradeCost;
+    private float swapElementCost = 30f;
 
     [Header("Unity Setup Fields")]
     public string enemyTag = "Enemy";
     public float fireRate = 1f;
     private float fireCountDown = 0f;
-    public GameObject currentBullet;
     public GameObject bulletPrefab;
-    public GameObject fireBullet;
-    public GameObject iceBullet;
-    public GameObject waterBullet;
     public Transform firePoint;
-
 
     public enum State{
         Default,
@@ -57,32 +52,14 @@ public class Turret : MonoBehaviour
         get { return cost; }
     }
 
-    public void SwapBullet(string element)
+    public float GetSwapElementCost()
     {
-        switch (element)
-        {
-            case "Fire":
-                currentBullet = fireBullet;
-                break;
-            case "Ice":
-                currentBullet = iceBullet;
-                break;
-            case "Water":
-                currentBullet = waterBullet;
-                break;
-        }
-    }
-
-    public void RestoreBullet()
-    {
-        currentBullet = bulletPrefab;
+        return swapElementCost;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        // Initialize bullet type
-        currentBullet = bulletPrefab;
 
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
@@ -116,7 +93,7 @@ public class Turret : MonoBehaviour
 
     void Shoot() 
     {
-        GameObject bulletGO = (GameObject)Instantiate(currentBullet, firePoint.position, firePoint.rotation); ;
+        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         if (bullet != null)
