@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    private Transform target;
+    //private Transform target;
 
     [Header("Attribute")]
     public float range = 15f;
@@ -43,7 +43,8 @@ public class Turret : MonoBehaviour
     {
 
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
-        targetTransforms = GetTargetTransforms();
+        
+        targetTransforms = isAoeTurret ? GetTargetTransforms() : new Transform[1];
     }
 
     void UpdateTarget()
@@ -51,11 +52,11 @@ public class Turret : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
 
         float shortestDistance = Mathf.Infinity;
-        GameObject nearestEnemy = null;
         
+        GameObject nearestEnemy = null;
         haveTarget = false;
-        target = null;
-
+        targetTransforms[0] = null;
+        
         foreach (GameObject enemy in enemies) 
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
@@ -75,8 +76,7 @@ public class Turret : MonoBehaviour
 
         if (nearestEnemy != null && shortestDistance <= range)
         {
-            target = nearestEnemy.transform;
-            targetTransforms.Append(target.transform);
+            targetTransforms[0] = nearestEnemy.transform;
         }
     }
 
@@ -86,7 +86,7 @@ public class Turret : MonoBehaviour
         {
             GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
             Bullet bullet = bulletGO.GetComponent<Bullet>();
-
+            
             if (bullet != null)
             {
                 bullet.Seek(targetTransform, isAoeTurret);
@@ -97,7 +97,7 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target == null) 
+        if (targetTransforms[0] == null) 
         {
             return;
         }
@@ -105,7 +105,7 @@ public class Turret : MonoBehaviour
         if (!isAoeTurret) 
         {
             // Enemy target lock on 
-            Vector3 dir = target.position - transform.position;
+            Vector3 dir = targetTransforms[0].position - transform.position;
             Quaternion lookAtRotation = Quaternion.LookRotation(dir);
             Vector3 rotation = Quaternion.Lerp(rotationBase.rotation, lookAtRotation, Time.deltaTime * rotationSpeed).eulerAngles;
             rotationBase.rotation = Quaternion.Euler(0f, rotation.y, 0f);
