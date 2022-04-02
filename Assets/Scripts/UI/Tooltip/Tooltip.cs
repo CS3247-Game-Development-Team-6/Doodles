@@ -12,6 +12,9 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private TextMeshProUGUI contentField;
     [SerializeField] private LayoutElement layoutElement;
 
+    [SerializeField] private float secondsToWaitBeforeShowing = 0.4f;
+    [SerializeField] private float secondsToFadeIn = 1f;
+
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private bool tooltipIsOn;
@@ -57,11 +60,11 @@ public class Tooltip : MonoBehaviour
 
     private IEnumerator FadeIn()
     {
-        for (float a = 0.00f; a < 1.4; a += 0.03f)
+        for (float a = 0.00f; a < secondsToWaitBeforeShowing + secondsToFadeIn; a += 0.03f)
         {
             if (!tooltipIsOn) yield break;
             
-            if (a >= 0.4f) canvasGroup.alpha = a - 0.4f;
+            if (a >= secondsToWaitBeforeShowing) canvasGroup.alpha = a - secondsToWaitBeforeShowing;
             else MoveTooltip(); // move the tooltip every iteration to the current mouse position
             
             yield return new WaitForSeconds(0.03f);
