@@ -37,13 +37,18 @@ public class PlayerMovement : MonoBehaviour {
     private bool isDashing = false;
     private bool isBuilding = false;
     private bool isUsingShooting;
+    private bool isAttacking = false;
+    private bool isPaused = false;
 
     // player build values
-    private float buildDistance = 3f;
-    [SerializeField]
-    private float buildDuration = 5f;
+    [SerializeField] private float buildDistance = 1.5f;
+    [SerializeField] private float buildDuration = 4f;
     private float currentBuildDuration = 0f;
     private GameObject currentTowerCell; // current cell that the player is interacting with
+
+    // player attack values
+    private float attackDuration = 0.25f;
+    private float currentAttackDuration = 0f;
 
     // player unity object attributes
     private Animator animator;
@@ -75,9 +80,9 @@ public class PlayerMovement : MonoBehaviour {
         // initialize melee and shooting; shooting is default
         playerShootingScript = GetComponent<PlayerShooting>();
         playerMeleeScript = GetComponent<PlayerMelee>();
-        playerShootingScript.enableShooting();
-        playerMeleeScript.disableMelee();
-        isUsingShooting = true;
+        playerShootingScript.disableShooting();
+        playerMeleeScript.enableMelee();
+        isUsingShooting = false;
         firePoint = GameObject.Find("FirePoint").GetComponent<Transform>();
 
         // initialize reference to pause menu
@@ -118,6 +123,7 @@ public class PlayerMovement : MonoBehaviour {
             default:
                 Move();
                 Build();
+                Attack();
 
                 Vector3 lookDirection = (mousePositionVector - rigidBody.position).normalized;
                 float angle = Mathf.Atan2(lookDirection.x, lookDirection.z) * Mathf.Rad2Deg;
@@ -132,14 +138,25 @@ public class PlayerMovement : MonoBehaviour {
         
     }
 
+    public float GetBuildDistance() {
+        return buildDistance;
+    }
+
     private void UpdatePauseState() {
         if (pauseMenu.IsPaused()) {
-            // game is paused
+            // game is paused, update state
+            isPaused = true;
             state = State.Paused;
             playerShootingScript.Pause();
             playerMeleeScript.Pause();
         } else {
             // game is not paused
+            if (!isPaused) { // game is already unpaused, do not update state
+                return;
+            }
+
+            // update state
+            isPaused = false;
             state = State.Normal;
             playerShootingScript.Resume();
             playerMeleeScript.Resume();
@@ -151,18 +168,12 @@ public class PlayerMovement : MonoBehaviour {
                 HandleMovementInputs();
                 HandleBuildInputs();
                 HandleWeaponSwapInputs();
-
-                if (Input.GetMouseButtonDown(0)) { // left click (tied to attacking action)
-                    moveDirection = Vector3.zero; // prevents character sliding while attacking
-                    // TODO: add animation for attack action
-                    // state = State.Attacking;
-                    // animator.PlayAttackAnimation(attackDirection, () => state = State.Normal);
-                }
+                HandleAttackInputs();
                 break;
 
             case State.Rolling:
                 // TODO: add player rolling animation
-                float speedDropMultiplier = 10f;
+                float speedDropMultiplier = 20f;
                 currentRollSpeed -= currentRollSpeed * speedDropMultiplier * Time.deltaTime;
             
                 float rollSpeedMinimum = 20f;
@@ -211,7 +222,8 @@ public class PlayerMovement : MonoBehaviour {
             isBuilding = false; 
             actionTimer.text = "";
         }
-
+        
+        // Moved to MapInput.cs
         /*
         Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
         if (Input.GetMouseButtonDown(1)) { // right click
@@ -226,7 +238,7 @@ public class PlayerMovement : MonoBehaviour {
                     GameObject towerCell = raycastHit.collider.gameObject;
                     Node node = towerCell.GetComponent<Node>();
                     node.HighlightEnter();
-                    Vector3 mouseTowerCellPosition = raycastHit.point;
+                    Vector3 mouseTowerCellPosition = raycastHit.collider.gameObject.transform.position;
                     BuildTowerAttempt(mouseTowerCellPosition, towerCell);
                 }
             }
@@ -248,6 +260,17 @@ public class PlayerMovement : MonoBehaviour {
                 playerMeleeScript.disableMelee();
                 isUsingShooting = true;
             }
+        }
+    }
+
+    private void HandleAttackInputs() {
+        if (Input.GetMouseButtonDown(0)) { // left click (tied to attacking action)
+            moveDirection = Vector3.zero; // prevents character sliding while attacking
+            // TODO: add animation for attack action
+            currentAttackDuration = attackDuration;
+            state = State.Attacking;
+            isAttacking = true;
+            // animator.PlayAttackAnimation(attackDirection, () => state = State.Normal);
         }
     }
 
@@ -282,9 +305,18 @@ public class PlayerMovement : MonoBehaviour {
         case State.Rolling:
             rigidBody.velocity = rollDirection * currentRollSpeed;
             break;
+
+        case State.Attacking:
+            rigidBody.velocity = Vector3.zero;
+            break;
         }
     }
 
+    /////////////////////////////////////
+    //
+    // Building-related functions
+    //
+    /////////////////////////////////////
     public void BuildTowerAttempt(Vector3 mouseTowerCellPosition, GameObject towerCell) {
         
         if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { 
@@ -338,6 +370,18 @@ public class PlayerMovement : MonoBehaviour {
                 player.ChangeInkAmount(-turret.Cost);
             }
             isBuilding = false;
+        }
+    }
+
+    private void Attack() { // used to prevent player input for a short duration when attacking
+        if (!isAttacking) { // player is not attacking
+            return;
+        }
+
+        currentAttackDuration -= Time.deltaTime;
+        if (currentAttackDuration <= 0) {
+            state = State.Normal;
+            isAttacking = false;
         }
     }
 }

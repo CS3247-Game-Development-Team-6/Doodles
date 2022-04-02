@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerShooting : MonoBehaviour {
     /*
@@ -31,7 +32,7 @@ public class PlayerShooting : MonoBehaviour {
     private void Start() {
         firePoint = GameObject.Find("FirePoint").GetComponent<Transform>();
         mainCamera = Camera.main;
-        isUsingShooting = true;
+        isUsingShooting = false;
         state = State.Normal;
     }
 
@@ -44,8 +45,8 @@ public class PlayerShooting : MonoBehaviour {
                     mousePositionVector = raycastHit.point;
                     //mousePositionVector.y = transform.position.y; // set to same vertical height as player
                 }
-
-                if (isUsingShooting && Input.GetButtonDown("Fire1")) {
+                if (!IsPointerOverUIObject() && isUsingShooting && Input.GetButtonDown("Fire1")) {
+                    // raycast not hitting UI layer, using shooting, and pressing left mouse button
                     Shoot();
                 }
                 break;
@@ -92,5 +93,15 @@ public class PlayerShooting : MonoBehaviour {
             // TODO: add shooting animation somewhere
             currentCooldown = shootingCooldown;
         }
+    }
+
+    private bool IsPointerOverUIObject() {
+        // the ray cast appears to require only eventData.position.
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+    
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 }

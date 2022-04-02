@@ -866,6 +866,17 @@ MonoBehaviour:
   criticalLevel: 0.3
   rawValue: 0
   maxValue: 0
+--- !u!114 &906611711 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4304542979912485023, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &941677297 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5553060649945844835, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
@@ -1510,6 +1521,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 100255592798314417, guid: 62a6231b3df377742a38e26e01f00e07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1306252974}
+    - target: {fileID: 100255592798314417, guid: 62a6231b3df377742a38e26e01f00e07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: buildFireTurret
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922736662165116523, guid: 62a6231b3df377742a38e26e01f00e07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1306252974}
+    - target: {fileID: 2922736662165116523, guid: 62a6231b3df377742a38e26e01f00e07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: buildWaterTurret
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969024228411023651, guid: 62a6231b3df377742a38e26e01f00e07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1306252974}
+    - target: {fileID: 2969024228411023651, guid: 62a6231b3df377742a38e26e01f00e07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: buildIceTurret
+      objectReference: {fileID: 0}
     - target: {fileID: 3873514512996847632, guid: 62a6231b3df377742a38e26e01f00e07, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1585,6 +1620,14 @@ PrefabInstance:
     - target: {fileID: 5257327669036159729, guid: 62a6231b3df377742a38e26e01f00e07, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257327669563553594, guid: 62a6231b3df377742a38e26e01f00e07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1306252974}
+    - target: {fileID: 5257327669563553594, guid: 62a6231b3df377742a38e26e01f00e07, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DestroyTower
       objectReference: {fileID: 0}
     - target: {fileID: 5257327669563553597, guid: 62a6231b3df377742a38e26e01f00e07, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1876,9 +1919,9 @@ PrefabInstance:
       propertyPath: raycastOccluder
       value: 
       objectReference: {fileID: 26158120}
-    - target: {fileID: 1288790776874782330, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
-      propertyPath: m_Name
-      value: BaseHealth
+    - target: {fileID: 1059972132, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -18.48816
       objectReference: {fileID: 0}
     - target: {fileID: 1800086425317640480, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2109,6 +2152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3773202538542358478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4017679474560131482, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5244389774292442137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2190,9 +2238,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1373582471}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: winUI
+      value: 
+      objectReference: {fileID: 3773202538542358478}
+    - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: gameOverUI
       value: 
       objectReference: {fileID: 550646146}
+    - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: wavesCounterUI
+      value: 
+      objectReference: {fileID: 906611711}
     - target: {fileID: 6600273765185839074, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -2241,6 +2297,10 @@ PrefabInstance:
       propertyPath: nodeUI
       value: 
       objectReference: {fileID: 2075829309}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: playerGO
+      value: 
+      objectReference: {fileID: 1789031178}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
 --- !u!1001 &7828996251632798773
@@ -2258,6 +2318,10 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 7828996249860865849, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
+      propertyPath: buildDistance
+      value: 1.7
+      objectReference: {fileID: 0}
     - target: {fileID: 7828996249860865851, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2268,11 +2332,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7828996249860865851, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.117
+      value: 0.723
       objectReference: {fileID: 0}
     - target: {fileID: 7828996249860865851, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.971
+      value: 1.727
       objectReference: {fileID: 0}
     - target: {fileID: 7828996249860865851, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
       propertyPath: m_LocalRotation.w

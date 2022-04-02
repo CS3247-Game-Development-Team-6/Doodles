@@ -18,6 +18,7 @@ public class Node : MonoBehaviour
     public Color tooFarColor;
 
     private bool isTowerBuilt = false;
+    private bool isAddedElement = false;
     private GameObject tower;
     public Cell cell;
 
@@ -30,6 +31,8 @@ public class Node : MonoBehaviour
     public GameObject defaultTile;
     public TileType[] tileTypes;
     private BuildManager buildManager;
+    private PlayerMovement playerMovement;
+    private GameObject playerObject;
 
     private Vector3 towerBuildPosition;
 
@@ -55,13 +58,44 @@ public class Node : MonoBehaviour
         decorationMesh.transform.SetParent(transform);
         
         buildManager = BuildManager.instance;
+        playerObject = GameObject.Find("Player");
+        playerMovement = playerObject.GetComponent<PlayerMovement>();
     }
 
-    public bool hasTowerBuilt()
+    public GameObject SetTower(GameObject tower)
+    {
+        this.tower = tower;
+        return tower;
+    }
+
+    public GameObject GetTower()
+    {
+        return this.tower;
+    }
+    public void DestroyTower()
+    {
+        Destroy(this.tower);
+        tower = null;
+    }
+    public bool GetIsTowerBuilt()
     {
         return isTowerBuilt;
     }
 
+    public void SetIsTowerBuilt(bool b)
+    {
+        isTowerBuilt = b;
+    }
+
+    public bool GetIsAddedElement()
+    {
+        return isAddedElement;
+    }
+
+    public void SetIsAddedElement(bool b)
+    {
+        isAddedElement = b;
+    }
     public float TowerCost() {
         GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
         return towerToBuild.GetComponent<Turret>().Cost;
@@ -81,23 +115,35 @@ public class Node : MonoBehaviour
 
         if (buildManager.GetTowerToBuild() == null) 
         {
-            Debug.Log("Tower cannot be built here! TODO: Show Prompt on screen");
             return null;
         }
 
         if (tower != null) 
         {
-            Debug.Log("Tower cannot be built here! TODO: Show Prompt on screen");
             return null;
         }
 
         // build a tower
         GameObject towerToBuild = buildManager.GetTowerToBuild();
         towerBuildPosition = tileMesh.transform.position + towerOffset;
-        isTowerBuilt = true;
+        SetIsTowerBuilt(true);
         tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, Quaternion.identity);
-        Destroy(decorationMesh);
+        Destroy(decorationMesh);    // Destroy current node's asset
+
         return tower.GetComponent<Turret>();
+    }
+
+    // Build swapped tower
+    public void SwapTower()
+    {
+        if (buildManager.GetTowerToBuild() == null)
+        {
+            Debug.Log("There's no tower to build");
+            return;
+        }
+        Debug.Log("I'm in node.cs SwapTower()");
+        GameObject towerToBuild = buildManager.GetTowerToBuild();
+        tower = (GameObject)Instantiate(towerToBuild, towerBuildPosition, Quaternion.identity);
     }
 
     public Vector3 GetTowerBuildPosition()
@@ -105,12 +151,16 @@ public class Node : MonoBehaviour
         return towerBuildPosition;
     }
 
-    private void OnMouseEnter() {
+    private void OnMouseOver() {
         if (EventSystem.current.IsPointerOverGameObject() || buildManager.GetTowerToBuild() == null) {
             return;
         }
 
-        tileRenderer.material.color = hoverColor;
+        if ((transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()) {
+            tileRenderer.material.color = tooFarColor;
+        } else {
+            tileRenderer.material.color = hoverColor;
+        }
     }
 
     private void OnMouseExit() {
