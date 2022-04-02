@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 5599824396960863642}
   - component: {fileID: 7979068609543431153}
   - component: {fileID: 2965639768699407012}
+  - component: {fileID: 1025656380027880917}
   m_Layer: 0
   m_Name: Ice
   m_TagString: Untagged
@@ -341,6 +342,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1025656380027880917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015510409188676889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Ice
+  content: ice ice baby
 --- !u!1 &4600644439624492359
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +368,7 @@ GameObject:
   - component: {fileID: 6494339931021776426}
   - component: {fileID: 3448080601082367184}
   - component: {fileID: 2923860784464461292}
+  - component: {fileID: 555756101970365361}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -474,6 +490,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &555756101970365361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4600644439624492359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Water
+  content: like water
 --- !u!1 &5253943535134561968
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,6 +699,7 @@ GameObject:
   - component: {fileID: 5253943535404000525}
   - component: {fileID: 5253943535404000522}
   - component: {fileID: 5253943535404000523}
+  - component: {fileID: 2874473805540046050}
   m_Layer: 0
   m_Name: Upgrade
   m_TagString: Untagged
@@ -790,6 +821,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2874473805540046050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5253943535404000521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Upgrade
+  content: Up
 --- !u!1 &5253943535555894459
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,6 +847,7 @@ GameObject:
   - component: {fileID: 5253943535555894463}
   - component: {fileID: 5253943535555894460}
   - component: {fileID: 5253943535555894461}
+  - component: {fileID: 4393754084374386490}
   m_Layer: 0
   m_Name: Destroy
   m_TagString: Untagged
@@ -923,6 +969,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4393754084374386490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5253943535555894459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Destroy
+  content: "Removes tower. \n(i wish we could plug in how much exactly but that's
+    not gonna be quick to implement)"
 --- !u!1 &5253943536085481847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,6 +1612,7 @@ GameObject:
   - component: {fileID: 2294119273419514541}
   - component: {fileID: 6316879759921171240}
   - component: {fileID: 105882454854956086}
+  - component: {fileID: 8804709817679960177}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -1672,3 +1734,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8804709817679960177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8448678081358125985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Fire
+  content: u are my fire

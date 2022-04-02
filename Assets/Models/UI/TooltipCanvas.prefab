@@ -75,7 +75,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 0.4784314, b: 0.4784314, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -539,6 +539,8 @@ MonoBehaviour:
   headerField: {fileID: 7523575736459848398}
   contentField: {fileID: 7523575735229308524}
   layoutElement: {fileID: 7523575736757427111}
+  secondsToWaitBeforeShowing: 0.4
+  secondsToFadeIn: 1
 --- !u!225 &7523575736757427106
 CanvasGroup:
   m_ObjectHideFlags: 0
