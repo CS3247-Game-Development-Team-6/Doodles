@@ -99,7 +99,8 @@ public class Enemy : MonoBehaviour
 
     public void ReduceDefense(int defDecreAmount)
     {
-        defense = initDefense - defDecreAmount;
+        if (defDecreAmount > initDefense) defense = 0;
+        else defense = initDefense - defDecreAmount;
     }
 
     public void RestoreDefense()

@@ -556,17 +556,11 @@ MonoBehaviour:
   speed: 0.8
   initSpeed: 0.7
   health: 0
-  initHealth: 700
+  initHealth: 600
   defense: 0
-  initDefense: 10
+  initDefense: 20
   inkGained: 7
   deathEffect: {fileID: 6496939036694839794, guid: 3db553ed3876d7345b9c4c6180c7f8d4, type: 3}
-  isScorched: 0
-  isChilled: 0
-  isDrenched: 0
-  isScalded: 0
-  isFrozen: 0
-  isWeakened: 0
   isInFog: 1
   healthBar: {fileID: 1444037786940132258}
   map: {fileID: 0}
@@ -596,7 +590,7 @@ MonoBehaviour:
   model: {fileID: 962791188857077900}
   animator: {fileID: 0}
   rangeCenter: {fileID: 7249149580455096876}
-  bulletPrefab: {fileID: 5753786456684779845, guid: d1b0a9d87d22b0c429c49b350d3f735a, type: 3}
+  bulletPrefab: {fileID: 5753786456684779845, guid: 1c063cf226a0b214786d54b0ea1fc553, type: 3}
   firePoint: {fileID: 4987653122298946544}
 --- !u!114 &5033028107803005616
 MonoBehaviour:
