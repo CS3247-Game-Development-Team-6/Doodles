@@ -58,7 +58,11 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        health = health - amount + defense;
+        // Damage to be taken is higher than defense
+        if (defense < amount)
+        {
+            health = health - amount + defense;
+        }
 
         // float number between 0 and 1
         healthBar.fillAmount = health / initHealth;
