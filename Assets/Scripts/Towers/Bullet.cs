@@ -17,9 +17,6 @@ public class Bullet : MonoBehaviour
     { 
         target = _target;
         isPassingThroughBullet = isPassing;
-
-        if (isPassingThroughBullet)
-            explosionRadius = 0.1f;
     }
 
     // Update is called once per frame
@@ -43,7 +40,7 @@ public class Bullet : MonoBehaviour
         transform.LookAt(target);
     }
 
-    void HitTarget() 
+    void HitTarget(bool toDestroyThisFrame=true, Collider hitEnemy=null) 
     {
         GameObject impactEffectParticle = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(impactEffectParticle, 5f);
@@ -53,7 +50,7 @@ public class Bullet : MonoBehaviour
             Explode();
         }
 
-        if (target.CompareTag("Enemy"))
+        if (target != null && target.CompareTag("Enemy"))
         {
             var effectable = target.GetComponent<IEffectable>();
             if (effectable != null) effectable.ApplyEffect(_data);
@@ -61,7 +58,15 @@ public class Bullet : MonoBehaviour
             target.GetComponent<Enemy>().TakeDamage(bulletDamage);
         }
 
-        Destroy(gameObject);    // destroys the bullet
+        if (hitEnemy)
+        {
+            var effectable = hitEnemy.gameObject.GetComponent<IEffectable>();
+            if (effectable != null) effectable.ApplyEffect(_data);
+            hitEnemy.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage);
+        }
+
+        if (toDestroyThisFrame) 
+            Destroy(gameObject);    // destroys the bullet
     }
 
     void Explode()
@@ -83,7 +88,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            HitTarget();
+            HitTarget(false, other);
         }
     }
 

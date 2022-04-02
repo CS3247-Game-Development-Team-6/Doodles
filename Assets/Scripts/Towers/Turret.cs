@@ -55,7 +55,8 @@ public class Turret : MonoBehaviour
         
         GameObject nearestEnemy = null;
         haveTarget = false;
-        targetTransforms[0] = null;
+        
+        if (!isAoeTurret) targetTransforms[0] = null;
         
         foreach (GameObject enemy in enemies) 
         {
@@ -74,7 +75,7 @@ public class Turret : MonoBehaviour
             }
         }
 
-        if (nearestEnemy != null && shortestDistance <= range)
+        if (nearestEnemy != null && shortestDistance <= range && !isAoeTurret)
         {
             targetTransforms[0] = nearestEnemy.transform;
         }
@@ -111,7 +112,7 @@ public class Turret : MonoBehaviour
             rotationBase.rotation = Quaternion.Euler(0f, rotation.y, 0f);
         }
 
-        if (fireCountDown <= 0f) 
+        if (haveTarget && fireCountDown <= 0f) 
         {
             Shoot();
             fireCountDown = 1f / fireRate;
@@ -135,6 +136,7 @@ public class Turret : MonoBehaviour
             aimingPointPosition.z += z;
 
             GameObject circleTarget = Instantiate(cube, aimingPointPosition, Quaternion.identity);
+            circleTarget.transform.parent = GameObject.Find("AoETargetsDirectory").transform;
             arrOfTransforms[bulletNumber] = circleTarget.transform;
         }
 
