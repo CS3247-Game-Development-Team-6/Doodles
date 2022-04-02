@@ -6,7 +6,7 @@ public class PlayerBullet : MonoBehaviour {
 
     public GameObject hitEffect; // TODO: get a hit effect for the bullets
 
-    private int bulletDamage = 20;
+    public int bulletDamage = 20;
 
     private float maxLifeTime = 10f;
     private float currentLifeTime;
@@ -32,7 +32,7 @@ public class PlayerBullet : MonoBehaviour {
         // Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
         // Destroy(effect, 5f); // destroy after 5 ticks
         
-        Debug.Log("Bullet hit: " + other.gameObject.name); // TODO: remove
+/*        Debug.Log("Bullet hit: " + other.gameObject.name); // TODO: remove*/
         if (other.collider.CompareTag("Enemy")) {
             other.collider.GetComponentInParent<Enemy>().TakeDamage(bulletDamage);
             Debug.Log("Enemy takes damage!"); // TODO: remove

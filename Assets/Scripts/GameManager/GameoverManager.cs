@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameoverManager : MonoBehaviour
@@ -27,11 +28,13 @@ public class GameoverManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void Retry() {
-
+    public void Retry() 
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void Menu() {
-        
+    public void Menu() 
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

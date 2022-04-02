@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class WaveSpawner : MonoBehaviour
 {
     // keep track of how many enemies alive then only spawn new wave
-    public static int numEnemiesAlive = 0;
+
+    public static int numEnemiesAlive;
+    public static bool isSpawningEnemy = false;
 
     public Wave[] waves;
 
@@ -22,17 +24,35 @@ public class WaveSpawner : MonoBehaviour
 
     private int waveIndex = 0;
 
+    void Start()
+    {
+        numEnemiesAlive = 0;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (numEnemiesAlive > 0)
+        //Debug.Log("Enemy alives: " + numEnemiesAlive);
+        if (numEnemiesAlive > 0 || isSpawningEnemy)
         {
             return;
         }
 
+        // win the game
+        if (waveIndex == waves.Length)
+        {
+            Debug.Log("LEVEL WON!");
+
+            GetComponent<GameManager>().WinGame();
+
+            // disable this script
+            this.enabled = false;
+        }
+
         if (countdownTimer <= 0f)
         {
-            StartCoroutine(SpawnWave());
+            isSpawningEnemy = true;
+            SpawnWave();
             countdownTimer = timeBetweenWaves;
             return;
         }
@@ -48,32 +68,22 @@ public class WaveSpawner : MonoBehaviour
     }
 
     // can pause the func execution
-    IEnumerator SpawnWave()
+    void SpawnWave()
     {
         //keep track of how many rounds survive
         GameManager.rounds++;
 
         Wave waveToSpawn = waves[waveIndex];
 
-        for (int i = 0; i < waveToSpawn.count; i++)
-        {
-            SpawnEnemy(waveToSpawn.enemy);
-            yield return new WaitForSeconds(1f / waveToSpawn.rate);
-        }
+        StartCoroutine(waveToSpawn.StartWave(this));
+
         waveIndex++;
-
-        if (waveIndex == waves.Length)
-        {
-            Debug.Log("LEVEL WON!");
-
-            // disable this script
-            this.enabled = false;
-        }
     }
 
-    void SpawnEnemy(GameObject _enemy)
+    public void SpawnEnemy(GameObject _enemy)
     {
         Instantiate(_enemy, spawnPoint.position, spawnPoint.rotation);
         numEnemiesAlive++;
     }
+
 }

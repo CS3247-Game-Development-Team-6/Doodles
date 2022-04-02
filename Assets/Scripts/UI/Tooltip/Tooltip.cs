@@ -64,7 +64,8 @@ public class Tooltip : MonoBehaviour
         {
             if (!tooltipIsOn) yield break;
             
-            if (a >= secondsToWaitBeforeShowing) canvasGroup.alpha = a - secondsToWaitBeforeShowing;
+            if (a >= secondsToWaitBeforeShowing) canvasGroup.alpha = (a - secondsToWaitBeforeShowing) 
+                                                                     * (1 / secondsToFadeIn);
             else MoveTooltip(); // move the tooltip every iteration to the current mouse position
             
             yield return new WaitForSeconds(0.03f);
