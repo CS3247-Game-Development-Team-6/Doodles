@@ -10,7 +10,7 @@ public class PlayerMeleeHitbox : MonoBehaviour
     */
     public GameObject hitEffect; // TODO: get a hit effect for melee actions
     private int meleeDamage = 30;
-    private float maxLifeTime = 0.15f;
+    private float maxLifeTime = 0.20f;
     private float currentLifeTime;
     private List<Collider> colliderList;
     private bool hasAppliedDamage = false;
@@ -33,7 +33,7 @@ public class PlayerMeleeHitbox : MonoBehaviour
     }
 
     void OnCollisionStay(Collision other) {
-        if (!colliderList.Contains(other.collider)) { 
+        if (other.collider.CompareTag("Enemy") && !colliderList.Contains(other.collider)) { 
             colliderList.Add(other.collider);
         }
     }
@@ -44,7 +44,8 @@ public class PlayerMeleeHitbox : MonoBehaviour
         }
 
         foreach (Collider collider in colliderList) {
-            if (collider.CompareTag("Enemy") && collider.gameObject != null) {
+            if (!collider) continue;    // should not continue if the game object has already been destroyed.
+            if (collider.CompareTag("Enemy")) {
                 // TODO: implement hit effect
                 // Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
                 // Destroy(effect, 5f); // destroy after 5 ticks
