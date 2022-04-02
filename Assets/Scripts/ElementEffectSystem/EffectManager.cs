@@ -78,7 +78,6 @@ public class EffectManager : MonoBehaviour, IEffectable
                         this._data.DOTAmount = _burstDotAmount;
                         this._data.TickSpeed = _burstTickSpeed;
                         this._data.Lifetime = _burstLifetime;
-                        Debug.Log("Kaboom");
                     }
                     // Weakened
                     else if (this._data.Element == "Ice" && _data.Element == "Fire" || this._data.Element == "Fire" && _data.Element == "Ice")
