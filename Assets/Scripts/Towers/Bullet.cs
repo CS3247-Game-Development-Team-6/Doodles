@@ -11,10 +11,15 @@ public class Bullet : MonoBehaviour
     public GameObject impactEffect;
     [SerializeField] private int bulletDamage;
     [SerializeField] private StatusEffectData _data;
+    private bool isPassingThroughBullet = false;
 
-    public void Seek(Transform _target) 
+    public void Seek(Transform _target, bool isPassing) 
     { 
         target = _target;
+        isPassingThroughBullet = isPassing;
+
+        if (isPassingThroughBullet)
+            explosionRadius = 0.1f;
     }
 
     // Update is called once per frame
@@ -71,6 +76,14 @@ public class Bullet : MonoBehaviour
 
                 collider.GetComponent<Enemy>().TakeDamage(bulletDamage);
             }
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            HitTarget();
         }
     }
 
