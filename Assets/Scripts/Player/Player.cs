@@ -19,8 +19,6 @@ public class Player : MonoBehaviour {
         ink = startingAmount * maxInk;
         playerInkIndicator.maxValue = (int)maxInk;
         playerInkIndicator.rawValue = (int)ink;
-        //Debug.Log(playerInkIndicator.maxValue);
-        //Debug.Log(playerInkIndicator.rawValue);
     }
 
     public bool hasEnoughInk(float cost) {
