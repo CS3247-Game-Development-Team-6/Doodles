@@ -45,18 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b909ab942025b9b4b8dec7655148aaec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 30
+  range: 3
   rotationBase: {fileID: 1444386264177786114}
   rotationSpeed: 5
-  cost: 15
-  upgradeCost: 20
+  cost: 20
+  swapElementCost: 35
+  upgradeCost: 25
   enemyTag: Enemy
   fireRate: 0.5
-  currentBullet: {fileID: 0}
   bulletPrefab: {fileID: 5149562609060439765, guid: 681c687178be50d4884650e5bd0e0ade, type: 3}
-  fireBullet: {fileID: 5149562609060439765, guid: 681c687178be50d4884650e5bd0e0ade, type: 3}
-  iceBullet: {fileID: 5149562609060439765, guid: 720ff82ec149bf5498b57112a3078402, type: 3}
-  waterBullet: {fileID: 5149562609060439765, guid: 08ed0a4e6064a084ea43dde318343e1b, type: 3}
   firePoint: {fileID: 2802609997441325570}
 --- !u!1 &4543029209186787370
 GameObject:
