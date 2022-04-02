@@ -19,7 +19,8 @@ public class Node : MonoBehaviour
 
     private bool isTowerBuilt = false;
     private bool isAddedElement = false;
-    private GameObject tower;
+    private bool isUpgraded = false;
+    public GameObject tower;
     public Cell cell;
 
     public Vector3 tileOffset = Vector3.zero;
@@ -31,8 +32,6 @@ public class Node : MonoBehaviour
     public GameObject defaultTile;
     public TileType[] tileTypes;
     private BuildManager buildManager;
-    private PlayerMovement playerMovement;
-    private GameObject playerObject;
 
     private Vector3 towerBuildPosition;
 
@@ -58,8 +57,6 @@ public class Node : MonoBehaviour
         decorationMesh.transform.SetParent(transform);
         
         buildManager = BuildManager.instance;
-        playerObject = GameObject.Find("Player");
-        playerMovement = playerObject.GetComponent<PlayerMovement>();
     }
 
     public GameObject SetTower(GameObject tower)
@@ -96,6 +93,17 @@ public class Node : MonoBehaviour
     {
         isAddedElement = b;
     }
+
+    public bool GetIsUpgraded()
+    {
+        return isUpgraded;
+    }
+
+    public void SetIsUpgraded(bool b)
+    { 
+        isUpgraded = b;
+    }
+
     public float TowerCost() {
         GameObject towerToBuild = BuildManager.instance.GetTowerToBuild();
         return towerToBuild.GetComponent<Turret>().Cost;
@@ -143,6 +151,7 @@ public class Node : MonoBehaviour
         }
         Debug.Log("I'm in node.cs SwapTower()");
         GameObject towerToBuild = buildManager.GetTowerToBuild();
+        Debug.Log(towerToBuild.name);
         tower = (GameObject)Instantiate(towerToBuild, towerBuildPosition, Quaternion.identity);
     }
 
@@ -151,16 +160,12 @@ public class Node : MonoBehaviour
         return towerBuildPosition;
     }
 
-    private void OnMouseOver() {
+    private void OnMouseEnter() {
         if (EventSystem.current.IsPointerOverGameObject() || buildManager.GetTowerToBuild() == null) {
             return;
         }
 
-        if ((transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()) {
-            tileRenderer.material.color = tooFarColor;
-        } else {
-            tileRenderer.material.color = hoverColor;
-        }
+        tileRenderer.material.color = hoverColor;
     }
 
     private void OnMouseExit() {

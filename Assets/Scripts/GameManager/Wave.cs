@@ -70,6 +70,9 @@ public class Wave
             }
 
         }
+
+        WaveSpawner.isSpawningEnemy = false;
     }  
+
 
 }

@@ -9,7 +9,6 @@ public class BuildManager : MonoBehaviour
     public GameObject playerGO;
     private Node selectedNode;
     public NodeUI nodeUI;
-    private GameObject currentTowerType;
     public GameObject standardTowerPrefab;
     public GameObject missileLauncherPrefab;
     public GameObject fireTurret;
@@ -18,6 +17,15 @@ public class BuildManager : MonoBehaviour
     public GameObject fireMissileLauncher;
     public GameObject iceMissileLauncher;
     public GameObject waterMissileLauncher;
+    public GameObject upTowerPrefab;
+    public GameObject upMissileLauncherPrefab;
+    public GameObject upFireTurret;
+    public GameObject upIceTurret;
+    public GameObject upWaterTurret;
+    public GameObject upFireMissileLauncher;
+    public GameObject upIceMissileLauncher;
+    public GameObject upWaterMissileLauncher;
+
 
     private void Awake()
     {
@@ -28,7 +36,6 @@ public class BuildManager : MonoBehaviour
         }
         instance = this;
         towerToBuild = standardTowerPrefab;
-        currentTowerType = towerToBuild;
     }
 
     public GameObject GetTowerToBuild()
@@ -55,18 +62,9 @@ public class BuildManager : MonoBehaviour
 
     public void SetTowerToBuild(GameObject tower)
     {
+        Debug.Log(tower.name);
         towerToBuild = tower; 
         DeselectNode();
-    }
-
-    public GameObject GetCurrentTowerType()
-    {
-        return currentTowerType;
-    }
-
-    public void SetCurrentTowerType(GameObject tower)
-    {
-        currentTowerType = tower;
     }
 
     // Change tower elements
@@ -81,19 +79,17 @@ public class BuildManager : MonoBehaviour
         }
 
         // Get rid of original tower
-        selectedNode.DestroyTower();
+        nodeUI.target.DestroyTower();
 
         // Build new tower with correct element
-        selectedNode.SwapTower();
+        nodeUI.target.SwapTower();
 
         player.ChangeInkAmount(-cost);
 
-        selectedNode.SetIsAddedElement(true);
-
         // Reset towerToBuild
-        if (towerToBuild.GetComponent<Turret>().name.Contains("Turret"))
+        if (towerToBuild.tag == "Turret")
             this.towerToBuild = standardTowerPrefab;
-        else if (towerToBuild.GetComponent<Turret>().name.Contains("MissileLauncher"))
+        else if (towerToBuild.tag == "Missile")
             this.towerToBuild = missileLauncherPrefab;
 
         // Hide nodeUI
@@ -102,74 +98,213 @@ public class BuildManager : MonoBehaviour
 
     public void buildFireTurret()
     {
+/*        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());*/
 
         // Check if already added element
-        if (selectedNode.GetIsAddedElement())
+        if (nodeUI.target.GetIsAddedElement())
         {
             return;
         }
+
+/*        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());*/
+
         // Set respective towers
-        if (currentTowerType == standardTowerPrefab)
+        if (!nodeUI.target.GetIsUpgraded())
         {
-            towerToBuild = fireTurret;
+            if (nodeUI.target.tower.tag == "Turret")
+            {
+                towerToBuild = fireTurret;
+            }
+            else if (nodeUI.target.tower.tag == "Missile")
+            {
+                towerToBuild = fireMissileLauncher;
+            }
         }
-        else if (currentTowerType == missileLauncherPrefab)
+        else
         {
-            towerToBuild = fireMissileLauncher;
+            if (nodeUI.target.tower.tag == "Turret")
+            {
+                towerToBuild = upFireTurret;
+            }
+            else if (nodeUI.target.tower.tag == "Missile")
+            {
+                towerToBuild = upFireMissileLauncher;
+            }
+        }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
+        {
+/*            Debug.Log("No cash no upgrade");*/
+            return;
         }
 
         SwapTower(this.towerToBuild, this.playerGO);
+        nodeUI.target.SetIsAddedElement(true);
     }
 
     public void buildIceTurret()
     {
+/*        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());*/
+
         // Check if already added element
-        if (selectedNode.GetIsAddedElement())
+        if (nodeUI.target.GetIsAddedElement())
         {
             return;
         }
 
+/*        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());*/
+
         // Set respective towers
-        if (currentTowerType == standardTowerPrefab)
+        if (!nodeUI.target.GetIsUpgraded())
         {
-            towerToBuild = iceTurret;
+            if (nodeUI.target.tower.tag == "Turret")
+            {
+                towerToBuild = iceTurret;
+            }
+            else if (nodeUI.target.tower.tag == "Missile")
+            {
+                towerToBuild = iceMissileLauncher;
+            }
         }
-        else if (currentTowerType == missileLauncherPrefab)
+        else
         {
-            towerToBuild = iceMissileLauncher;
+            if (nodeUI.target.tower.tag == "Turret")
+            {
+                towerToBuild = upIceTurret;
+            }
+            else if (nodeUI.target.tower.tag == "Missile")
+            {
+                towerToBuild = upIceMissileLauncher;
+            }
+        }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
+        {
+/*            Debug.Log("No cash no upgrade");*/
+            return;
         }
 
         SwapTower(this.towerToBuild, this.playerGO);
+        nodeUI.target.SetIsAddedElement(true);
     }
 
     public void buildWaterTurret()
     {
+/*        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());*/
+
         // Check if already added element
-        if (selectedNode.GetIsAddedElement())
+        if (nodeUI.target.GetIsAddedElement())
         {
             return;
         }
 
+/*        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());*/
+
         // Set respective towers
-        if (currentTowerType == standardTowerPrefab)
+        if (!nodeUI.target.GetIsUpgraded())
         {
-            towerToBuild = waterTurret;
+            if (nodeUI.target.tower.tag == "Turret")
+            {
+                towerToBuild = waterTurret;
+            }
+            else if (nodeUI.target.tower.tag == "Missile")
+            {
+                towerToBuild = waterMissileLauncher;
+            }
         }
-        else if (currentTowerType == missileLauncherPrefab)
+        else
+        { 
+            if (nodeUI.target.tower.tag == "Turret")
+            {
+                towerToBuild = upWaterTurret;
+            } 
+            else if (nodeUI.target.tower.tag == "Missile")
+            {
+                towerToBuild = upWaterMissileLauncher;
+            }
+        }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
         {
-            towerToBuild = waterMissileLauncher;
+/*            Debug.Log("No cash no upgrade");*/
+            return;
         }
 
         SwapTower(this.towerToBuild, this.playerGO);
+        nodeUI.target.SetIsAddedElement(true);
+    }
+
+    public void UpgradeTower()
+    {
+        if (nodeUI.target.GetIsUpgraded() && nodeUI.target.GetIsAddedElement())
+        {
+            return;
+        }
+
+        if (nodeUI.target.tower.tag == "Turret")
+        {
+            if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Basic")
+            {
+                towerToBuild = upTowerPrefab;
+            }
+
+            else if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Fire")
+            {
+                towerToBuild = upFireTurret;
+            }
+
+            else if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Ice")
+            {
+                towerToBuild = upIceTurret;
+            }
+
+            else if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Water")
+            {
+                towerToBuild = upWaterTurret;
+            }
+        }
+
+        else if (nodeUI.target.tower.tag == "Missile")
+        {
+            if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Basic")
+            {
+                towerToBuild = upMissileLauncherPrefab;
+            }
+
+            else if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Fire")
+            {
+                towerToBuild = upFireMissileLauncher;
+            }
+
+            else if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Ice")
+            {
+                towerToBuild = upIceMissileLauncher;
+            }
+
+            else if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Water")
+            {
+                towerToBuild = upWaterMissileLauncher;
+            }
+        }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
+        {
+/*            Debug.Log("No cash no upgrade");*/
+            return;
+        }
+
+        SwapTower(this.towerToBuild, this.playerGO);
+        nodeUI.target.SetIsUpgraded(true);
     }
 
     
 
     public void DestroyTower()
     {
-        selectedNode.DestroyTower();
-        selectedNode.SetIsTowerBuilt(false);
-        selectedNode.SetIsAddedElement(false);
+        nodeUI.target.DestroyTower();
+        nodeUI.target.SetIsTowerBuilt(false);
+        nodeUI.target.SetIsAddedElement(false);
+        nodeUI.target.SetIsUpgraded(false);
         // Hide nodeUI
         DeselectNode();
     }

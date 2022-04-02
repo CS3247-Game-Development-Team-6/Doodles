@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
-    public const float maxInk = 100f;
+    public float maxInk = 400f;
     public float growthRate;
     [Range(0, 1)] public float startingAmount = 0.6f;
     private float ink;
@@ -19,8 +19,6 @@ public class Player : MonoBehaviour {
         ink = startingAmount * maxInk;
         playerInkIndicator.maxValue = (int)maxInk;
         playerInkIndicator.rawValue = (int)ink;
-        Debug.Log(playerInkIndicator.maxValue);
-        Debug.Log(playerInkIndicator.rawValue);
     }
 
     public bool hasEnoughInk(float cost) {
@@ -40,8 +38,7 @@ public class Player : MonoBehaviour {
 
     // from killing enemy
     public void AddInk(float inkAmount) {
-        ink = ink + inkAmount;
-        playerInkIndicator.rawValue = (int)ink;
+        ChangeInkAmount(inkAmount); // TODO: Refactor pls....
     }
 
     private void Update() {

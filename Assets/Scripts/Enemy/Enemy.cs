@@ -58,15 +58,14 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        health = health - amount + defense;
+        // Damage to be taken is higher than defense
+        if (defense < amount)
+        {
+            health = health - amount + defense;
+        }
 
         // float number between 0 and 1
         healthBar.fillAmount = health / initHealth;
-
-        if (health <= 0)
-        {
-            Die();
-        }
     }
 
     public void TakeDot(float amount)
@@ -76,10 +75,6 @@ public class Enemy : MonoBehaviour
         // float number between 0 and 1
         healthBar.fillAmount = health / initHealth;
 
-        if (health <= 0)
-        {
-            Die();
-        }
     }
 
     public void ReduceSpeed(float slowAmount)
@@ -104,7 +99,8 @@ public class Enemy : MonoBehaviour
 
     public void ReduceDefense(int defDecreAmount)
     {
-        defense = initDefense - defDecreAmount;
+        if (defDecreAmount > initDefense) defense = 0;
+        else defense = initDefense - defDecreAmount;
     }
 
     public void RestoreDefense()
@@ -217,7 +213,19 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (health <= 0)
+        {
+            Die();
+        }
+
         if (GetComponent<EnemyShooting>().isShooting) {
+            // stop movement
+            animator.SetBool("isWalking", false);
+            return;
+        }
+
+        if (isFrozen)
+        {
             // stop movement
             animator.SetBool("isWalking", false);
             return;
@@ -248,7 +256,6 @@ public class Enemy : MonoBehaviour
         {
             lastXCoord = currentXCoord;
             lastYCoord = currentYCoord;
-            Debug.Log((lastXCoord, lastYCoord));
             isInFog = GetCurrentTileFogged(currentXCoord, currentYCoord);
         }
         

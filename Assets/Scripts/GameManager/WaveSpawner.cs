@@ -32,6 +32,7 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("Enemy alives: " + numEnemiesAlive);
         if (numEnemiesAlive > 0 || isSpawningEnemy)
         {
             return;
@@ -50,6 +51,7 @@ public class WaveSpawner : MonoBehaviour
 
         if (countdownTimer <= 0f)
         {
+            isSpawningEnemy = true;
             SpawnWave();
             countdownTimer = timeBetweenWaves;
             return;
@@ -71,16 +73,11 @@ public class WaveSpawner : MonoBehaviour
         //keep track of how many rounds survive
         GameManager.rounds++;
 
-        isSpawningEnemy = true;
-
         Wave waveToSpawn = waves[waveIndex];
 
         StartCoroutine(waveToSpawn.StartWave(this));
 
         waveIndex++;
-
-        isSpawningEnemy = false;
-
     }
 
     public void SpawnEnemy(GameObject _enemy)
