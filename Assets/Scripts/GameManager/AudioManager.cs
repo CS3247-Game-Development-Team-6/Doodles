@@ -1,6 +1,7 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -22,7 +23,11 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        Play("Level 1 BGM");
+        if (SceneManager.GetActiveScene().name == "Menu")
+            Play("Main Menu BGM");
+        else if (SceneManager.GetActiveScene().name == "ShaderScene")
+            Play("Level 1 BGM");
+
     }
 
     public void Play (string name)
