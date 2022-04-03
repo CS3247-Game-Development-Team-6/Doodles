@@ -47,6 +47,7 @@ public class EnemyBullet : MonoBehaviour
 
     void HitTarget() 
     {
+        // Better implementation required to identify boss bullet
         if (bulletDamage >= 100)
         {
             // boss bullet
