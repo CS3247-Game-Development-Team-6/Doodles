@@ -217,7 +217,7 @@ Transform:
   m_LocalScale: {x: 3, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: -58.354, y: 0, z: 0}
 --- !u!1 &41076050
 GameObject:
@@ -419,7 +419,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5263057130071336389, guid: 6a793fd696308b44c9be271e7055f73b, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5263057130071336389, guid: 6a793fd696308b44c9be271e7055f73b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1476,6 +1476,22 @@ PrefabInstance:
       propertyPath: raycastOccluder
       value: 
       objectReference: {fileID: 26158120}
+    - target: {fileID: 8479370089639194939, guid: ff2bd7890cc215943a4adf0dc5a84eed, type: 3}
+      propertyPath: m_fontSize
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479370089639194939, guid: ff2bd7890cc215943a4adf0dc5a84eed, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 45c821fbe8409334db1692d4a0bfa0ba, type: 2}
+    - target: {fileID: 8479370089639194939, guid: ff2bd7890cc215943a4adf0dc5a84eed, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8479370089639194939, guid: ff2bd7890cc215943a4adf0dc5a84eed, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff2bd7890cc215943a4adf0dc5a84eed, type: 3}
 --- !u!114 &1265310115 stripped
