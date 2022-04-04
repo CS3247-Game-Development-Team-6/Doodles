@@ -34,6 +34,8 @@ public class Node : MonoBehaviour
     private BuildManager buildManager;
 
     private Vector3 towerBuildPosition;
+    private PlayerMovement playerMovement;
+    private GameObject playerObject;
 
     private void Start()
     {
@@ -57,6 +59,8 @@ public class Node : MonoBehaviour
         decorationMesh.transform.SetParent(transform);
         
         buildManager = BuildManager.instance;
+        playerObject = GameObject.Find("Player");
+        playerMovement = playerObject.GetComponent<PlayerMovement>();
     }
 
     public GameObject SetTower(GameObject tower)
@@ -146,10 +150,8 @@ public class Node : MonoBehaviour
     {
         if (buildManager.GetTowerToBuild() == null)
         {
-            Debug.Log("There's no tower to build");
             return;
         }
-        Debug.Log("I'm in node.cs SwapTower()");
         GameObject towerToBuild = buildManager.GetTowerToBuild();
         Debug.Log(towerToBuild.name);
         tower = (GameObject)Instantiate(towerToBuild, towerBuildPosition, Quaternion.identity);
@@ -165,7 +167,11 @@ public class Node : MonoBehaviour
             return;
         }
 
-        tileRenderer.material.color = hoverColor;
+        if ((transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()) {
+            tileRenderer.material.color = tooFarColor;
+        } else {
+            tileRenderer.material.color = hoverColor;
+        }
     }
 
     private void OnMouseExit() {

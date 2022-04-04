@@ -39,7 +39,7 @@ public class PlayerHealth : MonoBehaviour {
     }
 
     void Die() {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
         // TODO: add death animation?
         gameManager.EndGame();
     }
