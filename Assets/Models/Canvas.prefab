@@ -792,8 +792,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4355193798396459507}
   - component: {fileID: 2498026662261923199}
-  - component: {fileID: 3905805140009660480}
   - component: {fileID: 1923195207}
+  - component: {fileID: 3905805140009660480}
+  - component: {fileID: 8721336144819857782}
   m_Layer: 5
   m_Name: Base Health
   m_TagString: Untagged
@@ -830,6 +831,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288790776874782330}
   m_CullTransparentMesh: 1
+--- !u!114 &1923195207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288790776874782330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e531edb85ac1ec54aa8308b4a07efb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 4366657069735432487}
+  slider: {fileID: 640462167510278400}
+  criticalColor: {r: 0.9433962, g: 0.39753166, b: 0.39753166, a: 1}
+  normalColor: {r: 0.7607844, g: 1, b: 0.72156864, a: 1}
+  criticalTextColor: {r: 0.6132076, g: 0, b: 0, a: 1}
+  normalTextColor: {r: 0.0783949, g: 0.5566038, b: 0, a: 1}
+  criticalLevel: 0
+  rawValue: 0
+  maxValue: 0
 --- !u!114 &3905805140009660480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -860,7 +882,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1923195207
+--- !u!114 &8721336144819857782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -869,18 +891,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1288790776874782330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e531edb85ac1ec54aa8308b4a07efb41, type: 3}
+  m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 4366657069735432487}
-  slider: {fileID: 640462167510278400}
-  criticalColor: {r: 0.9433962, g: 0.39753166, b: 0.39753166, a: 1}
-  normalColor: {r: 0.7607844, g: 1, b: 0.72156864, a: 1}
-  criticalTextColor: {r: 0.6132076, g: 0, b: 0, a: 1}
-  normalTextColor: {r: 0.0783949, g: 0.5566038, b: 0, a: 1}
-  criticalLevel: 0
-  rawValue: 0
-  maxValue: 0
+  header: Base Health
+  content: 'Takes damage if enemies reaches your base.
+
+    You lose if this drops
+    to 0!'
 --- !u!1 &1966511860102265600
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,8 +909,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6354936246506189678}
   - component: {fileID: 8062297774508722971}
-  - component: {fileID: 8738774552620862306}
   - component: {fileID: 889571982}
+  - component: {fileID: 8738774552620862306}
+  - component: {fileID: 786093589118146199}
   m_Layer: 5
   m_Name: Ink
   m_TagString: Untagged
@@ -929,6 +948,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966511860102265600}
   m_CullTransparentMesh: 1
+--- !u!114 &889571982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966511860102265600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e531edb85ac1ec54aa8308b4a07efb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 5203385472870957240}
+  slider: {fileID: 2639525442854384500}
+  criticalColor: {r: 0.9433962, g: 0.39753166, b: 0.39753166, a: 1}
+  normalColor: {r: 0.7607844, g: 1, b: 0.72156864, a: 1}
+  criticalTextColor: {r: 0.6132076, g: 0, b: 0, a: 1}
+  normalTextColor: {r: 0.0783949, g: 0.5566038, b: 0, a: 1}
+  criticalLevel: 0.3
+  rawValue: 0
+  maxValue: 0
 --- !u!114 &8738774552620862306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -959,7 +999,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &889571982
+--- !u!114 &786093589118146199
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -968,18 +1008,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1966511860102265600}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e531edb85ac1ec54aa8308b4a07efb41, type: 3}
+  m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 5203385472870957240}
-  slider: {fileID: 2639525442854384500}
-  criticalColor: {r: 0.9433962, g: 0.39753166, b: 0.39753166, a: 1}
-  normalColor: {r: 0.7607844, g: 1, b: 0.72156864, a: 1}
-  criticalTextColor: {r: 0.6132076, g: 0, b: 0, a: 1}
-  normalTextColor: {r: 0.0783949, g: 0.5566038, b: 0, a: 1}
-  criticalLevel: 0.3
-  rawValue: 0
-  maxValue: 0
+  header: Ink Amount
+  content: 'You use ink to create towers and clear fog.
+
+    Gain more from defeating
+    enemies!'
 --- !u!1 &2095568247091369496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,8 +1176,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2717706337348142264}
   - component: {fileID: 8682521188089669346}
-  - component: {fileID: 6815202010052704880}
   - component: {fileID: 1373582471}
+  - component: {fileID: 6815202010052704880}
+  - component: {fileID: 3859120868158049245}
   m_Layer: 5
   m_Name: TimerWatch
   m_TagString: Untagged
@@ -1179,6 +1216,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2576709304485457252}
   m_CullTransparentMesh: 1
+--- !u!114 &1373582471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2576709304485457252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e531edb85ac1ec54aa8308b4a07efb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  slider: {fileID: 5553060649945844835}
+  criticalColor: {r: 0, g: 0, b: 0, a: 0}
+  normalColor: {r: 0.7607844, g: 1, b: 0.72156864, a: 1}
+  criticalTextColor: {r: 0, g: 0, b: 0, a: 0}
+  normalTextColor: {r: 0, g: 0, b: 0, a: 0}
+  criticalLevel: 0
+  rawValue: 0
+  maxValue: 0
 --- !u!114 &6815202010052704880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,7 +1267,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1373582471
+--- !u!114 &3859120868158049245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1218,18 +1276,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2576709304485457252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e531edb85ac1ec54aa8308b4a07efb41, type: 3}
+  m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  slider: {fileID: 5553060649945844835}
-  criticalColor: {r: 0, g: 0, b: 0, a: 0}
-  normalColor: {r: 0.7607844, g: 1, b: 0.72156864, a: 1}
-  criticalTextColor: {r: 0, g: 0, b: 0, a: 0}
-  normalTextColor: {r: 0, g: 0, b: 0, a: 0}
-  criticalLevel: 0
-  rawValue: 0
-  maxValue: 0
+  header: Wave Timer
+  content: Duration left until the next wave of enemies.
 --- !u!1 &3661562774820757781
 GameObject:
   m_ObjectHideFlags: 0
@@ -2746,7 +2797,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   header: Cannon
-  content: aka Turret within dev
+  content: 'Ink cost: 15
+
+    Single target
+
+    High damage
+
+    Upgrade cost: 20
+
+    Element
+    change cost: 25
+
+    Elements: Fire / Ice / Water'
 --- !u!1001 &3773202538574067742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2965,6 +3027,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3217305879397314878, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
   m_PrefabInstance: {fileID: 3773202538574067742}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1800086425317640481 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3217305879397314879, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
+  m_PrefabInstance: {fileID: 3773202538574067742}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1800086425317640486 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3217305879397314872, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
@@ -2976,11 +3043,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1800086425317640481 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3217305879397314879, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
-  m_PrefabInstance: {fileID: 3773202538574067742}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5278047288783534771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2994,7 +3056,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   header: Ballista
-  content: aka Missile Launcher within dev
+  content: 'Ink cost: 20
+
+    Single target
+
+    Area of effect explosion
+
+    Medium
+    damage
+
+    Upgrade cost: 25
+
+    Element change cost: 35
+
+    Elements: Fire
+    / Ice / Water'
 --- !u!1001 &5806072572354519316
 PrefabInstance:
   m_ObjectHideFlags: 0

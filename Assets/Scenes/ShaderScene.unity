@@ -498,6 +498,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99335f9d627563347b4e34fb82fd22e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &367379735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5253943535555894459, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
+  m_PrefabInstance: {fileID: 351889076}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &368179651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,7 +1096,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4304542979912485023, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
   m_PrefabInstance: {fileID: 3773202538542358474}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1016147311}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -1180,6 +1185,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 46.165, y: 0, z: 0}
+--- !u!1 &1016147311 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5801174080530648772, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1016147315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016147311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Waves Counter
+  content: The current wave you are fighting against right now.
 --- !u!1 &1040735799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1257,6 +1281,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1222743743 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8448678081358125985, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
+  m_PrefabInstance: {fileID: 351889076}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1265310114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1479,6 +1508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36480db7dca0a4fbf9a4e69f3a870040, type: 3}
+--- !u!1 &1346341702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5253943535404000521, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
+  m_PrefabInstance: {fileID: 351889076}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1373582471 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1373582471, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
@@ -1535,6 +1569,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1458396411 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4600644439624492359, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
+  m_PrefabInstance: {fileID: 351889076}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1474049062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1945,6 +1984,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131574796}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2137255909 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1015510409188676889, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
+  m_PrefabInstance: {fileID: 351889076}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3773202538542358474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2104,6 +2148,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5553060649945844835, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
 --- !u!1 &3773202538542358475 stripped
@@ -2260,6 +2308,26 @@ PrefabInstance:
       propertyPath: playerGO
       value: 
       objectReference: {fileID: 1789031178}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: iceButton
+      value: 
+      objectReference: {fileID: 2137255909}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: fireButton
+      value: 
+      objectReference: {fileID: 1222743743}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waterButton
+      value: 
+      objectReference: {fileID: 1458396411}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: destroyButton
+      value: 
+      objectReference: {fileID: 367379735}
+    - target: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: upgradeButton
+      value: 
+      objectReference: {fileID: 1346341702}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
 --- !u!1001 &7828996251632798773

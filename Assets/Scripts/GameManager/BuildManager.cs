@@ -25,6 +25,11 @@ public class BuildManager : MonoBehaviour
     public GameObject upFireMissileLauncher;
     public GameObject upIceMissileLauncher;
     public GameObject upWaterMissileLauncher;
+    public GameObject upgradeButton;
+    public GameObject destroyButton;
+    public GameObject iceButton;
+    public GameObject fireButton;
+    public GameObject waterButton;
 
 
     private void Awake()
@@ -52,6 +57,7 @@ public class BuildManager : MonoBehaviour
         }
         selectedNode = node;
         nodeUI.SetTarget(node);
+        upgradeButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
     }
 
     public void DeselectNode()
