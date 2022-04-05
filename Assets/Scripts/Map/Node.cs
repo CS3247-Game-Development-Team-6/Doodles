@@ -138,8 +138,8 @@ public class Node : MonoBehaviour
         // build a tower
         GameObject towerToBuild = buildManager.GetTowerToBuild();
         towerBuildPosition = tileMesh.transform.position + towerOffset;
-        SetIsTowerBuilt(true);
         tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, Quaternion.identity);
+        SetIsTowerBuilt(true);
         Destroy(decorationMesh);    // Destroy current node's asset
 
         return tower.GetComponent<Turret>();
@@ -172,10 +172,20 @@ public class Node : MonoBehaviour
         } else {
             tileRenderer.material.color = hoverColor;
         }
+
+        if (GetIsTowerBuilt())
+        {
+            tower.gameObject.GetComponent<Outline>().enabled = true;
+        }
     }
 
     private void OnMouseExit() {
         tileRenderer.material.color = startColor;
+        
+        if (GetIsTowerBuilt())
+        {
+            tower.gameObject.GetComponent<Outline>().enabled = false;
+        }
     }
 
 }
