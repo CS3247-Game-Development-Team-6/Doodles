@@ -8,6 +8,9 @@ public class WaveSpawner : MonoBehaviour
     // keep track of how many enemies alive then only spawn new wave
 
     public static int numEnemiesAlive;
+
+    // enemies left counter
+    public static int numEnemiesLeftInWave;
     public static bool isSpawningEnemy = false;
 
     public Wave[] waves;
@@ -17,6 +20,7 @@ public class WaveSpawner : MonoBehaviour
     public float timeBetweenWaves = 5f;
 
     public IndicatorUI waveCountdownIndicator;
+    public Text enemiesLeftText;
 
     // decrease with time, countdown for new wave
     private float countdownTimer = 3f;
@@ -26,12 +30,15 @@ public class WaveSpawner : MonoBehaviour
     void Start()
     {
         numEnemiesAlive = 0;
+        numEnemiesLeftInWave = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Enemy alives: " + numEnemiesAlive);
+
+        enemiesLeftText.text = "Enemies left: " + string.Format("{0}", numEnemiesLeftInWave);
+
         if (numEnemiesAlive > 0 || isSpawningEnemy)
         {
             return;
@@ -61,6 +68,8 @@ public class WaveSpawner : MonoBehaviour
         countdownTimer = Mathf.Clamp(countdownTimer, 0f, Mathf.Infinity);
         waveCountdownIndicator.rawValue = (int)(countdownTimer * 100);
         waveCountdownIndicator.maxValue = (int)(timeBetweenWaves * 100);
+
+        
     }
 
     // can pause the func execution
@@ -71,6 +80,7 @@ public class WaveSpawner : MonoBehaviour
 
         Wave waveToSpawn = waves[waveIndex];
 
+        numEnemiesLeftInWave = waveToSpawn.getTotalEnemy();
         StartCoroutine(waveToSpawn.StartWave(this));
 
         waveIndex++;
@@ -80,6 +90,11 @@ public class WaveSpawner : MonoBehaviour
     {
         Instantiate(_enemy, spawnPoint.position, spawnPoint.rotation);
         numEnemiesAlive++;
+    }
+
+    public void SetNumEnemiesForTheWave(int num)
+    {
+        numEnemiesLeftInWave = num;
     }
 
 }

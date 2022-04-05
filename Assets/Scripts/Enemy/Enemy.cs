@@ -181,6 +181,7 @@ public class Enemy : MonoBehaviour
 
         // for new wave
         WaveSpawner.numEnemiesAlive--;
+        WaveSpawner.numEnemiesLeftInWave--;
         
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
