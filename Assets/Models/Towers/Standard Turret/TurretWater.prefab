@@ -255,6 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2670180140298441906}
   - component: {fileID: 5911250546372479925}
+  - component: {fileID: 5780459450130143872}
   m_Layer: 0
   m_Name: TurretWater
   m_TagString: Turret
@@ -300,6 +301,24 @@ MonoBehaviour:
   fireRate: 1
   bulletPrefab: {fileID: 1315704262782356680, guid: b5139372f4c51ef4193668c4a2588e74, type: 3}
   firePoint: {fileID: 4276231600001898912}
+--- !u!114 &5780459450130143872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5135174605016635187}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 6
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &5601624645475036612
 PrefabInstance:
   m_ObjectHideFlags: 0
