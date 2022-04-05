@@ -104,11 +104,8 @@ public class PlayerMovement : MonoBehaviour {
                 if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
                     mousePositionVector = raycastHit.point;
                     Debug.DrawLine(mouseRay.origin, raycastHit.point);
-                    // mousePositionVector.y = transform.position.y; // set to same vertical height as player
                 }
-                
-                // Debug.Log(Physics.Raycast(mouseRay, out RaycastHit test, float.MaxValue, groundLayerMask));
-                // Debug.Log(mousePositionVector);
+
                 break;
 
             case State.Paused:
@@ -128,8 +125,6 @@ public class PlayerMovement : MonoBehaviour {
                 Vector3 lookDirection = (mousePositionVector - rigidBody.position).normalized;
                 float angle = Mathf.Atan2(lookDirection.x, lookDirection.z) * Mathf.Rad2Deg;
                 firePoint.eulerAngles = new Vector3(0, angle, 0);
-                // rigidBody.rotation = new Vector3(0, angle, 0); // TODO: player should not rotate; should change sprite instead
-                // TODO: add player sprite animation
                 break;
             case State.Paused:
             // game is paused, pause all updates for player
@@ -197,10 +192,6 @@ public class PlayerMovement : MonoBehaviour {
             // player is moving
             lastMoveDirection = moveDirection; // used for movement actions when not moving
         }
-
-        if (Input.GetKeyDown(KeyCode.F)) { // TODO: dashing tentatively tied to key F for testing
-            isDashing = true;
-        }
     
         if (Input.GetKeyDown(KeyCode.Space)) {
             rollDirection = lastMoveDirection;
@@ -223,27 +214,6 @@ public class PlayerMovement : MonoBehaviour {
             actionTimer.text = "";
         }
         
-        // Moved to MapInput.cs
-        /*
-        Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetMouseButtonDown(1)) { // right click
-            Debug.Log("Attempting to build!"); // TODO: remove
-
-            if (Physics.Raycast(mouseRay, out RaycastHit raycastHit)) {
-                // Replace with actual tile layer, remove hard coding.
-                if (raycastHit.collider.gameObject.GetComponent<Node>() != null) {
-                // if (raycastHit.collider.gameObject.layer == 11) { // right clicked on a TowerCell
-                    Debug.Log("Clicked on " + raycastHit.collider.gameObject.name); // TODO: remove
-
-                    GameObject towerCell = raycastHit.collider.gameObject;
-                    Node node = towerCell.GetComponent<Node>();
-                    node.HighlightEnter();
-                    Vector3 mouseTowerCellPosition = raycastHit.collider.gameObject.transform.position;
-                    BuildTowerAttempt(mouseTowerCellPosition, towerCell);
-                }
-            }
-        }
-        */
     }
 
     private void HandleWeaponSwapInputs() {
@@ -266,7 +236,6 @@ public class PlayerMovement : MonoBehaviour {
     private void HandleAttackInputs() {
         if (Input.GetMouseButtonDown(0)) { // left click (tied to attacking action)
             moveDirection = Vector3.zero; // prevents character sliding while attacking
-            // TODO: add animation for attack action
             currentAttackDuration = attackDuration;
             state = State.Attacking;
             isAttacking = true;

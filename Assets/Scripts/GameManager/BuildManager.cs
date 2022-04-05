@@ -62,7 +62,6 @@ public class BuildManager : MonoBehaviour
 
     public void SetTowerToBuild(GameObject tower)
     {
-        Debug.Log(tower.name);
         towerToBuild = tower; 
         DeselectNode();
     }
