@@ -176,6 +176,10 @@ public class Node : MonoBehaviour
         if (GetIsTowerBuilt())
         {
             tower.gameObject.GetComponent<Outline>().enabled = true;
+            tower.gameObject.GetComponent<Outline>().OutlineColor =
+                (transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()
+                    ? tooFarColor
+                    : hoverColor;
         }
     }
 
