@@ -2796,19 +2796,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  header: Cannon
-  content: 'Ink cost: 15
+  header: Cannon [$15]
+  content: 'DMG: 45
+
+    Range: 4
+
+    Upgrade: $20; +20% DMG
+
+    Element change:
+    $25
 
     Single target
 
-    High damage
-
-    Upgrade cost: 20
-
-    Element
-    change cost: 25
-
-    Elements: Fire / Ice / Water'
+    High damage'
 --- !u!1001 &3773202538574067742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3055,22 +3055,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  header: Ballista
-  content: 'Ink cost: 20
+  header: Ballista [$20]
+  content: 'DMG: 30
+
+    Range: 3
+
+    Explosion Radius: 1
+
+    Upgrade: $25; +20%
+    DMG & Explosion Radius
+
+    Element change: $35
 
     Single target
 
-    Area of effect explosion
+    Area
+    of effect
 
-    Medium
-    damage
-
-    Upgrade cost: 25
-
-    Element change cost: 35
-
-    Elements: Fire
-    / Ice / Water'
+    Medium damage'
 --- !u!1001 &5806072572354519316
 PrefabInstance:
   m_ObjectHideFlags: 0

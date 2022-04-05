@@ -162,7 +162,7 @@ public class Node : MonoBehaviour
         return towerBuildPosition;
     }
 
-    private void OnMouseEnter() {
+    private void OnMouseOver() {
         if (EventSystem.current.IsPointerOverGameObject() || buildManager.GetTowerToBuild() == null) {
             return;
         }

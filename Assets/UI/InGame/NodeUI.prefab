@@ -353,10 +353,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e61c1cf77257d4b94add3fde3f7c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  header: Ice
-  cannonCost: 25
-  missileCost: 35
+  header: Ice Upgrade
   content: Use ink to change this tower's element to ice!
+  upgradeInfo: Slows enemies for 5 seconds
+  buttonType: 3
 --- !u!1 &4600644439624492359
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,10 +502,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e61c1cf77257d4b94add3fde3f7c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  header: Water
-  cannonCost: 25
-  missileCost: 35
+  header: Water Upgrade
   content: Use ink to change this tower's element to water!
+  upgradeInfo: Decreases enemy attack for 5 seconds
+  buttonType: 4
 --- !u!1 &5253943535134561968
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,9 +756,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   header: Upgrade Tower
-  cannonCost: 20
-  missileCost: 25
-  content: Use ink to upgrade this tower.
+  content: Use ink to upgrade this tower
+  upgradeInfo: Increases damage dealt
+  buttonType: 0
 --- !u!1 &5253943535555894459
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,9 +905,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   header: Destroy Tower
-  cannonCost: 0
-  missileCost: 0
-  content: 'Removes this tower. '
+  content: Removes this tower
+  upgradeInfo: Frees up tile to place another tower
+  buttonType: 1
 --- !u!1 &5253943536085481847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,7 +1353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e61c1cf77257d4b94add3fde3f7c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  header: Fire
-  cannonCost: 25
-  missileCost: 35
+  header: Fire Upgrade
   content: Use ink to change this tower's element to fire!
+  upgradeInfo: Deals DoT to enemies for 5 seconds
+  buttonType: 2

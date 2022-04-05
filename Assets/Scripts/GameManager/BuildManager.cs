@@ -57,7 +57,13 @@ public class BuildManager : MonoBehaviour
         }
         selectedNode = node;
         nodeUI.SetTarget(node);
-        upgradeButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+        if (node.tower != null) {
+            upgradeButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+            destroyButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+            iceButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+            fireButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+            waterButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+        }
     }
 
     public void DeselectNode()
@@ -293,7 +299,7 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetUpgradeCost()))
         {
 /*            Debug.Log("No cash no upgrade");*/
             return;

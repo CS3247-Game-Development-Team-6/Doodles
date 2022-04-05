@@ -26,9 +26,16 @@ public class Turret : MonoBehaviour
         get { return cost; }
     }
 
-    public float GetSwapElementCost()
-    {
+    public float GetSwapElementCost() {
         return swapElementCost;
+    }
+
+    public float GetUpgradeCost() {
+        return upgradeCost;
+    }
+
+    public float GetRange() {
+        return upgradeCost;
     }
 
     // Start is called before the first frame update

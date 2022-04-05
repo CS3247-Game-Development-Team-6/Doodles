@@ -12,6 +12,14 @@ public class Bullet : MonoBehaviour
     [SerializeField] private int bulletDamage;
     [SerializeField] private StatusEffectData _data;
 
+    public int GetBulletDamage() {
+        return bulletDamage;
+    }
+
+    public float GetExplosionRadius() {
+        return explosionRadius;
+    }
+
     public void Seek(Transform _target) 
     { 
         target = _target;
