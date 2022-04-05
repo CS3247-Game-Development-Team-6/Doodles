@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 2231947627263393190}
   - component: {fileID: 4190300635105384742}
   - component: {fileID: 5170162416538554740}
-  - component: {fileID: -5242390611474334461}
+  - component: {fileID: 3016889294438782974}
   m_Layer: 0
-  m_Name: AoEBullet
-  m_TagString: Basic
+  m_Name: fire_AoEBullet_up1
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dea5c2904c1537445bb4569f059fa1dd, type: 2}
+  - {fileID: 2100000, guid: a94440f66fb94a64ea0b7ba9bb72e66c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -113,7 +113,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-5242390611474334461
+--- !u!114 &3016889294438782974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 518e09dd5d31c784badfd69e28d18f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  explosionRadius: 0
+  speed: 4
+  explosionRadius: 3
   impactEffect: {fileID: 4586470546859298135, guid: 024f097d68bf33d44ba2726d968af48c, type: 3}
-  bulletDamage: 30
-  _data: {fileID: 0}
+  bulletDamage: 50
+  _data: {fileID: 11400000, guid: 44bd50d33ed57d64fbcfdf5b9b908176, type: 2}
