@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 5911250546372479925}
   m_Layer: 0
   m_Name: Up1_fire_AoETurret
-  m_TagString: Untagged
+  m_TagString: AOE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -619,6 +619,7 @@ MonoBehaviour:
   rotationBase: {fileID: 7984372079992035439}
   rotationSpeed: 10
   cost: 10
+  swapElementCost: 30
   upgradeCost: 10
   numberOfBulletsToFire: 12
   isAoeTurret: 1
