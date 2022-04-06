@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Unity Stuff")]
     public Image healthBar;
+    public TMP_Text healthText;
     
     public MapGenerator map;
     private Cell[,] cells;
@@ -213,6 +214,8 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        healthText.text = string.Format("{0}", health);
+
         if (health <= 0)
         {
             Die();
