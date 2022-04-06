@@ -11,11 +11,6 @@ public class PauseMenu : MonoBehaviour
     public GameObject gameplayCanvas;
     public GameObject raycastOccluder;
 
-    void Start()
-    {
-        Resume();   // Unfreeze game
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -33,6 +28,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        Debug.Log("resume");
         pauseMenuUI.SetActive(false);
         gameplayCanvas.SetActive(true);
         raycastOccluder.SetActive(false);
@@ -50,12 +46,20 @@ public class PauseMenu : MonoBehaviour
     {
         if (!GameManager.getIsGameEnded())
         {
+            GameIsPaused = true;
             pauseMenuUI.SetActive(true);
             gameplayCanvas.SetActive(false);
             raycastOccluder.SetActive(true);
             Time.timeScale = 0f;
-            GameIsPaused = true;
         }
+    }
+
+    public void Freeze() {
+        pauseMenuUI.SetActive(true);
+        raycastOccluder.SetActive(true);
+        Time.timeScale = 0f;
+        Debug.Log("force paused");
+        Debug.Log(pauseMenuUI.activeSelf);
     }
 
     public void LoadMenu()
