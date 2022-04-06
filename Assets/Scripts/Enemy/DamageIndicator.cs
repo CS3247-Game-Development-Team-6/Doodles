@@ -21,10 +21,17 @@ public class DamageIndicator : MonoBehaviour
 
         float direction = Random.rotation.eulerAngles.z;
 
+        // remove direction that goes below the map
+        if (direction > 180 && direction < 270)
+        {
+            direction = 90;
+        }
+
         Vector3 offset = Vector3.zero + Vector3.up;
         initPos = transform.position + offset;
         float dist = Random.Range(minDist, maxDist);
         targetPos = initPos + (Quaternion.Euler(0, 0, direction) * new Vector3(dist, dist, 0f));
+
         transform.localScale = Vector3.zero;
     }
 
