@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour {
     Requires player game object to have a "ActionTimer" game object containing a TMP_Text.
     Requires player game object to have a "FirePoint" game object containing a Transform.
     */
-    [SerializeField] private LayerMask dashLayerMask;
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask tileAndFogLayerMask;
     [SerializeField] private Player player;
@@ -28,13 +27,11 @@ public class PlayerMovement : MonoBehaviour {
     private float playerSpeed;
     private float sprintSpeed = 8f; // TODO: add sprinting if needed in the future
     private float walkSpeed = 4f;
-    private float dashAmount = 3f;
     private float initialRollSpeed = 50f;
     private float currentRollSpeed;
 
     // action boolean checks
     private bool isSprinting = false; // TODO: add sprinting if needed in the future
-    private bool isDashing = false;
     private bool isBuilding = false;
     private bool isUsingShooting;
     private bool isAttacking = false;
@@ -197,10 +194,6 @@ public class PlayerMovement : MonoBehaviour {
             // player is moving
             lastMoveDirection = moveDirection; // used for movement actions when not moving
         }
-
-        if (Input.GetKeyDown(KeyCode.F)) { // TODO: dashing tentatively tied to key F for testing
-            isDashing = true;
-        }
     
         if (Input.GetKeyDown(KeyCode.Space)) {
             rollDirection = lastMoveDirection;
@@ -287,19 +280,6 @@ public class PlayerMovement : MonoBehaviour {
                 actionTimer.text = "";
             }
 
-            // Dashing would be a replacement or an upgrade to rolling for now
-            if (isDashing) {
-                Vector3 dashPosition = transform.position + lastMoveDirection * dashAmount;
-
-                RaycastHit2D raycastHit2d = Physics2D.Raycast(transform.position, moveDirection, dashAmount, dashLayerMask);
-                if (raycastHit2d.collider != null) {
-                    // hit something
-                    dashPosition = raycastHit2d.point;
-                }
-                rigidBody.MovePosition(dashPosition);
-                // TODO: add player dashing animation
-                isDashing = false;
-            }
             break;
 
         case State.Rolling:
