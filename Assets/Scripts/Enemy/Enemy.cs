@@ -56,6 +56,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject model;
     public Animator animator;
+    public Canvas canvas;
 
     public void TakeDamage(float amount)
     {
@@ -200,6 +201,7 @@ public class Enemy : MonoBehaviour
         // initialize model and animator
         model = transform.GetChild(2).gameObject;
         animator = model.GetComponent<Animator>();
+        canvas = transform.GetChild(0).GetComponent<Canvas>();
 
         //ballMeshRenderer = gameObject.GetComponent<MeshRenderer>();
         ballParentTransform = gameObject.transform;
@@ -296,7 +298,19 @@ public class Enemy : MonoBehaviour
         //ballMeshRenderer.enabled = isVisible;
         foreach (Transform childrenTransform in ballParentTransform)
         {
-            childrenTransform.gameObject.SetActive(isVisible);
+            // disable canvas
+            if (childrenTransform.name == canvas.name)
+                childrenTransform.gameObject.SetActive(isVisible);
+
+            // disable every renderers
+            if (childrenTransform.name == model.name)
+            {
+                SkinnedMeshRenderer[] renderers = model.GetComponentsInChildren<SkinnedMeshRenderer>();
+                foreach (SkinnedMeshRenderer r in renderers) {
+                    r.enabled = isVisible;
+                }
+            }
+              
         }
     }
 

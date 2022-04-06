@@ -48,8 +48,8 @@ public class EnemyBullet : MonoBehaviour
 
     void HitTarget() 
     {
-        // Better implementation required to identify boss bullet
-        if (bulletDamage >= 100)
+
+        if (gameObject.CompareTag("BossBullet"))
         {
             // boss bullet
             CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
