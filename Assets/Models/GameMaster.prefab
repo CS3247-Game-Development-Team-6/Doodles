@@ -184,7 +184,6 @@ MonoBehaviour:
     rate3: 1
   spawnPoint: {fileID: 0}
   timeBetweenWaves: 3
-  waveCountdownText: {fileID: 0}
   waveCountdownIndicator: {fileID: 0}
 --- !u!114 &6600273765185839075
 MonoBehaviour:
@@ -202,12 +201,16 @@ MonoBehaviour:
   nodeUI: {fileID: 0}
   standardTowerPrefab: {fileID: 5135174605016635187, guid: 606a79db4dfc00e4fb105b7a58af8dfc, type: 3}
   missileLauncherPrefab: {fileID: 2689636279851204399, guid: 6bcec35a2c2d14f439fd18a476e24ed0, type: 3}
+  aoeTowerPrefab: {fileID: 5135174605016635187, guid: 72c6cd85d4901469abdbb8da44c0f30e, type: 3}
   fireTurret: {fileID: 5135174605016635187, guid: a9a26f0a25ebe6146a83e57250c82bf0, type: 3}
   iceTurret: {fileID: 5135174605016635187, guid: b1cf6a113a5f7ff4e9dab12c277866d6, type: 3}
   waterTurret: {fileID: 5135174605016635187, guid: b509d7e982a9cf34eb717034cc13c9ba, type: 3}
   fireMissileLauncher: {fileID: 2689636279851204399, guid: 738e77460b6f3294e8aa3378f6910d24, type: 3}
   iceMissileLauncher: {fileID: 2689636279851204399, guid: cf05377ca8e7ec94ea04c3f66d3042c3, type: 3}
   waterMissileLauncher: {fileID: 2689636279851204399, guid: 89a25ac1f47a5a845a9dd3f795047cd1, type: 3}
+  fireAoeTower: {fileID: 5135174605016635187, guid: 5955d80a74c324bab9a35eb28fd24768, type: 3}
+  iceAoeTower: {fileID: 5135174605016635187, guid: 407f1e67df91941e8b035d5f5da61fe5, type: 3}
+  waterAoeTower: {fileID: 5135174605016635187, guid: e8105bd5239da411c85165a4d274b21d, type: 3}
   upTowerPrefab: {fileID: 5135174605016635187, guid: 4a754f764f26b0840a3f067b22cec9b6, type: 3}
   upMissileLauncherPrefab: {fileID: 2689636279851204399, guid: d1ffe78151f66de4ab898bdabac5bca4, type: 3}
   upFireTurret: {fileID: 5135174605016635187, guid: 4ec25e2fc9bb6e74c861d26082714504, type: 3}
@@ -216,6 +219,10 @@ MonoBehaviour:
   upFireMissileLauncher: {fileID: 2689636279851204399, guid: fc2d0704921a9a444940c73829fb02ae, type: 3}
   upIceMissileLauncher: {fileID: 2689636279851204399, guid: 89f8e1f745c142d45ac3d7f3df76003e, type: 3}
   upWaterMissileLauncher: {fileID: 2689636279851204399, guid: 4a6ff8b4848f7e44581b484d02410d1b, type: 3}
+  upAoeTower: {fileID: 5135174605016635187, guid: 750613fd96671445eb60b5186049b218, type: 3}
+  upFireAoeTower: {fileID: 5135174605016635187, guid: 40bd14e2fd2024eb78d951470d9b1b3c, type: 3}
+  upIceAoeTower: {fileID: 5135174605016635187, guid: fc752dcc4aeb740329ecb1460df2d1b9, type: 3}
+  upWaterAoeTower: {fileID: 5135174605016635187, guid: 04b7b6f93cb9749219929cc369d7e123, type: 3}
 --- !u!114 &6600273765185839073
 MonoBehaviour:
   m_ObjectHideFlags: 0
