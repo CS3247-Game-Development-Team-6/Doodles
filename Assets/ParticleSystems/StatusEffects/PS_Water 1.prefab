@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 573714686981429908}
   - component: {fileID: 3626015154107466385}
   m_Layer: 0
-  m_Name: PS_Chilled
+  m_Name: PS_Water 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,7 +222,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.42114633, g: 0.9811321, b: 0.9256933, a: 1}
+      maxColor: {r: 0, g: 0.20553756, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4751,14 +4751,14 @@ ParticleSystemRenderer:
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 0
+  m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ae4bd2bfbe5feee409f42cd62343a844, type: 2}
+  - {fileID: 2100000, guid: 2656ffd617a68d949a7600cc66478917, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
