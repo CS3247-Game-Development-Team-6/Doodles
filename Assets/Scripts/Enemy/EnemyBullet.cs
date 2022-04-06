@@ -9,6 +9,7 @@ public class EnemyBullet : MonoBehaviour
     private Transform target;
     public float speed = 70f;
     public GameObject impactEffect;
+    public GameObject damageText;
 
     private int bulletDamage;
 
@@ -70,8 +71,12 @@ public class EnemyBullet : MonoBehaviour
 
         if (_target.CompareTag("Base"))
         {
-            Base.receiveDmg(bulletDamage);
+            Base.receiveDmg(bulletDamage);         
         }
+        
+        // show damage number
+        DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+        indicator.SetDamageText(bulletDamage);
     }
 
     public void ReduceBulletDamage(int _damage) {
