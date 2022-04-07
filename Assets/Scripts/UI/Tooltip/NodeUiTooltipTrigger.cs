@@ -83,6 +83,7 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
         ////////////////////////////
         // retrieve upgrade stats
         ////////////////////////////
+        string towerElement = currentNode.tower.GetComponent<Turret>().bulletPrefab.tag;
         if (currentNode.tower.tag == "Turret" && currentNode.GetIsUpgraded()) {
             if (buttonType == ButtonType.ElementFire) {
                 upgradeDamage = buildManager.upFireTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
@@ -116,9 +117,29 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
                 upgradeExplosionRadius = buildManager.waterTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
                 upgradeRange = buildManager.waterTurret.GetComponent<Turret>().GetRange();
             } else if (buttonType == ButtonType.Upgrade) {
-                upgradeDamage = buildManager.upTowerPrefab.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
-                upgradeExplosionRadius = buildManager.upTowerPrefab.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
-                upgradeRange = buildManager.upTowerPrefab.GetComponent<Turret>().GetRange();
+                if (towerElement == "Basic") {
+                    upgradeDamage = buildManager.upTowerPrefab.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                    upgradeExplosionRadius = buildManager.upTowerPrefab.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                    upgradeRange = buildManager.upTowerPrefab.GetComponent<Turret>().GetRange();
+                } else if (towerElement == "Fire") {
+                    upgradeDamage = buildManager.upFireTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                    upgradeExplosionRadius = buildManager.upFireTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                    upgradeRange = buildManager.upFireTurret.GetComponent<Turret>().GetRange();
+                } else if (towerElement == "Ice") {
+                    upgradeDamage = buildManager.upIceTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                    upgradeExplosionRadius = buildManager.upIceTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                    upgradeRange = buildManager.upIceTurret.GetComponent<Turret>().GetRange();
+                } else if (towerElement == "Water") {
+                    upgradeDamage = buildManager.upWaterTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                    upgradeExplosionRadius = buildManager.upWaterTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                    upgradeRange = buildManager.upWaterTurret.GetComponent<Turret>().GetRange();
+                } else {
+                    // SHOULD NOT REACH HERE
+                    Debug.LogWarning("NodeUiTooltipTrigger error, unaccountable tower element.");
+                    upgradeDamage = currentDamage;
+                    upgradeExplosionRadius = currentExplosionRadius;
+                    upgradeRange = currentRange;
+                }
             } else {
                 // is destroy button 
                 upgradeDamage = currentDamage;
@@ -158,9 +179,29 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
                 upgradeExplosionRadius = buildManager.waterMissileLauncher.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
                 upgradeRange = buildManager.waterMissileLauncher.GetComponent<Turret>().GetRange();
             } else if (buttonType == ButtonType.Upgrade) {
-                upgradeDamage = buildManager.upMissileLauncherPrefab.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
-                upgradeExplosionRadius = buildManager.upMissileLauncherPrefab.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
-                upgradeRange = buildManager.upMissileLauncherPrefab.GetComponent<Turret>().GetRange();
+                if (towerElement == "Basic") {
+                    upgradeDamage = buildManager.upMissileLauncherPrefab.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                    upgradeExplosionRadius = buildManager.upMissileLauncherPrefab.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                    upgradeRange = buildManager.upMissileLauncherPrefab.GetComponent<Turret>().GetRange();
+                } else if (towerElement == "Fire") {
+                    upgradeDamage = buildManager.upFireMissileLauncher.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                    upgradeExplosionRadius = buildManager.upFireMissileLauncher.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                    upgradeRange = buildManager.upFireMissileLauncher.GetComponent<Turret>().GetRange();
+                } else if (towerElement == "Ice") {
+                    upgradeDamage = buildManager.upIceMissileLauncher.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                    upgradeExplosionRadius = buildManager.upIceMissileLauncher.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                    upgradeRange = buildManager.upIceMissileLauncher.GetComponent<Turret>().GetRange();
+                } else if (towerElement == "Water") {
+                    upgradeDamage = buildManager.upWaterMissileLauncher.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                    upgradeExplosionRadius = buildManager.upWaterMissileLauncher.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                    upgradeRange = buildManager.upWaterMissileLauncher.GetComponent<Turret>().GetRange();
+                } else {
+                    // SHOULD NOT REACH HERE
+                    Debug.LogWarning("NodeUiTooltipTrigger error, unaccountable tower element.");
+                    upgradeDamage = currentDamage;
+                    upgradeExplosionRadius = currentExplosionRadius;
+                    upgradeRange = currentRange;
+                }
             } else {
                 // is destroy button 
                 upgradeDamage = currentDamage;
@@ -200,9 +241,29 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
                 upgradeExplosionRadius = buildManager.waterAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
                 upgradeRange = buildManager.waterAoeTower.GetComponent<Turret>().GetRange();
             } else if (buttonType == ButtonType.Upgrade) {
-                upgradeDamage = buildManager.upAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
-                upgradeExplosionRadius = buildManager.upAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
-                upgradeRange = buildManager.upAoeTower.GetComponent<Turret>().GetRange();
+                if (towerElement == "Basic") {
+                    upgradeDamage = buildManager.upAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                    upgradeExplosionRadius = buildManager.upAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                    upgradeRange = buildManager.upAoeTower.GetComponent<Turret>().GetRange();
+                } else if (towerElement == "Fire") {
+                    upgradeDamage = buildManager.upFireAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                    upgradeExplosionRadius = buildManager.upFireAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                    upgradeRange = buildManager.upFireAoeTower.GetComponent<Turret>().GetRange();
+                } else if (towerElement == "Ice") {
+                    upgradeDamage = buildManager.upIceAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                    upgradeExplosionRadius = buildManager.upIceAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                    upgradeRange = buildManager.upIceAoeTower.GetComponent<Turret>().GetRange();
+                } else if (towerElement == "Water") {
+                    upgradeDamage = buildManager.upWaterAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                    upgradeExplosionRadius = buildManager.upWaterAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                    upgradeRange = buildManager.upWaterAoeTower.GetComponent<Turret>().GetRange();
+                } else {
+                    // SHOULD NOT REACH HERE
+                    Debug.LogWarning("NodeUiTooltipTrigger error, unaccountable tower element.");
+                    upgradeDamage = currentDamage;
+                    upgradeExplosionRadius = currentExplosionRadius;
+                    upgradeRange = currentRange;
+                }
             } else {
                 // is destroy button 
                 upgradeDamage = currentDamage;
@@ -216,6 +277,16 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
             upgradeExplosionRadius = currentExplosionRadius;
             upgradeRange = currentRange;
         }
+
+        // print to debug log
+        Debug.Log("tower tag: " + currentNode.tower.tag);
+        Debug.Log("tower upgraded: " + currentNode.GetIsUpgraded());
+        Debug.Log("current damage: " + currentDamage);
+        Debug.Log("upgraded damage: " + upgradeDamage);
+        Debug.Log("current range: " + currentRange);
+        Debug.Log("upgraded range: " + upgradeRange);
+        Debug.Log("current explosion rad: " + currentExplosionRadius);
+        Debug.Log("upgraded explosion rad: " + upgradeExplosionRadius);
 
         /////////////////////////////////////
         // generate full content and headers

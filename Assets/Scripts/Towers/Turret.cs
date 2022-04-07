@@ -42,7 +42,7 @@ public class Turret : MonoBehaviour
     }
 
     public float GetRange() {
-        return upgradeCost;
+        return range;
     }
 
     // Start is called before the first frame update
