@@ -58,11 +58,7 @@ public class BuildManager : MonoBehaviour
         selectedNode = node;
         nodeUI.SetTarget(node);
         if (node.tower != null) {
-            upgradeButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
-            destroyButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
-            iceButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
-            fireButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
-            waterButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+            UpdateUiTooltip(node);
         }
     }
 
@@ -70,6 +66,14 @@ public class BuildManager : MonoBehaviour
     { 
         selectedNode = null;
         nodeUI.Hide();
+    }
+
+    private void UpdateUiTooltip(Node node) {
+        upgradeButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+        destroyButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+        iceButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+        fireButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+        waterButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
     }
 
     public void SetTowerToBuild(GameObject tower)
@@ -103,6 +107,9 @@ public class BuildManager : MonoBehaviour
             this.towerToBuild = standardTowerPrefab;
         else if (towerToBuild.tag == "Missile")
             this.towerToBuild = missileLauncherPrefab;
+
+        // Update UI tooltips
+        UpdateUiTooltip(nodeUI.target);
 
         // Hide nodeUI
         DeselectNode();
