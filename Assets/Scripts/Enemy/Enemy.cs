@@ -181,6 +181,7 @@ public class Enemy : MonoBehaviour
 
         // for new wave
         WaveSpawner.numEnemiesAlive--;
+        WaveSpawner.numEnemiesLeftInWave--;
         
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
@@ -235,9 +236,14 @@ public class Enemy : MonoBehaviour
 
         // movement direction to the target waypoint
         Vector3 direction = target.position - transform.position;
-        Quaternion lookAtRotation = Quaternion.LookRotation(direction);
-        Vector3 rotation = Quaternion.Lerp(model.transform.rotation, lookAtRotation, Time.deltaTime * 10f).eulerAngles;
-        model.transform.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+
+        if (direction != Vector3.zero)
+        {
+            // Do the rotation here
+            Quaternion lookAtRotation = Quaternion.LookRotation(direction);
+            Vector3 rotation = Quaternion.Lerp(model.transform.rotation, lookAtRotation, Time.deltaTime * 10f).eulerAngles;
+            model.transform.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+        }        
 
         // delta time is time passed since last frame
         transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);

@@ -11,12 +11,16 @@ public class BuildManager : MonoBehaviour
     public NodeUI nodeUI;
     public GameObject standardTowerPrefab;
     public GameObject missileLauncherPrefab;
+    public GameObject aoeTowerPrefab;
     public GameObject fireTurret;
     public GameObject iceTurret;
     public GameObject waterTurret;
     public GameObject fireMissileLauncher;
     public GameObject iceMissileLauncher;
     public GameObject waterMissileLauncher;
+    public GameObject fireAoeTower;
+    public GameObject iceAoeTower;
+    public GameObject waterAoeTower;
     public GameObject upTowerPrefab;
     public GameObject upMissileLauncherPrefab;
     public GameObject upFireTurret;
@@ -25,6 +29,10 @@ public class BuildManager : MonoBehaviour
     public GameObject upFireMissileLauncher;
     public GameObject upIceMissileLauncher;
     public GameObject upWaterMissileLauncher;
+    public GameObject upAoeTower;
+    public GameObject upFireAoeTower;
+    public GameObject upIceAoeTower;
+    public GameObject upWaterAoeTower;
 
 
     private void Awake()
@@ -91,6 +99,8 @@ public class BuildManager : MonoBehaviour
             this.towerToBuild = standardTowerPrefab;
         else if (towerToBuild.tag == "Missile")
             this.towerToBuild = missileLauncherPrefab;
+        else if (towerToBuild.tag == "AOE")
+            this.towerToBuild = aoeTowerPrefab;
 
         // Hide nodeUI
         DeselectNode();
@@ -119,6 +129,10 @@ public class BuildManager : MonoBehaviour
             {
                 towerToBuild = fireMissileLauncher;
             }
+            else if (nodeUI.target.tower.tag == "AOE")
+            {
+                towerToBuild = fireAoeTower;
+            }
         }
         else
         {
@@ -129,6 +143,10 @@ public class BuildManager : MonoBehaviour
             else if (nodeUI.target.tower.tag == "Missile")
             {
                 towerToBuild = upFireMissileLauncher;
+            }
+            else if (nodeUI.target.tower.tag == "AOE")
+            {
+                towerToBuild = upFireAoeTower;
             }
         }
 
@@ -165,6 +183,10 @@ public class BuildManager : MonoBehaviour
             {
                 towerToBuild = iceMissileLauncher;
             }
+            else if (nodeUI.target.tower.tag == "AOE")
+            {
+                towerToBuild = iceAoeTower;
+            }
         }
         else
         {
@@ -175,6 +197,10 @@ public class BuildManager : MonoBehaviour
             else if (nodeUI.target.tower.tag == "Missile")
             {
                 towerToBuild = upIceMissileLauncher;
+            }
+            else if (nodeUI.target.tower.tag == "AOE")
+            {
+                towerToBuild = upIceAoeTower;
             }
         }
 
@@ -211,6 +237,10 @@ public class BuildManager : MonoBehaviour
             {
                 towerToBuild = waterMissileLauncher;
             }
+            else if (nodeUI.target.tower.tag == "AOE")
+            {
+                towerToBuild = waterAoeTower;
+            }
         }
         else
         { 
@@ -221,6 +251,10 @@ public class BuildManager : MonoBehaviour
             else if (nodeUI.target.tower.tag == "Missile")
             {
                 towerToBuild = upWaterMissileLauncher;
+            }
+            else if (nodeUI.target.tower.tag == "AOE")
+            {
+                towerToBuild = upWaterAoeTower;
             }
         }
 
@@ -284,6 +318,29 @@ public class BuildManager : MonoBehaviour
             else if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Water")
             {
                 towerToBuild = upWaterMissileLauncher;
+            }
+        }
+
+        else if (nodeUI.target.tower.tag == "AOE")
+        {
+            if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Basic")
+            {
+                towerToBuild = upAoeTower;
+            }
+
+            else if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Fire")
+            {
+                towerToBuild = upFireAoeTower;
+            }
+
+            else if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Ice")
+            {
+                towerToBuild = upIceAoeTower;
+            }
+
+            else if (nodeUI.target.tower.GetComponent<Turret>().bulletPrefab.tag == "Water")
+            {
+                towerToBuild = upWaterAoeTower;
             }
         }
 
