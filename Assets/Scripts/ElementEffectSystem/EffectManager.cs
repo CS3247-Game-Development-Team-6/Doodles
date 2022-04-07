@@ -19,8 +19,6 @@ public class EffectManager : MonoBehaviour, IEffectable
 
     // For Burst DOT Effect
     private float _burstDotAmount;
-    private float _burstTickSpeed;
-    private float _burstLifetime;
 
     // Start is called before the first frame update
     void Start()
@@ -40,69 +38,91 @@ public class EffectManager : MonoBehaviour, IEffectable
     {
         // Check if already has 2 elements
         if (_data != null) {
-            if (this._data != null)     // Enemy is already inflicted with status effect
+            // Enemy is already inflicted with a status effect
+            if (this._data != null)     
             {
-                // Different element (Decide which elemental reaction data to use)
+                // Enemy is already inflicted with elemental reaction effect
+                if (this._data.Element == "Combined")
+                {
+                    return;
+                }
+
+                // Different element is inflicted on enemy
                 if (this._data.Element != _data.Element)
                 {
                     // Frozen
                     if ((this._data.Element == "Ice" && _data.Element == "Water") || (this._data.Element == "Water" && _data.Element == "Ice"))
                     {
-                        enemy.setChilled(true);
-                        enemy.setDrenched(true);
-                        RemoveEffect();
-                        enemy.setFrozen(true);
-                        this._data = _frozenData;
+                        setFrozenData();
                     }
                     // Scalded
                     else if (this._data.Element == "Fire" && _data.Element == "Water" || this._data.Element == "Water" && _data.Element == "Fire")
-                    {                       
-                        if (this._data.Element == "Fire")
-                        {
-                            _burstDotAmount = this._data.DOTAmount;
-                            _burstTickSpeed = this._data.TickSpeed;
-                            _burstLifetime = this._data.Lifetime;
-                        }
-                        else if (_data.Element == "Fire")
-                        {
-                            _burstDotAmount = _data.DOTAmount;
-                            _burstTickSpeed = _data.TickSpeed;
-                            _burstLifetime = _data.Lifetime;
-                        }
-                        enemy.setDrenched(true);
-                        RemoveEffect();
-                        enemy.setScalded(true);
-
-                        this._data = _scaldedData;
-                        // Info for burstDot effect
-                        this._data.DOTAmount = _burstDotAmount;
-                        this._data.TickSpeed = _burstTickSpeed;
-                        this._data.Lifetime = _burstLifetime;
+                    {
+                        setBurstDOTAmount(_data);
+                        setScaldedData();
                     }
                     // Weakened
                     else if (this._data.Element == "Ice" && _data.Element == "Fire" || this._data.Element == "Fire" && _data.Element == "Ice")
-                    {                       
-                        enemy.setChilled(true);
-                        RemoveEffect();
-                        enemy.setWeakened(true);
-                        this._data = _weakenedData;
+                    {
+                        setWeakenedData();
                     }
                 }
-                // Same element
-                else if (this._data.Element != "None")
+                // Same element is inflicted on enemy
+                else
                 {
                     RemoveEffect();
                     this._data = _data;
                 }
             }
-            else this._data = _data;    // Enemy not inflicted with status effect yet
+            // Enemy not inflicted with status effect yet
+            else 
+                this._data = _data;
 
+            // Spawn particle effects for elements and elemental reactions
             _effectParticles = Instantiate(this._data.EffectParticles, transform);
             
         }
     }
 
-    
+    private void setWeakenedData()
+    {
+        enemy.setChilled(true);
+        RemoveEffect();
+        enemy.setWeakened(true);
+        this._data = _weakenedData;
+    }
+
+    private void setScaldedData()
+    {
+        enemy.setDrenched(true);
+        RemoveEffect();
+        enemy.setScalded(true);
+        this._data = _scaldedData;
+        // Info for burstDot effect
+        this._data.DOTAmount = _burstDotAmount;
+    }
+
+    private void setFrozenData()
+    {
+        enemy.setChilled(true);
+        enemy.setDrenched(true);
+        RemoveEffect();
+        enemy.setFrozen(true);
+        this._data = _frozenData;
+    }
+
+    private void setBurstDOTAmount(StatusEffectData _data)
+    {
+        if (this._data.Element == "Fire")
+        {
+            _burstDotAmount = this._data.DOTAmount * this._data.TickSpeed * this._data.Lifetime;
+        }
+        else if (_data.Element == "Fire")
+        {
+            _burstDotAmount = _data.DOTAmount * _data.TickSpeed * _data.Lifetime;
+        }
+    }
+
     // Remove Status Effect on enemy
     public void RemoveEffect()
     {
@@ -126,6 +146,10 @@ public class EffectManager : MonoBehaviour, IEffectable
             enemy.RestoreDefense();
             enemy.setWeakened(false);
         }
+        if (enemy.getScalded())
+        {
+            enemy.setScalded(false);
+        }
 
         _data = null;
         _currentEffectTime = 0;
@@ -136,18 +160,27 @@ public class EffectManager : MonoBehaviour, IEffectable
     // Handle Status Effect Updates
     public void HandleEffect()
     {
+        // Update current effect's time
         _currentEffectTime += Time.deltaTime;
 
+        // Remove status effect if lifetime is reached
         if (_currentEffectTime >= _data.Lifetime) RemoveEffect();
 
+        // Enemy is currently not affected by any status effects
         if (_data == null) return;
 
+        // Update status effect timer accordingly
         // Frozen Effect (Ice + Water)
         if (enemy.getFrozen() && _currentEffectTime > _nextTickTime)
         {
+            // Only triggered once
+            if (_nextTickTime == 0)
+            {
+                enemy.ReduceSpeed(0);
+            }
             _nextTickTime += _data.TickSpeed;
-            enemy.ReduceSpeed(0);
         }
+        // BurstDOT Effect (Fire + Water)
         else if (enemy.getScalded() && _currentEffectTime > _nextTickTime)
         {
             // Only triggered once
@@ -157,10 +190,15 @@ public class EffectManager : MonoBehaviour, IEffectable
             }
             _nextTickTime += _data.TickSpeed;
         }
+        // DefDecre Effect (Ice + Fire)
         else if (enemy.getWeakened() && _currentEffectTime > _nextTickTime)
         {
+            // Only triggered once
+            if (_nextTickTime == 0)
+            {
+                enemy.ReduceDefense(_data.DefDecreAmount);
+            }
             _nextTickTime += _data.TickSpeed;
-            enemy.ReduceDefense(_data.DefDecreAmount);
         }
         // DOT Effect
         else if (_data.DOTAmount != 0 && _currentEffectTime > _nextTickTime)
@@ -171,14 +209,24 @@ public class EffectManager : MonoBehaviour, IEffectable
         // Slow Effect
         else if (_data.SlowAmount != 0 && _currentEffectTime > _nextTickTime)
         {
+            // Only triggered once
+            if (_nextTickTime == 0)
+            {
+                enemy.ReduceSpeed(_data.SlowAmount);
+                enemy.setChilled(true);
+            }
             _nextTickTime += _data.TickSpeed;
-            enemy.ReduceSpeed(_data.SlowAmount);
         }
         // Attack Decrease Effect
         else if (_data.AtkDecreAmount != 0 && _currentEffectTime > _nextTickTime)
         {
+            // Only triggered once
+            if (_nextTickTime == 0)
+            {
+                enemy.ReduceAttack(_data.AtkDecreAmount);
+                enemy.setDrenched(true);
+            }
             _nextTickTime += _data.TickSpeed;
-            enemy.ReduceAttack(_data.AtkDecreAmount);
         }
     }
 }
