@@ -8,7 +8,9 @@ public class NodeUI : MonoBehaviour
     public GameObject ui;
     public Node target;
 
-    public Vector3 manualOffset;
+    public float zOffset;
+    public float xOffsetMultiplier;
+    private float xOffset;
     public Sprite fireDefault;
     public Sprite fireActive;
     public Sprite iceDefault;
@@ -28,8 +30,12 @@ public class NodeUI : MonoBehaviour
     {
 
         target = _target;
+        Vector3 screenPoint = Camera.main.WorldToScreenPoint(_target.transform.position);
+        Debug.Log(screenPoint);
+        xOffset = (0.5f - screenPoint.x / Camera.main.pixelWidth) * xOffsetMultiplier;
+        Debug.Log(xOffset);
 
-        transform.position = target.GetTowerBuildPosition() + manualOffset;
+        transform.position = target.GetTowerBuildPosition() + new Vector3(xOffset, 0, zOffset);
 
         if (target.GetIsTowerBuilt())
         {
