@@ -363,7 +363,7 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetUpgradeCost()))
         {
 /*            Debug.Log("No cash no upgrade");*/
             return;
