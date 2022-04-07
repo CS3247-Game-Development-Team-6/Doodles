@@ -219,6 +219,10 @@ public class Enemy : MonoBehaviour
         }
 
         if (GetComponent<EnemyShooting>().isShooting) {
+            // stop attack if frozen
+            if (isFrozen) GetComponent<EnemyShooting>().enabled = false;
+            // restore attack if not frozen
+            else GetComponent<EnemyShooting>().enabled = true;
             // stop movement
             animator.SetBool("isWalking", false);
             return;
@@ -230,7 +234,7 @@ public class Enemy : MonoBehaviour
             animator.SetBool("isWalking", false);
             return;
         }
-
+        GetComponent<EnemyShooting>().enabled = true;
         animator.SetBool("isWalking", true);
 
         // movement direction to the target waypoint
