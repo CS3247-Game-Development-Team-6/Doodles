@@ -196,10 +196,13 @@ MonoBehaviour:
   cost: 10
   swapElementCost: 30
   upgradeCost: 10
+  numberOfBulletsToFire: 12
+  isAoeTurret: 0
   enemyTag: Enemy
-  fireRate: 1
+  fireRate: 0.7
   bulletPrefab: {fileID: 1315704262782356680, guid: 1af01dba5aef13e40a75468d4fe3386a, type: 3}
   firePoint: {fileID: 4276231600001898912}
+  cube: {fileID: 0}
 --- !u!114 &6327644193161751376
 MonoBehaviour:
   m_ObjectHideFlags: 0

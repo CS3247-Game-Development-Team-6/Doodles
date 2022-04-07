@@ -533,16 +533,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b909ab942025b9b4b8dec7655148aaec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 2
+  range: 1.5
   rotationBase: {fileID: 7984372079992035439}
   rotationSpeed: 10
-  cost: 10
-  swapElementCost: 30
-  upgradeCost: 90
+  cost: 100
+  swapElementCost: 75
+  upgradeCost: 150
   numberOfBulletsToFire: 8
   isAoeTurret: 1
   enemyTag: Enemy
-  fireRate: 2
+  fireRate: 0.6
   bulletPrefab: {fileID: 8038529814659282312, guid: a685175a2d3034cbb88db102fe273010, type: 3}
   firePoint: {fileID: 4276231600001898912}
   cube: {fileID: 7676760316769384773, guid: 2ebb9f2a61cd340888891958212e36e0, type: 3}
