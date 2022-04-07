@@ -47,8 +47,6 @@ public class WaveSpawner : MonoBehaviour
         // win the game
         if (waveIndex == waves.Length)
         {
-            Debug.Log("LEVEL WON!");
-
             GetComponent<GameManager>().WinGame();
 
             // disable this script

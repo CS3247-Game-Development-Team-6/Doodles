@@ -33,13 +33,11 @@ public class NodeUI : MonoBehaviour
 
         if (target.GetIsTowerBuilt())
         {
-/*            Debug.Log("We are currently displaying it here: " + transform.position);*/
             ui.SetActive(true);
 
 
             if (target.tower.GetComponent<Turret>().bulletPrefab.tag == "Fire")
             {
-                Debug.Log("Current selected bullet is fire");
                 Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
                 Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
                 Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
