@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3321494192059377045}
   - component: {fileID: 2689636279851204398}
+  - component: {fileID: -2819313586718079927}
   m_Layer: 0
   m_Name: Up1_MissileLauncher
   m_TagString: Missile
@@ -55,6 +56,24 @@ MonoBehaviour:
   fireRate: 0.5
   bulletPrefab: {fileID: 5149562609060439765, guid: fc158721863904d4b9eacb456236e11b, type: 3}
   firePoint: {fileID: 2995711942875274198}
+--- !u!114 &-2819313586718079927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689636279851204399}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 6
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2995711942171355113
 GameObject:
   m_ObjectHideFlags: 0
