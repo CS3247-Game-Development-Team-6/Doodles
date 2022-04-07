@@ -8,9 +8,11 @@ public class NodeUI : MonoBehaviour
     public GameObject ui;
     public Node target;
 
-    public float zOffset;
+    public float zOffsetMultiplier;
     public float xOffsetMultiplier;
+    public float xOffsetUpperShift;
     private float xOffset;
+    private float zOffset;
     public Sprite fireDefault;
     public Sprite fireActive;
     public Sprite iceDefault;
@@ -25,21 +27,30 @@ public class NodeUI : MonoBehaviour
     public Sprite upgradeDisable;
     public Sprite upgradeDefault;
 
+    private void Update() {
+        // Right clicking away when NodeUI is on now deactivates the NodeUI
+        if (Input.GetMouseButtonDown(1) && ui.activeSelf) {
+            ui.SetActive (false);
+        }
+    }
 
     public void SetTarget(Node _target)
     {
 
         target = _target;
         Vector3 screenPoint = Camera.main.WorldToScreenPoint(_target.transform.position);
-        Debug.Log(screenPoint);
         xOffset = (0.5f - screenPoint.x / Camera.main.pixelWidth) * xOffsetMultiplier;
-        Debug.Log(xOffset);
+        if (screenPoint.y / Camera.main.pixelHeight < 0.5) {
+            zOffset = 0.05f;
+        } else {
+            zOffset = (0.5f - screenPoint.y / Camera.main.pixelHeight) * zOffsetMultiplier;
+            xOffset += xOffset < 0 ? (-1 * xOffsetUpperShift) : xOffsetUpperShift;
+        }
 
         transform.position = target.GetTowerBuildPosition() + new Vector3(xOffset, 0, zOffset);
 
         if (target.GetIsTowerBuilt())
         {
-/*            Debug.Log("We are currently displaying it here: " + transform.position);*/
             ui.SetActive(true);
 
 

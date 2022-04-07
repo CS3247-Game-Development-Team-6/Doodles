@@ -37,7 +37,7 @@ public class WaveSpawner : MonoBehaviour
     void Update()
     {
 
-        enemiesLeftText.text = ": " + string.Format("{0}", numEnemiesLeftInWave);
+        enemiesLeftText.text = string.Format("{0}", numEnemiesLeftInWave);
 
         if (numEnemiesAlive > 0 || isSpawningEnemy)
         {

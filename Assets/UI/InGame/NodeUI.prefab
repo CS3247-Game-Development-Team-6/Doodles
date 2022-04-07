@@ -1012,7 +1012,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 5253943536834382600}
   target: {fileID: 0}
-  manualOffset: {x: 0, y: 0, z: 0.05}
+  zOffsetMultiplier: 10
+  xOffsetMultiplier: 3
+  xOffsetUpperShift: 2
   fireDefault: {fileID: 21300000, guid: eace385b694764d439657ec190a851f7, type: 3}
   fireActive: {fileID: 21300000, guid: 871e386ebd9809c45a17db1cf277dc14, type: 3}
   iceDefault: {fileID: 21300000, guid: 9d54a0e5c116f554ea27e3633bcfe11e, type: 3}
