@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     public GameObject impactEffect;
     [SerializeField] private int bulletDamage;
     [SerializeField] private StatusEffectData _data;
+    private bool isPassingThroughBullet = false;
 
     public int GetBulletDamage() {
         return bulletDamage;
@@ -20,9 +21,10 @@ public class Bullet : MonoBehaviour
         return explosionRadius;
     }
 
-    public void Seek(Transform _target) 
+    public void Seek(Transform _target, bool isPassing) 
     { 
         target = _target;
+        isPassingThroughBullet = isPassing;
     }
 
     // Update is called once per frame
@@ -46,7 +48,7 @@ public class Bullet : MonoBehaviour
         transform.LookAt(target);
     }
 
-    void HitTarget() 
+    void HitTarget(bool toDestroyThisFrame=true, Collider hitEnemy=null) 
     {
         GameObject impactEffectParticle = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(impactEffectParticle, 5f);
@@ -56,7 +58,7 @@ public class Bullet : MonoBehaviour
             Explode();
         }
 
-        if (target.CompareTag("Enemy"))
+        if (target != null && target.CompareTag("Enemy"))
         {
             var effectable = target.GetComponent<IEffectable>();
             if (effectable != null) effectable.ApplyEffect(_data);
@@ -64,7 +66,15 @@ public class Bullet : MonoBehaviour
             target.GetComponent<Enemy>().TakeDamage(bulletDamage);
         }
 
-        Destroy(gameObject);    // destroys the bullet
+        if (hitEnemy)
+        {
+            var effectable = hitEnemy.gameObject.GetComponent<IEffectable>();
+            if (effectable != null) effectable.ApplyEffect(_data);
+            hitEnemy.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage);
+        }
+
+        if (toDestroyThisFrame) 
+            Destroy(gameObject);    // destroys the bullet
     }
 
     void Explode()
@@ -79,6 +89,14 @@ public class Bullet : MonoBehaviour
 
                 collider.GetComponent<Enemy>().TakeDamage(bulletDamage);
             }
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            HitTarget(false, other);
         }
     }
 

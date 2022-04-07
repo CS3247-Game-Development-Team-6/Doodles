@@ -12,7 +12,7 @@ public class GameoverManager : MonoBehaviour
     void OnEnable()
     {
         wavesText.text = GameManager.rounds.ToString();
-        
+
         raycastOccluder.SetActive(true);
         //Time.timeScale = 0f;
         StartCoroutine(PauseGame());
@@ -24,8 +24,12 @@ public class GameoverManager : MonoBehaviour
         //for camera shaking
         yield return new WaitForSeconds(1.5f);
 
+        // Currently only works for single level (Hardcoded value here)
+        FindObjectOfType<AudioManager>().Stop("Level 1 BGM");
+
         // pause
         Time.timeScale = 0f;
+
     }
 
     public void Retry() 
