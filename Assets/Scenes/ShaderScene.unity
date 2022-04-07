@@ -582,9 +582,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1306252974}
     - target: {fileID: 5253943536085481801, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
+      propertyPath: debugMesh
+      value: 
+      objectReference: {fileID: 440708175}
+    - target: {fileID: 5253943536085481801, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
       propertyPath: manualOffset.z
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 5253943536085481801, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
+      propertyPath: debugMaterialView
+      value: 
+      objectReference: {fileID: 2100000, guid: c95ee087d56ed794c8432a2ec53b2f43, type: 2}
     - target: {fileID: 5253943536085481846, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -794,6 +802,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368179651}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &440708175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7828996251705944700, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
+  m_PrefabInstance: {fileID: 7828996251632798773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &469539735
 GameObject:
   m_ObjectHideFlags: 0

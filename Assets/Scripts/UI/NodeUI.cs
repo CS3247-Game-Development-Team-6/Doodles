@@ -27,7 +27,7 @@ public class NodeUI : MonoBehaviour
     public Sprite upgradeDisable;
     public Sprite upgradeDefault;
 
-    private void Update() {
+    private void FixedUpdate() {
         // Right clicking away when NodeUI is on now deactivates the NodeUI
         if (Input.GetMouseButtonDown(1) && ui.activeSelf) {
             ui.SetActive (false);
