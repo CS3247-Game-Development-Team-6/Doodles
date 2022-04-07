@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
             EndGame();
         }
 
-        wavesCounterUI.text = "Waves: " + string.Format("{0}", rounds);
+        wavesCounterUI.text = "Wave " + string.Format("{0}", rounds);
     }
 
     public void EndGame() {

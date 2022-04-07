@@ -103,9 +103,6 @@ public class PlayerMovement : MonoBehaviour {
                     Debug.DrawLine(mouseRay.origin, raycastHit.point);
                     // mousePositionVector.y = transform.position.y; // set to same vertical height as player
                 }
-                
-                // Debug.Log(Physics.Raycast(mouseRay, out RaycastHit test, float.MaxValue, groundLayerMask));
-                // Debug.Log(mousePositionVector);
                 break;
 
             case State.Paused:
@@ -215,33 +212,10 @@ public class PlayerMovement : MonoBehaviour {
             isBuilding = false; 
             actionTimer.text = "";
         }
-        
-        // Moved to MapInput.cs
-        /*
-        Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetMouseButtonDown(1)) { // right click
-            Debug.Log("Attempting to build!"); // TODO: remove
-
-            if (Physics.Raycast(mouseRay, out RaycastHit raycastHit)) {
-                // Replace with actual tile layer, remove hard coding.
-                if (raycastHit.collider.gameObject.GetComponent<Node>() != null) {
-                // if (raycastHit.collider.gameObject.layer == 11) { // right clicked on a TowerCell
-                    Debug.Log("Clicked on " + raycastHit.collider.gameObject.name); // TODO: remove
-
-                    GameObject towerCell = raycastHit.collider.gameObject;
-                    Node node = towerCell.GetComponent<Node>();
-                    node.HighlightEnter();
-                    Vector3 mouseTowerCellPosition = raycastHit.collider.gameObject.transform.position;
-                    BuildTowerAttempt(mouseTowerCellPosition, towerCell);
-                }
-            }
-        }
-        */
     }
 
     private void HandleWeaponSwapInputs() {
         if (Input.GetKeyDown(KeyCode.Q)) { // use Q to swap weapon
-            Debug.Log("Swapped weapon!"); // TODO: remove
             if (isUsingShooting) {
                 // currently using shooting, swap to melee
                 playerShootingScript.disableShooting();
@@ -301,32 +275,26 @@ public class PlayerMovement : MonoBehaviour {
         
         if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { 
             // player too far from tower cell
-/*            Debug.Log("Out of range.");*/
             return;
         }
 
         if (isBuilding) { 
             // player already building a tower
-/*            Debug.Log("Already building tower.");*/
             return;
         }
 
         currentTowerCell = towerCell;
         if (!player.hasEnoughInk(currentTowerCell.GetComponent<Node>().TowerCost())) {
             // player has not enough ink
-/*            Debug.Log("Not enough ink!");*/
             return;
         }
 
         if (currentTowerCell.GetComponent<Node>().HasTower()) {
             // tower cell already has a tower
-/*            Debug.Log("Tower already built.");*/
             return;
         }
 
         currentBuildDuration = buildDuration;
-/*        Debug.Log("Attempt to build...");
-        Debug.Log(towerCell);*/
         isBuilding = true;
         Build();
     }

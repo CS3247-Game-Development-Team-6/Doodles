@@ -138,8 +138,8 @@ public class Node : MonoBehaviour
         // build a tower
         GameObject towerToBuild = buildManager.GetTowerToBuild();
         towerBuildPosition = tileMesh.transform.position + towerOffset;
-        SetIsTowerBuilt(true);
         tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, Quaternion.identity);
+        SetIsTowerBuilt(true);
         Destroy(decorationMesh);    // Destroy current node's asset
 
         return tower.GetComponent<Turret>();
@@ -153,7 +153,6 @@ public class Node : MonoBehaviour
             return;
         }
         GameObject towerToBuild = buildManager.GetTowerToBuild();
-        Debug.Log(towerToBuild.name);
         tower = (GameObject)Instantiate(towerToBuild, towerBuildPosition, Quaternion.identity);
     }
 
@@ -172,10 +171,31 @@ public class Node : MonoBehaviour
         } else {
             tileRenderer.material.color = hoverColor;
         }
+
+        if (GetIsTowerBuilt()) {
+            tower.gameObject.GetComponent<Outline>().enabled = true;
+            tower.gameObject.GetComponent<Outline>().OutlineColor =
+                (transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()
+                    ? tooFarColor
+                    : hoverColor;
+        } else {
+            decorationMesh.gameObject.GetComponent<Outline>().enabled = true;
+            decorationMesh.gameObject.GetComponent<Outline>().OutlineWidth = 5f;
+            decorationMesh.gameObject.GetComponent<Outline>().OutlineColor = 
+                (transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()
+                    ? tooFarColor
+                    : hoverColor;
+        }
     }
 
     private void OnMouseExit() {
         tileRenderer.material.color = startColor;
+        
+        if (GetIsTowerBuilt()) {
+            tower.gameObject.GetComponent<Outline>().enabled = false;
+        } else {
+            decorationMesh.gameObject.GetComponent<Outline>().enabled = false;
+        }
     }
 
 }

@@ -9,6 +9,7 @@ public class EnemyBullet : MonoBehaviour
     private Transform target;
     public float speed = 70f;
     public GameObject impactEffect;
+    public GameObject damageText;
 
     private int bulletDamage;
 
@@ -47,8 +48,8 @@ public class EnemyBullet : MonoBehaviour
 
     void HitTarget() 
     {
-        // Better implementation required to identify boss bullet
-        if (bulletDamage >= 100)
+
+        if (gameObject.CompareTag("BossBullet"))
         {
             // boss bullet
             CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
@@ -70,8 +71,12 @@ public class EnemyBullet : MonoBehaviour
 
         if (_target.CompareTag("Base"))
         {
-            Base.receiveDmg(bulletDamage);
+            Base.receiveDmg(bulletDamage);         
         }
+        
+        // show damage number
+        DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+        indicator.SetDamageText(bulletDamage);
     }
 
     public void ReduceBulletDamage(int _damage) {

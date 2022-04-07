@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6692084267365264393}
   m_Layer: 0
   m_Name: EnemyBulletBoss
-  m_TagString: Untagged
+  m_TagString: BossBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,4 +96,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   impactEffect: {fileID: 1134129239631916, guid: 7e48ba6b1b968764490bbc70b66e3fe1, type: 3}
+  damageText: {fileID: 2675300404428900392, guid: 9a5c6034ef2a6a64d97fa4099150c76c, type: 3}
   initBulletDamage: 100
