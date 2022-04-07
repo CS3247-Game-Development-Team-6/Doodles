@@ -25,13 +25,13 @@ public class PlayerMovement : MonoBehaviour {
 
     // player movement values
     private float playerSpeed;
-    private float sprintSpeed = 8f; // TODO: add sprinting if needed in the future
+    // private float sprintSpeed = 8f; // TODO: add sprinting if needed in the future
     private float walkSpeed = 4f;
     private float initialRollSpeed = 50f;
     private float currentRollSpeed;
 
     // action boolean checks
-    private bool isSprinting = false; // TODO: add sprinting if needed in the future
+    // private bool isSprinting = false; // TODO: add sprinting if needed in the future
     private bool isBuilding = false;
     private bool isUsingShooting;
     private bool isAttacking = false;

@@ -33,6 +33,11 @@ public class BuildManager : MonoBehaviour
     public GameObject upFireAoeTower;
     public GameObject upIceAoeTower;
     public GameObject upWaterAoeTower;
+    public GameObject upgradeButton;
+    public GameObject destroyButton;
+    public GameObject iceButton;
+    public GameObject fireButton;
+    public GameObject waterButton;
 
 
     private void Awake()
@@ -60,12 +65,23 @@ public class BuildManager : MonoBehaviour
         }
         selectedNode = node;
         nodeUI.SetTarget(node);
+        if (node.tower != null) {
+            UpdateUiTooltip(node);
+        }
     }
 
     public void DeselectNode()
     { 
         selectedNode = null;
         nodeUI.Hide();
+    }
+
+    private void UpdateUiTooltip(Node node) {
+        upgradeButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+        destroyButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+        iceButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+        fireButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
+        waterButton.GetComponent<NodeUiTooltipTrigger>().SetNode(node);
     }
 
     public void SetTowerToBuild(GameObject tower)
@@ -101,6 +117,9 @@ public class BuildManager : MonoBehaviour
             this.towerToBuild = missileLauncherPrefab;
         else if (towerToBuild.tag == "AOE")
             this.towerToBuild = aoeTowerPrefab;
+
+        // Update UI tooltips
+        UpdateUiTooltip(nodeUI.target);
 
         // Hide nodeUI
         DeselectNode();
@@ -329,7 +348,7 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetUpgradeCost()))
         {
             return;
         }

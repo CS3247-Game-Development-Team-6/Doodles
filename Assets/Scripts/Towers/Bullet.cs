@@ -13,6 +13,14 @@ public class Bullet : MonoBehaviour
     [SerializeField] private StatusEffectData _data;
     private bool isPassingThroughBullet = false;
 
+    public int GetBulletDamage() {
+        return bulletDamage;
+    }
+
+    public float GetExplosionRadius() {
+        return explosionRadius;
+    }
+
     public void Seek(Transform _target, bool isPassing) 
     { 
         target = _target;
