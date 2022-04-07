@@ -108,15 +108,11 @@ public class BuildManager : MonoBehaviour
 
     public void buildFireTurret()
     {
-/*        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());*/
-
         // Check if already added element
         if (nodeUI.target.GetIsAddedElement())
         {
             return;
         }
-
-/*        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());*/
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -152,7 +148,6 @@ public class BuildManager : MonoBehaviour
 
         if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
         {
-/*            Debug.Log("No cash no upgrade");*/
             return;
         }
 
@@ -162,15 +157,11 @@ public class BuildManager : MonoBehaviour
 
     public void buildIceTurret()
     {
-/*        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());*/
-
         // Check if already added element
         if (nodeUI.target.GetIsAddedElement())
         {
             return;
         }
-
-/*        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());*/
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -206,7 +197,6 @@ public class BuildManager : MonoBehaviour
 
         if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
         {
-/*            Debug.Log("No cash no upgrade");*/
             return;
         }
 
@@ -216,15 +206,11 @@ public class BuildManager : MonoBehaviour
 
     public void buildWaterTurret()
     {
-/*        Debug.Log("This cell has element: " + nodeUI.target.GetIsAddedElement());*/
-
         // Check if already added element
         if (nodeUI.target.GetIsAddedElement())
         {
             return;
         }
-
-/*        Debug.Log("This cell has upgrade: " + nodeUI.target.GetIsUpgraded());*/
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -260,7 +246,6 @@ public class BuildManager : MonoBehaviour
 
         if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
         {
-/*            Debug.Log("No cash no upgrade");*/
             return;
         }
 
@@ -346,7 +331,6 @@ public class BuildManager : MonoBehaviour
 
         if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
         {
-/*            Debug.Log("No cash no upgrade");*/
             return;
         }
 
