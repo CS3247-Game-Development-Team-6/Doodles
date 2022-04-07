@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -49,12 +49,14 @@ public class Enemy : MonoBehaviour
 
     [Header("Unity Stuff")]
     public Image healthBar;
+    public TMP_Text healthText;
     
     public MapGenerator map;
     private Cell[,] cells;
 
     public GameObject model;
     public Animator animator;
+    public Canvas canvas;
 
     public void TakeDamage(float amount)
     {
@@ -200,6 +202,7 @@ public class Enemy : MonoBehaviour
         // initialize model and animator
         model = transform.GetChild(2).gameObject;
         animator = model.GetComponent<Animator>();
+        canvas = transform.GetChild(0).GetComponent<Canvas>();
 
         //ballMeshRenderer = gameObject.GetComponent<MeshRenderer>();
         ballParentTransform = gameObject.transform;
@@ -214,6 +217,8 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        healthText.text = string.Format("{0}", health);
+
         if (health <= 0)
         {
             Die();
@@ -303,7 +308,19 @@ public class Enemy : MonoBehaviour
         //ballMeshRenderer.enabled = isVisible;
         foreach (Transform childrenTransform in ballParentTransform)
         {
-            childrenTransform.gameObject.SetActive(isVisible);
+            // disable canvas
+            if (childrenTransform.name == canvas.name)
+                childrenTransform.gameObject.SetActive(isVisible);
+
+            // disable every renderers
+            if (childrenTransform.name == model.name)
+            {
+                SkinnedMeshRenderer[] renderers = model.GetComponentsInChildren<SkinnedMeshRenderer>();
+                foreach (SkinnedMeshRenderer r in renderers) {
+                    r.enabled = isVisible;
+                }
+            }
+              
         }
     }
 
