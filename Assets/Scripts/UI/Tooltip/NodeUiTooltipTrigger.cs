@@ -35,7 +35,7 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
     private static float upgradeExplosionRadius;
 
     public void SetNode(Node node) {
-        Debug.Log("SET NODE!!");
+        // Debug.Log("SET NODE!!");
         currentNode = node;
         buildManager = BuildManager.instance;
 
@@ -60,7 +60,7 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        Debug.Log("button type: " + buttonType);
+        // Debug.Log("button type: " + buttonType);
         if (buttonType == ButtonType.Upgrade && currentNode.GetIsUpgraded()) {
             // upgrade button, tower has upgrade
             TooltipSystem.Show("Tower is already upgraded!", header);
@@ -166,6 +166,48 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
                 upgradeDamage = buildManager.upMissileLauncherPrefab.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
                 upgradeExplosionRadius = buildManager.upMissileLauncherPrefab.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
                 upgradeRange = buildManager.upMissileLauncherPrefab.GetComponent<Turret>().GetRange();
+            } else {
+                // is destroy button 
+                upgradeDamage = currentDamage;
+                upgradeExplosionRadius = currentExplosionRadius;
+                upgradeRange = currentRange;
+            }
+        } else if (currentNode.tower.tag == "AOE" && currentNode.GetIsUpgraded()) {
+            if (buttonType == ButtonType.ElementFire) {
+                upgradeDamage = buildManager.upFireAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                upgradeExplosionRadius = buildManager.upFireAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                upgradeRange = buildManager.upFireAoeTower.GetComponent<Turret>().GetRange();
+            } else if (buttonType == ButtonType.ElementIce) {
+                upgradeDamage = buildManager.upIceAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                upgradeExplosionRadius = buildManager.upIceAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                upgradeRange = buildManager.upIceAoeTower.GetComponent<Turret>().GetRange();
+            } else if (buttonType == ButtonType.ElementWater) {
+                upgradeDamage = buildManager.upWaterAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                upgradeExplosionRadius = buildManager.upWaterAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                upgradeRange = buildManager.upWaterAoeTower.GetComponent<Turret>().GetRange();
+            } else {
+                // is upgrade or destroy button 
+                upgradeDamage = currentDamage;
+                upgradeExplosionRadius = currentExplosionRadius;
+                upgradeRange = currentRange;
+            }
+        } else if (currentNode.tower.tag == "AOE" && !currentNode.GetIsUpgraded()) {
+            if (buttonType == ButtonType.ElementFire) {
+                upgradeDamage = buildManager.fireAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                upgradeExplosionRadius = buildManager.fireAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                upgradeRange = buildManager.fireAoeTower.GetComponent<Turret>().GetRange();
+            } else if (buttonType == ButtonType.ElementIce) {
+                upgradeDamage = buildManager.iceAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                upgradeExplosionRadius = buildManager.iceAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                upgradeRange = buildManager.iceAoeTower.GetComponent<Turret>().GetRange();
+            } else if (buttonType == ButtonType.ElementWater) {
+                upgradeDamage = buildManager.waterAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                upgradeExplosionRadius = buildManager.waterAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                upgradeRange = buildManager.waterAoeTower.GetComponent<Turret>().GetRange();
+            } else if (buttonType == ButtonType.Upgrade) {
+                upgradeDamage = buildManager.upAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+                upgradeExplosionRadius = buildManager.upAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
+                upgradeRange = buildManager.upAoeTower.GetComponent<Turret>().GetRange();
             } else {
                 // is destroy button 
                 upgradeDamage = currentDamage;

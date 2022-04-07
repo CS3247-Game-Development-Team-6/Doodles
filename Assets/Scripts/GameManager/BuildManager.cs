@@ -29,16 +29,15 @@ public class BuildManager : MonoBehaviour
     public GameObject upFireMissileLauncher;
     public GameObject upIceMissileLauncher;
     public GameObject upWaterMissileLauncher;
+    public GameObject upAoeTower;
+    public GameObject upFireAoeTower;
+    public GameObject upIceAoeTower;
+    public GameObject upWaterAoeTower;
     public GameObject upgradeButton;
     public GameObject destroyButton;
     public GameObject iceButton;
     public GameObject fireButton;
     public GameObject waterButton;
-    public GameObject upAoeTower;
-    public GameObject upFireAoeTower;
-    public GameObject upIceAoeTower;
-    public GameObject upWaterAoeTower;
-
 
 
     private void Awake()
