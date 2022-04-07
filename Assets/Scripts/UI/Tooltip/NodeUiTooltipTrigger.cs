@@ -104,23 +104,18 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
             }
         } else if (currentNode.tower.tag == "Turret" && !currentNode.GetIsUpgraded()) {
             if (buttonType == ButtonType.ElementFire) {
-                Debug.Log("fetched fire turret values");
                 upgradeDamage = buildManager.fireTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
-                Debug.Log("bullet damage = " + upgradeDamage);
                 upgradeExplosionRadius = buildManager.fireTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
                 upgradeRange = buildManager.fireTurret.GetComponent<Turret>().GetRange();
             } else if (buttonType == ButtonType.ElementIce) {
-                Debug.Log("fetched ice turret values");
                 upgradeDamage = buildManager.iceTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
                 upgradeExplosionRadius = buildManager.iceTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
                 upgradeRange = buildManager.iceTurret.GetComponent<Turret>().GetRange();
             } else if (buttonType == ButtonType.ElementWater) {
-                Debug.Log("fetched water turret values");
                 upgradeDamage = buildManager.waterTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
                 upgradeExplosionRadius = buildManager.waterTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
                 upgradeRange = buildManager.waterTurret.GetComponent<Turret>().GetRange();
             } else if (buttonType == ButtonType.Upgrade) {
-                Debug.Log("fetched upgrade turret values");
                 upgradeDamage = buildManager.upTowerPrefab.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
                 upgradeExplosionRadius = buildManager.upTowerPrefab.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
                 upgradeRange = buildManager.upTowerPrefab.GetComponent<Turret>().GetRange();
