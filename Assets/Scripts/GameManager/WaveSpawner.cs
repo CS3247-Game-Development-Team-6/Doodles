@@ -11,7 +11,7 @@ public class WaveSpawner : MonoBehaviour
 
     // enemies left counter
     public static int numEnemiesLeftInWave;
-    public static bool isSpawningEnemy = false;
+    public static bool isSpawningEnemy;
 
     public Wave[] waves;
 
@@ -31,6 +31,7 @@ public class WaveSpawner : MonoBehaviour
     {
         numEnemiesAlive = 0;
         numEnemiesLeftInWave = 0;
+        isSpawningEnemy = false;
     }
 
     // Update is called once per frame
@@ -47,8 +48,6 @@ public class WaveSpawner : MonoBehaviour
         // win the game
         if (waveIndex == waves.Length)
         {
-            Debug.Log("LEVEL WON!");
-
             GetComponent<GameManager>().WinGame();
 
             // disable this script

@@ -28,7 +28,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        Debug.Log("resume");
         pauseMenuUI.SetActive(false);
         gameplayCanvas.SetActive(true);
         raycastOccluder.SetActive(false);
@@ -58,8 +57,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         raycastOccluder.SetActive(true);
         Time.timeScale = 0f;
-        Debug.Log("force paused");
-        Debug.Log(pauseMenuUI.activeSelf);
     }
 
     public void LoadMenu()
@@ -71,6 +68,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Retry()
     {
+        Resume();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public bool IsPaused() {

@@ -25,12 +25,8 @@ public class MapInput : MonoBehaviour {
                         player.ChangeInkAmount(-fog.cost);
                         fog.ClearFog();
                     }
-                    else {
-                        Debug.Log("Not enough ink!");
-                    }
                 } else if (node != null) {
                     if (node.cell.isFog) {
-                        Debug.Log("Fog present. Remove fog first.");
                         return;
                     }
                     Vector3 mouseTowerCellPosition = hit.collider.gameObject.transform.position;
