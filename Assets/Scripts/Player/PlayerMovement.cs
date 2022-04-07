@@ -191,12 +191,13 @@ public class PlayerMovement : MonoBehaviour {
             // player is moving
             lastMoveDirection = moveDirection; // used for movement actions when not moving
         }
-    
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            rollDirection = lastMoveDirection;
-            currentRollSpeed = initialRollSpeed;
-            state = State.Rolling;
-        }
+
+        // TODO: fix rolling (it causes clipping)
+        // if (Input.GetKeyDown(KeyCode.Space)) {
+        //     rollDirection = lastMoveDirection;
+        //     currentRollSpeed = initialRollSpeed;
+        //     state = State.Rolling;
+        // }
     }
 
     private void HandleBuildInputs() {
