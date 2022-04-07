@@ -26,7 +26,8 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
 
     private static Node currentNode; // can check upgrade and element status
     private static BuildManager buildManager = BuildManager.instance;
-    private static float cost;
+    private static float upgradeCost;
+    private static float elementSwapCost;
     private static float currentDamage;
     private static float currentRange;
     private static float currentExplosionRadius;
@@ -40,17 +41,8 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
         buildManager = BuildManager.instance;
 
         // retrieve costs
-        if (buttonType == ButtonType.Upgrade) {
-            cost = currentNode.tower.GetComponent<Turret>().GetUpgradeCost();
-        } else if (buttonType == ButtonType.ElementFire 
-            || buttonType == ButtonType.ElementIce
-            || buttonType == ButtonType.ElementWater) {
-            cost = currentNode.tower.GetComponent<Turret>().GetSwapElementCost();
-        } else if (buttonType == ButtonType.Destroy) {
-            cost = 0;
-        } else { // default catch
-            cost = 0;
-        }
+        upgradeCost = currentNode.tower.GetComponent<Turret>().GetUpgradeCost();
+        elementSwapCost = currentNode.tower.GetComponent<Turret>().GetSwapElementCost();
 
         // retrieve current stats
         currentDamage = currentNode.tower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
@@ -319,7 +311,16 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
         fullContent += "Explosion Radius: " + upgradeExplosionRadius + " [" + explosionRadiusChange + "]" + "\n";
         fullContent += upgradeInfo;
 
-        fullHeader += header + " [$" + cost + "]";
+        if (buttonType == ButtonType.Upgrade) {
+            fullHeader += header + " [$" + upgradeCost + "]";
+        } else if (buttonType == ButtonType.ElementIce 
+            || buttonType == ButtonType.ElementFire 
+            || buttonType == ButtonType.ElementWater) {
+            fullHeader += header + " [$" + elementSwapCost + "]";
+        } else {
+            fullHeader += header + " [$" + 0 + "]";
+        }
+        
 
         TooltipSystem.Show(fullContent, fullHeader);
     }
