@@ -273,9 +273,17 @@ public class PlayerMovement : MonoBehaviour {
     //
     /////////////////////////////////////
     public void BuildTowerAttempt(Vector3 mouseTowerCellPosition, GameObject towerCell) {
+
+        currentTowerCell = towerCell;
         
+        // Cannot interact with out of range towers.
         if ((mouseTowerCellPosition - transform.position).magnitude > buildDistance) { 
-            // player too far from tower cell
+            return;
+        }
+
+        // HasTower() opens NodeUI if there is a tower.
+        if (currentTowerCell.GetComponent<Node>().HasTower()) {
+            // tower cell already has a tower
             return;
         }
 
@@ -284,14 +292,9 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
 
-        currentTowerCell = towerCell;
+        // Ink cost
         if (!player.hasEnoughInk(currentTowerCell.GetComponent<Node>().TowerCost())) {
             // player has not enough ink
-            return;
-        }
-
-        if (currentTowerCell.GetComponent<Node>().HasTower()) {
-            // tower cell already has a tower
             return;
         }
 
