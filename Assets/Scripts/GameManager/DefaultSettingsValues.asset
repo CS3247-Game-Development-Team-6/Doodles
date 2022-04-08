@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c654d1076661f46a4cfc1536616bf7, type: 3}
+  m_Name: DefaultSettingsValues
+  m_EditorClassIdentifier: 
+  resolutions:
+  - widthHeight: {x: 1920, y: 1080}
+    menuScene: Menu
+    gameScene: ShaderScene
+  - widthHeight: {x: 1920, y: 1200}
+    menuScene: Menu 1920x1200
+    gameScene: ShaderScene 16-10
+  - widthHeight: {x: 1366, y: 768}
+    menuScene: Menu 1366x768
+    gameScene: ShaderScene
+  - widthHeight: {x: 3840, y: 2160}
+    menuScene: Menu 3840x2160
+    gameScene: ShaderScene
+  currIndex: 3
+  volumeSliderValue: 0.6
+  inMenu: 1
+  isFullScreen: 0

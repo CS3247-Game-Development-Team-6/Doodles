@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     // Remember to add the desired scene to the open scenes list under File -> Build Settings
-    public string scene;
+    public SettingsScriptableObject settings;
     public void PlayGame ()
     {
-        SceneManager.LoadScene(scene);
+        settings.SetCurrGameScene();
     }
 
     public void QuitGame ()

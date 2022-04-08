@@ -7,6 +7,7 @@ public class GameoverManager : MonoBehaviour
 {
     public Text wavesText;
     public GameObject raycastOccluder;
+    public SettingsScriptableObject settings;
 
     // everytime this is enabled
     void OnEnable()
@@ -41,6 +42,7 @@ public class GameoverManager : MonoBehaviour
 
     public void Menu() 
     {
-        SceneManager.LoadScene("Menu");
+        settings.SetCurrMenuScene();
+        // SceneManager.LoadScene("Menu");
     }
 }

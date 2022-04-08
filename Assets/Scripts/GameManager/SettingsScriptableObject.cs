@@ -24,10 +24,6 @@ public class SettingsScriptableObject : ScriptableObject
     public bool inMenu;
     public bool isFullScreen;
 
-    public void Initialize() {
-        SetResolutionIndex(currIndex);
-    }
-
     public Vector2Int GetResolution() {
         return resolutions[currIndex].widthHeight;
     }
@@ -42,7 +38,19 @@ public class SettingsScriptableObject : ScriptableObject
         SceneManager.LoadScene(resolutions[currIndex].gameScene);
     } 
 
+    public int SetCurrIndex() {
+        for (int i = 0; i < resolutions.Length; i++) {
+            if (resolutions[i].widthHeight.x == Screen.width && 
+                resolutions[i].widthHeight.y == Screen.height) {
+                currIndex = i;
+                return i;
+            }
+        }
+        return currIndex;
+    }
+
     public void SetResolutionIndex(int index) {
+        currIndex = index;
         ResolutionInfo info = resolutions[index];
         Screen.SetResolution(info.widthHeight.x, info.widthHeight.y, Screen.fullScreen);
         inMenu = SceneManager.GetActiveScene().name.StartsWith("Menu");
