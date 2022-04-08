@@ -36,7 +36,6 @@ public class NodeUI : MonoBehaviour
 
     public void SetTarget(Node _target)
     {
-
         target = _target;
         Vector3 screenPoint = Camera.main.WorldToScreenPoint(_target.transform.position);
         xOffset = (0.5f - screenPoint.x / Camera.main.pixelWidth) * xOffsetMultiplier;

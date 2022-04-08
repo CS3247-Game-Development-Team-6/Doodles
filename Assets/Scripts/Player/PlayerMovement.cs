@@ -284,6 +284,7 @@ public class PlayerMovement : MonoBehaviour {
         // HasTower() opens NodeUI if there is a tower.
         if (currentTowerCell.GetComponent<Node>().HasTower()) {
             // tower cell already has a tower
+            currentTowerCell.GetComponent<Node>().OpenTowerUpgrades();
             return;
         }
 
