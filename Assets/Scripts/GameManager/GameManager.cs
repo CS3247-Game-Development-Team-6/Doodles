@@ -8,12 +8,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject winUI;
     [SerializeField] private Text wavesCounterUI;
+    [SerializeField] private SettingsMenu settingsMenu;
 
     private static bool isGameEnded;
     public static int rounds;
 
 
     void Start() {
+        settingsMenu.ReloadScene();
         isGameEnded = false;
         rounds = 0;
     }
