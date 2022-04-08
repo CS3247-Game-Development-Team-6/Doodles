@@ -15,16 +15,21 @@ public class SettingsMenu : MonoBehaviour
 
     private void Start()
     {
-        List<string> options = new List<string>();
-        foreach (ResolutionInfo info in settings.resolutions) {
-            options.Add(string.Format("{0} x {1}", info.widthHeight.x, info.widthHeight.y));
-        }
-        resolutionPicker.ClearOptions();
-        resolutionPicker.AddOptions(options);
-        resolutionPicker.SetValueWithoutNotify(settings.findSetCurrIndex());
-        resolutionPicker.RefreshShownValue();
 
-        fullScreenToggle.isOn = Screen.fullScreen;
+        if (resolutionPicker != null) {
+            List<string> options = new List<string>();
+            foreach (ResolutionInfo info in settings.resolutions) {
+                options.Add(string.Format("{0} x {1}", info.widthHeight.x, info.widthHeight.y));
+            }
+            resolutionPicker.ClearOptions();
+            resolutionPicker.AddOptions(options);
+            resolutionPicker.SetValueWithoutNotify(settings.findSetCurrIndex());
+            resolutionPicker.RefreshShownValue();
+        }
+
+        if (fullScreenToggle != null) {
+            fullScreenToggle.isOn = Screen.fullScreen;
+        }
 
         SetVolume(0);
     }
