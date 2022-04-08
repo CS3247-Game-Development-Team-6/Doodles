@@ -27,7 +27,7 @@ public class NodeUI : MonoBehaviour
     public Sprite upgradeDisable;
     public Sprite upgradeDefault;
 
-    private void Update() {
+    private void FixedUpdate() {
         // Right clicking away when NodeUI is on now deactivates the NodeUI
         if (Input.GetMouseButtonDown(1) && ui.activeSelf) {
             ui.SetActive (false);
@@ -36,7 +36,6 @@ public class NodeUI : MonoBehaviour
 
     public void SetTarget(Node _target)
     {
-
         target = _target;
         Vector3 screenPoint = Camera.main.WorldToScreenPoint(_target.transform.position);
         xOffset = (0.5f - screenPoint.x / Camera.main.pixelWidth) * xOffsetMultiplier;

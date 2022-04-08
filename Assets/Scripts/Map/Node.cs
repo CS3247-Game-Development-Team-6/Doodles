@@ -113,8 +113,11 @@ public class Node : MonoBehaviour
         return towerToBuild.GetComponent<Turret>().Cost;
     }
 
-    public bool HasTower() {
+    public void OpenTowerUpgrades() {
         buildManager.SelectNode(this);
+    }
+
+    public bool HasTower() {
         return tower != null;
     }
 
