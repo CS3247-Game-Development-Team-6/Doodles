@@ -9,7 +9,6 @@ public class SettingsMenu : MonoBehaviour
 {
 
     public SettingsScriptableObject settings;
-    public Slider volumeSlider;
     public TMP_Dropdown resolutionPicker;
     public Toggle fullScreenToggle;
     public AudioMixer audioMixer;
@@ -22,13 +21,12 @@ public class SettingsMenu : MonoBehaviour
         }
         resolutionPicker.ClearOptions();
         resolutionPicker.AddOptions(options);
-        resolutionPicker.SetValueWithoutNotify(settings.SetCurrIndex());
+        resolutionPicker.SetValueWithoutNotify(settings.findSetCurrIndex());
         resolutionPicker.RefreshShownValue();
 
         fullScreenToggle.isOn = Screen.fullScreen;
 
-        settings.volumeSliderValue = volumeSlider.value;
-        SetVolume(settings.volumeSliderValue);
+        SetVolume(0);
     }
 
     public void ToggleFullScreen(bool isFullScreen) {
@@ -42,6 +40,5 @@ public class SettingsMenu : MonoBehaviour
     public void SetVolume (float volume)
     {
         audioMixer.SetFloat("volume", Mathf.Log10(volume)*20);
-        settings.volumeSliderValue = volume;
     }
 }

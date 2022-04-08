@@ -63,7 +63,16 @@ public class PauseMenu : MonoBehaviour
     {
         Resume();
         raycastOccluder.SetActive(false);
-        SceneManager.LoadScene(0);
+        if (!PlayerPrefs.HasKey(SettingsScriptableObject.MenuScenePref)) {
+            SettingsScriptableObject.Init();
+        }
+
+        string menuScene = PlayerPrefs.GetString(SettingsScriptableObject.MenuScenePref);
+
+        // To prevent infinitely opening the same scene which crashes the app
+        if (SceneManager.GetActiveScene().name.Equals(menuScene)) return;
+
+        SceneManager.LoadScene(menuScene);
     }
 
     public void Retry()

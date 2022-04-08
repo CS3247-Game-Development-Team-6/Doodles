@@ -943,6 +943,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4aca8b686666564b886d93514f45543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: 80f21140af2b69f4eb025963a2e940d6, type: 2}
+  volumeSlider: {fileID: 0}
+  resolutionPicker: {fileID: 0}
+  fullScreenToggle: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
 --- !u!1 &2390909938396826486
 GameObject:
@@ -1302,6 +1306,7 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 2390909938343528852}
   gameplayCanvas: {fileID: 0}
   raycastOccluder: {fileID: 0}
+  settings: {fileID: 11400000, guid: 80f21140af2b69f4eb025963a2e940d6, type: 2}
 --- !u!95 &2390909938755016283
 Animator:
   serializedVersion: 3

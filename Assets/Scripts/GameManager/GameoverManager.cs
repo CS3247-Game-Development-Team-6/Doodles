@@ -7,7 +7,6 @@ public class GameoverManager : MonoBehaviour
 {
     public Text wavesText;
     public GameObject raycastOccluder;
-    public SettingsScriptableObject settings;
 
     // everytime this is enabled
     void OnEnable()
@@ -42,7 +41,15 @@ public class GameoverManager : MonoBehaviour
 
     public void Menu() 
     {
-        settings.SetCurrMenuScene();
-        // SceneManager.LoadScene("Menu");
+        if (!PlayerPrefs.HasKey(SettingsScriptableObject.MenuScenePref)) {
+            SettingsScriptableObject.Init();
+        }
+
+        string menuScene = PlayerPrefs.GetString(SettingsScriptableObject.MenuScenePref);
+
+        // To prevent infinitely opening the same scene which crashes the app
+        if (SceneManager.GetActiveScene().name.Equals(menuScene)) return;
+
+        SceneManager.LoadScene(menuScene);
     }
 }

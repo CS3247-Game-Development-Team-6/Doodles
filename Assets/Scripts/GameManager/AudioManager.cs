@@ -52,9 +52,9 @@ public class AudioManager : MonoBehaviour
             volumeSlider.value = volumeFloat;
         }
 
-        if (SceneManager.GetActiveScene().name == "Menu")
+        if (SceneManager.GetActiveScene().name.StartsWith("Menu"))
             Play("Main Menu BGM");
-        else if (SceneManager.GetActiveScene().name == "ShaderScene")
+        else if (SceneManager.GetActiveScene().name.StartsWith("ShaderScene"))
             Play("Level 1 BGM");
 
     }
