@@ -51,7 +51,9 @@ public class SettingsScriptableObject : ScriptableObject
     public int findSetCurrIndex() {
         for (int i = 0; i < resolutions.Length; i++) {
             if (resolutions[i].widthHeight.x == Screen.width && 
-                resolutions[i].widthHeight.y == Screen.height) {
+                resolutions[i].widthHeight.y == Screen.height &&
+                (SceneManager.GetActiveScene().Equals(resolutions[i].gameScene) ||
+                SceneManager.GetActiveScene().Equals(resolutions[i].menuScene))) {
                 currIndex = i;
                 SetPlayerPrefs(i);
                 return i;
