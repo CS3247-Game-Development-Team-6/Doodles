@@ -41,6 +41,15 @@ public class GameoverManager : MonoBehaviour
 
     public void Menu() 
     {
-        SceneManager.LoadScene("Menu");
+        if (!PlayerPrefs.HasKey(SettingsScriptableObject.MenuScenePref)) {
+            SettingsScriptableObject.Init();
+        }
+
+        string menuScene = PlayerPrefs.GetString(SettingsScriptableObject.MenuScenePref);
+
+        // To prevent infinitely opening the same scene which crashes the app
+        if (SceneManager.GetActiveScene().name.Equals(menuScene)) return;
+
+        SceneManager.LoadScene(menuScene);
     }
 }

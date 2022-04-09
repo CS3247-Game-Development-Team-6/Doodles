@@ -270,7 +270,7 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
             upgradeRange = currentRange;
         }
 
-        // print to debug log
+        /*
         Debug.Log("tower tag: " + currentNode.tower.tag);
         Debug.Log("tower upgraded: " + currentNode.GetIsUpgraded());
         Debug.Log("current damage: " + currentDamage);
@@ -279,6 +279,7 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
         Debug.Log("upgraded range: " + upgradeRange);
         Debug.Log("current explosion rad: " + currentExplosionRadius);
         Debug.Log("upgraded explosion rad: " + upgradeExplosionRadius);
+        */
 
         /////////////////////////////////////
         // generate full content and headers
