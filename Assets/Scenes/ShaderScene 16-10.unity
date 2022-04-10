@@ -482,6 +482,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff03c2858a70d445ba29c8ff49b6a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &311912959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2947530210773271024, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc647323ac73fe5429d2d67c44b627e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &351889076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1355,6 +1366,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &926616249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4214417968122550721, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,6 +2444,10 @@ PrefabInstance:
       value: -106.2
       objectReference: {fileID: 0}
     - target: {fileID: 2947530210773271024, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: pauseMenuUI
+      value: 
+      objectReference: {fileID: 926616249}
+    - target: {fileID: 2947530210773271024, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: gameplayCanvas
       value: 
       objectReference: {fileID: 3773202538542358475}
@@ -2559,6 +2579,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4214417968647611077, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214417968647611077, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[9].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214417968647611077, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[9].m_Target
+      value: 
+      objectReference: {fileID: 311912959}
+    - target: {fileID: 4214417968647611077, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[9].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214417968647611077, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[9].m_MethodName
+      value: Resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214417968647611077, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[9].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214417968647611077, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[9].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4304542979912485023, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_FontData.m_FontSize
       value: 28
@@ -2582,6 +2630,10 @@ PrefabInstance:
     - target: {fileID: 5553060649945844835, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_FillAmount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614353815773346203, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -8.8263855
       objectReference: {fileID: 0}
     - target: {fileID: 6354936246506189678, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_AnchorMax.x
