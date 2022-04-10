@@ -2705,9 +2705,21 @@ PrefabInstance:
       value: GameMaster
       objectReference: {fileID: 0}
     - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: levelInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: d5ac5c3a4927ced47889286d932f3216, type: 2}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: wavesContainer
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: enemiesLeftText
       value: 
       objectReference: {fileID: 1841248107}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waves.Array.size
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: waveCountdownText
       value: 
@@ -2716,6 +2728,42 @@ PrefabInstance:
       propertyPath: waveCountdownIndicator
       value: 
       objectReference: {fileID: 1373582471}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waves.Array.data[15].rate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waves.Array.data[15].count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waves.Array.data[15].enemy
+      value: 
+      objectReference: {fileID: 6540121397901334477, guid: a9f462e45d43ada4690904da9c284f9e, type: 3}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waves.Array.data[15].rate2
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waves.Array.data[15].rate3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waves.Array.data[15].count2
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waves.Array.data[15].count3
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waves.Array.data[15].enemy2
+      value: 
+      objectReference: {fileID: 6540121397901334477, guid: d74de364f8d1dc943ba639ce7ec66331, type: 3}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: waves.Array.data[15].enemy3
+      value: 
+      objectReference: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: winUI
       value: 
