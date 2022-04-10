@@ -36,11 +36,20 @@ public class NodeUI : MonoBehaviour
 
     public void SetTarget(Node _target)
     {
+        /* Node UI location is dynamically set, with some hardcoded values here. */
         target = _target;
         Vector3 screenPoint = Camera.main.WorldToScreenPoint(_target.transform.position);
         xOffset = (0.5f - screenPoint.x / Camera.main.pixelWidth) * xOffsetMultiplier;
-        if (screenPoint.y / Camera.main.pixelHeight < 0.5) {
-            zOffset = 0.05f;
+
+        // Bottom left and right corners
+        if (screenPoint.y / Camera.main.pixelHeight < 0.2 && 
+            Mathf.Abs(0.5f -  screenPoint.x / Camera.main.pixelWidth) > 0.28) {
+            zOffset = 0.01f;
+            xOffset *= 2f;
+        // Middle of map (on y axis)
+        } else if (screenPoint.y / Camera.main.pixelHeight < 0.6) {
+            zOffset = 0.03f;
+        // Top third of map
         } else {
             zOffset = (0.5f - screenPoint.y / Camera.main.pixelHeight) * zOffsetMultiplier;
             xOffset += xOffset < 0 ? (-1 * xOffsetUpperShift) : xOffsetUpperShift;
