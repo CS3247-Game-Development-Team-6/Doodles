@@ -41,6 +41,8 @@ public class GameoverManager : MonoBehaviour
 
     public void Menu() 
     {
+        // Resume time
+        Time.timeScale = 1f;
         if (!PlayerPrefs.HasKey(SettingsScriptableObject.MenuScenePref)) {
             SettingsScriptableObject.Init();
         }
