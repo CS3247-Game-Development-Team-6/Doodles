@@ -35,7 +35,6 @@ public class WaveSpawner : MonoBehaviour
         numEnemiesLeftInWave = 0;
         isSpawningEnemy = false;
         if (levelInfo != null) waves = levelInfo.waves;
-        // if (levelInfo != null) levelInfo.waves = waves;
     }
 
     // Update is called once per frame
