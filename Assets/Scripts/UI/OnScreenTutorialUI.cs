@@ -33,8 +33,10 @@ public class OnScreenTutorialUI : MonoBehaviour {
 
     public void ReEnable() {
         gameObject.SetActive(true);
-        defaultTextLength = textBox.text.Length;
-        defaultFontSize = textBox.fontSize;
+        if (defaultTextLength < 0) {
+            defaultTextLength = textBox.text.Length;
+            defaultFontSize = textBox.fontSize;
+        }
         SetIndex(0);
     }
 
