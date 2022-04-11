@@ -51,6 +51,8 @@ public class PauseMenu : MonoBehaviour
             raycastOccluder.SetActive(true);
             Time.timeScale = 0f;
         }
+        
+        TooltipSystem.Hide();
     }
 
     public void Freeze() {
