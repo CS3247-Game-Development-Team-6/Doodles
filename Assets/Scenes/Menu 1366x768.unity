@@ -415,23 +415,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 2136937126}
+      objectReference: {fileID: 1985467149}
     - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+      value: SaveSoundSettings
       objectReference: {fileID: 0}
     - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: AudioManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
@@ -725,14 +725,9 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5263057130071336390, guid: 6a793fd696308b44c9be271e7055f73b, type: 3}
   m_PrefabInstance: {fileID: 232942810}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136937126}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ff03c2858a70d445ba29c8ff49b6a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2136937126 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5263057130071336391, guid: 6a793fd696308b44c9be271e7055f73b, type: 3}
-  m_PrefabInstance: {fileID: 232942810}
-  m_PrefabAsset: {fileID: 0}
