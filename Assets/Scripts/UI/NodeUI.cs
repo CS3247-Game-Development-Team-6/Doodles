@@ -129,23 +129,6 @@ public class NodeUI : MonoBehaviour
         }
     }
 
-    public void Update()
-    {
-        if (ui.activeInHierarchy)
-        {
-            if (target.GetIsUpgraded())
-            {
-                Button upgradeButton = GameObject.Find("/NodeUI/Canvas/Buttons/Upgrade").GetComponent<Button>();
-                upgradeButton.GetComponent<Image>().sprite = upgradeDisable;
-            }
-            else
-            {
-                Button upgradeButton = GameObject.Find("/NodeUI/Canvas/Buttons/Upgrade").GetComponent<Button>();
-                upgradeButton.GetComponent<Image>().sprite = upgradeDefault;
-            }
-        }
-    }
-
     public void Hide()
     {
         ui.SetActive (false);
