@@ -184,6 +184,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a793fd696308b44c9be271e7055f73b, type: 3}
+--- !u!1 &840281388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5263057130071336391, guid: 6a793fd696308b44c9be271e7055f73b, type: 3}
+  m_PrefabInstance: {fileID: 232942810}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &857668913
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +383,38 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1985467149}
+    - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 840281388}
+    - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3969703495192705056, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4728294721550785184, guid: 4803e184f154317448aafc9f6d617373, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -478,10 +515,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5771894348338073845, guid: 4803e184f154317448aafc9f6d617373, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1985467149}
+    - target: {fileID: 5495374515633626882, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_text
+      value: Option A
+      objectReference: {fileID: 0}
     - target: {fileID: 5809475732314425192, guid: 4803e184f154317448aafc9f6d617373, type: 3}
       propertyPath: m_text
       value: "Fantasy medieval weapon \u2013 Cattleya\r\nDwarf Melee Weapons \u2013
@@ -626,7 +663,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5263057130071336390, guid: 6a793fd696308b44c9be271e7055f73b, type: 3}
   m_PrefabInstance: {fileID: 232942810}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 840281388}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ff03c2858a70d445ba29c8ff49b6a21, type: 3}
