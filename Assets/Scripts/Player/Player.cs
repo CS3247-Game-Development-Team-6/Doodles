@@ -10,11 +10,13 @@ public class Player : MonoBehaviour {
     [Range(0, 1)] public float startingAmount = 0.6f;
     private float ink;
     [SerializeField] private PlayerMovement movement;
+    public LevelInfoScriptableObject levelInfo;
 
     public PlayerMovement Movement => movement;
     [SerializeField] private IndicatorUI playerInkIndicator;
 
     private void Start() {
+        if (levelInfo != null) startingAmount = levelInfo.startingInkPercentage;
 
         ink = startingAmount * maxInk;
         playerInkIndicator.maxValue = (int)maxInk;
@@ -34,11 +36,6 @@ public class Player : MonoBehaviour {
         playerInkIndicator.rawValue = (int)ink;
 
         // update visual
-    }
-
-    // from killing enemy
-    public void AddInk(float inkAmount) {
-        ChangeInkAmount(inkAmount); // TODO: Refactor pls....
     }
 
     private void Update() {

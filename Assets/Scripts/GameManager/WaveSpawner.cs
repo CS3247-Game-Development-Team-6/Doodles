@@ -22,6 +22,8 @@ public class WaveSpawner : MonoBehaviour
     public IndicatorUI waveCountdownIndicator;
     public Text enemiesLeftText;
 
+    public LevelInfoScriptableObject levelInfo;
+
     // decrease with time, countdown for new wave
     private float countdownTimer = 3f;
 
@@ -32,6 +34,7 @@ public class WaveSpawner : MonoBehaviour
         numEnemiesAlive = 0;
         numEnemiesLeftInWave = 0;
         isSpawningEnemy = false;
+        if (levelInfo != null) waves = levelInfo.waves;
     }
 
     // Update is called once per frame
