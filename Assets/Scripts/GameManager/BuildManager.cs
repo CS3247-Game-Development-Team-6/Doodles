@@ -274,7 +274,7 @@ public class BuildManager : MonoBehaviour
 
     public void UpgradeTower()
     {
-        if (nodeUI.target.GetIsUpgraded() && nodeUI.target.GetIsAddedElement())
+        if (nodeUI.target.GetIsUpgraded())
         {
             return;
         }
