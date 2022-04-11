@@ -25,7 +25,8 @@ public class WaveSpawner : MonoBehaviour
     public LevelInfoScriptableObject levelInfo;
 
     public Button skipWaveCountdownButton;
-    public bool isSkipWaveCountdownButtonVisible;
+    // boolean to set the button visible
+    private bool isSkipWaveCountdownButtonVisible;
 
     // decrease with time, countdown for new wave
     private float countdownTimer = 3f;
@@ -47,8 +48,9 @@ public class WaveSpawner : MonoBehaviour
 
     void buttonOnClick()
     {
-        Debug.Log("button clicked");
         isSkipWaveCountdownButtonVisible = false;
+
+        // reset timer 
         countdownTimer = 0f;
         UpdateTimerIndicator(countdownTimer);
     }
