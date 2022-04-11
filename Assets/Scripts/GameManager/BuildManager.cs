@@ -128,7 +128,7 @@ public class BuildManager : MonoBehaviour
     public void buildFireTurret()
     {
         // Check if already added element
-        if (nodeUI.target.GetIsAddedElement())
+        if (nodeUI.target.GetIsAddedElement() && !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
         {
             return;
         }
@@ -177,7 +177,7 @@ public class BuildManager : MonoBehaviour
     public void buildIceTurret()
     {
         // Check if already added element
-        if (nodeUI.target.GetIsAddedElement())
+        if (nodeUI.target.GetIsAddedElement() && !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
         {
             return;
         }
@@ -226,7 +226,7 @@ public class BuildManager : MonoBehaviour
     public void buildWaterTurret()
     {
         // Check if already added element
-        if (nodeUI.target.GetIsAddedElement())
+        if (nodeUI.target.GetIsAddedElement() && !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
         {
             return;
         }
@@ -274,7 +274,7 @@ public class BuildManager : MonoBehaviour
 
     public void UpgradeTower()
     {
-        if (nodeUI.target.GetIsUpgraded())
+        if (nodeUI.target.GetIsUpgraded() && !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetUpgradeCost()))
         {
             return;
         }
