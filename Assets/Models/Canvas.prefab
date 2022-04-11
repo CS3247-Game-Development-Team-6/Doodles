@@ -3098,7 +3098,7 @@ RectTransform:
   m_GameObject: {fileID: 6937130136276400411}
   m_LocalRotation: {x: -0, y: -0, z: 0.13917309, w: 0.9902681}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25496817, y: 0.42898524, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children:
   - {fileID: 3014907214916998554}
   m_Father: {fileID: 2717706337348142264}
@@ -3106,8 +3106,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.11419678, y: -1.2849579}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -0.9, y: -1.4}
+  m_SizeDelta: {x: 100, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &931756355498885712
 CanvasRenderer:
@@ -3203,8 +3203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adf98ef91c084068943938aee14ea89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  header: WaveTimerButton
-  content: "Do you want to skip the timer \ncountdown?\n"
+  header: Skip Countdown
+  content: 'Go straight to '
 --- !u!1 &7212915237067817263
 GameObject:
   m_ObjectHideFlags: 0
