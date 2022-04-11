@@ -59,6 +59,7 @@ Transform:
   m_Children:
   - {fileID: 3736312181993772698}
   - {fileID: 7427344348085755603}
+  - {fileID: 1664676768087294981}
   m_Father: {fileID: 3321494192059377045}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111,13 +112,16 @@ MonoBehaviour:
   range: 3
   rotationBase: {fileID: 7645729805080293556}
   rotationSpeed: 5
-  cost: 20
+  cost: 40
   swapElementCost: 35
   upgradeCost: 25
+  numberOfBulletsToFire: 12
+  isAoeTurret: 0
   enemyTag: Enemy
   fireRate: 0.5
   bulletPrefab: {fileID: 5149562609060439765, guid: 08ed0a4e6064a084ea43dde318343e1b, type: 3}
   firePoint: {fileID: 7427344348085755603}
+  cube: {fileID: 0}
 --- !u!114 &-4181247888248885077
 MonoBehaviour:
   m_ObjectHideFlags: 0
