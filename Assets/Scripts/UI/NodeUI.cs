@@ -7,6 +7,7 @@ public class NodeUI : MonoBehaviour
 {
     public GameObject ui;
     public Node target;
+    public GameObject playerGO;
 
     public float zOffsetMultiplier;
     public float xOffsetMultiplier;
@@ -122,8 +123,51 @@ public class NodeUI : MonoBehaviour
             }
             else
             {
+                // if current ink is less than the tower's required upgrade ink, we mark the upgrade icon as disabled
+                // we need reference to the player's ink level
+                // we need reference to the tile's tower built -> then retrieve the amount of ink needed for upgrade
+
+                if (playerGO.GetComponent<Player>().hasEnoughInk(target.tower.GetComponent<Turret>().upgradeCost))
+                {
+                    Button upgradeButton = GameObject.Find("/NodeUI/Canvas/Buttons/Upgrade").GetComponent<Button>();
+                    upgradeButton.GetComponent<Image>().sprite = upgradeDefault;
+                }
+                else
+                {
+                    Button upgradeButton = GameObject.Find("/NodeUI/Canvas/Buttons/Upgrade").GetComponent<Button>();
+                    upgradeButton.GetComponent<Image>().sprite = upgradeDisable;
+                }
+
+            }
+        }
+    }
+
+    public void Update()
+    {
+        if (ui.activeInHierarchy)
+        {
+            if (target.GetIsUpgraded())
+            {
                 Button upgradeButton = GameObject.Find("/NodeUI/Canvas/Buttons/Upgrade").GetComponent<Button>();
-                upgradeButton.GetComponent<Image>().sprite = upgradeDefault;
+                upgradeButton.GetComponent<Image>().sprite = upgradeDisable;
+            }
+            else
+            {
+                // if current ink is less than the tower's required upgrade ink, we mark the upgrade icon as disabled
+                // we need reference to the player's ink level
+                // we need reference to the tile's tower built -> then retrieve the amount of ink needed for upgrade
+
+                if (playerGO.GetComponent<Player>().hasEnoughInk(target.tower.GetComponent<Turret>().upgradeCost))
+                {
+                    Button upgradeButton = GameObject.Find("/NodeUI/Canvas/Buttons/Upgrade").GetComponent<Button>();
+                    upgradeButton.GetComponent<Image>().sprite = upgradeDefault;
+                }
+                else
+                {
+                    Button upgradeButton = GameObject.Find("/NodeUI/Canvas/Buttons/Upgrade").GetComponent<Button>();
+                    upgradeButton.GetComponent<Image>().sprite = upgradeDisable;
+                }
+
             }
         }
     }
