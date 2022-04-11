@@ -24,6 +24,9 @@ public class WaveSpawner : MonoBehaviour
 
     public LevelInfoScriptableObject levelInfo;
 
+    public Button skipWaveCountdownButton;
+    public bool isSkipWaveCountdownButtonVisible;
+
     // decrease with time, countdown for new wave
     private float countdownTimer = 3f;
 
@@ -34,17 +37,31 @@ public class WaveSpawner : MonoBehaviour
         numEnemiesAlive = 0;
         numEnemiesLeftInWave = 0;
         isSpawningEnemy = false;
+        countdownTimer = timeBetweenWaves;
+
+        isSkipWaveCountdownButtonVisible = true;
+        skipWaveCountdownButton.onClick.AddListener(buttonOnClick);
+
         if (levelInfo != null) waves = levelInfo.waves;
+    }
+
+    void buttonOnClick()
+    {
+        Debug.Log("button clicked");
+        isSkipWaveCountdownButtonVisible = false;
+        countdownTimer = 0f;
+        UpdateTimerIndicator(countdownTimer);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        skipWaveCountdownButton.gameObject.SetActive(isSkipWaveCountdownButtonVisible);
         enemiesLeftText.text = string.Format("{0}", numEnemiesLeftInWave);
 
         if (numEnemiesAlive > 0 || isSpawningEnemy)
         {
+            isSkipWaveCountdownButtonVisible = false;
             return;
         }
 
@@ -61,17 +78,22 @@ public class WaveSpawner : MonoBehaviour
         {
             isSpawningEnemy = true;
             SpawnWave();
-            countdownTimer = timeBetweenWaves;
+            countdownTimer = timeBetweenWaves;         
             return;
         }
+        isSkipWaveCountdownButtonVisible = true;
 
         countdownTimer -= Time.deltaTime;
-
         countdownTimer = Mathf.Clamp(countdownTimer, 0f, Mathf.Infinity);
-        waveCountdownIndicator.rawValue = (int)(countdownTimer * 100);
-        waveCountdownIndicator.maxValue = (int)(timeBetweenWaves * 100);
 
+        UpdateTimerIndicator(countdownTimer);
         
+    }
+
+    void UpdateTimerIndicator(float time)
+    {
+        waveCountdownIndicator.rawValue = (int)(time * 100);
+        waveCountdownIndicator.maxValue = (int)(timeBetweenWaves * 100);
     }
 
     // can pause the func execution
