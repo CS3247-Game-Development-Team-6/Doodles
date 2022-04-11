@@ -31,7 +31,7 @@ public class SettingsMenu : MonoBehaviour
             fullScreenToggle.isOn = Screen.fullScreen;
         }
 
-        SetVolume(0);
+        // SetVolume(0);
     }
 
     public void ToggleFullScreen(bool isFullScreen) {
