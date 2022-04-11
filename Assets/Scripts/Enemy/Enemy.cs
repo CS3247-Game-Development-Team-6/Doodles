@@ -179,7 +179,7 @@ public class Enemy : MonoBehaviour
     {
         // add ink
         Player playerScript = GameObject.Find("Player").GetComponent<Player>();
-        playerScript.AddInk(inkGained);
+        playerScript.ChangeInkAmount(inkGained);
 
         // for new wave
         WaveSpawner.numEnemiesAlive--;

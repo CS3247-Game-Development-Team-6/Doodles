@@ -193,13 +193,16 @@ MonoBehaviour:
   range: 4
   rotationBase: {fileID: 7984372079992035439}
   rotationSpeed: 10
-  cost: 10
+  cost: 40
   swapElementCost: 30
   upgradeCost: 10
+  numberOfBulletsToFire: 12
+  isAoeTurret: 0
   enemyTag: Enemy
   fireRate: 1
   bulletPrefab: {fileID: 1315704262782356680, guid: 0eb22f81087971a45bfb41bb9cef00cf, type: 3}
   firePoint: {fileID: 4276231600001898912}
+  cube: {fileID: 0}
 --- !u!114 &-9112129269417661870
 MonoBehaviour:
   m_ObjectHideFlags: 0
