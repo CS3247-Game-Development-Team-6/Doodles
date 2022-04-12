@@ -67,7 +67,7 @@ public class WaveSpawner : MonoBehaviour
 
         // stops when first time seeing tutorial
         if (!PlayerPrefs.HasKey(OnScreenTutorialUI.OnScreenTutorialPref) 
-            || PlayerPrefs.GetInt(OnScreenTutorialUI.OnScreenTutorialPref) == 1)
+            || PlayerPrefs.GetInt(OnScreenTutorialUI.OnScreenTutorialPref) != 1)
         {
             isSkipWaveCountdownButtonVisible = false;
             return;
