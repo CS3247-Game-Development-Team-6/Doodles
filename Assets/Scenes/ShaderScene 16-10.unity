@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44970143, g: 0.4997673, b: 0.5756332, a: 1}
+  m_IndirectSpecularColor: {r: 0.44970167, g: 0.49976736, b: 0.5756334, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1896,6 +1896,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474049062}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1530665680 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2855375989850712115, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1789031178 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7828996249860865855, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
@@ -2249,14 +2260,6 @@ PrefabInstance:
     - target: {fileID: 734051633343508608, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 806304323676308548, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -408.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 806304323676308548, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -484
       objectReference: {fileID: 0}
     - target: {fileID: 1800086425317640480, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2706,6 +2709,10 @@ PrefabInstance:
       propertyPath: waveCountdownIndicator
       value: 
       objectReference: {fileID: 1373582471}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: skipWaveCountdownButton
+      value: 
+      objectReference: {fileID: 1530665680}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: winUI
       value: 
