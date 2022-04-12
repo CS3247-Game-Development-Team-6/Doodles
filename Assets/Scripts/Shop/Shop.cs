@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
-    BuildManager buildManager;
+    public ShopItemUI[] items;
+    public PlayerMovement playerMovement;
+    private BuildManager buildManager;
 
     private void Start()
     {
@@ -19,5 +22,19 @@ public class Shop : MonoBehaviour
     public void SetMissileLauncher()
     {
         buildManager.SetTowerToBuild(buildManager.missileLauncherPrefab);
+    }
+
+
+    public void SetTowerAttempt(ShopItemUI item) {
+        if (playerMovement != null && playerMovement.GetIsBuilding()) return;
+        if (buildManager != null) {
+            buildManager.SetTowerToBuild(item.tower);
+            item.gameObject.GetComponent<Image>().sprite = item.selected;
+            foreach (ShopItemUI otherItem in items) {
+                if (item == otherItem) continue; 
+                otherItem.gameObject.GetComponent<Image>().sprite = otherItem.unselected;
+            }
+        }
+
     }
 }
