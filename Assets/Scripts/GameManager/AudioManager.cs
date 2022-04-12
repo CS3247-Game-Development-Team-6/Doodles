@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
     private static readonly string FirstPlay = "FirstPlay";
-    private static readonly string VolumePref = "VolumePref";
+    public static readonly string VolumePref = "VolumePref";
     private int firstPlayInt;
     public Slider volumeSlider;
     private float volumeFloat;

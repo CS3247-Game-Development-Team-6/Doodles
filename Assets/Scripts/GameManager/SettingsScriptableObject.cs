@@ -49,6 +49,11 @@ public class SettingsScriptableObject : ScriptableObject
     }
 
     public int findSetCurrIndex() {
+        if (PlayerPrefs.HasKey(ResIndexPref)) {
+            currIndex = PlayerPrefs.GetInt(ResIndexPref);
+            SetPlayerPrefs(currIndex);
+            return currIndex;
+        }
         for (int i = 0; i < resolutions.Length; i++) {
             if (resolutions[i].widthHeight.x == Screen.width && 
                 resolutions[i].widthHeight.y == Screen.height &&
