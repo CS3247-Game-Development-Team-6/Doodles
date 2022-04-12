@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask tileAndFogLayerMask;
     [SerializeField] private Player player;
+    public GameObject playerGO;
+    public GameObject insufficientInkEffect;
 
     // states
     private enum State { // used for player actions that cannot be interrupted
@@ -296,6 +298,7 @@ public class PlayerMovement : MonoBehaviour {
         // Ink cost
         if (!player.hasEnoughInk(currentTowerCell.GetComponent<Node>().TowerCost())) {
             // player has not enough ink
+            Instantiate(insufficientInkEffect, playerGO.transform.position, Quaternion.identity);
             return;
         }
 
