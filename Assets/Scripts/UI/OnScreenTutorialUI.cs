@@ -17,18 +17,16 @@ public class OnScreenTutorialUI : MonoBehaviour {
 
     private int defaultTextLength = -1;
     private float defaultFontSize = -1;
-    // private static readonly string OnScreenTutorialPref = "OnScreenTutorialPref";
+    private static readonly string OnScreenTutorialPref = "OnScreenTutorialPref";
 
     // for wavespawner, assuming not to be set false each start()
     public static bool hasSeenTutorial = false;
 
     private void Start() {
-        /*
         if (PlayerPrefs.HasKey(OnScreenTutorialPref) && PlayerPrefs.GetInt(OnScreenTutorialPref) == 0) {
             gameObject.SetActive(false);
             return;
         }
-        */
         if (defaultTextLength < 0) {
             defaultTextLength = textBox.text.Length;
             defaultFontSize = textBox.fontSize;
@@ -79,7 +77,7 @@ public class OnScreenTutorialUI : MonoBehaviour {
     public void Hide() {
         gameObject.SetActive(false);
         // Saves the fact that player has seen this tutorial already
-        // PlayerPrefs.SetInt(OnScreenTutorialPref, 0);
+        PlayerPrefs.SetInt(OnScreenTutorialPref, 0);
         hasSeenTutorial = true;
     }
 }
