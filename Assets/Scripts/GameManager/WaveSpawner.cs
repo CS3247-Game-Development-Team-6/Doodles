@@ -33,6 +33,8 @@ public class WaveSpawner : MonoBehaviour
 
     private int waveIndex = 0;
 
+    private OnScreenTutorialUI tutorialScript;
+
     void Start()
     {
         numEnemiesAlive = 0;
@@ -42,6 +44,8 @@ public class WaveSpawner : MonoBehaviour
 
         isSkipWaveCountdownButtonVisible = true;
         skipWaveCountdownButton.onClick.AddListener(buttonOnClick);
+
+        tutorialScript = GameObject.Find("Canvas").GetComponentInChildren<OnScreenTutorialUI>();
 
         if (levelInfo != null) waves = levelInfo.waves;
     }
@@ -60,6 +64,13 @@ public class WaveSpawner : MonoBehaviour
     {
         skipWaveCountdownButton.gameObject.SetActive(isSkipWaveCountdownButtonVisible);
         enemiesLeftText.text = string.Format("{0}", numEnemiesLeftInWave);
+
+        // stops when first time seeing tutorial
+        if (!OnScreenTutorialUI.hasSeenTutorial)
+        {
+            isSkipWaveCountdownButtonVisible = false;
+            return;
+        }
 
         if (numEnemiesAlive > 0 || isSpawningEnemy)
         {
