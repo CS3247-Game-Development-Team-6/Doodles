@@ -7,6 +7,8 @@ public class MapInput : MonoBehaviour {
     private Camera cam;
     public MapGenerator map;
     public Player player;
+    public GameObject playerGO;
+    public GameObject insufficientInkEffect;
 
     void Start() {
         cam = Camera.main;
@@ -24,6 +26,10 @@ public class MapInput : MonoBehaviour {
                     if (player.hasEnoughInk(fog.cost)) {
                         player.ChangeInkAmount(-fog.cost);
                         fog.ClearFog();
+                    }
+                    else
+                    {
+                        Instantiate(insufficientInkEffect, playerGO.transform.position, Quaternion.identity);
                     }
                 } else if (node != null) {
                     if (node.cell.isFog) {
