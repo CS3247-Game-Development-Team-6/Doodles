@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44970167, g: 0.49976736, b: 0.5756334, a: 1}
+  m_IndirectSpecularColor: {r: 0.4497019, g: 0.49976808, b: 0.57563424, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1520,6 +1520,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 0}
   player: {fileID: 1789031185}
+  playerGO: {fileID: 1789031178}
+  insufficientInkEffect: {fileID: 1252599804982201016, guid: 1ae7d1e1c28d77444a3ba9f1bdf97d38, type: 3}
 --- !u!4 &1040735802
 Transform:
   m_ObjectHideFlags: 0
@@ -2611,7 +2613,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 981325980601015555, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
 --- !u!1 &3773202538542358475 stripped
 GameObject:
@@ -2871,6 +2874,10 @@ PrefabInstance:
       propertyPath: playerInkIndicator
       value: 
       objectReference: {fileID: 889571982}
+    - target: {fileID: 7828996249860865849, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
+      propertyPath: playerGO
+      value: 
+      objectReference: {fileID: 1789031178}
     - target: {fileID: 7828996249860865849, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
       propertyPath: playerCamera
       value: 
