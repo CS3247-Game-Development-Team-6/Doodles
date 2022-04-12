@@ -145,6 +145,10 @@ public class PlayerMovement : MonoBehaviour {
         
     }
 
+    public bool GetIsBuilding() {
+        return isBuilding;
+    }
+
     public float GetBuildDistance() {
         return buildDistance;
     }
