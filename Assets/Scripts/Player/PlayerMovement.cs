@@ -225,6 +225,7 @@ public class PlayerMovement : MonoBehaviour {
             // interrupt building action on other action inputs
             isBuilding = false; 
             actionTimer.text = "";
+            buildIndicator.rawValue = 0;
         }
     }
 
@@ -266,6 +267,7 @@ public class PlayerMovement : MonoBehaviour {
                 // interrupt building action
                 isBuilding = false; 
                 actionTimer.text = "";
+                buildIndicator.rawValue = 0;
             }
 
             break;
@@ -332,7 +334,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (currentBuildDuration <= 0) {
             actionTimer.text = ""; // stop displaying timer
-
+            buildIndicator.rawValue = 0;
             Turret turret = currentTowerCell.GetComponent<Node>().BuildTower();
             if (turret != null) {
                 player.ChangeInkAmount(-turret.Cost);
