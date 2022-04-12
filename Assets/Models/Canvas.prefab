@@ -3075,6 +3075,138 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6713127244169458536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4038632468618533496}
+  - component: {fileID: 3885167783432632997}
+  - component: {fileID: 6938153441941249440}
+  - component: {fileID: 5376108116731777085}
+  m_Layer: 0
+  m_Name: Back
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4038632468618533496
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6713127244169458536}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1096771947161332676}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 132.7, y: -66}
+  m_SizeDelta: {x: 30, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3885167783432632997
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6713127244169458536}
+  m_CullTransparentMesh: 1
+--- !u!114 &6938153441941249440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6713127244169458536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 951201d52fa374d4d86d02d768dd287c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5376108116731777085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6713127244169458536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 0
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 2
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 21300000, guid: b73f872e24263da4687a6606f8566f5b, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: b73f872e24263da4687a6606f8566f5b, type: 3}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 6938153441941249440}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8324592239608150961}
+        m_TargetAssemblyTypeName: OnScreenTutorialUI, Assembly-CSharp
+        m_MethodName: SetPrevIndex
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6937130136276400411
 GameObject:
   m_ObjectHideFlags: 0
@@ -3242,7 +3374,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1096771947161332676}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3609,6 +3741,7 @@ GameObject:
   - component: {fileID: 3905632455634959933}
   - component: {fileID: 5659336313284425338}
   - component: {fileID: 8324592239608150961}
+  - component: {fileID: 279681379455549619}
   m_Layer: 0
   m_Name: OnScreenTutorial
   m_TagString: Untagged
@@ -3629,6 +3762,7 @@ RectTransform:
   m_Children:
   - {fileID: 8122983374235727795}
   - {fileID: 3990274034539599176}
+  - {fileID: 4038632468618533496}
   - {fileID: 7501433242847130988}
   m_Father: {fileID: 3773202538948704339}
   m_RootOrder: 5
@@ -3691,35 +3825,59 @@ MonoBehaviour:
   notes:
   - text: Hi there! I'm Doodle, and welcome to my Diary. Ain't it nice here?
     rectPosition: {x: 0, y: 0, z: 0}
+  - text: If you've been through this before, hit SKIP to start. Otherwise let me
+      introduce you to my world.
+    rectPosition: {x: 0, y: 0, z: 0}
   - text: For some reason, weird things have been happening. Hostile entities have
       been trying to destroy my home!
-    rectPosition: {x: -1, y: -205, z: 0}
+    rectPosition: {x: 0, y: 0, z: 0}
   - text: Please help me defend my castle! Let me walk you through the basics.
-    rectPosition: {x: -1, y: -205, z: 0}
-  - text: This shows the number of hostile entities left to destroy. I wonder why
-      they even appeared in the first place?
+    rectPosition: {x: 0, y: 0, z: 0}
+  - text: This shows the number of hostile entities on the map to destroy. I wonder
+      why they even appeared in the first place?
     rectPosition: {x: 211, y: 212, z: 0}
   - text: This shows the health of the base. It is the source of my power to create.
       Do not let it get destroyed!
     rectPosition: {x: 185, y: 65, z: 0}
-  - text: On that note, this shows the amount of ink I have. It is the resource used
-      for my power to create! Gain more from defeating hostile entities!
+  - text: Use ink$ to create towers using the ink you have. Select a tower to build
+      with Left Click. They are essential in helping you defend the base!
+    rectPosition: {x: -243, y: 114, z: 0}
+  - text: On that note, this shows the amount of ink$ I have. Gain more from defeating
+      hostile entities!
     rectPosition: {x: 185, y: -94, z: 0}
-  - text: Use ink to create towers using the ink you have. Select a tower with Left
-      Click. They are essential in helping you defend the land!
-    rectPosition: {x: -243, y: 114, z: 0}
-  - text: Careful! I can't move away while building, or I would have to scrap my
-      progress!
-    rectPosition: {x: -243, y: 114, z: 0}
-  - text: Move me around with WASD to build towers using Right Click on tiles around
-      the path to the base! They have limited range, so plan well - a good plan is
-      half the battle won!
+  - text: Move me around with WASD. Arrow keys work too!
     rectPosition: {x: -4, y: 114, z: 0}
-  - text: That said, if you need more firepower, I can use my own weapons to attack
-      them using Left Click. But I'm pretty fragile, so please be careful!
+  - text: To build towers, Right Click on tiles next to me! If I am close enough
+      to a tile to build on it, it will turn green.
     rectPosition: {x: -4, y: 114, z: 0}
+  - text: Careful! Building takes 2 seconds. I can't move away while building, or
+      I would have to scrap my progress!
+    rectPosition: {x: -4, y: 114, z: 0}
+  - text: Towers have limited range, so plan well - a good plan is half the battle
+      won! Hover over the shop icons to learn more about their abilities.
+    rectPosition: {x: -243, y: 114, z: 0}
+  - text: That said, in a pinch, I can use my own weapons to attack the invaders.
+      Left Click in their direction, and Q toggles between my Bullet and Sword attack.
+    rectPosition: {x: -4, y: 114, z: 0}
+  - text: But I'm pretty fragile, so please be careful, or else I may be slain too!
+    rectPosition: {x: -4, y: 114, z: 0}
+  - text: Now right click on the tower you just built. This brings up an interesting
+      menu...
+    rectPosition: {x: 0, y: -100, z: 0}
+  - text: 'I can upgrade my towers, or charge their bullets with elements. When elements
+      hit enemies, they inflict certain powers. '
+    rectPosition: {x: 0, y: -100, z: 0}
+  - text: Hover over them to learn more about what they do. They can be pretty expensive,
+      so use them wisely.
+    rectPosition: {x: 0, y: 0, z: 0}
+  - text: Psst! When 2 different types of elements land on an enemy, they can produce
+      a reaction with an even stronger effect! Tower placement is crucial!
+    rectPosition: {x: 0, y: -100, z: 0}
+  - text: Simply right click away anywhere to hide the menu. You can always learn
+      more about the elements from this guide book here!
+    rectPosition: {x: 256, y: -231, z: 0}
   - text: See the fog? It blocks vision and building of towers - use Right Click
-      to use 10 ink to clear a tile's fog! I wonder why this strange fog appeared...
+      to use 10 ink$ to clear a tile's fog! I wonder why this strange fog appeared...
     rectPosition: {x: -4, y: 114, z: 0}
   - text: This stopwatch shows the time left until the next wave of hostile entities!
       A moment of respite from this onslaught...
@@ -3734,6 +3892,21 @@ MonoBehaviour:
     rectPosition: {x: 0, y: 0, z: 0}
   currentIndex: 0
   textBox: {fileID: 4252627412189360677}
+--- !u!114 &279681379455549619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7770243675382698812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8053191837626714472
 GameObject:
   m_ObjectHideFlags: 0
@@ -4398,11 +4571,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
---- !u!1 &3773202538498999640 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3217305879397314879, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
-  m_PrefabInstance: {fileID: 1800086425544520807}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &623231342762935747 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1179125665838084516, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
@@ -4430,6 +4598,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3773202538498999640 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3217305879397314879, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
+  m_PrefabInstance: {fileID: 1800086425544520807}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1422336474070202805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4577,17 +4750,16 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 735542838615513101, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
---- !u!114 &2594076941742770618 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1179125665838084516, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
+--- !u!1 &1800086425317640481 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3217305879397314879, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
   m_PrefabInstance: {fileID: 3773202538574067742}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800086425317640481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b7da3e5f15c8f4692d1e6ef7479a3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+--- !u!224 &1800086425317640480 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3217305879397314878, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
+  m_PrefabInstance: {fileID: 3773202538574067742}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1800086425317640487 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3217305879397314873, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
@@ -4599,16 +4771,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1800086425317640480 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3217305879397314878, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
+--- !u!114 &2594076941742770618 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1179125665838084516, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
   m_PrefabInstance: {fileID: 3773202538574067742}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1800086425317640481 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3217305879397314879, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
-  m_PrefabInstance: {fileID: 3773202538574067742}
-  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800086425317640481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b7da3e5f15c8f4692d1e6ef7479a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5278047288783534771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4759,17 +4932,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
---- !u!114 &2594076943366058817 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1179125665838084516, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
-  m_PrefabInstance: {fileID: 3773202539098292965}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800086426957575130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b7da3e5f15c8f4692d1e6ef7479a3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1800086426957575130 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3217305879397314879, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
@@ -4789,6 +4951,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2594076943366058817 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1179125665838084516, guid: a3a04a8fe4b454940b0fb9de98e1e6f2, type: 3}
+  m_PrefabInstance: {fileID: 3773202539098292965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800086426957575130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b7da3e5f15c8f4692d1e6ef7479a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5724893580179340812
@@ -5021,14 +5194,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4feaf8d2da1363141b7b5084ddfeabe3, type: 3}
---- !u!1 &4214417968122550721 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8080491261084321664, guid: 4feaf8d2da1363141b7b5084ddfeabe3, type: 3}
-  m_PrefabInstance: {fileID: 5359060551121215041}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4214417968122550734 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8080491261084321679, guid: 4feaf8d2da1363141b7b5084ddfeabe3, type: 3}
+  m_PrefabInstance: {fileID: 5359060551121215041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4214417968122550721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8080491261084321664, guid: 4feaf8d2da1363141b7b5084ddfeabe3, type: 3}
   m_PrefabInstance: {fileID: 5359060551121215041}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5806072572354519316

@@ -5,6 +5,7 @@ using TMPro;
 
 [System.Serializable]
 public class Note {
+    [TextArea(4,6)]
     public string text;
     public Vector3 rectPosition;
 }
@@ -17,13 +18,12 @@ public class OnScreenTutorialUI : MonoBehaviour {
 
     private int defaultTextLength = -1;
     private float defaultFontSize = -1;
-    private static readonly string OnScreenTutorialPref = "OnScreenTutorialPref";
-
-    // for wavespawner, assuming not to be set false each start()
-    public static bool hasSeenTutorial = false;
+    public static readonly string OnScreenTutorialPref = "OnScreenTutorialPref";
 
     private void Start() {
-        if (PlayerPrefs.HasKey(OnScreenTutorialPref) && PlayerPrefs.GetInt(OnScreenTutorialPref) == 0) {
+        // Do not uncomment: only for debugging.
+        // PlayerPrefs.DeleteKey(OnScreenTutorialPref);
+        if (PlayerPrefs.HasKey(OnScreenTutorialPref) && PlayerPrefs.GetInt(OnScreenTutorialPref) == 1) {
             gameObject.SetActive(false);
             return;
         }
@@ -63,6 +63,17 @@ public class OnScreenTutorialUI : MonoBehaviour {
         }
     }
 
+    public void SetPrevIndex() {
+        if (currentIndex == 0) {
+            return;
+        } else {
+            currentIndex -= 1;
+            SetText(notes[currentIndex].text);
+            GetComponent<RectTransform>().anchoredPosition
+                = notes[currentIndex].rectPosition;
+        }
+    }
+
     public void SetIndex(int index) {
         if (index >= notes.Length) {
             Hide();
@@ -77,7 +88,6 @@ public class OnScreenTutorialUI : MonoBehaviour {
     public void Hide() {
         gameObject.SetActive(false);
         // Saves the fact that player has seen this tutorial already
-        PlayerPrefs.SetInt(OnScreenTutorialPref, 0);
-        hasSeenTutorial = true;
+        PlayerPrefs.SetInt(OnScreenTutorialPref, 1);
     }
 }
