@@ -19,6 +19,9 @@ public class OnScreenTutorialUI : MonoBehaviour {
     private float defaultFontSize = -1;
     // private static readonly string OnScreenTutorialPref = "OnScreenTutorialPref";
 
+    // for wavespawner, assuming not to be set false each start()
+    public static bool hasSeenTutorial = false;
+
     private void Start() {
         /*
         if (PlayerPrefs.HasKey(OnScreenTutorialPref) && PlayerPrefs.GetInt(OnScreenTutorialPref) == 0) {
@@ -77,5 +80,6 @@ public class OnScreenTutorialUI : MonoBehaviour {
         gameObject.SetActive(false);
         // Saves the fact that player has seen this tutorial already
         // PlayerPrefs.SetInt(OnScreenTutorialPref, 0);
+        hasSeenTutorial = true;
     }
 }
