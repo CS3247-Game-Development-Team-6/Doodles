@@ -39,6 +39,7 @@ public class BuildManager : MonoBehaviour
     public GameObject fireButton;
     public GameObject waterButton;
     public GameObject insufficientInkEffect;
+    public GameObject nodeUIGO;
 
 
     private void Awake()
@@ -100,7 +101,7 @@ public class BuildManager : MonoBehaviour
         // Check if enough ink
         if (!player.hasEnoughInk(cost))
         {
-            Instantiate(insufficientInkEffect, playerGO.transform.position, Quaternion.identity);
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
             return;
         }
 
@@ -169,7 +170,7 @@ public class BuildManager : MonoBehaviour
 
         if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
         {
-            Instantiate(insufficientInkEffect, playerGO.transform.position, Quaternion.identity);
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
             return;
         }
 
@@ -219,7 +220,7 @@ public class BuildManager : MonoBehaviour
 
         if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
         {
-            Instantiate(insufficientInkEffect, playerGO.transform.position, Quaternion.identity);
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
             return;
         }
 
@@ -269,7 +270,7 @@ public class BuildManager : MonoBehaviour
 
         if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
         {
-            Instantiate(insufficientInkEffect, playerGO.transform.position, Quaternion.identity);
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
             return;
         }
 
@@ -355,7 +356,7 @@ public class BuildManager : MonoBehaviour
 
         if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetUpgradeCost()))
         {
-            Instantiate(insufficientInkEffect, playerGO.transform.position, Quaternion.identity);
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
             return;
         }
 
