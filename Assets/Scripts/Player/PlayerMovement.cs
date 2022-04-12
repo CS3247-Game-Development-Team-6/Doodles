@@ -13,8 +13,10 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask tileAndFogLayerMask;
     [SerializeField] private Player player;
+    private IndicatorUI buildIndicator;
     public GameObject playerGO;
     public GameObject insufficientInkEffect;
+    
 
     // states
     private enum State { // used for player actions that cannot be interrupted
@@ -89,6 +91,15 @@ public class PlayerMovement : MonoBehaviour {
         
         // set default state
         state = State.Normal;
+
+        buildIndicator = GetComponent<IndicatorUI>();
+
+        if (buildIndicator)
+        {
+            // set maxValue of buildIndicator slider
+            buildIndicator.maxValue = (int)Mathf.Round(buildDuration * 1000);
+            buildIndicator.rawValue = 0;
+        }
     }
 
     // Update is called once per frame
@@ -316,6 +327,7 @@ public class PlayerMovement : MonoBehaviour {
         currentBuildDuration -= Time.deltaTime;
         if (currentBuildDuration > 0) {
             actionTimer.text = (Mathf.Round(currentBuildDuration * 10) / 10).ToString(); // display timer
+            buildIndicator.rawValue = (int) Mathf.Round(currentBuildDuration * 1000);
         }
 
         if (currentBuildDuration <= 0) {
