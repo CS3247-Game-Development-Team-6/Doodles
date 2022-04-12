@@ -14,7 +14,7 @@ public class Turret : MonoBehaviour
     public float rotationSpeed = 10f;
     [SerializeField] private float cost = 10f;
     [SerializeField] private float swapElementCost = 30f;
-    public float upgradeCost = 10f;
+    [SerializeField] private float upgradeCost = 10f;
     [SerializeField] private int numberOfBulletsToFire = 12;
     [SerializeField] private bool isAoeTurret;
 

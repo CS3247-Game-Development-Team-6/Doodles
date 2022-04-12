@@ -7,6 +7,7 @@ public class NodeUI : MonoBehaviour
 {
     public GameObject ui;
     public Node target;
+    public GameObject playerGO;
 
     public float zOffsetMultiplier;
     public float xOffsetMultiplier;
