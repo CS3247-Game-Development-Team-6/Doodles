@@ -93,17 +93,11 @@ public class BuildManager : MonoBehaviour
         DeselectNode();
     }
 
-    // Change tower elements
-    public void SwapTower(GameObject towerToBuild, GameObject playerGO)
+    // Change tower elements. Assumes that there is enough ink.
+    public void ChangeTowerElement(GameObject newTower, GameObject playerGO, GameObject origTower)
     {
-        float cost = towerToBuild.GetComponent<Turret>().GetSwapElementCost();
+        float cost = newTower.GetComponent<Turret>().GetSwapElementCost();
         Player player = playerGO.GetComponent<Player>();
-        // Check if enough ink
-        if (!player.hasEnoughInk(cost))
-        {
-            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
-            return;
-        }
 
         // Get rid of original tower
         nodeUI.target.DestroyTower();
@@ -114,12 +108,7 @@ public class BuildManager : MonoBehaviour
         player.ChangeInkAmount(-cost);
 
         // Reset towerToBuild
-        if (towerToBuild.tag == "Turret")
-            this.towerToBuild = standardTowerPrefab;
-        else if (towerToBuild.tag == "Missile")
-            this.towerToBuild = missileLauncherPrefab;
-        else if (towerToBuild.tag == "AOE")
-            this.towerToBuild = aoeTowerPrefab;
+        this.towerToBuild = origTower;
 
         // Update UI tooltips
         UpdateUiTooltip(nodeUI.target);
@@ -131,10 +120,16 @@ public class BuildManager : MonoBehaviour
     public void buildFireTurret()
     {
         // Check if already added element
-        if (nodeUI.target.GetIsAddedElement() && !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
-        {
+        if (nodeUI.target.GetIsAddedElement()) {
             return;
         }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost())) {
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
+            return;
+        }
+
+        GameObject origTower = towerToBuild;
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -168,23 +163,23 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
-        {
-            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
-            return;
-        }
-
-        SwapTower(this.towerToBuild, this.playerGO);
+        ChangeTowerElement(this.towerToBuild, this.playerGO, origTower);
         nodeUI.target.SetIsAddedElement(true);
     }
 
     public void buildIceTurret()
     {
         // Check if already added element
-        if (nodeUI.target.GetIsAddedElement() && !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
-        {
+        if (nodeUI.target.GetIsAddedElement()) {
             return;
         }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost())) {
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
+            return;
+        }
+
+        GameObject origTower = towerToBuild;
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -218,23 +213,23 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
-        {
-            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
-            return;
-        }
-
-        SwapTower(this.towerToBuild, this.playerGO);
+        ChangeTowerElement(this.towerToBuild, this.playerGO, origTower);
         nodeUI.target.SetIsAddedElement(true);
     }
 
     public void buildWaterTurret()
     {
         // Check if already added element
-        if (nodeUI.target.GetIsAddedElement() && !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
-        {
+        if (nodeUI.target.GetIsAddedElement()) {
             return;
         }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost())) {
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
+            return;
+        }
+
+        GameObject origTower = towerToBuild;
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -268,22 +263,22 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
-        {
-            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
-            return;
-        }
-
-        SwapTower(this.towerToBuild, this.playerGO);
+        ChangeTowerElement(this.towerToBuild, this.playerGO, origTower);
         nodeUI.target.SetIsAddedElement(true);
     }
 
     public void UpgradeTower()
     {
-        if (nodeUI.target.GetIsUpgraded() && !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetUpgradeCost()))
-        {
+        if (nodeUI.target.GetIsUpgraded()) {
             return;
         }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetUpgradeCost())) {
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
+            return;
+        }
+
+        GameObject origTower = towerToBuild;
 
         if (nodeUI.target.tower.tag == "Turret")
         {
@@ -354,13 +349,7 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetUpgradeCost()))
-        {
-            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
-            return;
-        }
-
-        SwapTower(this.towerToBuild, this.playerGO);
+        ChangeTowerElement(this.towerToBuild, this.playerGO, origTower);
         nodeUI.target.SetIsUpgraded(true);
     }
 

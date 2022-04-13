@@ -181,7 +181,7 @@ public class Node : MonoBehaviour
                 (transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()
                     ? tooFarColor
                     : hoverColor;
-        } else {
+        } else if (decorationMesh != null) {
             decorationMesh.gameObject.GetComponent<Outline>().enabled = true;
             decorationMesh.gameObject.GetComponent<Outline>().OutlineWidth = 5f;
             decorationMesh.gameObject.GetComponent<Outline>().OutlineColor = 
@@ -196,7 +196,7 @@ public class Node : MonoBehaviour
         
         if (GetIsTowerBuilt()) {
             tower.gameObject.GetComponent<Outline>().enabled = false;
-        } else {
+        } else if (decorationMesh != null) {
             decorationMesh.gameObject.GetComponent<Outline>().enabled = false;
         }
     }
