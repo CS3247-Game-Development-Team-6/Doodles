@@ -99,6 +99,7 @@ public class BuildManager : MonoBehaviour
         float cost = newTower.GetComponent<Turret>().GetSwapElementCost();
         Player player = playerGO.GetComponent<Player>();
         // Check if enough ink
+        /*
         if (!player.hasEnoughInk(cost))
         {
             Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
@@ -108,6 +109,7 @@ public class BuildManager : MonoBehaviour
 
             return;
         }
+        */
 
         // Get rid of original tower
         nodeUI.target.DestroyTower();
