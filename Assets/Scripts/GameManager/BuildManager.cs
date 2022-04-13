@@ -93,23 +93,11 @@ public class BuildManager : MonoBehaviour
         DeselectNode();
     }
 
-    // Change tower elements
+    // Change tower elements. Assumes that there is enough ink.
     public void ChangeTowerElement(GameObject newTower, GameObject playerGO, GameObject origTower)
     {
         float cost = newTower.GetComponent<Turret>().GetSwapElementCost();
         Player player = playerGO.GetComponent<Player>();
-        // Check if enough ink
-        /*
-        if (!player.hasEnoughInk(cost))
-        {
-            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
-
-            // Reset towerToBuild
-            this.towerToBuild = origTower;
-
-            return;
-        }
-        */
 
         // Get rid of original tower
         nodeUI.target.DestroyTower();
@@ -131,7 +119,6 @@ public class BuildManager : MonoBehaviour
 
     public void buildFireTurret()
     {
-        Debug.Log(nodeUI.target.GetIsAddedElement());
         // Check if already added element
         if (nodeUI.target.GetIsAddedElement()) {
             return;
@@ -182,7 +169,6 @@ public class BuildManager : MonoBehaviour
 
     public void buildIceTurret()
     {
-        Debug.Log(nodeUI.target.GetIsAddedElement());
         // Check if already added element
         if (nodeUI.target.GetIsAddedElement()) {
             return;
@@ -233,7 +219,6 @@ public class BuildManager : MonoBehaviour
 
     public void buildWaterTurret()
     {
-        Debug.Log(nodeUI.target.GetIsAddedElement());
         // Check if already added element
         if (nodeUI.target.GetIsAddedElement()) {
             return;
