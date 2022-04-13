@@ -114,19 +114,13 @@ public class BuildManager : MonoBehaviour
         player.ChangeInkAmount(-cost);
 
         // Reset towerToBuild
-        if (newTower.tag == "Turret")
-            this.towerToBuild = standardTowerPrefab;
-        else if (newTower.tag == "Missile")
-            this.towerToBuild = missileLauncherPrefab;
-        else if (newTower.tag == "AOE")
-            this.towerToBuild = aoeTowerPrefab;
+        this.towerToBuild = origTower;
 
         // Update UI tooltips
         UpdateUiTooltip(nodeUI.target);
 
         // Hide nodeUI
         DeselectNode();
-        this.towerToBuild = origTower;
     }
 
     public void buildFireTurret()
