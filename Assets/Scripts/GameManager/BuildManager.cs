@@ -172,6 +172,7 @@ public class BuildManager : MonoBehaviour
         if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
         {
             Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
+            this.towerToBuild = origTower;
             return;
         }
 
@@ -224,6 +225,7 @@ public class BuildManager : MonoBehaviour
         if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
         {
             Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
+            this.towerToBuild = origTower;
             return;
         }
 
@@ -276,6 +278,7 @@ public class BuildManager : MonoBehaviour
         if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
         {
             Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
+            this.towerToBuild = origTower;
             return;
         }
 
@@ -364,6 +367,7 @@ public class BuildManager : MonoBehaviour
         if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetUpgradeCost()))
         {
             Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
+            this.towerToBuild = origTower;
             return;
         }
 
