@@ -94,9 +94,9 @@ public class BuildManager : MonoBehaviour
     }
 
     // Change tower elements
-    public void SwapTower(GameObject towerToBuild, GameObject playerGO)
+    public void ChangeTowerElement(GameObject newTower, GameObject playerGO, GameObject origTower)
     {
-        float cost = towerToBuild.GetComponent<Turret>().GetSwapElementCost();
+        float cost = newTower.GetComponent<Turret>().GetSwapElementCost();
         Player player = playerGO.GetComponent<Player>();
         // Check if enough ink
         if (!player.hasEnoughInk(cost))
@@ -114,11 +114,11 @@ public class BuildManager : MonoBehaviour
         player.ChangeInkAmount(-cost);
 
         // Reset towerToBuild
-        if (towerToBuild.tag == "Turret")
+        if (newTower.tag == "Turret")
             this.towerToBuild = standardTowerPrefab;
-        else if (towerToBuild.tag == "Missile")
+        else if (newTower.tag == "Missile")
             this.towerToBuild = missileLauncherPrefab;
-        else if (towerToBuild.tag == "AOE")
+        else if (newTower.tag == "AOE")
             this.towerToBuild = aoeTowerPrefab;
 
         // Update UI tooltips
@@ -126,6 +126,7 @@ public class BuildManager : MonoBehaviour
 
         // Hide nodeUI
         DeselectNode();
+        this.towerToBuild = origTower;
     }
 
     public void buildFireTurret()
@@ -135,6 +136,8 @@ public class BuildManager : MonoBehaviour
         {
             return;
         }
+
+        GameObject origTower = towerToBuild;
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -174,7 +177,7 @@ public class BuildManager : MonoBehaviour
             return;
         }
 
-        SwapTower(this.towerToBuild, this.playerGO);
+        ChangeTowerElement(this.towerToBuild, this.playerGO, origTower);
         nodeUI.target.SetIsAddedElement(true);
     }
 
@@ -185,6 +188,8 @@ public class BuildManager : MonoBehaviour
         {
             return;
         }
+
+        GameObject origTower = towerToBuild;
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -224,7 +229,7 @@ public class BuildManager : MonoBehaviour
             return;
         }
 
-        SwapTower(this.towerToBuild, this.playerGO);
+        ChangeTowerElement(this.towerToBuild, this.playerGO, origTower);
         nodeUI.target.SetIsAddedElement(true);
     }
 
@@ -235,6 +240,8 @@ public class BuildManager : MonoBehaviour
         {
             return;
         }
+
+        GameObject origTower = towerToBuild;
 
         // Set respective towers
         if (!nodeUI.target.GetIsUpgraded())
@@ -274,7 +281,7 @@ public class BuildManager : MonoBehaviour
             return;
         }
 
-        SwapTower(this.towerToBuild, this.playerGO);
+        ChangeTowerElement(this.towerToBuild, this.playerGO, origTower);
         nodeUI.target.SetIsAddedElement(true);
     }
 
@@ -284,6 +291,8 @@ public class BuildManager : MonoBehaviour
         {
             return;
         }
+
+        GameObject origTower = towerToBuild;
 
         if (nodeUI.target.tower.tag == "Turret")
         {
@@ -360,7 +369,7 @@ public class BuildManager : MonoBehaviour
             return;
         }
 
-        SwapTower(this.towerToBuild, this.playerGO);
+        ChangeTowerElement(this.towerToBuild, this.playerGO, origTower);
         nodeUI.target.SetIsUpgraded(true);
     }
 
