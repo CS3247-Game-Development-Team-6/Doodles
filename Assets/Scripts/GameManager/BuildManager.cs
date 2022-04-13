@@ -129,8 +129,9 @@ public class BuildManager : MonoBehaviour
 
     public void buildFireTurret()
     {
+        Debug.Log(nodeUI.target.GetIsAddedElement());
         // Check if already added element
-        if (nodeUI.target.GetIsAddedElement() && !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
+        if (nodeUI.target.GetIsAddedElement() || !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
         {
             return;
         }
@@ -182,8 +183,9 @@ public class BuildManager : MonoBehaviour
 
     public void buildIceTurret()
     {
+        Debug.Log(nodeUI.target.GetIsAddedElement());
         // Check if already added element
-        if (nodeUI.target.GetIsAddedElement() && !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
+        if (nodeUI.target.GetIsAddedElement() || !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
         {
             return;
         }
@@ -235,8 +237,9 @@ public class BuildManager : MonoBehaviour
 
     public void buildWaterTurret()
     {
+        Debug.Log(nodeUI.target.GetIsAddedElement());
         // Check if already added element
-        if (nodeUI.target.GetIsAddedElement() && !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
+        if (nodeUI.target.GetIsAddedElement() || !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
         {
             return;
         }
@@ -288,7 +291,7 @@ public class BuildManager : MonoBehaviour
 
     public void UpgradeTower()
     {
-        if (nodeUI.target.GetIsUpgraded() && !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetUpgradeCost()))
+        if (nodeUI.target.GetIsUpgraded() || !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetUpgradeCost()))
         {
             return;
         }
