@@ -196,7 +196,7 @@ public class Node : MonoBehaviour
         
         if (GetIsTowerBuilt()) {
             tower.gameObject.GetComponent<Outline>().enabled = false;
-        } else {
+        } else if (decorationMesh != null) {
             decorationMesh.gameObject.GetComponent<Outline>().enabled = false;
         }
     }

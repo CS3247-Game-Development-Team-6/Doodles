@@ -131,8 +131,12 @@ public class BuildManager : MonoBehaviour
     {
         Debug.Log(nodeUI.target.GetIsAddedElement());
         // Check if already added element
-        if (nodeUI.target.GetIsAddedElement() || !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
-        {
+        if (nodeUI.target.GetIsAddedElement()) {
+            return;
+        }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost())) {
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
             return;
         }
 
@@ -170,13 +174,6 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
-        {
-            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
-            this.towerToBuild = origTower;
-            return;
-        }
-
         ChangeTowerElement(this.towerToBuild, this.playerGO, origTower);
         nodeUI.target.SetIsAddedElement(true);
     }
@@ -185,8 +182,12 @@ public class BuildManager : MonoBehaviour
     {
         Debug.Log(nodeUI.target.GetIsAddedElement());
         // Check if already added element
-        if (nodeUI.target.GetIsAddedElement() || !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
-        {
+        if (nodeUI.target.GetIsAddedElement()) {
+            return;
+        }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost())) {
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
             return;
         }
 
@@ -224,13 +225,6 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
-        {
-            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
-            this.towerToBuild = origTower;
-            return;
-        }
-
         ChangeTowerElement(this.towerToBuild, this.playerGO, origTower);
         nodeUI.target.SetIsAddedElement(true);
     }
@@ -239,8 +233,12 @@ public class BuildManager : MonoBehaviour
     {
         Debug.Log(nodeUI.target.GetIsAddedElement());
         // Check if already added element
-        if (nodeUI.target.GetIsAddedElement() || !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetSwapElementCost()))
-        {
+        if (nodeUI.target.GetIsAddedElement()) {
+            return;
+        }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost())) {
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
             return;
         }
 
@@ -278,21 +276,18 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetSwapElementCost()))
-        {
-            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
-            this.towerToBuild = origTower;
-            return;
-        }
-
         ChangeTowerElement(this.towerToBuild, this.playerGO, origTower);
         nodeUI.target.SetIsAddedElement(true);
     }
 
     public void UpgradeTower()
     {
-        if (nodeUI.target.GetIsUpgraded() || !playerGO.GetComponent<Player>().hasEnoughInk(nodeUI.target.tower.GetComponent<Turret>().GetUpgradeCost()))
-        {
+        if (nodeUI.target.GetIsUpgraded()) {
+            return;
+        }
+
+        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetUpgradeCost())) {
+            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
             return;
         }
 
@@ -365,13 +360,6 @@ public class BuildManager : MonoBehaviour
             {
                 towerToBuild = upWaterAoeTower;
             }
-        }
-
-        if (!playerGO.GetComponent<Player>().hasEnoughInk(towerToBuild.GetComponent<Turret>().GetUpgradeCost()))
-        {
-            Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
-            this.towerToBuild = origTower;
-            return;
         }
 
         ChangeTowerElement(this.towerToBuild, this.playerGO, origTower);
