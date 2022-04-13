@@ -102,6 +102,10 @@ public class BuildManager : MonoBehaviour
         if (!player.hasEnoughInk(cost))
         {
             Instantiate(insufficientInkEffect, nodeUIGO.transform.position, Quaternion.identity);
+
+            // Reset towerToBuild
+            this.towerToBuild = origTower;
+
             return;
         }
 
