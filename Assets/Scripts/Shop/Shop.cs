@@ -15,17 +15,6 @@ public class Shop : MonoBehaviour
         buildManager = BuildManager.instance;
     }
 
-    public void SetTurretToBuild() 
-    {
-        buildManager.SetTowerToBuild(buildManager.standardTowerPrefab);
-    }
-
-    public void SetMissileLauncher()
-    {
-        buildManager.SetTowerToBuild(buildManager.missileLauncherPrefab);
-    }
-
-
     public void SetTowerAttempt(ShopItemUI item) {
         if (playerMovement != null && playerMovement.GetIsBuilding()) {
             Instantiate(invalidActionEffect, playerMovement.transform.position, Quaternion.identity);
