@@ -43,7 +43,7 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
-        if (!GameManager.getIsGameEnded())
+        if (!GameStateManager.getIsGameEnded())
         {
             GameIsPaused = true;
             pauseMenuUI.SetActive(true);

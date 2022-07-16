@@ -78,7 +78,7 @@ public class WaveSpawner : MonoBehaviour
         // win the game
         if (waveIndex == waves.Length)
         {
-            GetComponent<GameManager>().WinGame();
+            GetComponent<GameStateManager>().WinGame();
 
             // disable this script
             this.enabled = false;
@@ -110,7 +110,7 @@ public class WaveSpawner : MonoBehaviour
     void SpawnWave()
     {
         //keep track of how many waves survive
-        GameManager.wavesCounter++;
+        GameStateManager.wavesCounter++;
 
         Wave waveToSpawn = waves[waveIndex];
 
