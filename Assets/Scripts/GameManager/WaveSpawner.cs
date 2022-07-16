@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
+    [SerializeField] private Text wavesCounterUI;
+
     // keep track of how many enemies alive then only spawn new wave
-
     public static int numEnemiesAlive;
-
+    public static int wavesCounter;
     // enemies left counter
     public static int numEnemiesLeftInWave;
     public static bool isSpawningEnemy;
@@ -39,6 +40,7 @@ public class WaveSpawner : MonoBehaviour
         numEnemiesLeftInWave = 0;
         isSpawningEnemy = false;
         countdownTimer = timeBetweenWaves;
+        wavesCounter = 0;
 
         isSkipWaveCountdownButtonVisible = true;
         skipWaveCountdownButton.onClick.AddListener(buttonOnClick);
@@ -60,6 +62,7 @@ public class WaveSpawner : MonoBehaviour
     {
         skipWaveCountdownButton.gameObject.SetActive(isSkipWaveCountdownButtonVisible);
         enemiesLeftText.text = string.Format("{0}", numEnemiesLeftInWave);
+        wavesCounterUI.text = "Wave " + string.Format("{0}", wavesCounter);
 
         // stops when first time seeing tutorial
         if (!PlayerPrefs.HasKey(OnScreenTutorialUI.OnScreenTutorialPref) 
@@ -110,7 +113,7 @@ public class WaveSpawner : MonoBehaviour
     void SpawnWave()
     {
         //keep track of how many waves survive
-        GameStateManager.wavesCounter++;
+        wavesCounter++;
 
         Wave waveToSpawn = waves[waveIndex];
 

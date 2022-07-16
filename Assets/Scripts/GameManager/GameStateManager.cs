@@ -7,15 +7,12 @@ public class GameStateManager : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject winUI;
-    [SerializeField] private Text wavesCounterUI;
 
     private static bool isGameEnded;
-    public static int wavesCounter;
 
 
     void Start() {
         isGameEnded = false;
-        wavesCounter = 0;
     }
 
     void Update() {
@@ -25,8 +22,6 @@ public class GameStateManager : MonoBehaviour
         if (Base.getHp() <= 0) {
             EndGame();
         }
-
-        wavesCounterUI.text = "Wave " + string.Format("{0}", wavesCounter);
     }
 
     public void EndGame() {
