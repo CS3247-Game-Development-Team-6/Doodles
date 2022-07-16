@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // Text
 
-public class GameStateManager : MonoBehaviour
-{
+public class GameStateManager : MonoBehaviour {
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject winUI;
 
     private static bool isGameEnded;
-
 
     void Start() {
         isGameEnded = false;
@@ -26,12 +24,11 @@ public class GameStateManager : MonoBehaviour
 
     public void EndGame() {
         isGameEnded = true;
-        
+
         gameOverUI.SetActive(true);
     }
 
-    public void WinGame()
-    {
+    public void WinGame() {
         isGameEnded = true;
 
         winUI.SetActive(true);
