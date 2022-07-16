@@ -109,8 +109,8 @@ public class WaveSpawner : MonoBehaviour
     // can pause the func execution
     void SpawnWave()
     {
-        //keep track of how many rounds survive
-        GameManager.rounds++;
+        //keep track of how many waves survive
+        GameManager.wavesCounter++;
 
         Wave waveToSpawn = waves[waveIndex];
 

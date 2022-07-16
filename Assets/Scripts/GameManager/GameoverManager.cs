@@ -11,7 +11,7 @@ public class GameoverManager : MonoBehaviour
     // everytime this is enabled
     void OnEnable()
     {
-        wavesText.text = GameManager.rounds.ToString();
+        wavesText.text = GameManager.wavesCounter.ToString();
 
         raycastOccluder.SetActive(true);
         //Time.timeScale = 0f;

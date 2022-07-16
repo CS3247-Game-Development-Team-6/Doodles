@@ -10,12 +10,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text wavesCounterUI;
 
     private static bool isGameEnded;
-    public static int rounds;
+    public static int wavesCounter;
 
 
     void Start() {
         isGameEnded = false;
-        rounds = 0;
+        wavesCounter = 0;
     }
 
     void Update() {
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
             EndGame();
         }
 
-        wavesCounterUI.text = "Wave " + string.Format("{0}", rounds);
+        wavesCounterUI.text = "Wave " + string.Format("{0}", wavesCounter);
     }
 
     public void EndGame() {
