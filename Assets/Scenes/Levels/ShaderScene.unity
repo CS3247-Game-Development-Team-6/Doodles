@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4497019, g: 0.49976808, b: 0.57563424, a: 1}
+  m_IndirectSpecularColor: {r: 0.44970167, g: 0.49976736, b: 0.5756334, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2231,7 +2231,7 @@ PrefabInstance:
       objectReference: {fileID: 26158120}
     - target: {fileID: 1059972132, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -18.488525
+      value: -18.488586
       objectReference: {fileID: 0}
     - target: {fileID: 1059972136, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: playerMovement
@@ -2574,21 +2574,13 @@ PrefabInstance:
       value: GameMaster
       objectReference: {fileID: 0}
     - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: wavesContainer
+      propertyPath: wavesCounterUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 906611711}
     - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: enemiesLeftText
       value: 
       objectReference: {fileID: 1841248107}
-    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: waves.Array.size
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: waveCountdownText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: waveCountdownIndicator
       value: 
@@ -2597,42 +2589,6 @@ PrefabInstance:
       propertyPath: skipWaveCountdownButton
       value: 
       objectReference: {fileID: 3773202538542358476}
-    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: waves.Array.data[15].rate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: waves.Array.data[15].count
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: waves.Array.data[15].enemy
-      value: 
-      objectReference: {fileID: 6540121397901334477, guid: a9f462e45d43ada4690904da9c284f9e, type: 3}
-    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: waves.Array.data[15].rate2
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: waves.Array.data[15].rate3
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: waves.Array.data[15].count2
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: waves.Array.data[15].count3
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: waves.Array.data[15].enemy2
-      value: 
-      objectReference: {fileID: 6540121397901334477, guid: d74de364f8d1dc943ba639ce7ec66331, type: 3}
-    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: waves.Array.data[15].enemy3
-      value: 
-      objectReference: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: winUI
       value: 
@@ -2641,10 +2597,6 @@ PrefabInstance:
       propertyPath: gameOverUI
       value: 
       objectReference: {fileID: 550646146}
-    - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
-      propertyPath: wavesCounterUI
-      value: 
-      objectReference: {fileID: 906611711}
     - target: {fileID: 6600273765185839074, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: m_RootOrder
       value: 6
