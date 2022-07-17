@@ -23,6 +23,6 @@ public class ShopTowerUI : MonoBehaviour {
             return;
         }
 
-        shop.SetTowerToBuild(this);
+        shop.SetTowerToBuild(towerInfo);
     }
 }

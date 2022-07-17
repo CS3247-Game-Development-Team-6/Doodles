@@ -34,8 +34,8 @@ public class Shop : MonoBehaviour
 
     }
 
-    public void SetTowerToBuild(ShopTowerUI item) {
-        towerManager.SetTowerToBuild(item.towerInfo);
+    public void SetTowerToBuild(TowerInfo towerInfo) {
+        towerManager.SetTowerToBuild(towerInfo);
 
     }
 }
