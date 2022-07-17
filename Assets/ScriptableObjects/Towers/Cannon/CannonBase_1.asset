@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
-  m_Name: TowerInfo
+  m_Name: CannonBase_1
   m_EditorClassIdentifier: 
-  name: 
-  range: 0
-  rotationSpeed: 0
-  cost: 0
-  swapElementCost: []
-  upgradesCosts: []
+  towerName: Cannon
+  range: 4
+  versionNum: 1
+  fireRate: 1
+  element: {fileID: 0}
+  cost: 25
+  towerPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  nextUpgrade: {fileID: 0}
+  nextElements: []
