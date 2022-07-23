@@ -88,7 +88,6 @@ public class WaveSpawner : MonoBehaviour {
     }
 
     void SpawnWave() {
-        //keep track of how many waves survive
         wavesCounter++;
 
         Wave waveToSpawn = waves[waveIndex];
