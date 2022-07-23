@@ -13,16 +13,10 @@ public class PlayerHealth : MonoBehaviour {
     private Image healthBar;
     private GameStateManager gameStateManager;
 
-    // Start is called before the first frame update
     void Start() {
         healthBar = GameObject.Find("HealthCanvas/HealthBG/HealthBar").GetComponent<Image>();
         healthAmount = maxHealth;
         gameStateManager = GameObject.Find("GameMaster").GetComponent<GameStateManager>();
-    }
-
-    // Update is called once per frame
-    void Update() {
-
     }
 
     public void TakeDamage(int amount) {
