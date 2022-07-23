@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class GameoverManager : MonoBehaviour {
+public class Gameover : MonoBehaviour {
     public Text wavesText;
     public GameObject raycastOccluder;
 
