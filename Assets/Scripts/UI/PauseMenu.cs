@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour {
     public GameObject gameplayCanvas;
     public GameObject raycastOccluder;
 
-    // Update is called once per frame
+
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (GameIsPaused) {
