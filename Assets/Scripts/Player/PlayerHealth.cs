@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        
+
     }
 
     public void TakeDamage(int amount) {
@@ -31,8 +31,6 @@ public class PlayerHealth : MonoBehaviour {
         // float number between 0 and 1
         healthBar.fillAmount = healthAmount / maxHealth;
 
-        // TODO: add damage animation?
-
         if (healthAmount <= 0) {
             Die();
         }
@@ -40,7 +38,6 @@ public class PlayerHealth : MonoBehaviour {
 
     void Die() {
         gameObject.SetActive(false);
-        // TODO: add death animation?
         gameStateManager.EndGame();
     }
 }
