@@ -16,6 +16,7 @@ public class CannonTower : Tower {
         // GetComponentInChildren<Base>
         // use GetComponent to find base, firepoint
     }
+
     void Start() {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
@@ -40,6 +41,7 @@ public class CannonTower : Tower {
             target = nearestEnemy.transform;
         }
     }
+
     public override void Shoot() {
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
@@ -48,6 +50,7 @@ public class CannonTower : Tower {
             bullet.Seek(target, PENETRATE_TARGET);
         }
     }
+
     void Update() {
         if (!target) return;
         
