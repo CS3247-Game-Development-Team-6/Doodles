@@ -49,7 +49,7 @@ public class WaveSpawner : MonoBehaviour {
         enemiesLeftText.text = string.Format("{0}", numEnemiesLeftInWave);
         wavesCounterUI.text = "Wave " + string.Format("{0}", wavesCounter);
 
-        // stops when first time seeing tutorial
+        // Pause if player is viewing tutorial
         if (!PlayerPrefs.HasKey(OnScreenTutorialUI.OnScreenTutorialPref)
             || PlayerPrefs.GetInt(OnScreenTutorialUI.OnScreenTutorialPref) != 1) {
             isSkipWaveCountdownButtonVisible = false;
