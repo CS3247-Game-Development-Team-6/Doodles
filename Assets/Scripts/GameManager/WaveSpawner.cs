@@ -39,7 +39,7 @@ public class WaveSpawner : MonoBehaviour {
     void buttonOnClick() {
         isSkipWaveCountdownButtonVisible = false;
 
-        countdownTimer = 0f; // reset timer 
+        countdownTimer = 0f;
         UpdateTimerIndicator(countdownTimer);
     }
 
