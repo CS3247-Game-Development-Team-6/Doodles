@@ -64,8 +64,6 @@ public class WaveSpawner : MonoBehaviour {
 
         if (waveIndex == waves.Length) {
             GetComponent<GameStateManager>().WinGame();
-
-            // disable this script
             this.enabled = false;
         }
 
