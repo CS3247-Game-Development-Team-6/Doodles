@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class SpikeyTower : Tower {
 
-    private float rotationSpeed = 1f;
     private float towerRadius = 1f;
     private int numBarrels = 8;
-    public Transform[] targetTransforms;
-    public Transform firePoint;
+    private Transform[] targetTransforms;
+    private Transform firePoint;
     private float fireCountdown = 0f;
     private bool isShooting;
 
@@ -14,7 +13,11 @@ public class SpikeyTower : Tower {
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
-        firePoint = transform.Find(Tower.FIRE_POINT_NAME);
+        if (towerInfo.upgradeNum == 1) {
+            this.numBarrels = 12;
+        }
+
+        firePoint = transform.Find(Tower.ROTATION_BASE_NAME).Find(Tower.FIRE_POINT_NAME);
         targetTransforms = GetTargetTransforms();
     }
 
@@ -66,10 +69,9 @@ public class SpikeyTower : Tower {
             aimingPointPosition.x += x;
             aimingPointPosition.z += z;
 
-            GameObject circleTarget = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            circleTarget.transform.position = aimingPointPosition;
-            circleTarget.transform.parent = transform;
-            arrOfTransforms[bulletNumber] = circleTarget.transform;
+            Transform circleTarget = Instantiate(firePoint, aimingPointPosition, Quaternion.identity);
+            circleTarget.parent = transform;
+            arrOfTransforms[bulletNumber] = circleTarget;
         }
 
         return arrOfTransforms;

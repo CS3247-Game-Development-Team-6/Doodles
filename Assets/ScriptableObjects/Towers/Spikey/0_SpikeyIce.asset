@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
-  m_Name: 1_CannonIce
+  m_Name: 0_SpikeyIce
   m_EditorClassIdentifier: 
-  towerName: 
-  range: 4
-  upgradeNum: 1
+  towerName: Spikey
+  range: 1.5
+  versionNum: 0
   fireRate: 1
   element: {fileID: 11400000, guid: 2a9f0209ebf96cc4f8a2c63413522b7e, type: 2}
-  cost: 25
-  towerPrefab: {fileID: 5135174605016635187, guid: deea561c1ac81714489013ec3928ef25, type: 3}
-  bulletPrefab: {fileID: 1315704262782356680, guid: 1af01dba5aef13e40a75468d4fe3386a, type: 3}
-  nextUpgrade: {fileID: 0}
+  cost: 75
+  towerPrefab: {fileID: 5135174605016635187, guid: 69aa22905ecb0e4418ba9aab3a6c4211, type: 3}
+  bulletPrefab: {fileID: 8038529814659282312, guid: b374119d2c9274b6ba2a076c0a4da660, type: 3}
+  nextUpgrade: {fileID: 11400000, guid: f8f1b6506b564a447b36e3a4d4fdeeb8, type: 2}
   nextElements: []

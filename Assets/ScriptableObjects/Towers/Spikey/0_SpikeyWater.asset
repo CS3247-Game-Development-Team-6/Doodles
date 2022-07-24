@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
-  m_Name: 1_CannonWater
+  m_Name: 0_SpikeyWater
   m_EditorClassIdentifier: 
-  towerName: 
-  range: 4
-  upgradeNum: 1
+  towerName: Spikey
+  range: 1.5
+  versionNum: 0
   fireRate: 1
   element: {fileID: 11400000, guid: 5f2ac61151ef7e347b4a722691241670, type: 2}
-  cost: 25
-  towerPrefab: {fileID: 5135174605016635187, guid: 59fd4d13de7b4d54ba3dc1f24e3946c0, type: 3}
-  bulletPrefab: {fileID: 1315704262782356680, guid: 0eb22f81087971a45bfb41bb9cef00cf, type: 3}
-  nextUpgrade: {fileID: 0}
+  cost: 75
+  towerPrefab: {fileID: 5135174605016635187, guid: 4aa43051b4dabae469bb4b1579a0dde0, type: 3}
+  bulletPrefab: {fileID: 8038529814659282312, guid: a685175a2d3034cbb88db102fe273010, type: 3}
+  nextUpgrade: {fileID: 11400000, guid: 6531f12e672699348a5f3f4ce18d8bb6, type: 2}
   nextElements: []

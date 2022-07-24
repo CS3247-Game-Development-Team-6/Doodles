@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
-  m_Name: 1_BallistaBase
+  m_Name: 1_SpikeyBase
   m_EditorClassIdentifier: 
-  towerName: Ballista
-  range: 3
+  towerName: Spikey
+  range: 1.5
   upgradeNum: 1
   fireRate: 1
   element: {fileID: 0}
-  cost: 25
-  towerPrefab: {fileID: 2689636279851204399, guid: fb0e108e3648a84458f5b7748440670d, type: 3}
-  bulletPrefab: {fileID: 5149562609060439765, guid: fc158721863904d4b9eacb456236e11b, type: 3}
+  cost: 150
+  towerPrefab: {fileID: 5135174605016635187, guid: 4d28ac568c6555345afb90b3d507984d, type: 3}
+  bulletPrefab: {fileID: 8038529814659282312, guid: 2a7b85d1e508e984fb6aaa9eed9bc902, type: 3}
   nextUpgrade: {fileID: 0}
   nextElements:
   - element: 0
-    tower: {fileID: 11400000, guid: bc7bbc09be5f0fe40a6193e2c4e1de85, type: 2}
+    tower: {fileID: 11400000, guid: b915c12d943e3bd4194cd1f12d3aac7d, type: 2}
   - element: 2
-    tower: {fileID: 11400000, guid: bc7bbc09be5f0fe40a6193e2c4e1de85, type: 2}
+    tower: {fileID: 11400000, guid: f8f1b6506b564a447b36e3a4d4fdeeb8, type: 2}
   - element: 1
-    tower: {fileID: 11400000, guid: 939d276d5a3bfca4ca2e632c1f32656b, type: 2}
+    tower: {fileID: 11400000, guid: 6531f12e672699348a5f3f4ce18d8bb6, type: 2}

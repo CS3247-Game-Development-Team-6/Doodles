@@ -16,8 +16,8 @@ public class TowerInfo : ScriptableObject {
     public string towerName;
     /** Range of detection and shooting. */
     [Range(0, MAX_RANGE)] public float range;
-    /** versionNum corresponds to the number of upgrades this tower has had. */
-    [Range(0, MAX_UPGRADES)] public int versionNum;
+    /** upgradeNum corresponds to the number of upgrades this tower has had. */
+    [Range(0, MAX_UPGRADES)] public int upgradeNum;
     /** Number of rounds fired per second. */
     [Range(0, Mathf.Infinity)] public float fireRate;
     /** element corresponds to the element of this tower (if any). */

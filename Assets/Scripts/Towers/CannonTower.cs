@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class CannonTower : Tower {
 
-    private float rotationSpeed = 1f;
-    public Transform rotationBase;
-    public Transform firePoint;
+    private float rotationSpeed = 5f;
+    private Transform rotationBase;
+    private Transform firePoint;
     private float fireCountdown = 0f;
     private Transform target;
 

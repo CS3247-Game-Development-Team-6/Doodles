@@ -23,7 +23,7 @@ public class Tower : MonoBehaviour {
         this.range = towerInfo.range;
         this.fireRate = towerInfo.fireRate;
         this.cost = towerInfo.cost;
-        this.versionNum = towerInfo.versionNum;
+        this.versionNum = towerInfo.upgradeNum;
         this.element = towerInfo.element;
         this.bulletPrefab = towerInfo.bulletPrefab;
         this.nextUpgrade = towerInfo.nextUpgrade;
