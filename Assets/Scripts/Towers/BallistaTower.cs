@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CannonTower : Tower {
+public class BallistaTower : Tower {
 
     private float rotationSpeed = 1f;
     public Transform rotationBase;
@@ -8,7 +8,7 @@ public class CannonTower : Tower {
     private float fireCountdown = 0f;
     private Transform target;
 
-    private const bool PENETRATE_TARGET = false;
+    private const bool PENETRATE_TARGET = true;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
