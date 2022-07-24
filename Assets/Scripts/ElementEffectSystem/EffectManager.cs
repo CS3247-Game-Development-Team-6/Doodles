@@ -7,15 +7,15 @@ public class EffectManager : MonoBehaviour, IEffectable
     private Enemy enemy;
     
     // For Status Effects
-    private StatusEffectData _data;
+    private ElementEffectInfo _data;
     private GameObject _effectParticles;
     private float _currentEffectTime = 0f;
     private float _nextTickTime = 0f;
 
     // For Special Effects
-    [SerializeField] private StatusEffectData _scaldedData;
-    [SerializeField] private StatusEffectData _frozenData;
-    [SerializeField] private StatusEffectData _weakenedData;
+    [SerializeField] private ElementEffectInfo _scaldedData;
+    [SerializeField] private ElementEffectInfo _frozenData;
+    [SerializeField] private ElementEffectInfo _weakenedData;
 
     // For Burst DOT Effect
     private float _burstDotAmount;
@@ -34,7 +34,7 @@ public class EffectManager : MonoBehaviour, IEffectable
 
 
     // Apply Status Effect on enemy
-    public void ApplyEffect(StatusEffectData _data)
+    public void ApplyEffect(ElementEffectInfo _data)
     {
         // Check if already has 2 elements
         if (_data != null) {
@@ -111,7 +111,7 @@ public class EffectManager : MonoBehaviour, IEffectable
         this._data = _frozenData;
     }
 
-    private void setBurstDOTAmount(StatusEffectData _data)
+    private void setBurstDOTAmount(ElementEffectInfo _data)
     {
         if (this._data.Element == "Fire")
         {

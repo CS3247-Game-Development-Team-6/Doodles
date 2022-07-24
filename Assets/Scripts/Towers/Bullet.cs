@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     public float explosionRadius = 0f;    
     public GameObject impactEffect;
     [SerializeField] private int bulletDamage;
-    [SerializeField] private StatusEffectData _data;
+    [SerializeField] private ElementEffectInfo _data;
     private bool isPassingThroughBullet = false;
 
     public int GetBulletDamage() {
