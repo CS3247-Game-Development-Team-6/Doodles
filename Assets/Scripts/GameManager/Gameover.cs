@@ -29,7 +29,10 @@ public class Gameover : MonoBehaviour {
     }
 
     public void Retry() {
+        // load current active scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        // remove occluder
         raycastOccluder.SetActive(false);
         Time.timeScale = 1f;
     }
