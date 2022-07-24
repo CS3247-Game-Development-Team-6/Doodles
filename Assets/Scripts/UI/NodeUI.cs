@@ -12,8 +12,6 @@ public class NodeUI : MonoBehaviour
     public float xOffsetUpperShift;
     private float xOffset;
     private float zOffset;
-    // To use in future to access selectedNode
-    private TowerManager towerManager;
     public Sprite fireDefault;
     public Sprite fireActive;
     public Sprite iceDefault;
@@ -28,8 +26,21 @@ public class NodeUI : MonoBehaviour
     public Sprite upgradeDisable;
     public Sprite upgradeDefault;
 
+    private GameObject upgradeButton;
+    private GameObject destroyButton;
+    private GameObject fireButton;
+    private GameObject iceButton;
+    private GameObject waterButton;
+
     private void Start() {
-        towerManager = TowerManager.instance;
+        Transform canvas = transform.Find("Canvas");
+        Transform othersGroup = canvas.Find("Buttons");
+        Transform elementsGroup = canvas.Find("Elements");
+        this.upgradeButton = othersGroup.Find("Upgrade").gameObject;
+        this.destroyButton = othersGroup.Find("Destroy").gameObject;
+        this.fireButton = elementsGroup.Find("Fire").gameObject;
+        this.iceButton = elementsGroup.Find("Ice").gameObject;
+        this.waterButton = elementsGroup.Find("Water").gameObject;
     }
 
     private void FixedUpdate() {
@@ -39,11 +50,21 @@ public class NodeUI : MonoBehaviour
         }
     }
 
-    public void SetTarget(Node _target)
+    private Image GetButtonImage(GameObject buttonObj) {
+        Button button = buttonObj.GetComponent<Button>();
+        if (!button) return null;
+        return button.GetComponent<Image>();
+    }
+
+    private NodeUITooltipTrigger GetTooltip(GameObject buttonObj) {
+        return buttonObj.GetComponent<NodeUITooltipTrigger>();
+    }
+
+    public void SetTarget(Node target)
     {
         /* Node UI location is dynamically set, with some hardcoded values here. */
-        selectedNode = _target;
-        Vector3 screenPoint = Camera.main.WorldToScreenPoint(_target.transform.position);
+        selectedNode = target;
+        Vector3 screenPoint = Camera.main.WorldToScreenPoint(target.transform.position);
         xOffset = (0.5f - screenPoint.x / Camera.main.pixelWidth) * xOffsetMultiplier;
 
         // Bottom left and right corners
@@ -62,66 +83,40 @@ public class NodeUI : MonoBehaviour
 
         transform.position = selectedNode.GetTowerBuildPosition() + new Vector3(xOffset, 0, zOffset);
 
-        if (selectedNode.GetIsTowerBuilt())
-        {
+        if (selectedNode.GetIsTowerBuilt()) {
             ui.SetActive(true);
+            Image fireImage = GetButtonImage(fireButton);
+            Image iceImage = GetButtonImage(iceButton);
+            Image waterImage = GetButtonImage(waterButton);
+            Image upgradeImage = GetButtonImage(upgradeButton);
+            NodeUITooltipTrigger fireTooltip = GetTooltip(fireButton);
 
+            upgradeImage.sprite = selectedNode.GetIsUpgraded() ? upgradeDisable : upgradeDefault;
 
-            if (selectedNode.towerObj.GetComponent<Tower>().bulletPrefab.tag == "Fire") {
-                Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
-                Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
-                Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
-
-                fireButton.GetComponent<Image>().sprite = fireActive;
-                iceButton.GetComponent<Image>().sprite = iceDisable;
-                waterButton.GetComponent<Image>().sprite = waterDisable;
-
-            } else if (selectedNode.towerObj.GetComponent<Tower>().bulletPrefab.tag == "Ice") {
-                Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
-                Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
-                Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
-
-                fireButton.GetComponent<Image>().sprite = fireDisable;
-                iceButton.GetComponent<Image>().sprite = iceActive;
-                waterButton.GetComponent<Image>().sprite = waterDisable;
-            } else if (selectedNode.towerObj.GetComponent<Tower>().bulletPrefab.tag == "Water") {
-                Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
-                Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
-                Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
-
-                fireButton.GetComponent<Image>().sprite = fireDisable;
-                iceButton.GetComponent<Image>().sprite = iceDisable;
-                waterButton.GetComponent<Image>().sprite = waterActive;
+            if (!selectedNode.tower.element) {
+                fireImage.sprite = fireDefault;
+                iceImage.sprite = iceDefault;
+                waterImage.sprite = waterDefault;
             } else {
-                Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
-                Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
-                Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
-
-                fireButton.GetComponent<Image>().sprite = fireDefault;
-                iceButton.GetComponent<Image>().sprite = iceDefault;
-                waterButton.GetComponent<Image>().sprite = waterDefault;
-            }
-
-            if (selectedNode.towerObj.tag == "Missile") {
-                Image attackRadius = GameObject.Find("/NodeUI/Canvas/RadiusCanvas/AttackRadius").GetComponent<Image>();
-                attackRadius.sprite = missleRadius;
-            } else if (selectedNode.towerObj.tag == "Turret") {
-                Image attackRadius = GameObject.Find("/NodeUI/Canvas/RadiusCanvas/AttackRadius").GetComponent<Image>();
-                attackRadius.sprite = towerRadius;
-            }
-
-            if (selectedNode.GetIsUpgraded()) { 
-                Button upgradeButton = GameObject.Find("/NodeUI/Canvas/Buttons/Upgrade").GetComponent<Button>();
-                upgradeButton.GetComponent<Image>().sprite = upgradeDisable;
-            } else {
-                Button upgradeButton = GameObject.Find("/NodeUI/Canvas/Buttons/Upgrade").GetComponent<Button>();
-                upgradeButton.GetComponent<Image>().sprite = upgradeDefault;
+                ElementType element = selectedNode.tower.element.type;
+                if (element == ElementType.FIRE) {
+                    fireImage.sprite = fireActive;
+                    iceImage.sprite = iceDisable;
+                    waterImage.sprite = waterDisable;
+                } else if (element == ElementType.WATER) {
+                    fireImage.sprite = fireDisable;
+                    iceImage.sprite = iceDisable;
+                    waterImage.sprite = waterActive;
+                } else if (element == ElementType.ICE) {
+                    fireImage.sprite = fireDisable;
+                    iceImage.sprite = iceActive;
+                    waterImage.sprite = waterDisable;
+                }
             }
         }
     }
 
-    public void Hide()
-    {
+    public void Hide() {
         ui.SetActive (false);
     }
 }

@@ -42,6 +42,7 @@ public class SpikeyTower : Tower {
         foreach (var targetTransform in targetTransforms) {
             GameObject bulletObj = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
             Bullet bullet = bulletObj.GetComponent<Bullet>();
+            bullet.SetBulletInfo(towerInfo);
             
             if (bullet != null) {
                 bullet.Seek(targetTransform, PENETRATE_TARGET);
@@ -70,6 +71,7 @@ public class SpikeyTower : Tower {
             aimingPointPosition.z += z;
 
             Transform circleTarget = Instantiate(firePoint, aimingPointPosition, Quaternion.identity);
+            circleTarget.name = "Target" + bulletNumber;
             circleTarget.parent = transform;
             arrOfTransforms[bulletNumber] = circleTarget;
         }

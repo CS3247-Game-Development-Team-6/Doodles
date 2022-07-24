@@ -25,6 +25,18 @@ public class TowerInfo : ScriptableObject {
     /** cost is the additional cost to create this tower from previous version. */
     public int cost;
 
+    [Header("Bullet")]
+    /** Speed of bullet per second. */
+    [Range(1, Mathf.Infinity)] public float speed;
+    /** Explosion radius of bullet AOE effect. */
+    [Range(0, Mathf.Infinity)] public float explosionRadius;
+    /** Damage of bullet on hitting enemy. */
+    public int damage;
+    /** Is destroyed on hit, or penetrates through enemy. */
+    public bool penetratesEnemy;
+    /** Particle effect on collision with enemy. */
+    public GameObject impactPrefab;
+
     /** TODO: Add bullet information (e.g. damage etc.) which will be passed
      *  to Bullet class on initialization. */
 

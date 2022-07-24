@@ -45,6 +45,7 @@ public class BallistaTower : Tower {
     public override void Shoot() {
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
+        bullet.SetBulletInfo(towerInfo);
         
         if (bullet != null) {
             bullet.Seek(target, PENETRATE_TARGET);

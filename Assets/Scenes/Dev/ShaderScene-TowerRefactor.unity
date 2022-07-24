@@ -781,12 +781,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: NodeUI
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7327554375204076149, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
-    - {fileID: 6081142564860306341, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
-    - {fileID: 4816266256631049665, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
-    - {fileID: 7591668818242738069, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
-    - {fileID: 7069780741540769188, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
 --- !u!114 &351889077 stripped
 MonoBehaviour:
@@ -1084,63 +1079,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc647323ac73fe5429d2d67c44b627e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &511465540
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4673274404661140608, guid: a428d616513f503449b577834a0b8137, type: 3}
-      propertyPath: m_RootOrder
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 4673274404661140608, guid: a428d616513f503449b577834a0b8137, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 711.62103
-      objectReference: {fileID: 0}
-    - target: {fileID: 4673274404661140608, guid: a428d616513f503449b577834a0b8137, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 581.0402
-      objectReference: {fileID: 0}
-    - target: {fileID: 4673274404661140608, guid: a428d616513f503449b577834a0b8137, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -744.29626
-      objectReference: {fileID: 0}
-    - target: {fileID: 4673274404661140608, guid: a428d616513f503449b577834a0b8137, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4673274404661140608, guid: a428d616513f503449b577834a0b8137, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4673274404661140608, guid: a428d616513f503449b577834a0b8137, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4673274404661140608, guid: a428d616513f503449b577834a0b8137, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4673274404661140608, guid: a428d616513f503449b577834a0b8137, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4673274404661140608, guid: a428d616513f503449b577834a0b8137, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4673274404661140608, guid: a428d616513f503449b577834a0b8137, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4673274404661140611, guid: a428d616513f503449b577834a0b8137, type: 3}
-      propertyPath: m_Name
-      value: AoETargetsDirectory
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a428d616513f503449b577834a0b8137, type: 3}
 --- !u!1 &550646146 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 550646146, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
@@ -1850,8 +1788,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerInfo: {fileID: 11400000, guid: df2645ecac5d45d4ca0e8c487a08abb3, type: 2}
-  selected: {fileID: 0}
-  unselected: {fileID: 0}
+  selected: {fileID: 21300000, guid: 2a058fdedefd18f4dba4fbd00b5cd10c, type: 3}
+  unselected: {fileID: 21300000, guid: 75db3c3abcd6d1b46bb90a61ab46e61b, type: 3}
 --- !u!1 &1306252971 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6600273765185839068, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
@@ -1869,6 +1807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689b80af745fde6459e3711c4ce4d245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  insufficientInkEffect: {fileID: 8998585739324249827, guid: 1ae7d1e1c28d77444a3ba9f1bdf97d38, type: 3}
+  playerObj: {fileID: 1789031178}
 --- !u!114 &1306252978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1990,8 +1930,7 @@ PrefabInstance:
       propertyPath: secondsToFadeIn
       value: 0.6
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7523575735797191668, guid: 36480db7dca0a4fbf9a4e69f3a870040, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36480db7dca0a4fbf9a4e69f3a870040, type: 3}
 --- !u!1 &1346341702 stripped
 GameObject:
@@ -2172,8 +2111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerInfo: {fileID: 11400000, guid: 7e608828053941e4580916f257cb5fa0, type: 2}
-  selected: {fileID: 0}
-  unselected: {fileID: 0}
+  selected: {fileID: 21300000, guid: ecc5168358db8ce419a2b76b1c9a87fa, type: 3}
+  unselected: {fileID: 21300000, guid: 39aed29194e8a6f4993f3d6808895fb0, type: 3}
 --- !u!1 &1789031178 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7828996249860865855, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
@@ -2314,8 +2253,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerInfo: {fileID: 11400000, guid: 06b49e2a01d1e1e4f97cf6bb361fabe1, type: 2}
-  selected: {fileID: 0}
-  unselected: {fileID: 0}
+  selected: {fileID: 21300000, guid: 9791159beea6e6346b75983c7a8a10b7, type: 3}
+  unselected: {fileID: 21300000, guid: fadeda5247cb39f439eebc1641045991, type: 3}
 --- !u!1 &2035720919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2571,12 +2510,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1767207540842979141, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1767207540842979141, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1767207540842979141, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1598742916}
     - target: {fileID: 1767207540842979141, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2588,6 +2531,10 @@ PrefabInstance:
     - target: {fileID: 1767207540842979141, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetTowerInShop
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767207540842979141, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ShopTowerUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1767207540842979141, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -2675,12 +2622,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2129989812743946612, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2129989812743946612, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2129989812743946612, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1962247918}
     - target: {fileID: 2129989812743946612, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2692,6 +2643,10 @@ PrefabInstance:
     - target: {fileID: 2129989812743946612, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetTowerInShop
+      objectReference: {fileID: 0}
+    - target: {fileID: 2129989812743946612, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ShopTowerUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2129989812743946612, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -2894,13 +2849,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6695644447658288956, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695644447658288956, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2a058fdedefd18f4dba4fbd00b5cd10c, type: 3}
+    - target: {fileID: 6695644447658288956, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6695644447658288956, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6695644447658288956, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1293943193}
     - target: {fileID: 6695644447658288956, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2912,6 +2879,10 @@ PrefabInstance:
     - target: {fileID: 6695644447658288956, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetTowerInShop
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695644447658288956, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ShopTowerUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6695644447658288956, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -3173,7 +3144,8 @@ PrefabInstance:
       propertyPath: upgradeButton
       value: 
       objectReference: {fileID: 1346341702}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
 --- !u!1001 &7828996251632798773
 PrefabInstance:

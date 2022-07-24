@@ -14,10 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Fire Ballista
   range: 3
-  versionNum: 0
+  upgradeNum: 0
   fireRate: 1
   element: {fileID: 11400000, guid: 5f2ac61151ef7e347b4a722691241670, type: 2}
   cost: 25
+  speed: 40
+  explosionRadius: 1
+  damage: 30
+  penetratesEnemy: 0
+  impactPrefab: {fileID: 4232268957626667253, guid: 264947c3b0cb18d4096fa599d2e97062, type: 3}
   towerPrefab: {fileID: 2689636279851204399, guid: aeff0e9c38a38f24fb8cf8f7ac8e3138, type: 3}
   bulletPrefab: {fileID: 5149562609060439765, guid: 08ed0a4e6064a084ea43dde318343e1b, type: 3}
   nextUpgrade: {fileID: 11400000, guid: 939d276d5a3bfca4ca2e632c1f32656b, type: 2}

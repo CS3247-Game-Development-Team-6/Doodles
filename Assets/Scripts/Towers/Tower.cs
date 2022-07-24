@@ -6,6 +6,7 @@ public class Tower : MonoBehaviour {
     public const string ROTATION_BASE_NAME = "RotationBase";
     public const string FIRE_POINT_NAME = "FirePoint";
 
+    protected TowerInfo towerInfo;
     protected string towerName;
     protected float range;
     protected float fireRate;
@@ -19,6 +20,7 @@ public class Tower : MonoBehaviour {
 
     /** Set tower info from Node. */
     public virtual void SetTowerInfo(TowerInfo towerInfo) {
+        this.towerInfo = towerInfo;
         this.towerName = towerInfo.towerName;
         this.range = towerInfo.range;
         this.fireRate = towerInfo.fireRate;
