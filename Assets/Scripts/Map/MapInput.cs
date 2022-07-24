@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MapInput : MonoBehaviour { 
@@ -37,7 +35,6 @@ public class MapInput : MonoBehaviour {
                         return;
                     }
                     Vector3 mouseTowerCellPosition = hit.collider.gameObject.transform.position;
-                    // TO REMOVE once towerManager is complete
                     playerMovement.BuildTowerAttempt(mouseTowerCellPosition, hit.collider.gameObject);
                 }
             }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -144,33 +142,41 @@ public class Node : MonoBehaviour
         towerBuildPosition = tileMesh.transform.position + towerOffset;
         towerObj = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, Quaternion.identity);
         SetIsTowerBuilt(true);
-        Destroy(decorationMesh);    // Destroy current node's asset
+        Destroy(decorationMesh);    // Destroy the flora on the tile.
 
         return towerObj.GetComponent<Turret>();
     }
 
-    // New implementation of tower building.
-    /** Removes decorations and creates new tower based on the info.
-     */
+    /** Removes decorations and creates new tower based on the towerInfo.  */
     public Tower BuildTower(TowerInfo towerInfo) {
         towerBuildPosition = tileMesh.transform.position + towerOffset;
         towerObj = Instantiate(towerInfo.towerPrefab, towerBuildPosition, Quaternion.identity);
         towerObj.GetComponent<Tower>().SetTowerInfo(towerInfo);
         SetIsTowerBuilt(true);
-        Destroy(decorationMesh);
+        Destroy(decorationMesh);    // Destroy the flora on the tile.
 
         return towerObj.GetComponent<Tower>();
     }
 
-    // Build swapped tower
-    public void SwapTower()
-    {
+    // DEPRECATING: Refer to ReplaceTower for the newest version
+    public void SwapTower() {
         if (buildManager.GetTowerToBuild() == null)
         {
             return;
         }
         GameObject towerToBuild = buildManager.GetTowerToBuild();
         towerObj = (GameObject)Instantiate(towerToBuild, towerBuildPosition, Quaternion.identity);
+    }
+
+    /** Replace existing tower upon upgrade. */
+    public Tower ReplaceTower(TowerInfo towerInfo) {
+        Destroy(towerObj);
+        towerBuildPosition = tileMesh.transform.position + towerOffset;
+        towerObj = Instantiate(towerInfo.towerPrefab, towerBuildPosition, Quaternion.identity);
+        towerObj.GetComponent<Tower>().SetTowerInfo(towerInfo);
+        SetIsTowerBuilt(true);
+
+        return towerObj.GetComponent<Tower>();
     }
 
     public Vector3 GetTowerBuildPosition()

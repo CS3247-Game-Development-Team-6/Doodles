@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -23,27 +21,32 @@ public class TowerManager : MonoBehaviour {
         inkManager = GameObject.FindObjectOfType<InkManager>().GetComponent<InkManager>();
     }
 
+    /** TODO: Fill in for Tooltip system */
     public void SelectNode(Node node) {
         if (selectedNode == node) {
             DeselectNode();
             return;
         }
         selectedNode = node;
+        node.OpenTowerUpgrades();
         // nodeUI.SetTarget(node);
         /* if (node.tower != null) {
             UpdateUiTooltip(node);
         } */
     }
 
+    /** TODO: Fill in for Tooltip system */
     public void DeselectNode() { 
         selectedNode = null;
         // nodeUI.Hide();
     }
 
+    /** Returns cost of currently selected tower.
+     */
     public int GetTowerCost() {
         if (!towerToBuild) {
             Debug.LogError("No tower type selected");
-            return -1;
+            return 0;
         }
 
         return towerToBuild.cost;
@@ -67,26 +70,34 @@ public class TowerManager : MonoBehaviour {
             Debug.LogError("Tower not built by Node " + node);
         }
 
-        // TODO: Change to delete here.
-        // Should NOT pass responsibility of creating/destroying tower to NodeUI!
-        // nodeUI.target.DestroyTower();
-        // nodeUI.target.SwapTower();
-
-        // UPDATE UI TOOLTIP HERE
-
         DeselectNode();
     }
 
-    /** For upgrades/element changes on selected node. */
-    public void ReplaceTower(TowerInfo towerInfo) {
-        // nodeUI.target.SetIsUpgraded(towerInfo.versionNum > 0);
-        // nodeUI.target.SetIsAddedElement(towerInfo.element != null);
+    /** For element changes on selected node. */
+    public void ReplaceElementTower(ElementInfo element) {
+        Debug.Log("Selected node", selectedNode);
+        Debug.Log("Selected node tower", selectedNode.towerObj);
+        Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
+        foreach (var pair in selectedTower.nextElements) {
+            if (pair.element == element) {
+                selectedNode.ReplaceTower(towerToBuild);
+                break;
+            }
+        }
+        DeselectNode();
+    }
 
+    /** For upgrades on selected node. */
+    public void UpgradeTower() {
+        Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
+        selectedNode.ReplaceTower(selectedTower.nextUpgrade);
+        DeselectNode();
     }
 
     /** Destroys tower on selected node. */
     public void DestroyTower() {
-
+        selectedNode.DestroyTower();
+        DeselectNode();
     }
 
     public void SetTowerToBuild(TowerInfo towerInfo) {

@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 1315704262782356681}
   - component: {fileID: 8763639161649857149}
   m_Layer: 0
-  m_Name: WaterBullet
-  m_TagString: Water
+  m_Name: 1_CannonBulletFire
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f281685532169d9459c16cd85a7fd50d, type: 2}
+  - {fileID: 2100000, guid: a94440f66fb94a64ea0b7ba9bb72e66c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,5 +111,5 @@ MonoBehaviour:
   speed: 40
   explosionRadius: 0
   impactEffect: {fileID: 4586470546859298135, guid: 024f097d68bf33d44ba2726d968af48c, type: 3}
-  bulletDamage: 35
-  _data: {fileID: 11400000, guid: a620402c788011848a12b7a2ef9ad464, type: 2}
+  bulletDamage: 36
+  _data: {fileID: 11400000, guid: 44bd50d33ed57d64fbcfdf5b9b908176, type: 2}

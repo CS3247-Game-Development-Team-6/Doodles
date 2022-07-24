@@ -153,10 +153,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2670180140298441906}
-  - component: {fileID: 5911250546372479925}
   - component: {fileID: -7369330622769130103}
+  - component: {fileID: -6059475370683566207}
   m_Layer: 0
-  m_Name: CannonBase_1
+  m_Name: 1_CannonBase
   m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,31 +178,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5911250546372479925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5135174605016635187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b909ab942025b9b4b8dec7655148aaec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 4
-  rotationBase: {fileID: 7984372079992035439}
-  rotationSpeed: 10
-  cost: 40
-  swapElementCost: 25
-  upgradeCost: 10
-  numberOfBulletsToFire: 12
-  isAoeTurret: 0
-  enemyTag: Enemy
-  fireRate: 1
-  bulletPrefab: {fileID: 1315704262782356680, guid: 51155749e1a0c9a4cb5f09b5641edf00, type: 3}
-  firePoint: {fileID: 4276231600001898912}
-  cube: {fileID: 0}
 --- !u!114 &-7369330622769130103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +196,20 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &-6059475370683566207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5135174605016635187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2322c46afa9c01e46a28623f37ec842a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationBase: {fileID: 0}
+  firePoint: {fileID: 0}
 --- !u!1001 &3450901890396166468
 PrefabInstance:
   m_ObjectHideFlags: 0

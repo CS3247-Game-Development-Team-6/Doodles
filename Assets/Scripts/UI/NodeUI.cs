@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class NodeUI : MonoBehaviour
 {
     public GameObject ui;
-    public Node target;
+    public Node selectedNode;
     public GameObject playerGO;
 
     public float zOffsetMultiplier;
@@ -14,6 +12,8 @@ public class NodeUI : MonoBehaviour
     public float xOffsetUpperShift;
     private float xOffset;
     private float zOffset;
+    // To use in future to access selectedNode
+    private TowerManager towerManager;
     public Sprite fireDefault;
     public Sprite fireActive;
     public Sprite iceDefault;
@@ -28,6 +28,10 @@ public class NodeUI : MonoBehaviour
     public Sprite upgradeDisable;
     public Sprite upgradeDefault;
 
+    private void Start() {
+        towerManager = TowerManager.instance;
+    }
+
     private void FixedUpdate() {
         // Right clicking away when NodeUI is on now deactivates the NodeUI
         if (Input.GetMouseButtonDown(1) && ui.activeSelf) {
@@ -38,7 +42,7 @@ public class NodeUI : MonoBehaviour
     public void SetTarget(Node _target)
     {
         /* Node UI location is dynamically set, with some hardcoded values here. */
-        target = _target;
+        selectedNode = _target;
         Vector3 screenPoint = Camera.main.WorldToScreenPoint(_target.transform.position);
         xOffset = (0.5f - screenPoint.x / Camera.main.pixelWidth) * xOffsetMultiplier;
 
@@ -56,15 +60,14 @@ public class NodeUI : MonoBehaviour
             xOffset += xOffset < 0 ? (-1 * xOffsetUpperShift) : xOffsetUpperShift;
         }
 
-        transform.position = target.GetTowerBuildPosition() + new Vector3(xOffset, 0, zOffset);
+        transform.position = selectedNode.GetTowerBuildPosition() + new Vector3(xOffset, 0, zOffset);
 
-        if (target.GetIsTowerBuilt())
+        if (selectedNode.GetIsTowerBuilt())
         {
             ui.SetActive(true);
 
 
-            if (target.towerObj.GetComponent<Turret>().bulletPrefab.tag == "Fire")
-            {
+            if (selectedNode.towerObj.GetComponent<Tower>().bulletPrefab.tag == "Fire") {
                 Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
                 Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
                 Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
@@ -73,9 +76,7 @@ public class NodeUI : MonoBehaviour
                 iceButton.GetComponent<Image>().sprite = iceDisable;
                 waterButton.GetComponent<Image>().sprite = waterDisable;
 
-            }
-            else if (target.towerObj.GetComponent<Turret>().bulletPrefab.tag == "Ice")
-            {
+            } else if (selectedNode.towerObj.GetComponent<Tower>().bulletPrefab.tag == "Ice") {
                 Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
                 Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
                 Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
@@ -83,9 +84,7 @@ public class NodeUI : MonoBehaviour
                 fireButton.GetComponent<Image>().sprite = fireDisable;
                 iceButton.GetComponent<Image>().sprite = iceActive;
                 waterButton.GetComponent<Image>().sprite = waterDisable;
-            }
-            else if (target.towerObj.GetComponent<Turret>().bulletPrefab.tag == "Water")
-            {
+            } else if (selectedNode.towerObj.GetComponent<Tower>().bulletPrefab.tag == "Water") {
                 Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
                 Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
                 Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
@@ -93,9 +92,7 @@ public class NodeUI : MonoBehaviour
                 fireButton.GetComponent<Image>().sprite = fireDisable;
                 iceButton.GetComponent<Image>().sprite = iceDisable;
                 waterButton.GetComponent<Image>().sprite = waterActive;
-            }
-            else 
-            {
+            } else {
                 Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
                 Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
                 Button waterButton = GameObject.Find("/NodeUI/Canvas/Elements/Water").GetComponent<Button>();
@@ -105,24 +102,18 @@ public class NodeUI : MonoBehaviour
                 waterButton.GetComponent<Image>().sprite = waterDefault;
             }
 
-            if (target.towerObj.tag == "Missile")
-            {
+            if (selectedNode.towerObj.tag == "Missile") {
                 Image attackRadius = GameObject.Find("/NodeUI/Canvas/RadiusCanvas/AttackRadius").GetComponent<Image>();
                 attackRadius.sprite = missleRadius;
-            }
-            else if (target.towerObj.tag == "Turret")
-            {
+            } else if (selectedNode.towerObj.tag == "Turret") {
                 Image attackRadius = GameObject.Find("/NodeUI/Canvas/RadiusCanvas/AttackRadius").GetComponent<Image>();
                 attackRadius.sprite = towerRadius;
             }
 
-            if (target.GetIsUpgraded())
-            { 
+            if (selectedNode.GetIsUpgraded()) { 
                 Button upgradeButton = GameObject.Find("/NodeUI/Canvas/Buttons/Upgrade").GetComponent<Button>();
                 upgradeButton.GetComponent<Image>().sprite = upgradeDisable;
-            }
-            else
-            {
+            } else {
                 Button upgradeButton = GameObject.Find("/NodeUI/Canvas/Buttons/Upgrade").GetComponent<Button>();
                 upgradeButton.GetComponent<Image>().sprite = upgradeDefault;
             }

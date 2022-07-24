@@ -11,11 +11,13 @@ public class Tower : MonoBehaviour {
     protected float fireRate;
     protected int cost;
     protected int versionNum;
-    protected ElementInfo element;
-    protected GameObject bulletPrefab;
-    protected TowerInfo nextUpgrade;
-    protected ElementKeyValue[] nextElements;
+    // Temporarily public for NodeUI, but eventually to replace with element in NodeUI
+    public GameObject bulletPrefab { get; private set; }
+    public ElementInfo element { get; private set; }
+    public TowerInfo nextUpgrade { get; private set; }
+    public ElementKeyValue[] nextElements { get; private set; }
 
+    /** Set tower info from Node. */
     public virtual void SetTowerInfo(TowerInfo towerInfo) {
         this.towerName = towerInfo.towerName;
         this.range = towerInfo.range;

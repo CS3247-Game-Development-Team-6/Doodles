@@ -300,10 +300,11 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
 
+        Node node = currentTowerCell.GetComponent<Node>();
         // HasTower() opens NodeUI if there is a tower.
-        if (currentTowerCell.GetComponent<Node>().HasTower()) {
+        if (node.HasTower()) {
             // tower cell already has a tower
-            currentTowerCell.GetComponent<Node>().OpenTowerUpgrades();
+            TowerManager.instance.SelectNode(node);
             return;
         }
 
@@ -315,7 +316,6 @@ public class PlayerMovement : MonoBehaviour {
         // Ink cost
         // if (!player.hasEnoughInk(currentTowerCell.GetComponent<Node>().TowerCost())) {
         if (!inkManager.hasEnoughInk(TowerManager.instance.GetTowerCost())) {
-            // player has not enough ink
             Instantiate(insufficientInkEffect, playerGO.transform.position, Quaternion.identity);
             return;
         }
@@ -326,7 +326,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Build() {
-        if (!isBuilding) { // player not building anything
+        if (!isBuilding) {
             return;
         }
 

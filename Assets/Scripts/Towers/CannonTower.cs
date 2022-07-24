@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CannonTower : Tower {
@@ -16,9 +14,7 @@ public class CannonTower : Tower {
         base.SetTowerInfo(towerInfo);
         rotationBase = transform.Find(Tower.ROTATION_BASE_NAME);
         firePoint = rotationBase.Find(Tower.FIRE_POINT_NAME);
-        Debug.Log("TowerInfo being set" + this.towerName + firePoint + " " + rotationBase);
     }
-
 
     void Start() {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
