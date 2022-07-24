@@ -1391,8 +1391,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 0}
-  towerManager: {fileID: 0}
-  player: {fileID: 1789031185}
+  towerManager: {fileID: 1306252972}
+  inkManager: {fileID: 1306252978}
+  playerMovement: {fileID: 7828996251632798774}
   playerGO: {fileID: 1789031178}
   insufficientInkEffect: {fileID: 1252599804982201016, guid: 1ae7d1e1c28d77444a3ba9f1bdf97d38, type: 3}
 --- !u!4 &1040735802
@@ -1643,7 +1644,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689b80af745fde6459e3711c4ce4d245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObj: {fileID: 1789031178}
+  buildDistance: 1.5
+  buildDuration: 4
 --- !u!114 &1306252974 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
@@ -1655,6 +1657,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f780afe953f12f4693a78c431e9b683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1306252978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306252971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb0b3241653f2643a974524b1a1fe4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxInk: 200
+  growthRate: 0
+  startingAmount: 0.7
+  movement: {fileID: 7828996251632798774}
+  levelInfo: {fileID: 11400000, guid: 198253c90dfd4c54e902e0dc8d46c03e, type: 2}
+  playerInkIndicator: {fileID: 889571982}
 --- !u!1001 &1329500688
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1942,17 +1962,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7828996249860865855, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
   m_PrefabInstance: {fileID: 7828996251632798773}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1789031185 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7828996249860865828, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
-  m_PrefabInstance: {fileID: 7828996251632798773}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1789031178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbb0b3241653f2643a974524b1a1fe4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1838362328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2969,9 +2978,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 889571982}
     - target: {fileID: 7828996249860865849, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1306252978}
+    - target: {fileID: 7828996249860865849, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
       propertyPath: playerGO
       value: 
       objectReference: {fileID: 1789031178}
+    - target: {fileID: 7828996249860865849, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
+      propertyPath: inkManager
+      value: 
+      objectReference: {fileID: 1306252978}
     - target: {fileID: 7828996249860865849, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
       propertyPath: playerCamera
       value: 
@@ -3028,7 +3045,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7828996249860865828, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
 --- !u!114 &7828996251632798774 stripped
 MonoBehaviour:

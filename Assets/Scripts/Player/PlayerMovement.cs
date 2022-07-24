@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour {
     */
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask tileAndFogLayerMask;
-    [SerializeField] private Player player;
+    [SerializeField] private InkManager inkManager;
     private IndicatorUI buildIndicator;
     public GameObject playerGO;
     public GameObject insufficientInkEffect;
@@ -313,7 +313,8 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         // Ink cost
-        if (!player.hasEnoughInk(currentTowerCell.GetComponent<Node>().TowerCost())) {
+        // if (!player.hasEnoughInk(currentTowerCell.GetComponent<Node>().TowerCost())) {
+        if (!inkManager.hasEnoughInk(TowerManager.instance.GetTowerCost())) {
             // player has not enough ink
             Instantiate(insufficientInkEffect, playerGO.transform.position, Quaternion.identity);
             return;
@@ -339,10 +340,13 @@ public class PlayerMovement : MonoBehaviour {
         if (currentBuildDuration <= 0) {
             actionTimer.text = ""; // stop displaying timer
             buildIndicator.rawValue = 0;
+            /*
             Turret turret = currentTowerCell.GetComponent<Node>().BuildTower();
             if (turret != null) {
                 player.ChangeInkAmount(-turret.Cost);
             }
+            */
+            TowerManager.instance.BuildTower(currentTowerCell.GetComponent<Node>());
             isBuilding = false;
         }
     }

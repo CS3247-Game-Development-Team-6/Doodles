@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class CannonTower : Tower {
 
-    private float rotationSpeed;
-    private Transform rotationBase;
-    private Transform firePoint;
+    private float rotationSpeed = 1f;
+    public Transform rotationBase;
+    public Transform firePoint;
     private float fireCountdown = 0f;
     private Transform target;
 
     private const bool PENETRATE_TARGET = false;
 
-    public CannonTower(TowerInfo towerInfo) : base(towerInfo) {
-        // GetComponentInChildren<Base>
-        // use GetComponent to find base, firepoint
+    public override void SetTowerInfo(TowerInfo towerInfo) {
+        base.SetTowerInfo(towerInfo);
+        rotationBase = transform.Find(Tower.ROTATION_BASE_NAME);
+        firePoint = rotationBase.Find(Tower.FIRE_POINT_NAME);
+        Debug.Log("TowerInfo being set" + this.towerName + firePoint + " " + rotationBase);
     }
+
 
     void Start() {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
@@ -53,6 +56,7 @@ public class CannonTower : Tower {
 
     void Update() {
         if (!target) return;
+
         
         // Enemy target lock on 
         Vector3 dir = target.position - transform.position;

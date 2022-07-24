@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TowerManager : MonoBehaviour {
-    public static TowerManager instance;
-    [SerializeField] private GameObject playerObj;
+    public static TowerManager instance { get; private set; }
+    private InkManager inkManager;
     private TowerInfo towerToBuild;
     private Node selectedNode;
+    private TMP_Text actionTimer;
 
     private void Awake() {
         if (instance != null) {
@@ -14,6 +16,11 @@ public class TowerManager : MonoBehaviour {
             return;
         }
         instance = this;
+
+        // initialize action timer text
+        actionTimer = GameObject.Find("ActionTimer").GetComponent<TMP_Text>();
+        actionTimer.text = "";
+        inkManager = GameObject.FindObjectOfType<InkManager>().GetComponent<InkManager>();
     }
 
     public void SelectNode(Node node) {
@@ -33,22 +40,38 @@ public class TowerManager : MonoBehaviour {
         // nodeUI.Hide();
     }
 
-    /** For building on a new tile on selected node. */
-    public void BuildTower() {
+    public int GetTowerCost() {
         if (!towerToBuild) {
-            Debug.Log("No tower to build");
+            Debug.LogError("No tower type selected");
+            return -1;
+        }
+
+        return towerToBuild.cost;
+    }
+
+    /** For building on a new tile on selected node. */
+     public void BuildTower(Node node) {
+        if (!towerToBuild) {
+            Debug.LogError("No tower type selected");
+            return;
+        } else if (!towerToBuild.towerPrefab) {
+            Debug.LogError("No tower prefab present");
             return;
         }
         int cost = towerToBuild.cost;
-        Player player = playerObj.GetComponent<Player>();
-        Debug.Log("Tower being built " + towerToBuild.towerName + " for " + cost);
+
+        Tower tower = node.BuildTower(towerToBuild);
+        if (tower != null) {
+            inkManager.ChangeInkAmount(-cost);
+        } else {
+            Debug.LogError("Tower not built by Node " + node);
+        }
 
         // TODO: Change to delete here.
         // Should NOT pass responsibility of creating/destroying tower to NodeUI!
         // nodeUI.target.DestroyTower();
         // nodeUI.target.SwapTower();
 
-        // player.ChangeInkAmount(-cost);
         // UPDATE UI TOOLTIP HERE
 
         DeselectNode();

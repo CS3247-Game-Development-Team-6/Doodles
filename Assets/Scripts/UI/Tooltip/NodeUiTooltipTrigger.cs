@@ -41,13 +41,13 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
         buildManager = BuildManager.instance;
 
         // retrieve costs
-        upgradeCost = currentNode.tower.GetComponent<Turret>().GetUpgradeCost();
-        elementSwapCost = currentNode.tower.GetComponent<Turret>().GetSwapElementCost();
+        upgradeCost = currentNode.towerObj.GetComponent<Turret>().GetUpgradeCost();
+        elementSwapCost = currentNode.towerObj.GetComponent<Turret>().GetSwapElementCost();
 
         // retrieve current stats
-        currentDamage = currentNode.tower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
-        currentExplosionRadius = currentNode.tower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();
-        currentRange = currentNode.tower.GetComponent<Turret>().GetRange();
+        currentDamage = currentNode.towerObj.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
+        currentExplosionRadius = currentNode.towerObj.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();
+        currentRange = currentNode.towerObj.GetComponent<Turret>().GetRange();
 
     }
 
@@ -75,8 +75,8 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
         ////////////////////////////
         // retrieve upgrade stats
         ////////////////////////////
-        string towerElement = currentNode.tower.GetComponent<Turret>().bulletPrefab.tag;
-        if (currentNode.tower.tag == "Turret" && currentNode.GetIsUpgraded()) {
+        string towerElement = currentNode.towerObj.GetComponent<Turret>().bulletPrefab.tag;
+        if (currentNode.towerObj.tag == "Turret" && currentNode.GetIsUpgraded()) {
             if (buttonType == ButtonType.ElementFire) {
                 upgradeDamage = buildManager.upFireTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
                 upgradeExplosionRadius = buildManager.upFireTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
@@ -95,7 +95,7 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
                 upgradeExplosionRadius = currentExplosionRadius;
                 upgradeRange = currentRange;
             }
-        } else if (currentNode.tower.tag == "Turret" && !currentNode.GetIsUpgraded()) {
+        } else if (currentNode.towerObj.tag == "Turret" && !currentNode.GetIsUpgraded()) {
             if (buttonType == ButtonType.ElementFire) {
                 upgradeDamage = buildManager.fireTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
                 upgradeExplosionRadius = buildManager.fireTurret.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
@@ -138,7 +138,7 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
                 upgradeExplosionRadius = currentExplosionRadius;
                 upgradeRange = currentRange;
             }
-        } else if (currentNode.tower.tag == "Missile" && currentNode.GetIsUpgraded()) {
+        } else if (currentNode.towerObj.tag == "Missile" && currentNode.GetIsUpgraded()) {
             if (buttonType == ButtonType.ElementFire) {
                 upgradeDamage = buildManager.upFireMissileLauncher.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
                 upgradeExplosionRadius = buildManager.upFireMissileLauncher.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
@@ -157,7 +157,7 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
                 upgradeExplosionRadius = currentExplosionRadius;
                 upgradeRange = currentRange;
             }
-        } else if (currentNode.tower.tag == "Missile" && !currentNode.GetIsUpgraded()) {
+        } else if (currentNode.towerObj.tag == "Missile" && !currentNode.GetIsUpgraded()) {
             if (buttonType == ButtonType.ElementFire) {
                 upgradeDamage = buildManager.fireMissileLauncher.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
                 upgradeExplosionRadius = buildManager.fireMissileLauncher.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
@@ -200,7 +200,7 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
                 upgradeExplosionRadius = currentExplosionRadius;
                 upgradeRange = currentRange;
             }
-        } else if (currentNode.tower.tag == "AOE" && currentNode.GetIsUpgraded()) {
+        } else if (currentNode.towerObj.tag == "AOE" && currentNode.GetIsUpgraded()) {
             if (buttonType == ButtonType.ElementFire) {
                 upgradeDamage = buildManager.upFireAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
                 upgradeExplosionRadius = buildManager.upFireAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;
@@ -219,7 +219,7 @@ public class NodeUiTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointe
                 upgradeExplosionRadius = currentExplosionRadius;
                 upgradeRange = currentRange;
             }
-        } else if (currentNode.tower.tag == "AOE" && !currentNode.GetIsUpgraded()) {
+        } else if (currentNode.towerObj.tag == "AOE" && !currentNode.GetIsUpgraded()) {
             if (buttonType == ButtonType.ElementFire) {
                 upgradeDamage = buildManager.fireAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetBulletDamage();
                 upgradeExplosionRadius = buildManager.fireAoeTower.GetComponent<Turret>().bulletPrefab.GetComponent<Bullet>().GetExplosionRadius();;

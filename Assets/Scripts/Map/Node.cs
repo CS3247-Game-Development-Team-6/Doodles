@@ -20,7 +20,7 @@ public class Node : MonoBehaviour
     private bool isTowerBuilt = false;
     private bool isAddedElement = false;
     private bool isUpgraded = false;
-    public GameObject tower;
+    public GameObject towerObj;
     public Cell cell;
 
     public Vector3 tileOffset = Vector3.zero;
@@ -65,18 +65,18 @@ public class Node : MonoBehaviour
 
     public GameObject SetTower(GameObject tower)
     {
-        this.tower = tower;
+        this.towerObj = tower;
         return tower;
     }
 
     public GameObject GetTower()
     {
-        return this.tower;
+        return this.towerObj;
     }
     public void DestroyTower()
     {
-        Destroy(this.tower);
-        tower = null;
+        Destroy(this.towerObj);
+        towerObj = null;
     }
     public bool GetIsTowerBuilt()
     {
@@ -118,13 +118,14 @@ public class Node : MonoBehaviour
     }
 
     public bool HasTower() {
-        return tower != null;
+        return towerObj != null;
     }
 
     public void ToggleObjectView(bool visible) {
         decorationMesh.SetActive(visible);
     }
 
+    // DEPRECATING: Refer to BuildTower for newest version.
     public Turret BuildTower()
     {
 
@@ -133,7 +134,7 @@ public class Node : MonoBehaviour
             return null;
         }
 
-        if (tower != null) 
+        if (towerObj != null) 
         {
             return null;
         }
@@ -141,11 +142,24 @@ public class Node : MonoBehaviour
         // build a tower
         GameObject towerToBuild = buildManager.GetTowerToBuild();
         towerBuildPosition = tileMesh.transform.position + towerOffset;
-        tower = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, Quaternion.identity);
+        towerObj = (GameObject) Instantiate(towerToBuild, tileMesh.transform.position + towerOffset, Quaternion.identity);
         SetIsTowerBuilt(true);
         Destroy(decorationMesh);    // Destroy current node's asset
 
-        return tower.GetComponent<Turret>();
+        return towerObj.GetComponent<Turret>();
+    }
+
+    // New implementation of tower building.
+    /** Removes decorations and creates new tower based on the info.
+     */
+    public Tower BuildTower(TowerInfo towerInfo) {
+        towerBuildPosition = tileMesh.transform.position + towerOffset;
+        towerObj = Instantiate(towerInfo.towerPrefab, towerBuildPosition, Quaternion.identity);
+        towerObj.GetComponent<Tower>().SetTowerInfo(towerInfo);
+        SetIsTowerBuilt(true);
+        Destroy(decorationMesh);
+
+        return towerObj.GetComponent<Tower>();
     }
 
     // Build swapped tower
@@ -156,7 +170,7 @@ public class Node : MonoBehaviour
             return;
         }
         GameObject towerToBuild = buildManager.GetTowerToBuild();
-        tower = (GameObject)Instantiate(towerToBuild, towerBuildPosition, Quaternion.identity);
+        towerObj = (GameObject)Instantiate(towerToBuild, towerBuildPosition, Quaternion.identity);
     }
 
     public Vector3 GetTowerBuildPosition()
@@ -176,8 +190,8 @@ public class Node : MonoBehaviour
         }
 
         if (GetIsTowerBuilt()) {
-            tower.gameObject.GetComponent<Outline>().enabled = true;
-            tower.gameObject.GetComponent<Outline>().OutlineColor =
+            towerObj.gameObject.GetComponent<Outline>().enabled = true;
+            towerObj.gameObject.GetComponent<Outline>().OutlineColor =
                 (transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()
                     ? tooFarColor
                     : hoverColor;
@@ -195,7 +209,7 @@ public class Node : MonoBehaviour
         tileRenderer.material.color = startColor;
         
         if (GetIsTowerBuilt()) {
-            tower.gameObject.GetComponent<Outline>().enabled = false;
+            towerObj.gameObject.GetComponent<Outline>().enabled = false;
         } else if (decorationMesh != null) {
             decorationMesh.gameObject.GetComponent<Outline>().enabled = false;
         }

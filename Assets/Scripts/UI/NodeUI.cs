@@ -63,7 +63,7 @@ public class NodeUI : MonoBehaviour
             ui.SetActive(true);
 
 
-            if (target.tower.GetComponent<Turret>().bulletPrefab.tag == "Fire")
+            if (target.towerObj.GetComponent<Turret>().bulletPrefab.tag == "Fire")
             {
                 Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
                 Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
@@ -74,7 +74,7 @@ public class NodeUI : MonoBehaviour
                 waterButton.GetComponent<Image>().sprite = waterDisable;
 
             }
-            else if (target.tower.GetComponent<Turret>().bulletPrefab.tag == "Ice")
+            else if (target.towerObj.GetComponent<Turret>().bulletPrefab.tag == "Ice")
             {
                 Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
                 Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
@@ -84,7 +84,7 @@ public class NodeUI : MonoBehaviour
                 iceButton.GetComponent<Image>().sprite = iceActive;
                 waterButton.GetComponent<Image>().sprite = waterDisable;
             }
-            else if (target.tower.GetComponent<Turret>().bulletPrefab.tag == "Water")
+            else if (target.towerObj.GetComponent<Turret>().bulletPrefab.tag == "Water")
             {
                 Button fireButton = GameObject.Find("/NodeUI/Canvas/Elements/Fire").GetComponent<Button>();
                 Button iceButton = GameObject.Find("/NodeUI/Canvas/Elements/Ice").GetComponent<Button>();
@@ -105,12 +105,12 @@ public class NodeUI : MonoBehaviour
                 waterButton.GetComponent<Image>().sprite = waterDefault;
             }
 
-            if (target.tower.tag == "Missile")
+            if (target.towerObj.tag == "Missile")
             {
                 Image attackRadius = GameObject.Find("/NodeUI/Canvas/RadiusCanvas/AttackRadius").GetComponent<Image>();
                 attackRadius.sprite = missleRadius;
             }
-            else if (target.tower.tag == "Turret")
+            else if (target.towerObj.tag == "Turret")
             {
                 Image attackRadius = GameObject.Find("/NodeUI/Canvas/RadiusCanvas/AttackRadius").GetComponent<Image>();
                 attackRadius.sprite = towerRadius;
