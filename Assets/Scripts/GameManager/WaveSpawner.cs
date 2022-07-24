@@ -39,11 +39,10 @@ public class WaveSpawner : MonoBehaviour {
     void buttonOnClick() {
         isSkipWaveCountdownButtonVisible = false;
 
-        countdownTimer = 0f;
+        countdownTimer = 0f; // reset timer 
         UpdateTimerIndicator(countdownTimer);
     }
 
-    // Update is called once per frame
     void Update() {
         skipWaveCountdownButton.gameObject.SetActive(isSkipWaveCountdownButtonVisible);
         enemiesLeftText.text = string.Format("{0}", numEnemiesLeftInWave);
