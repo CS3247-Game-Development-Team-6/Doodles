@@ -6,12 +6,14 @@ public class MapInput : MonoBehaviour {
  
     private Camera cam;
     public MapGenerator map;
+    public TowerManager towerManager;
     public Player player;
     public GameObject playerGO;
     public GameObject insufficientInkEffect;
 
     void Start() {
         cam = Camera.main;
+        towerManager = TowerManager.instance;
     }
 
     void Update() {
@@ -36,6 +38,8 @@ public class MapInput : MonoBehaviour {
                         return;
                     }
                     Vector3 mouseTowerCellPosition = hit.collider.gameObject.transform.position;
+                    towerManager.BuildTower();
+                    // TO REMOVE once towerManager is complete
                     player.Movement.BuildTowerAttempt(mouseTowerCellPosition, hit.collider.gameObject);
                 }
             }

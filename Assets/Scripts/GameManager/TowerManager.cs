@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class TowerManager : MonoBehaviour {
     public static TowerManager instance;
+    [SerializeField] private GameObject playerObj;
     private TowerInfo towerToBuild;
     private Node selectedNode;
-    private GameObject playerObj;
-    private GameObject nodeUIObj;
-    private NodeUI nodeUI;
 
     private void Awake() {
         if (instance != null) {
@@ -24,7 +22,7 @@ public class TowerManager : MonoBehaviour {
             return;
         }
         selectedNode = node;
-        nodeUI.SetTarget(node);
+        // nodeUI.SetTarget(node);
         /* if (node.tower != null) {
             UpdateUiTooltip(node);
         } */
@@ -32,21 +30,25 @@ public class TowerManager : MonoBehaviour {
 
     public void DeselectNode() { 
         selectedNode = null;
-        nodeUI.Hide();
+        // nodeUI.Hide();
     }
 
     /** For building on a new tile on selected node. */
     public void BuildTower() {
-        if (!towerToBuild) return;
+        if (!towerToBuild) {
+            Debug.Log("No tower to build");
+            return;
+        }
         int cost = towerToBuild.cost;
         Player player = playerObj.GetComponent<Player>();
+        Debug.Log("Tower being built " + towerToBuild.towerName + " for " + cost);
 
         // TODO: Change to delete here.
         // Should NOT pass responsibility of creating/destroying tower to NodeUI!
-        nodeUI.target.DestroyTower();
-        nodeUI.target.SwapTower();
+        // nodeUI.target.DestroyTower();
+        // nodeUI.target.SwapTower();
 
-        player.ChangeInkAmount(-cost);
+        // player.ChangeInkAmount(-cost);
         // UPDATE UI TOOLTIP HERE
 
         DeselectNode();
@@ -54,8 +56,8 @@ public class TowerManager : MonoBehaviour {
 
     /** For upgrades/element changes on selected node. */
     public void ReplaceTower(TowerInfo towerInfo) {
-        nodeUI.target.SetIsUpgraded(towerInfo.versionNum > 0);
-        nodeUI.target.SetIsAddedElement(towerInfo.element != null);
+        // nodeUI.target.SetIsUpgraded(towerInfo.versionNum > 0);
+        // nodeUI.target.SetIsAddedElement(towerInfo.element != null);
 
     }
 

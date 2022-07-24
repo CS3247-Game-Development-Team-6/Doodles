@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopTowerUI : MonoBehaviour {
-    public Button button;
     public TowerInfo towerInfo;
     public Sprite selected;
     public Sprite unselected;
