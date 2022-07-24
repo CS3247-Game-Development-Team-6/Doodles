@@ -7,6 +7,7 @@ public class TowerManager : MonoBehaviour {
     private TowerInfo towerToBuild;
     private Node selectedNode;
     private TMP_Text actionTimer;
+    private NodeUI nodeUI;
 
     private void Awake() {
         if (instance != null) {
@@ -18,7 +19,8 @@ public class TowerManager : MonoBehaviour {
         // initialize action timer text
         actionTimer = GameObject.Find("ActionTimer").GetComponent<TMP_Text>();
         actionTimer.text = "";
-        inkManager = GameObject.FindObjectOfType<InkManager>().GetComponent<InkManager>();
+        inkManager = InkManager.instance;
+        nodeUI = GameObject.FindObjectOfType<NodeUI>().GetComponent<NodeUI>();
     }
 
     /** TODO: Fill in for Tooltip system */
@@ -28,17 +30,13 @@ public class TowerManager : MonoBehaviour {
             return;
         }
         selectedNode = node;
-        node.OpenTowerUpgrades();
-        // nodeUI.SetTarget(node);
-        /* if (node.tower != null) {
-            UpdateUiTooltip(node);
-        } */
+        nodeUI.SetTarget(node);
     }
 
     /** TODO: Fill in for Tooltip system */
     public void DeselectNode() { 
         selectedNode = null;
-        // nodeUI.Hide();
+        nodeUI.Hide();
     }
 
     /** Returns cost of currently selected tower.
@@ -75,12 +73,10 @@ public class TowerManager : MonoBehaviour {
 
     /** For element changes on selected node. */
     public void ReplaceElementTower(ElementInfo element) {
-        Debug.Log("Selected node", selectedNode);
-        Debug.Log("Selected node tower", selectedNode.towerObj);
         Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
         foreach (var pair in selectedTower.nextElements) {
-            if (pair.element == element) {
-                selectedNode.ReplaceTower(towerToBuild);
+            if (pair.element == element.type) {
+                selectedNode.ReplaceTower(pair.tower);
                 break;
             }
         }
@@ -91,6 +87,7 @@ public class TowerManager : MonoBehaviour {
     public void UpgradeTower() {
         Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
         selectedNode.ReplaceTower(selectedTower.nextUpgrade);
+        selectedNode.SetIsUpgraded(true);
         DeselectNode();
     }
 

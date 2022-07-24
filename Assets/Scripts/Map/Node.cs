@@ -74,6 +74,7 @@ public class Node : MonoBehaviour
     public void DestroyTower()
     {
         Destroy(this.towerObj);
+        isTowerBuilt = false;
         towerObj = null;
     }
     public bool GetIsTowerBuilt()

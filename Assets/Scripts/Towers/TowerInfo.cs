@@ -2,7 +2,7 @@ using UnityEngine;
 
 [System.Serializable]
 public class ElementKeyValue {
-    public ElementInfo element;
+    public ElementType element;
     public TowerInfo tower;
 }
 
