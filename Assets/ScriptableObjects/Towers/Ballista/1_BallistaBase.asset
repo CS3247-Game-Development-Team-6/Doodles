@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
-  m_Name: 0_BallistaBase
+  m_Name: 1_BallistaBase
   m_EditorClassIdentifier: 
   towerName: Ballista
   range: 3
   versionNum: 0
   fireRate: 1
   element: {fileID: 0}
-  cost: 40
+  cost: 25
   towerPrefab: {fileID: 2689636279851204399, guid: 81e5af41165768542bd55aa5fe7998ef, type: 3}
   bulletPrefab: {fileID: 5149562609060439765, guid: eb6d43d03636f12408b09dd69d35301a, type: 3}
-  nextUpgrade: {fileID: 11400000, guid: f9710f37c76531a44b1c047a4da51b44, type: 2}
+  nextUpgrade: {fileID: 0}
   nextElements:
   - element: 0
-    tower: {fileID: 11400000, guid: 216ae7d7c023ee64293163f0c3a0c485, type: 2}
+    tower: {fileID: 11400000, guid: bc7bbc09be5f0fe40a6193e2c4e1de85, type: 2}
   - element: 2
-    tower: {fileID: 11400000, guid: de2fc37e81c6f1c4788568bcd989d683, type: 2}
+    tower: {fileID: 11400000, guid: bc7bbc09be5f0fe40a6193e2c4e1de85, type: 2}
   - element: 1
-    tower: {fileID: 11400000, guid: 89a267766c8dcf04cbd1a37597a3bd2e, type: 2}
+    tower: {fileID: 11400000, guid: 939d276d5a3bfca4ca2e632c1f32656b, type: 2}

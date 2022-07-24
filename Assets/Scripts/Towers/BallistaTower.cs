@@ -8,7 +8,7 @@ public class BallistaTower : Tower {
     private float fireCountdown = 0f;
     private Transform target;
 
-    private const bool PENETRATE_TARGET = true;
+    private const bool PENETRATE_TARGET = false;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
