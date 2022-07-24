@@ -76,7 +76,11 @@ public class TowerManager : MonoBehaviour {
         Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
         foreach (var pair in selectedTower.nextElements) {
             if (pair.element == element.type) {
-                selectedNode.ReplaceTower(pair.tower);
+                if (selectedNode.ReplaceTower(pair.tower)) {
+                    inkManager.ChangeInkAmount(-pair.tower.cost);
+                } else {
+                    Debug.LogError("Tower not built at Node " + selectedNode);
+                }
                 break;
             }
         }
@@ -86,8 +90,12 @@ public class TowerManager : MonoBehaviour {
     /** For upgrades on selected node. */
     public void UpgradeTower() {
         Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
-        selectedNode.ReplaceTower(selectedTower.nextUpgrade);
-        selectedNode.SetIsUpgraded(true);
+        if (selectedNode.ReplaceTower(selectedTower.nextUpgrade)) {
+            inkManager.ChangeInkAmount(-selectedTower.nextUpgrade.cost);
+            selectedNode.SetIsUpgraded(true);
+        } else {
+            Debug.LogError("Tower not built at Node " + selectedNode);
+        }
         DeselectNode();
     }
 
