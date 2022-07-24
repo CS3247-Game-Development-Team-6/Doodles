@@ -3,21 +3,27 @@ using UnityEngine;
 public class Tower : MonoBehaviour {
 
     public const string ENEMY_TAG = "Enemy";
+    public const string ROTATION_BASE_NAME = "RotationBase";
+    public const string FIRE_POINT_NAME = "FirePoint";
 
+    protected string towerName;
     protected float range;
     protected float fireRate;
     protected int cost;
     protected int versionNum;
-    protected ElementEffectInfo element;
-    protected GameObject bulletPrefab;
-    protected TowerInfo nextUpgrade;
-    protected ElementInfo[] nextElements;
+    // Temporarily public for NodeUI, but eventually to replace with element in NodeUI
+    public GameObject bulletPrefab { get; private set; }
+    public ElementInfo element { get; private set; }
+    public TowerInfo nextUpgrade { get; private set; }
+    public ElementKeyValue[] nextElements { get; private set; }
 
-    protected Tower(TowerInfo towerInfo) {
+    /** Set tower info from Node. */
+    public virtual void SetTowerInfo(TowerInfo towerInfo) {
+        this.towerName = towerInfo.towerName;
         this.range = towerInfo.range;
         this.fireRate = towerInfo.fireRate;
         this.cost = towerInfo.cost;
-        this.versionNum = towerInfo.versionNum;
+        this.versionNum = towerInfo.upgradeNum;
         this.element = towerInfo.element;
         this.bulletPrefab = towerInfo.bulletPrefab;
         this.nextUpgrade = towerInfo.nextUpgrade;

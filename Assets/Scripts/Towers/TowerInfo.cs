@@ -1,9 +1,9 @@
 using UnityEngine;
 
 [System.Serializable]
-public class ElementInfo {
-    public ElementEffectInfo element;
-    public TowerInfo elementTowerInfo;
+public class ElementKeyValue {
+    public ElementType element;
+    public TowerInfo tower;
 }
 
 [CreateAssetMenu(fileName = "TowerInfo", menuName = "Tower Type")]
@@ -16,12 +16,12 @@ public class TowerInfo : ScriptableObject {
     public string towerName;
     /** Range of detection and shooting. */
     [Range(0, MAX_RANGE)] public float range;
-    /** versionNum corresponds to the number of upgrades this tower has had. */
-    [Range(0, MAX_UPGRADES)] public int versionNum;
+    /** upgradeNum corresponds to the number of upgrades this tower has had. */
+    [Range(0, MAX_UPGRADES)] public int upgradeNum;
     /** Number of rounds fired per second. */
     [Range(0, Mathf.Infinity)] public float fireRate;
     /** element corresponds to the element of this tower (if any). */
-    public ElementEffectInfo element;
+    public ElementInfo element;
     /** cost is the additional cost to create this tower from previous version. */
     public int cost;
 
@@ -36,6 +36,6 @@ public class TowerInfo : ScriptableObject {
     /** Link to the info of the next upgrade. */
     public TowerInfo nextUpgrade;
     /** Links to the info of the elemental versions. */
-    public ElementInfo[] nextElements;
+    public ElementKeyValue[] nextElements;
 
 }

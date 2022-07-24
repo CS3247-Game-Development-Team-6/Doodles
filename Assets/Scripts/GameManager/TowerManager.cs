@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TowerManager : MonoBehaviour {
-    public static TowerManager instance;
-    [SerializeField] private GameObject playerObj;
+    public static TowerManager instance { get; private set; }
+    private InkManager inkManager;
     private TowerInfo towerToBuild;
     private Node selectedNode;
+    private TMP_Text actionTimer;
+    private NodeUI nodeUI;
 
     private void Awake() {
         if (instance != null) {
@@ -14,56 +15,94 @@ public class TowerManager : MonoBehaviour {
             return;
         }
         instance = this;
+
+        // initialize action timer text
+        actionTimer = GameObject.Find("ActionTimer").GetComponent<TMP_Text>();
+        actionTimer.text = "";
+        inkManager = InkManager.instance;
+        nodeUI = GameObject.FindObjectOfType<NodeUI>().GetComponent<NodeUI>();
     }
 
+    /** TODO: Fill in for Tooltip system */
     public void SelectNode(Node node) {
         if (selectedNode == node) {
             DeselectNode();
             return;
         }
         selectedNode = node;
-        // nodeUI.SetTarget(node);
-        /* if (node.tower != null) {
-            UpdateUiTooltip(node);
-        } */
+        nodeUI.SetTarget(node);
     }
 
+    /** TODO: Fill in for Tooltip system */
     public void DeselectNode() { 
         selectedNode = null;
-        // nodeUI.Hide();
+        nodeUI.Hide();
+    }
+
+    /** Returns cost of currently selected tower.
+     */
+    public int GetTowerCost() {
+        if (!towerToBuild) {
+            Debug.LogError("No tower type selected");
+            return 0;
+        }
+
+        return towerToBuild.cost;
     }
 
     /** For building on a new tile on selected node. */
-    public void BuildTower() {
+     public void BuildTower(Node node) {
         if (!towerToBuild) {
-            Debug.Log("No tower to build");
+            Debug.LogError("No tower type selected");
+            return;
+        } else if (!towerToBuild.towerPrefab) {
+            Debug.LogError("No tower prefab present");
             return;
         }
         int cost = towerToBuild.cost;
-        Player player = playerObj.GetComponent<Player>();
-        Debug.Log("Tower being built " + towerToBuild.towerName + " for " + cost);
 
-        // TODO: Change to delete here.
-        // Should NOT pass responsibility of creating/destroying tower to NodeUI!
-        // nodeUI.target.DestroyTower();
-        // nodeUI.target.SwapTower();
-
-        // player.ChangeInkAmount(-cost);
-        // UPDATE UI TOOLTIP HERE
+        Tower tower = node.BuildTower(towerToBuild);
+        if (tower != null) {
+            inkManager.ChangeInkAmount(-cost);
+        } else {
+            Debug.LogError("Tower not built by Node " + node);
+        }
 
         DeselectNode();
     }
 
-    /** For upgrades/element changes on selected node. */
-    public void ReplaceTower(TowerInfo towerInfo) {
-        // nodeUI.target.SetIsUpgraded(towerInfo.versionNum > 0);
-        // nodeUI.target.SetIsAddedElement(towerInfo.element != null);
+    /** For element changes on selected node. */
+    public void ReplaceElementTower(ElementInfo element) {
+        Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
+        foreach (var pair in selectedTower.nextElements) {
+            if (pair.element == element.type) {
+                if (selectedNode.ReplaceTower(pair.tower)) {
+                    inkManager.ChangeInkAmount(-pair.tower.cost);
+                } else {
+                    Debug.LogError("Tower not built at Node " + selectedNode);
+                }
+                break;
+            }
+        }
+        DeselectNode();
+    }
 
+    /** For upgrades on selected node. */
+    public void UpgradeTower() {
+        Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
+        if (selectedNode.ReplaceTower(selectedTower.nextUpgrade)) {
+            inkManager.ChangeInkAmount(-selectedTower.nextUpgrade.cost);
+            selectedNode.SetIsUpgraded(true);
+        } else {
+            Debug.LogError("Tower not built at Node " + selectedNode);
+        }
+        DeselectNode();
     }
 
     /** Destroys tower on selected node. */
     public void DestroyTower() {
-
+        selectedNode.DestroyTower();
+        DeselectNode();
     }
 
     public void SetTowerToBuild(TowerInfo towerInfo) {
