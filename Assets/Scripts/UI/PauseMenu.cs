@@ -3,31 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
-{
+public class PauseMenu : MonoBehaviour {
     public static bool GameIsPaused;
 
     public GameObject pauseMenuUI;
     public GameObject gameplayCanvas;
     public GameObject raycastOccluder;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(GameIsPaused)
-            {
+
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (GameIsPaused) {
                 Resume();
-            } else
-            {
+            } else {
                 Pause();
             }
         }
     }
 
-    public void Resume()
-    {
+    public void Resume() {
         pauseMenuUI.SetActive(false);
         gameplayCanvas.SetActive(true);
         raycastOccluder.SetActive(false);
@@ -35,23 +29,20 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
     }
 
-    public void Restart()
-    {
+    public void Restart() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Resume();
     }
 
-    void Pause()
-    {
-        if (!GameManager.getIsGameEnded())
-        {
+    void Pause() {
+        if (!GameStateManager.getIsGameEnded()) {
             GameIsPaused = true;
             pauseMenuUI.SetActive(true);
             gameplayCanvas.SetActive(false);
             raycastOccluder.SetActive(true);
             Time.timeScale = 0f;
         }
-        
+
         TooltipSystem.Hide();
     }
 
@@ -61,8 +52,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void LoadMenu()
-    {
+    public void LoadMenu() {
         Resume();
         raycastOccluder.SetActive(false);
         if (!PlayerPrefs.HasKey(SettingsScriptableObject.MenuScenePref)) {
@@ -77,8 +67,7 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(menuScene);
     }
 
-    public void Retry()
-    {
+    public void Retry() {
         Resume();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

@@ -11,18 +11,12 @@ public class PlayerHealth : MonoBehaviour {
     private float maxHealth = 100;
 
     private Image healthBar;
-    private GameManager gameManager;
+    private GameStateManager gameStateManager;
 
-    // Start is called before the first frame update
     void Start() {
         healthBar = GameObject.Find("HealthCanvas/HealthBG/HealthBar").GetComponent<Image>();
         healthAmount = maxHealth;
-        gameManager = GameObject.Find("GameMaster").GetComponent<GameManager>();
-    }
-
-    // Update is called once per frame
-    void Update() {
-        
+        gameStateManager = GameObject.Find("GameMaster").GetComponent<GameStateManager>();
     }
 
     public void TakeDamage(int amount) {
@@ -31,8 +25,6 @@ public class PlayerHealth : MonoBehaviour {
         // float number between 0 and 1
         healthBar.fillAmount = healthAmount / maxHealth;
 
-        // TODO: add damage animation?
-
         if (healthAmount <= 0) {
             Die();
         }
@@ -40,7 +32,6 @@ public class PlayerHealth : MonoBehaviour {
 
     void Die() {
         gameObject.SetActive(false);
-        // TODO: add death animation?
-        gameManager.EndGame();
+        gameStateManager.EndGame();
     }
 }

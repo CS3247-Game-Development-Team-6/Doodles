@@ -3,42 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WaveSpawner : MonoBehaviour
-{
-    // keep track of how many enemies alive then only spawn new wave
+public class WaveSpawner : MonoBehaviour {
+    [SerializeField] private Text wavesCounterUI;
 
-    public static int numEnemiesAlive;
-
-    // enemies left counter
+    public static int numEnemiesAlive; // keep track of how many enemies alive then only spawn new wave
+    public static int wavesCounter;
     public static int numEnemiesLeftInWave;
     public static bool isSpawningEnemy;
 
     public Wave[] waves;
-
     public Transform spawnPoint;
-
     public float timeBetweenWaves = 5f;
-
     public IndicatorUI waveCountdownIndicator;
     public Text enemiesLeftText;
-
     public LevelInfoScriptableObject levelInfo;
-
     public Button skipWaveCountdownButton;
-    // boolean to set the button visible
+
     private bool isSkipWaveCountdownButtonVisible;
-
-    // decrease with time, countdown for new wave
-    private float countdownTimer = 3f;
-
+    private float countdownTimer = 3f; // decrease with time, countdown for new wave
     private int waveIndex = 0;
 
-    void Start()
-    {
+    void Start() {
         numEnemiesAlive = 0;
         numEnemiesLeftInWave = 0;
         isSpawningEnemy = false;
         countdownTimer = timeBetweenWaves;
+        wavesCounter = 0;
 
         isSkipWaveCountdownButtonVisible = true;
         skipWaveCountdownButton.onClick.AddListener(buttonOnClick);
@@ -46,49 +36,40 @@ public class WaveSpawner : MonoBehaviour
         if (levelInfo != null) waves = levelInfo.waves;
     }
 
-    void buttonOnClick()
-    {
+    void buttonOnClick() {
         isSkipWaveCountdownButtonVisible = false;
 
-        // reset timer 
-        countdownTimer = 0f;
+        countdownTimer = 0f; // reset timer 
         UpdateTimerIndicator(countdownTimer);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         skipWaveCountdownButton.gameObject.SetActive(isSkipWaveCountdownButtonVisible);
         enemiesLeftText.text = string.Format("{0}", numEnemiesLeftInWave);
+        wavesCounterUI.text = "Wave " + string.Format("{0}", wavesCounter);
 
-        // stops when first time seeing tutorial
-        if (!PlayerPrefs.HasKey(OnScreenTutorialUI.OnScreenTutorialPref) 
-            || PlayerPrefs.GetInt(OnScreenTutorialUI.OnScreenTutorialPref) != 1)
-        {
+        // Pause if player is viewing tutorial
+        if (!PlayerPrefs.HasKey(OnScreenTutorialUI.OnScreenTutorialPref)
+            || PlayerPrefs.GetInt(OnScreenTutorialUI.OnScreenTutorialPref) != 1) {
             isSkipWaveCountdownButtonVisible = false;
             return;
         }
 
-        if (numEnemiesAlive > 0 || isSpawningEnemy)
-        {
+        if (numEnemiesAlive > 0 || isSpawningEnemy) {
             isSkipWaveCountdownButtonVisible = false;
             return;
         }
 
-        // win the game
-        if (waveIndex == waves.Length)
-        {
-            GetComponent<GameManager>().WinGame();
 
-            // disable this script
+        if (waveIndex == waves.Length) {
+            GetComponent<GameStateManager>().WinGame();
             this.enabled = false;
         }
 
-        if (countdownTimer <= 0f)
-        {
+        if (countdownTimer <= 0f) {
             isSpawningEnemy = true;
             SpawnWave();
-            countdownTimer = timeBetweenWaves;         
+            countdownTimer = timeBetweenWaves;
             return;
         }
         isSkipWaveCountdownButtonVisible = true;
@@ -97,20 +78,16 @@ public class WaveSpawner : MonoBehaviour
         countdownTimer = Mathf.Clamp(countdownTimer, 0f, Mathf.Infinity);
 
         UpdateTimerIndicator(countdownTimer);
-        
+
     }
 
-    void UpdateTimerIndicator(float time)
-    {
+    void UpdateTimerIndicator(float time) {
         waveCountdownIndicator.rawValue = (int)(time * 100);
         waveCountdownIndicator.maxValue = (int)(timeBetweenWaves * 100);
     }
 
-    // can pause the func execution
-    void SpawnWave()
-    {
-        //keep track of how many rounds survive
-        GameManager.rounds++;
+    void SpawnWave() {
+        wavesCounter++;
 
         Wave waveToSpawn = waves[waveIndex];
 
@@ -120,14 +97,12 @@ public class WaveSpawner : MonoBehaviour
         waveIndex++;
     }
 
-    public void SpawnEnemy(GameObject _enemy)
-    {
+    public void SpawnEnemy(GameObject _enemy) {
         Instantiate(_enemy, spawnPoint.position, spawnPoint.rotation);
         numEnemiesAlive++;
     }
 
-    public void SetNumEnemiesForTheWave(int num)
-    {
+    public void SetNumEnemiesForTheWave(int num) {
         numEnemiesLeftInWave = num;
     }
 
