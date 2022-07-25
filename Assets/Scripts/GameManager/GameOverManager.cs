@@ -7,7 +7,7 @@ public class GameOverManager : MonoBehaviour {
     public Text wavesText;
     public GameObject raycastOccluder;
 
-    // when GameStateManager enable this
+    // Enabled when game is running
     void OnEnable() {
         wavesText.text = WaveSpawner.wavesCounter.ToString();
 
