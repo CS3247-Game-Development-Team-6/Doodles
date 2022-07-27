@@ -14,7 +14,7 @@ public class NodeButtonInfo {
     public void Setup(GameObject button) {
         this.button = button;
         this.image = button.GetComponent<Image>();
-        // this.tooltip = button.GetComponent<NodeUITooltipTrigger>();
+        this.tooltip = button.GetComponent<NodeUITooltipTrigger>();
     }
 }
 
@@ -84,18 +84,23 @@ public class NodeUI : MonoBehaviour
 
         if (selectedNode.HasTower()) {
             upgrade.image.sprite = selectedNode.isUpgraded ? upgrade.disabledSprite : upgrade.defaultSprite;
+            upgrade.tooltip.isNotAvailable = selectedNode.isUpgraded;
+            upgrade.tooltip.SetTowerInfo(selectedNode.tower.towerInfo, selectedNode.tower.nextUpgrade);
+            TowerInfo currTower = selectedNode.tower.towerInfo;
 
             if (!selectedNode.tower.element) {
                 foreach (var pair in elementButtonInfos) {
                     NodeButtonInfo button = pair.Value;
                     button.image.sprite = button.defaultSprite;
+                    button.tooltip.SetTowerInfo(selectedNode.tower.towerInfo, selectedNode.tower.nextElement[pair.Key]);
+                    button.tooltip.isNotAvailable = false;
                 }
             } else {
                 ElementType element = selectedNode.tower.element.type;
                 foreach (var pair in elementButtonInfos) {
                     NodeButtonInfo button = pair.Value;
-                    Debug.Log(button);
                     button.image.sprite = pair.Key == element ? button.activeSprite : button.disabledSprite;
+                    button.tooltip.isNotAvailable = true;
                 }
             }
             ui.SetActive(true);

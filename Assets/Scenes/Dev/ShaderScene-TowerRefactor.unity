@@ -1111,7 +1111,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 144.65}
+  m_SizeDelta: {x: 400, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &469539737
 MonoBehaviour:
@@ -1266,7 +1266,6 @@ GameObject:
   m_Component:
   - component: {fileID: 557443435}
   - component: {fileID: 557443434}
-  - component: {fileID: 557443433}
   m_Layer: 0
   m_Name: UI Camera
   m_TagString: Untagged
@@ -1274,14 +1273,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &557443433
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557443432}
-  m_Enabled: 1
 --- !u!20 &557443434
 Camera:
   m_ObjectHideFlags: 0
@@ -2195,7 +2186,11 @@ PrefabInstance:
       objectReference: {fileID: 557443434}
     - target: {fileID: 7523575735797191674, guid: 36480db7dca0a4fbf9a4e69f3a870040, type: 3}
       propertyPath: m_RenderMode
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523575735797191674, guid: 36480db7dca0a4fbf9a4e69f3a870040, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7523575736757427108, guid: 36480db7dca0a4fbf9a4e69f3a870040, type: 3}
       propertyPath: secondsToFadeIn

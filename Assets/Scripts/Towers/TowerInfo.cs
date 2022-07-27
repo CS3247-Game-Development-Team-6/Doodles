@@ -11,6 +11,7 @@ public class TowerInfo : ScriptableObject {
 
     public const int MAX_RANGE = 15;
     public const int MAX_UPGRADES = 1;
+    public const float DMG_MULTIIPLIER = 1.2f;
 
     [Header("Stats")]
     public string towerName;
@@ -49,5 +50,23 @@ public class TowerInfo : ScriptableObject {
     public TowerInfo nextUpgrade;
     /** Links to the info of the elemental versions. */
     public ElementKeyValue[] nextElements;
+
+    /** DEV ONLY: Autofills upgrade with details based on this towerInfo. 
+     * NEVER use in production code, only use to quickly autoset details in the Upgrade TowerInfos.
+     * DOES NOT set towerName or any of the prefabs or linking upgrades.
+     */
+    public void AutoFillUpgradeInfo() {
+        if (!this.nextUpgrade) return;
+
+        this.nextUpgrade.upgradeNum = this.upgradeNum + 1;
+        this.nextUpgrade.damage = Mathf.FloorToInt((float)this.damage * DMG_MULTIIPLIER);
+
+        this.nextUpgrade.element = this.element;
+        this.nextUpgrade.speed = this.speed;
+        this.nextUpgrade.explosionRadius = this.explosionRadius;
+        this.nextUpgrade.range = this.range;
+        this.nextUpgrade.fireRate = this.fireRate;
+        this.nextUpgrade.penetratesEnemy = this.penetratesEnemy;
+    } 
 
 }

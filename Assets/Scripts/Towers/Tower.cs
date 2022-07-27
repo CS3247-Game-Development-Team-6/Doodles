@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : MonoBehaviour {
@@ -6,17 +7,17 @@ public class Tower : MonoBehaviour {
     public const string ROTATION_BASE_NAME = "RotationBase";
     public const string FIRE_POINT_NAME = "FirePoint";
 
-    protected TowerInfo towerInfo;
     protected string towerName;
     protected float range;
     protected float fireRate;
     protected int cost;
     protected int versionNum;
-    // Temporarily public for NodeUI, but eventually to replace with element in NodeUI
-    public GameObject bulletPrefab { get; private set; }
+    protected GameObject bulletPrefab;
     public ElementInfo element { get; private set; }
+    public TowerInfo towerInfo { get; protected set; }
     public TowerInfo nextUpgrade { get; private set; }
     public ElementKeyValue[] nextElements { get; private set; }
+    public Dictionary<ElementType, TowerInfo> nextElement { get; private set; }
 
     /** Set tower info from Node. */
     public virtual void SetTowerInfo(TowerInfo towerInfo) {
@@ -29,7 +30,10 @@ public class Tower : MonoBehaviour {
         this.element = towerInfo.element;
         this.bulletPrefab = towerInfo.bulletPrefab;
         this.nextUpgrade = towerInfo.nextUpgrade;
-        this.nextElements = towerInfo.nextElements;
+        this.nextElement = new Dictionary<ElementType, TowerInfo>(3);
+        foreach (ElementKeyValue pair in towerInfo.nextElements) {
+            this.nextElement.Add(pair.element, pair.tower);
+        }
     }
 
     /** Instantiates and fires bullets. */

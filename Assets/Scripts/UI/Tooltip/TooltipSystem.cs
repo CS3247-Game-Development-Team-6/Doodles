@@ -1,12 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class TooltipSystem : MonoBehaviour
-{
+public class TooltipSystem : MonoBehaviour {
     public static TooltipSystem instance { get; private set; }
 
     public Tooltip tooltip;

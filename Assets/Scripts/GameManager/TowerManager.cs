@@ -77,6 +77,21 @@ public class TowerManager : MonoBehaviour {
     public void ReplaceElementTower(ElementInfo element) {
         Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
         InkManager inkManager = InkManager.instance;
+        TowerInfo elementTower = selectedTower.nextElement[element.type];
+        if (!elementTower) {
+            Debug.LogError("Element Tower not found");
+            return;
+        }
+
+        if (!inkManager.hasEnoughInk(elementTower.cost)) {
+            TriggerInsufficientInk();
+        } else if (selectedNode.ReplaceTower(elementTower)) {
+            inkManager.ChangeInkAmount(-elementTower.cost);
+        } else {
+            Debug.LogError("Tower not built at Node " + selectedNode);
+        }
+
+        /*
         foreach (var pair in selectedTower.nextElements) {
             if (pair.element == element.type) {
                 Debug.Log(pair.element + " " + pair.tower.towerName);
@@ -90,6 +105,7 @@ public class TowerManager : MonoBehaviour {
                 break;
             }
         }
+        */
         DeselectNode();
     }
 
