@@ -1,46 +1,55 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+[System.Serializable]
+public class NodeButtonInfo {
+    public GameObject button { get; private set; }
+    public Image image { get; private set; }
+    public NodeUITooltipTrigger tooltip { get; private set; }
+    public Sprite defaultSprite;
+    public Sprite activeSprite;
+    public Sprite disabledSprite;
+
+    public void Setup(GameObject button) {
+        this.button = button;
+        this.image = button.GetComponent<Image>();
+        // this.tooltip = button.GetComponent<NodeUITooltipTrigger>();
+    }
+}
 
 public class NodeUI : MonoBehaviour
 {
     public GameObject ui;
-    public Node selectedNode;
     public GameObject playerGO;
+    private Node selectedNode;
 
     public float zOffsetMultiplier;
     public float xOffsetMultiplier;
     public float xOffsetUpperShift;
     private float xOffset;
     private float zOffset;
-    public Sprite fireDefault;
-    public Sprite fireActive;
-    public Sprite iceDefault;
-    public Sprite iceActive;
-    public Sprite waterDefault;
-    public Sprite waterActive;
-    public Sprite towerRadius;
-    public Sprite missleRadius;
-    public Sprite iceDisable;
-    public Sprite waterDisable;
-    public Sprite fireDisable;
-    public Sprite upgradeDisable;
-    public Sprite upgradeDefault;
 
-    private GameObject upgradeButton;
-    private GameObject destroyButton;
-    private GameObject fireButton;
-    private GameObject iceButton;
-    private GameObject waterButton;
+    public NodeButtonInfo fire;
+    public NodeButtonInfo ice;
+    public NodeButtonInfo water;
+    public NodeButtonInfo upgrade;
+    public NodeButtonInfo destroy;
+    private Dictionary<ElementType, NodeButtonInfo> elementButtonInfos;
 
     private void Start() {
         Transform canvas = transform.Find("Canvas");
         Transform othersGroup = canvas.Find("Buttons");
         Transform elementsGroup = canvas.Find("Elements");
-        this.upgradeButton = othersGroup.Find("Upgrade").gameObject;
-        this.destroyButton = othersGroup.Find("Destroy").gameObject;
-        this.fireButton = elementsGroup.Find("Fire").gameObject;
-        this.iceButton = elementsGroup.Find("Ice").gameObject;
-        this.waterButton = elementsGroup.Find("Water").gameObject;
+        this.upgrade.Setup(othersGroup.Find("Upgrade").gameObject);
+        this.destroy.Setup(othersGroup.Find("Destroy").gameObject);
+        this.fire.Setup(elementsGroup.Find("Fire").gameObject);
+        this.ice.Setup(elementsGroup.Find("Ice").gameObject);
+        this.water.Setup(elementsGroup.Find("Water").gameObject);
+        elementButtonInfos = new Dictionary<ElementType, NodeButtonInfo>(3);
+        elementButtonInfos.Add(ElementType.FIRE, this.fire);
+        elementButtonInfos.Add(ElementType.ICE, this.ice);
+        elementButtonInfos.Add(ElementType.WATER, this.water);
     }
 
     private void FixedUpdate() {
@@ -48,16 +57,6 @@ public class NodeUI : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && ui.activeSelf) {
             ui.SetActive (false);
         }
-    }
-
-    private Image GetButtonImage(GameObject buttonObj) {
-        Button button = buttonObj.GetComponent<Button>();
-        if (!button) return null;
-        return button.GetComponent<Image>();
-    }
-
-    private NodeUITooltipTrigger GetTooltip(GameObject buttonObj) {
-        return buttonObj.GetComponent<NodeUITooltipTrigger>();
     }
 
     public void SetTarget(Node target)
@@ -81,38 +80,25 @@ public class NodeUI : MonoBehaviour
             xOffset += xOffset < 0 ? (-1 * xOffsetUpperShift) : xOffsetUpperShift;
         }
 
-        transform.position = selectedNode.GetTowerBuildPosition() + new Vector3(xOffset, 0, zOffset);
+        transform.position = selectedNode.towerBuildPosition + new Vector3(xOffset, 0, zOffset);
 
-        if (selectedNode.GetIsTowerBuilt()) {
-            ui.SetActive(true);
-            Image fireImage = GetButtonImage(fireButton);
-            Image iceImage = GetButtonImage(iceButton);
-            Image waterImage = GetButtonImage(waterButton);
-            Image upgradeImage = GetButtonImage(upgradeButton);
-            NodeUITooltipTrigger fireTooltip = GetTooltip(fireButton);
-
-            upgradeImage.sprite = selectedNode.GetIsUpgraded() ? upgradeDisable : upgradeDefault;
+        if (selectedNode.HasTower()) {
+            upgrade.image.sprite = selectedNode.isUpgraded ? upgrade.disabledSprite : upgrade.defaultSprite;
 
             if (!selectedNode.tower.element) {
-                fireImage.sprite = fireDefault;
-                iceImage.sprite = iceDefault;
-                waterImage.sprite = waterDefault;
+                foreach (var pair in elementButtonInfos) {
+                    NodeButtonInfo button = pair.Value;
+                    button.image.sprite = button.defaultSprite;
+                }
             } else {
                 ElementType element = selectedNode.tower.element.type;
-                if (element == ElementType.FIRE) {
-                    fireImage.sprite = fireActive;
-                    iceImage.sprite = iceDisable;
-                    waterImage.sprite = waterDisable;
-                } else if (element == ElementType.WATER) {
-                    fireImage.sprite = fireDisable;
-                    iceImage.sprite = iceDisable;
-                    waterImage.sprite = waterActive;
-                } else if (element == ElementType.ICE) {
-                    fireImage.sprite = fireDisable;
-                    iceImage.sprite = iceActive;
-                    waterImage.sprite = waterDisable;
+                foreach (var pair in elementButtonInfos) {
+                    NodeButtonInfo button = pair.Value;
+                    Debug.Log(button);
+                    button.image.sprite = pair.Key == element ? button.activeSprite : button.disabledSprite;
                 }
             }
+            ui.SetActive(true);
         }
     }
 

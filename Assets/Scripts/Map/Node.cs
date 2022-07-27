@@ -15,8 +15,7 @@ public class Node : MonoBehaviour
     private Color startColor;
     public Color tooFarColor;
 
-    private bool isAddedElement = false;
-    private bool isUpgraded = false;
+    public bool isUpgraded { get; set; }
     public GameObject towerObj;
     public Tower tower { get; private set; }
     public Cell cell;
@@ -30,7 +29,7 @@ public class Node : MonoBehaviour
     public GameObject defaultTile;
     public TileType[] tileTypes;
 
-    private Vector3 towerBuildPosition;
+    public Vector3 towerBuildPosition { get; private set; }
     private PlayerMovement playerMovement;
     private GameObject playerObject;
 
@@ -58,36 +57,13 @@ public class Node : MonoBehaviour
         playerObject = GameObject.Find("Player");
         playerMovement = playerObject.GetComponent<PlayerMovement>();
     }
-    public void DestroyTower()
-    {
+
+    public void DestroyTower() {
         Destroy(this.towerObj);
         tower = null;
         towerObj = null;
     }
-    public bool GetIsTowerBuilt()
-    {
-        return tower != null;
-    }
 
-    public bool GetIsAddedElement()
-    {
-        return isAddedElement;
-    }
-
-    public void SetIsAddedElement(bool b)
-    {
-        isAddedElement = b;
-    }
-
-    public bool GetIsUpgraded()
-    {
-        return isUpgraded;
-    }
-
-    public void SetIsUpgraded(bool b)
-    { 
-        isUpgraded = b;
-    }
 
     public bool HasTower() {
         return towerObj != null;
@@ -96,7 +72,6 @@ public class Node : MonoBehaviour
     public void ToggleObjectView(bool visible) {
         decorationMesh.SetActive(visible);
     }
-
 
     /** Removes decorations and creates new tower based on the towerInfo.  */
     public Tower BuildTower(TowerInfo towerInfo) {
@@ -121,11 +96,7 @@ public class Node : MonoBehaviour
         return towerObj.GetComponent<Tower>();
     }
 
-    public Vector3 GetTowerBuildPosition()
-    {
-        return towerBuildPosition;
-    }
-
+    // NOTE; Should change to use the same raycasting procedure as per MapInput.cs
     private void OnMouseOver() {
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;
@@ -137,7 +108,7 @@ public class Node : MonoBehaviour
             tileRenderer.material.color = hoverColor;
         }
 
-        if (GetIsTowerBuilt()) {
+        if (HasTower()) {
             towerObj.gameObject.GetComponent<Outline>().enabled = true;
             towerObj.gameObject.GetComponent<Outline>().OutlineColor =
                 (transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()
@@ -156,7 +127,7 @@ public class Node : MonoBehaviour
     private void OnMouseExit() {
         tileRenderer.material.color = startColor;
         
-        if (GetIsTowerBuilt()) {
+        if (HasTower()) {
             towerObj.gameObject.GetComponent<Outline>().enabled = false;
         } else if (decorationMesh != null) {
             decorationMesh.gameObject.GetComponent<Outline>().enabled = false;
