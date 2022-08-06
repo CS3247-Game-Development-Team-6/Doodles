@@ -11,7 +11,7 @@ public class WaveSpawner : MonoBehaviour {
     public static int numEnemiesLeftInWave;
     public static bool isSpawningEnemy;
 
-    public Wave[] waves;
+    public WaveManager[] waves;
     public Transform spawnPoint;
     public float timeBetweenWaves = 5f;
     public IndicatorUI waveCountdownIndicator;
@@ -89,7 +89,7 @@ public class WaveSpawner : MonoBehaviour {
     void SpawnWave() {
         wavesCounter++;
 
-        Wave waveToSpawn = waves[waveIndex];
+        WaveManager waveToSpawn = waves[waveIndex];
 
         numEnemiesLeftInWave = waveToSpawn.getTotalEnemy();
         StartCoroutine(waveToSpawn.StartWave(this));
