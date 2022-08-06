@@ -3,13 +3,12 @@ using System.Collections; // IEnumerator
 
 
 [System.Serializable]
-public class Wave 
-{
+public class Wave {
+
     public GameObject enemy;
     public int count;
     public float rate;
 
-    // optional
     public GameObject enemy2;
     public int count2;
     public float rate2;
@@ -20,15 +19,13 @@ public class Wave
 
     public readonly int maxEnemyVariant = 3;
 
-    public bool isEnemySpawnable(GameObject enemy, int count, float rate)
-    {
+    public bool isEnemySpawnable(GameObject enemy, int count, float rate) {
         bool isValidEnemy = enemy != null;
         bool isValidCount = count > 0;
         bool isValidRate = rate > 0;
         return isValidEnemy && isValidCount && isValidRate;
     }
-    public int getTotalEnemy()
-    {
+    public int getTotalEnemy() {
         GameObject _enemy = null;
         int _count = 0;
         float _rate = 0;
@@ -36,10 +33,8 @@ public class Wave
         int res = 0;
 
         // loop every enemy type in this wave
-        for (int i = 0; i < maxEnemyVariant; i++)
-        {
-            switch (i)
-            {
+        for (int i = 0; i < maxEnemyVariant; i++) {
+            switch (i) {
                 case 0:
                     _enemy = enemy;
                     _count = count;
@@ -61,8 +56,7 @@ public class Wave
 
             }
 
-            if (isEnemySpawnable(_enemy, _count, _rate))
-            {
+            if (isEnemySpawnable(_enemy, _count, _rate)) {
                 res += _count;
             }
 
@@ -71,17 +65,14 @@ public class Wave
         return res;
     }
 
-    public IEnumerator StartWave(WaveSpawner waveSpawner)
-    {
+    public IEnumerator StartWave(WaveSpawner waveSpawner) {
         GameObject _enemy = null;
         int _count = 0;
         float _rate = 0;
 
         // loop every enemy type in this wave
-        for (int i = 0; i < maxEnemyVariant; i++)
-        {          
-            switch (i)
-            {
+        for (int i = 0; i < maxEnemyVariant; i++) {
+            switch (i) {
                 case 0:
                     _enemy = enemy;
                     _count = count;
@@ -103,10 +94,8 @@ public class Wave
 
             }
 
-            if (isEnemySpawnable(_enemy, _count, _rate))
-            {
-                for (int j = 0; j < _count; j++)
-                {
+            if (isEnemySpawnable(_enemy, _count, _rate)) {
+                for (int j = 0; j < _count; j++) {
                     waveSpawner.SpawnEnemy(_enemy);
                     yield return new WaitForSeconds(1f / _rate);
                 }
@@ -115,7 +104,7 @@ public class Wave
         }
 
         WaveSpawner.isSpawningEnemy = false;
-    }  
+    }
 
 
 }
