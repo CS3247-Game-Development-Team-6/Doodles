@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
+  m_Name: 0_SpikeyBase
+  m_EditorClassIdentifier: 
+  towerName: Spikey
+  range: 1.5
+  upgradeNum: 0
+  fireRate: 1
+  element: {fileID: 0}
+  cost: 100
+  speed: 0
+  explosionRadius: 0
+  damage: 30
+  penetratesEnemy: 0
+  impactPrefab: {fileID: 0}
+  towerPrefab: {fileID: 5135174605016635187, guid: 8d54b48565db13a498020bc19bfe7ff9, type: 3}
+  bulletPrefab: {fileID: 8038529814659282312, guid: e64bdd063911640198cf23f86bb72e00, type: 3}
+  nextUpgrade: {fileID: 11400000, guid: d62bf7acdddde7149bb8379548c22659, type: 2}
+  nextElements:
+  - element: 0
+    tower: {fileID: 11400000, guid: a4e2ec99a995c2442a2261c5eed2eacf, type: 2}
+  - element: 1
+    tower: {fileID: 11400000, guid: dddd41dea25f3b24195fb6cd29712ee7, type: 2}
+  - element: 2
+    tower: {fileID: 11400000, guid: c0b8e97a8e50911418c939a2f9ad2237, type: 2}

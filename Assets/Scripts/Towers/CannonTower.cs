@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CannonTower : Tower {
 
-    private float rotationSpeed;
+    private float rotationSpeed = 5f;
     private Transform rotationBase;
     private Transform firePoint;
     private float fireCountdown = 0f;
@@ -12,15 +10,17 @@ public class CannonTower : Tower {
 
     private const bool PENETRATE_TARGET = false;
 
-    public CannonTower(TowerInfo towerInfo) : base(towerInfo) {
-        // GetComponentInChildren<Base>
-        // use GetComponent to find base, firepoint
+    public override void SetTowerInfo(TowerInfo towerInfo) {
+        base.SetTowerInfo(towerInfo);
+        rotationBase = transform.Find(Tower.ROTATION_BASE_NAME);
+        firePoint = rotationBase.Find(Tower.FIRE_POINT_NAME);
     }
 
     void Start() {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
+    /** Checks every second for the closest enemy in range. */
     void UpdateTarget() {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
 
@@ -45,6 +45,7 @@ public class CannonTower : Tower {
     public override void Shoot() {
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
+        bullet.SetBulletInfo(towerInfo);
         
         if (bullet != null) {
             bullet.Seek(target, PENETRATE_TARGET);
@@ -53,6 +54,7 @@ public class CannonTower : Tower {
 
     void Update() {
         if (!target) return;
+
         
         // Enemy target lock on 
         Vector3 dir = target.position - transform.position;

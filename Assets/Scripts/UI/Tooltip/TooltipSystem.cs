@@ -1,33 +1,24 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class TooltipSystem : MonoBehaviour
-{
-    private static TooltipSystem _current;
+public class TooltipSystem : MonoBehaviour {
+    public static TooltipSystem instance { get; private set; }
 
     public Tooltip tooltip;
     
 
-    private void Awake()
-    {
-        _current = this;
-        _current.tooltip.gameObject.SetActive(true); // added this line to hide the default tooltip from the Editor
-        _current.tooltip.SetVisibility(false);
+    private void Awake() {
+        instance = this;
+        instance.tooltip.gameObject.SetActive(true); // added this line to hide the default tooltip from the Editor
+        instance.tooltip.SetVisibility(false);
     }
 
-    public static void Show(string content, string header="")
-    {
-        _current.tooltip.SetText(content, header);
-        _current.tooltip.SetVisibility(true);
+    public static void Show(string content, string header="") {
+        instance.tooltip.SetText(content, header);
+        instance.tooltip.SetVisibility(true);
     }
 
-    public static void Hide()
-    {
-        _current.tooltip.SetVisibility(false);
+    public static void Hide() {
+        instance.tooltip.SetVisibility(false);
     }
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// DEPRECATED: DO not use
 public class ShopItemUI : MonoBehaviour
 {
     public Button button;
@@ -24,7 +25,7 @@ public class ShopItemUI : MonoBehaviour
             return;
         }
 
-        shop.SetTowerAttempt(this);
+        // shop.SetTowerAttempt(this);
 
     }
 }
