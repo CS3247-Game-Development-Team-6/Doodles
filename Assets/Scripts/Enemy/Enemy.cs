@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private GameObject deathEffect;
 
+    private InkManager inkManager;
+
     // Flags for status effects
 
     private bool isScorched = false;
@@ -57,6 +59,10 @@ public class Enemy : MonoBehaviour
     public GameObject model;
     public Animator animator;
     public Canvas canvas;
+
+    private void Awake() {
+        inkManager = InkManager.instance;
+    }
 
     public void TakeDamage(float amount)
     {
@@ -178,8 +184,7 @@ public class Enemy : MonoBehaviour
     void Die ()
     {
         // add ink
-        Player playerScript = GameObject.Find("Player").GetComponent<Player>();
-        playerScript.ChangeInkAmount(inkGained);
+        inkManager.ChangeInkAmount(inkGained);
 
         // for new wave
         WaveSpawner.numEnemiesAlive--;

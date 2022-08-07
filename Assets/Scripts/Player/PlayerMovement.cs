@@ -12,10 +12,10 @@ public class PlayerMovement : MonoBehaviour {
     */
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask tileAndFogLayerMask;
-    [SerializeField] private Player player;
+    private TowerManager towerManager;
+    private InkManager inkManager;
     private IndicatorUI buildIndicator;
     public GameObject playerGO;
-    public GameObject insufficientInkEffect;
     
 
     // states
@@ -74,6 +74,9 @@ public class PlayerMovement : MonoBehaviour {
         // animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody>();
 
+        inkManager = InkManager.instance;
+        towerManager = TowerManager.instance;
+
         // initialize action timer text
         actionTimer = GameObject.Find("ActionTimer").GetComponent<TMP_Text>();
         actionTimer.text = "";
@@ -94,8 +97,7 @@ public class PlayerMovement : MonoBehaviour {
 
         buildIndicator = GetComponent<IndicatorUI>();
 
-        if (buildIndicator)
-        {
+        if (buildIndicator) {
             // set maxValue of buildIndicator slider
             buildIndicator.maxValue = (int)Mathf.Round(buildDuration * 1000);
             buildIndicator.rawValue = 0;
@@ -300,22 +302,21 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
 
+        Node node = currentTowerCell.GetComponent<Node>();
         // HasTower() opens NodeUI if there is a tower.
-        if (currentTowerCell.GetComponent<Node>().HasTower()) {
+        if (node.HasTower()) {
             // tower cell already has a tower
-            currentTowerCell.GetComponent<Node>().OpenTowerUpgrades();
+            towerManager.SelectNode(node);
             return;
         }
 
         if (isBuilding) { 
-            // player already building a tower
             return;
         }
 
         // Ink cost
-        if (!player.hasEnoughInk(currentTowerCell.GetComponent<Node>().TowerCost())) {
-            // player has not enough ink
-            Instantiate(insufficientInkEffect, playerGO.transform.position, Quaternion.identity);
+        if (!inkManager.hasEnoughInk(towerManager.GetTowerCost())) {
+            towerManager.TriggerInsufficientInk();
             return;
         }
 
@@ -325,7 +326,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Build() {
-        if (!isBuilding) { // player not building anything
+        if (!isBuilding) {
             return;
         }
 
@@ -339,10 +340,7 @@ public class PlayerMovement : MonoBehaviour {
         if (currentBuildDuration <= 0) {
             actionTimer.text = ""; // stop displaying timer
             buildIndicator.rawValue = 0;
-            Turret turret = currentTowerCell.GetComponent<Node>().BuildTower();
-            if (turret != null) {
-                player.ChangeInkAmount(-turret.Cost);
-            }
+            towerManager.BuildTower(currentTowerCell.GetComponent<Node>());
             isBuilding = false;
         }
     }

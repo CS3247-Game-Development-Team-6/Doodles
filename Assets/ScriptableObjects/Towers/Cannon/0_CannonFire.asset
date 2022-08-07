@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
+  m_Name: 0_CannonFire
+  m_EditorClassIdentifier: 
+  towerName: Fire Cannon
+  range: 4
+  upgradeNum: 0
+  fireRate: 1
+  element: {fileID: 11400000, guid: 5503097e096315346a110e0488d9c960, type: 2}
+  cost: 25
+  speed: 40
+  explosionRadius: 0
+  damage: 30
+  penetratesEnemy: 0
+  impactPrefab: {fileID: 4586470546859298135, guid: 024f097d68bf33d44ba2726d968af48c, type: 3}
+  towerPrefab: {fileID: 5135174605016635187, guid: dd463cf298e54874982275f8ab62276e, type: 3}
+  bulletPrefab: {fileID: 1315704262782356680, guid: 5f6ecc1421dc70c4bb5c03a659ac2260, type: 3}
+  nextUpgrade: {fileID: 11400000, guid: 0fb3a3505ee03f24986cfd24e342ba40, type: 2}
+  nextElements: []

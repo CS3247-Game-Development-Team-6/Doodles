@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17653eb85ce4825449fd32535f8cb8ef, type: 3}
+  m_Name: DefDecreEffect
+  m_EditorClassIdentifier: 
+  Name: Weakened [DEF down]
+  DOTAmount: 0
+  TickSpeed: 1
+  SlowAmount: 0
+  AtkDecreAmount: 0
+  DefDecreAmount: 10
+  Lifetime: 5
+  Element: Combined
+  EffectParticles: {fileID: 100000, guid: f5bb55a5470a8c24d9c76cf8490594b3, type: 3}
