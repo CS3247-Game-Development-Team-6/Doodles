@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -11,7 +9,16 @@ public class Bullet : MonoBehaviour
     public GameObject impactEffect;
     [SerializeField] private int bulletDamage;
     [SerializeField] private ElementEffectInfo _data;
-    private bool isPassingThroughBullet = false;
+    private bool isPassingThroughBullet;
+
+    public void SetBulletInfo(TowerInfo towerInfo) {
+        this.speed = towerInfo.speed;
+        this.explosionRadius = towerInfo.explosionRadius;
+        this.bulletDamage = towerInfo.damage;
+        this._data = !towerInfo.element ? null : towerInfo.element.effect;
+        this.impactEffect = towerInfo.impactPrefab;
+        this.isPassingThroughBullet = towerInfo.penetratesEnemy;
+    }
 
     public int GetBulletDamage() {
         return bulletDamage;
@@ -48,33 +55,32 @@ public class Bullet : MonoBehaviour
         transform.LookAt(target);
     }
 
-    void HitTarget(bool toDestroyThisFrame=true, Collider hitEnemy=null) 
-    {
-        GameObject impactEffectParticle = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(impactEffectParticle, 5f);
+    void HitTarget(bool toDestroyThisFrame=true, Collider hitEnemy=null) {
+        if (impactEffect) {
+            GameObject impactEffectParticle = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
+            Destroy(impactEffectParticle, 5f);
+        }
 
-        if (explosionRadius > 0f)
-        {
+        if (explosionRadius > 0f) {
             Explode();
         }
 
-        if (target != null && target.CompareTag("Enemy"))
-        {
+        if (target != null && target.CompareTag("Enemy")) {
             var effectable = target.GetComponent<IEffectable>();
             if (effectable != null) effectable.ApplyEffect(_data);
 
             target.GetComponent<Enemy>().TakeDamage(bulletDamage);
         }
 
-        if (hitEnemy)
-        {
+        if (hitEnemy) {
             var effectable = hitEnemy.gameObject.GetComponent<IEffectable>();
             if (effectable != null) effectable.ApplyEffect(_data);
             hitEnemy.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage);
         }
 
-        if (toDestroyThisFrame) 
+        if (toDestroyThisFrame) {
             Destroy(gameObject);    // destroys the bullet
+        }
     }
 
     void Explode()

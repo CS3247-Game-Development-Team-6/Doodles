@@ -1,9 +1,10 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class TowerManager : MonoBehaviour {
     public static TowerManager instance { get; private set; }
-    private InkManager inkManager;
+    [SerializeField] private ParticleSystem insufficientInkEffect;
+    [SerializeField] private GameObject playerObj;
     private TowerInfo towerToBuild;
     private Node selectedNode;
     private TMP_Text actionTimer;
@@ -19,7 +20,6 @@ public class TowerManager : MonoBehaviour {
         // initialize action timer text
         actionTimer = GameObject.Find("ActionTimer").GetComponent<TMP_Text>();
         actionTimer.text = "";
-        inkManager = InkManager.instance;
         nodeUI = GameObject.FindObjectOfType<NodeUI>().GetComponent<NodeUI>();
     }
 
@@ -34,7 +34,7 @@ public class TowerManager : MonoBehaviour {
     }
 
     /** TODO: Fill in for Tooltip system */
-    public void DeselectNode() { 
+    public void DeselectNode() {
         selectedNode = null;
         nodeUI.Hide();
     }
@@ -51,7 +51,7 @@ public class TowerManager : MonoBehaviour {
     }
 
     /** For building on a new tile on selected node. */
-     public void BuildTower(Node node) {
+    public void BuildTower(Node node) {
         if (!towerToBuild) {
             Debug.LogError("No tower type selected");
             return;
@@ -59,10 +59,12 @@ public class TowerManager : MonoBehaviour {
             Debug.LogError("No tower prefab present");
             return;
         }
-        int cost = towerToBuild.cost;
 
-        Tower tower = node.BuildTower(towerToBuild);
-        if (tower != null) {
+        int cost = towerToBuild.cost;
+        InkManager inkManager = InkManager.instance;
+        if (!inkManager.hasEnoughInk(cost)) {
+            TriggerInsufficientInk();
+        } else if (node.BuildTower(towerToBuild)) {
             inkManager.ChangeInkAmount(-cost);
         } else {
             Debug.LogError("Tower not built by Node " + node);
@@ -74,9 +76,28 @@ public class TowerManager : MonoBehaviour {
     /** For element changes on selected node. */
     public void ReplaceElementTower(ElementInfo element) {
         Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
+        InkManager inkManager = InkManager.instance;
+        TowerInfo elementTower = selectedTower.nextElement[element.type];
+        if (!elementTower) {
+            Debug.LogError("Element Tower not found");
+            return;
+        }
+
+        if (!inkManager.hasEnoughInk(elementTower.cost)) {
+            TriggerInsufficientInk();
+        } else if (selectedNode.ReplaceTower(elementTower)) {
+            inkManager.ChangeInkAmount(-elementTower.cost);
+        } else {
+            Debug.LogError("Tower not built at Node " + selectedNode);
+        }
+
+        /*
         foreach (var pair in selectedTower.nextElements) {
             if (pair.element == element.type) {
-                if (selectedNode.ReplaceTower(pair.tower)) {
+                Debug.Log(pair.element + " " + pair.tower.towerName);
+                if (!inkManager.hasEnoughInk(pair.tower.cost)) {
+                    TriggerInsufficientInk();
+                } else if (selectedNode.ReplaceTower(pair.tower)) {
                     inkManager.ChangeInkAmount(-pair.tower.cost);
                 } else {
                     Debug.LogError("Tower not built at Node " + selectedNode);
@@ -84,20 +105,28 @@ public class TowerManager : MonoBehaviour {
                 break;
             }
         }
+        */
         DeselectNode();
     }
 
     /** For upgrades on selected node. */
     public void UpgradeTower() {
         Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
-        if (selectedNode.ReplaceTower(selectedTower.nextUpgrade)) {
+        InkManager inkManager = InkManager.instance;
+        if (!selectedTower.nextUpgrade) {
+            Debug.LogError("No more upgrades for Node" + selectedNode);
+            return;
+        } else if (!inkManager.hasEnoughInk(selectedTower.nextUpgrade.cost)) {
+            TriggerInsufficientInk();
+        } else if (selectedNode.ReplaceTower(selectedTower.nextUpgrade)) {
             inkManager.ChangeInkAmount(-selectedTower.nextUpgrade.cost);
-            selectedNode.SetIsUpgraded(true);
+            selectedNode.isUpgraded = true;
         } else {
             Debug.LogError("Tower not built at Node " + selectedNode);
         }
         DeselectNode();
     }
+
 
     /** Destroys tower on selected node. */
     public void DestroyTower() {
@@ -107,5 +136,9 @@ public class TowerManager : MonoBehaviour {
 
     public void SetTowerToBuild(TowerInfo towerInfo) {
         this.towerToBuild = towerInfo;
+    }
+
+    public void TriggerInsufficientInk() {
+        Instantiate(insufficientInkEffect, playerObj.transform.position, Quaternion.identity);
     }
 }

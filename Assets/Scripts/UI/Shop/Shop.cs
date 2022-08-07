@@ -1,44 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Shop : MonoBehaviour
-{
-    public ShopItemUI[] items;
-    public PlayerMovement playerMovement;
-    public ParticleSystem invalidActionEffect;
-    [SerializeField] private ShopTowerUI defaultTower;
-    // Deprecating: Use towerManager for new building system.
-    private BuildManager buildManager;
+public class Shop : MonoBehaviour {
+    [SerializeField] private ShopTowerUI selectedTower;
+    [SerializeField] private ParticleSystem invalidAction;
+    [SerializeField] PlayerMovement playerMovement;
     private TowerManager towerManager;
 
     private void Start() {
-        buildManager = BuildManager.instance;
         towerManager = TowerManager.instance;
-        if (defaultTower != null) {
-            SetTowerToBuild(defaultTower.towerInfo);
+        selectedTower = GetComponentInChildren<ShopTowerUI>();
+        if (selectedTower) {
+            SetTowerToBuild(selectedTower);
         }
     }
 
-    // Deprecating: Use SetTowerToBuild for new building system.
-    public void SetTowerAttempt(ShopItemUI item) {
-        if (playerMovement != null && playerMovement.GetIsBuilding()) {
-            Instantiate(invalidActionEffect, playerMovement.transform.position, Quaternion.identity);
+    private void TriggerInvalidAction() {
+        Instantiate(invalidAction, transform);
+    }
+
+    public void SetTowerToBuild(ShopTowerUI item) {
+        if (playerMovement && playerMovement.GetIsBuilding()) {
+            TriggerInvalidAction();
             return;
         }
-        if (buildManager != null) {
-            buildManager.SetTowerToBuild(item.tower);
-            item.gameObject.GetComponent<Image>().sprite = item.selected;
-            foreach (ShopItemUI otherItem in items) {
-                if (item == otherItem) continue; 
-                otherItem.gameObject.GetComponent<Image>().sprite = otherItem.unselected;
-            }
+        item.gameObject.GetComponent<Image>().sprite = item.selected;
+        if (selectedTower != null && selectedTower != item) { 
+            selectedTower.gameObject.GetComponent<Image>().sprite = selectedTower.unselected;
         }
 
-    }
-
-    public void SetTowerToBuild(TowerInfo towerInfo) {
+        selectedTower = item;
+        TowerInfo towerInfo = item.towerInfo;
         towerManager.SetTowerToBuild(towerInfo);
     }
 }
