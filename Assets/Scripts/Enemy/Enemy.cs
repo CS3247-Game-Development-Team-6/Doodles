@@ -5,26 +5,21 @@ using TMPro;
 
 public class Enemy : MonoBehaviour {
 
+    /**
+     * enemy properties 
+     */
     [SerializeField] private float speed;
-
     [SerializeField] private float initSpeed = 1f;
-
     [SerializeField] private float health;
-
     [SerializeField] private float initHealth = 100;
-
     [SerializeField] private int defense;
-
     [SerializeField] private int initDefense = 10;
-
     [SerializeField] private float inkGained = 1f;
-
-
     [SerializeField] private GameObject deathEffect;
 
-    private InkManager inkManager;
-
-    // Flags for status effects
+    /** 
+     * Effect status
+     */
     public enum EffectStatus {
         scorch, // fire
         chill, // ice
@@ -34,44 +29,50 @@ public class Enemy : MonoBehaviour {
         weaken, // fire + ice
         none // default
     }
-
     public EffectStatus effectStatus = EffectStatus.none;
-
     public void setEffectStatus(EffectStatus status) {
         effectStatus = status;
     }
-
     public EffectStatus getEffectStatus() {
         return effectStatus;
     }
-
     public void removeEffectStatus() {
         effectStatus = EffectStatus.none;
     }
 
+    /**
+     * Visibility
+     */
     public bool isInFog = true;
-    //private MeshRenderer ballMeshRenderer;
     private Transform ballParentTransform;
+    public Canvas canvas;
 
+    /**
+     * Shoot target
+     */
     private Transform target;
-    private int waypointIndex = 0;
+    private GameObject bulletPrefab;
 
+    /**
+     * Rotation
+     */
+    public GameObject model;
+    public Animator animator;
+
+    /**
+     * Translation
+     */
+    private int waypointIndex = 0;
     private int lastXCoord = 0;
     private int lastYCoord = 0;
+    public MapGenerator map;
+    private Cell[,] cells;
 
-    // to reduce bullet damage
-    private GameObject bulletPrefab;
+    private InkManager inkManager;
 
     [Header("Unity Stuff")]
     public Image healthBar;
     public TMP_Text healthText;
-
-    public MapGenerator map;
-    private Cell[,] cells;
-
-    public GameObject model;
-    public Animator animator;
-    public Canvas canvas;
 
     private void Awake() {
         inkManager = InkManager.instance;
@@ -135,18 +136,14 @@ public class Enemy : MonoBehaviour {
     }
 
     void Start() {
-        // Initialize Stats
         health = initHealth;
         speed = initSpeed;
         defense = initDefense;
         bulletPrefab = GetComponentInParent<EnemyShooting>().bulletPrefab;
 
-        // initialize model and animator
         model = transform.GetChild(2).gameObject;
         animator = model.GetComponent<Animator>();
         canvas = transform.GetChild(0).GetComponent<Canvas>();
-
-        //ballMeshRenderer = gameObject.GetComponent<MeshRenderer>();
         ballParentTransform = gameObject.transform;
 
         // first target, which is first waypoint in Waypoints
@@ -165,9 +162,7 @@ public class Enemy : MonoBehaviour {
         }
 
         if (GetComponent<EnemyShooting>().isShooting) {
-            // stop attack if frozen
             if (getEffectStatus() == EffectStatus.froze) GetComponent<EnemyShooting>().enabled = false;
-            // restore attack if not frozen
             else GetComponent<EnemyShooting>().enabled = true;
             // stop movement
             animator.SetBool("isWalking", false);
@@ -175,7 +170,6 @@ public class Enemy : MonoBehaviour {
         }
 
         if (getEffectStatus() == EffectStatus.froze) {
-            // stop movement
             animator.SetBool("isWalking", false);
             return;
         }
@@ -229,14 +223,11 @@ public class Enemy : MonoBehaviour {
         target = Waypoints.points[waypointIndex];
     }
 
-    // previously was enemy attack the base and destroy
     void EndPath() {
-        // do nothing
         animator.SetBool("isWalking", false);
     }
 
     private void setEnemyVisibility(bool isVisible) {
-        //ballMeshRenderer.enabled = isVisible;
         foreach (Transform childrenTransform in ballParentTransform) {
             // disable canvas
             if (childrenTransform.name == canvas.name)
