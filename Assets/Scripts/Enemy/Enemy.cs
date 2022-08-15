@@ -25,13 +25,37 @@ public class Enemy : MonoBehaviour {
     private InkManager inkManager;
 
     // Flags for status effects
+    public enum EffectStatus {
+        scorch, // fire
+        chill, // ice
+        drench, // water
+        scald, // fire + water
+        froze, // ice + water
+        weakened, // fire + ice
+        none // default
+    }
 
-    private bool isScorched = false;
-    private bool isChilled = false;
-    private bool isDrenched = false;
-    private bool isScalded = false;
-    private bool isFrozen = false;
-    private bool isWeakened = false;
+    public EffectStatus effectStatus = EffectStatus.none;
+
+    public void setEffectStatus(EffectStatus status) {
+        effectStatus = status;
+    }
+
+    public EffectStatus getEffectStatus() {
+        return effectStatus;
+    }
+
+    public void removeEffectStatus() {
+        effectStatus = EffectStatus.none;
+    }
+
+
+    private bool isScorched = false; // fire: burnt
+    private bool isChilled = false; // ice
+    private bool isDrenched = false; // water: wet
+    private bool isScalded = false; // fire + water: vaporize
+    private bool isFrozen = false; // ice + water
+    private bool isWeakened = false; // fire + ice: melt
 
     public bool isInFog = true;
     //private MeshRenderer ballMeshRenderer;
@@ -104,14 +128,6 @@ public class Enemy : MonoBehaviour {
         defense = initDefense;
     }
 
-    public void setScorched(bool b) {
-        isScorched = b;
-    }
-
-    public bool getScorched() {
-        return isScorched;
-    }
-
     public void setChilled(bool b) {
         isChilled = b;
     }
@@ -150,10 +166,6 @@ public class Enemy : MonoBehaviour {
 
     public bool getWeakened() {
         return isWeakened;
-    }
-
-    public bool getInFog() {
-        return isInFog;
     }
 
     void Die() {
