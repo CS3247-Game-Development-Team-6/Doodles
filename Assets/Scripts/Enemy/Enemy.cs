@@ -5,11 +5,11 @@ using TMPro;
 
 public class Enemy : MonoBehaviour {
 
-    [SerializeField] private float speed;               // Serialized for debugging purposes
+    [SerializeField] private float speed;
 
     [SerializeField] private float initSpeed = 1f;
 
-    [SerializeField] private float health;              // Serialized for debugging purposes
+    [SerializeField] private float health;
 
     [SerializeField] private float initHealth = 100;
 
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour {
         drench, // water
         scald, // fire + water
         froze, // ice + water
-        weakened, // fire + ice
+        weaken, // fire + ice
         none // default
     }
 
@@ -48,14 +48,6 @@ public class Enemy : MonoBehaviour {
     public void removeEffectStatus() {
         effectStatus = EffectStatus.none;
     }
-
-
-    private bool isScorched = false; // fire: burnt
-    private bool isChilled = false; // ice
-    private bool isDrenched = false; // water: wet
-    private bool isScalded = false; // fire + water: vaporize
-    private bool isFrozen = false; // ice + water
-    private bool isWeakened = false; // fire + ice: melt
 
     public bool isInFog = true;
     //private MeshRenderer ballMeshRenderer;
@@ -128,46 +120,6 @@ public class Enemy : MonoBehaviour {
         defense = initDefense;
     }
 
-    public void setChilled(bool b) {
-        isChilled = b;
-    }
-
-    public bool getChilled() {
-        return isChilled;
-    }
-
-    public void setDrenched(bool b) {
-        isDrenched = b;
-    }
-
-    public bool getDrenched() {
-        return isDrenched;
-    }
-
-    public void setScalded(bool b) {
-        isScalded = b;
-    }
-
-    public bool getScalded() {
-        return isScalded;
-    }
-
-    public void setFrozen(bool b) {
-        isFrozen = b;
-    }
-
-    public bool getFrozen() {
-        return isFrozen;
-    }
-
-    public void setWeakened(bool b) {
-        isWeakened = b;
-    }
-
-    public bool getWeakened() {
-        return isWeakened;
-    }
-
     void Die() {
         // add ink
         inkManager.ChangeInkAmount(inkGained);
@@ -214,7 +166,7 @@ public class Enemy : MonoBehaviour {
 
         if (GetComponent<EnemyShooting>().isShooting) {
             // stop attack if frozen
-            if (isFrozen) GetComponent<EnemyShooting>().enabled = false;
+            if (getEffectStatus() == EffectStatus.froze) GetComponent<EnemyShooting>().enabled = false;
             // restore attack if not frozen
             else GetComponent<EnemyShooting>().enabled = true;
             // stop movement
@@ -222,7 +174,7 @@ public class Enemy : MonoBehaviour {
             return;
         }
 
-        if (isFrozen) {
+        if (getEffectStatus() == EffectStatus.froze) {
             // stop movement
             animator.SetBool("isWalking", false);
             return;
