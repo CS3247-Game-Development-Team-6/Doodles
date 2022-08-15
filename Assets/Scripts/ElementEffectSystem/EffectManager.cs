@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectManager : MonoBehaviour, IEffectable {
@@ -11,7 +9,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
     private float _currentEffectTime = 0f;
     private float _nextTickTime = 0f;
 
-    // For Special Effects
+    // For Combined Effects
     [SerializeField] private ElementEffectInfo _scaldedData;
     [SerializeField] private ElementEffectInfo _frozenData;
     [SerializeField] private ElementEffectInfo _weakenedData;
@@ -19,18 +17,14 @@ public class EffectManager : MonoBehaviour, IEffectable {
     // For Burst DOT Effect
     private float _burstDotAmount;
 
-    // Start is called before the first frame update
     void Start() {
         enemy = GetComponentInParent<Enemy>();
     }
 
-    // Update is called once per frame
     void Update() {
         if (_data != null) HandleEffect();
     }
 
-
-    // Apply Status Effect on enemy
     public void ApplyEffect(ElementEffectInfo _data) {
         // Check if already has 2 elements
         if (_data != null) {
@@ -102,7 +96,6 @@ public class EffectManager : MonoBehaviour, IEffectable {
         }
     }
 
-    // Remove Status Effect on enemy
     public void RemoveEffect() {
         if (enemy.getEffectStatus() == Enemy.EffectStatus.chill) {
             enemy.RestoreSpeed();
@@ -152,7 +145,6 @@ public class EffectManager : MonoBehaviour, IEffectable {
         }
         // BurstDOT Effect (Fire + Water)
         else if (enemy.getEffectStatus() == Enemy.EffectStatus.scald && _currentEffectTime > _nextTickTime) {
-            // Only triggered once
             if (_nextTickTime == 0) {
                 enemy.TakeDot(_data.DOTAmount * _data.TickSpeed * _data.Lifetime);
             }
@@ -160,29 +152,26 @@ public class EffectManager : MonoBehaviour, IEffectable {
         }
         // DefDecre Effect (Ice + Fire)
         else if (enemy.getEffectStatus() == Enemy.EffectStatus.weaken && _currentEffectTime > _nextTickTime) {
-            // Only triggered once
             if (_nextTickTime == 0) {
                 enemy.ReduceDefense(_data.DefDecreAmount);
             }
             _nextTickTime += _data.TickSpeed;
         }
-        // DOT Effect
+        // DOT Effect (Fire)
         else if (_data.DOTAmount != 0 && _currentEffectTime > _nextTickTime) {
             _nextTickTime += _data.TickSpeed;
             enemy.TakeDot(_data.DOTAmount);
         }
-        // Slow Effect
+        // Slow Effect (Ice)
         else if (_data.SlowAmount != 0 && _currentEffectTime > _nextTickTime) {
-            // Only triggered once
             if (_nextTickTime == 0) {
                 enemy.ReduceSpeed(_data.SlowAmount);
                 enemy.setEffectStatus(Enemy.EffectStatus.chill);
             }
             _nextTickTime += _data.TickSpeed;
         }
-        // Attack Decrease Effect
+        // Attack Decrease Effect (Water)
         else if (_data.AtkDecreAmount != 0 && _currentEffectTime > _nextTickTime) {
-            // Only triggered once
             if (_nextTickTime == 0) {
                 enemy.ReduceAttack(_data.AtkDecreAmount);
                 enemy.setEffectStatus(Enemy.EffectStatus.drench);
