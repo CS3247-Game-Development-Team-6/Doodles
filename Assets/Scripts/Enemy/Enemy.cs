@@ -225,7 +225,7 @@ public class Enemy : MonoBehaviour {
         target = Waypoints.points[waypointIndex];
     }
 
-    void EndPath() {
+    private void EndPath() {
         animator.SetBool("isWalking", false);
     }
 
