@@ -207,7 +207,7 @@ public class Enemy : MonoBehaviour {
         }
 
         // enemy is visible if not in fog, hence its visibility is the negation of the isInFog bool.
-        setEnemyVisibility(!isInFog);
+        SetEnemyVisibility(!isInFog);
 
     }
 
@@ -229,7 +229,7 @@ public class Enemy : MonoBehaviour {
         animator.SetBool("isWalking", false);
     }
 
-    private void setEnemyVisibility(bool isVisible) {
+    private void SetEnemyVisibility(bool isVisible) {
         foreach (Transform childrenTransform in ballParentTransform) {
             // disable canvas
             if (childrenTransform.name == canvas.name)
