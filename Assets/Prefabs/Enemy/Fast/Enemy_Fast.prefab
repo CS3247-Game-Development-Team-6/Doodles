@@ -609,21 +609,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae588f773893f24419816762fa1dc82d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
   initSpeed: 2
-  health: 0
   initHealth: 100
-  defense: 0
   initDefense: 0
   inkGained: 5
   deathEffect: {fileID: 6496939036694839794, guid: 2e72e6fd95c8d0e48b55714387846831, type: 3}
-  isInFog: 1
+  enemyInfo: {fileID: 11400000, guid: 40bb94349b0be824793e1b61c2d89294, type: 2}
   healthBar: {fileID: 2344494249134577957}
   healthText: {fileID: 2656935879816995319}
-  map: {fileID: 0}
-  model: {fileID: 3744675478819270487}
-  animator: {fileID: 0}
-  canvas: {fileID: 0}
 --- !u!114 &904252060
 MonoBehaviour:
   m_ObjectHideFlags: 0

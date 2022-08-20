@@ -8,14 +8,15 @@ public class Enemy : MonoBehaviour {
     /**
      * enemy properties 
      */
-    [SerializeField] private float speed;
+    private float speed;
     [SerializeField] private float initSpeed = 1f;
-    [SerializeField] private float health;
+    private float health;
     [SerializeField] private float initHealth = 100;
-    [SerializeField] private int defense;
+    private int defense;
     [SerializeField] private int initDefense = 10;
     [SerializeField] private float inkGained = 1f;
     [SerializeField] private GameObject deathEffect;
+    [SerializeField] private EnemyInfo enemyInfo;
 
     /** 
      * Effect status
@@ -29,7 +30,7 @@ public class Enemy : MonoBehaviour {
         weaken, // fire + ice
         none // default
     }
-    public EffectStatus effectStatus = EffectStatus.none;
+    private EffectStatus effectStatus = EffectStatus.none;
     public void setEffectStatus(EffectStatus status) {
         effectStatus = status;
     }
@@ -43,9 +44,9 @@ public class Enemy : MonoBehaviour {
     /**
      * Visibility
      */
-    public bool isInFog = true;
+    private bool isInFog = true;
     private Transform ballParentTransform;
-    public Canvas canvas;
+    private Canvas canvas;
 
     /**
      * Shoot target
@@ -56,8 +57,8 @@ public class Enemy : MonoBehaviour {
     /**
      * Rotation
      */
-    public GameObject model;
-    public Animator animator;
+    private GameObject model;
+    private Animator animator;
 
     /**
      * Translation
@@ -65,7 +66,6 @@ public class Enemy : MonoBehaviour {
     private int waypointIndex = 0;
     private int lastXCoord = 0;
     private int lastYCoord = 0;
-    public MapGenerator map;
     private Cell[,] cells;
 
     private InkManager inkManager;
