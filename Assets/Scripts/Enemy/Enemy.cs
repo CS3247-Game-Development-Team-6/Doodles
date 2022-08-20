@@ -3,6 +3,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/** 
+ * Enemy's effect status caused by element reactions
+ */
+public enum EffectStatus {
+    SCORCH, // fire
+    CHILL, // ice
+    DRENCH, // water
+    SCALD, // fire + water
+    FROZE, // ice + water
+    WEAKEN, // fire + ice
+    NONE // default
+}
+
 public class Enemy : MonoBehaviour {
 
     /**
@@ -17,19 +30,7 @@ public class Enemy : MonoBehaviour {
     [SerializeField] private float inkGained = 1f;
     [SerializeField] private GameObject deathEffect;
 
-    /** 
-     * Effect status
-     */
-    public enum EffectStatus {
-        SCORCH, // fire
-        CHILL, // ice
-        DRENCH, // water
-        SCALD, // fire + water
-        FROZE, // ice + water
-        WEAKEN, // fire + ice
-        NONE // default
-    }
-    public EffectStatus effectStatus = EffectStatus.NONE;
+    public EffectStatus effectStatus;
     public void setEffectStatus(EffectStatus status) {
         effectStatus = status;
     }
@@ -139,6 +140,7 @@ public class Enemy : MonoBehaviour {
         health = initHealth;
         speed = initSpeed;
         defense = initDefense;
+        effectStatus = EffectStatus.NONE;
         bulletPrefab = GetComponentInParent<EnemyShooting>().bulletPrefab;
 
         model = transform.GetChild(2).gameObject;
