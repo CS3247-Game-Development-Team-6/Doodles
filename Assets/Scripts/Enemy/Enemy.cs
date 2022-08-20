@@ -122,7 +122,7 @@ public class Enemy : MonoBehaviour {
         defense = initDefense;
     }
 
-    void Die() {
+    private void Die() {
         // add ink
         inkManager.ChangeInkAmount(inkGained);
 
