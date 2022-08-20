@@ -216,7 +216,7 @@ public class Enemy : MonoBehaviour {
         return cell.isFog;
     }
 
-    void GetNextWaypoint() {
+    private void GetNextWaypoint() {
         if (waypointIndex >= Waypoints.points.Length - 1) {
             EndPath();
             return;
