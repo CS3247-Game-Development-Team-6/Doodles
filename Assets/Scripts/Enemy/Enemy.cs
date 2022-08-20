@@ -21,15 +21,15 @@ public class Enemy : MonoBehaviour {
      * Effect status
      */
     public enum EffectStatus {
-        scorch, // fire
-        chill, // ice
-        drench, // water
-        scald, // fire + water
-        froze, // ice + water
-        weaken, // fire + ice
-        none // default
+        SCORCH, // fire
+        CHILL, // ice
+        DRENCH, // water
+        SCALD, // fire + water
+        FROZE, // ice + water
+        WEAKEN, // fire + ice
+        NONE // default
     }
-    public EffectStatus effectStatus = EffectStatus.none;
+    public EffectStatus effectStatus = EffectStatus.NONE;
     public void setEffectStatus(EffectStatus status) {
         effectStatus = status;
     }
@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour {
         return effectStatus;
     }
     public void removeEffectStatus() {
-        effectStatus = EffectStatus.none;
+        effectStatus = EffectStatus.NONE;
     }
 
     /**
@@ -162,14 +162,14 @@ public class Enemy : MonoBehaviour {
         }
 
         if (GetComponent<EnemyShooting>().isShooting) {
-            if (getEffectStatus() == EffectStatus.froze) GetComponent<EnemyShooting>().enabled = false;
+            if (getEffectStatus() == EffectStatus.FROZE) GetComponent<EnemyShooting>().enabled = false;
             else GetComponent<EnemyShooting>().enabled = true;
             // stop movement
             animator.SetBool("isWalking", false);
             return;
         }
 
-        if (getEffectStatus() == EffectStatus.froze) {
+        if (getEffectStatus() == EffectStatus.FROZE) {
             animator.SetBool("isWalking", false);
             return;
         }
