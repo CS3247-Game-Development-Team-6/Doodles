@@ -136,7 +136,7 @@ public class Enemy : MonoBehaviour {
 
     }
 
-    void Start() {
+    private void Start() {
         health = initHealth;
         speed = initSpeed;
         defense = initDefense;
@@ -156,7 +156,7 @@ public class Enemy : MonoBehaviour {
     }
 
 
-    void Update() {
+    private void Update() {
         healthText.text = string.Format("{0}", health);
 
         if (health <= 0) {
