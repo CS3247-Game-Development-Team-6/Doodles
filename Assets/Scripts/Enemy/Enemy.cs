@@ -9,13 +9,10 @@ public class Enemy : MonoBehaviour {
      * enemy properties 
      */
     private float speed;
-    [SerializeField] private float initSpeed = 1f;
     private float health;
-    [SerializeField] private float initHealth = 100;
     private int defense;
-    [SerializeField] private int initDefense = 10;
-    [SerializeField] private float inkGained = 1f;
-    [SerializeField] private GameObject deathEffect;
+    private float inkGained;
+    private GameObject deathEffect;
     [SerializeField] private EnemyInfo enemyInfo;
 
     /** 
@@ -85,23 +82,23 @@ public class Enemy : MonoBehaviour {
         }
 
         // float number between 0 and 1
-        healthBar.fillAmount = health / initHealth;
+        healthBar.fillAmount = health / enemyInfo.health;
     }
 
     public void TakeDot(float amount) {
         health = health - amount;
 
         // float number between 0 and 1
-        healthBar.fillAmount = health / initHealth;
+        healthBar.fillAmount = health / enemyInfo.health;
 
     }
 
     public void ReduceSpeed(float slowAmount) {
-        speed = initSpeed * slowAmount;
+        speed = enemyInfo.speed * slowAmount;
     }
 
     public void RestoreSpeed() {
-        speed = initSpeed;
+        speed = enemyInfo.speed;
     }
 
     public void ReduceAttack(int atkDecreAmount) {
@@ -113,12 +110,12 @@ public class Enemy : MonoBehaviour {
     }
 
     public void ReduceDefense(int defDecreAmount) {
-        if (defDecreAmount > initDefense) defense = 0;
-        else defense = initDefense - defDecreAmount;
+        if (defDecreAmount > enemyInfo.defense) defense = 0;
+        else defense = enemyInfo.defense - defDecreAmount;
     }
 
     public void RestoreDefense() {
-        defense = initDefense;
+        defense = enemyInfo.defense;
     }
 
     void Die() {
@@ -136,9 +133,11 @@ public class Enemy : MonoBehaviour {
     }
 
     void Start() {
-        health = initHealth;
-        speed = initSpeed;
-        defense = initDefense;
+        health = enemyInfo.health;
+        speed = enemyInfo.speed;
+        defense = enemyInfo.defense;
+        inkGained = enemyInfo.inkGained;
+        deathEffect = enemyInfo.deathEffect;
         bulletPrefab = GetComponentInParent<EnemyShooting>().bulletPrefab;
 
         model = transform.GetChild(2).gameObject;
