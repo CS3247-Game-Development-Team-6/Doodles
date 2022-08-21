@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectManager : MonoBehaviour, IEffectable
-{
+public class EffectManager : MonoBehaviour, IEffectable {
     private Enemy enemy;
-    
+
     // For Status Effects
     private ElementEffectInfo _data;
     private GameObject _effectParticles;
     private float _currentEffectTime = 0f;
     private float _nextTickTime = 0f;
 
-    // For Special Effects
+    // For Combined Effects
     [SerializeField] private ElementEffectInfo _scaldedData;
     [SerializeField] private ElementEffectInfo _frozenData;
     [SerializeField] private ElementEffectInfo _weakenedData;
@@ -20,135 +17,104 @@ public class EffectManager : MonoBehaviour, IEffectable
     // For Burst DOT Effect
     private float _burstDotAmount;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         enemy = GetComponentInParent<Enemy>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (_data != null) HandleEffect();
     }
 
-
-    // Apply Status Effect on enemy
-    public void ApplyEffect(ElementEffectInfo _data)
-    {
+    public void ApplyEffect(ElementEffectInfo _data) {
         // Check if already has 2 elements
         if (_data != null) {
             // Enemy is already inflicted with a status effect
-            if (this._data != null)     
-            {
+            if (this._data != null) {
                 // Enemy is already inflicted with elemental reaction effect
-                if (this._data.Element == "Combined")
-                {
+                if (this._data.Element == "Combined") {
                     return;
                 }
 
                 // Different element is inflicted on enemy
-                if (this._data.Element != _data.Element)
-                {
+                if (this._data.Element != _data.Element) {
                     // Frozen
-                    if ((this._data.Element == "Ice" && _data.Element == "Water") || (this._data.Element == "Water" && _data.Element == "Ice"))
-                    {
+                    if ((this._data.Element == "Ice" && _data.Element == "Water") || (this._data.Element == "Water" && _data.Element == "Ice")) {
                         setFrozenData();
                     }
                     // Scalded
-                    else if (this._data.Element == "Fire" && _data.Element == "Water" || this._data.Element == "Water" && _data.Element == "Fire")
-                    {
+                    else if (this._data.Element == "Fire" && _data.Element == "Water" || this._data.Element == "Water" && _data.Element == "Fire") {
                         setBurstDOTAmount(_data);
                         setScaldedData();
                     }
                     // Weakened
-                    else if (this._data.Element == "Ice" && _data.Element == "Fire" || this._data.Element == "Fire" && _data.Element == "Ice")
-                    {
+                    else if (this._data.Element == "Ice" && _data.Element == "Fire" || this._data.Element == "Fire" && _data.Element == "Ice") {
                         setWeakenedData();
                     }
                 }
                 // Same element is inflicted on enemy
-                else
-                {
+                else {
                     RemoveEffect();
                     this._data = _data;
                 }
             }
             // Enemy not inflicted with status effect yet
-            else 
+            else
                 this._data = _data;
 
             // Spawn particle effects for elements and elemental reactions
             _effectParticles = Instantiate(this._data.EffectParticles, transform);
-            
+
         }
     }
 
-    private void setWeakenedData()
-    {
-        enemy.setChilled(true);
+    private void setWeakenedData() {
         RemoveEffect();
-        enemy.setWeakened(true);
+        enemy.setEffectStatus(EffectStatus.WEAKEN);
         this._data = _weakenedData;
     }
 
-    private void setScaldedData()
-    {
-        enemy.setDrenched(true);
+    private void setScaldedData() {
         RemoveEffect();
-        enemy.setScalded(true);
+        enemy.setEffectStatus(EffectStatus.SCALD);
         this._data = _scaldedData;
+
         // Info for burstDot effect
         this._data.DOTAmount = _burstDotAmount;
     }
 
-    private void setFrozenData()
-    {
-        enemy.setChilled(true);
-        enemy.setDrenched(true);
+    private void setFrozenData() {
         RemoveEffect();
-        enemy.setFrozen(true);
+        enemy.setEffectStatus(EffectStatus.FROZE);
         this._data = _frozenData;
     }
 
-    private void setBurstDOTAmount(ElementEffectInfo _data)
-    {
-        if (this._data.Element == "Fire")
-        {
+    private void setBurstDOTAmount(ElementEffectInfo _data) {
+        if (this._data.Element == "Fire") {
             _burstDotAmount = this._data.DOTAmount * this._data.TickSpeed * this._data.Lifetime;
-        }
-        else if (_data.Element == "Fire")
-        {
+        } else if (_data.Element == "Fire") {
             _burstDotAmount = _data.DOTAmount * _data.TickSpeed * _data.Lifetime;
         }
     }
 
-    // Remove Status Effect on enemy
-    public void RemoveEffect()
-    {
-        if (enemy.getChilled())
-        {
+    public void RemoveEffect() {
+        if (enemy.getEffectStatus() == EffectStatus.CHILL) {
             enemy.RestoreSpeed();
-            enemy.setChilled(false);
+            enemy.removeEffectStatus();
         }
-        if (enemy.getDrenched())
-        {
+        if (enemy.getEffectStatus() == EffectStatus.DRENCH) {
             enemy.RestoreAttack();
-            enemy.setDrenched(false);
+            enemy.removeEffectStatus();
         }
-        if (enemy.getFrozen())
-        {
+        if (enemy.getEffectStatus() == EffectStatus.FROZE) {
             enemy.RestoreSpeed();
-            enemy.setFrozen(false);
+            enemy.removeEffectStatus();
         }
-        if (enemy.getWeakened())
-        {
+        if (enemy.getEffectStatus() == EffectStatus.WEAKEN) {
             enemy.RestoreDefense();
-            enemy.setWeakened(false);
+            enemy.removeEffectStatus();
         }
-        if (enemy.getScalded())
-        {
-            enemy.setScalded(false);
+        if (enemy.getEffectStatus() == EffectStatus.SCALD) {
+            enemy.removeEffectStatus();
         }
 
         _data = null;
@@ -158,8 +124,7 @@ public class EffectManager : MonoBehaviour, IEffectable
     }
 
     // Handle Status Effect Updates
-    public void HandleEffect()
-    {
+    public void HandleEffect() {
         // Update current effect's time
         _currentEffectTime += Time.deltaTime;
 
@@ -171,60 +136,45 @@ public class EffectManager : MonoBehaviour, IEffectable
 
         // Update status effect timer accordingly
         // Frozen Effect (Ice + Water)
-        if (enemy.getFrozen() && _currentEffectTime > _nextTickTime)
-        {
+        if (enemy.getEffectStatus() == EffectStatus.FROZE && _currentEffectTime > _nextTickTime) {
             // Only triggered once
-            if (_nextTickTime == 0)
-            {
+            if (_nextTickTime == 0) {
                 enemy.ReduceSpeed(0);
             }
             _nextTickTime += _data.TickSpeed;
         }
         // BurstDOT Effect (Fire + Water)
-        else if (enemy.getScalded() && _currentEffectTime > _nextTickTime)
-        {
-            // Only triggered once
-            if (_nextTickTime == 0)
-            {
+        else if (enemy.getEffectStatus() == EffectStatus.SCALD && _currentEffectTime > _nextTickTime) {
+            if (_nextTickTime == 0) {
                 enemy.TakeDot(_data.DOTAmount * _data.TickSpeed * _data.Lifetime);
             }
             _nextTickTime += _data.TickSpeed;
         }
         // DefDecre Effect (Ice + Fire)
-        else if (enemy.getWeakened() && _currentEffectTime > _nextTickTime)
-        {
-            // Only triggered once
-            if (_nextTickTime == 0)
-            {
+        else if (enemy.getEffectStatus() == EffectStatus.WEAKEN && _currentEffectTime > _nextTickTime) {
+            if (_nextTickTime == 0) {
                 enemy.ReduceDefense(_data.DefDecreAmount);
             }
             _nextTickTime += _data.TickSpeed;
         }
-        // DOT Effect
-        else if (_data.DOTAmount != 0 && _currentEffectTime > _nextTickTime)
-        {
+        // DOT Effect (Fire)
+        else if (_data.DOTAmount != 0 && _currentEffectTime > _nextTickTime) {
             _nextTickTime += _data.TickSpeed;
             enemy.TakeDot(_data.DOTAmount);
         }
-        // Slow Effect
-        else if (_data.SlowAmount != 0 && _currentEffectTime > _nextTickTime)
-        {
-            // Only triggered once
-            if (_nextTickTime == 0)
-            {
+        // Slow Effect (Ice)
+        else if (_data.SlowAmount != 0 && _currentEffectTime > _nextTickTime) {
+            if (_nextTickTime == 0) {
                 enemy.ReduceSpeed(_data.SlowAmount);
-                enemy.setChilled(true);
+                enemy.setEffectStatus(EffectStatus.CHILL);
             }
             _nextTickTime += _data.TickSpeed;
         }
-        // Attack Decrease Effect
-        else if (_data.AtkDecreAmount != 0 && _currentEffectTime > _nextTickTime)
-        {
-            // Only triggered once
-            if (_nextTickTime == 0)
-            {
+        // Attack Decrease Effect (Water)
+        else if (_data.AtkDecreAmount != 0 && _currentEffectTime > _nextTickTime) {
+            if (_nextTickTime == 0) {
                 enemy.ReduceAttack(_data.AtkDecreAmount);
-                enemy.setDrenched(true);
+                enemy.setEffectStatus(EffectStatus.DRENCH);
             }
             _nextTickTime += _data.TickSpeed;
         }
