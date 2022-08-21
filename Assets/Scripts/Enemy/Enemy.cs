@@ -3,6 +3,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/** 
+ * Enemy's effect status caused by element reactions
+ */
+public enum EffectStatus {
+    SCORCH, // fire
+    CHILL, // ice
+    DRENCH, // water
+    SCALD, // fire + water
+    FROZE, // ice + water
+    WEAKEN, // fire + ice
+    NONE // default
+}
+
 public class Enemy : MonoBehaviour {
 
     /**
@@ -15,19 +28,8 @@ public class Enemy : MonoBehaviour {
     private GameObject deathEffect;
     [SerializeField] private EnemyInfo enemyInfo;
 
-    /** 
-     * Effect status
-     */
-    public enum EffectStatus {
-        scorch, // fire
-        chill, // ice
-        drench, // water
-        scald, // fire + water
-        froze, // ice + water
-        weaken, // fire + ice
-        none // default
-    }
-    private EffectStatus effectStatus = EffectStatus.none;
+    public EffectStatus effectStatus;
+
     public void setEffectStatus(EffectStatus status) {
         effectStatus = status;
     }
@@ -35,7 +37,7 @@ public class Enemy : MonoBehaviour {
         return effectStatus;
     }
     public void removeEffectStatus() {
-        effectStatus = EffectStatus.none;
+        effectStatus = EffectStatus.NONE;
     }
 
     /**
@@ -90,7 +92,6 @@ public class Enemy : MonoBehaviour {
 
         // float number between 0 and 1
         healthBar.fillAmount = health / enemyInfo.health;
-
     }
 
     public void ReduceSpeed(float slowAmount) {
@@ -118,7 +119,7 @@ public class Enemy : MonoBehaviour {
         defense = enemyInfo.defense;
     }
 
-    void Die() {
+    private void Die() {
         // add ink
         inkManager.ChangeInkAmount(inkGained);
 
@@ -129,7 +130,6 @@ public class Enemy : MonoBehaviour {
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
         Destroy(gameObject);
-
     }
 
     void Start() {
@@ -138,6 +138,7 @@ public class Enemy : MonoBehaviour {
         defense = enemyInfo.defense;
         inkGained = enemyInfo.inkGained;
         deathEffect = enemyInfo.deathEffect;
+        effectStatus = EffectStatus.NONE;
         bulletPrefab = GetComponentInParent<EnemyShooting>().bulletPrefab;
 
         model = transform.GetChild(2).gameObject;
@@ -152,8 +153,7 @@ public class Enemy : MonoBehaviour {
         cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
     }
 
-
-    void Update() {
+    private void Update() {
         healthText.text = string.Format("{0}", health);
 
         if (health <= 0) {
@@ -161,14 +161,14 @@ public class Enemy : MonoBehaviour {
         }
 
         if (GetComponent<EnemyShooting>().isShooting) {
-            if (getEffectStatus() == EffectStatus.froze) GetComponent<EnemyShooting>().enabled = false;
+            if (getEffectStatus() == EffectStatus.FROZE) GetComponent<EnemyShooting>().enabled = false;
             else GetComponent<EnemyShooting>().enabled = true;
             // stop movement
             animator.SetBool("isWalking", false);
             return;
         }
 
-        if (getEffectStatus() == EffectStatus.froze) {
+        if (getEffectStatus() == EffectStatus.FROZE) {
             animator.SetBool("isWalking", false);
             return;
         }
@@ -204,16 +204,14 @@ public class Enemy : MonoBehaviour {
         }
 
         // enemy is visible if not in fog, hence its visibility is the negation of the isInFog bool.
-        setEnemyVisibility(!isInFog);
-
+        SetEnemyVisibility(!isInFog);
     }
 
     private bool GetCurrentTileFogged(int xCoord, int yCoord) {
         Cell cell = cells[yCoord, xCoord];
         return cell.isFog;
     }
-
-    void GetNextWaypoint() {
+    private void GetNextWaypoint() {
         if (waypointIndex >= Waypoints.points.Length - 1) {
             EndPath();
             return;
@@ -222,11 +220,11 @@ public class Enemy : MonoBehaviour {
         target = Waypoints.points[waypointIndex];
     }
 
-    void EndPath() {
+    private void EndPath() {
         animator.SetBool("isWalking", false);
     }
 
-    private void setEnemyVisibility(bool isVisible) {
+    private void SetEnemyVisibility(bool isVisible) {
         foreach (Transform childrenTransform in ballParentTransform) {
             // disable canvas
             if (childrenTransform.name == canvas.name)
