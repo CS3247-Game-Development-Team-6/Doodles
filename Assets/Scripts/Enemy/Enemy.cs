@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour {
     private GameObject deathEffect;
     [SerializeField] private EnemyInfo enemyInfo;
 
-    public EffectStatus effectStatus;
+    private EffectStatus effectStatus;
 
     public void setEffectStatus(EffectStatus status) {
         effectStatus = status;
