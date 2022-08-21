@@ -12,7 +12,7 @@ public class EnemyShooting : MonoBehaviour {
     public GameObject bulletPrefab;
     public Transform firePoint;
     private Transform target; // player or base
-    private Transform rangeCenter;
+    public Transform rangeCenter;
     private float fireCountDown = 0f;
 
     /**

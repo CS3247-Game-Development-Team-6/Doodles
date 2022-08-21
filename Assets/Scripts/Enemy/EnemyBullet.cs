@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using EZCameraShake;
 
 // similar to tower bullet, but diff target
-public class EnemyBullet : MonoBehaviour
-{
+public class EnemyBullet : MonoBehaviour {
     private Transform target;
     public float speed = 70f;
     public GameObject impactEffect;
@@ -19,26 +16,22 @@ public class EnemyBullet : MonoBehaviour
         bulletDamage = initBulletDamage;
     }
 
-    public void Seek(Transform _target) 
-    { 
+    public void Seek(Transform _target) {
         target = _target;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (target == null) 
-        { 
+    void Update() {
+        if (target == null) {
             Destroy(gameObject);
             return;
         }
 
         Vector3 dir = target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
-        
+
         // hit 
-        if (dir.magnitude <= distanceThisFrame)
-        {
+        if (dir.magnitude <= distanceThisFrame) {
             HitTarget();
             return;
         }
@@ -46,16 +39,14 @@ public class EnemyBullet : MonoBehaviour
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
     }
 
-    void HitTarget() 
-    {
+    void HitTarget() {
 
-        if (gameObject.CompareTag("BossBullet"))
-        {
+        if (gameObject.CompareTag("BossBullet")) {
             // boss bullet
             CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
         }
 
-        GameObject effectIns = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
+        GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(effectIns, 2f);
 
         Damage(target);
@@ -64,16 +55,14 @@ public class EnemyBullet : MonoBehaviour
     }
 
     void Damage(Transform _target) {
-        if (_target.CompareTag("Player"))
-        {
+        if (_target.CompareTag("Player")) {
             _target.GetComponent<PlayerHealth>().TakeDamage(bulletDamage);
         }
 
-        if (_target.CompareTag("Base"))
-        {
-            Base.receiveDmg(bulletDamage);         
+        if (_target.CompareTag("Base")) {
+            Base.receiveDmg(bulletDamage);
         }
-        
+
         // show damage number
         DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
         indicator.SetDamageText(bulletDamage);
