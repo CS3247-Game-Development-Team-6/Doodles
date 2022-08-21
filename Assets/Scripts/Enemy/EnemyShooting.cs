@@ -1,65 +1,61 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShooting : MonoBehaviour
-{
-    // player or base
-    private Transform target;
-    
+public class EnemyShooting : MonoBehaviour {
+
     // can be customized
     [Header("Attributes")]
     public float range = 1f;
     public float fireRate = 1f;
-    public string attackAnimationName = "Attack";
-    public float attackAnimationExitTime = 0.75f;
 
+    public bool isShooting = false;
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+    private Transform target; // player or base
+    private Transform rangeCenter;
     private float fireCountDown = 0f;
 
-    // when shooting, stop enemy movement
-    public bool isShooting = false;
+    /**
+     * Rotation
+     */
+    public Transform partToRotate;
+    private float rotationSpeed;
+    private GameObject model;
+
+    /**
+     * Animation
+     */
+    private Animator animator;
+    private string attackAnimationName = "Attack";
+    private float attackAnimationExitTime = 0.75f;
 
     [Header("Setup Fields")]
     public string playerTag = "Player";
     public string baseTag = "Base";
 
-    public Transform partToRotate;
-    public float rotationSpeed = 10f;
 
-    public GameObject model;
-    public Animator animator;
-    public Transform rangeCenter;
-
-    public GameObject bulletPrefab;
-    public Transform firePoint;
-
-
-    void Start()
-    {
-        InvokeRepeating ("UpdateTarget", 0f, 0.5f);
+    private void Start() {
+        InvokeRepeating("UpdateTarget", 0f, 0.5f);
         model = transform.GetChild(2).gameObject;
         animator = model.GetComponent<Animator>();
         rangeCenter = transform.GetChild(3).gameObject.transform;
-
+        rotationSpeed = 10f;
         fireCountDown = 1f / fireRate;
     }
 
     // dont need to find target every frame
     void UpdateTarget() {
-        
+
         GameObject[] targets = GameObject.FindGameObjectsWithTag(playerTag);
         GameObject[] bases = GameObject.FindGameObjectsWithTag(baseTag);
 
         (GameObject, float) result = FindNearestTarget(targets, bases);
         GameObject nearestTarget = result.Item1;
         float shortestDistance = result.Item2;
-        
-        if (nearestTarget != null && shortestDistance <= range)
-        {
+
+        if (nearestTarget != null && shortestDistance <= range) {
             target = nearestTarget.transform;
-        }
-        else 
-        {
+        } else {
             target = null;
         }
     }
@@ -68,70 +64,56 @@ public class EnemyShooting : MonoBehaviour
     // _targets are player
     // _bases are multiple bases
     // return tuples of either nearest player/base and shortest distance to the enemy
-    (GameObject, float) FindNearestTarget(GameObject[] _targets, GameObject[] _bases) 
-    {
+    (GameObject, float) FindNearestTarget(GameObject[] _targets, GameObject[] _bases) {
         float shortestDistance = Mathf.Infinity;
         GameObject nearestTarget = null;
 
-        foreach (GameObject tempTarget in _targets) 
-        {
+        foreach (GameObject tempTarget in _targets) {
             float distanceToPlayer = Vector3.Distance(rangeCenter.position, tempTarget.transform.position);
-            if (distanceToPlayer < shortestDistance)
-            {
+            if (distanceToPlayer < shortestDistance) {
                 shortestDistance = distanceToPlayer;
                 nearestTarget = tempTarget;
             }
         }
 
-        foreach (GameObject tempTarget in _bases) 
-        {
+        foreach (GameObject tempTarget in _bases) {
             // range from the model
             float distanceToPlayer = Vector3.Distance(rangeCenter.position, tempTarget.transform.position);
-            if (distanceToPlayer < shortestDistance)
-            {
+            if (distanceToPlayer < shortestDistance) {
                 shortestDistance = distanceToPlayer;
                 nearestTarget = tempTarget;
             }
         }
 
-        return (nearestTarget, shortestDistance);;
+        return (nearestTarget, shortestDistance); ;
     }
-    
 
-    void Update()
-    {
+
+    private void Update() {
         if (target == null) {
-
             isShooting = false;
-            // reset after player moving away
             fireCountDown = 1f / fireRate;
-
-            return;          
+            return;
         }
-
         isShooting = true;
 
         // rotate enemy using quaternion
         Vector3 dir = target.position - transform.position;
         Quaternion lookAtRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookAtRotation, Time.deltaTime * rotationSpeed).eulerAngles;
-        
+
         partToRotate.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
         model.transform.rotation = Quaternion.Euler(model.transform.rotation.x, rotation.y, rotation.z);
 
-        if (fireCountDown <= 0f) 
-        {
+        if (fireCountDown <= 0f) {
             StartCoroutine(Shoot());
-
             fireCountDown = 1f / fireRate;
         }
-
         fireCountDown -= Time.deltaTime;
-
     }
 
     // shoot according to firecountdown timer
-    IEnumerator Shoot () {
+    IEnumerator Shoot() {
         // animate
         animator.SetTrigger("shoot");
 
@@ -142,14 +124,12 @@ public class EnemyShooting : MonoBehaviour
         while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < attackAnimationExitTime)
             yield return null;
 
-        GameObject bulletGO = (GameObject) Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         EnemyBullet bullet = bulletGO.GetComponent<EnemyBullet>();
 
-        if (bullet != null)
-        {
+        if (bullet != null) {
             bullet.Seek(target);
         }
-        
     }
 
     void OnDrawGizmosSelected() {
