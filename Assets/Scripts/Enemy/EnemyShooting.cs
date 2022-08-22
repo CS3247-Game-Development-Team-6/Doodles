@@ -10,6 +10,7 @@ public class EnemyShooting : MonoBehaviour {
     private float fireRate;
     private float bulletSpeed;
     private int bulletDamage;
+    private int initBulletDamage;
     [SerializeField] private EnemyShootingInfo shootingInfo;
 
     /**
@@ -46,7 +47,8 @@ public class EnemyShooting : MonoBehaviour {
 
         range = shootingInfo.range;
         fireRate = shootingInfo.fireRate;
-        bulletDamage = shootingInfo.bulletDamage;
+        initBulletDamage = shootingInfo.bulletDamage;
+        bulletDamage = initBulletDamage;
         bulletSpeed = shootingInfo.bulletSpeed;
         model = transform.GetChild(2).gameObject;
         animator = model.GetComponent<Animator>();
@@ -140,8 +142,16 @@ public class EnemyShooting : MonoBehaviour {
         EnemyBullet bullet = bulletGO.GetComponent<EnemyBullet>();
 
         if (bullet != null) {
-            bullet.Seek(target);
+            bullet.Seek(target, bulletSpeed, bulletDamage);
         }
+    }
+
+    public void ReduceBulletDamage(int _damage) {
+        bulletDamage = initBulletDamage - _damage;
+    }
+
+    public void RestoreBulletDamage() {
+        bulletDamage = initBulletDamage;
     }
 
 }

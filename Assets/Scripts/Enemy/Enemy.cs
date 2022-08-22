@@ -51,7 +51,6 @@ public class Enemy : MonoBehaviour {
      * Shoot target
      */
     private Transform target;
-    private GameObject bulletPrefab;
 
     /**
      * Rotation
@@ -103,11 +102,11 @@ public class Enemy : MonoBehaviour {
     }
 
     public void ReduceAttack(int atkDecreAmount) {
-        bulletPrefab.GetComponent<EnemyBullet>().ReduceBulletDamage(atkDecreAmount);
+        GetComponent<EnemyShooting>().ReduceBulletDamage(atkDecreAmount);
     }
 
     public void RestoreAttack() {
-        bulletPrefab.GetComponent<EnemyBullet>().RestoreBulletDamage();
+        GetComponent<EnemyShooting>().RestoreBulletDamage();
     }
 
     public void ReduceDefense(int defDecreAmount) {
@@ -139,7 +138,6 @@ public class Enemy : MonoBehaviour {
         inkGained = enemyInfo.inkGained;
         deathEffect = enemyInfo.deathEffect;
         effectStatus = EffectStatus.NONE;
-        bulletPrefab = GetComponentInParent<EnemyShooting>().bulletPrefab;
 
         model = transform.GetChild(2).gameObject;
         animator = model.GetComponent<Animator>();
