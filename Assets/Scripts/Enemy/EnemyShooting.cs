@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour {
 
-    // can be customized
     [Header("Attributes")]
     public float range = 1f;
     public float fireRate = 1f;
+    public int bulletDamage = 10;
+    public float bulletSpeed = 70f;
 
     public bool isShooting = false;
     public GameObject bulletPrefab;
@@ -64,7 +65,7 @@ public class EnemyShooting : MonoBehaviour {
     // _targets are player
     // _bases are multiple bases
     // return tuples of either nearest player/base and shortest distance to the enemy
-    (GameObject, float) FindNearestTarget(GameObject[] _targets, GameObject[] _bases) {
+    private (GameObject, float) FindNearestTarget(GameObject[] _targets, GameObject[] _bases) {
         float shortestDistance = Mathf.Infinity;
         GameObject nearestTarget = null;
 
@@ -113,7 +114,7 @@ public class EnemyShooting : MonoBehaviour {
     }
 
     // shoot according to firecountdown timer
-    IEnumerator Shoot() {
+    private IEnumerator Shoot() {
         // animate
         animator.SetTrigger("shoot");
 
@@ -132,8 +133,4 @@ public class EnemyShooting : MonoBehaviour {
         }
     }
 
-    void OnDrawGizmosSelected() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(rangeCenter.position, range);
-    }
 }

@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d1c5786862b98c44836f8cab5529806, type: 3}
-  m_Name: EnemySimple
+  m_Script: {fileID: 11500000, guid: 6cf51191cc8a94e49bd13d2182323859, type: 3}
+  m_Name: BossEnemyShootingInfo
   m_EditorClassIdentifier: 
-  speed: 1
-  health: 200
-  defense: 10
-  inkGained: 3
-  deathEffect: {fileID: 6496939036694839794, guid: fa175d5aa33423f4a9406bdc4bd544aa, type: 3}
+  range: 1.25
+  fireRate: 0.3
+  bulletSpeed: 50
+  bulletDamage: 100
