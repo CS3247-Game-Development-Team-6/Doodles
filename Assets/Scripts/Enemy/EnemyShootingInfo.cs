@@ -6,4 +6,5 @@ public class EnemyShootingInfo : ScriptableObject {
     public float fireRate;
     public float bulletSpeed;
     public int bulletDamage;
+    public bool enableCameraShake;
 }

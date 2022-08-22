@@ -6,14 +6,16 @@ public class EnemyBullet : MonoBehaviour {
     private Transform target;
     private float speed;
     private int bulletDamage;
+    private bool enableCameraShake;
 
     public GameObject impactEffect;
     public GameObject damageText;
 
-    public void Seek(Transform _target, float _speed, int damage) {
+    public void Seek(Transform _target, float _speed, int damage, bool _enableCameraShake) {
         target = _target;
         speed = _speed;
         bulletDamage = damage;
+        enableCameraShake = _enableCameraShake;
     }
 
     private void Update() {
@@ -35,7 +37,7 @@ public class EnemyBullet : MonoBehaviour {
     }
 
     private void HitTarget() {
-        if (gameObject.CompareTag("BossBullet")) {
+        if (enableCameraShake) {
             CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
         }
 
