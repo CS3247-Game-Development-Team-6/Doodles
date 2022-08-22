@@ -3,17 +3,23 @@ using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour {
 
-    [Header("Attributes")]
-    public float range = 1f;
-    public float fireRate = 1f;
-    public int bulletDamage = 10;
-    public float bulletSpeed = 70f;
+    /**
+     * Enemy shooting stats
+     */
+    private float range;
+    private float fireRate;
+    private float bulletSpeed;
+    private int bulletDamage;
+    [SerializeField] private EnemyShootingInfo shootingInfo;
 
+    /**
+     * Shooting mechanism
+     */
     public bool isShooting = false;
     public GameObject bulletPrefab;
     public Transform firePoint;
     private Transform target; // player or base
-    public Transform rangeCenter;
+    private Transform rangeCenter;
     private float fireCountDown = 0f;
 
     /**
@@ -37,6 +43,11 @@ public class EnemyShooting : MonoBehaviour {
 
     private void Start() {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+
+        range = shootingInfo.range;
+        fireRate = shootingInfo.fireRate;
+        bulletDamage = shootingInfo.bulletDamage;
+        bulletSpeed = shootingInfo.bulletSpeed;
         model = transform.GetChild(2).gameObject;
         animator = model.GetComponent<Animator>();
         rangeCenter = transform.GetChild(3).gameObject.transform;

@@ -609,11 +609,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae588f773893f24419816762fa1dc82d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initSpeed: 2
-  initHealth: 100
-  initDefense: 0
-  inkGained: 5
-  deathEffect: {fileID: 6496939036694839794, guid: 2e72e6fd95c8d0e48b55714387846831, type: 3}
   enemyInfo: {fileID: 11400000, guid: 40bb94349b0be824793e1b61c2d89294, type: 2}
   healthBar: {fileID: 2344494249134577957}
   healthText: {fileID: 2656935879816995319}
@@ -629,20 +624,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ca49d966c12c943a21cab051419277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 1.2
-  fireRate: 0.9
-  attackAnimationName: Attack
-  attackAnimationExitTime: 1
+  shootingInfo: {fileID: 11400000, guid: 53098099a1405b347b1faa47fbd3e8bb, type: 2}
   isShooting: 0
-  playerTag: Player
-  baseTag: Base
-  partToRotate: {fileID: 5669220208767639743}
-  rotationSpeed: 10
-  model: {fileID: 3744675478819270487}
-  animator: {fileID: 0}
-  rangeCenter: {fileID: 8465516812189274386}
   bulletPrefab: {fileID: 5753786456684779845, guid: c484e72e52a807f4a868b5f58b15169c, type: 3}
   firePoint: {fileID: 4646890024762604175}
+  partToRotate: {fileID: 5669220208767639743}
+  playerTag: Player
+  baseTag: Base
 --- !u!114 &3927220003791629200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,11 +918,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: e1cd1a76ecd557440a55dfaeead52541, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6113d0ea44252774db53fa756483807d, type: 3}
---- !u!1 &3744675478819270487 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100102, guid: 6113d0ea44252774db53fa756483807d, type: 3}
-  m_PrefabInstance: {fileID: 3744675478819235921}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3744675478819369655 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400102, guid: 6113d0ea44252774db53fa756483807d, type: 3}
