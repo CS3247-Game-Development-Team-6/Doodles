@@ -60,7 +60,7 @@ public class EnemyShooting : MonoBehaviour {
     }
 
     // dont need to find target every frame
-    void UpdateTarget() {
+    private void UpdateTarget() {
 
         GameObject[] targets = GameObject.FindGameObjectsWithTag(playerTag);
         GameObject[] bases = GameObject.FindGameObjectsWithTag(baseTag);
