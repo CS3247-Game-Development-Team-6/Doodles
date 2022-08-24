@@ -21,16 +21,15 @@ public class Enemy : MonoBehaviour {
     /**
      * enemy properties 
      */
-    [SerializeField] private float speed;
-    [SerializeField] private float initSpeed = 1f;
-    [SerializeField] private float health;
-    [SerializeField] private float initHealth = 100;
-    [SerializeField] private int defense;
-    [SerializeField] private int initDefense = 10;
-    [SerializeField] private float inkGained = 1f;
-    [SerializeField] private GameObject deathEffect;
+    private float speed;
+    private float health;
+    private int defense;
+    private float inkGained;
+    private GameObject deathEffect;
+    [SerializeField] private EnemyInfo enemyInfo;
 
-    public EffectStatus effectStatus;
+    private EffectStatus effectStatus;
+
     public void setEffectStatus(EffectStatus status) {
         effectStatus = status;
     }
@@ -44,21 +43,20 @@ public class Enemy : MonoBehaviour {
     /**
      * Visibility
      */
-    public bool isInFog = true;
+    private bool isInFog = true;
     private Transform ballParentTransform;
-    public Canvas canvas;
+    private Canvas canvas;
 
     /**
      * Shoot target
      */
     private Transform target;
-    private GameObject bulletPrefab;
 
     /**
      * Rotation
      */
-    public GameObject model;
-    public Animator animator;
+    private GameObject model;
+    private Animator animator;
 
     /**
      * Translation
@@ -66,7 +64,6 @@ public class Enemy : MonoBehaviour {
     private int waypointIndex = 0;
     private int lastXCoord = 0;
     private int lastYCoord = 0;
-    public MapGenerator map;
     private Cell[,] cells;
 
     private InkManager inkManager;
@@ -86,40 +83,39 @@ public class Enemy : MonoBehaviour {
         }
 
         // float number between 0 and 1
-        healthBar.fillAmount = health / initHealth;
+        healthBar.fillAmount = health / enemyInfo.health;
     }
 
     public void TakeDot(float amount) {
         health = health - amount;
 
         // float number between 0 and 1
-        healthBar.fillAmount = health / initHealth;
-
+        healthBar.fillAmount = health / enemyInfo.health;
     }
 
     public void ReduceSpeed(float slowAmount) {
-        speed = initSpeed * slowAmount;
+        speed = enemyInfo.speed * slowAmount;
     }
 
     public void RestoreSpeed() {
-        speed = initSpeed;
+        speed = enemyInfo.speed;
     }
 
     public void ReduceAttack(int atkDecreAmount) {
-        bulletPrefab.GetComponent<EnemyBullet>().ReduceBulletDamage(atkDecreAmount);
+        GetComponent<EnemyShooting>().ReduceBulletDamage(atkDecreAmount);
     }
 
     public void RestoreAttack() {
-        bulletPrefab.GetComponent<EnemyBullet>().RestoreBulletDamage();
+        GetComponent<EnemyShooting>().RestoreBulletDamage();
     }
 
     public void ReduceDefense(int defDecreAmount) {
-        if (defDecreAmount > initDefense) defense = 0;
-        else defense = initDefense - defDecreAmount;
+        if (defDecreAmount > enemyInfo.defense) defense = 0;
+        else defense = enemyInfo.defense - defDecreAmount;
     }
 
     public void RestoreDefense() {
-        defense = initDefense;
+        defense = enemyInfo.defense;
     }
 
     private void Die() {
@@ -133,15 +129,15 @@ public class Enemy : MonoBehaviour {
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
         Destroy(gameObject);
-
     }
 
-    private void Start() {
-        health = initHealth;
-        speed = initSpeed;
-        defense = initDefense;
+    void Start() {
+        health = enemyInfo.health;
+        speed = enemyInfo.speed;
+        defense = enemyInfo.defense;
+        inkGained = enemyInfo.inkGained;
+        deathEffect = enemyInfo.deathEffect;
         effectStatus = EffectStatus.NONE;
-        bulletPrefab = GetComponentInParent<EnemyShooting>().bulletPrefab;
 
         model = transform.GetChild(2).gameObject;
         animator = model.GetComponent<Animator>();
@@ -154,7 +150,6 @@ public class Enemy : MonoBehaviour {
         // get a reference to all cells for checking if a tile is fogged or not
         cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
     }
-
 
     private void Update() {
         healthText.text = string.Format("{0}", health);
@@ -208,14 +203,12 @@ public class Enemy : MonoBehaviour {
 
         // enemy is visible if not in fog, hence its visibility is the negation of the isInFog bool.
         SetEnemyVisibility(!isInFog);
-
     }
 
     private bool GetCurrentTileFogged(int xCoord, int yCoord) {
         Cell cell = cells[yCoord, xCoord];
         return cell.isFog;
     }
-
     private void GetNextWaypoint() {
         if (waypointIndex >= Waypoints.points.Length - 1) {
             EndPath();
