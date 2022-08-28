@@ -49,5 +49,17 @@ This is the developer guide for Doodle's Diary. It is intended to be a reference
 
 ## Code Review Process
 
+- PR owner:
+  - Once a feature is completed and ready to merge, create a PR.
+  - Within the PR, states the purpose and what you've done.
+  - Request for the necessary personnel to review the PR.
+  - Correct the PR if necessary.
+- PR reviewer:
+  - Switch to the PR branch.
+  - Test the PR:
+    - To ensure all coding style adhere to the coding standards before approval.
+    - To ensure the project can be built and run.
+  - Comment as necessary and monitor the progress of the PR until it is approved.
+
 ## Content Creation Flow
 
