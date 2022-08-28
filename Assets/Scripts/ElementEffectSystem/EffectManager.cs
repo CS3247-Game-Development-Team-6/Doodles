@@ -31,23 +31,26 @@ public class EffectManager : MonoBehaviour, IEffectable {
             // Enemy is already inflicted with a status effect
             if (this._data != null) {
                 // Enemy is already inflicted with elemental reaction effect
-                if (this._data.Element == "Combined") {
+                if (this._data.Element == ElementEffectType.COMBINED) {
                     return;
                 }
 
                 // Different element is inflicted on enemy
                 if (this._data.Element != _data.Element) {
                     // Frozen
-                    if ((this._data.Element == "Ice" && _data.Element == "Water") || (this._data.Element == "Water" && _data.Element == "Ice")) {
+                    if ((this._data.Element == ElementEffectType.ICE && _data.Element == ElementEffectType.WATER)
+                        || (this._data.Element == ElementEffectType.WATER && _data.Element == ElementEffectType.ICE)) {
                         setFrozenData();
                     }
                     // Scalded
-                    else if (this._data.Element == "Fire" && _data.Element == "Water" || this._data.Element == "Water" && _data.Element == "Fire") {
+                    else if (this._data.Element == ElementEffectType.FIRE && _data.Element == ElementEffectType.WATER
+                        || this._data.Element == ElementEffectType.WATER && _data.Element == ElementEffectType.FIRE) {
                         setBurstDOTAmount(_data);
                         setScaldedData();
                     }
                     // Weakened
-                    else if (this._data.Element == "Ice" && _data.Element == "Fire" || this._data.Element == "Fire" && _data.Element == "Ice") {
+                    else if (this._data.Element == ElementEffectType.ICE && _data.Element == ElementEffectType.FIRE
+                        || this._data.Element == ElementEffectType.FIRE && _data.Element == ElementEffectType.ICE) {
                         setWeakenedData();
                     }
                 }
@@ -89,9 +92,9 @@ public class EffectManager : MonoBehaviour, IEffectable {
     }
 
     private void setBurstDOTAmount(ElementEffectInfo _data) {
-        if (this._data.Element == "Fire") {
+        if (this._data.Element == ElementEffectType.FIRE) {
             _burstDotAmount = this._data.DOTAmount * this._data.TickSpeed * this._data.Lifetime;
-        } else if (_data.Element == "Fire") {
+        } else if (_data.Element == ElementEffectType.FIRE) {
             _burstDotAmount = _data.DOTAmount * _data.TickSpeed * _data.Lifetime;
         }
     }

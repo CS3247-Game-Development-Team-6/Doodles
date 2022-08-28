@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMeleeHitbox : MonoBehaviour
-{
+public class PlayerMeleeHitbox : MonoBehaviour {
     /*
     --IMPORTANT--
     Player melee hitbox can be counted under PlayerBullets layer as they serve the same function.
@@ -33,7 +32,7 @@ public class PlayerMeleeHitbox : MonoBehaviour
     }
 
     void OnCollisionStay(Collision other) {
-        if (other.collider.CompareTag("Enemy") && !colliderList.Contains(other.collider)) { 
+        if (other.collider.CompareTag("Enemy") && !colliderList.Contains(other.collider)) {
             colliderList.Add(other.collider);
         }
     }
@@ -50,7 +49,7 @@ public class PlayerMeleeHitbox : MonoBehaviour
                 // Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
                 // Destroy(effect, 5f); // destroy after 5 ticks
 
-                collider.GetComponentInParent<Enemy>().TakeDamage(meleeDamage);
+                collider.GetComponentInParent<Enemy>().TakeDamage(meleeDamage, ElementEffectType.NONE);
             }
         }
 

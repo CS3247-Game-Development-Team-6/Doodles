@@ -31,9 +31,9 @@ public class PlayerBullet : MonoBehaviour {
         // TODO: implement hit effect
         // Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
         // Destroy(effect, 5f); // destroy after 5 ticks
-        
+
         if (other.collider.CompareTag("Enemy")) {
-            other.collider.GetComponentInParent<Enemy>().TakeDamage(bulletDamage);
+            other.collider.GetComponentInParent<Enemy>().TakeDamage(bulletDamage, ElementEffectType.NONE);
         }
         Destroy(gameObject);
     }

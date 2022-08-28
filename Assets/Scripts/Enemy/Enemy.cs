@@ -76,7 +76,12 @@ public class Enemy : MonoBehaviour {
         inkManager = InkManager.instance;
     }
 
-    public void TakeDamage(float amount) {
+    public void TakeDamage(float amount, ElementEffectType effectType) {
+        // check effectType to immune: same type
+
+        // recalculate damage: level of dominance
+
+        // effectType.NONE
         // Damage to be taken is higher than defense
         if (defense < amount) {
             health = health - amount + defense;
