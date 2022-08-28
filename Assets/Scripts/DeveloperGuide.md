@@ -18,6 +18,8 @@ This is the developer guide for Doodle's Diary. It is intended to be a reference
 - Developers are to employ the [C# at Google Style Guide](https://google.github.io/styleguide/csharp-style.html) for all source code and documentation.
 
 ## System Architecture
+The purpose of this section to lay out the basic system architecture to provide a clear understanding of the system. 
+
 
 ### Tower
 
@@ -30,6 +32,8 @@ This is the developer guide for Doodle's Diary. It is intended to be a reference
 ### UI
 
 ### Menu
+
+## Content Creation Flow
 
 
 ## Branch Management
@@ -60,6 +64,3 @@ This is the developer guide for Doodle's Diary. It is intended to be a reference
     - To ensure all coding style adhere to the coding standards before approval.
     - To ensure the project can be built and run.
   - Comment as necessary and monitor the progress of the PR until it is approved.
-
-## Content Creation Flow
-
