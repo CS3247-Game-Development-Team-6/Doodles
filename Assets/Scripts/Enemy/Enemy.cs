@@ -109,11 +109,12 @@ public class Enemy : MonoBehaviour {
      */
     private void ReduceHealth(float amount) {
         if (defense < amount) {
-            health = health - amount + defense;
-        }
+            float temp = amount - defense;
+            health = health - temp;
 
-        // update health bar, float number between 0 and 1
-        healthBar.fillAmount = health / enemyInfo.health;
+            // update health bar, float number between 0 and 1
+            healthBar.fillAmount = health / enemyInfo.health;
+        }
     }
 
     public void TakeDot(float amount) {

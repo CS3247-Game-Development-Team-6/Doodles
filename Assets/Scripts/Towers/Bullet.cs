@@ -64,13 +64,13 @@ public class Bullet : MonoBehaviour {
             var effectable = target.GetComponent<IEffectable>();
             if (effectable != null) effectable.ApplyEffect(_data);
 
-            target.GetComponent<Enemy>().TakeDamage(bulletDamage, _data.Element);
+            target.GetComponent<Enemy>().TakeDamage(bulletDamage, GetElementType());
         }
 
         if (hitEnemy) {
             var effectable = hitEnemy.gameObject.GetComponent<IEffectable>();
             if (effectable != null) effectable.ApplyEffect(_data);
-            hitEnemy.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage, _data.Element);
+            hitEnemy.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage, GetElementType());
         }
 
         if (toDestroyThisFrame) {
@@ -85,8 +85,16 @@ public class Bullet : MonoBehaviour {
                 var effectable = collider.GetComponent<IEffectable>();
                 if (effectable != null) effectable.ApplyEffect(_data);
 
-                collider.GetComponent<Enemy>().TakeDamage(bulletDamage, _data.Element);
+                collider.GetComponent<Enemy>().TakeDamage(bulletDamage, GetElementType());
             }
+        }
+    }
+
+    private ElementEffectType GetElementType() {
+        if (_data == null) {
+            return ElementEffectType.NONE;
+        } else {
+            return _data.Element;
         }
     }
 
