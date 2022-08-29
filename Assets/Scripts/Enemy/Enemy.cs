@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour {
     private int defense;
     private float inkGained;
     private GameObject deathEffect;
+    private ElementEffectType elementType;
     [SerializeField] private EnemyInfo enemyInfo;
 
     private EffectStatus effectStatus;
@@ -76,18 +77,42 @@ public class Enemy : MonoBehaviour {
         inkManager = InkManager.instance;
     }
 
-    public void TakeDamage(float amount, ElementEffectType effectType) {
-        // check effectType to immune: same type
+    /**
+     * Immune to damage with same elements type from tower. Tower deals more damage to specific element type's enemy
+     * 
+     * Reference: https://app.diagrams.net/#G1qh2Om2KumNYIiOz-RVrV0Wqfpf9qtsK3 
+   
+    // ElementEffectType (in ElementEffectInfo) have COMBINED element, to be used in EffectManager
+    // if possible, may need to refactor EffectManager to remove COMBINED
+    // The final outcome is enemy elements have no COMBINED element and tower elements (ElementType) have no COMBINED element.
 
-        // recalculate damage: level of dominance
+     */
+    public void TakeDamage(float amount, ElementEffectType bulletElementType) {
+        if ((elementType == ElementEffectType.FIRE && bulletElementType == ElementEffectType.FIRE)
+            || (elementType == ElementEffectType.WATER && bulletElementType == ElementEffectType.WATER)
+            || (elementType == ElementEffectType.ICE && bulletElementType == ElementEffectType.ICE)) {
+            return;
+        }
 
-        // effectType.NONE
-        // Damage to be taken is higher than defense
+        if ((elementType == ElementEffectType.FIRE && bulletElementType == ElementEffectType.WATER)
+            || (elementType == ElementEffectType.WATER && bulletElementType == ElementEffectType.ICE)
+            || (elementType == ElementEffectType.ICE && bulletElementType == ElementEffectType.FIRE)) {
+            ReduceHealth(amount * 150 / 100);
+            return;
+        }
+
+        ReduceHealth(amount);
+    }
+
+    /*
+     * Take account of enemy defense when reducing health
+     */
+    private void ReduceHealth(float amount) {
         if (defense < amount) {
             health = health - amount + defense;
         }
 
-        // float number between 0 and 1
+        // update health bar, float number between 0 and 1
         healthBar.fillAmount = health / enemyInfo.health;
     }
 
@@ -142,6 +167,7 @@ public class Enemy : MonoBehaviour {
         defense = enemyInfo.defense;
         inkGained = enemyInfo.inkGained;
         deathEffect = enemyInfo.deathEffect;
+        elementType = enemyInfo.elementType;
         effectStatus = EffectStatus.NONE;
 
         model = transform.GetChild(2).gameObject;
