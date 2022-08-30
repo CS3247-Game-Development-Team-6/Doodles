@@ -98,10 +98,11 @@ public class Enemy : MonoBehaviour {
             || (elementType == ElementEffectType.WATER && bulletElementType == ElementEffectType.ICE)
             || (elementType == ElementEffectType.ICE && bulletElementType == ElementEffectType.FIRE)) {
             ReduceHealth(amount * 150 / 100);
+            Debug.Log("take damage more: " + amount * 150 / 100);
             return;
         }
-
         ReduceHealth(amount);
+        Debug.Log("take damage normal: " + amount);
     }
 
     /*

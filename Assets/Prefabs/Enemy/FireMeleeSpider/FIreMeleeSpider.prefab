@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 904252060}
   - component: {fileID: 7208389763373003395}
   m_Layer: 0
-  m_Name: ElementalMelee
+  m_Name: FIreMeleeSpider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae588f773893f24419816762fa1dc82d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyInfo: {fileID: 11400000, guid: e0c09d2b93eb39945833766386a20a08, type: 2}
+  enemyInfo: {fileID: 11400000, guid: 192c208aab2219c4a8107dae4a02afab, type: 2}
   healthBar: {fileID: 1929750958}
   healthText: {fileID: 4879313988388672468}
 --- !u!114 &904252060
@@ -676,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ca49d966c12c943a21cab051419277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingInfo: {fileID: 11400000, guid: a5cd9960061bd414d915b416c813cafe, type: 2}
+  shootingInfo: {fileID: 11400000, guid: 861704ed98a62024690561e47f373414, type: 2}
   isShooting: 0
   bulletPrefab: {fileID: 5753786456684779845, guid: b11f3588d36e3f84ba72fe1baeee0b34, type: 3}
   firePoint: {fileID: 5410826820070449313}
