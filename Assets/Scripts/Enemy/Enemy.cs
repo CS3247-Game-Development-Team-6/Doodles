@@ -72,6 +72,7 @@ public class Enemy : MonoBehaviour {
     [Header("Unity Stuff")]
     public Image healthBar;
     public TMP_Text healthText;
+    public GameObject damageText;
 
     private void Awake() {
         inkManager = InkManager.instance;
@@ -111,18 +112,24 @@ public class Enemy : MonoBehaviour {
     private void ReduceHealth(float amount) {
         if (defense < amount) {
             float temp = amount - defense;
-            health = health - temp;
+            health -= temp;
 
             // update health bar, float number between 0 and 1
             healthBar.fillAmount = health / enemyInfo.health;
+
+            DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+            indicator.SetDamageTextFromFloat(temp);
         }
     }
 
     public void TakeDot(float amount) {
-        health = health - amount;
+        health -= amount;
 
         // float number between 0 and 1
         healthBar.fillAmount = health / enemyInfo.health;
+
+        DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+        indicator.SetDamageTextFromFloat(amount);
     }
 
     public void ReduceSpeed(float slowAmount) {

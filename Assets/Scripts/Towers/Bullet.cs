@@ -63,7 +63,6 @@ public class Bullet : MonoBehaviour {
         if (target != null && target.CompareTag("Enemy")) {
             var effectable = target.GetComponent<IEffectable>();
             if (effectable != null) effectable.ApplyEffect(_data);
-            Debug.Log("target take damage");
             target.GetComponent<Enemy>().TakeDamage(bulletDamage, GetElementType());
         }
 
@@ -84,7 +83,6 @@ public class Bullet : MonoBehaviour {
             if (collider.CompareTag("Enemy")) {
                 var effectable = collider.GetComponent<IEffectable>();
                 if (effectable != null) effectable.ApplyEffect(_data);
-                Debug.Log("explode take damage");
                 collider.GetComponent<Enemy>().TakeDamage(bulletDamage, GetElementType());
             }
         }
