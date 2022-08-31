@@ -20,6 +20,15 @@ This is the developer guide for Doodle's Diary. It is intended to be a reference
 ## System Architecture
 The purpose of this section to lay out the basic system architecture to provide a clear understanding of the system. 
 
+- Under the `/Scripts` folder, you will be able to find all the relevant gameplay behavioral scripts that are used in the game. The scripts are further categorized into the following sub-folders:
+  - `/ElementEffectSystem`: Scripts that are responsible for gameplay behavior of elemental effects.
+  - `/Enemy`: Scripts that are reponsible for gameplay behavior of in-game enemies.
+  - `/GameManager`: Scripts that are responsible for settings for display and sound. Also, behaviors for game state, level difficulty, in-game currency (ink), base tower and wave spawning.
+  - `/Graphics`: Scripts that are responsible for graphic rendering and post pocessing effects.
+  - `/Map`: Scripts that are responsible for generation of the tile map.
+  - `/Player`: Scripts that are responsible for the player's behaviours in-game. 
+  - `/Tower`: Scripts that are responsible for the tower's settings and behaviours in-game. 
+  - `/UI`: Scripts that are responsible for the UI's behaviors used. 
 
 ### Tower
 
