@@ -32,6 +32,10 @@ The purpose of this section to lay out the basic system architecture to provide 
 
 ### Tower
 
+> What is a ScriptableObject?
+> 
+> ScriptableObject is a serializable Unity class that allows you to store large quantities of shared data independent from script instances.  
+
 ### Player
 
 ### Enemy
