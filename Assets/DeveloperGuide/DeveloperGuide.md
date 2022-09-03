@@ -53,7 +53,7 @@ For each tower, we will use the following naming convention - `<Level>_<Name><El
 
 #### Creation of tower models
 In general, a tower model should consist of:
-
+- 
 
 
 ### Player
