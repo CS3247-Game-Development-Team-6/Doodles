@@ -30,11 +30,21 @@ The purpose of this section to lay out the basic system architecture to provide 
   - `/Tower`: Scripts that are responsible for the tower's settings and behaviours in-game. 
   - `/UI`: Scripts that are responsible for the UI's behaviors used. 
 
+## Unity Development Essential:
+- `scriptableObject`:
+  - [Brackeys's Tutorial](https://www.youtube.com/watch?v=aPXvoWVabPY&ab_channel=Brackeys)
+- 
+
 ### Tower
 
-> What is a ScriptableObject?
-> 
-> ScriptableObject is a serializable Unity class that allows you to store large quantities of shared data independent from script instances.  
+Tower is one of the core features in this project. They help to diversify the gameplay and provide a more interesting experience.
+
+For traditional towers, they usually consists of the following properties:
+
+- 1 Base Model + 1 Upgraded Model
+- 1 Base Behavior + 3 Elemental Behaviors
+
+
 
 ### Player
 
