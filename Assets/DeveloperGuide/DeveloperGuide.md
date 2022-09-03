@@ -61,9 +61,17 @@ For each tower, we will use the following naming convention - `<Level>_<Name><El
 
   <img src="./public/Tower/towerPrefabModel.png" width=500px/>
 
-  - Base: The base of which a tower is built.
-  - Rotational Base: To allow the cannon to rotate and point at the target. Developer has to manually adjust the transform of the rotational base and calibrate with the base.
-  - Firing Point: This is a point where `bullet.prefab` will be instantiated. 
+  - `Base`: The base of which a tower is built.
+  - `RotationBase`: To allow the cannon to rotate and point at the target. Developer has to manually adjust the transform of the rotational base and calibrate with the base.
+  - `FirePoint`: This is a point where `bullet.prefab` will be instantiated.
+  - The above naming convention should be followed for the tower prefabs. This is because the `Tower.cs` script will be using these names to find references when instantiating the tower.
+
+    <img src="./public/Tower/towerPrefabNaming.png" width=500px/>
+    <img src="./public/Tower/towerPrefabNaming2.png" width=500px/>
+
+- For each tower, corresponding tower scriptable object should be created, for each of the upgrade variants and each of the elemental variants.
+
+
 
 
 ### Player
