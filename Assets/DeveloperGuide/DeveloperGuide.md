@@ -91,7 +91,6 @@ To script for each tower's behaviors, individual scripts should be created for t
 
 <img src="./public/Tower/towerClassDiagram.png"/>
 
-
 ---
 
 ### Player
