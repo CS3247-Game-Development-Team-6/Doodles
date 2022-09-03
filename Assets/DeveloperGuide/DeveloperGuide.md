@@ -36,6 +36,8 @@ The purpose of this section to lay out the basic system architecture to provide 
   - `/Tower`: Scripts that are responsible for the tower's settings and behaviours in-game. 
   - `/UI`: Scripts that are responsible for the UI's behaviors used. 
 
+---
+
 ### Tower
 
 #### Overall Property
@@ -51,7 +53,7 @@ For each tower, we will use the following naming convention - `<Level>_<Name><El
 - E.g. `0_CannonBase`, `1_BallistaFire`.
 - For towers with no element, use `Base` for `<Element>`.
 
-#### Creation of tower prefabs
+#### Tower prefabs
 
 - For each tower, it should be assigned with its own tag to distinguish its type.
 
@@ -69,10 +71,28 @@ For each tower, we will use the following naming convention - `<Level>_<Name><El
     <img src="./public/Tower/towerPrefabNaming.png" width=500px/>
     <img src="./public/Tower/towerPrefabNaming2.png" width=500px/>
 
-- For each tower, corresponding tower scriptable object should be created, for each of the upgrade variants and each of the elemental variants.
+#### Tower Scriptable Object
+
+- For each tower, a corresponding scriptable object should be created for each of the tower variants.
+  
+  <img src="./public/Tower/towerScriptObjs.png" width=500px/>
+
+- For each tower type, its corresponding prefab should be assigned.
+
+  <img src="./public/Tower/towerScriptObjPrefabAssign.png" height=500px/>
+
+- For each scriptable object created for each tower, do fill up the upgrade path as accordingly.
+
+  <img src="./public/Tower/towerScriptObjUpPath.png" height=500px/>
+
+#### Tower C# Behavioral Scripts
+
+To script for each tower's behaviors, individual scripts should be created for the tower. The behavioral scripts created should be extended from the `Tower` class.
+
+<img src="./public/Tower/towerClassDiagram.png"/>
 
 
-
+---
 
 ### Player
 
