@@ -33,17 +33,18 @@ The purpose of this section to lay out the basic system architecture to provide 
 ## Unity Development Essential:
 - `scriptableObject`:
   - [Brackeys's Tutorial](https://www.youtube.com/watch?v=aPXvoWVabPY&ab_channel=Brackeys)
-- 
 
 ### Tower
 
-Tower is one of the core features in this project. They help to diversify the gameplay and provide a more interesting experience.
+#### Property
+For a single tower type in game, it usually consists:
+- 1 basic version + 1 upgraded version. 
+- 1 non-elemental variant + 3 elemental version. (For now, we only have fire, water and ice as our elemental types.)
 
-For traditional towers, they usually consists of the following properties:
+#### Architecture Diagram
 
-- 1 Base Model + 1 Upgraded Model
-- 1 Base Behavior + 3 Elemental Behaviors
-
+##### Tower Behavior
+<p align="center"><img src="./public/towerUpgradeBehavior.png" width=500px/></p>
 
 
 ### Player
