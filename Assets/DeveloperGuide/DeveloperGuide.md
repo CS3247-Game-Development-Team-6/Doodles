@@ -17,7 +17,7 @@ This is the developer guide for Doodle's Diary. It is intended to be a reference
 
 - Developers are to employ the [C# at Google Style Guide](https://google.github.io/styleguide/csharp-style.html) for all source code and documentation.
 
-## Unity Development Essential:
+## Unity Development Essential
 - `scriptableObject`:
   - [Brackeys's Tutorial](https://www.youtube.com/watch?v=aPXvoWVabPY&ab_channel=Brackeys)
 
