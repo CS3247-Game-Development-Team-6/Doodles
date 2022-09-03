@@ -17,6 +17,12 @@ This is the developer guide for Doodle's Diary. It is intended to be a reference
 
 - Developers are to employ the [C# at Google Style Guide](https://google.github.io/styleguide/csharp-style.html) for all source code and documentation.
 
+## Unity Development Essential:
+- `scriptableObject`:
+  - [Brackeys's Tutorial](https://www.youtube.com/watch?v=aPXvoWVabPY&ab_channel=Brackeys)
+
+---
+
 ## System Architecture
 The purpose of this section to lay out the basic system architecture to provide a clear understanding of the system. 
 
@@ -30,21 +36,24 @@ The purpose of this section to lay out the basic system architecture to provide 
   - `/Tower`: Scripts that are responsible for the tower's settings and behaviours in-game. 
   - `/UI`: Scripts that are responsible for the UI's behaviors used. 
 
-## Unity Development Essential:
-- `scriptableObject`:
-  - [Brackeys's Tutorial](https://www.youtube.com/watch?v=aPXvoWVabPY&ab_channel=Brackeys)
-
 ### Tower
 
-#### Property
+#### Overall Property
 For a single tower type in game, it usually consists:
 - 1 basic version + 1 upgraded version. 
 - 1 non-elemental variant + 3 elemental version. (For now, we only have fire, water and ice as our elemental types.)
+- The upgrade path of a typical tower is as follows:
+  
+  <img src="./public/towerUpgradeBehavior.png" width=500px/>
 
-#### Architecture Diagram
+#### Naming Convention
+For each tower, we will use the following naming convention - `<Level>_<Name><Element>`. This naming convention should be followed for the tower prefabs and the tower scriptable object instances.
+- E.g. `0_CannonBase`, `1_BallistaFire`.
+- For towers with no element, use `Base` for `<Element>`.
 
-##### Tower Behavior
-<p align="center"><img src="./public/towerUpgradeBehavior.png" width=500px/></p>
+#### Creation of tower models
+In general, a tower model should consist of:
+
 
 
 ### Player
@@ -56,9 +65,6 @@ For a single tower type in game, it usually consists:
 ### UI
 
 ### Menu
-
-## Content Creation Flow
-
 
 ## Branch Management
 - `main` branch: For stable releases. Only merge into this branch when the build is stable and ready for release.
