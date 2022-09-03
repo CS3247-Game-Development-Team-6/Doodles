@@ -44,16 +44,26 @@ For a single tower type in game, it usually consists:
 - 1 non-elemental variant + 3 elemental version. (For now, we only have fire, water and ice as our elemental types.)
 - The upgrade path of a typical tower is as follows:
   
-  <img src="./public/towerUpgradeBehavior.png" width=500px/>
+  <img src="./public/Tower/towerUpgradeBehavior.png" width=500px/>
 
 #### Naming Convention
 For each tower, we will use the following naming convention - `<Level>_<Name><Element>`. This naming convention should be followed for the tower prefabs and the tower scriptable object instances.
 - E.g. `0_CannonBase`, `1_BallistaFire`.
 - For towers with no element, use `Base` for `<Element>`.
 
-#### Creation of tower models
-In general, a tower model should consist of:
-- 
+#### Creation of tower prefabs
+
+- For each tower, it should be assigned with its own tag to distinguish its type.
+
+  <img src="./public/Tower/towerTag.png"/>
+
+- In general, a tower prefab should consist of:
+
+  <img src="./public/Tower/towerPrefabModel.png" width=500px/>
+
+  - Base: The base of which a tower is built.
+  - Rotational Base: To allow the cannon to rotate and point at the target. Developer has to manually adjust the transform of the rotational base and calibrate with the base.
+  - Firing Point: This is a point where `bullet.prefab` will be instantiated. 
 
 
 ### Player
