@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44970167, g: 0.49976736, b: 0.5756334, a: 1}
+  m_IndirectSpecularColor: {r: 0.4497019, g: 0.49976808, b: 0.57563424, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1358,8 +1358,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
+  m_Color: {r: 0.8254717, g: 1, b: 0.98450124, a: 1}
+  m_Intensity: 0.36
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2079,7 +2079,7 @@ MonoBehaviour:
   growthRate: 0
   startingAmount: 0.7
   movement: {fileID: 7828996251632798774}
-  levelInfo: {fileID: 11400000, guid: 198253c90dfd4c54e902e0dc8d46c03e, type: 2}
+  levelInfo: {fileID: 11400000, guid: 140bbd25839f53543813e69e02eb8db3, type: 2}
   playerInkIndicator: {fileID: 889571982}
 --- !u!1001 &1329500688
 PrefabInstance:
@@ -3326,6 +3326,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameMaster
       objectReference: {fileID: 0}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: levelInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 140bbd25839f53543813e69e02eb8db3, type: 2}
     - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: wavesContainer
       value: 
