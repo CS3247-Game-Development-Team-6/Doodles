@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -25,6 +26,8 @@ public class TowerInfo : ScriptableObject {
     public ElementInfo element;
     /** cost is the additional cost to create this tower from previous version. */
     public int cost;
+    /** the celltypes this tower can be built on. */
+    public List<CellType> allowedCellTypes;
 
     [Header("Bullet")]
     /** Speed of bullet per second. */

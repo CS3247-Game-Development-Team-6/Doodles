@@ -320,6 +320,12 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
 
+        // Are we allowed to build the tower here?
+        if (!towerManager.CanBuildTower(node)) {
+            Debug.LogWarning($"Cannot build tower on {node}");
+            return;
+        }
+
         currentBuildDuration = buildDuration;
         isBuilding = true;
         Build();
