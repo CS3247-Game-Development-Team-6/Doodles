@@ -51,8 +51,10 @@ public class Node : MonoBehaviour
             }
         }
 
-        decorationMesh = Instantiate(prefab, transform.position + tileOffset, transform.rotation);
-        decorationMesh.transform.SetParent(transform);
+        if (prefab != null) {
+            decorationMesh = Instantiate(prefab, transform.position + tileOffset, transform.rotation);
+            decorationMesh.transform.SetParent(transform);
+        }
         
         playerObject = GameObject.Find("Player");
         playerMovement = playerObject.GetComponent<PlayerMovement>();
@@ -79,7 +81,7 @@ public class Node : MonoBehaviour
         towerObj = Instantiate(towerInfo.towerPrefab, towerBuildPosition, Quaternion.identity);
         tower = towerObj.GetComponent<Tower>();
         tower.SetTowerInfo(towerInfo);
-        Destroy(decorationMesh);    // Destroy the flora on the tile.
+        if (decorationMesh != null) Destroy(decorationMesh);    // Destroy the flora on the tile.
 
         return towerObj.GetComponent<Tower>();
     }

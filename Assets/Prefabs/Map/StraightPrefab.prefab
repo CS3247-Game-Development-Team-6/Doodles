@@ -105,6 +105,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1013895710286160022}
+  - component: {fileID: 26286198409295446}
+  - component: {fileID: -3809826431614107819}
   m_Layer: 0
   m_Name: StraightPrefab
   m_TagString: Untagged
@@ -128,6 +130,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &26286198409295446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894887961081992580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9e8655fe760a84d979fe02de93f176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverColor: {r: 0.0783949, g: 0.5566038, b: 0, a: 1}
+  tooFarColor: {r: 0.9433962, g: 0.39753166, b: 0.39753166, a: 1}
+  towerObj: {fileID: 0}
+  tileOffset: {x: 0, y: 0, z: 0}
+  towerOffset: {x: 0, y: 0, z: 0}
+  tileMesh: {fileID: 1587568490812675054}
+  defaultTile: {fileID: 0}
+  tileTypes: []
+--- !u!65 &-3809826431614107819
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894887961081992580}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1, y: 0.3, z: 1.1}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1001 &1930149714690518719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -185,6 +220,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caea7f1a1cf0ba34897a2463cd7f0365, type: 3}
+--- !u!1 &1587568490812675054 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: caea7f1a1cf0ba34897a2463cd7f0365, type: 3}
+  m_PrefabInstance: {fileID: 1930149714690518719}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2108807832937580884 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: caea7f1a1cf0ba34897a2463cd7f0365, type: 3}
