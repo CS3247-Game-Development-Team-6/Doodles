@@ -322,6 +322,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // Are we allowed to build the tower here?
         if (!towerManager.CanBuildTower(node)) {
+            // node.TriggerInvalidAction();
             Debug.LogWarning($"Cannot build tower on {node}");
             return;
         }

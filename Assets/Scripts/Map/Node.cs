@@ -12,8 +12,9 @@ public class TileType {
 public class Node : MonoBehaviour
 {
     public Color hoverColor;
-    private Color startColor;
     public Color tooFarColor;
+    public Color invalidColor;
+    private Color startColor;
 
     public bool isUpgraded { get; set; }
     public GameObject towerObj;
@@ -32,6 +33,8 @@ public class Node : MonoBehaviour
     public Vector3 towerBuildPosition { get; private set; }
     private PlayerMovement playerMovement;
     private GameObject playerObject;
+
+    public ParticleSystem invalidAction;
 
     private void Start()
     {
@@ -104,7 +107,9 @@ public class Node : MonoBehaviour
             return;
         }
 
-        if ((transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()) {
+        if (!TowerManager.instance.CanBuildTower(this)){
+            tileRenderer.material.color = invalidColor;
+        } else if ((transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()) {
             tileRenderer.material.color = tooFarColor;
         } else {
             tileRenderer.material.color = hoverColor;
@@ -119,11 +124,18 @@ public class Node : MonoBehaviour
         } else if (decorationMesh != null) {
             decorationMesh.gameObject.GetComponent<Outline>().enabled = true;
             decorationMesh.gameObject.GetComponent<Outline>().OutlineWidth = 5f;
-            decorationMesh.gameObject.GetComponent<Outline>().OutlineColor = 
-                (transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()
-                    ? tooFarColor
-                    : hoverColor;
+            if (!TowerManager.instance.CanBuildTower(this)) {
+                decorationMesh.gameObject.GetComponent<Outline>().OutlineColor = invalidColor;
+            } else if ((transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()) {
+                decorationMesh.gameObject.GetComponent<Outline>().OutlineColor = tooFarColor;
+            } else {
+                decorationMesh.gameObject.GetComponent<Outline>().OutlineColor = hoverColor;
+            }
         }
+    }
+
+    public void TriggerInvalidAction() {
+        Instantiate(invalidAction, transform);
     }
 
     private void OnMouseExit() {

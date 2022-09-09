@@ -144,12 +144,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverColor: {r: 0.0783949, g: 0.5566038, b: 0, a: 1}
   tooFarColor: {r: 0.9433962, g: 0.39753166, b: 0.39753166, a: 1}
+  invalidColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
   towerObj: {fileID: 0}
   tileOffset: {x: 0, y: 0, z: 0}
   towerOffset: {x: 0, y: 0, z: 0}
   tileMesh: {fileID: 1587568490812675054}
   defaultTile: {fileID: 0}
   tileTypes: []
+  invalidAction: {fileID: 8998585739324249827, guid: b03950896a593fb458be4883929e47a6, type: 3}
 --- !u!65 &-3809826431614107819
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -161,7 +163,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1, y: 0.3, z: 1.1}
+  m_Size: {x: 1.1, y: 0.2, z: 1.1}
   m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1001 &1930149714690518719
 PrefabInstance:
