@@ -274,6 +274,11 @@ public class Enemy : MonoBehaviour {
                 foreach (SkinnedMeshRenderer r in renderers) {
                     r.enabled = isVisible;
                 }
+
+                MeshRenderer[] meshRenderers = model.GetComponentsInChildren<MeshRenderer>();
+                foreach (MeshRenderer r in meshRenderers) {
+                    r.enabled = isVisible;
+                }
             }
 
         }
