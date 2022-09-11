@@ -33,7 +33,7 @@ public class PlayerBullet : MonoBehaviour {
         // Destroy(effect, 5f); // destroy after 5 ticks
 
         if (other.collider.CompareTag("Enemy")) {
-            other.collider.GetComponentInParent<Enemy>().TakeDamage(bulletDamage, ElementEffectType.NONE);
+            other.collider.GetComponentInParent<Enemy>().TakeDamage(bulletDamage, null);
         }
         Destroy(gameObject);
     }

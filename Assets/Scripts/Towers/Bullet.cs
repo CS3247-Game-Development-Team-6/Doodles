@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour {
     public GameObject impactEffect;
     [SerializeField] private int bulletDamage;
     [SerializeField] private ElementEffectInfo _data;
+    [SerializeField] private ElementInfo elementInfo;
     private bool isPassingThroughBullet;
 
     public void SetBulletInfo(TowerInfo towerInfo) {
@@ -15,6 +16,7 @@ public class Bullet : MonoBehaviour {
         this.explosionRadius = towerInfo.explosionRadius;
         this.bulletDamage = towerInfo.damage;
         this._data = !towerInfo.element ? null : towerInfo.element.effect;
+        this.elementInfo = !towerInfo.element ? null : towerInfo.element;
         this.impactEffect = towerInfo.impactPrefab;
         this.isPassingThroughBullet = towerInfo.penetratesEnemy;
     }
@@ -63,13 +65,13 @@ public class Bullet : MonoBehaviour {
         if (target != null && target.CompareTag("Enemy")) {
             var effectable = target.GetComponent<IEffectable>();
             if (effectable != null) effectable.ApplyEffect(_data);
-            target.GetComponent<Enemy>().TakeDamage(bulletDamage, GetElementType());
+            target.GetComponent<Enemy>().TakeDamage(bulletDamage, elementInfo);
         }
 
         if (hitEnemy) {
             var effectable = hitEnemy.gameObject.GetComponent<IEffectable>();
             if (effectable != null) effectable.ApplyEffect(_data);
-            hitEnemy.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage, GetElementType());
+            hitEnemy.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage, elementInfo);
         }
 
         if (toDestroyThisFrame) {
@@ -83,16 +85,8 @@ public class Bullet : MonoBehaviour {
             if (collider.CompareTag("Enemy")) {
                 var effectable = collider.GetComponent<IEffectable>();
                 if (effectable != null) effectable.ApplyEffect(_data);
-                collider.GetComponent<Enemy>().TakeDamage(bulletDamage, GetElementType());
+                collider.GetComponent<Enemy>().TakeDamage(bulletDamage, elementInfo);
             }
-        }
-    }
-
-    private ElementEffectType GetElementType() {
-        if (_data == null) {
-            return ElementEffectType.NONE;
-        } else {
-            return _data.Element;
         }
     }
 

@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour {
     private int defense;
     private float inkGained;
     private GameObject deathEffect;
-    private ElementEffectType elementType;
+    private ElementInfo element;
     [SerializeField] private EnemyInfo enemyInfo;
 
     private EffectStatus effectStatus;
@@ -81,29 +81,23 @@ public class Enemy : MonoBehaviour {
     /**
      * Immune to damage with same elements type from tower. Tower deals more damage to specific element type's enemy
      * 
-     * Reference: https://app.diagrams.net/#G1qh2Om2KumNYIiOz-RVrV0Wqfpf9qtsK3 
-   
-    // ElementEffectType (in ElementEffectInfo) have COMBINED element, to be used in EffectManager
-    // if possible, may need to refactor EffectManager to remove COMBINED
-    // The final outcome is enemy elements have no COMBINED element and tower elements (ElementType) have no COMBINED element.
-
+     * Reference: https://drive.google.com/drive/folders/1Ck3jqkF_k5snVlAlZsA441pl4-DpjStC  
      */
-    public void TakeDamage(float amount, ElementEffectType bulletElementType) {
-        if ((elementType == ElementEffectType.FIRE && bulletElementType == ElementEffectType.FIRE)
-            || (elementType == ElementEffectType.WATER && bulletElementType == ElementEffectType.WATER)
-            || (elementType == ElementEffectType.ICE && bulletElementType == ElementEffectType.ICE)) {
+    public void TakeDamage(float amount, ElementInfo bulletElement) {
+        if (element == null || bulletElement == null) {
+            ReduceHealth(amount);
             return;
         }
 
-        if ((elementType == ElementEffectType.FIRE && bulletElementType == ElementEffectType.WATER)
-            || (elementType == ElementEffectType.WATER && bulletElementType == ElementEffectType.ICE)
-            || (elementType == ElementEffectType.ICE && bulletElementType == ElementEffectType.FIRE)) {
+        if (element.type == bulletElement.type) {
+            return;
+        }
+
+        if (element.weakness == bulletElement.type) {
             ReduceHealth(amount * 150 / 100);
-            Debug.Log("take damage more: " + amount * 150 / 100);
             return;
         }
         ReduceHealth(amount);
-        Debug.Log("take damage normal: " + amount);
     }
 
     /*
@@ -176,7 +170,7 @@ public class Enemy : MonoBehaviour {
         defense = enemyInfo.defense;
         inkGained = enemyInfo.inkGained;
         deathEffect = enemyInfo.deathEffect;
-        elementType = enemyInfo.elementType;
+        element = enemyInfo.element;
         effectStatus = EffectStatus.NONE;
 
         model = transform.GetChild(2).gameObject;

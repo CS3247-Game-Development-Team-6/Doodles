@@ -7,5 +7,5 @@ public class EnemyInfo : ScriptableObject {
     public int defense;
     public float inkGained;
     public GameObject deathEffect;
-    public ElementEffectType elementType;
+    public ElementInfo element;
 }
