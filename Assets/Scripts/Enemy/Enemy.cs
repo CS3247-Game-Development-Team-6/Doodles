@@ -19,14 +19,16 @@ public enum EffectStatus {
 public class Enemy : MonoBehaviour {
 
     /**
-     * enemy properties 
+     * enemy properties from EnemyInfo
      */
     private float speed;
     private float health;
     private int defense;
+    private ElementInfo element;
+    private float damageMultiplier;
     private float inkGained;
     private GameObject deathEffect;
-    private ElementInfo element;
+
     [SerializeField] private EnemyInfo enemyInfo;
 
     private EffectStatus effectStatus;
@@ -94,7 +96,7 @@ public class Enemy : MonoBehaviour {
         }
 
         if (element.weakness == bulletElement.type) {
-            ReduceHealth(amount * 150 / 100);
+            ReduceHealth(amount * damageMultiplier);
             return;
         }
         ReduceHealth(amount);
@@ -168,9 +170,10 @@ public class Enemy : MonoBehaviour {
         health = enemyInfo.health;
         speed = enemyInfo.speed;
         defense = enemyInfo.defense;
+        element = enemyInfo.element;
+        damageMultiplier = enemyInfo.damageMultiplier;
         inkGained = enemyInfo.inkGained;
         deathEffect = enemyInfo.deathEffect;
-        element = enemyInfo.element;
         effectStatus = EffectStatus.NONE;
 
         model = transform.GetChild(2).gameObject;
