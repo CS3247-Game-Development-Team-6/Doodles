@@ -26,5 +26,13 @@ public class EnemyInfo : ScriptableObject {
     public ElementInfo element;
     public float damageMultiplier;
 
+    /**
+     * Invulnerability for a period of time
+     */
+    [Header("Invulnerable")]
+    public bool isInvulnerable;
+    public float duration;
+    public float cooldown;
+    public float slowSpeed;
 
 }

@@ -3,44 +3,62 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-/** 
- * Enemy's effect status caused by element reactions
- */
-public enum EffectStatus {
+
+public enum Status {
+    /**
+     * Element status
+     */
     SCORCH, // fire
     CHILL, // ice
     DRENCH, // water
     SCALD, // fire + water
     FROZE, // ice + water
     WEAKEN, // fire + ice
+
+    /**
+     * Unique status
+     */
+    INVUlNERABLE, // immune to everything
     NONE // default
 }
 
 public class Enemy : MonoBehaviour {
 
     /**
-     * enemy properties from EnemyInfo
+     * basic enemy properties
      */
     private float speed;
     private float health;
     private int defense;
-    private ElementInfo element;
-    private float damageMultiplier;
     private float inkGained;
     private GameObject deathEffect;
 
+    /**
+     * Elemental
+     */
+    private ElementInfo element;
+    private float damageMultiplier;
+
+    /**
+     * Invulnerability
+     */
+    private bool isInvulnerable;
+    private float duration;
+    private float cooldown;
+    private float slowSpeed;
+
     [SerializeField] private EnemyInfo enemyInfo;
 
-    private EffectStatus effectStatus;
+    private Status status;
 
-    public void setEffectStatus(EffectStatus status) {
-        effectStatus = status;
+    public void setStatus(Status _status) {
+        status = _status;
     }
-    public EffectStatus getEffectStatus() {
-        return effectStatus;
+    public Status getStatus() {
+        return status;
     }
-    public void removeEffectStatus() {
-        effectStatus = EffectStatus.NONE;
+    public void removeStatus() {
+        status = Status.NONE;
     }
 
     /**
@@ -86,6 +104,10 @@ public class Enemy : MonoBehaviour {
      * Reference: https://drive.google.com/drive/folders/1Ck3jqkF_k5snVlAlZsA441pl4-DpjStC  
      */
     public void TakeDamage(float amount, ElementInfo bulletElement) {
+        if (getStatus() == Status.INVUlNERABLE) {
+            return;
+        }
+
         if (element == null || bulletElement == null) {
             ReduceHealth(amount);
             return;
@@ -119,6 +141,10 @@ public class Enemy : MonoBehaviour {
     }
 
     public void TakeDot(float amount) {
+        if (getStatus() == Status.INVUlNERABLE) {
+            return;
+        }
+
         health -= amount;
 
         // float number between 0 and 1
@@ -174,7 +200,11 @@ public class Enemy : MonoBehaviour {
         damageMultiplier = enemyInfo.damageMultiplier;
         inkGained = enemyInfo.inkGained;
         deathEffect = enemyInfo.deathEffect;
-        effectStatus = EffectStatus.NONE;
+        isInvulnerable = enemyInfo.isInvulnerable;
+        slowSpeed = enemyInfo.slowSpeed;
+        duration = enemyInfo.duration;
+        cooldown = enemyInfo.cooldown;
+        status = Status.NONE;
 
         model = transform.GetChild(2).gameObject;
         animator = model.GetComponent<Animator>();
@@ -195,18 +225,35 @@ public class Enemy : MonoBehaviour {
             Die();
         }
 
+        if (isInvulnerable && getStatus() == Status.INVUlNERABLE) {
+            if (duration <= 0f) {
+                DisableInvulnerability();
+            }
+            // reduce duration
+            duration -= Time.deltaTime;
+        }
+
+        if (isInvulnerable && getStatus() != Status.INVUlNERABLE) {
+            if (cooldown <= 0f) {
+                EnableInvulnerability();
+            }
+            cooldown -= Time.deltaTime;
+        }
+
+
         if (GetComponent<EnemyShooting>().isShooting) {
-            if (getEffectStatus() == EffectStatus.FROZE) GetComponent<EnemyShooting>().enabled = false;
+            if (getStatus() == Status.FROZE) GetComponent<EnemyShooting>().enabled = false;
             else GetComponent<EnemyShooting>().enabled = true;
             // stop movement
             animator.SetBool("isWalking", false);
             return;
         }
 
-        if (getEffectStatus() == EffectStatus.FROZE) {
+        if (getStatus() == Status.FROZE) {
             animator.SetBool("isWalking", false);
             return;
         }
+
         GetComponent<EnemyShooting>().enabled = true;
         animator.SetBool("isWalking", true);
 
@@ -279,6 +326,25 @@ public class Enemy : MonoBehaviour {
             }
 
         }
+    }
+
+    private void EnableInvulnerability() {
+        GetComponent<EffectManager>().RemoveEffect();
+        GetComponent<EffectManager>().enabled = false;
+        setStatus(Status.INVUlNERABLE);
+        cooldown = enemyInfo.cooldown;
+
+        // only for invulnerable enemy
+        transform.GetChild(4).gameObject.SetActive(true);
+    }
+
+    private void DisableInvulnerability() {
+        setStatus(Status.NONE);
+        GetComponent<EffectManager>().enabled = true;
+        duration = enemyInfo.duration;
+
+        // only for invulnerable enemy
+        transform.GetChild(4).gameObject.SetActive(false);
     }
 
 }
