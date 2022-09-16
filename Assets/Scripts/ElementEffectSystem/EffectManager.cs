@@ -26,7 +26,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
     }
 
     public void ApplyEffect(ElementEffectInfo _data) {
-        if (enemy.getStatus() == Status.INVUlNERABLE) {
+        if (enemy.GetStatus() == Status.INVUlNERABLE) {
             return;
         }
 
@@ -76,13 +76,13 @@ public class EffectManager : MonoBehaviour, IEffectable {
 
     private void setWeakenedData() {
         RemoveEffect();
-        enemy.setStatus(Status.WEAKEN);
+        enemy.SetStatus(Status.WEAKEN);
         this._data = _weakenedData;
     }
 
     private void setScaldedData() {
         RemoveEffect();
-        enemy.setStatus(Status.SCALD);
+        enemy.SetStatus(Status.SCALD);
         this._data = _scaldedData;
 
         // Info for burstDot effect
@@ -91,7 +91,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
 
     private void setFrozenData() {
         RemoveEffect();
-        enemy.setStatus(Status.FROZE);
+        enemy.SetStatus(Status.FROZE);
         this._data = _frozenData;
     }
 
@@ -104,24 +104,24 @@ public class EffectManager : MonoBehaviour, IEffectable {
     }
 
     public void RemoveEffect() {
-        if (enemy.getStatus() == Status.CHILL) {
+        if (enemy.GetStatus() == Status.CHILL) {
             enemy.RestoreSpeed();
-            enemy.removeStatus();
+            enemy.RemoveStatus();
         }
-        if (enemy.getStatus() == Status.DRENCH) {
+        if (enemy.GetStatus() == Status.DRENCH) {
             enemy.RestoreAttack();
-            enemy.removeStatus();
+            enemy.RemoveStatus();
         }
-        if (enemy.getStatus() == Status.FROZE) {
+        if (enemy.GetStatus() == Status.FROZE) {
             enemy.RestoreSpeed();
-            enemy.removeStatus();
+            enemy.RemoveStatus();
         }
-        if (enemy.getStatus() == Status.WEAKEN) {
+        if (enemy.GetStatus() == Status.WEAKEN) {
             enemy.RestoreDefense();
-            enemy.removeStatus();
+            enemy.RemoveStatus();
         }
-        if (enemy.getStatus() == Status.SCALD) {
-            enemy.removeStatus();
+        if (enemy.GetStatus() == Status.SCALD) {
+            enemy.RemoveStatus();
         }
 
         _data = null;
@@ -143,7 +143,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
 
         // Update status effect timer accordingly
         // Frozen Effect (Ice + Water)
-        if (enemy.getStatus() == Status.FROZE && _currentEffectTime > _nextTickTime) {
+        if (enemy.GetStatus() == Status.FROZE && _currentEffectTime > _nextTickTime) {
             // Only triggered once
             if (_nextTickTime == 0) {
                 enemy.ReduceSpeed(0);
@@ -151,14 +151,14 @@ public class EffectManager : MonoBehaviour, IEffectable {
             _nextTickTime += _data.TickSpeed;
         }
         // BurstDOT Effect (Fire + Water)
-        else if (enemy.getStatus() == Status.SCALD && _currentEffectTime > _nextTickTime) {
+        else if (enemy.GetStatus() == Status.SCALD && _currentEffectTime > _nextTickTime) {
             if (_nextTickTime == 0) {
                 enemy.TakeDot(_data.DOTAmount * _data.TickSpeed * _data.Lifetime);
             }
             _nextTickTime += _data.TickSpeed;
         }
         // DefDecre Effect (Ice + Fire)
-        else if (enemy.getStatus() == Status.WEAKEN && _currentEffectTime > _nextTickTime) {
+        else if (enemy.GetStatus() == Status.WEAKEN && _currentEffectTime > _nextTickTime) {
             if (_nextTickTime == 0) {
                 enemy.ReduceDefense(_data.DefDecreAmount);
             }
@@ -173,7 +173,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
         else if (_data.SlowAmount != 0 && _currentEffectTime > _nextTickTime) {
             if (_nextTickTime == 0) {
                 enemy.ReduceSpeed(_data.SlowAmount);
-                enemy.setStatus(Status.CHILL);
+                enemy.SetStatus(Status.CHILL);
             }
             _nextTickTime += _data.TickSpeed;
         }
@@ -181,7 +181,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
         else if (_data.AtkDecreAmount != 0 && _currentEffectTime > _nextTickTime) {
             if (_nextTickTime == 0) {
                 enemy.ReduceAttack(_data.AtkDecreAmount);
-                enemy.setStatus(Status.DRENCH);
+                enemy.SetStatus(Status.DRENCH);
             }
             _nextTickTime += _data.TickSpeed;
         }

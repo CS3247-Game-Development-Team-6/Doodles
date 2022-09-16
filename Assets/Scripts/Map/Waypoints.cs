@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Waypoints : MonoBehaviour
-{
+public class Waypoints : MonoBehaviour {
     public static Transform[] points;
     public MapGenerator map;
     public GameObject gameMaster;
@@ -11,12 +8,10 @@ public class Waypoints : MonoBehaviour
     private bool waypointsActive = false;
 
 
-    public void ActivateWaypoints()
-    {
+    public void ActivateWaypoints() {
         // assign array waypoints
         points = new Transform[transform.childCount];
-        for (int i = 0; i < points.Length; i++)
-        {
+        for (int i = 0; i < points.Length; i++) {
             transform.GetChild(i).position += offset;
             points[i] = transform.GetChild(i);
         }
@@ -34,8 +29,7 @@ public class Waypoints : MonoBehaviour
         if (!waypointsActive) return;
         Gizmos.color = Color.red;
         int n = transform.childCount;
-        for (int i = 0; i < n - 1; i++)
-        {
+        for (int i = 0; i < n - 1; i++) {
             Gizmos.DrawSphere(transform.GetChild(i).position, 0.2f);
         }
         Gizmos.color = Color.green;

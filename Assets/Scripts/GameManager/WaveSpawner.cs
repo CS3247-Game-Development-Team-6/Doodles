@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -100,10 +98,6 @@ public class WaveSpawner : MonoBehaviour {
     public void SpawnEnemy(GameObject _enemy) {
         Instantiate(_enemy, spawnPoint.position, spawnPoint.rotation);
         numEnemiesAlive++;
-    }
-
-    public void SetNumEnemiesForTheWave(int num) {
-        numEnemiesLeftInWave = num;
     }
 
 }
