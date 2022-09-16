@@ -330,7 +330,6 @@ public class Enemy : MonoBehaviour {
 
     private void EnableInvulnerability() {
         GetComponent<EffectManager>().RemoveEffect();
-        GetComponent<EffectManager>().enabled = false;
         setStatus(Status.INVUlNERABLE);
         cooldown = enemyInfo.cooldown;
 
@@ -340,7 +339,6 @@ public class Enemy : MonoBehaviour {
 
     private void DisableInvulnerability() {
         setStatus(Status.NONE);
-        GetComponent<EffectManager>().enabled = true;
         duration = enemyInfo.duration;
 
         // only for invulnerable enemy

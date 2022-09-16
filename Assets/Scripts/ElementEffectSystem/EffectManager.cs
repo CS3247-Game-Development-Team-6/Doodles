@@ -26,6 +26,10 @@ public class EffectManager : MonoBehaviour, IEffectable {
     }
 
     public void ApplyEffect(ElementEffectInfo _data) {
+        if (enemy.getStatus() == Status.INVUlNERABLE) {
+            return;
+        }
+
         // Check if already has 2 elements
         if (_data != null) {
             // Enemy is already inflicted with a status effect
