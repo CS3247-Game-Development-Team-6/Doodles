@@ -45,7 +45,6 @@ public class Enemy : MonoBehaviour {
     private bool isInvulnerable;
     private float duration;
     private float cooldown;
-    private float slowSpeed;
 
     [SerializeField] private EnemyInfo enemyInfo;
 
@@ -201,7 +200,6 @@ public class Enemy : MonoBehaviour {
         inkGained = enemyInfo.inkGained;
         deathEffect = enemyInfo.deathEffect;
         isInvulnerable = enemyInfo.isInvulnerable;
-        slowSpeed = enemyInfo.slowSpeed;
         duration = enemyInfo.duration;
         cooldown = enemyInfo.cooldown;
         status = Status.NONE;

@@ -33,6 +33,5 @@ public class EnemyInfo : ScriptableObject {
     public bool isInvulnerable;
     public float duration;
     public float cooldown;
-    public float slowSpeed;
 
 }
