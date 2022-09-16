@@ -34,4 +34,12 @@ public class EnemyInfo : ScriptableObject {
     public float duration;
     public float cooldown;
 
+    /**
+     * Spawnable after death
+     */
+    [Header("Spawnable")]
+    public bool isSpawnable;
+    public int spawnCount;
+    public GameObject spawnPrefab;
+
 }

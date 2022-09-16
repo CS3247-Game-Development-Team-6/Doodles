@@ -22,6 +22,9 @@ public enum Status {
     NONE // default
 }
 
+/**
+ * Main functionality: control movement, hp, death and visibility in fog
+ */
 public class Enemy : MonoBehaviour {
 
     /**
@@ -46,17 +49,24 @@ public class Enemy : MonoBehaviour {
     private float duration;
     private float cooldown;
 
+    /**
+     * Spawnable after death
+     */
+    private bool isSpawnable;
+    private int spawnCount;
+    private GameObject spawnPrefab;
+
     [SerializeField] private EnemyInfo enemyInfo;
 
     private Status status;
 
-    public void setStatus(Status _status) {
+    public void SetStatus(Status _status) {
         status = _status;
     }
-    public Status getStatus() {
+    public Status GetStatus() {
         return status;
     }
-    public void removeStatus() {
+    public void RemoveStatus() {
         status = Status.NONE;
     }
 
@@ -66,11 +76,9 @@ public class Enemy : MonoBehaviour {
     private bool isInFog = true;
     private Transform ballParentTransform;
     private Canvas canvas;
-
-    /**
-     * Shoot target
-     */
-    private Transform target;
+    private int lastXCoord = 0;
+    private int lastYCoord = 0;
+    private Cell[,] cells;
 
     /**
      * Rotation
@@ -82,9 +90,7 @@ public class Enemy : MonoBehaviour {
      * Translation
      */
     private int waypointIndex = 0;
-    private int lastXCoord = 0;
-    private int lastYCoord = 0;
-    private Cell[,] cells;
+    private Transform target;
 
     private InkManager inkManager;
 
@@ -103,7 +109,7 @@ public class Enemy : MonoBehaviour {
      * Reference: https://drive.google.com/drive/folders/1Ck3jqkF_k5snVlAlZsA441pl4-DpjStC  
      */
     public void TakeDamage(float amount, ElementInfo bulletElement) {
-        if (getStatus() == Status.INVUlNERABLE) {
+        if (GetStatus() == Status.INVUlNERABLE) {
             return;
         }
 
@@ -140,7 +146,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public void TakeDot(float amount) {
-        if (getStatus() == Status.INVUlNERABLE) {
+        if (GetStatus() == Status.INVUlNERABLE) {
             return;
         }
 
@@ -179,6 +185,26 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Die() {
+        if (isSpawnable && spawnCount > 0 && spawnPrefab != null) {
+            for (int i = 0; i < spawnCount; i++) {
+                GameObject spawnGO = (GameObject)Instantiate(spawnPrefab, transform.position, Quaternion.identity);
+
+                /*
+                 * set movement
+                 */
+                Enemy enemyScript = spawnGO.GetComponent<Enemy>();
+                if (enemyScript != null) {
+                    enemyScript.InitWaypoint(waypointIndex);
+                }
+
+                /*
+                 * wave enemy number
+                 */
+                WaveSpawner.numEnemiesLeftInWave++;
+                WaveSpawner.numEnemiesAlive++;
+            }
+        }
+
         // add ink
         inkManager.ChangeInkAmount(inkGained);
 
@@ -202,15 +228,16 @@ public class Enemy : MonoBehaviour {
         isInvulnerable = enemyInfo.isInvulnerable;
         duration = enemyInfo.duration;
         cooldown = enemyInfo.cooldown;
+        isSpawnable = enemyInfo.isSpawnable;
+        spawnCount = enemyInfo.spawnCount;
+        spawnPrefab = enemyInfo.spawnPrefab;
+        target = Waypoints.points[waypointIndex];
         status = Status.NONE;
 
         model = transform.GetChild(2).gameObject;
         animator = model.GetComponent<Animator>();
         canvas = transform.GetChild(0).GetComponent<Canvas>();
         ballParentTransform = gameObject.transform;
-
-        // first target, which is first waypoint in Waypoints
-        target = Waypoints.points[0];
 
         // get a reference to all cells for checking if a tile is fogged or not
         cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
@@ -223,15 +250,14 @@ public class Enemy : MonoBehaviour {
             Die();
         }
 
-        if (isInvulnerable && getStatus() == Status.INVUlNERABLE) {
+        if (isInvulnerable && GetStatus() == Status.INVUlNERABLE) {
             if (duration <= 0f) {
                 DisableInvulnerability();
             }
-            // reduce duration
             duration -= Time.deltaTime;
         }
 
-        if (isInvulnerable && getStatus() != Status.INVUlNERABLE) {
+        if (isInvulnerable && GetStatus() != Status.INVUlNERABLE) {
             if (cooldown <= 0f) {
                 EnableInvulnerability();
             }
@@ -240,14 +266,14 @@ public class Enemy : MonoBehaviour {
 
 
         if (GetComponent<EnemyShooting>().isShooting) {
-            if (getStatus() == Status.FROZE) GetComponent<EnemyShooting>().enabled = false;
+            if (GetStatus() == Status.FROZE) GetComponent<EnemyShooting>().enabled = false;
             else GetComponent<EnemyShooting>().enabled = true;
             // stop movement
             animator.SetBool("isWalking", false);
             return;
         }
 
-        if (getStatus() == Status.FROZE) {
+        if (GetStatus() == Status.FROZE) {
             animator.SetBool("isWalking", false);
             return;
         }
@@ -274,6 +300,9 @@ public class Enemy : MonoBehaviour {
             GetNextWaypoint();
         }
 
+        /**
+         * visibility in fog
+         */
         int currentXCoord = Convert.ToInt32(Math.Floor(currentPosition.x));
         int currentYCoord = Convert.ToInt32(Math.Floor(currentPosition.z));
 
@@ -291,6 +320,11 @@ public class Enemy : MonoBehaviour {
         Cell cell = cells[yCoord, xCoord];
         return cell.isFog;
     }
+
+    public void InitWaypoint(int index) {
+        waypointIndex = index;
+    }
+
     private void GetNextWaypoint() {
         if (waypointIndex >= Waypoints.points.Length - 1) {
             EndPath();
@@ -328,7 +362,7 @@ public class Enemy : MonoBehaviour {
 
     private void EnableInvulnerability() {
         GetComponent<EffectManager>().RemoveEffect();
-        setStatus(Status.INVUlNERABLE);
+        SetStatus(Status.INVUlNERABLE);
         cooldown = enemyInfo.cooldown;
 
         // only for invulnerable enemy
@@ -336,7 +370,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private void DisableInvulnerability() {
-        setStatus(Status.NONE);
+        SetStatus(Status.NONE);
         duration = enemyInfo.duration;
 
         // only for invulnerable enemy
