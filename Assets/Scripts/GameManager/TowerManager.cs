@@ -54,8 +54,10 @@ public class TowerManager : MonoBehaviour {
     public bool CanBuildTower(Node node) {
         CellType nodeCellType = node.cell.type;
         List<CellType> allowedCellType = towerToBuild.allowedCellTypes;
-        if (allowedCellType == null || allowedCellType.Count == 0) {
-            Debug.LogWarning($"No cell types allowed for {towerToBuild.name}. Add one to the ScriptableObject.");
+        if (allowedCellType == null) towerToBuild.allowedCellTypes = new List<CellType>();
+        if (allowedCellType.Count == 0) {
+            towerToBuild.allowedCellTypes.Add(CellType.NONE);
+            Debug.LogWarning($"No cell types allowed for {towerToBuild.name}. Adding NONE to the ScriptableObject.");
             return false;
         }
 
