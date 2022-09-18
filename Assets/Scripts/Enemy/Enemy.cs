@@ -19,13 +19,16 @@ public enum EffectStatus {
 public class Enemy : MonoBehaviour {
 
     /**
-     * enemy properties 
+     * enemy properties from EnemyInfo
      */
     private float speed;
     private float health;
     private int defense;
+    private ElementInfo element;
+    private float damageMultiplier;
     private float inkGained;
     private GameObject deathEffect;
+
     [SerializeField] private EnemyInfo enemyInfo;
 
     private EffectStatus effectStatus;
@@ -71,26 +74,58 @@ public class Enemy : MonoBehaviour {
     [Header("Unity Stuff")]
     public Image healthBar;
     public TMP_Text healthText;
+    public GameObject damageText;
 
     private void Awake() {
         inkManager = InkManager.instance;
     }
 
-    public void TakeDamage(float amount) {
-        // Damage to be taken is higher than defense
-        if (defense < amount) {
-            health = health - amount + defense;
+    /**
+     * Immune to damage with same elements type from tower. Tower deals more damage to specific element type's enemy
+     * 
+     * Reference: https://drive.google.com/drive/folders/1Ck3jqkF_k5snVlAlZsA441pl4-DpjStC  
+     */
+    public void TakeDamage(float amount, ElementInfo bulletElement) {
+        if (element == null || bulletElement == null) {
+            ReduceHealth(amount);
+            return;
         }
 
-        // float number between 0 and 1
-        healthBar.fillAmount = health / enemyInfo.health;
+        if (element.type == bulletElement.type) {
+            return;
+        }
+
+        if (element.weakness == bulletElement.type) {
+            ReduceHealth(amount * damageMultiplier);
+            return;
+        }
+        ReduceHealth(amount);
+    }
+
+    /*
+     * Take account of enemy defense when reducing health
+     */
+    private void ReduceHealth(float amount) {
+        if (defense < amount) {
+            float temp = amount - defense;
+            health -= temp;
+
+            // update health bar, float number between 0 and 1
+            healthBar.fillAmount = health / enemyInfo.health;
+
+            DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+            indicator.SetDamageTextFromFloat(temp);
+        }
     }
 
     public void TakeDot(float amount) {
-        health = health - amount;
+        health -= amount;
 
         // float number between 0 and 1
         healthBar.fillAmount = health / enemyInfo.health;
+
+        DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+        indicator.SetDamageTextFromFloat(amount);
     }
 
     public void ReduceSpeed(float slowAmount) {
@@ -135,6 +170,8 @@ public class Enemy : MonoBehaviour {
         health = enemyInfo.health;
         speed = enemyInfo.speed;
         defense = enemyInfo.defense;
+        element = enemyInfo.element;
+        damageMultiplier = enemyInfo.damageMultiplier;
         inkGained = enemyInfo.inkGained;
         deathEffect = enemyInfo.deathEffect;
         effectStatus = EffectStatus.NONE;
@@ -232,6 +269,11 @@ public class Enemy : MonoBehaviour {
             if (childrenTransform.name == model.name) {
                 SkinnedMeshRenderer[] renderers = model.GetComponentsInChildren<SkinnedMeshRenderer>();
                 foreach (SkinnedMeshRenderer r in renderers) {
+                    r.enabled = isVisible;
+                }
+
+                MeshRenderer[] meshRenderers = model.GetComponentsInChildren<MeshRenderer>();
+                foreach (MeshRenderer r in meshRenderers) {
                     r.enabled = isVisible;
                 }
             }

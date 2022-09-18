@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
-{
+public class Bullet : MonoBehaviour {
 
     private Transform target;
     public float speed = 70f;
-    public float explosionRadius = 0f;    
+    public float explosionRadius = 0f;
     public GameObject impactEffect;
     [SerializeField] private int bulletDamage;
     [SerializeField] private ElementEffectInfo _data;
+    [SerializeField] private ElementInfo elementInfo;
     private bool isPassingThroughBullet;
 
     public void SetBulletInfo(TowerInfo towerInfo) {
@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
         this.explosionRadius = towerInfo.explosionRadius;
         this.bulletDamage = towerInfo.damage;
         this._data = !towerInfo.element ? null : towerInfo.element.effect;
+        this.elementInfo = !towerInfo.element ? null : towerInfo.element;
         this.impactEffect = towerInfo.impactPrefab;
         this.isPassingThroughBullet = towerInfo.penetratesEnemy;
     }
@@ -28,26 +29,22 @@ public class Bullet : MonoBehaviour
         return explosionRadius;
     }
 
-    public void Seek(Transform _target, bool isPassing) 
-    { 
+    public void Seek(Transform _target, bool isPassing) {
         target = _target;
         isPassingThroughBullet = isPassing;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (target == null) 
-        { 
+    void Update() {
+        if (target == null) {
             Destroy(gameObject);
             return;
         }
 
         Vector3 dir = target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
-        
-        if (dir.magnitude <= distanceThisFrame)
-        {
+
+        if (dir.magnitude <= distanceThisFrame) {
             HitTarget();
         }
 
@@ -55,9 +52,9 @@ public class Bullet : MonoBehaviour
         transform.LookAt(target);
     }
 
-    void HitTarget(bool toDestroyThisFrame=true, Collider hitEnemy=null) {
+    void HitTarget(bool toDestroyThisFrame = true, Collider hitEnemy = null) {
         if (impactEffect) {
-            GameObject impactEffectParticle = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
+            GameObject impactEffectParticle = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(impactEffectParticle, 5f);
         }
 
@@ -68,14 +65,13 @@ public class Bullet : MonoBehaviour
         if (target != null && target.CompareTag("Enemy")) {
             var effectable = target.GetComponent<IEffectable>();
             if (effectable != null) effectable.ApplyEffect(_data);
-
-            target.GetComponent<Enemy>().TakeDamage(bulletDamage);
+            target.GetComponent<Enemy>().TakeDamage(bulletDamage, elementInfo);
         }
 
         if (hitEnemy) {
             var effectable = hitEnemy.gameObject.GetComponent<IEffectable>();
             if (effectable != null) effectable.ApplyEffect(_data);
-            hitEnemy.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage);
+            hitEnemy.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage, elementInfo);
         }
 
         if (toDestroyThisFrame) {
@@ -83,31 +79,24 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void Explode()
-    {
-        Collider[] colliders =  Physics.OverlapSphere(transform.position, explosionRadius);
-        foreach (Collider collider in colliders)
-        {
-            if (collider.CompareTag("Enemy"))
-            {
+    void Explode() {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider collider in colliders) {
+            if (collider.CompareTag("Enemy")) {
                 var effectable = collider.GetComponent<IEffectable>();
                 if (effectable != null) effectable.ApplyEffect(_data);
-
-                collider.GetComponent<Enemy>().TakeDamage(bulletDamage);
+                collider.GetComponent<Enemy>().TakeDamage(bulletDamage, elementInfo);
             }
         }
     }
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Enemy")) {
             HitTarget(false, other);
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
+    private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
