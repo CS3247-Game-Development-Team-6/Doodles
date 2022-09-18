@@ -203,7 +203,9 @@ public class MapGenerator : MonoBehaviour
                 tile.transform.Rotate(cells[r, c].rotation);
                 tile.transform.localScale *= cellSize;
                 cell.tile = tile;
-                if (typeOfCell == CellType.NONE) tile.GetComponent<Node>().cell = cell;
+                if (tileToPlace.GetComponent<Node>() != null) {
+                    tile.GetComponent<Node>().cell = cell;
+                }
                 
                 // Instantiate the fog tile for every cell
                 GameObject fog = Instantiate(fogPrefab, transform);
@@ -236,8 +238,8 @@ public class MapGenerator : MonoBehaviour
         for (int r = 0; r < mapWidth; r++) {
             for (int c = 0; c < mapHeight; c++) {
                 Cell cell = cells[r, c];
-                cell.fog.SetActive(cell.isFog);
-                cell.tile.SetActive(!cell.isFog);
+                if (cell.fog != null) cell.fog.SetActive(cell.isFog);
+                if (cell.tile != null) cell.tile.SetActive(!cell.isFog);
             }
         }
     }
