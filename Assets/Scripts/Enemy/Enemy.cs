@@ -191,8 +191,6 @@ public class Enemy : MonoBehaviour {
             Vector3 minVector = -(_forwardVector);
             Vector3 maxVector = _forwardVector;
 
-            // todo: max <= base position
-
             for (int i = 0; i < _spawnCount; i++) {
                 Vector3 spawnOffset = new Vector3(
                     UnityEngine.Random.Range(minVector.x, maxVector.x),
