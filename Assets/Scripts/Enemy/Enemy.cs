@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
 public enum Status {
     /**
      * Element status
@@ -184,10 +183,23 @@ public class Enemy : MonoBehaviour {
         defense = enemyInfo.defense;
     }
 
-    private void Die() {
-        if (isSpawnable && spawnCount > 0 && spawnPrefab != null) {
-            for (int i = 0; i < spawnCount; i++) {
-                GameObject spawnGO = (GameObject)Instantiate(spawnPrefab, transform.position, Quaternion.identity);
+    /**
+     * offset to separate between mobs
+     */
+    private void SpawnWhenDeath(bool _isSpawnable, GameObject _prefab, Vector3 _spawnPosition, Vector3 _forwardVector, int _spawnCount) {
+        if (_isSpawnable && _spawnCount > 0 && _prefab != null) {
+            Vector3 minVector = -(_forwardVector);
+            Vector3 maxVector = _forwardVector;
+
+            // todo: max <= base position
+
+            for (int i = 0; i < _spawnCount; i++) {
+                Vector3 spawnOffset = new Vector3(
+                    UnityEngine.Random.Range(minVector.x, maxVector.x),
+                    UnityEngine.Random.Range(minVector.y, maxVector.y),
+                    UnityEngine.Random.Range(minVector.z, maxVector.z)
+                );
+                GameObject spawnGO = (GameObject)Instantiate(_prefab, _spawnPosition + spawnOffset, Quaternion.identity);
 
                 /*
                  * set movement
@@ -204,6 +216,11 @@ public class Enemy : MonoBehaviour {
                 WaveSpawner.numEnemiesAlive++;
             }
         }
+    }
+
+    private void Die() {
+        SpawnWhenDeath(isSpawnable, spawnPrefab, transform.position,
+            (target.position - transform.position).normalized, spawnCount);
 
         // add ink
         inkManager.ChangeInkAmount(inkGained);
