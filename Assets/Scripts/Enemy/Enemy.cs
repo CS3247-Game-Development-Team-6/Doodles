@@ -186,39 +186,43 @@ public class Enemy : MonoBehaviour {
     /**
      * offset to separate between mobs
      */
-    private void SpawnWhenDeath(bool _isSpawnable, GameObject _prefab, Vector3 _spawnPosition, Vector3 _forwardVector, int _spawnCount) {
-        if (_isSpawnable && _spawnCount > 0 && _prefab != null) {
-            Vector3 minVector = -(_forwardVector);
-            Vector3 maxVector = _forwardVector;
+    private void SpawnWhenDeath(GameObject _prefab, Vector3 _spawnPosition, Vector3 minRange, Vector3 maxRange, int _spawnCount) {
+        for (int i = 0; i < _spawnCount; i++) {
+            Vector3 spawnOffset = new Vector3(
+                UnityEngine.Random.Range(minRange.x, maxRange.x),
+                UnityEngine.Random.Range(minRange.y, maxRange.y),
+                UnityEngine.Random.Range(minRange.z, maxRange.z)
+            );
+            GameObject spawnGO = (GameObject)Instantiate(_prefab, _spawnPosition + spawnOffset, Quaternion.identity);
 
-            for (int i = 0; i < _spawnCount; i++) {
-                Vector3 spawnOffset = new Vector3(
-                    UnityEngine.Random.Range(minVector.x, maxVector.x),
-                    UnityEngine.Random.Range(minVector.y, maxVector.y),
-                    UnityEngine.Random.Range(minVector.z, maxVector.z)
-                );
-                GameObject spawnGO = (GameObject)Instantiate(_prefab, _spawnPosition + spawnOffset, Quaternion.identity);
-
-                /*
-                 * set movement
-                 */
-                Enemy enemyScript = spawnGO.GetComponent<Enemy>();
-                if (enemyScript != null) {
-                    enemyScript.InitWaypoint(waypointIndex);
-                }
-
-                /*
-                 * wave enemy number
-                 */
-                WaveSpawner.numEnemiesLeftInWave++;
-                WaveSpawner.numEnemiesAlive++;
+            /*
+             * set movement
+             */
+            Enemy enemyScript = spawnGO.GetComponent<Enemy>();
+            if (enemyScript != null) {
+                enemyScript.InitWaypoint(waypointIndex);
             }
+
+            /*
+             * wave enemy number
+             */
+            WaveSpawner.numEnemiesLeftInWave++;
+            WaveSpawner.numEnemiesAlive++;
         }
+
     }
 
     private void Die() {
-        SpawnWhenDeath(isSpawnable, spawnPrefab, transform.position,
-            (target.position - transform.position).normalized, spawnCount);
+        if (isSpawnable && spawnCount > 0 && spawnPrefab != null) {
+            SpawnWhenDeath(spawnPrefab, transform.position,
+                -(target.position - transform.position).normalized,
+                target == Waypoints.points[Waypoints.points.Length - 1] ? // current enemy is near base, to avoid spawning mobs into the base
+                    new Vector3(0, 0, 0) :
+                    (target.position - transform.position).normalized,
+                spawnCount
+            );
+        }
+
 
         // add ink
         inkManager.ChangeInkAmount(inkGained);
