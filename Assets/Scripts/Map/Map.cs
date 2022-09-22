@@ -61,7 +61,7 @@ public class Map : MonoBehaviour {
     }
 
     private void ActivateChunk() {
-        if (currentChunk.GenerateRandomPath(10,2)) {
+        if (currentChunk.GenerateRandomPath(10,10)) {
         // if (currentChunk.GenerateBackupPath()) {
             if (!currentChunk.prefabsGenerated) mapInfo.GeneratePrefabs(currentChunk);
         }

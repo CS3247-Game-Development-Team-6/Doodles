@@ -183,8 +183,8 @@ public class Chunk : MonoBehaviour {
         int score = 0;
         for (int c = -1; c <= 1; c++) {
             for (int r = -1; r <= 1; r++) {
-                if (ContainsCell(cellCoord)) continue;
-                if (dirGrid[cellCoord.y + c, cellCoord.x + r] == Vector2Int.zero) score++;
+                if (!ContainsCell(cellCoord + new Vector2Int(r,c))) continue;
+                if (dirGrid[cellCoord.x + r, cellCoord.y + c] == Vector2Int.zero) score++;
             }
         }
         return score;
