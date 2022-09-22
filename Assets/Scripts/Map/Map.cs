@@ -7,8 +7,8 @@ public static class DirExtensions {
             // x axis: rows; y axis: columns
             case DIR.LEFT: return new Vector2Int(-1, 0);
             case DIR.RIGHT: return new Vector2Int(1, 0);
-            case DIR.UP: return new Vector2Int(0, -1);
-            case DIR.DOWN: return new Vector2Int(0, 1);
+            case DIR.UP: return new Vector2Int(0, 1);
+            case DIR.DOWN: return new Vector2Int(0, -1);
             default: return Vector2Int.zero;
         }
     }
@@ -57,11 +57,10 @@ public class Map : MonoBehaviour {
             chunkList.Add(currentChunk);
         }
         if (numVisibleChunks > 0) currentChunk = chunkList[0];
-        // mapInfo.GeneratePrefabs(currentChunk);
     }
 
     private void ActivateChunk() {
-        if (currentChunk.GenerateRandomPath(10,10)) {
+        if (currentChunk.GenerateRandomPath(GENERATION_MAX_TRIES, 3)) {
         // if (currentChunk.GenerateBackupPath()) {
             if (!currentChunk.prefabsGenerated) mapInfo.GeneratePrefabs(currentChunk);
         }

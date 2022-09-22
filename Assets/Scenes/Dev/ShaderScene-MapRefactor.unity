@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70dea9fd3b675394d9459f5093987ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunkSize: {x: 6, y: 6}
+  chunkSize: {x: 7, y: 7}
   mapInfo: {fileID: 11400000, guid: f7f01d4312581794d987faf1afa4a01e, type: 2}
   numVisibleChunks: 4
   isEndless: 0
@@ -2618,7 +2618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1789031187}
-  smoothSpeed: 0.125
+  smoothSpeed: 0.01
   offset: {x: -0, y: 9, z: -4}
 --- !u!1 &2091044108
 GameObject:
@@ -2804,7 +2804,7 @@ PrefabInstance:
       objectReference: {fileID: 26158120}
     - target: {fileID: 1059972132, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -18.488647
+      value: -18.488708
       objectReference: {fileID: 0}
     - target: {fileID: 1059972136, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: playerMovement

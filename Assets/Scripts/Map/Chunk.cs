@@ -18,20 +18,27 @@ public class Chunk : MonoBehaviour {
     public void Init() {
         var f = Random.Range(0f, 1f) / 0.2 % 1;
         spawnDir = f < 0.5 ? DIR.RIGHT : DIR.UP;
+
+        int minDiff = Mathf.Max(4, (gridSize.x + gridSize.y) / 4);
+        int new1 = 0, new2 = 0;
+        while (Mathf.Abs(new1 - new2) < minDiff) {
+            new1 = Random.Range(0, gridSize.x - 1);
+            new2 = Random.Range(0, gridSize.y - 1);
+        }
         // x axis: rows; y axis: columns
         // RIGHT = (1,0), UP = (0, 1)
         if (prevChunk != null) { 
             startPos = prevChunk.spawnDir == DIR.RIGHT ? 
                 new Vector2Int(0, prevChunk.spawnPos.y) : new Vector2Int(prevChunk.spawnPos.x, 0);
             spawnPos = spawnDir == DIR.RIGHT ? 
-                new Vector2Int(gridSize.x-1, Mathf.FloorToInt(Random.Range(0, gridSize.y-1))) : 
-                new Vector2Int(Mathf.FloorToInt(Random.Range(0, gridSize.x-1)), gridSize.y-1);
+                new Vector2Int(gridSize.x-1, new1) : 
+                new Vector2Int(new1, gridSize.y-1);
         } else if (spawnDir == DIR.RIGHT) {
-            startPos = new Vector2Int(0, Mathf.FloorToInt(Random.Range(0, gridSize.y-1)));
-            spawnPos = new Vector2Int(gridSize.x-1, Mathf.FloorToInt(Random.Range(0, gridSize.y-1)));
+            startPos = new Vector2Int(0, new1);
+            spawnPos = new Vector2Int(gridSize.x-1, new2);
         } else if (spawnDir == DIR.UP) {
-            startPos = new Vector2Int(Mathf.FloorToInt(Random.Range(0,gridSize.x-1)), 0);
-            spawnPos = new Vector2Int(Mathf.FloorToInt(Random.Range(0, gridSize.x-1)), gridSize.y-1);
+            startPos = new Vector2Int(new1, 0);
+            spawnPos = new Vector2Int(new2, gridSize.y-1);
         }
 
         if (prevChunk != null) {
@@ -67,7 +74,7 @@ public class Chunk : MonoBehaviour {
                 dirGrid[currentPos.x, currentPos.y] = currentDir;
                 currentPos += currentDir;
             }
-            currentDir = currentPos.y < startPos.y ? DIR.DOWN.Vec() : DIR.UP.Vec();
+            currentDir = currentPos.y < startPos.y ? DIR.UP.Vec() : DIR.DOWN.Vec();
             while (currentPos.y != startPos.y) {
                 dirGrid[currentPos.x, currentPos.y] = currentDir;
                 currentPos += currentDir;
@@ -77,16 +84,13 @@ public class Chunk : MonoBehaviour {
                 dirGrid[currentPos.x, currentPos.y] = currentDir;
                 currentPos += currentDir;
             }
-            cellsGenerated = true;
-            SetCellsOnPath();
-            return true;
         } else {
             int breakp = Random.Range(0, gridSize.y);
             while (currentPos.y != breakp) {
                 dirGrid[currentPos.x, currentPos.y] = currentDir;
                 currentPos += currentDir;
             }
-            currentDir = currentPos.x < startPos.x ? DIR.LEFT.Vec() : DIR.RIGHT.Vec();
+            currentDir = currentPos.x < startPos.x ? DIR.RIGHT.Vec() : DIR.LEFT.Vec();
             while (currentPos.x != startPos.x) {
                 dirGrid[currentPos.x, currentPos.y] = currentDir;
                 currentPos += currentDir;
@@ -96,13 +100,13 @@ public class Chunk : MonoBehaviour {
                 dirGrid[currentPos.x, currentPos.y] = currentDir;
                 currentPos += currentDir;
             }
-            cellsGenerated = true;
-            SetCellsOnPath();
-            return true;
         }
+        cellsGenerated = true;
+        SetCellsOnPath();
+        return true;
     }
 
-    public bool GenerateRandomPath(int tries, int minScore) {
+    public bool GenerateRandomPath(int tries, int minAveScorePerTile) {
         if (cellsGenerated) return true;
         if (tries == 0) {
             cellsGenerated = GenerateBackupPath();
@@ -111,17 +115,19 @@ public class Chunk : MonoBehaviour {
         dirGrid = new Vector2Int[gridSize.x, gridSize.y];
         int length = 0;
         int score = 0;
+        int minLength = (gridSize.x + gridSize.y) / 2;
+        int maxLength = (gridSize.x + gridSize.y) * 3 / 2;
         Vector2Int currentPos = spawnPos;
         Vector2Int currentDir = -spawnDir.Vec();
-        int maxLength = gridSize.x * gridSize.y * 4;
-        for (int _ = 0; _ < maxLength; _++) {
+        int maxTries = gridSize.x * gridSize.y * 4;
+        for (int _ = 0; _ < maxTries; _++) {
             Vector2Int nextPos = currentPos + currentDir;
             bool validCell = ContainsCell(nextPos);
             if (validCell && dirGrid[nextPos.x, nextPos.y] == Vector2Int.zero) {
                 dirGrid[currentPos.x, currentPos.y] = currentDir;
                 score += ScorePath(currentPos);
                 if (nextPos == startPos) {
-                    if (score >= minScore) {
+                    if (score >= minAveScorePerTile * length && minLength < length && length < maxLength) {
                         cellsGenerated = true;
                         SetCellsOnPath();
                         return true;
@@ -134,7 +140,7 @@ public class Chunk : MonoBehaviour {
             currentDir = ((DIR)Random.Range(0, 4)).Vec();
         }
 
-        return GenerateRandomPath(tries-1, minScore);
+        return GenerateRandomPath(tries-1, minAveScorePerTile);
     }
 
     private void SetCellsOnPath() {
@@ -147,42 +153,41 @@ public class Chunk : MonoBehaviour {
             else if (currentPos == startPos) cell.type = CellType.BASE;
             else if (dirGrid[lastPos.x, lastPos.y] != dirGrid[currentPos.x, currentPos.y]) {
                 cell.type = CellType.CURVEPATH;
-                // cell.rotation = new Vector3(0, GetRotationDeg(dirGrid[lastPos.y, lastPos.x], dirGrid[currentPos.y, currentPos.x]));
+                cell.rotation = new Vector3(0, GetRotationDeg(dirGrid[lastPos.x, lastPos.y], dirGrid[currentPos.x, currentPos.y]), 0);
             } else {
                 cell.type = CellType.STRAIGHTPATH;
-                //cell.rotation = new Vector3(0, GetRotationDeg(dirGrid[lastPos.y, lastPos.x], dirGrid[currentPos.y, currentPos.x]));
+                cell.rotation = new Vector3(0, GetRotationDeg(dirGrid[lastPos.x, lastPos.y], dirGrid[currentPos.x, currentPos.y]), 0);
             }
             cell.pathOrder = len++;
             lastPos = currentPos;
             currentPos += dirGrid[currentPos.x, currentPos.y];
-            Debug.Log($"Cell {cell.type}");
         }
     }
 
     private int GetRotationDeg(Vector2Int first, Vector2Int second) {
-        Vector2Int r = -Vector2Int.left;
-        Vector2Int d = -Vector2Int.up;
-        Vector2Int l = Vector2Int.left;
-        Vector2Int u = Vector2Int.up;
+        Vector2Int u = DIR.UP.Vec();
+        Vector2Int r = DIR.RIGHT.Vec();
+        Vector2Int d = DIR.DOWN.Vec();
+        Vector2Int l = DIR.LEFT.Vec();
         if (first == second) {
-            if (first == r) return 0;
-            else if (first == d) return 90;
-            else if (first == l) return 180;
-            else if (first == u) return 270;
+            if (first == l) return 0;
+            else if (first == u) return 90;
+            else if (first == r) return 180;
+            else if (first == d) return 270;
         }
 
         if (first == l && second == u || first == d && second == r) return 0;
-        else if (first == u && second == r || first == l && second == d) return 90;
+        else if (first == r && second == u || first == d && second == l) return 90;
         else if (first == r && second == d || first == u && second == l) return 180;
-        else if (first == r && second == u || first == d && second == l) return 270;
+        else if (first == u && second == r || first == l && second == d) return 270;
 
         return 0;
     }
 
     private int ScorePath(Vector2Int cellCoord) {
         int score = 0;
-        for (int c = -1; c <= 1; c++) {
-            for (int r = -1; r <= 1; r++) {
+        for (int r = -1; r <= 1; r++) {
+            for (int c = -1; c <= 1; c++) {
                 if (!ContainsCell(cellCoord + new Vector2Int(r,c))) continue;
                 if (dirGrid[cellCoord.x + r, cellCoord.y + c] == Vector2Int.zero) score++;
             }
