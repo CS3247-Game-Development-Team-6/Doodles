@@ -25,6 +25,8 @@ public class TowerInfo : ScriptableObject {
     public ElementInfo element;
     /** cost is the additional cost to create this tower from previous version. */
     public int cost;
+    /** health is the amount of health allocated to the tower at the start*/
+    public float health;
 
     [Header("Bullet")]
     /** Speed of bullet per second. */
@@ -44,6 +46,7 @@ public class TowerInfo : ScriptableObject {
     [Header("Prefabs")]
     public GameObject towerPrefab;
     public GameObject bulletPrefab;
+    public GameObject smokePrefab;
 
     [Header("Upgrades")]
     /** Link to the info of the next upgrade. */
@@ -60,7 +63,7 @@ public class TowerInfo : ScriptableObject {
 
         this.nextUpgrade.upgradeNum = this.upgradeNum + 1;
         this.nextUpgrade.damage = Mathf.FloorToInt((float)this.damage * DMG_MULTIIPLIER);
-
+    
         this.nextUpgrade.element = this.element;
         this.nextUpgrade.speed = this.speed;
         this.nextUpgrade.explosionRadius = this.explosionRadius;

@@ -11,6 +11,7 @@ public class Tower : MonoBehaviour {
     protected float range;
     protected float fireRate;
     protected int cost;
+    protected float health;
     protected int versionNum;
     protected GameObject bulletPrefab;
     public ElementInfo element { get; private set; }
@@ -26,6 +27,7 @@ public class Tower : MonoBehaviour {
         this.range = towerInfo.range;
         this.fireRate = towerInfo.fireRate;
         this.cost = towerInfo.cost;
+        this.health = towerInfo.health;
         this.versionNum = towerInfo.upgradeNum;
         this.element = towerInfo.element;
         this.bulletPrefab = towerInfo.bulletPrefab;

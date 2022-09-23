@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CannonTower : Tower {
 
@@ -7,6 +8,9 @@ public class CannonTower : Tower {
     private Transform firePoint;
     private float fireCountdown = 0f;
     private Transform target;
+    private Image healthBar;
+    private GameObject smokeEffect;
+    private float maxHealth;
 
     private const bool PENETRATE_TARGET = false;
 
@@ -14,6 +18,9 @@ public class CannonTower : Tower {
         base.SetTowerInfo(towerInfo);
         rotationBase = transform.Find(Tower.ROTATION_BASE_NAME);
         firePoint = rotationBase.Find(Tower.FIRE_POINT_NAME);
+        healthBar = transform.Find("TowerHealthCanvas/HealthBG/HealthBar").GetComponent<Image>();
+        smokeEffect = transform.Find("FX_Smoke").gameObject;
+        maxHealth = health;
     }
 
     void Start() {
@@ -53,9 +60,19 @@ public class CannonTower : Tower {
     }
 
     void Update() {
+
+        if (health <= 0) {
+            print("Tower destroyed");
+            smokeEffect.SetActive(true);
+            return;
+        }
+
+        health -= Time.deltaTime * 4;
+        print(health / maxHealth);
+        healthBar.fillAmount = health / maxHealth;
+
         if (!target) return;
 
-        
         // Enemy target lock on 
         Vector3 dir = target.position - transform.position;
         Quaternion lookAtRotation = Quaternion.LookRotation(dir);
