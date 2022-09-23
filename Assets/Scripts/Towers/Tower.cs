@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tower : MonoBehaviour {
 
@@ -11,15 +12,18 @@ public class Tower : MonoBehaviour {
     protected float fireRate;
     protected int cost;
     protected float health;
+    protected float maxHealth;
     protected float healthDecayRate;
     protected int versionNum;
+    protected Image healthBar;
     protected GameObject bulletPrefab;
-    public GameObject smokePrefab;
+    protected GameObject smokePrefab;
     public ElementInfo element { get; private set; }
     public TowerInfo towerInfo { get; protected set; }
     public TowerInfo nextUpgrade { get; private set; }
     public ElementKeyValue[] nextElements { get; private set; }
     public Dictionary<ElementType, TowerInfo> nextElement { get; private set; }
+    private bool isInDamage = false;
 
     /** Set tower info from Node. */
     public virtual void SetTowerInfo(TowerInfo towerInfo) {
@@ -29,22 +33,36 @@ public class Tower : MonoBehaviour {
         this.fireRate = towerInfo.fireRate;
         this.cost = towerInfo.cost;
         this.health = towerInfo.health;
+        this.maxHealth = this.health;
         this.healthDecayRate = towerInfo.healthDecayRate;
         this.versionNum = towerInfo.upgradeNum;
         this.element = towerInfo.element;
         this.bulletPrefab = towerInfo.bulletPrefab;
-        this.smokePrefab = towerInfo.smokePrefab;
         this.nextUpgrade = towerInfo.nextUpgrade;
         this.nextElement = new Dictionary<ElementType, TowerInfo>(3);
         foreach (ElementKeyValue pair in towerInfo.nextElements) {
             this.nextElement.Add(pair.element, pair.tower);
         }
+        this.smokePrefab = (GameObject) Instantiate(towerInfo.smokePrefab, transform.position, transform.rotation);
+        this.smokePrefab.GetComponent<ParticleSystem>().Stop();
+        this.healthBar = transform.Find("TowerHealthCanvas/HealthBG/HealthBar").GetComponent<Image>();
+    }
+
+    /** Function accessable by enemy to damage tower. */
+    public void DecreaseHealth(float amount) {
+        health -= 50;
     }
 
     /** Instantiates and fires bullets. */
-    public virtual void Shoot() { }
+    public virtual void Shoot() {
+        DecreaseHealth(healthDecayRate);
+    }
 
     public virtual void Update() {
-       print("Hello from Tower class");
+        if (health <= 0 && this.smokePrefab.GetComponent<ParticleSystem>().isStopped) {
+            this.smokePrefab.GetComponent<ParticleSystem>().Play();
+            return;
+        }
+        healthBar.fillAmount = health / maxHealth;
     }
 }

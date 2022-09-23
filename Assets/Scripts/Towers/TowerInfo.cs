@@ -49,6 +49,7 @@ public class TowerInfo : ScriptableObject {
     public GameObject towerPrefab;
     public GameObject bulletPrefab;
     public GameObject smokePrefab;
+    public GameObject healthBarPrefab;
 
     [Header("Upgrades")]
     /** Link to the info of the next upgrade. */
