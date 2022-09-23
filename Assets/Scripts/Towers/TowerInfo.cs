@@ -66,7 +66,6 @@ public class TowerInfo : ScriptableObject {
 
         this.nextUpgrade.upgradeNum = this.upgradeNum + 1;
         this.nextUpgrade.damage = Mathf.FloorToInt((float)this.damage * DMG_MULTIIPLIER);
-    
         this.nextUpgrade.element = this.element;
         this.nextUpgrade.speed = this.speed;
         this.nextUpgrade.explosionRadius = this.explosionRadius;

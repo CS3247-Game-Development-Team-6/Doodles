@@ -23,7 +23,6 @@ public class Tower : MonoBehaviour {
     public TowerInfo nextUpgrade { get; private set; }
     public ElementKeyValue[] nextElements { get; private set; }
     public Dictionary<ElementType, TowerInfo> nextElement { get; private set; }
-    private bool isInDamage = false;
 
     /** Set tower info from Node. */
     public virtual void SetTowerInfo(TowerInfo towerInfo) {
