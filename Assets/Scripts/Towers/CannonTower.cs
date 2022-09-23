@@ -8,19 +8,12 @@ public class CannonTower : Tower {
     private Transform firePoint;
     private float fireCountdown = 0f;
     private Transform target;
-    private Image healthBar;
-    private float maxHealth;
     private const bool PENETRATE_TARGET = false;
-    private GameObject smokeEffect;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
         rotationBase = transform.Find(Tower.ROTATION_BASE_NAME);
         firePoint = rotationBase.Find(Tower.FIRE_POINT_NAME);
-        healthBar = transform.Find("TowerHealthCanvas/HealthBG/HealthBar").GetComponent<Image>();
-        maxHealth = health;
-        smokeEffect = (GameObject) Instantiate(smokePrefab, transform.position, transform.rotation);
-        smokeEffect.SetActive(false);
     }
 
     void Start() {
@@ -59,18 +52,8 @@ public class CannonTower : Tower {
         }
     }
 
-    void Update() {
-
-        if (health <= 0) {
-            print("Tower destroyed");
-            smokeEffect.SetActive(true);
-            return;
-        }
-
-        health -= Time.deltaTime * 4;
-        print(health / maxHealth);
-        healthBar.fillAmount = health / maxHealth;
-
+    public override void Update() {
+        base.Update();
         if (!target) return;
 
         // Enemy target lock on 
