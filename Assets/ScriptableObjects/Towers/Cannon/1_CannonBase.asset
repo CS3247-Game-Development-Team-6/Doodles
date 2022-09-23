@@ -18,6 +18,8 @@ MonoBehaviour:
   fireRate: 1
   element: {fileID: 0}
   cost: 25
+  health: 0
+  healthDecayRate: 0
   speed: 40
   explosionRadius: 0
   damage: 36
@@ -25,6 +27,7 @@ MonoBehaviour:
   impactPrefab: {fileID: 4586470546859298135, guid: 024f097d68bf33d44ba2726d968af48c, type: 3}
   towerPrefab: {fileID: 5135174605016635187, guid: a72e065d855d0184293fd965de617734, type: 3}
   bulletPrefab: {fileID: 1315704262782356680, guid: 51155749e1a0c9a4cb5f09b5641edf00, type: 3}
+  smokePrefab: {fileID: 100000, guid: 785f7f2ed47b94fbfa109bc55f7d1c07, type: 3}
   nextUpgrade: {fileID: 11400000, guid: 8a87d74afed0e474190f5d0feef49ef1, type: 2}
   nextElements:
   - element: 0
