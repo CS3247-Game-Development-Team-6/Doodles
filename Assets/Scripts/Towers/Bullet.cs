@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour {
         transform.LookAt(target);
     }
 
-    void HitTarget(bool toDestroyThisFrame = true, Collider hitEnemy = null) {
+    void virtual HitTarget(bool toDestroyThisFrame = true, Collider hitEnemy = null) {
         if (impactEffect) {
             GameObject impactEffectParticle = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(impactEffectParticle, 5f);
@@ -79,7 +79,7 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    void Explode() {
+    void virtual Explode() {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider collider in colliders) {
             if (collider.CompareTag("Enemy")) {
