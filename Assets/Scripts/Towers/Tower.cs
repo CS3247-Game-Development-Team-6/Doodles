@@ -44,7 +44,15 @@ public class Tower : MonoBehaviour {
         }
         this.smokePrefab = (GameObject) Instantiate(towerInfo.smokePrefab, transform.position, transform.rotation);
         this.smokePrefab.GetComponent<ParticleSystem>().Stop();
-        this.healthBar = transform.Find("TowerHealthCanvas/HealthBG/HealthBar").GetComponent<Image>();
+
+        GameObject healthBarPrefab = Instantiate(towerInfo.healthBarPrefab, transform.position, transform.rotation);
+        healthBarPrefab.transform.SetParent(transform);
+        healthBarPrefab.transform.position = new Vector3(
+            healthBarPrefab.transform.position.x, 
+            healthBarPrefab.transform.position.y + 1.3f, 
+            healthBarPrefab.transform.position.z + 0.5f);
+        healthBarPrefab.transform.rotation = Quaternion.Euler(50, 0, 0);
+        this.healthBar = healthBarPrefab.transform.Find("HealthBG/HealthBar").GetComponent<Image>();
     }
 
     /** Function accessable by enemy to damage tower. */
