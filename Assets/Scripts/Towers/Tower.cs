@@ -6,7 +6,6 @@ public class Tower : MonoBehaviour {
     public const string ENEMY_TAG = "Enemy";
     public const string ROTATION_BASE_NAME = "RotationBase";
     public const string FIRE_POINT_NAME = "FirePoint";
-
     protected string towerName;
     protected float range;
     protected float fireRate;
@@ -44,4 +43,8 @@ public class Tower : MonoBehaviour {
 
     /** Instantiates and fires bullets. */
     public virtual void Shoot() { }
+
+    public virtual void Update() {
+       print("Hello from Tower class");
+    }
 }

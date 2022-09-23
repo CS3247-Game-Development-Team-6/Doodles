@@ -50,7 +50,7 @@ public class SpikeyTower : Tower {
         }
     }
 
-    private void Update() {
+    public override void Update() {
         if (isShooting && fireCountdown <= 0f) {
             Shoot();
             fireCountdown = 1f / fireRate;

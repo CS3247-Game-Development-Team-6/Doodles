@@ -52,7 +52,7 @@ public class BallistaTower : Tower {
         }
     }
 
-    void Update() {
+    public override void Update() {
         if (!target) return;
 
         
