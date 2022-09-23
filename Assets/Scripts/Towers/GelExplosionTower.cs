@@ -9,7 +9,7 @@ public class GelExplosionTower : Tower {
     private Transform target;
 
     private const bool PENETRATE_TARGET = false;
-    public const slowValue = 15f;
+    public const float slowValue = 15f;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
@@ -45,7 +45,7 @@ public class GelExplosionTower : Tower {
 
     public override void Shoot() {
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
-        GelExplosionBullet bullet = bulletObj.GetComponent<Bullet>();
+        GelExplosionBullet bullet = bulletObj.GetComponent<GelExplosionBullet>();
         bullet.SetBulletInfo(towerInfo);
         bullet.SetSlowValue(slowValue);
         
