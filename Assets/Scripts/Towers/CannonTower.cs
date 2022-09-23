@@ -9,18 +9,18 @@ public class CannonTower : Tower {
     private float fireCountdown = 0f;
     private Transform target;
     private Image healthBar;
-    private GameObject smokeEffect;
     private float maxHealth;
-
     private const bool PENETRATE_TARGET = false;
+    private GameObject smokeEffect;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
         rotationBase = transform.Find(Tower.ROTATION_BASE_NAME);
         firePoint = rotationBase.Find(Tower.FIRE_POINT_NAME);
         healthBar = transform.Find("TowerHealthCanvas/HealthBG/HealthBar").GetComponent<Image>();
-        smokeEffect = transform.Find("FX_Smoke").gameObject;
         maxHealth = health;
+        smokeEffect = (GameObject) Instantiate(smokePrefab, transform.position, transform.rotation);
+        smokeEffect.SetActive(false);
     }
 
     void Start() {

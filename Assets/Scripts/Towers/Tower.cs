@@ -12,8 +12,10 @@ public class Tower : MonoBehaviour {
     protected float fireRate;
     protected int cost;
     protected float health;
+    protected float healthDecayRate;
     protected int versionNum;
     protected GameObject bulletPrefab;
+    public GameObject smokePrefab;
     public ElementInfo element { get; private set; }
     public TowerInfo towerInfo { get; protected set; }
     public TowerInfo nextUpgrade { get; private set; }
@@ -28,9 +30,11 @@ public class Tower : MonoBehaviour {
         this.fireRate = towerInfo.fireRate;
         this.cost = towerInfo.cost;
         this.health = towerInfo.health;
+        this.healthDecayRate = towerInfo.healthDecayRate;
         this.versionNum = towerInfo.upgradeNum;
         this.element = towerInfo.element;
         this.bulletPrefab = towerInfo.bulletPrefab;
+        this.smokePrefab = towerInfo.smokePrefab;
         this.nextUpgrade = towerInfo.nextUpgrade;
         this.nextElement = new Dictionary<ElementType, TowerInfo>(3);
         foreach (ElementKeyValue pair in towerInfo.nextElements) {
