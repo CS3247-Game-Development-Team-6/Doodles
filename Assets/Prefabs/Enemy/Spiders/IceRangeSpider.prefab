@@ -613,6 +613,7 @@ GameObject:
   - component: {fileID: 986762576498338959}
   - component: {fileID: 904252060}
   - component: {fileID: 7208389763373003395}
+  - component: {fileID: -4499526559693755135}
   m_Layer: 0
   m_Name: IceRangeSpider
   m_TagString: Enemy
@@ -750,6 +751,20 @@ MonoBehaviour:
   _scaldedData: {fileID: 11400000, guid: 8982c217c37259142b4427dd206e7b0f, type: 2}
   _frozenData: {fileID: 11400000, guid: 528997d82f1193647a49ef9489883657, type: 2}
   _weakenedData: {fileID: 11400000, guid: 3736ed5fb54fd314eb72776659995569, type: 2}
+--- !u!114 &-4499526559693755135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6540121397901334477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08851f21373671e40946bf56fea5fc9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gelLifetime: 2
+  gelSlowAmount: 0.9
 --- !u!1 &8326160171143518766
 GameObject:
   m_ObjectHideFlags: 0

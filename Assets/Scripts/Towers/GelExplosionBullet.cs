@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class GelExplosionBullet : Bullet {
     
-    public float slowValue = 0.0f;
-
-    public void SetSlowValue(float slowValue) {
-        this.slowValue = slowValue;
-    }
-    
     public override void HitTarget(bool toDestroyThisFrame = true, Collider hitEnemy = null) {
         base.HitTarget(toDestroyThisFrame, hitEnemy);
 
-        // TODO: Add slow; it conflicts with freezing - require a solution
+        // apply gel to enemy
+        if (hitEnemy) {
+            var enemy = hitEnemy.gameObject.GetComponent<Enemy>();
+            if (enemy != null) enemy.applyGel();
+        }
     }
 
     public override void Explode() {
         base.Explode();
 
-        // TODO: Add slow; it conflicts with freezing - require a solution
+        // apply gel in an area
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider collider in colliders) {
+            if (collider.CompareTag("Enemy")) {
+                var enemy = collider.gameObject.GetComponent<Enemy>();
+                if (enemy != null) enemy.applyGel();
+            }
+        }
     }
-    
 }

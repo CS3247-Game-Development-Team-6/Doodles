@@ -76,6 +76,11 @@ public class Enemy : MonoBehaviour {
     public TMP_Text healthText;
     public GameObject damageText;
 
+    /**
+     * ExtraEffectManager
+     */
+    private ExtraEffectManager extraEffectManager;
+
     private void Awake() {
         inkManager = InkManager.instance;
     }
@@ -128,12 +133,26 @@ public class Enemy : MonoBehaviour {
         indicator.SetDamageTextFromFloat(amount);
     }
 
+    public void applyGel() {
+        extraEffectManager.applyGel();
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
+
     public void ReduceSpeed(float slowAmount) {
         speed = enemyInfo.speed * slowAmount;
+        extraEffectManager.calculateGelSpeed();
     }
 
     public void RestoreSpeed() {
         speed = enemyInfo.speed;
+        extraEffectManager.calculateGelSpeed();
     }
 
     public void ReduceAttack(int atkDecreAmount) {
@@ -186,6 +205,9 @@ public class Enemy : MonoBehaviour {
 
         // get a reference to all cells for checking if a tile is fogged or not
         cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
+    
+        // get reference to its ExtraEffectManager
+        extraEffectManager = GetComponent<ExtraEffectManager>();
     }
 
     private void Update() {
