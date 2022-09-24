@@ -50,6 +50,7 @@ public class TowerInfo : ScriptableObject {
     public GameObject bulletPrefab;
     public GameObject smokePrefab;
     public GameObject healthBarPrefab;
+    public GameObject damagedSoundPrefab;
 
     [Header("Upgrades")]
     /** Link to the info of the next upgrade. */
