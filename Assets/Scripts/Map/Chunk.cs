@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Waypoints))]
 public class Chunk : MonoBehaviour {
+    public const int MIN_SIZE = 30;
     [SerializeField] public float cellSize;
     [SerializeField] public Vector2Int gridSize;
     public int chunkId;
@@ -15,21 +17,24 @@ public class Chunk : MonoBehaviour {
     public Vector2Int[,] dirGrid;
     public bool cellsGenerated { get; private set; }
     public bool prefabsGenerated;
+    public LevelInfoScriptableObject levelInfo { get; private set; }
     public List<Cell> waypoints { get; private set; }
+    public bool isCurrentChunk { get; private set; }
     private Barrier[] barriers;
 
-    public void Init(Transform barrierPrefab) {
+    public void Init(Transform barrierPrefab, LevelInfoScriptableObject levelInfo) {
+        this.levelInfo = levelInfo; 
         var f = Random.Range(0f, 1f) / 0.2 % 1;
         spawnDir = f < 0.5 ? DIR.RIGHT : DIR.UP;
 
-        int minDiff = Mathf.Max(4, (gridSize.x + gridSize.y) / 4);
+        int minDiff = (gridSize.x + gridSize.y) / 4;
         int newX = 0, newY = 0, newX1 = 0, newY1 = 0;
-        while (Mathf.Abs(newX - newY) < minDiff) {
+        do {
             newX = Random.Range(0, gridSize.x - 1);
             newX1 = Random.Range(0, gridSize.x - 1);
             newY = Random.Range(0, gridSize.y - 1);
             newY1 = Random.Range(0, gridSize.y - 1);
-        }
+        } while (Mathf.Abs(newX - newY) < minDiff);
         // x axis: rows; y axis: columns
         // RIGHT = (1,0), UP = (0, 1)
         if (prevChunk != null) { 
@@ -61,7 +66,7 @@ public class Chunk : MonoBehaviour {
                 var yRotation = 0;
                 var pathOrder = -1;
                 Vector3 newRotation = new Vector3(0, yRotation, 0);
-                cells[r, c] = new Cell(cellPos, typeOfCell, true, newRotation, pathOrder);
+                cells[r, c] = new Cell(new Vector2Int(r, c), cellPos, typeOfCell, false, newRotation, pathOrder);
                 // NOTE: per default we initialise all tiles as foggy, then clear some close to the base.
             }
             placeInPosition += Vector3.forward * cellSize;
@@ -82,9 +87,14 @@ public class Chunk : MonoBehaviour {
             x = d == DIR.UP || d == DIR.DOWN ? wallWidth : gridSize.y;
             z = d == DIR.RIGHT || d == DIR.LEFT ? wallWidth : gridSize.x;
             wall.localScale = new Vector3(x, 2, z);
-            // set trigger to proceed to next level
-            wall.GetComponent<Collider>().isTrigger = d == spawnDir;
         }
+    }
+
+    public void OpenNext() {
+        // set trigger to proceed to next level
+        Barrier wall = barriers[(int)spawnDir];
+        wall.GetComponent<Collider>().isTrigger = true;
+        Debug.Log($"Set Collider trigger {wall.GetComponent<Collider>().isTrigger}");
     }
 
     public bool GenerateBackupPath() {
@@ -131,8 +141,8 @@ public class Chunk : MonoBehaviour {
     }
 
     public bool GenerateRandomPath(int tries, int minAveScorePerTile) {
-        if (cellsGenerated) return true;
-        if (tries == 0) {
+        if (cellsGenerated) return false;
+        if (tries == 0 || gridSize.x * gridSize.y < MIN_SIZE) {
             cellsGenerated = GenerateBackupPath();
             return true;
         }
@@ -174,9 +184,13 @@ public class Chunk : MonoBehaviour {
         waypoints = new List<Cell>();
         while (lastPos != startPos) {
            Cell cell = cells[currentPos.x, currentPos.y];
-            if (!ContainsCell(lastPos)) cell.type = CellType.SPAWN;
-            else if (currentPos == startPos) cell.type = CellType.BASE;
-            else if (dirGrid[lastPos.x, lastPos.y] != dirGrid[currentPos.x, currentPos.y]) {
+            if (!ContainsCell(lastPos)) {
+                cell.type = CellType.SPAWN;
+                waypoints.Add(cell);
+            } else if (currentPos == startPos) {
+                cell.type = CellType.BASE;
+                waypoints.Add(cell);
+            } else if (dirGrid[lastPos.x, lastPos.y] != dirGrid[currentPos.x, currentPos.y]) {
                 cell.type = CellType.CURVEPATH;
                 cell.rotation = new Vector3(0, GetRotationDeg(dirGrid[lastPos.x, lastPos.y], dirGrid[currentPos.x, currentPos.y]), 0);
                 waypoints.Add(cell);
@@ -229,11 +243,12 @@ public class Chunk : MonoBehaviour {
 
     public bool ContainsPosition(Vector3 pos) {
         return transform.position.x <= pos.x && transform.position.z <= pos.z &&
-            pos.x < transform.position.x + cellSize * gridSize.x && 
-            pos.z < transform.position.z + cellSize * gridSize.y;
+            pos.x < transform.position.x + cellSize * gridSize.y && 
+            pos.z < transform.position.z + cellSize * gridSize.x;
     }
 
     public void SetActive(bool state) {
+        isCurrentChunk = state;
         for (int r = 0; r < gridSize.x; r++) {
             for (int c = 0; c < gridSize.y; c++) {
                 if (cells[r,c].tile != null) cells[r, c].tile.SetActive(state);

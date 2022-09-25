@@ -511,10 +511,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70dea9fd3b675394d9459f5093987ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunkSize: {x: 10, y: 7}
+  chunkSize: {x: 5, y: 5}
   mapInfo: {fileID: 11400000, guid: f7f01d4312581794d987faf1afa4a01e, type: 2}
-  numVisibleChunks: 4
-  isEndless: 0
   basePlane: {fileID: 1792607524}
   barrierPrefab: {fileID: 7592276886298649118, guid: c4e1a81ac38611a4dac2f705f32c6099, type: 3}
   waypointEmpty: {fileID: 1420675846}
@@ -2295,8 +2293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34dca5f1a69e4d429b22d142cf59d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
-  gameMaster: {fileID: 1306252971}
+  waypointsPosition: []
+  mapGen: {fileID: 0}
+  waveSpawner: {fileID: 0}
 --- !u!4 &1420675848
 Transform:
   m_ObjectHideFlags: 0
@@ -3496,6 +3495,10 @@ PrefabInstance:
       value: GameMaster
       objectReference: {fileID: 0}
     - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+      propertyPath: levelInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: ac665baa53f14284f9e7caf022dff80c, type: 2}
+    - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: wavesContainer
       value: 
       objectReference: {fileID: 0}
@@ -3737,35 +3740,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7828996250309619822, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.49
-      objectReference: {fileID: 0}
     - target: {fileID: 7828996250744097806, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 7828996251319239447, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 7828996251319239447, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7828996251319239447, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 7828996251705944703, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7828996251705944703, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7828996251705944703, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.01
       objectReference: {fileID: 0}

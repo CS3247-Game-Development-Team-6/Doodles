@@ -23,7 +23,15 @@ public class WaveSpawner : MonoBehaviour {
     private float countdownTimer = 3f; // decrease with time, countdown for new wave
     private int waveIndex = 0;
 
+    public bool waveCleared { get; private set; }
+
     void Start() {
+        SetNewLevel(levelInfo);
+    }
+
+    public void SetNewLevel(LevelInfoScriptableObject levelInfo) {
+        Debug.Log("Resetting wave");
+        waveCleared = false;
         numEnemiesAlive = 0;
         numEnemiesLeftInWave = 0;
         isSpawningEnemy = false;
@@ -33,7 +41,10 @@ public class WaveSpawner : MonoBehaviour {
         isSkipWaveCountdownButtonVisible = true;
         skipWaveCountdownButton.onClick.AddListener(ButtonOnClick);
 
+        this.levelInfo = levelInfo;
         if (levelInfo != null) waves = levelInfo.waves;
+
+        waveIndex = 0;
     }
 
     void ButtonOnClick() {
@@ -60,16 +71,14 @@ public class WaveSpawner : MonoBehaviour {
             return;
         }
 
-
         if (waveIndex == waves.Length) {
-            GetComponent<GameStateManager>().WinGame();
-            this.enabled = false;
+            waveCleared = true;
         }
 
         if (countdownTimer <= 0f) {
-            isSpawningEnemy = true;
+            isSpawningEnemy = waveIndex < waves.Length;
             SpawnWave();
-            countdownTimer = timeBetweenWaves;
+            countdownTimer =  waveIndex < waves.Length ? timeBetweenWaves : 0;
             return;
         }
         isSkipWaveCountdownButtonVisible = true;
@@ -79,6 +88,11 @@ public class WaveSpawner : MonoBehaviour {
 
         UpdateTimerIndicator(countdownTimer);
 
+    }
+
+    public void WinGame() {
+        GetComponent<GameStateManager>().WinGame();
+        this.enabled = false;
     }
 
     void UpdateTimerIndicator(float time) {

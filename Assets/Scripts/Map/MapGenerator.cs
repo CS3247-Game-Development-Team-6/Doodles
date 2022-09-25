@@ -183,7 +183,7 @@ public class MapGenerator : MonoBehaviour
                 }
 
                 Vector3 newRotation = new Vector3(0, rotationINT, 0);
-                cells[r, c] = new Cell(cellPos, typeOfCell, true, newRotation, pathNum);
+                cells[r, c] = new Cell(new Vector2Int(r,c), cellPos, typeOfCell, true, newRotation, pathNum);
                 // NOTE: per default we initialise all tiles as foggy, then clear some close to the base.
                 
                 Cell cell = cells[r, c];

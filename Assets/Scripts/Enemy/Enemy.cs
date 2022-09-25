@@ -17,6 +17,7 @@ public enum EffectStatus {
 }
 
 public class Enemy : MonoBehaviour {
+    private const float EPSILON = 0.02f;
 
     /**
      * enemy properties from EnemyInfo
@@ -70,6 +71,7 @@ public class Enemy : MonoBehaviour {
     private Cell[,] cells;
 
     private InkManager inkManager;
+    private Map map;
 
     [Header("Unity Stuff")]
     public Image healthBar;
@@ -78,6 +80,7 @@ public class Enemy : MonoBehaviour {
 
     private void Awake() {
         inkManager = InkManager.instance;
+        map = FindObjectOfType<Map>();
     }
 
     /**
@@ -185,7 +188,8 @@ public class Enemy : MonoBehaviour {
         target = Waypoints.points[0];
 
         // get a reference to all cells for checking if a tile is fogged or not
-        cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
+        // cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
+        cells = FindObjectOfType<Map>().currentChunk.cells;
     }
 
     private void Update() {
@@ -223,13 +227,16 @@ public class Enemy : MonoBehaviour {
         // delta time is time passed since last frame
         transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
 
-        var currentPosition = transform.position;
+        var currentPosition = transform.position - map.currentChunk.transform.position;
+        var targetPosition = target.position - map.currentChunk.transform.position;
 
-        if (Vector3.Distance(currentPosition, target.position) <= 0.2f) {
+        if (Vector3.Distance(currentPosition, targetPosition) <= EPSILON) {
             GetNextWaypoint();
         }
 
+        // Rows
         int currentXCoord = Convert.ToInt32(Math.Floor(currentPosition.x));
+        // Columns
         int currentYCoord = Convert.ToInt32(Math.Floor(currentPosition.z));
 
         if (currentXCoord != lastXCoord || currentYCoord != lastYCoord) {
@@ -243,7 +250,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private bool GetCurrentTileFogged(int xCoord, int yCoord) {
-        Cell cell = cells[yCoord, xCoord];
+        Cell cell = cells[xCoord, yCoord];
         return cell.isFog;
     }
     private void GetNextWaypoint() {

@@ -33,25 +33,25 @@ public class Map : MonoBehaviour {
     // Pairs of chunks and next dir (Down/Right)
     [SerializeField] private Vector2Int chunkSize;
     [SerializeField] private MapInfo mapInfo;
-    [SerializeField] private int numVisibleChunks;
-    [SerializeField] private bool isEndless;
+    private int numChunks;
+    // [SerializeField] private bool isEndless;
 
     [SerializeField] private Transform basePlane;
     [SerializeField] private Barrier barrierPrefab;
     [SerializeField] private GameObject waypointEmpty;
     [SerializeField] private ParticleSystem poofEffect;
 
-    private Chunk currentChunk;
+    public Chunk currentChunk { get; private set; }
     private List<Chunk> chunkList = new List<Chunk>();
     private Transform player;
     private WaveSpawner waveSpawner;
-    private int lastChunkId = -1;
 
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
         waveSpawner = FindObjectOfType<WaveSpawner>();
+        numChunks = mapInfo.levelInfo.Length;
         // choose one edge for start and the other edge for end
-        for (int chunk = 0; chunk < numVisibleChunks; chunk++) {
+        for (int chunk = 0; chunk < numChunks; chunk++) {
             GameObject newChunk = new GameObject("Chunk" + chunkList.Count);
             newChunk.transform.parent = transform;
             newChunk.transform.localPosition = Vector3.zero;
@@ -62,54 +62,35 @@ public class Map : MonoBehaviour {
             currentChunk.gridSize = chunkSize;
             currentChunk.highlightColor = Color.cyan;
             if (chunk > 0) currentChunk.prevChunk = chunkList[chunk - 1];
-            if (barrierPrefab != null) currentChunk.Init(barrierPrefab.transform);
+            if (barrierPrefab != null) currentChunk.Init(barrierPrefab.transform, mapInfo.levelInfo[chunk]);
             chunkList.Add(currentChunk);
         }
-        if (numVisibleChunks > 0) currentChunk = chunkList[0];
+        if (numChunks > 0) currentChunk = chunkList[0];
     }
 
     private void DeactivateChunk(Chunk chunk) {
-        chunk.SetActive(false);
+        if (chunk.isCurrentChunk) {
+            chunk.SetActive(false);
+            currentChunk.GetComponent<Waypoints>().DeactivateLocalWaypoints();
+        }
     }
 
     private void ActivateChunk() {
         if (currentChunk.prefabsGenerated) currentChunk.SetActive(true);
         else if (currentChunk.GenerateRandomPath(GENERATION_MAX_TRIES, 3)) {
+            // is false if cells already generated
             mapInfo.GeneratePrefabs(currentChunk);
-            SetWaypoints(currentChunk.waypoints);
+            currentChunk.SetActive(true);
+            currentChunk.GetComponent<Waypoints>().SetWaypoints(currentChunk.waypoints, mapInfo.waypointPrefab);
+            currentChunk.GetComponent<Waypoints>().ActivateLocalWaypoints();
+            waveSpawner.SetNewLevel(currentChunk.levelInfo);
         }
         basePlane.localScale = new Vector3(currentChunk.gridSize.y, 1, currentChunk.gridSize.x) / ORIG_SCALE;
         basePlane.position = currentChunk.transform.position + new Vector3(currentChunk.gridSize.y, -0.1f, currentChunk.gridSize.x) / 2;
-        waveSpawner.spawnPoint = currentChunk.cells[currentChunk.spawnPos.x, currentChunk.spawnPos.y].tile.transform;
-    }
-    private Vector3[] SetWaypoints(List<Cell> waypointCells) {
-        // sort array based on their order in the path
-        // Array.Sort(waypointCells, (oneCell, otherCell) => oneCell.pathOrder.CompareTo(otherCell.pathOrder));
-        Vector3[] waypointsPosition = new Vector3[waypointCells.Count];
-        GameObject prevWaypoint = null;
-        for (int i = 0; i < waypointCells.Count; i++) {
-            waypointsPosition[i] = waypointCells[i].position;
-            GameObject waypoint = mapInfo.GenerateWaypoint(i, waypointEmpty.transform);
-            if (waypoint != null) {
-                waypoint.transform.position = i == waypointCells.Count - 1
-                    ? changeEnemyTargetWaypoint(waypointCells[i].position, prevWaypoint)
-                    : waypointCells[i].position;
-            }
-            prevWaypoint = waypoint;
+        if (waveSpawner.waveCleared) {
+            if (currentChunk.chunkId == chunkList.Count - 1) waveSpawner.WinGame();
+            else currentChunk.OpenNext();
         }
-        
-        return waypointsPosition;
-    }
-
-    private Vector3 changeEnemyTargetWaypoint(Vector3 basePosition, GameObject closestWaypoint) {
-        if (closestWaypoint == null) return basePosition;
-
-        var delta = basePosition - closestWaypoint.transform.position;
-
-        delta = delta.normalized;
-        delta *= 0.5f;  // this moves the waypoint 0.5 units towards the closest waypoint. can be in-/decreased.
-
-        return basePosition - delta;
     }
 
 
@@ -124,8 +105,7 @@ public class Map : MonoBehaviour {
         if (tries < chunkList.Count) {
             currentChunk = newChunk;
             foreach (Chunk c in chunkList) {
-                // if (Mathf.Abs(c.chunkId - currentChunk.chunkId) > 1) DeactivateChunk(c);
-                DeactivateChunk(c);
+                if (c != newChunk) DeactivateChunk(c);
             }
             currentChunk.highlightColor = Color.green;
             ActivateChunk();
