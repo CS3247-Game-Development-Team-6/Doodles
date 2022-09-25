@@ -39,6 +39,7 @@ public class SpikeyTower : Tower {
     }
 
     public override void Shoot() {
+        base.Shoot();
         foreach (var targetTransform in targetTransforms) {
             GameObject bulletObj = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
             Bullet bullet = bulletObj.GetComponent<Bullet>();
@@ -51,6 +52,9 @@ public class SpikeyTower : Tower {
     }
 
     public override void Update() {
+        base.Update();
+        if (health <= 0) return;
+
         if (isShooting && fireCountdown <= 0f) {
             Shoot();
             fireCountdown = 1f / fireRate;
