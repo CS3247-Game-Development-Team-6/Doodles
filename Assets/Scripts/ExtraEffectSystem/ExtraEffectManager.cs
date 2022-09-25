@@ -11,7 +11,7 @@ public class ExtraEffectManager : MonoBehaviour {
 
     // values that can be set
     public float gelLifetime = 2.0f; // lifetime of the effect
-    public float gelSlowAmount = 0.9f; // value 0 to 1 applied to speed of enemy
+    public float gelSlowAmount = 0.1f; // value 0 to 1 applied to speed of enemy
     
     private bool hasGel = false; // separate effect from element effects
     private float currentEffectTime = 0f;
@@ -55,7 +55,8 @@ public class ExtraEffectManager : MonoBehaviour {
 
         currentEffectTime += Time.deltaTime; // increment time counter
 
-        enemy.setSpeed(enemyCalculatedGelSpeed);
+        // enemy.setSpeed(enemyCalculatedGelSpeed);
+        enemy.ReduceSpeed(gelSlowAmount);
         // TODO: setting speed like this might be problematic later
     }
 }

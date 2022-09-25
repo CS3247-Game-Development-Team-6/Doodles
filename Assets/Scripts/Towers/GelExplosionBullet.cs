@@ -10,7 +10,10 @@ public class GelExplosionBullet : Bullet {
         // apply gel to enemy
         if (hitEnemy) {
             var enemy = hitEnemy.gameObject.GetComponent<Enemy>();
-            if (enemy != null) enemy.applyGel();
+            if (enemy != null) {
+                // enemy.applyGel();
+                EnemyEffectManager.instance.HandleEffect(new GelEffect(), enemy);
+            }
         }
     }
 
