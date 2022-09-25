@@ -242,10 +242,10 @@ RectTransform:
   m_Father: {fileID: 1924629757667604183}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 8.533334, y: -7.856}
+  m_SizeDelta: {x: 17.066668, y: 15.712}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5599824396960863642
 CanvasRenderer:
@@ -355,8 +355,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Ice Upgrade
   content: Use ink to change this tower's element to ice!
-  upgradeInfo: Slows enemies for 5 seconds
-  buttonType: 3
 --- !u!1 &4600644439624492359
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,10 +389,10 @@ RectTransform:
   m_Father: {fileID: 1924629757667604183}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 42.666668, y: -7.856}
+  m_SizeDelta: {x: 17.066668, y: 15.712}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6494339931021776426
 CanvasRenderer:
@@ -504,8 +502,153 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Water Upgrade
   content: Use ink to change this tower's element to water!
-  upgradeInfo: Decreases enemy attack for 5 seconds
-  buttonType: 4
+--- !u!1 &4704833173777207596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8282054151255204317}
+  - component: {fileID: 5091243696365305187}
+  - component: {fileID: 6813135141899292437}
+  - component: {fileID: 1776343088633222962}
+  - component: {fileID: 1980989390605765831}
+  m_Layer: 0
+  m_Name: Fix
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8282054151255204317
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4704833173777207596}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0000042574748}
+  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
+  m_Children: []
+  m_Father: {fileID: 5253943535134561971}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 39.310013, y: -0}
+  m_SizeDelta: {x: 14.924, y: 14.906}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &5091243696365305187
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4704833173777207596}
+  m_CullTransparentMesh: 1
+--- !u!114 &6813135141899292437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4704833173777207596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3d517f94bb2874dd5b81772700c47396, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1776343088633222962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4704833173777207596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 2
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: 99f5aa84615ee470c83d2fb561bc73d2, type: 3}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 6813135141899292437}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
+        m_MethodName: DestroyTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1980989390605765831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4704833173777207596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e61c1cf77257d4b94add3fde3f7c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: Fix Tower
+  content: Fix this tower
 --- !u!1 &5253943535134561968
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,13 +680,14 @@ RectTransform:
   m_Children:
   - {fileID: 5253943535404000520}
   - {fileID: 5253943535555894458}
+  - {fileID: 8282054151255204317}
   m_Father: {fileID: 5253943536834382603}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 38.51135, y: -15.3}
-  m_SizeDelta: {x: 29.2, y: 12.952999}
+  m_AnchoredPosition: {x: 38.511, y: -16}
+  m_SizeDelta: {x: 46.772, y: 14.906}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5253943535134561973
 CanvasRenderer:
@@ -571,7 +715,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 1
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -613,10 +757,10 @@ RectTransform:
   m_Father: {fileID: 5253943535134561971}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 7.462, y: -7.453}
+  m_SizeDelta: {x: 14.924, y: 14.906}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5253943535404000525
 CanvasRenderer:
@@ -726,8 +870,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Upgrade Tower
   content: Use ink to upgrade this tower
-  upgradeInfo: Increases damage dealt
-  buttonType: 0
 --- !u!1 &5253943535555894459
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,10 +904,10 @@ RectTransform:
   m_Father: {fileID: 5253943535134561971}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 23.386, y: -7.453}
+  m_SizeDelta: {x: 14.924, y: 14.906}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5253943535555894463
 CanvasRenderer:
@@ -875,8 +1017,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Destroy Tower
   content: Removes this tower
-  upgradeInfo: Frees up tile to place another tower
-  buttonType: 1
 --- !u!1 &5253943536085481847
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,24 +1062,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 5253943536834382600}
-  target: {fileID: 0}
   playerGO: {fileID: 0}
   zOffsetMultiplier: 10
   xOffsetMultiplier: 3
   xOffsetUpperShift: 2
-  fireDefault: {fileID: 21300000, guid: eace385b694764d439657ec190a851f7, type: 3}
-  fireActive: {fileID: 21300000, guid: 871e386ebd9809c45a17db1cf277dc14, type: 3}
-  iceDefault: {fileID: 21300000, guid: 9d54a0e5c116f554ea27e3633bcfe11e, type: 3}
-  iceActive: {fileID: 21300000, guid: c436c7a825a77b0429e6d8beee56c50d, type: 3}
-  waterDefault: {fileID: 21300000, guid: 214cab270c55a01428a563b2650e0b31, type: 3}
-  waterActive: {fileID: 21300000, guid: 00a2794ea16fe2942b834f6318c0ce38, type: 3}
-  towerRadius: {fileID: 21300000, guid: 44f1e17605d263a46a724e394fc7e96a, type: 3}
-  missleRadius: {fileID: 21300000, guid: a46dc9d1e4e923544b4d4620dbf75852, type: 3}
-  iceDisable: {fileID: 21300000, guid: 90011919f83bb834c860612d686769b3, type: 3}
-  waterDisable: {fileID: 21300000, guid: 22f2509cbbd9a6f4da949ddbd5ff7a7b, type: 3}
-  fireDisable: {fileID: 21300000, guid: 6ed70b278693f024ab9a4cb2ba935665, type: 3}
-  upgradeDisable: {fileID: 21300000, guid: bb04f84d301f70b41be513d6e7f291b0, type: 3}
-  upgradeDefault: {fileID: 21300000, guid: 03a583774c87d794091578f1d51630e5, type: 3}
+  fire:
+    defaultSprite: {fileID: 0}
+    activeSprite: {fileID: 0}
+    disabledSprite: {fileID: 0}
+  ice:
+    defaultSprite: {fileID: 0}
+    activeSprite: {fileID: 0}
+    disabledSprite: {fileID: 0}
+  water:
+    defaultSprite: {fileID: 0}
+    activeSprite: {fileID: 0}
+    disabledSprite: {fileID: 0}
+  upgrade:
+    defaultSprite: {fileID: 0}
+    activeSprite: {fileID: 0}
+    disabledSprite: {fileID: 0}
+  destroy:
+    defaultSprite: {fileID: 0}
+    activeSprite: {fileID: 0}
+    disabledSprite: {fileID: 0}
 --- !u!1 &5253943536834382600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1184,10 +1330,10 @@ RectTransform:
   m_Father: {fileID: 1924629757667604183}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 25.600002, y: -7.856}
+  m_SizeDelta: {x: 17.066668, y: 15.712}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2294119273419514541
 CanvasRenderer:
@@ -1297,8 +1443,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Fire Upgrade
   content: Use ink to change this tower's element to fire!
-  upgradeInfo: Deals DoT to enemies for 5 seconds
-  buttonType: 2
 --- !u!1 &8788777169986421082
 GameObject:
   m_ObjectHideFlags: 0
