@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TowerSelectionManager : MonoBehaviour {
     [Header("Cards Parameters")]
@@ -75,6 +76,6 @@ public class TowerSelectionManager : MonoBehaviour {
     }
 
     public void StartGame() {
-        Debug.Log("start game");
+        SceneManager.LoadScene("SpiderScene-prototype");
     }
 }
