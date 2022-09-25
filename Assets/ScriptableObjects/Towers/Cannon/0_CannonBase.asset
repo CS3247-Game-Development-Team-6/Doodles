@@ -19,10 +19,11 @@ MonoBehaviour:
   element: {fileID: 0}
   cost: 30
   health: 100
-  healthDecayRate: 1
+  healthDecayRate: 50
+  damageFixCost: 50
   speed: 40
   explosionRadius: 0
-  damage: 45
+  damage: 1000
   penetratesEnemy: 0
   impactPrefab: {fileID: 4586470546859298135, guid: 024f097d68bf33d44ba2726d968af48c, type: 3}
   towerPrefab: {fileID: 5135174605016635187, guid: 22c89fe08a5a8334bbd7e1d8e9da2045, type: 3}
