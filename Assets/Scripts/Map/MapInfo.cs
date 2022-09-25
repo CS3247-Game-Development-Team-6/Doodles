@@ -2,6 +2,9 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New MapInfo", menuName = "Map")]
 public class MapInfo : ScriptableObject {
+
+    [Header("Prefabs")]
+
     [SerializeField] public GameObject mapBase;
     [SerializeField] public GameObject tilePrefab;
     [SerializeField] public GameObject fogPrefab;
@@ -10,7 +13,13 @@ public class MapInfo : ScriptableObject {
     [SerializeField] public GameObject curvePrefab;
     [SerializeField] public GameObject straightPrefab;
     [SerializeField] public GameObject waypointPrefab;
-    [SerializeField] public GameObject waypointEmpty;
+
+    [Header("LevelInfo")]
+    
+    [SerializeField] public string levelName;
+    [SerializeField,Range(0,1)] public float startingInkFraction;
+    [SerializeField,Range(0,1)] public float inkRegenRate;
+    [SerializeField] public LevelInfoScriptableObject[] levelInfo;
 
     public void GeneratePrefabs(Chunk chunk) {
         if (!chunk.cellsGenerated) return;
@@ -41,6 +50,12 @@ public class MapInfo : ScriptableObject {
             }
         }
         chunk.prefabsGenerated = true;
-
     }
+
+    public GameObject GenerateWaypoint(int index, Transform parent) {
+        GameObject waypoint = Instantiate(waypointPrefab, parent, true);
+        waypoint.name = $"Waypoint {index}";
+        return waypoint;
+    }
+    
 }

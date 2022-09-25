@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Chunk : MonoBehaviour {
@@ -14,16 +15,20 @@ public class Chunk : MonoBehaviour {
     public Vector2Int[,] dirGrid;
     public bool cellsGenerated { get; private set; }
     public bool prefabsGenerated;
+    public List<Cell> waypoints { get; private set; }
+    private Barrier[] barriers;
 
-    public void Init() {
+    public void Init(Transform barrierPrefab) {
         var f = Random.Range(0f, 1f) / 0.2 % 1;
         spawnDir = f < 0.5 ? DIR.RIGHT : DIR.UP;
 
         int minDiff = Mathf.Max(4, (gridSize.x + gridSize.y) / 4);
-        int new1 = 0, new2 = 0;
-        while (Mathf.Abs(new1 - new2) < minDiff) {
-            new1 = Random.Range(0, gridSize.x - 1);
-            new2 = Random.Range(0, gridSize.y - 1);
+        int newX = 0, newY = 0, newX1 = 0, newY1 = 0;
+        while (Mathf.Abs(newX - newY) < minDiff) {
+            newX = Random.Range(0, gridSize.x - 1);
+            newX1 = Random.Range(0, gridSize.x - 1);
+            newY = Random.Range(0, gridSize.y - 1);
+            newY1 = Random.Range(0, gridSize.y - 1);
         }
         // x axis: rows; y axis: columns
         // RIGHT = (1,0), UP = (0, 1)
@@ -31,14 +36,14 @@ public class Chunk : MonoBehaviour {
             startPos = prevChunk.spawnDir == DIR.RIGHT ? 
                 new Vector2Int(0, prevChunk.spawnPos.y) : new Vector2Int(prevChunk.spawnPos.x, 0);
             spawnPos = spawnDir == DIR.RIGHT ? 
-                new Vector2Int(gridSize.x-1, new1) : 
-                new Vector2Int(new1, gridSize.y-1);
+                new Vector2Int(gridSize.x-1, newY) : 
+                new Vector2Int(newX, gridSize.y-1);
         } else if (spawnDir == DIR.RIGHT) {
-            startPos = new Vector2Int(0, new1);
-            spawnPos = new Vector2Int(gridSize.x-1, new2);
+            startPos = new Vector2Int(0, newY);
+            spawnPos = new Vector2Int(gridSize.x-1, newY1);
         } else if (spawnDir == DIR.UP) {
-            startPos = new Vector2Int(new1, 0);
-            spawnPos = new Vector2Int(new2, gridSize.y-1);
+            startPos = new Vector2Int(newX, 0);
+            spawnPos = new Vector2Int(newX1, gridSize.y-1);
         }
 
         if (prevChunk != null) {
@@ -60,6 +65,25 @@ public class Chunk : MonoBehaviour {
                 // NOTE: per default we initialise all tiles as foggy, then clear some close to the base.
             }
             placeInPosition += Vector3.forward * cellSize;
+        }
+
+        barriers = new Barrier[4];
+        for (int i = 0; i < 4; i++) {
+            DIR d = (DIR)i;
+            if (chunkId != 0 && d.Vec() == -prevChunk.spawnDir.Vec()) continue;
+
+            Transform wall = Instantiate(barrierPrefab, transform);
+            wall.name = $"Barrier {chunkId} {d}";
+            barriers[i] = wall.GetComponent<Barrier>();
+            float wallWidth = 0f;
+            float x = d == DIR.UP ? gridSize.y : d == DIR.DOWN ? wallWidth/2 : ((float)gridSize.y / 2);
+            float z = d == DIR.RIGHT ? gridSize.x : d == DIR.LEFT ? wallWidth/2 : ((float)gridSize.x / 2);
+            wall.position = transform.position + new Vector3(x, 1, z);
+            x = d == DIR.UP || d == DIR.DOWN ? wallWidth : gridSize.y;
+            z = d == DIR.RIGHT || d == DIR.LEFT ? wallWidth : gridSize.x;
+            wall.localScale = new Vector3(x, 2, z);
+            // set trigger to proceed to next level
+            wall.GetComponent<Collider>().isTrigger = d == spawnDir;
         }
     }
 
@@ -147,6 +171,7 @@ public class Chunk : MonoBehaviour {
         Vector2Int lastPos = -Vector2Int.one;
         Vector2Int currentPos = spawnPos;
         int len = 0;
+        waypoints = new List<Cell>();
         while (lastPos != startPos) {
            Cell cell = cells[currentPos.x, currentPos.y];
             if (!ContainsCell(lastPos)) cell.type = CellType.SPAWN;
@@ -154,6 +179,7 @@ public class Chunk : MonoBehaviour {
             else if (dirGrid[lastPos.x, lastPos.y] != dirGrid[currentPos.x, currentPos.y]) {
                 cell.type = CellType.CURVEPATH;
                 cell.rotation = new Vector3(0, GetRotationDeg(dirGrid[lastPos.x, lastPos.y], dirGrid[currentPos.x, currentPos.y]), 0);
+                waypoints.Add(cell);
             } else {
                 cell.type = CellType.STRAIGHTPATH;
                 cell.rotation = new Vector3(0, GetRotationDeg(dirGrid[lastPos.x, lastPos.y], dirGrid[currentPos.x, currentPos.y]), 0);
@@ -207,25 +233,33 @@ public class Chunk : MonoBehaviour {
             pos.z < transform.position.z + cellSize * gridSize.y;
     }
 
+    public void SetActive(bool state) {
+        for (int r = 0; r < gridSize.x; r++) {
+            for (int c = 0; c < gridSize.y; c++) {
+                if (cells[r,c].tile != null) cells[r, c].tile.SetActive(state);
+            }
+        }
+    }
+
     private void OnDrawGizmos() {
         Gizmos.color = highlightColor;
         Vector3 position = transform.position;
-        Vector3 width = Vector3.right * cellSize * gridSize.x;
-        Vector3 height = Vector3.forward * cellSize * gridSize.y;
-        for (int r = 0; r <= gridSize.x; r++) {
+        Vector3 width = Vector3.right * cellSize * gridSize.y;
+        Vector3 height = Vector3.forward * cellSize * gridSize.x;
+        for (int c = 0; c <= gridSize.y; c++) {
             Gizmos.DrawLine(position, position + height);
             position += Vector3.right * cellSize;
         }
         position = transform.position;
-        for (int c = 0; c <= gridSize.y; c++) {
+        for (int r = 0; r <= gridSize.x; r++) {
             Gizmos.DrawLine(position, position + width);
             position += Vector3.forward * cellSize;
         }
         Vector3 offset = transform.position + 0.5f * cellSize * new Vector3(1, 0, 1);
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(new Vector3(spawnPos.x, 0, spawnPos.y) + offset, 0.1f);
+        Gizmos.DrawSphere(new Vector3(spawnPos.y, 0, spawnPos.x) + offset, 0.1f);
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(new Vector3(startPos.x, 0, startPos.y) + offset, 0.1f);
+        Gizmos.DrawSphere(new Vector3(startPos.y, 0, startPos.x) + offset, 0.1f);
     }
 
 }

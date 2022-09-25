@@ -11,8 +11,8 @@ public class WaveSpawner : MonoBehaviour {
     public static int numEnemiesLeftInWave;
     public static bool isSpawningEnemy;
 
-    public WaveManager[] waves;
-    public Transform spawnPoint;
+    public WaveSet[] waves;
+    public Transform spawnPoint { get; set; }
     public float timeBetweenWaves = 5f;
     public IndicatorUI waveCountdownIndicator;
     public Text enemiesLeftText;
@@ -31,12 +31,12 @@ public class WaveSpawner : MonoBehaviour {
         wavesCounter = 0;
 
         isSkipWaveCountdownButtonVisible = true;
-        skipWaveCountdownButton.onClick.AddListener(buttonOnClick);
+        skipWaveCountdownButton.onClick.AddListener(ButtonOnClick);
 
         if (levelInfo != null) waves = levelInfo.waves;
     }
 
-    void buttonOnClick() {
+    void ButtonOnClick() {
         isSkipWaveCountdownButtonVisible = false;
 
         countdownTimer = 0f; // reset timer 
@@ -89,7 +89,7 @@ public class WaveSpawner : MonoBehaviour {
     void SpawnWave() {
         wavesCounter++;
 
-        WaveManager waveToSpawn = waves[waveIndex];
+        WaveSet waveToSpawn = waves[waveIndex];
 
         numEnemiesLeftInWave = waveToSpawn.getTotalEnemy();
         StartCoroutine(waveToSpawn.StartWave(this));

@@ -3,7 +3,7 @@ using System.Collections; // IEnumerator
 
 
 [System.Serializable]
-public class WaveManager {
+public class WaveSet {
 
     public GameObject enemy;
     public int count;
