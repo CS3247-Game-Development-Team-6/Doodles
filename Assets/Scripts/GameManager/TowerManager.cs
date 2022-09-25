@@ -131,10 +131,7 @@ public class TowerManager : MonoBehaviour {
     public void FixTower() {
         Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
         InkManager inkManager = InkManager.instance;
-        if (!selectedTower.IsDead()) {
-            Debug.LogError("Tower is not broken");
-            return;
-        } else if (!inkManager.hasEnoughInk(selectedTower.towerInfo.damageFixCost)) {
+        if (!inkManager.hasEnoughInk(selectedTower.towerInfo.damageFixCost)) {
             TriggerInsufficientInk();
         } else if (selectedTower.restoreHealth()) {
             inkManager.ChangeInkAmount(-selectedTower.towerInfo.damageFixCost);
