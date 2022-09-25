@@ -23,6 +23,7 @@ public class Tower : MonoBehaviour {
     protected float health;
     protected float maxHealth;
     protected float healthDecayRate;
+    private bool damageEffectPlayed = false;
 
     // Prefabs
     protected GameObject bulletPrefab;
@@ -109,13 +110,15 @@ public class Tower : MonoBehaviour {
 
     public virtual void Update() {
         healthBar.fillAmount = health / maxHealth;
-        if (health <= 0 && this.smokePrefab.GetComponent<ParticleSystem>().isStopped) {
+        if (health <= 0 && !damageEffectPlayed) {
             this.smokePrefab.GetComponent<ParticleSystem>().Play();
             this.damagedSound.Play();
+            damageEffectPlayed = true;
             return;
-        } else if (health > 0 && this.smokePrefab.GetComponent<ParticleSystem>().isPlaying) {
+        } else if (health > 0 && damageEffectPlayed) {
             this.smokePrefab.GetComponent<ParticleSystem>().Stop();
             this.damagedSound.Stop();
+            damageEffectPlayed = false;
             return;
         }
     }
