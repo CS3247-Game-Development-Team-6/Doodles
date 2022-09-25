@@ -330,12 +330,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
-        m_MethodName: buildIceTurret
-        m_Mode: 1
+        m_TargetAssemblyTypeName: TowerManager, Assembly-CSharp
+        m_MethodName: ReplaceElementTower
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 2a9f0209ebf96cc4f8a2c63413522b7e, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ElementInfo, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -477,12 +477,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
-        m_MethodName: buildWaterTurret
-        m_Mode: 1
+        m_TargetAssemblyTypeName: TowerManager, Assembly-CSharp
+        m_MethodName: ReplaceElementTower
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 5f2ac61151ef7e347b4a722691241670, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ElementInfo, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -759,8 +759,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 7.462, y: -7.453}
-  m_SizeDelta: {x: 14.924, y: 14.906}
+  m_AnchoredPosition: {x: 7.3, y: -6.4764996}
+  m_SizeDelta: {x: 14.6, y: 12.952999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5253943535404000525
 CanvasRenderer:
@@ -845,7 +845,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: TowerManager, Assembly-CSharp
         m_MethodName: UpgradeTower
         m_Mode: 1
         m_Arguments:
@@ -906,8 +906,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 23.386, y: -7.453}
-  m_SizeDelta: {x: 14.924, y: 14.906}
+  m_AnchoredPosition: {x: 21.900002, y: -6.4764996}
+  m_SizeDelta: {x: 14.6, y: 12.952999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5253943535555894463
 CanvasRenderer:
@@ -992,7 +992,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: TowerManager, Assembly-CSharp
         m_MethodName: DestroyTower
         m_Mode: 1
         m_Arguments:
@@ -1067,25 +1067,29 @@ MonoBehaviour:
   xOffsetMultiplier: 3
   xOffsetUpperShift: 2
   fire:
-    defaultSprite: {fileID: 0}
-    activeSprite: {fileID: 0}
-    disabledSprite: {fileID: 0}
+    defaultSprite: {fileID: 21300000, guid: eace385b694764d439657ec190a851f7, type: 3}
+    activeSprite: {fileID: 21300000, guid: 871e386ebd9809c45a17db1cf277dc14, type: 3}
+    disabledSprite: {fileID: 21300000, guid: 6ed70b278693f024ab9a4cb2ba935665, type: 3}
   ice:
-    defaultSprite: {fileID: 0}
-    activeSprite: {fileID: 0}
-    disabledSprite: {fileID: 0}
+    defaultSprite: {fileID: 21300000, guid: 9d54a0e5c116f554ea27e3633bcfe11e, type: 3}
+    activeSprite: {fileID: 21300000, guid: c436c7a825a77b0429e6d8beee56c50d, type: 3}
+    disabledSprite: {fileID: 21300000, guid: 90011919f83bb834c860612d686769b3, type: 3}
   water:
-    defaultSprite: {fileID: 0}
-    activeSprite: {fileID: 0}
-    disabledSprite: {fileID: 0}
+    defaultSprite: {fileID: 21300000, guid: 214cab270c55a01428a563b2650e0b31, type: 3}
+    activeSprite: {fileID: 21300000, guid: 00a2794ea16fe2942b834f6318c0ce38, type: 3}
+    disabledSprite: {fileID: 21300000, guid: 22f2509cbbd9a6f4da949ddbd5ff7a7b, type: 3}
   upgrade:
-    defaultSprite: {fileID: 0}
+    defaultSprite: {fileID: 21300000, guid: 03a583774c87d794091578f1d51630e5, type: 3}
     activeSprite: {fileID: 0}
-    disabledSprite: {fileID: 0}
+    disabledSprite: {fileID: 21300000, guid: bb04f84d301f70b41be513d6e7f291b0, type: 3}
   destroy:
-    defaultSprite: {fileID: 0}
+    defaultSprite: {fileID: 21300000, guid: 99ce2bf6e4f6726418edea8780c8a350, type: 3}
     activeSprite: {fileID: 0}
     disabledSprite: {fileID: 0}
+  fix:
+    defaultSprite: {fileID: 21300000, guid: 3d517f94bb2874dd5b81772700c47396, type: 3}
+    activeSprite: {fileID: 0}
+    disabledSprite: {fileID: 21300000, guid: 5f07fd80e0c27471485a5ce3e457ea8b, type: 3}
 --- !u!1 &5253943536834382600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,12 +1422,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
-        m_MethodName: buildFireTurret
-        m_Mode: 1
+        m_TargetAssemblyTypeName: TowerManager, Assembly-CSharp
+        m_MethodName: ReplaceElementTower
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 5503097e096315346a110e0488d9c960, type: 2}
+          m_ObjectArgumentAssemblyTypeName: ElementInfo, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -35,6 +35,7 @@ public class NodeUI : MonoBehaviour
     public NodeButtonInfo water;
     public NodeButtonInfo upgrade;
     public NodeButtonInfo destroy;
+    public NodeButtonInfo fix;
     private Dictionary<ElementType, NodeButtonInfo> elementButtonInfos;
 
     private void Start() {
@@ -43,6 +44,7 @@ public class NodeUI : MonoBehaviour
         Transform elementsGroup = canvas.Find("Elements");
         this.upgrade.Setup(othersGroup.Find("Upgrade").gameObject);
         this.destroy.Setup(othersGroup.Find("Destroy").gameObject);
+        this.fix.Setup(othersGroup.Find("Fix").gameObject);
         this.fire.Setup(elementsGroup.Find("Fire").gameObject);
         this.ice.Setup(elementsGroup.Find("Ice").gameObject);
         this.water.Setup(elementsGroup.Find("Water").gameObject);

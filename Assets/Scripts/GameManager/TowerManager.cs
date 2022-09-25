@@ -134,6 +134,14 @@ public class TowerManager : MonoBehaviour {
         DeselectNode();
     }
 
+    /** Fix tower on selected node. */
+    public void FixTower() {
+        Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
+        InkManager inkManager = InkManager.instance;
+        
+        DeselectNode();
+    }
+
     public void SetTowerToBuild(TowerInfo towerInfo) {
         this.towerToBuild = towerInfo;
     }
