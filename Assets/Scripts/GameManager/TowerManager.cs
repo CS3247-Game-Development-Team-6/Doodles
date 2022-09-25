@@ -127,6 +127,23 @@ public class TowerManager : MonoBehaviour {
         DeselectNode();
     }
 
+    /** Fix tower on selected node. */
+    public void FixTower() {
+        Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
+        InkManager inkManager = InkManager.instance;
+        if (!selectedTower.IsDead()) {
+            Debug.LogError("Tower is not broken");
+            return;
+        } else if (!inkManager.hasEnoughInk(selectedTower.towerInfo.damageFixCost)) {
+            TriggerInsufficientInk();
+        } else if (selectedTower.restoreHealth()) {
+            inkManager.ChangeInkAmount(-selectedTower.towerInfo.damageFixCost);
+        } else {
+            Debug.LogError("Tower not fixed at Node " + selectedNode);
+        }
+
+        DeselectNode();
+    }
 
     /** Destroys tower on selected node. */
     public void DestroyTower() {
@@ -134,13 +151,6 @@ public class TowerManager : MonoBehaviour {
         DeselectNode();
     }
 
-    /** Fix tower on selected node. */
-    public void FixTower() {
-        Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
-        InkManager inkManager = InkManager.instance;
-        
-        DeselectNode();
-    }
 
     public void SetTowerToBuild(TowerInfo towerInfo) {
         this.towerToBuild = towerInfo;

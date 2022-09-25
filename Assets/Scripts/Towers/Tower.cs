@@ -7,6 +7,8 @@ public class Tower : MonoBehaviour {
     // Tower info
     protected string towerName;
     protected int versionNum;
+    protected int cost;
+    protected int damageFixCost;
 
     // Macros
     public const string ENEMY_TAG = "Enemy";
@@ -16,7 +18,6 @@ public class Tower : MonoBehaviour {
     // Tower Attack Attributes
     protected float range;
     protected float fireRate;
-    protected int cost;
 
     // Tower Durability Attributes
     protected float health;
@@ -44,6 +45,7 @@ public class Tower : MonoBehaviour {
         this.range = towerInfo.range;
         this.fireRate = towerInfo.fireRate;
         this.cost = towerInfo.cost;
+        this.damageFixCost = towerInfo.damageFixCost;
         this.health = towerInfo.health;
         this.maxHealth = this.health;
         this.healthDecayRate = towerInfo.healthDecayRate;
@@ -78,7 +80,21 @@ public class Tower : MonoBehaviour {
 
     /** Function accessable by enemy to damage tower. */
     public void DecreaseHealth(float amount) {
-        health -= 50;
+        health -= amount;
+    }
+
+    /** Function to increase tower health. */
+    public void IncreaseHealth(float amount) {
+        health += amount;
+        if (health > maxHealth) {
+            health = maxHealth;
+        }
+    }
+
+    /** Function to increase tower health. */
+    public bool restoreHealth() {
+        IncreaseHealth(maxHealth);
+        return true;
     }
 
     /** Instantiates and fires bullets. */
@@ -86,12 +102,21 @@ public class Tower : MonoBehaviour {
         DecreaseHealth(healthDecayRate);
     }
 
+    /** Check if tower is dead. */
+    public bool IsDead() {
+        return health <= 0;
+    }
+
     public virtual void Update() {
+        healthBar.fillAmount = health / maxHealth;
         if (health <= 0 && this.smokePrefab.GetComponent<ParticleSystem>().isStopped) {
             this.smokePrefab.GetComponent<ParticleSystem>().Play();
             this.damagedSound.Play();
             return;
+        } else if (health > 0 && this.smokePrefab.GetComponent<ParticleSystem>().isPlaying) {
+            this.smokePrefab.GetComponent<ParticleSystem>().Stop();
+            this.damagedSound.Stop();
+            return;
         }
-        healthBar.fillAmount = health / maxHealth;
     }
 }
