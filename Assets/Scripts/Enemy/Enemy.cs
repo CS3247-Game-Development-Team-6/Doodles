@@ -16,7 +16,7 @@ public enum EffectStatus {
     NONE // default
 }
 
-[RequireComponent(typeof(EnemyActiveEffectsManager))]
+[RequireComponent(typeof(EnemyActiveEffects))]
 public class Enemy : MonoBehaviour {
 
     /**
@@ -81,11 +81,11 @@ public class Enemy : MonoBehaviour {
      * EnemyActiveEffectsManager
      */
     public float speedMultiplier;
-    private EnemyActiveEffectsManager enemyActiveEffectsManager;
+    private EnemyActiveEffects enemyActiveEffectsManager;
 
     private void Awake() {
         inkManager = InkManager.instance;
-        enemyActiveEffectsManager = GetComponent<EnemyActiveEffectsManager>();
+        enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
     }
 
     /**
@@ -205,7 +205,7 @@ public class Enemy : MonoBehaviour {
 
         // get reference to its EnemyActiveEffectsManager
         speedMultiplier = 1.0f;
-        enemyActiveEffectsManager = GetComponent<EnemyActiveEffectsManager>();
+        enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
     }
 
     private void Update() {

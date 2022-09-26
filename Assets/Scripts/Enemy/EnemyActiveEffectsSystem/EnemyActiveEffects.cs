@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Active Effect Manager for an enemy
 // Currently applied after element effects
-public class EnemyActiveEffectsManager : MonoBehaviour {
+public class EnemyActiveEffects : MonoBehaviour {
     // enemy this effect manager is attached to
     private Enemy enemy;
     
