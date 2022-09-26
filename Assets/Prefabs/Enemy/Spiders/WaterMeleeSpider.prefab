@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 986762576498338959}
   - component: {fileID: 904252060}
   - component: {fileID: 7208389763373003395}
-  - component: {fileID: -2232138328373205404}
+  - component: {fileID: 7855957698827827926}
   m_Layer: 0
   m_Name: WaterMeleeSpider
   m_TagString: Enemy
@@ -666,6 +666,7 @@ MonoBehaviour:
   healthBar: {fileID: 1929750958}
   healthText: {fileID: 4879313988388672468}
   damageText: {fileID: 2675300404428900392, guid: 934f2897b165c6b47b9aa966c0c7d01c, type: 3}
+  speedMultiplier: 0
 --- !u!114 &904252060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,7 +701,7 @@ MonoBehaviour:
   _scaldedData: {fileID: 11400000, guid: 8982c217c37259142b4427dd206e7b0f, type: 2}
   _frozenData: {fileID: 11400000, guid: 528997d82f1193647a49ef9489883657, type: 2}
   _weakenedData: {fileID: 11400000, guid: 3736ed5fb54fd314eb72776659995569, type: 2}
---- !u!114 &-2232138328373205404
+--- !u!114 &7855957698827827926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -709,7 +710,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6540121397901334477}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33006a2befb6c9644a890fc527cc679b, type: 3}
+  m_Script: {fileID: 11500000, guid: c0c0405fecb06d5408f42208e873bfd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8326160171143518766

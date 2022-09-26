@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,40 +8,35 @@ public class EnemyActiveEffectsManager : MonoBehaviour {
     // enemy this effect manager is attached to
     private Enemy enemy;
     
-    // gel effect variables
-    private bool hasGel = false;
-    private GelEffect currentGelEffect;
+    private HashSet<string> activeEffects;
     
     private void Start() {
-        this.enemy = GetComponentInParent<Enemy>();
+        enemy = GetComponent<Enemy>();
+        activeEffects = new HashSet<string>();
     }
 
-    public void RecalculateSpeed() {
-        if (currentGelEffect != null && currentGelEffect.isActivated) { // there is a current gel effect in effect
-            currentGelEffect.RecalculateSpeed();
+    public IEnumerator HandleEffect(IEnemyEffect effect) {
+        var effectKey = effect.GetKey();
+        if (activeEffects.Contains(effectKey)) {
+            Debug.LogWarning($"Effect {effectKey} is already applied and cannot be reapplied.");
+        } else {
+            Debug.Log($"Effect {effectKey} is being applied and added!");
+            StartCoroutine(effect.Activate(this.enemy)); // apply effect
+            activeEffects.Add(effectKey);
+            yield return new WaitForSeconds(effect.GetLifetime());
+            DeactivateEffect(effect);
+
         }
     }
 
-    public void HandleEffect(Effect effect) {
-        if (effect is GelEffect) {
-            if (hasGel == true) {
-                // remove previous gel effect, prevent stacking of effect
-                StartCoroutine(effect.Deactivate(this.enemy));
-            }
-
-            // track gel effect
-            currentGelEffect = (GelEffect) effect;
-            hasGel = true;
-        }
-
-        StartCoroutine(effect.Activate(this.enemy)); // apply effect
-    }
-
-    public void DeactivateEffect(Effect effect) {
-        if (effect is GelEffect) {
-            hasGel = false;
-
-            StartCoroutine(currentGelEffect.Deactivate(this.enemy)); // remove effect
+    public void DeactivateEffect(IEnemyEffect effect) {
+        var effectKey = effect.GetKey();
+        if (!activeEffects.Contains(effectKey)) {
+            Debug.LogWarning($"Effect {effectKey} is not active on {enemy}.");
+        } else {
+            Debug.Log($"Effect {effectKey} is being deactivated and removed!");
+            StartCoroutine(effect.Deactivate(this.enemy)); // remove effect
+            activeEffects.Remove(effectKey);
         }
     }
 }
