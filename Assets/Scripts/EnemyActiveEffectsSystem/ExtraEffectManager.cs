@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
+ * DEPRECATED CLASS - YONG RUI
  * This manages extra effects on enemies not tied to elements, and it applied 
  * after element effects
  */

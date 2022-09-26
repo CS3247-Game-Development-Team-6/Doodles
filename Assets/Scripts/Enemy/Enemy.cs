@@ -77,9 +77,9 @@ public class Enemy : MonoBehaviour {
     public GameObject damageText;
 
     /**
-     * ExtraEffectManager
+     * EnemyActiveEffectsManager
      */
-    private ExtraEffectManager extraEffectManager;
+    private EnemyActiveEffectsManager enemyActiveEffectsManager;
 
     private void Awake() {
         inkManager = InkManager.instance;
@@ -134,7 +134,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public void applyGel() {
-        extraEffectManager.applyGel();
+        enemyActiveEffectsManager.HandleEffect(new GelEffect());
     }
 
     public float getSpeed() {
@@ -143,16 +143,18 @@ public class Enemy : MonoBehaviour {
 
     public void setSpeed(float speed) {
         this.speed = speed;
+
+        // currently called by EnemyActiveEffectsManager and GelEffect
     }
 
     public void ReduceSpeed(float slowAmount) {
         speed = enemyInfo.speed * slowAmount;
-        extraEffectManager.calculateGelSpeed();
+        enemyActiveEffectsManager.RecalculateSpeed();
     }
 
     public void RestoreSpeed() {
         speed = enemyInfo.speed;
-        extraEffectManager.calculateGelSpeed();
+        enemyActiveEffectsManager.RecalculateSpeed();
     }
 
     public void ReduceAttack(int atkDecreAmount) {
@@ -206,8 +208,8 @@ public class Enemy : MonoBehaviour {
         // get a reference to all cells for checking if a tile is fogged or not
         cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
     
-        // get reference to its ExtraEffectManager
-        extraEffectManager = GetComponent<ExtraEffectManager>();
+        // get reference to its EnemyActiveEffectsManager
+        enemyActiveEffectsManager = GetComponent<EnemyActiveEffectsManager>();
     }
 
     private void Update() {

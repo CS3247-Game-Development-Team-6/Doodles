@@ -55,7 +55,6 @@ public class GelExplosionTower : Tower {
     void Update() {
         if (!target) return;
 
-        
         // Enemy target lock on 
         Vector3 dir = target.position - transform.position;
         Quaternion lookAtRotation = Quaternion.LookRotation(dir);
