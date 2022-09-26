@@ -85,9 +85,14 @@ public class NodeUI : MonoBehaviour
         transform.position = selectedNode.towerBuildPosition + new Vector3(xOffset, 0, zOffset);
 
         if (selectedNode.HasTower()) {
+
             upgrade.image.sprite = selectedNode.isUpgraded ? upgrade.disabledSprite : upgrade.defaultSprite;
             upgrade.tooltip.isNotAvailable = selectedNode.isUpgraded;
             upgrade.tooltip.SetTowerInfo(selectedNode.tower.towerInfo, selectedNode.tower.nextUpgrade);
+            
+            fix.tooltip.isFix = true;
+            fix.tooltip.SetTowerInfo(selectedNode.tower.towerInfo, selectedNode.tower.nextUpgrade);
+            
             TowerInfo currTower = selectedNode.tower.towerInfo;
 
             if (!selectedNode.tower.element) {

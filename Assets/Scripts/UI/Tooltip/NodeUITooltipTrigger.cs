@@ -4,17 +4,18 @@ public class NodeUITooltipTrigger : TooltipTrigger {
     private TowerInfo currentTower;
     private TowerInfo newTower;
     private bool isUpgrade;
-    public bool isNotAvailable { get; set; }
+    public bool isFix = false;
+    public bool isNotAvailable { get; set; } 
 
     public void SetTowerInfo(TowerInfo currentTower, TowerInfo newTower) {
         this.currentTower = currentTower;
         this.newTower = newTower;
         this.isUpgrade = currentTower.element == newTower.element 
-            && currentTower.upgradeNum < newTower.upgradeNum; 
+            && currentTower.upgradeNum < newTower.upgradeNum;
     }
 
     private string FormatContent() {
-        if (!newTower || !currentTower) return content;
+        if (!newTower || !currentTower || isFix) return content;
         int damageDiff = newTower.damage - currentTower.damage;
         float rangeDiff = newTower.range - currentTower.range;
 
@@ -24,6 +25,7 @@ public class NodeUITooltipTrigger : TooltipTrigger {
     }
 
     private string FormatHeader() {
+        if (isFix) return header + $@" [${currentTower.damageFixCost}]";
         if (!newTower || !currentTower) return header;
         return header + $@" [${newTower.cost}]";
     }

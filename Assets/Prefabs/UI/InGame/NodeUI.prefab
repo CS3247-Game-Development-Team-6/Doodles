@@ -355,6 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Ice Upgrade
   content: Use ink to change this tower's element to ice!
+  isFix: 0
 --- !u!1 &4600644439624492359
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,6 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Water Upgrade
   content: Use ink to change this tower's element to water!
+  isFix: 0
 --- !u!1 &4704833173777207596
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +650,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   header: Fix Tower
-  content: Fix this tower
+  content: Restore this tower to full health
+  isFix: 0
 --- !u!1 &5253943535134561968
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,6 +873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Upgrade Tower
   content: Use ink to upgrade this tower
+  isFix: 0
 --- !u!1 &5253943535555894459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,6 +1021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Destroy Tower
   content: Removes this tower
+  isFix: 0
 --- !u!1 &5253943536085481847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1447,6 +1452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   header: Fire Upgrade
   content: Use ink to change this tower's element to fire!
+  isFix: 0
 --- !u!1 &8788777169986421082
 GameObject:
   m_ObjectHideFlags: 0
