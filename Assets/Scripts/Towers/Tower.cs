@@ -84,6 +84,11 @@ public class Tower : MonoBehaviour {
         health -= amount;
     }
 
+    /** Function to check if tower is full health. */
+    public bool IsFullHealth() {
+        return health == maxHealth;
+    }
+
     /** Function to increase tower health. */
     public void IncreaseHealth(float amount) {
         health += amount;
