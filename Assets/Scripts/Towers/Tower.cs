@@ -63,6 +63,7 @@ public class Tower : MonoBehaviour {
 
         // Prepare Smoke Effect to be played
         this.smokePrefab = (GameObject) Instantiate(towerInfo.smokePrefab, transform.position, transform.rotation);
+        this.smokePrefab.transform.SetParent(transform);
         this.smokePrefab.GetComponent<ParticleSystem>().Stop();
 
         // Create health bar UI for each tower
@@ -124,7 +125,7 @@ public class Tower : MonoBehaviour {
 
     public virtual void Update() {
         healthBar.fillAmount = health / maxHealth;
-        UpdateDamageFixCost();
+        UpdateDamageFixCost(); // still have error, UI not updated as expected with the actual value
         if (health <= 0 && !damageEffectPlayed) {
             this.smokePrefab.GetComponent<ParticleSystem>().Play();
             this.damagedSound.Play();
