@@ -14,10 +14,10 @@ public class GelEffect : Effect {
 
     public IEnumerator Activate(Enemy enemy) {
         this.enemy = enemy;
-        this.isActivated = true;
         this.enemyBaseSpeed = enemy.getSpeed();
         float newSpeed = enemyBaseSpeed * gelSlowAmount;
         enemy.setSpeed(newSpeed);
+        this.isActivated = true;
         
         Debug.Log($"{enemy} speed set to {newSpeed}");
         
