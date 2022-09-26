@@ -19,7 +19,7 @@ public class CardManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
 
     public void OnPointerDown(PointerEventData eventData) {
-        towerSelectionManager.AddTowerReference(selfGO, this);
+        towerSelectionManager.SelectTower(selfGO, this);
     }
 
     public void OnPointerUp(PointerEventData eventData) {

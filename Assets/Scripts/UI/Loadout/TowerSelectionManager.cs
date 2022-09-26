@@ -5,17 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class TowerSelectionManager : MonoBehaviour {
     [Header("Cards Parameters")]
-    public int cardAmount;
     public GameObject[] cardsGO;
-    //public GameObject cardPrefab;
-    public Transform cardHolderTransform;
+    public Transform towerInventory;
+    private int cardAmount;
+    private List<GameObject> selectionsCards;
 
     [Header("Towers Parameters")]
-    public List<GameObject> towerCards;
-
-    public Transform selectionTransform;
-    //public GameObject selectionCardPrefab;
-    public List<GameObject> selectionsCards;
+    public Transform towerSlot;
+    private List<GameObject> towerCards;
     public List<int> selectedIndexes;
 
     public Button letsBuildButton;
@@ -27,7 +24,7 @@ public class TowerSelectionManager : MonoBehaviour {
         towerCards = new List<GameObject>();
 
         for (int i = 0; i < cardAmount; i++) {
-            AddTowerCardSelection(i);
+            AddSelectionCards(i);
         }
     }
 
@@ -36,9 +33,9 @@ public class TowerSelectionManager : MonoBehaviour {
     }
 
     // add to towerinventory
-    public void AddTowerCardSelection(int index) {
+    public void AddSelectionCards(int index) {
         // todo: add cards dynamicly
-        GameObject card = Instantiate(cardsGO[index], selectionTransform);
+        GameObject card = Instantiate(cardsGO[index], towerInventory);
         CardManager cardManager = card.GetComponent<CardManager>();
         cardManager.selfGO = cardsGO[index];
         cardManager.towerSelectionManager = this;
@@ -46,12 +43,12 @@ public class TowerSelectionManager : MonoBehaviour {
         selectionsCards.Add(card);
     }
 
-    public void AddTowerReference(GameObject selfGO, CardManager parentCard = default) {
+    public void SelectTower(GameObject selfGO, CardManager parentCard = default) {
         AddTowerCard(new List<GameObject>(cardsGO).IndexOf(selfGO), parentCard);
     }
 
     // add to towerslot
-    public void AddTowerCard(int index, CardManager parentCard = default) {
+    private void AddTowerCard(int index, CardManager parentCard = default) {
         if (selectedIndexes.Contains(index)) {
             //remove
             int indexPos = selectedIndexes.IndexOf(index);
@@ -64,7 +61,7 @@ public class TowerSelectionManager : MonoBehaviour {
 
         } else {
             selectedIndexes.Add(index);
-            GameObject card = Instantiate(cardsGO[index], cardHolderTransform);
+            GameObject card = Instantiate(cardsGO[index], towerSlot);
             CardManager cardManager = card.GetComponent<CardManager>();
             cardManager.selfGO = cardsGO[index];
             cardManager.towerSelectionManager = this;

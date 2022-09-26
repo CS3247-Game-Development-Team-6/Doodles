@@ -593,15 +593,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d8b9810a2327d4d971ad14c8a1b3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardAmount: 0
   cardsGO:
   - {fileID: 2648217297815673723, guid: 82e6b21c04ce0694486ee4daed1f0a58, type: 3}
   - {fileID: 2648217297815673723, guid: ac9b0949be3d6c24f95de36fc73c995b, type: 3}
   - {fileID: 2648217297815673723, guid: 9053ab00f13873c4c96af8fd657aef9b, type: 3}
-  cardHolderTransform: {fileID: 1052465927}
-  towerCards: []
-  selectionTransform: {fileID: 653970302}
-  selectionsCards: []
+  towerInventory: {fileID: 653970302}
+  towerSlot: {fileID: 1052465927}
   selectedIndexes: 
   letsBuildButton: {fileID: 1104054121}
   minCardAllowed: 1
