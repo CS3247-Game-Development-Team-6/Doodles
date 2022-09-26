@@ -44,6 +44,8 @@ public class Enemy : MonoBehaviour {
         effectStatus = EffectStatus.NONE;
     }
 
+    public Waypoints waypoints { get; set; }
+
     /**
      * Visibility
      */
@@ -185,11 +187,13 @@ public class Enemy : MonoBehaviour {
         ballParentTransform = gameObject.transform;
 
         // first target, which is first waypoint in Waypoints
-        target = Waypoints.points[0];
+        // target = Waypoints.points[0];
 
         // get a reference to all cells for checking if a tile is fogged or not
         // cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
-        cells = FindObjectOfType<Map>().currentChunk.cells;
+        Chunk currChunk = FindObjectOfType<Map>().currentChunk;
+        cells = currChunk.cells;
+        waypoints = currChunk.GetComponent<Waypoints>();
     }
 
     private void Update() {
@@ -250,16 +254,17 @@ public class Enemy : MonoBehaviour {
     }
 
     private bool GetCurrentTileFogged(int xCoord, int yCoord) {
-        Cell cell = cells[xCoord, yCoord];
+        // is inverted
+        Cell cell = cells[yCoord, xCoord];
         return cell.isFog;
     }
     private void GetNextWaypoint() {
-        if (waypointIndex >= Waypoints.points.Length - 1) {
+        if (waypointIndex >= waypoints.Length - 1) {
             EndPath();
             return;
         }
         waypointIndex++;
-        target = Waypoints.points[waypointIndex];
+        target = waypoints.GetPoint(waypointIndex);
     }
 
     private void EndPath() {

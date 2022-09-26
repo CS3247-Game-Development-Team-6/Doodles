@@ -6,6 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
+// DEPRECATED: DO NOT USE/UPDATE
 public class MapGenerator : MonoBehaviour
 {
     public float cellSize = 1.0f;

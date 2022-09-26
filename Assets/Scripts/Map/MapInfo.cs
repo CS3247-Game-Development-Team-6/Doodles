@@ -5,7 +5,6 @@ public class MapInfo : ScriptableObject {
 
     [Header("Prefabs")]
 
-    [SerializeField] public GameObject mapBase;
     [SerializeField] public GameObject tilePrefab;
     [SerializeField] public GameObject fogPrefab;
     [SerializeField] public GameObject basePrefab;
@@ -25,6 +24,7 @@ public class MapInfo : ScriptableObject {
         if (!chunk.cellsGenerated) return;
         if (chunk.prefabsGenerated) return;
 
+        Vector3 offset = new Vector3(1, 0, 1) * chunk.cellSize;
         for (int r = 0; r < chunk.cells.GetLength(0); r++) {
             for (int c = 0; c < chunk.cells.GetLength(1); c++) {
                 Cell cell = chunk.cells[r, c];
@@ -43,10 +43,22 @@ public class MapInfo : ScriptableObject {
                 tile.name = $"{tileToPlace} {r}, {c}";
                 tile.transform.SetParent(chunk.transform);
                 tile.transform.localScale *= chunk.cellSize;
-                cell.tile = tile;
                 if (tileToPlace.GetComponent<Node>() != null) {
                     tile.GetComponent<Node>().cell = cell;
+                } else if (tileToPlace.GetComponent<Spawn>() != null) {
+                    tile.GetComponent<Spawn>().isCaptured = true;
                 }
+
+                GameObject fog = Instantiate(fogPrefab, chunk.transform);
+                fog.name = $"Fog {r}, {c}";
+                fog.transform.localScale *= chunk.cellSize;
+                fog.transform.position = tile.transform.position;
+                fog.GetComponent<Fog>().cell = cell;
+
+                chunk.cells[r,c].tile = tile;
+                chunk.cells[r,c].fog = fog;
+                fog.SetActive(cell.isFog);
+                tile.SetActive(!cell.isFog);
             }
         }
         chunk.prefabsGenerated = true;

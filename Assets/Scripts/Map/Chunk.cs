@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Waypoints))]
+[RequireComponent(typeof(Waypoints), typeof(ChunkSpawner))]
 public class Chunk : MonoBehaviour {
     public const int MIN_SIZE = 30;
     [SerializeField] public float cellSize;
@@ -11,8 +11,8 @@ public class Chunk : MonoBehaviour {
     public Vector2Int spawnPos;
     public DIR spawnDir;
     public Chunk prevChunk;
+    public Chunk nextChunk;
     public Cell[,] cells;
-    public Color highlightColor;
 
     public Vector2Int[,] dirGrid;
     public bool cellsGenerated { get; private set; }
@@ -20,6 +20,7 @@ public class Chunk : MonoBehaviour {
     public LevelInfoScriptableObject levelInfo { get; private set; }
     public List<Cell> waypoints { get; private set; }
     public bool isCurrentChunk { get; private set; }
+    public bool isCaptured { get; private set; }
     private Barrier[] barriers;
 
     public void Init(Transform barrierPrefab, LevelInfoScriptableObject levelInfo) {
@@ -58,15 +59,18 @@ public class Chunk : MonoBehaviour {
 
         Vector3 placeInPosition = transform.position + new Vector3(0.5f, 0, 0.5f) * cellSize;
         cells = new Cell[gridSize.x, gridSize.y];
-        
+
+        int err = (int)Mathf.Pow(Mathf.Min(gridSize.x, gridSize.y), 2f)/5;
         for (int r = 0; r < gridSize.x; r++) {
             for (int c = 0; c < gridSize.y; c++) {
                 Vector3 cellPos = placeInPosition + Vector3.right * c * cellSize;
+                Vector2Int index = new Vector2Int(r, c);
                 var typeOfCell = CellType.NONE;  // default every cell as a NONE-cell
                 var yRotation = 0;
                 var pathOrder = -1;
                 Vector3 newRotation = new Vector3(0, yRotation, 0);
-                cells[r, c] = new Cell(new Vector2Int(r, c), cellPos, typeOfCell, false, newRotation, pathOrder);
+                bool isFog = levelInfo.isFogChunk && (startPos - index).sqrMagnitude - err > 0;
+                cells[r, c] = new Cell(index, cellPos, typeOfCell, isFog, newRotation, pathOrder);
                 // NOTE: per default we initialise all tiles as foggy, then clear some close to the base.
             }
             placeInPosition += Vector3.forward * cellSize;
@@ -88,12 +92,16 @@ public class Chunk : MonoBehaviour {
             z = d == DIR.RIGHT || d == DIR.LEFT ? wallWidth : gridSize.x;
             wall.localScale = new Vector3(x, 2, z);
         }
+        isCaptured = false;
+
+        GetComponent<ChunkSpawner>().Init(levelInfo);
     }
 
     public void OpenNext() {
         // set trigger to proceed to next level
         Barrier wall = barriers[(int)spawnDir];
         wall.GetComponent<Collider>().isTrigger = true;
+        isCaptured = true;
         Debug.Log($"Set Collider trigger {wall.GetComponent<Collider>().isTrigger}");
     }
 
@@ -204,6 +212,15 @@ public class Chunk : MonoBehaviour {
         }
     }
 
+    public void SetWaypoints() {
+        if (!prefabsGenerated) {
+            Debug.LogError("Prefabs not generated yet, waypoints cannot be set.");
+            return;
+        }
+        GetComponent<Waypoints>().SetWaypoints(waypoints);
+
+    }
+
     private int GetRotationDeg(Vector2Int first, Vector2Int second) {
         Vector2Int u = DIR.UP.Vec();
         Vector2Int r = DIR.RIGHT.Vec();
@@ -247,17 +264,21 @@ public class Chunk : MonoBehaviour {
             pos.z < transform.position.z + cellSize * gridSize.x;
     }
 
-    public void SetActive(bool state) {
+    public void SetVisible(bool state) {
+        // Debug.Log($"Vis {state} for {name}");
         isCurrentChunk = state;
         for (int r = 0; r < gridSize.x; r++) {
             for (int c = 0; c < gridSize.y; c++) {
-                if (cells[r,c].tile != null) cells[r, c].tile.SetActive(state);
+                if (cells[r,c].fog != null) {
+                    bool isHidden = cells[r, c].isFog || !state;
+                    cells[r, c].fog.SetActive(isHidden);
+                    cells[r, c].tile.SetActive(!isHidden);
+                }
             }
         }
     }
 
     private void OnDrawGizmos() {
-        Gizmos.color = highlightColor;
         Vector3 position = transform.position;
         Vector3 width = Vector3.right * cellSize * gridSize.y;
         Vector3 height = Vector3.forward * cellSize * gridSize.x;
