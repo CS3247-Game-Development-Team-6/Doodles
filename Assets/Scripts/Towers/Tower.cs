@@ -93,7 +93,7 @@ public class Tower : MonoBehaviour {
     }
 
     /** Function to increase tower health. */
-    public bool restoreHealth() {
+    public bool RestoreHealth() {
         IncreaseHealth(maxHealth);
         return true;
     }
@@ -114,12 +114,10 @@ public class Tower : MonoBehaviour {
             this.smokePrefab.GetComponent<ParticleSystem>().Play();
             this.damagedSound.Play();
             damageEffectPlayed = true;
-            return;
         } else if (health > 0 && damageEffectPlayed) {
             this.smokePrefab.GetComponent<ParticleSystem>().Stop();
             this.damagedSound.Stop();
             damageEffectPlayed = false;
-            return;
         }
     }
 }
