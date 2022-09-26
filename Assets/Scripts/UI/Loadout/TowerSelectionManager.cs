@@ -18,14 +18,20 @@ public class TowerSelectionManager : MonoBehaviour {
     public Button letsBuildButton;
     public int minCardAllowed;
 
+    public static bool isInGame;
+
+
     void Start() {
         cardAmount = cardsGO.Length;
         selectionsCards = new List<GameObject>();
         towerCards = new List<GameObject>();
+        isInGame = false;
 
         for (int i = 0; i < cardAmount; i++) {
             AddSelectionCards(i);
         }
+
+
     }
 
     void Update() {
@@ -73,6 +79,9 @@ public class TowerSelectionManager : MonoBehaviour {
     }
 
     public void StartGame() {
+        isInGame = true;
         SceneManager.LoadScene("SpiderScene-prototype");
     }
+
+
 }

@@ -6,12 +6,10 @@ using UnityEngine.EventSystems;
 public class CardManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
     public GameObject selfGO;
     public TowerSelectionManager towerSelectionManager;
-    public bool isSelected;
 
     public CardManager parentCard;
 
     void Start() {
-
     }
 
     void Update() {
@@ -19,7 +17,12 @@ public class CardManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
 
     public void OnPointerDown(PointerEventData eventData) {
-        towerSelectionManager.SelectTower(selfGO, this);
+        if (TowerSelectionManager.isInGame) {
+            Debug.Log("selecting this tower to build");
+        } else {
+            towerSelectionManager.SelectTower(selfGO, this);
+        }
+
     }
 
     public void OnPointerUp(PointerEventData eventData) {
