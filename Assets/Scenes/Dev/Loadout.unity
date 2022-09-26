@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 34221763}
   - component: {fileID: 34221762}
   - component: {fileID: 34221766}
+  - component: {fileID: 34221767}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -314,6 +315,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee368848325503a4696c43ad428b9006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &34221767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34221761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d8b9810a2327d4d971ad14c8a1b3fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardsGO:
+  - {fileID: 3217305879397314879, guid: cba14a4bc4a45c942b889cb53910a6bc, type: 3}
+  - {fileID: 3217305879397314879, guid: 37fba677149972643bd27eb7319aca1c, type: 3}
+  - {fileID: 3217305879397314879, guid: 898753a9a5250df46a854842a85b34c5, type: 3}
+  towerInventory: {fileID: 653970302}
+  towerSlot: {fileID: 1052465927}
+  selectedIndexes: 
+  letsBuildButton: {fileID: 1104054121}
+  minCardAllowed: 1
 --- !u!1 &129444454
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,58 +586,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &364485533
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 364485535}
-  - component: {fileID: 364485534}
-  m_Layer: 0
-  m_Name: SceneManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &364485534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364485533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d8b9810a2327d4d971ad14c8a1b3fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardsGO:
-  - {fileID: 3217305879397314879, guid: 37fba677149972643bd27eb7319aca1c, type: 3}
-  - {fileID: 3217305879397314879, guid: cba14a4bc4a45c942b889cb53910a6bc, type: 3}
-  - {fileID: 3217305879397314879, guid: 898753a9a5250df46a854842a85b34c5, type: 3}
-  towerInventory: {fileID: 653970302}
-  towerSlot: {fileID: 1052465927}
-  selectedIndexes: 
-  letsBuildButton: {fileID: 1104054121}
-  minCardAllowed: 1
---- !u!4 &364485535
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364485533}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &477791264
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,6 +931,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1052465927}
   - component: {fileID: 1052465928}
+  - component: {fileID: 1052465929}
   m_Layer: 5
   m_Name: Grid
   m_TagString: Untagged
@@ -1011,6 +982,21 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 1
+--- !u!114 &1052465929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052465926}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a64a780fd538e48b04263c891ce439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedTower: {fileID: 0}
+  invalidAction: {fileID: 8998585739324249827, guid: b03950896a593fb458be4883929e47a6, type: 3}
+  playerMovement: {fileID: 7828996249860865849, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
 --- !u!1 &1104054119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,7 +1080,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 364485534}
+      - m_Target: {fileID: 34221767}
         m_TargetAssemblyTypeName: TowerSelectionManager, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1

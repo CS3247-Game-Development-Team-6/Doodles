@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
+public class CardManager : MonoBehaviour, IPointerDownHandler {
     public GameObject selfGO;
     public TowerSelectionManager towerSelectionManager;
-
     public CardManager parentCard;
 
     void Start() {
@@ -18,14 +15,11 @@ public class CardManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData) {
         if (TowerSelectionManager.isInGame) {
-            Debug.Log("selecting this tower to build");
+            GetComponent<ShopTowerUI>().SetTowerInShop();
         } else {
             towerSelectionManager.SelectTower(selfGO, this);
         }
 
     }
 
-    public void OnPointerUp(PointerEventData eventData) {
-
-    }
 }

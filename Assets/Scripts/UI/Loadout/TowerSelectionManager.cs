@@ -30,8 +30,6 @@ public class TowerSelectionManager : MonoBehaviour {
         for (int i = 0; i < cardAmount; i++) {
             AddSelectionCards(i);
         }
-
-
     }
 
     void Update() {
@@ -80,6 +78,8 @@ public class TowerSelectionManager : MonoBehaviour {
 
     public void StartGame() {
         isInGame = true;
+        Shop shop = GetComponentInChildren<Shop>();
+        shop.enabled = true;
         SceneManager.LoadScene("SpiderScene-prototype");
     }
 

@@ -52,6 +52,11 @@ public class TowerManager : MonoBehaviour {
     }
 
     public bool CanBuildTower(Node node) {
+        if (towerToBuild == null) {
+            Debug.LogWarning($"Have not selected any tower");
+            return false;
+        }
+
         CellType nodeCellType = node.cell.type;
         List<CellType> allowedCellType = towerToBuild.allowedCellTypes;
         if (allowedCellType == null) towerToBuild.allowedCellTypes = new List<CellType>();
