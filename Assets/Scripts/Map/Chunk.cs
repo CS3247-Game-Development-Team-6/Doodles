@@ -19,9 +19,10 @@ public class Chunk : MonoBehaviour {
     public bool prefabsGenerated;
     public LevelInfoScriptableObject levelInfo { get; private set; }
     public List<Cell> waypoints { get; private set; }
-    public bool isCurrentChunk { get; private set; }
-    public bool isCaptured { get; private set; }
+    public bool isVisible { get; private set; }
     private Barrier[] barriers;
+    private ChunkSpawner chunkSpawner;
+    public Barrier MainBarrier => barriers != null && barriers.Length == 4 ? barriers[(int)spawnDir] : null;
 
     public void Init(Transform barrierPrefab, LevelInfoScriptableObject levelInfo) {
         this.levelInfo = levelInfo; 
@@ -92,17 +93,22 @@ public class Chunk : MonoBehaviour {
             z = d == DIR.RIGHT || d == DIR.LEFT ? wallWidth : gridSize.x;
             wall.localScale = new Vector3(x, 2, z);
         }
-        isCaptured = false;
 
-        GetComponent<ChunkSpawner>().Init(levelInfo);
+        chunkSpawner = GetComponent<ChunkSpawner>();
+        //  First disable chunkSpawner.
+        chunkSpawner.enabled = false;
+        chunkSpawner.Init(levelInfo, cells[spawnPos.x, spawnPos.y].position);
     }
 
-    public void OpenNext() {
+    public void OpenBarrier() {
         // set trigger to proceed to next level
-        Barrier wall = barriers[(int)spawnDir];
-        wall.GetComponent<Collider>().isTrigger = true;
-        isCaptured = true;
-        Debug.Log($"Set Collider trigger {wall.GetComponent<Collider>().isTrigger}");
+        if (MainBarrier == null) {
+            Debug.Log("No barrier to open.");
+            return;
+        }
+
+        MainBarrier.GetComponent<Collider>().isTrigger = true;
+        Debug.Log($"Opening the barrier for {nextChunk}: {MainBarrier}");
     }
 
     public bool GenerateBackupPath() {
@@ -121,7 +127,7 @@ public class Chunk : MonoBehaviour {
                 dirGrid[currentPos.x, currentPos.y] = currentDir;
                 currentPos += currentDir;
             }
-            currentDir = -spawnDir.Vec();
+            currentDir = currentPos.x < startPos.x ? DIR.RIGHT.Vec() : DIR.LEFT.Vec();
             while (currentPos.x != startPos.x) {
                 dirGrid[currentPos.x, currentPos.y] = currentDir;
                 currentPos += currentDir;
@@ -137,7 +143,7 @@ public class Chunk : MonoBehaviour {
                 dirGrid[currentPos.x, currentPos.y] = currentDir;
                 currentPos += currentDir;
             }
-            currentDir = -spawnDir.Vec();
+            currentDir = currentPos.y < startPos.y ? DIR.UP.Vec() : DIR.DOWN.Vec();
             while (currentPos.y != startPos.y) {
                 dirGrid[currentPos.x, currentPos.y] = currentDir;
                 currentPos += currentDir;
@@ -221,6 +227,10 @@ public class Chunk : MonoBehaviour {
 
     }
 
+    public void StartSpawning() {
+        chunkSpawner.enabled = true;
+    }
+
     private int GetRotationDeg(Vector2Int first, Vector2Int second) {
         Vector2Int u = DIR.UP.Vec();
         Vector2Int r = DIR.RIGHT.Vec();
@@ -265,8 +275,7 @@ public class Chunk : MonoBehaviour {
     }
 
     public void SetVisible(bool state) {
-        // Debug.Log($"Vis {state} for {name}");
-        isCurrentChunk = state;
+        isVisible = state;
         for (int r = 0; r < gridSize.x; r++) {
             for (int c = 0; c < gridSize.y; c++) {
                 if (cells[r,c].fog != null) {

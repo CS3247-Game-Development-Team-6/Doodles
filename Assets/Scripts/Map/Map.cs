@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,11 +45,11 @@ public class Map : MonoBehaviour {
     public Chunk currentChunk { get; private set; }
     private List<Chunk> chunkList = new List<Chunk>();
     private Transform player;
-    //private WaveSpawner waveSpawner;
+    private WaveUI waveUI;
 
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
-        // waveSpawner = FindObjectOfType<WaveSpawner>();
+        waveUI = FindObjectOfType<WaveUI>();
         numChunks = mapInfo.levelInfo.Length;
         // choose one edge for start and the other edge for end
         for (int chunk = 0; chunk < numChunks; chunk++) {
@@ -62,68 +63,86 @@ public class Map : MonoBehaviour {
             currentChunk.gridSize = chunkSize;
             if (chunk > 0) {
                 currentChunk.prevChunk = chunkList[chunk - 1];
-                currentChunk.prevChunk.nextChunk = currentChunk;
+                chunkList[chunk - 1].nextChunk = currentChunk;
             }
             if (barrierPrefab != null) currentChunk.Init(barrierPrefab.transform, mapInfo.levelInfo[chunk]);
             chunkList.Add(currentChunk);
         }
-        if (numChunks > 0) currentChunk = chunkList[0];
+        if (chunkList.Count == 0) return;
+
+        // Initial Chunk Activation
+        ActivateCurrentChunk();
         var startCell = currentChunk.startPos;
         var playerCell = startCell;
         while (!currentChunk.ContainsCell(playerCell) || playerCell == startCell) {
-            playerCell = startCell + new Vector2Int(Random.Range(0, 3) - 1, Random.Range(0, 3) - 1);
+            playerCell = startCell + new Vector2Int(UnityEngine.Random.Range(0, 3) - 1, UnityEngine.Random.Range(0, 3) - 1);
         }
         player.position = currentChunk.cells[playerCell.x, playerCell.y].position + player.up * 0.25f + Vector3.up * 0.5f;
 
-        // Reset in order to generate paths in next Update()
-        currentChunk = null;
+    }
+
+    private void DeactivatePrevChunk(object sender, EventArgs e) {
+        DeactivateChunk(currentChunk.prevChunk);
     }
 
     private void DeactivateChunk(Chunk chunk) {
-        if (chunk.isCurrentChunk) {
+        if (chunk.isVisible) {
             chunk.SetVisible(false);
             currentChunk.GetComponent<Waypoints>().DeactivateLocalWaypoints();
         }
     }
 
-    private void ActivateChunk(Chunk chunk, bool isFocus) {
-        Debug.Log($"Activating {chunk}:  visibility {isFocus}");
-        if (chunk.prefabsGenerated) chunk.SetVisible(isFocus);
-        else if (chunk.GenerateRandomPath(GENERATION_MAX_TRIES, 3)) {
-            // is false if cells already generated
+    private bool GenerateChunk(Chunk chunk) {
+        Debug.Log($"Generating {chunk}");
+        if (chunk.prefabsGenerated) return true;
+        if (chunk.GenerateRandomPath(GENERATION_MAX_TRIES, 3)) {
             mapInfo.GeneratePrefabs(chunk);
-            chunk.SetWaypoints();
-            chunk.SetVisible(isFocus);
-            /*
-            if (isFocus) {
-                chunk.GetComponent<Waypoints>().SetWaypoints(chunk.waypoints, mapInfo.waypointPrefab);
-                chunk.GetComponent<Waypoints>().ActivateLocalWaypoints();
-                waveSpawner.SetNewLevel(chunk.levelInfo);
-            }
-            */
+            chunk.SetVisible(false);
+            return true;
         }
-
-        if (!isFocus) return;
-
-        basePlane.localScale = new Vector3(chunk.gridSize.y, 1, chunk.gridSize.x) / ORIG_SCALE;
-        basePlane.position = chunk.transform.position + new Vector3(chunk.gridSize.y, -0.1f, chunk.gridSize.x) / 2;
-        chunk.OpenNext();
-        /*
-        if (waveSpawner.AreWavesCleared()) {
-            if (chunk.chunkId == chunkList.Count - 1) waveSpawner.WinGame();
-            else {
-                chunk.OpenNext();
-            }
-        }
-        */
+        return false;
     }
 
-    private void Update() {
-        // change behaviour to: if current chunk does not contain position,
-        // then look for the one that does and adjust accordingly
-        if (currentChunk != null && currentChunk.ContainsPosition(player.position)) return;
-        if (chunkList.Count == 0) return;
+    private void SetCurrentChunk(Chunk chunk) {
+        Debug.Log($"Activating {chunk}");
+        if (!GenerateChunk(chunk)) return;
 
+        // Chunk data and objects are generated
+        basePlane.localScale = new Vector3(chunk.gridSize.y, 1, chunk.gridSize.x) / ORIG_SCALE;
+        basePlane.position = chunk.transform.position + new Vector3(chunk.gridSize.y, -0.1f, chunk.gridSize.x) / 2;
+        ChunkSpawner chunkSpawner = chunk.GetComponent<ChunkSpawner>();
+        chunk.SetWaypoints();
+        chunk.StartSpawning();
+        chunkSpawner.OnWaveEnd += OpenNextChunk;
+        waveUI.SetSpawner(chunkSpawner);
+        chunk.SetVisible(true);
+        currentChunk = chunk;
+    }
+
+    private void OpenNextChunk(object sender, EventArgs e) {
+        if (currentChunk.nextChunk == null) { 
+            ChunkSpawner.WinGame();
+            return;
+        }
+        currentChunk.nextChunk.SetVisible(true);
+        currentChunk.OpenBarrier();
+        currentChunk.MainBarrier.CrossBarrier += ActivateNextChunk;
+        // currentChunk.MainBarrier.CloseBarrier += DeactivatePrevChunk;
+    }
+
+    private void ActivateNextChunk(object sender, EventArgs e) {
+        if (!(sender is Barrier)) return;
+        Chunk nextChunk = ((Barrier)sender).NextChunk;
+        SetCurrentChunk(nextChunk);
+        if (nextChunk.nextChunk != null) {
+            GenerateChunk(nextChunk.nextChunk);
+            nextChunk.nextChunk.SetVisible(false);
+        }
+    }
+
+    private void ActivateCurrentChunk() {
+        // Map will look for the currentChunk that Player is standing on
+        if (currentChunk != null && currentChunk.ContainsPosition(player.position)) return;
         Chunk newChunk = currentChunk == null ? chunkList[0] : currentChunk;
         int tries = 0;
         for (; tries < chunkList.Count && !newChunk.ContainsPosition(player.position); tries++) {
@@ -133,12 +152,14 @@ public class Map : MonoBehaviour {
         if (tries < chunkList.Count) {
             currentChunk = newChunk;
             foreach (Chunk c in chunkList) {
-                if (c.prevChunk == newChunk) 
-                    ActivateChunk(c, newChunk.isCaptured);
-                else if (c != newChunk) 
+                if (c.prevChunk == newChunk) {
+                    GenerateChunk(c);
+                    c.SetVisible(false);
+                } else if (c != newChunk) {
                     DeactivateChunk(c);
+                }
             }
-            ActivateChunk(currentChunk, true);
+            SetCurrentChunk(currentChunk);
         }
     }
 }

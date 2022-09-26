@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70dea9fd3b675394d9459f5093987ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chunkSize: {x: 6, y: 9}
+  chunkSize: {x: 6, y: 6}
   mapInfo: {fileID: 11400000, guid: f7f01d4312581794d987faf1afa4a01e, type: 2}
   basePlane: {fileID: 1792607524}
   barrierPrefab: {fileID: 7592276886298649118, guid: c4e1a81ac38611a4dac2f705f32c6099, type: 3}
@@ -2336,9 +2336,7 @@ MonoBehaviour:
   numEnemiesAlive: 0
   numEnemiesLeftInWave: 0
   isSpawningEnemy: 0
-  levelInfo: {fileID: 0}
   waves: []
-  timeBetweenWaves: 5
 --- !u!114 &1420675850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2501,7 +2499,6 @@ MonoBehaviour:
   waveCountdownIndicator: {fileID: 1373582471}
   enemiesLeftText: {fileID: 1841248107}
   skipWaveCountdownButton: {fileID: 3773202538542358476}
-  isSkipVisible: 1
 --- !u!1 &1789031178 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7828996249860865855, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}

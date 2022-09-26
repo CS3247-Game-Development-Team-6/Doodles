@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Chunk))]
@@ -8,68 +9,67 @@ public class ChunkSpawner : MonoBehaviour {
     public int numEnemiesLeftInWave;
     public bool isSpawningEnemy;
 
-    [SerializeField] private LevelInfoScriptableObject levelInfo;
     public WaveSet[] waves;
     public int waveIndex { get; private set; }
 
-    public Transform spawnPoint { get; set; }
-    public float timeBetweenWaves = 5f;
+    public Vector3 spawnPointPos { get; set; }
+    public float timeBetweenWaves { get; private set; }  = 2f;
 
-    private float countdownTimer = 5f; // decrease with time, countdown for new wave
-    private WaveUI waveUI;
+    public float countdownTimer { get; private set; }  = 2f; // decrease with time, countdown for new wave
     private bool initialized;
 
-    public void Init(LevelInfoScriptableObject levelInfo) {
+    // Event to publish to UI elements. WaveUI elements should subscribe.
+    public event EventHandler OnWaveActivity;
+    public event EventHandler OnWaveEnd;
+
+    public int WavesLeft => waves == null ? 0 : Mathf.Max(0, waves.Length - waveIndex);
+
+    public void Init(LevelInfoScriptableObject levelInfo, Vector3 spawnPointPos) {
         initialized = true;
         numEnemiesAlive = 0;
         numEnemiesLeftInWave = 0;
         isSpawningEnemy = false;
         countdownTimer = timeBetweenWaves;
         waveIndex = 0;
-        waveUI = FindObjectOfType<WaveUI>();
-
-        this.levelInfo = levelInfo;
 
         if (levelInfo != null) waves = levelInfo.waves;
+        this.spawnPointPos = spawnPointPos;
     }
 
-    private void ResetTimer() {
+    public void ResetTimer() {
         countdownTimer = 0f;
     }
 
     private void Update() {
-        if (!initialized) {
-            Debug.Log($"Chunk Spawner of {name}");
-            return;
-        }
+        if (!initialized) { return; }
 
-        waveUI.UpdateTimerIndicator(countdownTimer, timeBetweenWaves);
-        waveUI.UpdateWaves(waveIndex);
-        waveUI.UpdateEnemies(numEnemiesLeftInWave);
-        
         // Pause if player is viewing tutorial
         if (!PlayerPrefs.HasKey(OnScreenTutorialUI.OnScreenTutorialPref)
             || PlayerPrefs.GetInt(OnScreenTutorialUI.OnScreenTutorialPref) != 1) {
             return;
         }
 
+        OnWaveActivity?.Invoke(this, EventArgs.Empty);
+
         if (numEnemiesAlive > 0 || isSpawningEnemy) {
             return;
         }
 
+        // Debug.Log($"{countdownTimer} Chunk Spawner of {name}");
+
         if (countdownTimer <= 0f) {
-            waveIndex = Mathf.Min(waves.Length, waveIndex+1);
             if (waveIndex < waves.Length) {
                 SpawnWave();
+                waveIndex = Mathf.Min(waves.Length, waveIndex+1);
                 isSpawningEnemy = true;
-                countdownTimer = waveIndex == waves.Length - 1 ? 0: timeBetweenWaves;
+                countdownTimer = waveIndex == waves.Length ? 0 : timeBetweenWaves;
             } else {
-                GetComponent<Waypoints>().enabled = false;
+                OnWaveEnd?.Invoke(this, EventArgs.Empty);
+                Debug.Log("Ended waves");
+                this.enabled = false;
             }
             return;
         }
-
-        // isSkipWaveCountdownButtonVisible = true;
 
         countdownTimer -= Time.deltaTime;
         countdownTimer = Mathf.Clamp(countdownTimer, 0f, Mathf.Infinity);
@@ -91,12 +91,9 @@ public class ChunkSpawner : MonoBehaviour {
     }
 
     public void SpawnEnemy(GameObject _enemy) {
-        Instantiate(_enemy, spawnPoint.position, spawnPoint.rotation);
+        GameObject enemy = Instantiate(_enemy, spawnPointPos, Quaternion.identity);
+        enemy.GetComponent<Enemy>().Init(this);
         numEnemiesAlive++;
-    }
-
-    public void SetNumEnemiesForTheWave(int num) {
-        numEnemiesLeftInWave = num;
     }
 
 }

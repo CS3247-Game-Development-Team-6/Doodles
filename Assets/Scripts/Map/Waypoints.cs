@@ -5,16 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Chunk), typeof(ChunkSpawner))]
 public class Waypoints : MonoBehaviour {
     public Transform[] points;
-    // public Transform[] waypointsPosition;
-    // public MapGenerator mapGen;
-    // public WaveSpawner waveSpawner;
     private Vector3 offset = new Vector3(0, 0.3f, 0);
     private bool waypointsActive = false;
     public int Length => points.Length;
-
-    private void Start() {
-        // waveSpawner = FindObjectOfType<WaveSpawner>();
-    }
 
     public Transform GetPoint(int index) {
         return points[index];
@@ -26,22 +19,18 @@ public class Waypoints : MonoBehaviour {
         for (int i = 0; i < waypointCells.Count; i++) {
             // Debug.Log($"waypoint {waypointCells[i].Index}");
             points[i] = waypointCells[i].tile.transform;
-            GameObject waypoint = Instantiate(new GameObject(), transform, true);
+            GameObject waypoint = new GameObject();
             waypoint.name = $"Waypoint {i}";
-            if (waypoint != null) {
-                waypoint.transform.position = i == waypointCells.Count - 1
-                    ? changeEnemyTargetWaypoint(waypointCells[i].position, prevWaypoint)
-                    : waypointCells[i].position;
-            }
+            waypoint.transform.parent = transform;
+            waypoint.transform.position = i == waypointCells.Count - 1
+                ? changeEnemyTargetWaypoint(waypointCells[i].position, prevWaypoint)
+                : waypointCells[i].position;
             prevWaypoint = waypoint;
         }
     }
 
     public void ActivateLocalWaypoints() {
         Debug.Log($"Activated waypoints for {name}");
-        // points = waypointsPosition;
-
-        // waveSpawner.spawnPoint = points[0];
         waypointsActive = true;
     }
     public void DeactivateLocalWaypoints() {
@@ -62,6 +51,7 @@ public class Waypoints : MonoBehaviour {
 
     // DEPRECATING DO NOT USE
     public void ActivateWaypoints() {
+    /*
         Debug.Log($"Activated {name}");
         // assign array waypoints
         points = new Transform[transform.childCount];
@@ -73,6 +63,7 @@ public class Waypoints : MonoBehaviour {
 
         // waveSpawner.GetComponent<WaveSpawner>().spawnPoint = points[0];
         waypointsActive = true;
+    */
     }
 
     /* Red markers indicate waypoints, green marker indicates base.

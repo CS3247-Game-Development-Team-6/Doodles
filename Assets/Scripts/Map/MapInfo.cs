@@ -45,8 +45,6 @@ public class MapInfo : ScriptableObject {
                 tile.transform.localScale *= chunk.cellSize;
                 if (tileToPlace.GetComponent<Node>() != null) {
                     tile.GetComponent<Node>().cell = cell;
-                } else if (tileToPlace.GetComponent<Spawn>() != null) {
-                    tile.GetComponent<Spawn>().isCaptured = true;
                 }
 
                 GameObject fog = Instantiate(fogPrefab, chunk.transform);
