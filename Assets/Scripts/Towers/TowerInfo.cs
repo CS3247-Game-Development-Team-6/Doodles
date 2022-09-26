@@ -30,7 +30,9 @@ public class TowerInfo : ScriptableObject {
     /** health decay rate is the rate at which the tower loses health. */
     public float healthDecayRate;
     /** the cost to fix a damaged tower*/
-    public int damageFixCost;
+    public float damageFixCost;
+    /** the factor that is multiplied by when fixing a tower*/
+    public float damageFixFactor;
 
     [Header("Bullet")]
     /** Speed of bullet per second. */

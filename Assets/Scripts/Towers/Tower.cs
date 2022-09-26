@@ -8,7 +8,8 @@ public class Tower : MonoBehaviour {
     protected string towerName;
     protected int versionNum;
     protected int cost;
-    protected int damageFixCost;
+    protected float damageFixCost;
+    protected float damageFixFactor;
 
     // Macros
     public const string ENEMY_TAG = "Enemy";
@@ -47,6 +48,7 @@ public class Tower : MonoBehaviour {
         this.fireRate = towerInfo.fireRate;
         this.cost = towerInfo.cost;
         this.damageFixCost = towerInfo.damageFixCost;
+        this.damageFixFactor = towerInfo.damageFixFactor;
         this.health = towerInfo.health;
         this.maxHealth = this.health;
         this.healthDecayRate = towerInfo.healthDecayRate;
@@ -113,8 +115,16 @@ public class Tower : MonoBehaviour {
         return health <= 0;
     }
 
+    /** Function to update damageFixCost. */
+    public void UpdateDamageFixCost() {
+        float healthLoss = maxHealth - health;
+        damageFixCost = damageFixFactor * healthLoss;
+        towerInfo.damageFixCost = damageFixCost;
+    }
+
     public virtual void Update() {
         healthBar.fillAmount = health / maxHealth;
+        UpdateDamageFixCost();
         if (health <= 0 && !damageEffectPlayed) {
             this.smokePrefab.GetComponent<ParticleSystem>().Play();
             this.damagedSound.Play();
