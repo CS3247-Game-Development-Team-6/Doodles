@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4497019, g: 0.49976808, b: 0.57563424, a: 1}
+  m_IndirectSpecularColor: {r: 0.44970167, g: 0.49976736, b: 0.5756334, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -514,6 +514,38 @@ PrefabInstance:
       propertyPath: m_text
       value: Option A
       objectReference: {fileID: 0}
+    - target: {fileID: 5771894348338073845, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771894348338073845, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771894348338073845, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1623022463}
+    - target: {fileID: 5771894348338073845, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771894348338073845, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: PlayGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771894348338073845, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: MainMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771894348338073845, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5771894348338073845, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5809475732314425192, guid: 4803e184f154317448aafc9f6d617373, type: 3}
       propertyPath: m_text
       value: "Fantasy medieval weapon \u2013 Cattleya\r\nDwarf Melee Weapons \u2013
@@ -570,6 +602,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+--- !u!114 &1623022463 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7996870125225622303, guid: 4803e184f154317448aafc9f6d617373, type: 3}
+  m_PrefabInstance: {fileID: 1438062614}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27430159f717d8c48b2459d2f97cc0d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1712940805
 GameObject:
   m_ObjectHideFlags: 0
