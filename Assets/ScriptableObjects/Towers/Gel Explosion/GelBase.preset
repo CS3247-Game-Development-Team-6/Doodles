@@ -30,7 +30,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: range
-    value: 4
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: upgradeNum
@@ -46,10 +46,14 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: cost
-    value: 30
+    value: 50
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: allowedCellTypes.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: allowedCellTypes.Array.data[0]
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -75,17 +79,41 @@ Preset:
   - target: {fileID: 0}
     propertyPath: towerPrefab
     value: 
-    objectReference: {fileID: 0}
+    objectReference: {fileID: 5135174605016635187, guid: f5da8a0dfb8a20449806ed7a66f573b7, type: 3}
   - target: {fileID: 0}
     propertyPath: bulletPrefab
     value: 
-    objectReference: {fileID: 0}
+    objectReference: {fileID: 1315704262782356680, guid: e446c4c3e5ae3e844b4af7096094e892, type: 3}
   - target: {fileID: 0}
     propertyPath: nextUpgrade
     value: 
-    objectReference: {fileID: 0}
+    objectReference: {fileID: 11400000, guid: 251661026f1aa5e4fbc3854eebd11826, type: 2}
   - target: {fileID: 0}
     propertyPath: nextElements.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.data[0].element
     value: 0
     objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.data[0].tower
+    value: 
+    objectReference: {fileID: 11400000, guid: ad4e7413f770f134f807b28700c193fe, type: 2}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.data[1].element
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.data[1].tower
+    value: 
+    objectReference: {fileID: 11400000, guid: 46656f756c6f8da4fa4722f2c9c99c8d, type: 2}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.data[2].element
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.data[2].tower
+    value: 
+    objectReference: {fileID: 11400000, guid: f85d2388144635e4cb8fa2530a3781f5, type: 2}
   m_ExcludedProperties: []
