@@ -1,5 +1,7 @@
 using UnityEngine;
 
+/* deprecated: use CardManager
+ */
 public class ShopTowerUI : MonoBehaviour {
     public TowerInfo towerInfo;
     public Sprite selected;
@@ -19,6 +21,6 @@ public class ShopTowerUI : MonoBehaviour {
             return;
         }
 
-        shop.SetTowerToBuild(this);
+        //shop.SetTowerToBuild(this);
     }
 }

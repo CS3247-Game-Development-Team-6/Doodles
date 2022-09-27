@@ -38,39 +38,32 @@ public class TowerSelectionManager : MonoBehaviour {
 
     // add to towerinventory
     public void AddSelectionCards(int index) {
-        // todo: add cards dynamicly
         GameObject card = Instantiate(cardsGO[index], towerInventory);
         CardManager cardManager = card.GetComponent<CardManager>();
-        cardManager.selfGO = cardsGO[index];
-        cardManager.towerSelectionManager = this;
+        cardManager.InitCard(cardsGO[index], this);
 
         selectionsCards.Add(card);
     }
 
-    public void SelectTower(GameObject selfGO, CardManager parentCard = default) {
-        AddTowerCard(new List<GameObject>(cardsGO).IndexOf(selfGO), parentCard);
+    public void SelectTower(GameObject selfGO) {
+        AddTowerCard(new List<GameObject>(cardsGO).IndexOf(selfGO));
     }
 
     // add to towerslot
-    private void AddTowerCard(int index, CardManager parentCard = default) {
+    private void AddTowerCard(int index) {
         if (selectedIndexes.Contains(index)) {
             //remove
             int indexPos = selectedIndexes.IndexOf(index);
             GameObject tempRef = towerCards[indexPos];
-
             towerCards.Remove(tempRef);
             Destroy(tempRef);
-
             selectedIndexes.Remove(index);
 
         } else {
             selectedIndexes.Add(index);
             GameObject card = Instantiate(cardsGO[index], towerSlot);
             CardManager cardManager = card.GetComponent<CardManager>();
-            cardManager.selfGO = cardsGO[index];
-            cardManager.towerSelectionManager = this;
-            cardManager.parentCard = parentCard;
-
+            cardManager.InitCard(cardsGO[index], this);
             towerCards.Add(card);
         }
 

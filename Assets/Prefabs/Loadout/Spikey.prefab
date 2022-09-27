@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 3217305879397314872}
   - component: {fileID: 3217305879397314873}
   - component: {fileID: 3217305879397314874}
-  - component: {fileID: 4868395218449130071}
   - component: {fileID: 7147444643808796925}
   m_Layer: 5
   m_Name: Spikey
@@ -232,21 +231,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &4868395218449130071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3217305879397314879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 541e0b235bec5b34f98feb3128533f4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerInfo: {fileID: 11400000, guid: 7e608828053941e4580916f257cb5fa0, type: 2}
-  selected: {fileID: 21300000, guid: ecc5168358db8ce419a2b76b1c9a87fa, type: 3}
-  unselected: {fileID: 21300000, guid: 39aed29194e8a6f4993f3d6808895fb0, type: 3}
 --- !u!114 &7147444643808796925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,9 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7394d54f4fab5e242bc37e916d744049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfGO: {fileID: 0}
-  towerSelectionManager: {fileID: 0}
-  parentCard: {fileID: 0}
+  towerInfo: {fileID: 11400000, guid: 7e608828053941e4580916f257cb5fa0, type: 2}
+  selected: {fileID: 21300000, guid: ecc5168358db8ce419a2b76b1c9a87fa, type: 3}
+  unselected: {fileID: 21300000, guid: 39aed29194e8a6f4993f3d6808895fb0, type: 3}
 --- !u!1 &3217305880091554993
 GameObject:
   m_ObjectHideFlags: 0

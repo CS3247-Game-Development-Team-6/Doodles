@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Shop : MonoBehaviour {
-    [SerializeField] private ShopTowerUI selectedTower;
+    [SerializeField] private CardManager selectedTower;
     [SerializeField] private ParticleSystem invalidAction;
     [SerializeField] PlayerMovement playerMovement;
 
@@ -10,7 +10,7 @@ public class Shop : MonoBehaviour {
         Instantiate(invalidAction, transform);
     }
 
-    public void SetTowerToBuild(ShopTowerUI item) {
+    public void SetTowerToBuild(CardManager item) {
         if (playerMovement && playerMovement.GetIsBuilding()) {
             TriggerInvalidAction();
             return;
