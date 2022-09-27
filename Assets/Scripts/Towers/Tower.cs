@@ -39,6 +39,7 @@ public class Tower : MonoBehaviour {
     public TowerInfo nextUpgrade { get; private set; }
     public ElementKeyValue[] nextElements { get; private set; }
     public Dictionary<ElementType, TowerInfo> nextElement { get; private set; }
+    public List<CellType> allowedCellTypes { get; private set; }
 
     /** Set tower info from Node. */
     public virtual void SetTowerInfo(TowerInfo towerInfo) {
@@ -57,6 +58,7 @@ public class Tower : MonoBehaviour {
         this.bulletPrefab = towerInfo.bulletPrefab;
         this.nextUpgrade = towerInfo.nextUpgrade;
         this.nextElement = new Dictionary<ElementType, TowerInfo>(3);
+        this.allowedCellTypes = towerInfo.allowedCellTypes;
         foreach (ElementKeyValue pair in towerInfo.nextElements) {
             this.nextElement.Add(pair.element, pair.tower);
         }

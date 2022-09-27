@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -33,6 +34,8 @@ public class TowerInfo : ScriptableObject {
     public float damageFixCost;
     /** the factor that is multiplied by when fixing a tower*/
     public float damageFixFactor;
+    /** the celltypes this tower can be built on. */
+    public List<CellType> allowedCellTypes;
 
     [Header("Bullet")]
     /** Speed of bullet per second. */
