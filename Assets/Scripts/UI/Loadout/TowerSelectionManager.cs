@@ -74,6 +74,7 @@ public class TowerSelectionManager : MonoBehaviour {
         Shop shop = GetComponentInChildren<Shop>();
         shop.enabled = true;
         SceneManager.LoadScene("SpiderScene-prototype");
+        Destroy(this);
     }
 
 
