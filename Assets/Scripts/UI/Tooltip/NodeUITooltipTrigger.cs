@@ -4,7 +4,7 @@ public class NodeUITooltipTrigger : TooltipTrigger {
     private TowerInfo currentTower;
     private TowerInfo newTower;
     private bool isUpgrade;
-    public bool isFix = false;
+    public bool isFixButton = false;
     public bool isNotAvailable { get; set; } 
 
     public void SetTowerInfo(TowerInfo currentTower, TowerInfo newTower) {
@@ -15,7 +15,7 @@ public class NodeUITooltipTrigger : TooltipTrigger {
     }
 
     private string FormatContent() {
-        if (!newTower || !currentTower || isFix) return content;
+        if (!newTower || !currentTower || isFixButton) return content;
         int damageDiff = newTower.damage - currentTower.damage;
         float rangeDiff = newTower.range - currentTower.range;
 
@@ -25,7 +25,7 @@ public class NodeUITooltipTrigger : TooltipTrigger {
     }
 
     private string FormatHeader() {
-        if (isFix) return header + $@" [${currentTower.damageFixCost}]";
+        if (isFixButton) return header + $@" [${currentTower.damageFixCost}]";
         if (!newTower || !currentTower) return header;
         return header + $@" [${newTower.cost}]";
     }
