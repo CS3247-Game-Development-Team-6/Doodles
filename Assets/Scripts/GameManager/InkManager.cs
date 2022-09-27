@@ -8,7 +8,8 @@ public class InkManager : MonoBehaviour {
     [Range(0, 1)] public float startingAmount = 0.6f;
     private float ink;
     [SerializeField] private PlayerMovement movement;
-    public LevelInfoScriptableObject levelInfo;
+    [SerializeField] private MapInfo mapInfo;
+    // public ChunkInfoScriptableObject levelInfo;
 
     public PlayerMovement Movement => movement;
     [SerializeField] private IndicatorUI playerInkIndicator;
@@ -20,7 +21,11 @@ public class InkManager : MonoBehaviour {
         }
         instance = this;
 
-        if (levelInfo != null) startingAmount = levelInfo.startingInkPercentage;
+        if (mapInfo != null) { 
+            startingAmount = mapInfo.startingInkFraction;
+            growthRate = mapInfo.inkRegenRate;
+        }
+
 
         ink = startingAmount * maxInk;
         playerInkIndicator.maxValue = (int)maxInk;

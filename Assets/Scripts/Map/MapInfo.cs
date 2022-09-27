@@ -18,7 +18,7 @@ public class MapInfo : ScriptableObject {
     [SerializeField] public string levelName;
     [SerializeField,Range(0,1)] public float startingInkFraction;
     [SerializeField,Range(0,1)] public float inkRegenRate;
-    [SerializeField] public LevelInfoScriptableObject[] levelInfo;
+    [SerializeField] public ChunkInfoScriptableObject[] levelInfo;
 
     public void GeneratePrefabs(Chunk chunk) {
         if (!chunk.cellsGenerated) return;

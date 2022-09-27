@@ -17,14 +17,14 @@ public class Chunk : MonoBehaviour {
     public Vector2Int[,] dirGrid;
     public bool cellsGenerated { get; private set; }
     public bool prefabsGenerated;
-    public LevelInfoScriptableObject levelInfo { get; private set; }
+    public ChunkInfoScriptableObject levelInfo { get; private set; }
     public List<Cell> waypoints { get; private set; }
     public bool isVisible { get; private set; }
     private Barrier[] barriers;
     private ChunkSpawner chunkSpawner;
     public Barrier MainBarrier => barriers != null && barriers.Length == 4 ? barriers[(int)spawnDir] : null;
 
-    public void Init(Transform barrierPrefab, LevelInfoScriptableObject levelInfo) {
+    public void Init(Transform barrierPrefab, ChunkInfoScriptableObject levelInfo) {
         this.levelInfo = levelInfo; 
         var f = Random.Range(0f, 1f) / 0.2 % 1;
         spawnDir = f < 0.5 ? DIR.RIGHT : DIR.UP;

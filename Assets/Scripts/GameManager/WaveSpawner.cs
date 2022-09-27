@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+// DEPRECATING: DO NOT USE
 public class WaveSpawner : MonoBehaviour {
     [SerializeField] private Text wavesCounterUI;
 
@@ -17,7 +19,7 @@ public class WaveSpawner : MonoBehaviour {
     public float timeBetweenWaves = 5f;
     public IndicatorUI waveCountdownIndicator;
     public Text enemiesLeftText;
-    public LevelInfoScriptableObject levelInfo;
+    public ChunkInfoScriptableObject levelInfo;
     public Button skipWaveCountdownButton;
 
     private bool isSkipWaveCountdownButtonVisible;
@@ -33,7 +35,7 @@ public class WaveSpawner : MonoBehaviour {
         return waves.Length == waveIndex && !isSpawningEnemy;
     }
 
-    public void SetNewLevel(LevelInfoScriptableObject levelInfo) {
+    public void SetNewLevel(ChunkInfoScriptableObject levelInfo) {
         Debug.Log("Resetting wave");
         numEnemiesAlive = 0;
         numEnemiesLeftInWave = 0;

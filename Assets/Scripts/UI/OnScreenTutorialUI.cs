@@ -22,11 +22,15 @@ public class OnScreenTutorialUI : MonoBehaviour {
 
     private void Start() {
         // Do not uncomment: only for debugging.
-        // PlayerPrefs.DeleteKey(OnScreenTutorialPref);
+        /*
         if (PlayerPrefs.HasKey(OnScreenTutorialPref) && PlayerPrefs.GetInt(OnScreenTutorialPref) == 1) {
             gameObject.SetActive(false);
             return;
         }
+        */
+
+        PlayerPrefs.DeleteKey(OnScreenTutorialPref);
+
         if (defaultTextLength < 0) {
             defaultTextLength = textBox.text.Length;
             defaultFontSize = textBox.fontSize;
@@ -34,7 +38,14 @@ public class OnScreenTutorialUI : MonoBehaviour {
         SetIndex(0);
     }
 
+    public void SetNotes(ChunkInfoScriptableObject chunkInfo) {
+        this.notes = chunkInfo.notes;
+        SetIndex(0);
+    }
+
     public void ReEnable() {
+        PlayerPrefs.DeleteKey(OnScreenTutorialPref);
+
         gameObject.SetActive(true);
         if (defaultTextLength < 0) {
             defaultTextLength = textBox.text.Length;

@@ -24,7 +24,7 @@ public class ChunkSpawner : MonoBehaviour {
 
     public int WavesLeft => waves == null ? 0 : Mathf.Max(0, waves.Length - waveIndex);
 
-    public void Init(LevelInfoScriptableObject levelInfo, Vector3 spawnPointPos) {
+    public void Init(ChunkInfoScriptableObject levelInfo, Vector3 spawnPointPos) {
         initialized = true;
         numEnemiesAlive = 0;
         numEnemiesLeftInWave = 0;
@@ -34,6 +34,9 @@ public class ChunkSpawner : MonoBehaviour {
 
         if (levelInfo != null) waves = levelInfo.waves;
         this.spawnPointPos = spawnPointPos;
+    }
+
+    private void OnEnable() {
     }
 
     public void ResetTimer() {
@@ -54,8 +57,6 @@ public class ChunkSpawner : MonoBehaviour {
         if (numEnemiesAlive > 0 || isSpawningEnemy) {
             return;
         }
-
-        // Debug.Log($"{countdownTimer} Chunk Spawner of {name}");
 
         if (countdownTimer <= 0f) {
             if (waveIndex < waves.Length) {
