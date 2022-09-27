@@ -331,6 +331,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Build() {
+
         if (!isBuilding) {
             return;
         }
