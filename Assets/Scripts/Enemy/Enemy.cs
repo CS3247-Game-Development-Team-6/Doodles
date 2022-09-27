@@ -17,6 +17,7 @@ public enum EffectStatus {
 }
 
 public class Enemy : MonoBehaviour {
+    private const float EPSILON = 0.02f;
 
     /**
      * enemy properties from EnemyInfo
@@ -42,6 +43,9 @@ public class Enemy : MonoBehaviour {
     public void removeEffectStatus() {
         effectStatus = EffectStatus.NONE;
     }
+
+    public Waypoints waypoints { get; set; }
+    public ChunkSpawner chunkSpawner { get; set; }
 
     /**
      * Visibility
@@ -70,6 +74,7 @@ public class Enemy : MonoBehaviour {
     private Cell[,] cells;
 
     private InkManager inkManager;
+    private Map map;
 
     [Header("Unity Stuff")]
     public Image healthBar;
@@ -78,6 +83,7 @@ public class Enemy : MonoBehaviour {
 
     private void Awake() {
         inkManager = InkManager.instance;
+        map = FindObjectOfType<Map>();
     }
 
     /**
@@ -158,8 +164,8 @@ public class Enemy : MonoBehaviour {
         inkManager.ChangeInkAmount(inkGained);
 
         // for new wave
-        WaveSpawner.numEnemiesAlive--;
-        WaveSpawner.numEnemiesLeftInWave--;
+        chunkSpawner.numEnemiesAlive--;
+        chunkSpawner.numEnemiesLeftInWave--;
 
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
@@ -182,10 +188,18 @@ public class Enemy : MonoBehaviour {
         ballParentTransform = gameObject.transform;
 
         // first target, which is first waypoint in Waypoints
-        target = Waypoints.points[0];
 
         // get a reference to all cells for checking if a tile is fogged or not
-        cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
+        // cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
+        // Chunk currChunk = FindObjectOfType<Map>().currentChunk;
+    }
+
+    public void Init(ChunkSpawner chunkSpawner) {
+        this.chunkSpawner = chunkSpawner;
+        Chunk currChunk = chunkSpawner.GetComponent<Chunk>();
+        cells = currChunk.cells;
+        waypoints = currChunk.GetComponent<Waypoints>();
+        target = waypoints.points[0];
     }
 
     private void Update() {
@@ -223,36 +237,40 @@ public class Enemy : MonoBehaviour {
         // delta time is time passed since last frame
         transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
 
-        var currentPosition = transform.position;
+        var currentPosition = transform.position - chunkSpawner.transform.position;
+        var targetPosition = target.position - chunkSpawner.transform.position;
 
-        if (Vector3.Distance(currentPosition, target.position) <= 0.2f) {
+        if (Vector3.Distance(currentPosition, targetPosition) <= EPSILON) {
             GetNextWaypoint();
         }
 
-        int currentXCoord = Convert.ToInt32(Math.Floor(currentPosition.x));
-        int currentYCoord = Convert.ToInt32(Math.Floor(currentPosition.z));
+        // Col on x axis
+        int col = Convert.ToInt32(Math.Floor(currentPosition.x));
+        // Row on y axis
+        int row = Convert.ToInt32(Math.Floor(currentPosition.z));
 
-        if (currentXCoord != lastXCoord || currentYCoord != lastYCoord) {
-            lastXCoord = currentXCoord;
-            lastYCoord = currentYCoord;
-            isInFog = GetCurrentTileFogged(currentXCoord, currentYCoord);
+        if (row != lastYCoord || col != lastXCoord) {
+            lastYCoord = row;
+            lastXCoord = col;
+            isInFog = GetCurrentTileFogged(row, col);
         }
 
         // enemy is visible if not in fog, hence its visibility is the negation of the isInFog bool.
         SetEnemyVisibility(!isInFog);
     }
 
-    private bool GetCurrentTileFogged(int xCoord, int yCoord) {
-        Cell cell = cells[yCoord, xCoord];
+    private bool GetCurrentTileFogged(int row, int col) {
+        // is inverted
+        Cell cell = cells[row, col];
         return cell.isFog;
     }
     private void GetNextWaypoint() {
-        if (waypointIndex >= Waypoints.points.Length - 1) {
+        if (waypointIndex >= waypoints.Length - 1) {
             EndPath();
             return;
         }
         waypointIndex++;
-        target = Waypoints.points[waypointIndex];
+        target = waypoints.GetPoint(waypointIndex);
     }
 
     private void EndPath() {
