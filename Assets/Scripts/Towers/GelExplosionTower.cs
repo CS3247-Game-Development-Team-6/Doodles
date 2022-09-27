@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GelExplosionTower : Tower {
 
+    private new const string ROTATION_BASE_NAME = "Gel_Explosive_Tower";
     private float rotationSpeed = 5f;
     private Transform rotationBase;
     private Transform firePoint;
@@ -12,7 +13,7 @@ public class GelExplosionTower : Tower {
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
-        rotationBase = transform.Find(Tower.ROTATION_BASE_NAME);
+        rotationBase = transform.Find(GelExplosionTower.ROTATION_BASE_NAME);
         firePoint = rotationBase.Find(Tower.FIRE_POINT_NAME);
     }
 
