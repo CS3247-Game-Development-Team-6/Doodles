@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviour {
         }
 
         //string gameScene = PlayerPrefs.GetString(SettingsScriptableObject.GameScenePref);
-        string gameScene = "Loadout";
+        string gameScene = "tutorial_scene";
         SceneManager.LoadScene(gameScene);
     }
 

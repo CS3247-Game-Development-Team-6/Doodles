@@ -16,7 +16,7 @@ public class TowerSelectionManager : MonoBehaviour {
     public List<int> selectedIndexes;
 
     public Button letsBuildButton;
-    public int minCardAllowed;
+    public int validCardAllowed;
 
     public static bool isInGame;
 
@@ -33,7 +33,7 @@ public class TowerSelectionManager : MonoBehaviour {
     }
 
     void Update() {
-        letsBuildButton.interactable = towerCards.Count >= minCardAllowed;
+        letsBuildButton.interactable = towerCards.Count == validCardAllowed;
     }
 
     // add to towerinventory
