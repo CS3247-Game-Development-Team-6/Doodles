@@ -81,6 +81,11 @@ public class Enemy : MonoBehaviour {
     public TMP_Text healthText;
     public GameObject damageText;
 
+    /**
+     * EnemyActiveEffectsManager
+     */
+    private EnemyActiveEffectsManager enemyActiveEffectsManager;
+
     private void Awake() {
         inkManager = InkManager.instance;
         map = FindObjectOfType<Map>();
@@ -134,12 +139,28 @@ public class Enemy : MonoBehaviour {
         indicator.SetDamageTextFromFloat(amount);
     }
 
+    public void applyGel() {
+        enemyActiveEffectsManager.HandleEffect(new GelEffect());
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+
+        // currently called by EnemyActiveEffectsManager and GelEffect
+    }
+
     public void ReduceSpeed(float slowAmount) {
         speed = enemyInfo.speed * slowAmount;
+        enemyActiveEffectsManager.RecalculateSpeed();
     }
 
     public void RestoreSpeed() {
         speed = enemyInfo.speed;
+        enemyActiveEffectsManager.RecalculateSpeed();
     }
 
     public void ReduceAttack(int atkDecreAmount) {
@@ -200,6 +221,8 @@ public class Enemy : MonoBehaviour {
         cells = currChunk.cells;
         waypoints = currChunk.GetComponent<Waypoints>();
         target = waypoints.points[0];
+        // get reference to its EnemyActiveEffectsManager
+        enemyActiveEffectsManager = GetComponent<EnemyActiveEffectsManager>();
     }
 
     private void Update() {
