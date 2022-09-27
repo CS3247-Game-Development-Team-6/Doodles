@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardManager : MonoBehaviour, IPointerDownHandler {
+public class CardManager : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler {
 
     /**
      * loadout tower selection
@@ -33,6 +33,14 @@ public class CardManager : MonoBehaviour, IPointerDownHandler {
             towerSelectionManager.SelectTower(selfGO);
         }
 
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) {
+        towerSelectionManager.HoverTower(towerInfo, selected);
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        towerSelectionManager.UnhoverTower();
     }
 
     public void SetTowerInShop() {
