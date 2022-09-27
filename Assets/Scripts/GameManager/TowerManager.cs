@@ -5,11 +5,14 @@ public class TowerManager : MonoBehaviour {
     public static TowerManager instance { get; private set; }
     [SerializeField] private ParticleSystem insufficientInkEffect;
     [SerializeField] private GameObject playerObj;
+    [SerializeField] private GameObject healthBarPrefab;
+    [SerializeField] private GameObject smokeEffectPrefab;
+    [SerializeField] private GameObject soundEffectPrefab;
     private TowerInfo towerToBuild;
     private Node selectedNode;
     private TMP_Text actionTimer;
     private NodeUI nodeUI;
-
+    
     private void Awake() {
         if (instance != null) {
             Debug.Log("TowerManager should be a singleton! Only 1 should exist in a scene.");
@@ -48,6 +51,18 @@ public class TowerManager : MonoBehaviour {
         }
 
         return towerToBuild.cost;
+    }
+
+    public GameObject GetSmokeEffectPrefab() {
+        return smokeEffectPrefab;
+    }
+
+    public GameObject GetSoundEffectPrefab() {
+        return soundEffectPrefab;
+    }
+
+    public GameObject GetHealthBarPrefab() {
+        return healthBarPrefab;
     }
 
     /** For building on a new tile on selected node. */

@@ -62,12 +62,12 @@ public class Tower : MonoBehaviour {
         }
 
         // Prepare Smoke Effect to be played
-        this.smokePrefab = (GameObject) Instantiate(towerInfo.smokePrefab, transform.position, transform.rotation);
+        this.smokePrefab = Instantiate(TowerManager.instance.GetSmokeEffectPrefab(), transform.position, transform.rotation);
         this.smokePrefab.transform.SetParent(transform);
         this.smokePrefab.GetComponent<ParticleSystem>().Stop();
 
         // Create health bar UI for each tower
-        GameObject healthBarPrefab = Instantiate(towerInfo.healthBarPrefab, transform.position, transform.rotation);
+        GameObject healthBarPrefab = Instantiate(TowerManager.instance.GetHealthBarPrefab(), transform.position, transform.rotation);
         healthBarPrefab.transform.SetParent(transform);
         healthBarPrefab.transform.position = new Vector3( // hard coded offset
             healthBarPrefab.transform.position.x, 
@@ -77,7 +77,7 @@ public class Tower : MonoBehaviour {
         this.healthBar = healthBarPrefab.transform.Find("HealthBG/HealthBar").GetComponent<Image>();
         
         // Prepare audio to be played
-        GameObject damagedSoundPrefab = Instantiate(towerInfo.damagedSoundPrefab, transform.position, transform.rotation);
+        GameObject damagedSoundPrefab = Instantiate(TowerManager.instance.GetSoundEffectPrefab(), transform.position, transform.rotation);
         damagedSoundPrefab.transform.SetParent(transform);
         this.damagedSound = damagedSoundPrefab.GetComponent<AudioSource>();
     }
