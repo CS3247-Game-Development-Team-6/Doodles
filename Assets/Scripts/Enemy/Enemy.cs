@@ -16,6 +16,7 @@ public enum EffectStatus {
     NONE // default
 }
 
+[RequireComponent(typeof(EnemyActiveEffects))]
 public class Enemy : MonoBehaviour {
 
     /**
@@ -79,10 +80,12 @@ public class Enemy : MonoBehaviour {
     /**
      * EnemyActiveEffectsManager
      */
-    private EnemyActiveEffectsManager enemyActiveEffectsManager;
+    public float speedMultiplier;
+    private EnemyActiveEffects enemyActiveEffectsManager;
 
     private void Awake() {
         inkManager = InkManager.instance;
+        enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
     }
 
     /**
@@ -133,28 +136,20 @@ public class Enemy : MonoBehaviour {
         indicator.SetDamageTextFromFloat(amount);
     }
 
-    public void applyGel() {
-        enemyActiveEffectsManager.HandleEffect(new GelEffect());
+    public void ApplyEffect(IEnemyEffect effect) {
+        StartCoroutine(enemyActiveEffectsManager.HandleEffect(effect));
     }
 
-    public float getSpeed() {
-        return speed;
+    public float getFinalSpeed() {
+        return speed * speedMultiplier;
     }
 
-    public void setSpeed(float speed) {
-        this.speed = speed;
-
-        // currently called by EnemyActiveEffectsManager and GelEffect
-    }
-
-    public void ReduceSpeed(float slowAmount) {
+    public void ReduceBaseSpeed(float slowAmount) {
         speed = enemyInfo.speed * slowAmount;
-        enemyActiveEffectsManager.RecalculateSpeed();
     }
 
-    public void RestoreSpeed() {
+    public void RestoreBaseSpeed() {
         speed = enemyInfo.speed;
-        enemyActiveEffectsManager.RecalculateSpeed();
     }
 
     public void ReduceAttack(int atkDecreAmount) {
@@ -207,9 +202,10 @@ public class Enemy : MonoBehaviour {
 
         // get a reference to all cells for checking if a tile is fogged or not
         cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
-    
+
         // get reference to its EnemyActiveEffectsManager
-        enemyActiveEffectsManager = GetComponent<EnemyActiveEffectsManager>();
+        speedMultiplier = 1.0f;
+        enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
     }
 
     private void Update() {
@@ -245,7 +241,7 @@ public class Enemy : MonoBehaviour {
         }
 
         // delta time is time passed since last frame
-        transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
+        transform.Translate(direction.normalized * getFinalSpeed() * Time.deltaTime, Space.World);
 
         var currentPosition = transform.position;
 

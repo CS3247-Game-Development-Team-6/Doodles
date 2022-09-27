@@ -11,7 +11,7 @@ public class GelExplosionBullet : Bullet {
         if (hitEnemy) {
             var enemy = hitEnemy.gameObject.GetComponent<Enemy>();
             if (enemy != null) {
-                enemy.applyGel();
+                enemy.ApplyEffect(new GelExplosionEffect());
             }
         }
     }
@@ -24,8 +24,9 @@ public class GelExplosionBullet : Bullet {
         foreach (Collider collider in colliders) {
             if (collider.CompareTag("Enemy")) {
                 var enemy = collider.gameObject.GetComponent<Enemy>();
-                if (enemy != null) enemy.applyGel();
+                if (enemy != null) enemy.ApplyEffect(new GelExplosionEffect());
             }
         }
     }
 }
+
