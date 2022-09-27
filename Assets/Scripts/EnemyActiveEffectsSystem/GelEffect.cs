@@ -39,10 +39,7 @@ public class GelEffect : Effect {
     }
 
     public IEnumerator Deactivate(Enemy enemy) {
-        if (!isActivated) {
-            // not activated, do nothing as variables not instantiated
-            Debug.LogError($"Attempted to deactivate gel for {enemy} without activating effect!");
-        } else {
+        if !isActivated) {
             Debug.Log($"{enemy} reverted to {enemyBaseSpeed}");
             
             isActivated = false;
