@@ -35,6 +35,7 @@ public class NodeUI : MonoBehaviour
     public NodeButtonInfo water;
     public NodeButtonInfo upgrade;
     public NodeButtonInfo destroy;
+    public NodeButtonInfo fix;
     private Dictionary<ElementType, NodeButtonInfo> elementButtonInfos;
 
     private void Start() {
@@ -43,6 +44,7 @@ public class NodeUI : MonoBehaviour
         Transform elementsGroup = canvas.Find("Elements");
         this.upgrade.Setup(othersGroup.Find("Upgrade").gameObject);
         this.destroy.Setup(othersGroup.Find("Destroy").gameObject);
+        this.fix.Setup(othersGroup.Find("Fix").gameObject);
         this.fire.Setup(elementsGroup.Find("Fire").gameObject);
         this.ice.Setup(elementsGroup.Find("Ice").gameObject);
         this.water.Setup(elementsGroup.Find("Water").gameObject);
@@ -83,9 +85,14 @@ public class NodeUI : MonoBehaviour
         transform.position = selectedNode.towerBuildPosition + new Vector3(xOffset, 0, zOffset);
 
         if (selectedNode.HasTower()) {
+
             upgrade.image.sprite = selectedNode.isUpgraded ? upgrade.disabledSprite : upgrade.defaultSprite;
             upgrade.tooltip.isNotAvailable = selectedNode.isUpgraded;
             upgrade.tooltip.SetTowerInfo(selectedNode.tower.towerInfo, selectedNode.tower.nextUpgrade);
+            
+            fix.tooltip.isFixButton = true;
+            fix.tooltip.SetTowerInfo(selectedNode.tower.towerInfo, selectedNode.tower.nextUpgrade);
+            
             TowerInfo currTower = selectedNode.tower.towerInfo;
 
             if (!selectedNode.tower.element) {
