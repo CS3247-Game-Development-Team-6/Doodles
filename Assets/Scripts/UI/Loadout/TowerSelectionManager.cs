@@ -17,6 +17,7 @@ public class TowerSelectionManager : MonoBehaviour {
 
     public Button letsBuildButton;
     public int validCardAllowed;
+    public string nextSceneName;
 
     public static bool isInGame;
 
@@ -90,7 +91,7 @@ public class TowerSelectionManager : MonoBehaviour {
         shop.SetDefaultTower(towerCards[0].GetComponent<CardManager>());
         shop.enabled = true;
         loadingText.SetActive(true);
-        SceneManager.LoadScene("SpiderScene-alpha");
+        SceneManager.LoadScene(nextSceneName);
         Destroy(this);
     }
 

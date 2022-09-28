@@ -6,6 +6,7 @@ using System.Collections;
 public class GameOverManager : MonoBehaviour {
     public Text wavesText;
     public GameObject raycastOccluder;
+    public string retrySceneName;
 
     // Enabled when game is running
     void OnEnable() {
@@ -17,6 +18,11 @@ public class GameOverManager : MonoBehaviour {
         FindObjectOfType<AudioManager>().Stop("Level 1 BGM");
 
         StartCoroutine(PauseGame());
+
+        GameObject[] ddols = GameStateManager.GetDontDestroyOnLoadObjects();
+        for (int i = 0; i < ddols.Length; i++) {
+            Destroy(ddols[i]);
+        }
     }
 
     IEnumerator PauseGame() {
@@ -30,12 +36,14 @@ public class GameOverManager : MonoBehaviour {
 
     public void Retry() {
         // load current active scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // deprecated: SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         GameObject[] ddols = GameStateManager.GetDontDestroyOnLoadObjects();
         for (int i = 0; i < ddols.Length; i++) {
-            ddols[i].SetActive(true);
+            Destroy(ddols[i]);
         }
+
+        SceneManager.LoadScene(retrySceneName);
 
         // remove occluder
         raycastOccluder.SetActive(false);

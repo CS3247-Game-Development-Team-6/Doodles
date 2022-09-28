@@ -165,13 +165,12 @@ public class EnemyShooting : MonoBehaviour {
         bulletDamage = initBulletDamage;
     }
 
-    private void OnDrawGizmos()
-    // the gizmos are drawn after waypoints have actually been added
-    // this is done to avoid the error when we try to draw gizmos before we have waypoints placed.
+    // to test the range from rangeCenter
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(rangeCenter.position, range);
 
-    }
+    }*/
 
 }

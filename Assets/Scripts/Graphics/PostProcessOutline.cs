@@ -19,7 +19,8 @@ public sealed class PostProcessOutline : PostProcessEffectSettings {
 public sealed class PostProcessOutlineRenderer : PostProcessEffectRenderer<PostProcessOutline> {
 
     public float CalculateDepthThreshold() {
-        return 1 - (float)Screen.currentResolution.width / 10000f;
+        return 0.161f;
+        //return 1 - (float)Screen.currentResolution.width / 10000f;
     }
 
     public override void Render(PostProcessRenderContext context) {

@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour {
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject winUI;
+    public string nextSceneName;
 
     private static bool isGameEnded;
 
@@ -39,6 +41,14 @@ public class GameStateManager : MonoBehaviour {
         isGameEnded = true;
 
         winUI.SetActive(true);
+    }
+
+    public void GotoNextScene() {
+        GameObject[] ddols = GetDontDestroyOnLoadObjects();
+        for (int i = 0; i < ddols.Length; i++) {
+            Destroy(ddols[i]);
+        }
+        SceneManager.LoadScene(nextSceneName);
     }
 
     // for other game scripts to check if the game is ended
