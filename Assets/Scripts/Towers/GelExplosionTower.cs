@@ -54,7 +54,7 @@ public class GelExplosionTower : Tower {
         }
     }
 
-    void Update() {
+    public override void Update() {
         base.Update();
         if (!target) return;
 

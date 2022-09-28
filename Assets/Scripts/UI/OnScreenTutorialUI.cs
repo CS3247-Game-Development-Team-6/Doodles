@@ -73,6 +73,8 @@ public class OnScreenTutorialUI : MonoBehaviour {
             SetText(notes[currentIndex].text);
             GetComponent<RectTransform>().anchoredPosition
                 = notes[currentIndex].rectPosition;
+        } else {
+            IsClosed = true;
         }
     }
 
@@ -82,12 +84,16 @@ public class OnScreenTutorialUI : MonoBehaviour {
             SetText(notes[currentIndex].text);
             GetComponent<RectTransform>().anchoredPosition
                 = notes[currentIndex].rectPosition;
+        } else {
+            IsClosed = true;
         }
     }
 
     public void SetIndex(int index) {
         currentIndex = index;
-        if (currentIndex < 0 || currentIndex >= notes.Length) return;
+        if (currentIndex < 0 || currentIndex >= notes.Length) {
+            IsClosed = true;
+        }
         SetText(notes[currentIndex].text);
         GetComponent<RectTransform>().anchoredPosition
             = notes[currentIndex].rectPosition;
@@ -105,6 +111,6 @@ public class OnScreenTutorialUI : MonoBehaviour {
 
     private void Update() {
         GetComponent<CanvasGroup>().alpha = 
-            IsClosed || currentIndex >= notes.Length || currentIndex < 0 ? 0 : 1;
+            IsClosed ? 0 : 1;
     }
 }
