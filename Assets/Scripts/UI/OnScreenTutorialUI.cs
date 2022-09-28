@@ -68,8 +68,8 @@ public class OnScreenTutorialUI : MonoBehaviour {
     }
 
     public void SetNextIndex() {
-        if (currentIndex < notes.Length - 1) {
-            currentIndex += 1;
+        currentIndex = Mathf.Min(currentIndex+1, notes.Length);
+        if (currentIndex < notes.Length) {
             SetText(notes[currentIndex].text);
             GetComponent<RectTransform>().anchoredPosition
                 = notes[currentIndex].rectPosition;
@@ -77,8 +77,8 @@ public class OnScreenTutorialUI : MonoBehaviour {
     }
 
     public void SetPrevIndex() {
+        currentIndex = Mathf.Max(currentIndex-1, -1);
         if (currentIndex > 0) {
-            currentIndex -= 1;
             SetText(notes[currentIndex].text);
             GetComponent<RectTransform>().anchoredPosition
                 = notes[currentIndex].rectPosition;
@@ -87,6 +87,7 @@ public class OnScreenTutorialUI : MonoBehaviour {
 
     public void SetIndex(int index) {
         currentIndex = index;
+        if (currentIndex < 0 || currentIndex >= notes.Length) return;
         SetText(notes[currentIndex].text);
         GetComponent<RectTransform>().anchoredPosition
             = notes[currentIndex].rectPosition;
@@ -104,6 +105,6 @@ public class OnScreenTutorialUI : MonoBehaviour {
 
     private void Update() {
         GetComponent<CanvasGroup>().alpha = 
-            IsClosed || (currentIndex >= notes.Length && currentIndex < 0) ? 0 : 1;
+            IsClosed || currentIndex >= notes.Length || currentIndex < 0 ? 0 : 1;
     }
 }
