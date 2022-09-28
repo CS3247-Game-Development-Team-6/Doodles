@@ -22,6 +22,7 @@ public class TowerSelectionManager : MonoBehaviour {
 
     [Header("UI Components")]
     [SerializeField] private TowerDescriptionUI towerDescriptionUI;
+    [SerializeField] private GameObject loadingText;
 
     void Start() {
         cardAmount = cardsGO.Length;
@@ -88,6 +89,7 @@ public class TowerSelectionManager : MonoBehaviour {
         Shop shop = GetComponentInChildren<Shop>();
         shop.SetDefaultTower(towerCards[0].GetComponent<CardManager>());
         shop.enabled = true;
+        loadingText.SetActive(true);
         SceneManager.LoadScene("SpiderScene-alpha");
         Destroy(this);
     }
