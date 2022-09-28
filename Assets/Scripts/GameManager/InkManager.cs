@@ -8,22 +8,24 @@ public class InkManager : MonoBehaviour {
     [Range(0, 1)] public float startingAmount = 0.6f;
     private float ink;
     [SerializeField] private PlayerMovement movement;
-    [SerializeField] private MapInfo mapInfo;
-    // public ChunkInfoScriptableObject levelInfo;
+    private MapInfo mapInfo;
 
     public PlayerMovement Movement => movement;
     [SerializeField] private IndicatorUI playerInkIndicator;
 
-    private void Awake() {
+    private void Start() {
         if (instance != null) {
             Debug.Log("InkManager should be a singleton! Only 1 should exist in a scene.");
             return;
         }
         instance = this;
 
-        if (mapInfo != null) { 
-            startingAmount = mapInfo.startingInkFraction;
-            growthRate = mapInfo.inkRegenRate;
+        if (FindObjectOfType<Map>() != null) { 
+            mapInfo = FindObjectOfType<Map>().MapInfo;
+            if (mapInfo != null) {
+                startingAmount = mapInfo.startingInkFraction;
+                growthRate = mapInfo.inkRegenRate;
+            }
         }
 
 

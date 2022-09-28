@@ -34,6 +34,7 @@ public class Map : MonoBehaviour {
     // Pairs of chunks and next dir (Down/Right)
     [SerializeField] private Vector2Int chunkSize;
     [SerializeField] private MapInfo mapInfo;
+    public MapInfo MapInfo => mapInfo;
     private int numChunks;
     // [SerializeField] private bool isEndless;
 
@@ -46,10 +47,12 @@ public class Map : MonoBehaviour {
     private List<Chunk> chunkList = new List<Chunk>();
     private Transform player;
     private WaveUI waveUI;
+    private OnScreenTutorialUI tutorialUI;
 
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
         waveUI = FindObjectOfType<WaveUI>();
+        tutorialUI = FindObjectOfType<OnScreenTutorialUI>();
         numChunks = mapInfo.levelInfo.Length;
         // choose one edge for start and the other edge for end
         for (int chunk = 0; chunk < numChunks; chunk++) {
@@ -78,6 +81,7 @@ public class Map : MonoBehaviour {
             playerCell = startCell + new Vector2Int(UnityEngine.Random.Range(0, 3) - 1, UnityEngine.Random.Range(0, 3) - 1);
         }
         player.position = currentChunk.cells[playerCell.x, playerCell.y].position + player.up * 0.25f + Vector3.up * 0.5f;
+
 
     }
 
