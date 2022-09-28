@@ -8,6 +8,11 @@ public class GameStateManager : MonoBehaviour {
 
     void Start() {
         isGameEnded = false;
+
+        GameObject[] ddols = GetDontDestroyOnLoadObjects();
+        for (int i = 0; i < ddols.Length; i++) {
+            ddols[i].transform.Find("LoadingBar").gameObject.SetActive(false);
+        }
     }
 
     void Update() {
