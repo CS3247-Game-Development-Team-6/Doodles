@@ -82,6 +82,7 @@ public class Map : MonoBehaviour {
             playerCell = startCell + new Vector2Int(UnityEngine.Random.Range(0, 3) - 1, UnityEngine.Random.Range(0, 3) - 1);
         }
         player.position = currentChunk.cells[playerCell.x, playerCell.y].position + player.up * 0.25f + Vector3.up * 0.5f;
+        tutorialUI.SetNotes(currentChunk.levelInfo);
 
 
     }
@@ -117,8 +118,7 @@ public class Map : MonoBehaviour {
         basePlane.position = chunk.transform.position + new Vector3(chunk.gridSize.y, -0.1f, chunk.gridSize.x) / 2;
         ChunkSpawner chunkSpawner = chunk.GetComponent<ChunkSpawner>();
         chunk.SetWaypoints();
-        tutorialUI.OnTutorialClose += chunk.StartSpawning;
-        // chunk.StartSpawning();
+        chunk.StartSpawning();
         chunkSpawner.OnWaveEnd += OpenNextChunk;
         chunkSpawner.OnWaveEnd += tutorialUI.SetNotesForNextChunk;
         waveUI.SetSpawner(chunkSpawner);
@@ -133,7 +133,7 @@ public class Map : MonoBehaviour {
         }
         currentChunk.nextChunk.SetVisible(true);
         currentChunk.OpenBarrier();
-        tutorialUI.Unhide();
+        tutorialUI.Reset();
         currentChunk.MainBarrier.CrossBarrier += ActivateNextChunk;
         // currentChunk.MainBarrier.CloseBarrier += DeactivatePrevChunk;
     }

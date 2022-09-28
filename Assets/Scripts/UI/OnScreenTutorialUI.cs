@@ -18,10 +18,7 @@ public class OnScreenTutorialUI : MonoBehaviour {
 
     private int defaultTextLength = -1;
     private float defaultFontSize = -1;
-    public static readonly string OnScreenTutorialPref = "OnScreenTutorialPref";
     public bool IsClosed { get; private set; } = false;
-
-    public event EventHandler OnTutorialClose; 
 
     private void Start() {
         // Do not uncomment: only for debugging.
@@ -47,7 +44,7 @@ public class OnScreenTutorialUI : MonoBehaviour {
         if (notes.Length > 0) SetIndex(0);
     }
 
-    private void SetNotes(ChunkInfoScriptableObject chunkInfo) {
+    public void SetNotes(ChunkInfoScriptableObject chunkInfo) {
         this.notes = chunkInfo.notes;
         SetIndex(0);
     }
@@ -57,8 +54,8 @@ public class OnScreenTutorialUI : MonoBehaviour {
         if (!(sender is ChunkSpawner)) return;
         Chunk currChunk = ((ChunkSpawner)sender).GetComponent<Chunk>();
         if (currChunk.nextChunk == null) return;
-        Debug.Log($"Setting the notes for next chunk {currChunk.nextChunk}");
         SetNotes(currChunk.nextChunk.levelInfo);
+        Debug.Log($"Setting the notes for next chunk {currChunk.nextChunk}");
     }
 
     private float getFontMultiplier(string text) {
@@ -71,9 +68,7 @@ public class OnScreenTutorialUI : MonoBehaviour {
     }
 
     public void SetNextIndex() {
-        if (currentIndex >= notes.Length - 1) {
-            Hide();
-        } else {
+        if (currentIndex < notes.Length - 1) {
             currentIndex += 1;
             SetText(notes[currentIndex].text);
             GetComponent<RectTransform>().anchoredPosition
@@ -82,9 +77,7 @@ public class OnScreenTutorialUI : MonoBehaviour {
     }
 
     public void SetPrevIndex() {
-        if (currentIndex == 0) {
-            return;
-        } else {
+        if (currentIndex > 0) {
             currentIndex -= 1;
             SetText(notes[currentIndex].text);
             GetComponent<RectTransform>().anchoredPosition
@@ -93,10 +86,8 @@ public class OnScreenTutorialUI : MonoBehaviour {
     }
 
     public void SetIndex(int index) {
-        if (index >= notes.Length) {
-            Hide();
-        } else {
-            currentIndex = index;
+        currentIndex = index;
+        if (index < notes.Length) {
             SetText(notes[currentIndex].text);
             GetComponent<RectTransform>().anchoredPosition
                 = notes[currentIndex].rectPosition;
@@ -104,16 +95,16 @@ public class OnScreenTutorialUI : MonoBehaviour {
     }
 
     public void Hide() {
-        OnTutorialClose?.Invoke(this, EventArgs.Empty);
         IsClosed = true;
         // gameObject.SetActive(false);
     }
 
-    public void Unhide() {
+    public void Reset() {
+        SetIndex(0);
         IsClosed = false;
     }
 
     private void Update() {
-        GetComponent<CanvasGroup>().alpha = IsClosed ? 0 : 1;
+        GetComponent<CanvasGroup>().alpha = IsClosed || currentIndex >= notes.Length ? 0 : 1;
     }
 }

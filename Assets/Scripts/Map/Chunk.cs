@@ -236,7 +236,7 @@ public class Chunk : MonoBehaviour {
 
     }
 
-    public void StartSpawning(object sender, EventArgs e) {
+    public void StartSpawning() {
         chunkSpawner.enabled = true;
     }
 

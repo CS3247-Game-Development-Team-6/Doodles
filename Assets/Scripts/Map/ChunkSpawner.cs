@@ -21,6 +21,7 @@ public class ChunkSpawner : MonoBehaviour {
     // Event to publish to UI elements. WaveUI elements should subscribe.
     public event EventHandler OnWaveActivity;
     public event EventHandler OnWaveEnd;
+    private OnScreenTutorialUI tutorialUI;
 
     public int WavesLeft => waves == null ? 0 : Mathf.Max(0, waves.Length - waveIndex);
 
@@ -34,9 +35,7 @@ public class ChunkSpawner : MonoBehaviour {
 
         if (levelInfo != null) waves = levelInfo.waves;
         this.spawnPointPos = spawnPointPos;
-    }
-
-    private void OnEnable() {
+        tutorialUI = FindObjectOfType<OnScreenTutorialUI>();
     }
 
     public void ResetTimer() {
@@ -45,12 +44,15 @@ public class ChunkSpawner : MonoBehaviour {
 
     private void Update() {
         if (!initialized) { return; }
-
         // Pause if player is viewing tutorial
+        if (!tutorialUI.IsClosed) return;
+
+        /*
         if (!PlayerPrefs.HasKey(OnScreenTutorialUI.OnScreenTutorialPref)
             || PlayerPrefs.GetInt(OnScreenTutorialUI.OnScreenTutorialPref) != 1) {
             return;
         }
+        */
 
         OnWaveActivity?.Invoke(this, EventArgs.Empty);
 
