@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -10,6 +9,7 @@ public class Note {
     public Vector3 rectPosition;
 }
 
+[RequireComponent(typeof(CanvasGroup))]
 public class OnScreenTutorialUI : MonoBehaviour {
 
     public Note[] notes;
@@ -19,6 +19,9 @@ public class OnScreenTutorialUI : MonoBehaviour {
     private int defaultTextLength = -1;
     private float defaultFontSize = -1;
     public static readonly string OnScreenTutorialPref = "OnScreenTutorialPref";
+    public bool IsClosed { get; private set; } = false;
+
+    public event EventHandler OnTutorialClose; 
 
     private void Start() {
         // Do not uncomment: only for debugging.
@@ -56,10 +59,6 @@ public class OnScreenTutorialUI : MonoBehaviour {
         if (currChunk.nextChunk == null) return;
         Debug.Log($"Setting the notes for next chunk {currChunk.nextChunk}");
         SetNotes(currChunk.nextChunk.levelInfo);
-    }
-
-    public void Unhide() {
-        gameObject.SetActive(true);
     }
 
     private float getFontMultiplier(string text) {
@@ -105,6 +104,16 @@ public class OnScreenTutorialUI : MonoBehaviour {
     }
 
     public void Hide() {
-        gameObject.SetActive(false);
+        OnTutorialClose?.Invoke(this, EventArgs.Empty);
+        IsClosed = true;
+        // gameObject.SetActive(false);
+    }
+
+    public void Unhide() {
+        IsClosed = false;
+    }
+
+    private void Update() {
+        GetComponent<CanvasGroup>().alpha = IsClosed ? 0 : 1;
     }
 }

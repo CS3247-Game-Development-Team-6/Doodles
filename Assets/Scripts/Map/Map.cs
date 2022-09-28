@@ -117,7 +117,8 @@ public class Map : MonoBehaviour {
         basePlane.position = chunk.transform.position + new Vector3(chunk.gridSize.y, -0.1f, chunk.gridSize.x) / 2;
         ChunkSpawner chunkSpawner = chunk.GetComponent<ChunkSpawner>();
         chunk.SetWaypoints();
-        chunk.StartSpawning();
+        tutorialUI.OnTutorialClose += chunk.StartSpawning;
+        // chunk.StartSpawning();
         chunkSpawner.OnWaveEnd += OpenNextChunk;
         chunkSpawner.OnWaveEnd += tutorialUI.SetNotesForNextChunk;
         waveUI.SetSpawner(chunkSpawner);
@@ -132,8 +133,8 @@ public class Map : MonoBehaviour {
         }
         currentChunk.nextChunk.SetVisible(true);
         currentChunk.OpenBarrier();
-        currentChunk.MainBarrier.CrossBarrier += ActivateNextChunk;
         tutorialUI.Unhide();
+        currentChunk.MainBarrier.CrossBarrier += ActivateNextChunk;
         // currentChunk.MainBarrier.CloseBarrier += DeactivatePrevChunk;
     }
 

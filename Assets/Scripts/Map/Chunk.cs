@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Waypoints), typeof(ChunkSpawner))]
 public class Chunk : MonoBehaviour {
@@ -233,7 +236,7 @@ public class Chunk : MonoBehaviour {
 
     }
 
-    public void StartSpawning() {
+    public void StartSpawning(object sender, EventArgs e) {
         chunkSpawner.enabled = true;
     }
 
