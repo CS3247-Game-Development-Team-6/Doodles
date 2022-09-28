@@ -6,11 +6,14 @@ public class TowerManager : MonoBehaviour {
     public static TowerManager instance { get; private set; }
     [SerializeField] private ParticleSystem insufficientInkEffect;
     [SerializeField] private GameObject playerObj;
+    [SerializeField] private GameObject healthBarPrefab;
+    [SerializeField] private GameObject smokeEffectPrefab;
+    [SerializeField] private GameObject soundEffectPrefab;
     private TowerInfo towerToBuild;
     private Node selectedNode;
     private TMP_Text actionTimer;
     private NodeUI nodeUI;
-
+    
     private void Awake() {
         if (instance != null) {
             Debug.Log("TowerManager should be a singleton! Only 1 should exist in a scene.");
@@ -51,7 +54,24 @@ public class TowerManager : MonoBehaviour {
         return towerToBuild.cost;
     }
 
+    public GameObject GetSmokeEffectPrefab() {
+        return smokeEffectPrefab;
+    }
+
+    public GameObject GetSoundEffectPrefab() {
+        return soundEffectPrefab;
+    }
+
+    public GameObject GetHealthBarPrefab() {
+        return healthBarPrefab;
+    }
+    
     public bool CanBuildTower(Node node) {
+        if (towerToBuild == null) {
+            Debug.LogWarning($"Have not selected any tower");
+            return false;
+        }
+
         CellType nodeCellType = node.cell.type;
         List<CellType> allowedCellType = towerToBuild.allowedCellTypes;
         if (allowedCellType == null) towerToBuild.allowedCellTypes = new List<CellType>();
@@ -144,12 +164,27 @@ public class TowerManager : MonoBehaviour {
         DeselectNode();
     }
 
+    /** Fix tower on selected node. */
+    public void FixTower() {
+        Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
+        InkManager inkManager = InkManager.instance;
+        if (!inkManager.hasEnoughInk(selectedTower.towerInfo.damageFixCost)) {
+            TriggerInsufficientInk();
+        } else if (selectedTower.RestoreHealth()) {
+            inkManager.ChangeInkAmount(-selectedTower.towerInfo.damageFixCost);
+        } else {
+            Debug.LogError("Tower not fixed at Node " + selectedNode);
+        }
+
+        DeselectNode();
+    }
 
     /** Destroys tower on selected node. */
     public void DestroyTower() {
         selectedNode.DestroyTower();
         DeselectNode();
     }
+
 
     public void SetTowerToBuild(TowerInfo towerInfo) {
         this.towerToBuild = towerInfo;

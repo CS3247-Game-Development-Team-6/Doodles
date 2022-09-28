@@ -16,6 +16,7 @@ public enum EffectStatus {
     NONE // default
 }
 
+[RequireComponent(typeof(EnemyActiveEffects))]
 public class Enemy : MonoBehaviour {
     private const float EPSILON = 0.02f;
 
@@ -81,9 +82,16 @@ public class Enemy : MonoBehaviour {
     public TMP_Text healthText;
     public GameObject damageText;
 
+    /**
+     * EnemyActiveEffectsManager
+     */
+    public float speedMultiplier;
+    private EnemyActiveEffects enemyActiveEffectsManager;
+
     private void Awake() {
         inkManager = InkManager.instance;
         map = FindObjectOfType<Map>();
+        enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
     }
 
     /**
@@ -134,11 +142,19 @@ public class Enemy : MonoBehaviour {
         indicator.SetDamageTextFromFloat(amount);
     }
 
-    public void ReduceSpeed(float slowAmount) {
+    public void ApplyEffect(IEnemyEffect effect) {
+        StartCoroutine(enemyActiveEffectsManager.HandleEffect(effect));
+    }
+
+    public float getFinalSpeed() {
+        return speed * speedMultiplier;
+    }
+
+    public void ReduceBaseSpeed(float slowAmount) {
         speed = enemyInfo.speed * slowAmount;
     }
 
-    public void RestoreSpeed() {
+    public void RestoreBaseSpeed() {
         speed = enemyInfo.speed;
     }
 
@@ -200,6 +216,11 @@ public class Enemy : MonoBehaviour {
         cells = currChunk.cells;
         waypoints = currChunk.GetComponent<Waypoints>();
         target = waypoints.points[0];
+        // cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
+
+        // get reference to its EnemyActiveEffectsManager
+        speedMultiplier = 1.0f;
+        enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
     }
 
     private void Update() {
@@ -235,7 +256,7 @@ public class Enemy : MonoBehaviour {
         }
 
         // delta time is time passed since last frame
-        transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
+        transform.Translate(direction.normalized * getFinalSpeed() * Time.deltaTime, Space.World);
 
         var currentPosition = transform.position - chunkSpawner.transform.position;
         var targetPosition = target.position - chunkSpawner.transform.position;

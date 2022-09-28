@@ -7,7 +7,6 @@ public class CannonTower : Tower {
     private Transform firePoint;
     private float fireCountdown = 0f;
     private Transform target;
-
     private const bool PENETRATE_TARGET = false;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
@@ -16,7 +15,7 @@ public class CannonTower : Tower {
         firePoint = rotationBase.Find(Tower.FIRE_POINT_NAME);
     }
 
-    void Start() {
+    public void Start() {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
@@ -43,6 +42,7 @@ public class CannonTower : Tower {
     }
 
     public override void Shoot() {
+        base.Shoot();
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         bullet.SetBulletInfo(towerInfo);
@@ -52,10 +52,12 @@ public class CannonTower : Tower {
         }
     }
 
-    void Update() {
+    public override void Update() {
+        base.Update();
+
+        if (health <= 0) return;
         if (!target) return;
 
-        
         // Enemy target lock on 
         Vector3 dir = target.position - transform.position;
         Quaternion lookAtRotation = Quaternion.LookRotation(dir);

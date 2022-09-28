@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +20,11 @@ public class PauseMenu : MonoBehaviour {
     }
 
     public void Resume() {
+        GameObject[] ddols = GameStateManager.GetDontDestroyOnLoadObjects();
+        for (int i = 0; i < ddols.Length; i++) {
+            ddols[i].SetActive(true);
+        }
+
         pauseMenuUI.SetActive(false);
         gameplayCanvas.SetActive(true);
         raycastOccluder.SetActive(false);
@@ -36,6 +39,11 @@ public class PauseMenu : MonoBehaviour {
 
     void Pause() {
         if (!GameStateManager.getIsGameEnded()) {
+            GameObject[] ddols = GameStateManager.GetDontDestroyOnLoadObjects();
+            for (int i = 0; i < ddols.Length; i++) {
+                ddols[i].SetActive(false);
+            }
+
             GameIsPaused = true;
             pauseMenuUI.SetActive(true);
             gameplayCanvas.SetActive(false);
@@ -47,6 +55,10 @@ public class PauseMenu : MonoBehaviour {
     }
 
     public void Freeze() {
+        GameObject[] ddols = GameStateManager.GetDontDestroyOnLoadObjects();
+        for (int i = 0; i < ddols.Length; i++) {
+            ddols[i].SetActive(false);
+        }
         pauseMenuUI.SetActive(true);
         raycastOccluder.SetActive(true);
         Time.timeScale = 0f;

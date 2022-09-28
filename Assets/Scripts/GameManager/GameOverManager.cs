@@ -32,6 +32,11 @@ public class GameOverManager : MonoBehaviour {
         // load current active scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+        GameObject[] ddols = GameStateManager.GetDontDestroyOnLoadObjects();
+        for (int i = 0; i < ddols.Length; i++) {
+            ddols[i].SetActive(true);
+        }
+
         // remove occluder
         raycastOccluder.SetActive(false);
         Time.timeScale = 1f;

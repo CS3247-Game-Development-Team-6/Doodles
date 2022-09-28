@@ -34,6 +34,9 @@ public class PlayerMovement : MonoBehaviour {
     private float initialRollSpeed = 50f;
     private float currentRollSpeed;
 
+    // player position values
+    private float playerHeightValue;
+
     // action boolean checks
     // private bool isSprinting = false; // TODO: add sprinting if needed in the future
     private bool isBuilding = false;
@@ -74,8 +77,12 @@ public class PlayerMovement : MonoBehaviour {
         // animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody>();
 
+        // initialize ink and tower managers
         inkManager = InkManager.instance;
         towerManager = TowerManager.instance;
+
+        // initialize playerHeightValue
+        playerHeightValue = transform.position.y; // used to fix the height of player 
 
         // initialize action timer text
         actionTimer = GameObject.Find("ActionTimer").GetComponent<TMP_Text>();
@@ -112,6 +119,10 @@ public class PlayerMovement : MonoBehaviour {
             default:
                 // game is running normally
                 ProcessInputs();
+
+                // fix player height to prevent height from changing due to movement 
+                transform.position = new Vector3(transform.position.x, playerHeightValue, transform.position.z);
+
                 Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
                     mousePositionVector = raycastHit.point;
@@ -175,6 +186,7 @@ public class PlayerMovement : MonoBehaviour {
             playerMeleeScript.Resume();
         }
     }
+
     private void ProcessInputs() {
         switch (state) {
             case State.Normal:
@@ -185,7 +197,7 @@ public class PlayerMovement : MonoBehaviour {
                 break;
 
             case State.Rolling:
-                // TODO: add player rolling animation
+                // TODO: add player rolling animation ?
                 float speedDropMultiplier = 20f;
                 currentRollSpeed -= currentRollSpeed * speedDropMultiplier * Time.deltaTime;
             
@@ -211,12 +223,11 @@ public class PlayerMovement : MonoBehaviour {
             lastMoveDirection = moveDirection; // used for movement actions when not moving
         }
 
-        // TODO: fix rolling (it causes clipping)
-        // if (Input.GetKeyDown(KeyCode.Space)) {
-        //     rollDirection = lastMoveDirection;
-        //     currentRollSpeed = initialRollSpeed;
-        //     state = State.Rolling;
-        // }
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            rollDirection = lastMoveDirection;
+            currentRollSpeed = initialRollSpeed;
+            state = State.Rolling;
+        }
     }
 
     private void HandleBuildInputs() {
@@ -331,6 +342,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Build() {
+
         if (!isBuilding) {
             return;
         }

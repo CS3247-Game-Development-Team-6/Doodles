@@ -13,19 +13,38 @@ MonoBehaviour:
   m_Name: 0_SpikeyBase
   m_EditorClassIdentifier: 
   towerName: Spikey
-  range: 3.1
+  towerDesc: 'Cost: $100
+
+    DMG: 30
+
+    Range: 1.5
+
+    Upgrade: $150, +20%
+    DMG
+
+    Bullets travel in fixed directions and pierce enemies.
+
+'
+  range: 1.5
   upgradeNum: 0
   fireRate: 1
   element: {fileID: 0}
   cost: 100
+  health: 100
+  healthDecayRate: 1
+  damageFixCost: 0
+  damageFixFactor: 1
   allowedCellTypes: 00000000
-  speed: 0
+  speed: 1
   explosionRadius: 0
   damage: 30
   penetratesEnemy: 0
   impactPrefab: {fileID: 0}
   towerPrefab: {fileID: 5135174605016635187, guid: 8d54b48565db13a498020bc19bfe7ff9, type: 3}
   bulletPrefab: {fileID: 8038529814659282312, guid: e64bdd063911640198cf23f86bb72e00, type: 3}
+  smokePrefab: {fileID: 100000, guid: 785f7f2ed47b94fbfa109bc55f7d1c07, type: 3}
+  healthBarPrefab: {fileID: 9038127182088754521, guid: 23da22333cba243218fac5b7096ef31b, type: 3}
+  damagedSoundPrefab: {fileID: 1983200342343509110, guid: 75b77af14971248619980a0e1c41f97a, type: 3}
   nextUpgrade: {fileID: 11400000, guid: d62bf7acdddde7149bb8379548c22659, type: 2}
   nextElements:
   - element: 0

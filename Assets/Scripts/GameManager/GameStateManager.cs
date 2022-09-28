@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // Text
 
 public class GameStateManager : MonoBehaviour {
     [SerializeField] private GameObject gameOverUI;
@@ -29,6 +26,11 @@ public class GameStateManager : MonoBehaviour {
     }
 
     public void WinGame() {
+        GameObject[] ddols = GetDontDestroyOnLoadObjects();
+        for (int i = 0; i < ddols.Length; i++) {
+            ddols[i].SetActive(false);
+        }
+
         isGameEnded = true;
 
         winUI.SetActive(true);
@@ -37,5 +39,21 @@ public class GameStateManager : MonoBehaviour {
     // for other game scripts to check if the game is ended
     public static bool getIsGameEnded() {
         return isGameEnded;
+    }
+
+    public static GameObject[] GetDontDestroyOnLoadObjects() {
+        GameObject temp = null;
+        try {
+            temp = new GameObject();
+            Object.DontDestroyOnLoad(temp);
+            UnityEngine.SceneManagement.Scene dontDestroyOnLoad = temp.scene;
+            Object.DestroyImmediate(temp);
+            temp = null;
+
+            return dontDestroyOnLoad.GetRootGameObjects();
+        } finally {
+            if (temp != null)
+                Object.DestroyImmediate(temp);
+        }
     }
 }
