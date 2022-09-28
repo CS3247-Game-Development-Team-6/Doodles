@@ -30,9 +30,9 @@ public enum DIR {
 
 public class Map : MonoBehaviour {
     private const int ORIG_SCALE = 10;
-    private const int GENERATION_MAX_TRIES = 10;
+    private const int GENERATION_MAX_TRIES = 20;
     // Pairs of chunks and next dir (Down/Right)
-    [SerializeField] private Vector2Int chunkSize;
+    private Vector2Int chunkSize;
     [SerializeField] private MapInfo mapInfo;
     public MapInfo MapInfo => mapInfo;
     private int numChunks;
@@ -54,6 +54,7 @@ public class Map : MonoBehaviour {
         waveUI = FindObjectOfType<WaveUI>();
         tutorialUI = FindObjectOfType<OnScreenTutorialUI>();
         numChunks = mapInfo.levelInfo.Length;
+        chunkSize = mapInfo.gridSize;
         // choose one edge for start and the other edge for end
         for (int chunk = 0; chunk < numChunks; chunk++) {
             GameObject newChunk = new GameObject("Chunk" + chunkList.Count);
@@ -97,9 +98,9 @@ public class Map : MonoBehaviour {
     }
 
     private bool GenerateChunk(Chunk chunk) {
-        Debug.Log($"Generating {chunk}");
+        // Debug.Log($"Generating {chunk}");
         if (chunk.prefabsGenerated) return true;
-        if (chunk.GenerateRandomPath(GENERATION_MAX_TRIES, 3)) {
+        if (chunk.GenerateRandomPath(GENERATION_MAX_TRIES, mapInfo.minScore)) {
             mapInfo.GeneratePrefabs(chunk);
             chunk.SetVisible(false);
             return true;
@@ -118,6 +119,7 @@ public class Map : MonoBehaviour {
         chunk.SetWaypoints();
         chunk.StartSpawning();
         chunkSpawner.OnWaveEnd += OpenNextChunk;
+        chunkSpawner.OnWaveEnd += tutorialUI.SetNotesForNextChunk;
         waveUI.SetSpawner(chunkSpawner);
         chunk.SetVisible(true);
         currentChunk = chunk;
@@ -131,6 +133,7 @@ public class Map : MonoBehaviour {
         currentChunk.nextChunk.SetVisible(true);
         currentChunk.OpenBarrier();
         currentChunk.MainBarrier.CrossBarrier += ActivateNextChunk;
+        tutorialUI.Unhide();
         // currentChunk.MainBarrier.CloseBarrier += DeactivatePrevChunk;
     }
 

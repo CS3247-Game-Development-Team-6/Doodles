@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -27,31 +27,39 @@ public class OnScreenTutorialUI : MonoBehaviour {
             gameObject.SetActive(false);
             return;
         }
-        */
 
         PlayerPrefs.DeleteKey(OnScreenTutorialPref);
+        */
+
+        Map map = FindObjectOfType<Map>();
+        if (map != null && map.currentChunk != null) {
+            notes = map.currentChunk.levelInfo.notes;
+        }
 
         if (defaultTextLength < 0) {
             defaultTextLength = textBox.text.Length;
             defaultFontSize = textBox.fontSize;
         }
-        SetIndex(0);
+
+        if (notes.Length > 0) SetIndex(0);
     }
 
-    public void SetNotes(ChunkInfoScriptableObject chunkInfo) {
+    private void SetNotes(ChunkInfoScriptableObject chunkInfo) {
         this.notes = chunkInfo.notes;
         SetIndex(0);
     }
 
-    public void ReEnable() {
-        PlayerPrefs.DeleteKey(OnScreenTutorialPref);
+    // Triggered OnWaveEnd (from Chunk)
+    public void SetNotesForNextChunk(object sender, EventArgs e) {
+        if (!(sender is ChunkSpawner)) return;
+        Chunk currChunk = ((ChunkSpawner)sender).GetComponent<Chunk>();
+        if (currChunk.nextChunk == null) return;
+        Debug.Log($"Setting the notes for next chunk {currChunk.nextChunk}");
+        SetNotes(currChunk.nextChunk.levelInfo);
+    }
 
+    public void Unhide() {
         gameObject.SetActive(true);
-        if (defaultTextLength < 0) {
-            defaultTextLength = textBox.text.Length;
-            defaultFontSize = textBox.fontSize;
-        }
-        SetIndex(0);
     }
 
     private float getFontMultiplier(string text) {
@@ -98,7 +106,5 @@ public class OnScreenTutorialUI : MonoBehaviour {
 
     public void Hide() {
         gameObject.SetActive(false);
-        // Saves the fact that player has seen this tutorial already
-        PlayerPrefs.SetInt(OnScreenTutorialPref, 1);
     }
 }

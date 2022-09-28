@@ -85,6 +85,7 @@ public class Chunk : MonoBehaviour {
             Transform wall = Instantiate(barrierPrefab, transform);
             wall.name = $"Barrier {chunkId} {d}";
             barriers[i] = wall.GetComponent<Barrier>();
+            barriers[i].Init(d);
             float wallWidth = 0f;
             float x = d == DIR.UP ? gridSize.y : d == DIR.DOWN ? wallWidth/2 : ((float)gridSize.y / 2);
             float z = d == DIR.RIGHT ? gridSize.x : d == DIR.LEFT ? wallWidth/2 : ((float)gridSize.x / 2);
@@ -154,7 +155,7 @@ public class Chunk : MonoBehaviour {
         return true;
     }
 
-    public bool GenerateRandomPath(int tries, int minAveScorePerTile) {
+    public bool GenerateRandomPath(int tries, int minScore) {
         if (cellsGenerated) return false;
         if (tries == 0 || gridSize.x * gridSize.y < MIN_SIZE) {
             cellsGenerated = GenerateBackupPath();
@@ -168,6 +169,11 @@ public class Chunk : MonoBehaviour {
         Vector2Int currentPos = spawnPos;
         Vector2Int currentDir = -spawnDir.Vec();
         int maxTries = gridSize.x * gridSize.y * 4;
+
+        // Adjust based on Manhattan Distance
+        minScore -= Mathf.Abs(spawnPos.x - startPos.x) + Mathf.Abs(spawnPos.y - startPos.y);
+
+
         for (int _ = 0; _ < maxTries; _++) {
             Vector2Int nextPos = currentPos + currentDir;
             bool validCell = ContainsCell(nextPos);
@@ -175,7 +181,7 @@ public class Chunk : MonoBehaviour {
                 dirGrid[currentPos.x, currentPos.y] = currentDir;
                 score += ScorePath(currentPos);
                 if (nextPos == startPos) {
-                    if (score >= minAveScorePerTile * length && minLength < length && length < maxLength) {
+                    if (score >= minScore && minLength < length && length < maxLength) {
                         cellsGenerated = true;
                         SetCellsOnPath();
                         return true;
@@ -188,7 +194,7 @@ public class Chunk : MonoBehaviour {
             currentDir = ((DIR)Random.Range(0, 4)).Vec();
         }
 
-        return GenerateRandomPath(tries-1, minAveScorePerTile);
+        return GenerateRandomPath(tries-1, minScore);
     }
 
     private void SetCellsOnPath() {
