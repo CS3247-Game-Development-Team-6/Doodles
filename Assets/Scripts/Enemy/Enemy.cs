@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour {
     /**
      * Translation
      */
-    private int waypointIndex = 0;
+    public int waypointIndex = 0; // make public for a quick fix so that enemy dont attack base without reaching
     private int lastXCoord = 0;
     private int lastYCoord = 0;
     private Cell[,] cells;

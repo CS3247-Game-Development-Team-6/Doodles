@@ -69,7 +69,16 @@ public class EnemyShooting : MonoBehaviour {
         GameObject nearestTarget = result.Item1;
         float shortestDistance = result.Item2;
 
-        if (nearestTarget != null && shortestDistance <= range) {
+        /*if (nearestTarget != null && shortestDistance <= range) {
+            target = nearestTarget.transform;
+        } else {
+            target = null;
+        }*/
+
+        if (nearestTarget != null && nearestTarget.gameObject.tag == baseTag && GetComponent<Enemy>().waypointIndex >= GetComponent<Enemy>().waypoints.Length - 1
+            && shortestDistance <= range) {
+            target = nearestTarget.transform;
+        } else if (nearestTarget != null && nearestTarget.gameObject.tag == playerTag && shortestDistance <= range) {
             target = nearestTarget.transform;
         } else {
             target = null;
@@ -154,6 +163,15 @@ public class EnemyShooting : MonoBehaviour {
 
     public void RestoreBulletDamage() {
         bulletDamage = initBulletDamage;
+    }
+
+    private void OnDrawGizmos()
+    // the gizmos are drawn after waypoints have actually been added
+    // this is done to avoid the error when we try to draw gizmos before we have waypoints placed.
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(rangeCenter.position, range);
+
     }
 
 }
