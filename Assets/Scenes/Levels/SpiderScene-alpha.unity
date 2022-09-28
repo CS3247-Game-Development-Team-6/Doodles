@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70dea9fd3b675394d9459f5093987ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapInfo: {fileID: 11400000, guid: f7f01d4312581794d987faf1afa4a01e, type: 2}
+  mapInfo: {fileID: 11400000, guid: ec5b0ab1089facf4f83026846d116649, type: 2}
   basePlane: {fileID: 1546535281}
   barrierPrefab: {fileID: 7592276886298649118, guid: c4e1a81ac38611a4dac2f705f32c6099, type: 3}
   waypointEmpty: {fileID: 8396853103122026701, guid: 71d519184add2f346ac3e1e498fb244d, type: 3}
@@ -1704,7 +1704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab10b6441e9b4743b4825bb0f296b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outline: {fileID: 0}
 --- !u!114 &889571982 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 889571982, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
@@ -2816,6 +2815,14 @@ PrefabInstance:
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 7828996251632798774}
+    - target: {fileID: 1096771947161332676, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 210
+      objectReference: {fileID: 0}
+    - target: {fileID: 1096771947161332676, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -243
+      objectReference: {fileID: 0}
     - target: {fileID: 1767207540842979138, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -3086,7 +3093,7 @@ PrefabInstance:
     - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: levelInfo
       value: 
-      objectReference: {fileID: 11400000, guid: 140bbd25839f53543813e69e02eb8db3, type: 2}
+      objectReference: {fileID: 11400000, guid: 56f997e57cf43eb4a95a78c311785b4f, type: 2}
     - target: {fileID: 6600273765185839069, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: wavesContainer
       value: 

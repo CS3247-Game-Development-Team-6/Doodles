@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a9c0d17401c4545b95d37e4dcade62, type: 3}
+  m_Name: 0_Tutorial_Level
+  m_EditorClassIdentifier: 
+  tilePrefab: {fileID: 7800446164947485080, guid: 1f806d45796febc488124686add56529, type: 3}
+  fogPrefab: {fileID: 1420561545051096249, guid: f482a39b3ddbb654ca8786b76a852048, type: 3}
+  basePrefab: {fileID: 1880223237805618186, guid: 0b674d8b417dd9e4b8e2c2d51e1a3420, type: 3}
+  spawnPrefab: {fileID: 6269207307636801995, guid: f7227dc7993d14cf2b6b85bad19a9434, type: 3}
+  curvePrefab: {fileID: 1355420953937332540, guid: 006b9dc87e65141f29b53654208c099c, type: 3}
+  straightPrefab: {fileID: 7894887961081992580, guid: 4c85730c47d6f47ea907c33ec17975d2, type: 3}
+  waypointPrefab: {fileID: 8396853103122026701, guid: 71d519184add2f346ac3e1e498fb244d, type: 3}
+  levelName: TutorialLevel
+  gridSize: {x: 8, y: 8}
+  minScore: 20
+  startingInkFraction: 0.7
+  inkRegenRate: 0
+  levelInfo:
+  - {fileID: 11400000, guid: 56f997e57cf43eb4a95a78c311785b4f, type: 2}
+  - {fileID: 11400000, guid: 56f997e57cf43eb4a95a78c311785b4f, type: 2}
+  - {fileID: 11400000, guid: 56f997e57cf43eb4a95a78c311785b4f, type: 2}
