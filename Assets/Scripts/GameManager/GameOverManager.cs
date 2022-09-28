@@ -9,7 +9,7 @@ public class GameOverManager : MonoBehaviour {
 
     // Enabled when game is running
     void OnEnable() {
-        wavesText.text = WaveSpawner.wavesCounter.ToString();
+        wavesText.text = ChunkSpawner.totalWaveCount.ToString();
 
         raycastOccluder.SetActive(true);
 
@@ -31,6 +31,11 @@ public class GameOverManager : MonoBehaviour {
     public void Retry() {
         // load current active scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        GameObject[] ddols = GameStateManager.GetDontDestroyOnLoadObjects();
+        for (int i = 0; i < ddols.Length; i++) {
+            ddols[i].SetActive(true);
+        }
 
         // remove occluder
         raycastOccluder.SetActive(false);

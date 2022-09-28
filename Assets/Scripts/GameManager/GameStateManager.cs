@@ -26,6 +26,11 @@ public class GameStateManager : MonoBehaviour {
     }
 
     public void WinGame() {
+        GameObject[] ddols = GetDontDestroyOnLoadObjects();
+        for (int i = 0; i < ddols.Length; i++) {
+            ddols[i].SetActive(false);
+        }
+
         isGameEnded = true;
 
         winUI.SetActive(true);

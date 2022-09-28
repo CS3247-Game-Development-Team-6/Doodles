@@ -278,8 +278,6 @@ public class PlayerMovement : MonoBehaviour {
         case State.Normal:
             rigidBody.velocity = moveDirection * playerSpeed;
 
-            // TODO: add player moving animation
-
             if (rigidBody.velocity.magnitude > 0.2) {
                 // interrupt building action
                 isBuilding = false; 

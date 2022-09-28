@@ -20,6 +20,8 @@ public class TowerSelectionManager : MonoBehaviour {
 
     public static bool isInGame;
 
+    [Header("UI Components")]
+    [SerializeField] private TowerDescriptionUI towerDescriptionUI;
 
     void Start() {
         cardAmount = cardsGO.Length;
@@ -30,10 +32,21 @@ public class TowerSelectionManager : MonoBehaviour {
         for (int i = 0; i < cardAmount; i++) {
             AddSelectionCards(i);
         }
+
+        // TEMPORARY
+        towerDescriptionUI.maxSlots = validCardAllowed;
     }
 
     void Update() {
         letsBuildButton.interactable = towerCards.Count == validCardAllowed;
+    }
+
+    public void HoverTower(TowerInfo towerInfo, Sprite sprite) {
+        towerDescriptionUI.SetInfo(towerInfo, sprite);
+    }
+
+    public void UnhoverTower() {
+        towerDescriptionUI.ResetInfo();
     }
 
     // add to towerinventory
@@ -71,9 +84,10 @@ public class TowerSelectionManager : MonoBehaviour {
 
     public void StartGame() {
         isInGame = true;
+        towerDescriptionUI.enabled = false;
         Shop shop = GetComponentInChildren<Shop>();
         shop.enabled = true;
-        SceneManager.LoadScene("SpiderScene-prototype");
+        SceneManager.LoadScene("SpiderScene-alpha");
         Destroy(this);
     }
 

@@ -3,16 +3,13 @@ using UnityEngine;
 public class MapInput : MonoBehaviour { 
  
     private Camera cam;
-    public MapGenerator map;
-    public TowerManager towerManager;
-    public InkManager inkManager;
+    private InkManager inkManager;
     public PlayerMovement playerMovement;
-    public GameObject playerGO;
-    public GameObject insufficientInkEffect;
+    public ParticleSystem insufficientInkEffect;
 
     void Start() {
         cam = Camera.main;
-        towerManager = TowerManager.instance;
+        inkManager = InkManager.instance;
     }
 
     void Update() {
@@ -28,7 +25,7 @@ public class MapInput : MonoBehaviour {
                         inkManager.ChangeInkAmount(-fog.cost);
                         fog.ClearFog();
                     } else {
-                        Instantiate(insufficientInkEffect, playerGO.transform.position, Quaternion.identity);
+                        Instantiate(insufficientInkEffect, playerMovement.transform.position, Quaternion.identity);
                     }
                 } else if (node != null) {
                     if (node.cell.isFog) {
