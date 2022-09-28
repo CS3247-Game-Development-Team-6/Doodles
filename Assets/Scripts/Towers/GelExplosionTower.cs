@@ -44,6 +44,7 @@ public class GelExplosionTower : Tower {
     }
 
     public override void Shoot() {
+        base.Shoot();
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         GelExplosionBullet bullet = bulletObj.GetComponent<GelExplosionBullet>();
         bullet.SetBulletInfo(towerInfo);
@@ -54,6 +55,7 @@ public class GelExplosionTower : Tower {
     }
 
     void Update() {
+        base.Update();
         if (!target) return;
 
         // Enemy target lock on 

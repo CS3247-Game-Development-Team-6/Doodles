@@ -13,11 +13,16 @@ MonoBehaviour:
   m_Name: 1_GelFire
   m_EditorClassIdentifier: 
   towerName: Fire Gel Explosion
+  towerDesc: 
   range: 3
   upgradeNum: 0
   fireRate: 1
   element: {fileID: 11400000, guid: 5503097e096315346a110e0488d9c960, type: 2}
   cost: 40
+  health: 150
+  healthDecayRate: 2
+  damageFixCost: 0
+  damageFixFactor: 2
   allowedCellTypes: 
   speed: 30
   explosionRadius: 1.2

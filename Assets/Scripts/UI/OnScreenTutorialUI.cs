@@ -87,11 +87,9 @@ public class OnScreenTutorialUI : MonoBehaviour {
 
     public void SetIndex(int index) {
         currentIndex = index;
-        if (index < notes.Length) {
-            SetText(notes[currentIndex].text);
-            GetComponent<RectTransform>().anchoredPosition
-                = notes[currentIndex].rectPosition;
-        }
+        SetText(notes[currentIndex].text);
+        GetComponent<RectTransform>().anchoredPosition
+            = notes[currentIndex].rectPosition;
     }
 
     public void Hide() {
@@ -105,6 +103,7 @@ public class OnScreenTutorialUI : MonoBehaviour {
     }
 
     private void Update() {
-        GetComponent<CanvasGroup>().alpha = IsClosed || currentIndex >= notes.Length ? 0 : 1;
+        GetComponent<CanvasGroup>().alpha = 
+            IsClosed || (currentIndex >= notes.Length && currentIndex < 0) ? 0 : 1;
     }
 }
