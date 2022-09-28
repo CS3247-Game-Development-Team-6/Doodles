@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour {
 
     // Start is called before the first frame update
     private void Start() {
+        playerCamera = Camera.main;
         playerSpeed = walkSpeed;
         // animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody>();

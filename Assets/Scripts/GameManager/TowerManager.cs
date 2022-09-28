@@ -68,7 +68,7 @@ public class TowerManager : MonoBehaviour {
     
     public bool CanBuildTower(Node node) {
         if (towerToBuild == null) {
-            Debug.LogWarning($"Have not selected any tower");
+            // Debug.LogWarning($"Have not selected any tower");
             return false;
         }
 
