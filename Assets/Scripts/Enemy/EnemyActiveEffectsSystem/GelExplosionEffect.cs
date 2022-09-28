@@ -19,14 +19,14 @@ public class GelExplosionEffect : IEnemyEffect {
     public IEnumerator Activate(Enemy enemy) {
         float debugBaseSpeed = enemy.getFinalSpeed();
         enemy.speedMultiplier *= gelSlowAmount;
-        Debug.Log($"{enemy} speed: slow amount {gelSlowAmount}, orig {debugBaseSpeed}, final: {enemy.getFinalSpeed()}");
+        //Debug.Log($"{enemy} speed: slow amount {gelSlowAmount}, orig {debugBaseSpeed}, final: {enemy.getFinalSpeed()}");
         yield return new WaitForSeconds(gelLifetime);
     }
 
     public IEnumerator Deactivate(Enemy enemy) {
         float debugBaseSpeed = enemy.getFinalSpeed();
         enemy.speedMultiplier /= gelSlowAmount;
-        Debug.Log($"{enemy} speed set to {enemy.speedMultiplier * debugBaseSpeed}");
+        //Debug.Log($"{enemy} speed set to {enemy.speedMultiplier * debugBaseSpeed}");
         yield return new WaitForEndOfFrame();
     }
 }
