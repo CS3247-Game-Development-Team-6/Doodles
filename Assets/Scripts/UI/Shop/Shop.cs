@@ -2,9 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Shop : MonoBehaviour {
-    [SerializeField] private CardManager selectedTower;
+    public CardManager defaultTower { get; private set; }
+    [SerializeField] public CardManager selectedTower;
     [SerializeField] private ParticleSystem invalidAction;
     [SerializeField] PlayerMovement playerMovement;
+
+    public void SetDefaultTower(CardManager defaultTower) {
+        this.defaultTower = defaultTower;
+    }
 
     private void TriggerInvalidAction() {
         Instantiate(invalidAction, transform);

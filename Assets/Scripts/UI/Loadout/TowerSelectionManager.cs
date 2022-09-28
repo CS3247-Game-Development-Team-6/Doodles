@@ -86,6 +86,7 @@ public class TowerSelectionManager : MonoBehaviour {
         isInGame = true;
         towerDescriptionUI.enabled = false;
         Shop shop = GetComponentInChildren<Shop>();
+        shop.SetDefaultTower(towerCards[0].GetComponent<CardManager>());
         shop.enabled = true;
         SceneManager.LoadScene("SpiderScene-alpha");
         Destroy(this);

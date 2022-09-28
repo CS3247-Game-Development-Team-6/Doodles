@@ -69,6 +69,10 @@ public class TowerManager : MonoBehaviour {
     public bool CanBuildTower(Node node) {
         if (towerToBuild == null) {
             // Debug.LogWarning($"Have not selected any tower");
+            if (FindObjectOfType<Shop>() != null) {
+                Shop shop = FindObjectOfType<Shop>();
+                shop.SetTowerToBuild(shop.defaultTower);
+            }
             return false;
         }
 
