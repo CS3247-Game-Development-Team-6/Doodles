@@ -12,7 +12,7 @@ public class Note {
 [RequireComponent(typeof(CanvasGroup))]
 public class OnScreenTutorialUI : MonoBehaviour {
 
-    public Note[] notes;
+    private Note[] notes;
     public int currentIndex = 0;
     public TextMeshProUGUI textBox;
 
@@ -30,6 +30,7 @@ public class OnScreenTutorialUI : MonoBehaviour {
 
         PlayerPrefs.DeleteKey(OnScreenTutorialPref);
         */
+        notes = new Note[0];
 
         Map map = FindObjectOfType<Map>();
         if (map != null && map.currentChunk != null) {
@@ -58,13 +59,8 @@ public class OnScreenTutorialUI : MonoBehaviour {
         Debug.Log($"Setting the notes for next chunk {currChunk.nextChunk}");
     }
 
-    private float getFontMultiplier(string text) {
-        return Mathf.Min(1f, 1.1f * Mathf.Sqrt((float)defaultTextLength / text.Length));
-    }
-
     private void SetText(string text) {
         textBox.text = text;
-        textBox.fontSize = defaultFontSize * getFontMultiplier(text);
     }
 
     public void SetNextIndex() {

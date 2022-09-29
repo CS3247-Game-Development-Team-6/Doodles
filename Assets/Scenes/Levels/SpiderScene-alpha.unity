@@ -2963,14 +2963,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4252627412189360677, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 3760b2e223daf6e48a1c7cda3cf4c618, type: 2}
-    - target: {fileID: 4252627412189360677, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -4460980234496968587, guid: 3760b2e223daf6e48a1c7cda3cf4c618, type: 2}
     - target: {fileID: 5165088123359564013, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: playerMovement
       value: 
@@ -3003,6 +2995,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -119.97
       objectReference: {fileID: 0}
+    - target: {fileID: 8324592239608150961, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: debugBox
+      value: 
+      objectReference: {fileID: 3773202538542358479}
     - target: {fileID: 8774960218586103493, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3046,6 +3042,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4017679474560131482, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
   m_PrefabInstance: {fileID: 3773202538542358474}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3773202538542358479 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2228178513685641544, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5244389774292442137
 PrefabInstance:
   m_ObjectHideFlags: 0
