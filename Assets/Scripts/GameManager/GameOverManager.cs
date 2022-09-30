@@ -10,7 +10,7 @@ public class GameOverManager : MonoBehaviour {
 
     // Enabled when game is running
     void OnEnable() {
-        wavesText.text = ChunkSpawner.totalWaveCount.ToString();
+        wavesText.text = FindObjectOfType<Map>().WavesCleared.ToString();
 
         raycastOccluder.SetActive(true);
 

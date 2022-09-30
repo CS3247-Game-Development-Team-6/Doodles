@@ -27,33 +27,34 @@ public class Chunk : MonoBehaviour {
     private ChunkSpawner chunkSpawner;
     public Barrier MainBarrier => barriers != null && barriers.Length == 4 ? barriers[(int)spawnDir] : null;
 
+    private static Vector2Int RandomCellOnBorder(DIR dir, Vector2Int gridSize, bool isStart) {
+        switch (dir) {
+            case DIR.RIGHT:
+                return new Vector2Int(isStart ? 0 : (gridSize.x-1), Random.Range(0, gridSize.y));
+            case DIR.UP:
+                return new Vector2Int(Random.Range(0, gridSize.x), isStart ? 0 : (gridSize.y-1));
+            default:
+                return Vector2Int.zero;
+        }
+    }
+
     public void Init(Transform barrierPrefab, ChunkInfoScriptableObject levelInfo) {
         this.levelInfo = levelInfo; 
         var f = Random.Range(0f, 1f) / 0.2 % 1;
         spawnDir = f < 0.5 ? DIR.RIGHT : DIR.UP;
-
-        int minDiff = (gridSize.x + gridSize.y) / 4;
-        int newX = 0, newY = 0, newX1 = 0, newY1 = 0;
-        do {
-            newX = Random.Range(0, gridSize.x - 1);
-            newX1 = Random.Range(0, gridSize.x - 1);
-            newY = Random.Range(0, gridSize.y - 1);
-            newY1 = Random.Range(0, gridSize.y - 1);
-        } while (Mathf.Abs(newX - newY) < minDiff);
-        // x axis: rows; y axis: columns
-        // RIGHT = (1,0), UP = (0, 1)
         if (prevChunk != null) { 
             startPos = prevChunk.spawnDir == DIR.RIGHT ? 
                 new Vector2Int(0, prevChunk.spawnPos.y) : new Vector2Int(prevChunk.spawnPos.x, 0);
-            spawnPos = spawnDir == DIR.RIGHT ? 
-                new Vector2Int(gridSize.x-1, newY) : 
-                new Vector2Int(newX, gridSize.y-1);
-        } else if (spawnDir == DIR.RIGHT) {
-            startPos = new Vector2Int(0, newY);
-            spawnPos = new Vector2Int(gridSize.x-1, newY1);
-        } else if (spawnDir == DIR.UP) {
-            startPos = new Vector2Int(newX, 0);
-            spawnPos = new Vector2Int(newX1, gridSize.y-1);
+        } else {
+            startPos = RandomCellOnBorder(spawnDir, gridSize, true);
+        }
+        spawnPos = startPos;
+        int minManhattanDistance = gridSize == null ? 0 : (5 * (gridSize.x + gridSize.y) / 8);
+        while (ManhattanDistance(spawnPos, startPos) < minManhattanDistance) {
+            if (prevChunk == null) startPos = RandomCellOnBorder(spawnDir, gridSize, true);
+            // Gradually relaxes the restriction on manhattan distance
+            else minManhattanDistance = (int)(minManhattanDistance * 0.9f);
+            spawnPos = RandomCellOnBorder(spawnDir, gridSize, false);
         }
 
         if (prevChunk != null) {
@@ -294,6 +295,10 @@ public class Chunk : MonoBehaviour {
                 }
             }
         }
+    }
+
+    private int ManhattanDistance(Vector2Int u, Vector2Int v) {
+        return Mathf.Abs(u.x - v.x) + Mathf.Abs(u.y - v.y);
     }
 
     private void OnDrawGizmos() {
