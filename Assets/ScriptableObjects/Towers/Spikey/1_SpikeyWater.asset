@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: 1_SpikeyWater
   m_EditorClassIdentifier: 
   towerName: Spikey
+  towerDesc: 
   range: 1.5
   upgradeNum: 1
   fireRate: 1
   element: {fileID: 11400000, guid: 5f2ac61151ef7e347b4a722691241670, type: 2}
   cost: 75
-  health: 100
-  healthDecayRate: 1
+  health: 190
+  healthDecayRate: 2.4
   damageFixCost: 0
-  damageFixFactor: 1
+  damageFixFactor: 0.4
   allowedCellTypes: 00000000
   speed: 1
   explosionRadius: 0
@@ -30,8 +31,5 @@ MonoBehaviour:
   impactPrefab: {fileID: 0}
   towerPrefab: {fileID: 5135174605016635187, guid: 75dbd8ccc311a6f4dab53631f7d0fcb6, type: 3}
   bulletPrefab: {fileID: 8038529814659282312, guid: 790c929ed581c5b41ae2bc32387c7493, type: 3}
-  smokePrefab: {fileID: 100000, guid: 785f7f2ed47b94fbfa109bc55f7d1c07, type: 3}
-  healthBarPrefab: {fileID: 9038127182088754521, guid: 23da22333cba243218fac5b7096ef31b, type: 3}
-  damagedSoundPrefab: {fileID: 1983200342343509110, guid: 75b77af14971248619980a0e1c41f97a, type: 3}
   nextUpgrade: {fileID: 0}
   nextElements: []

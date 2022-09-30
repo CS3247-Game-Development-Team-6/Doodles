@@ -48,7 +48,7 @@ public class Tower : MonoBehaviour {
         this.range = towerInfo.range;
         this.fireRate = towerInfo.fireRate;
         this.cost = towerInfo.cost;
-        this.damageFixCost = towerInfo.damageFixCost;
+        this.damageFixCost = 0;
         this.damageFixFactor = towerInfo.damageFixFactor;
         this.health = towerInfo.health;
         this.maxHealth = this.health;
