@@ -1,18 +1,39 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tower : MonoBehaviour {
 
+    // Tower info
+    protected string towerName;
+    protected int versionNum;
+    protected int cost;
+    protected float damageFixCost;
+    protected float damageFixFactor;
+
+    // Macros
     public const string ENEMY_TAG = "Enemy";
     public const string ROTATION_BASE_NAME = "RotationBase";
     public const string FIRE_POINT_NAME = "FirePoint";
 
-    protected string towerName;
+    // Tower Attack Attributes
     protected float range;
     protected float fireRate;
-    protected int cost;
-    protected int versionNum;
+
+    // Tower Durability Attributes
+    protected float health;
+    protected float maxHealth;
+    protected float healthDecayRate;
+    private bool damageEffectPlayed = false;
+
+    // Prefabs
     protected GameObject bulletPrefab;
+    protected GameObject smokePrefab;
+    protected AudioSource damagedSound;
+
+    // Image
+    protected Image healthBar;
+
     public ElementInfo element { get; private set; }
     public TowerInfo towerInfo { get; protected set; }
     public TowerInfo nextUpgrade { get; private set; }
@@ -27,6 +48,11 @@ public class Tower : MonoBehaviour {
         this.range = towerInfo.range;
         this.fireRate = towerInfo.fireRate;
         this.cost = towerInfo.cost;
+        this.damageFixCost = towerInfo.damageFixCost;
+        this.damageFixFactor = towerInfo.damageFixFactor;
+        this.health = towerInfo.health;
+        this.maxHealth = this.health;
+        this.healthDecayRate = towerInfo.healthDecayRate;
         this.versionNum = towerInfo.upgradeNum;
         this.element = towerInfo.element;
         this.bulletPrefab = towerInfo.bulletPrefab;
@@ -36,8 +62,80 @@ public class Tower : MonoBehaviour {
         foreach (ElementKeyValue pair in towerInfo.nextElements) {
             this.nextElement.Add(pair.element, pair.tower);
         }
+
+        // Prepare Smoke Effect to be played
+        this.smokePrefab = Instantiate(TowerManager.instance.GetSmokeEffectPrefab(), transform.position, transform.rotation);
+        this.smokePrefab.transform.SetParent(transform);
+        this.smokePrefab.GetComponent<ParticleSystem>().Stop();
+
+        // Create health bar UI for each tower
+        GameObject healthBarPrefab = Instantiate(TowerManager.instance.GetHealthBarPrefab(), transform.position, transform.rotation);
+        healthBarPrefab.transform.SetParent(transform);
+        healthBarPrefab.transform.position = new Vector3( // hard coded offset
+            healthBarPrefab.transform.position.x, 
+            healthBarPrefab.transform.position.y + 1.3f, 
+            healthBarPrefab.transform.position.z + 0.5f);
+        healthBarPrefab.transform.rotation = Quaternion.Euler(50, 0, 0);
+        this.healthBar = healthBarPrefab.transform.Find("HealthBG/HealthBar").GetComponent<Image>();
+        
+        // Prepare audio to be played
+        GameObject damagedSoundPrefab = Instantiate(TowerManager.instance.GetSoundEffectPrefab(), transform.position, transform.rotation);
+        damagedSoundPrefab.transform.SetParent(transform);
+        this.damagedSound = damagedSoundPrefab.GetComponent<AudioSource>();
+    }
+
+    /** Function accessable by enemy to damage tower. */
+    public void DecreaseHealth(float amount) {
+        health -= amount;
+    }
+
+    /** Function to check if tower is full health. */
+    public bool IsFullHealth() {
+        return health == maxHealth;
+    }
+
+    /** Function to increase tower health. */
+    public void IncreaseHealth(float amount) {
+        health += amount;
+        if (health > maxHealth) {
+            health = maxHealth;
+        }
+    }
+
+    /** Function to increase tower health. */
+    public bool RestoreHealth() {
+        IncreaseHealth(maxHealth);
+        return true;
     }
 
     /** Instantiates and fires bullets. */
-    public virtual void Shoot() { }
+    public virtual void Shoot() {
+        DecreaseHealth(healthDecayRate);
+    }
+
+    /** Check if tower is dead. */
+    public bool IsDead() {
+        return health <= 0;
+    }
+
+    /** Function to update damageFixCost. */
+    public void UpdateDamageFixCost() {
+        float healthLoss = maxHealth - health;
+        damageFixCost = damageFixFactor * healthLoss;
+        towerInfo.damageFixCost = damageFixCost;
+    }
+
+    public virtual void Update() {
+        healthBar.fillAmount = health / maxHealth;
+        UpdateDamageFixCost(); // still have error, UI not updated as expected with the actual value
+        if (health <= 0 && !damageEffectPlayed) {
+            this.smokePrefab.GetComponent<ParticleSystem>().Play();
+            this.damagedSound.Play();
+            damageEffectPlayed = true;
+        } else if (health > 0 && damageEffectPlayed) {
+            this.smokePrefab.GetComponent<ParticleSystem>().Stop();
+            this.damagedSound.Stop();
+            damageEffectPlayed = false;
+        }
+    }
 }

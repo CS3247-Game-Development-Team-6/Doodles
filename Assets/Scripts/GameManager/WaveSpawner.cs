@@ -3,40 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+// DEPRECATING: DO NOT USE
 public class WaveSpawner : MonoBehaviour {
     [SerializeField] private Text wavesCounterUI;
 
     public static int numEnemiesAlive; // keep track of how many enemies alive then only spawn new wave
-    public static int wavesCounter;
+    // public static int wavesCounter;
     public static int numEnemiesLeftInWave;
     public static bool isSpawningEnemy;
+    public static int totalWaveCount { get; private set; }
 
-    public WaveManager[] waves;
-    public Transform spawnPoint;
+    public WaveSet[] waves;
+    public Transform spawnPoint { get; set; }
     public float timeBetweenWaves = 5f;
     public IndicatorUI waveCountdownIndicator;
     public Text enemiesLeftText;
-    public LevelInfoScriptableObject levelInfo;
+    public ChunkInfoScriptableObject levelInfo;
     public Button skipWaveCountdownButton;
 
     private bool isSkipWaveCountdownButtonVisible;
     private float countdownTimer = 3f; // decrease with time, countdown for new wave
-    private int waveIndex = 0;
+    public int waveIndex { get; private set; }
+
 
     void Start() {
+        //SetNewLevel(levelInfo);
+    }
+
+    public bool AreWavesCleared() {
+        return waves.Length == waveIndex && !isSpawningEnemy;
+    }
+
+    public void SetNewLevel(ChunkInfoScriptableObject levelInfo) {
+        Debug.Log("Resetting wave");
         numEnemiesAlive = 0;
         numEnemiesLeftInWave = 0;
         isSpawningEnemy = false;
         countdownTimer = timeBetweenWaves;
-        wavesCounter = 0;
 
         isSkipWaveCountdownButtonVisible = true;
-        skipWaveCountdownButton.onClick.AddListener(buttonOnClick);
+        skipWaveCountdownButton.onClick.AddListener(ButtonOnClick);
 
+        this.levelInfo = levelInfo;
         if (levelInfo != null) waves = levelInfo.waves;
+
+        waveIndex = -1;
     }
 
-    void buttonOnClick() {
+    void ButtonOnClick() {
         isSkipWaveCountdownButtonVisible = false;
 
         countdownTimer = 0f; // reset timer 
@@ -44,9 +59,10 @@ public class WaveSpawner : MonoBehaviour {
     }
 
     void Update() {
+        /*
         skipWaveCountdownButton.gameObject.SetActive(isSkipWaveCountdownButtonVisible);
         enemiesLeftText.text = string.Format("{0}", numEnemiesLeftInWave);
-        wavesCounterUI.text = "Wave " + string.Format("{0}", wavesCounter);
+        wavesCounterUI.text = "Wave " + string.Format("{0}", waveIndex+1);
 
         // Pause if player is viewing tutorial
         if (!PlayerPrefs.HasKey(OnScreenTutorialUI.OnScreenTutorialPref)
@@ -60,16 +76,13 @@ public class WaveSpawner : MonoBehaviour {
             return;
         }
 
-
-        if (waveIndex == waves.Length) {
-            GetComponent<GameStateManager>().WinGame();
-            this.enabled = false;
-        }
-
         if (countdownTimer <= 0f) {
-            isSpawningEnemy = true;
-            SpawnWave();
-            countdownTimer = timeBetweenWaves;
+            waveIndex = Mathf.Min(waves.Length, waveIndex+1);
+            if (waveIndex < waves.Length) {
+                SpawnWave();
+                isSpawningEnemy = true;
+                countdownTimer = waveIndex == waves.Length - 1 ? 0: timeBetweenWaves;
+            }
             return;
         }
         isSkipWaveCountdownButtonVisible = true;
@@ -78,7 +91,13 @@ public class WaveSpawner : MonoBehaviour {
         countdownTimer = Mathf.Clamp(countdownTimer, 0f, Mathf.Infinity);
 
         UpdateTimerIndicator(countdownTimer);
+        */
 
+    }
+
+    public void WinGame() {
+        GetComponent<GameStateManager>().WinGame();
+        this.enabled = false;
     }
 
     void UpdateTimerIndicator(float time) {
@@ -87,14 +106,14 @@ public class WaveSpawner : MonoBehaviour {
     }
 
     void SpawnWave() {
-        wavesCounter++;
+        if (waveIndex == waves.Length) return;
 
-        WaveManager waveToSpawn = waves[waveIndex];
+        totalWaveCount++;
+
+        WaveSet waveToSpawn = waves[waveIndex];
 
         numEnemiesLeftInWave = waveToSpawn.getTotalEnemy();
         StartCoroutine(waveToSpawn.StartWave(this));
-
-        waveIndex++;
     }
 
     public void SpawnEnemy(GameObject _enemy) {

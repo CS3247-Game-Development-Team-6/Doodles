@@ -28,7 +28,8 @@ public class Cell {
 
     public Vector3 Position { get; }
 
-    public Cell(Vector3 pos, CellType typeOfCell, bool isFoggy, Vector3 rot, int pathNum) {
+    public Cell(Vector2Int index, Vector3 pos, CellType typeOfCell, bool isFoggy, Vector3 rot, int pathNum) {
+        this.index = index;
         position = pos;
         type = typeOfCell;
         isFog = isFoggy;

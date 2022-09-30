@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1170105554}
   - component: {fileID: 1170105553}
   - component: {fileID: 1170105552}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 1179090690}
   - component: {fileID: 1179090692}
   - component: {fileID: 1179090691}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 1929750957}
   - component: {fileID: 1929750959}
   - component: {fileID: 1929750958}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 1743717827376617673}
   - component: {fileID: 4940969500727402386}
   - component: {fileID: 3398518152103901628}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 1110088004721518106}
   - component: {fileID: 6661129512452265873}
   - component: {fileID: 7627375074670015471}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HPText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,6 +663,7 @@ GameObject:
   - component: {fileID: 986762576498338959}
   - component: {fileID: 904252060}
   - component: {fileID: 3927220003791629200}
+  - component: {fileID: 1330700009839814681}
   m_Layer: 0
   m_Name: Enemy_Boss
   m_TagString: Enemy
@@ -763,9 +764,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyInfo: {fileID: 11400000, guid: e41e9492c221f7342b93703b9d0108b6, type: 2}
+  waypointIndex: 0
   healthBar: {fileID: 1929750958}
   healthText: {fileID: 7627375074670015471}
   damageText: {fileID: 2675300404428900392, guid: 934f2897b165c6b47b9aa966c0c7d01c, type: 3}
+  speedMultiplier: 0
 --- !u!114 &904252060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -800,6 +803,18 @@ MonoBehaviour:
   _scaldedData: {fileID: 11400000, guid: 8982c217c37259142b4427dd206e7b0f, type: 2}
   _frozenData: {fileID: 11400000, guid: 528997d82f1193647a49ef9489883657, type: 2}
   _weakenedData: {fileID: 11400000, guid: 3736ed5fb54fd314eb72776659995569, type: 2}
+--- !u!114 &1330700009839814681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6540121397901334477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c0405fecb06d5408f42208e873bfd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8790860002384552885
 GameObject:
   m_ObjectHideFlags: 0

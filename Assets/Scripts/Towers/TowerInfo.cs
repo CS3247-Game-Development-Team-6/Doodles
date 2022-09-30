@@ -16,6 +16,8 @@ public class TowerInfo : ScriptableObject {
 
     [Header("Stats")]
     public string towerName;
+    [TextArea(4,8)] public string towerDesc;
+
     /** Range of detection and shooting. */
     [Range(0, MAX_RANGE)] public float range;
     /** upgradeNum corresponds to the number of upgrades this tower has had. */
@@ -26,6 +28,14 @@ public class TowerInfo : ScriptableObject {
     public ElementInfo element;
     /** cost is the additional cost to create this tower from previous version. */
     public int cost;
+    /** health is the amount of health allocated to the tower at the start*/
+    public float health;
+    /** health decay rate is the rate at which the tower loses health. */
+    public float healthDecayRate;
+    /** the cost to fix a damaged tower*/
+    public float damageFixCost;
+    /** the factor that is multiplied by when fixing a tower*/
+    public float damageFixFactor;
     /** the celltypes this tower can be built on. */
     public List<CellType> allowedCellTypes;
 
@@ -63,7 +73,6 @@ public class TowerInfo : ScriptableObject {
 
         this.nextUpgrade.upgradeNum = this.upgradeNum + 1;
         this.nextUpgrade.damage = Mathf.FloorToInt((float)this.damage * DMG_MULTIIPLIER);
-
         this.nextUpgrade.element = this.element;
         this.nextUpgrade.speed = this.speed;
         this.nextUpgrade.explosionRadius = this.explosionRadius;

@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe4a39bb2062e524580495433674019c, type: 3}
+  m_Name: 0_Tutorial_Chunk_1
+  m_EditorClassIdentifier: 
+  levelName: 0_Tutorial_Chunk_1
+  startingInkPercentage: 0.5
+  waves:
+  - enemy: {fileID: 6540121397901334477, guid: d74de364f8d1dc943ba639ce7ec66331, type: 3}
+    count: 3
+    rate: 1
+    enemy2: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
+    count2: 0
+    rate2: 1
+    enemy3: {fileID: 6540121397901334477, guid: 300acf72d144c3145a64944ed02ec40c, type: 3}
+    count3: 0
+    rate3: 1
+  - enemy: {fileID: 6540121397901334477, guid: d74de364f8d1dc943ba639ce7ec66331, type: 3}
+    count: 6
+    rate: 1
+    enemy2: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
+    count2: 0
+    rate2: 1
+    enemy3: {fileID: 6540121397901334477, guid: 300acf72d144c3145a64944ed02ec40c, type: 3}
+    count3: 0
+    rate3: 1
+  - enemy: {fileID: 6540121397901334477, guid: d74de364f8d1dc943ba639ce7ec66331, type: 3}
+    count: 10
+    rate: 1
+    enemy2: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
+    count2: 0
+    rate2: 1
+    enemy3: {fileID: 6540121397901334477, guid: 300acf72d144c3145a64944ed02ec40c, type: 3}
+    count3: 0
+    rate3: 1
+  isFogChunk: 0
+  notes:
+  - text: Hi there! I'm Doodle, and welcome! Ain't it nice here?
+    rectPosition: {x: 231, y: -174, z: 0}
+  - text: If you've been through this before, hit SKIP to start.
+    rectPosition: {x: 231, y: -174, z: 0}
+  - text: Please help me defend my castle! It is the source of our power! Let me
+      walk you through the basics.
+    rectPosition: {x: 231, y: -174, z: 0}
+  - text: This wave counter shows the number of waves of entities so far.
+    rectPosition: {x: 215, y: 239, z: 0}
+  - text: This counter under that shows the number of hostile entities on the map
+      to destroy!
+    rectPosition: {x: 215, y: 239, z: 0}
+  - text: This shows the health of the base. It is the source of our power to create.
+      Do not let it get destroyed!
+    rectPosition: {x: 226, y: 156, z: 0}
+  - text: Use ink to create towers! Select a tower to build with Left Click. They
+      are essential in helping us defend the base!
+    rectPosition: {x: -210, y: 74, z: 0}
+  - text: On that note, this shows the amount of ink you have. Gain more from defeating
+      hostile entities!
+    rectPosition: {x: 226, y: 74, z: 0}
+  - text: Move me around with WASD. Arrow keys work too!
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: Right Click on tiles next to us to build towers! Tiles will turn green
+      If we are close enough to a tile to build on it.
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: Careful! Building takes 2 seconds. Moving away while building scraps our
+      progress!
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: Towers have limited range, so plan well! Hover over the shop icons to learn
+      more about their abilities.
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: Towers require maintenance over time as they fire at enemies. Use the upgrade
+      menu to repair towers!
+    rectPosition: {x: 231, y: -174, z: 0}
+  - text: In a pinch, use weapons to attack enemies. Left Click in their direction
+      to attack, and using Q toggles between Bullet and Sword attacks.
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: But we're pretty fragile, so please be careful, or else we may be slain!
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: Now right click on the tower you just built. This brings up an interesting
+      menu...
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: 'We can upgrade towers, or charge their bullets with elements. When elemental
+      towers inflict certain powerful effects! '
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: Hover over them to learn more about what they do. They can be pretty expensive,
+      use them wisely.
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: Psst! 2 different elements hitting an enemy produce a reaction with an
+      even stronger effect! Tower placement is crucial!
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: Simply right click anywhere to hide the upgrade menu. You can learn more
+      about the elements from this guide book here!
+    rectPosition: {x: 231, y: -174, z: 0}
+  - text: The stopwatch shows the time left until the next wave of hostile entities!
+      A moment of respite from this onslaught...
+    rectPosition: {x: 210, y: -243, z: 0}
+  - text: If you ever need more information like this walkthrough again, you can
+      use this information book right here! Knowledge is power!
+    rectPosition: {x: 231, y: -174, z: 0}
+  - text: The waves are beginning! Stay strong and remain steadfast!
+    rectPosition: {x: 231, y: -174, z: 0}

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
+  m_Name: 1_GelFire
+  m_EditorClassIdentifier: 
+  towerName: Fire Gel Explosion
+  towerDesc: 
+  range: 3
+  upgradeNum: 0
+  fireRate: 1
+  element: {fileID: 11400000, guid: 5503097e096315346a110e0488d9c960, type: 2}
+  cost: 40
+  health: 150
+  healthDecayRate: 2
+  damageFixCost: 0
+  damageFixFactor: 2
+  allowedCellTypes: 
+  speed: 30
+  explosionRadius: 1.2
+  damage: 15
+  penetratesEnemy: 0
+  impactPrefab: {fileID: 4586470546859298135, guid: 024f097d68bf33d44ba2726d968af48c, type: 3}
+  towerPrefab: {fileID: 5135174605016635187, guid: a569763cecd85c040b0a9174176e064b, type: 3}
+  bulletPrefab: {fileID: 1315704262782356680, guid: b46953a17219e2f4993c3078b27ee547, type: 3}
+  nextUpgrade: {fileID: 0}
+  nextElements: []
