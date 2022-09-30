@@ -100,7 +100,6 @@ public class Enemy : MonoBehaviour {
      * Reference: https://drive.google.com/drive/folders/1Ck3jqkF_k5snVlAlZsA441pl4-DpjStC  
      */
     public void TakeDamage(float amount, ElementInfo bulletElement) {
-        amount = amount * (SpellManager.instance.DamageFactor);
         if (element == null || bulletElement == null) {
             ReduceHealth(amount);
             return;

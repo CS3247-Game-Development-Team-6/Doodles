@@ -40,8 +40,8 @@ public class InkManager : MonoBehaviour {
 
     public void ChangeInkAmount(float deltaAmount) {
         // at most maxInk
-        deltaAmount = deltaAmount * (SpellManager.instance.InkFactor);
         ink = Mathf.Min(ink + deltaAmount, maxInk);
+
         // at least 0
         ink = Mathf.Max(ink, 0.0f);
         playerInkIndicator.rawValue = (int)ink;
