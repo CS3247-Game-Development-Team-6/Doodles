@@ -9,9 +9,11 @@ public class NodeUITooltipTrigger : TooltipTrigger {
 
     public void SetTowerInfo(TowerInfo currentTower, TowerInfo newTower) {
         this.currentTower = currentTower;
-        this.newTower = newTower;
-        this.isUpgrade = currentTower.element == newTower.element 
-            && currentTower.upgradeNum < newTower.upgradeNum;
+        if (newTower != null) {
+            this.newTower = newTower;
+            this.isUpgrade = currentTower.element == newTower.element 
+                && currentTower.upgradeNum < newTower.upgradeNum;
+        }
     }
 
     private string FormatContent() {
