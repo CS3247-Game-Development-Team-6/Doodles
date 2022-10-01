@@ -121,7 +121,7 @@ public class Tower : MonoBehaviour {
     /** Function to update damageFixCost. */
     public void UpdateDamageFixCost() {
         float healthLoss = maxHealth - health;
-        damageFixCost = damageFixFactor * healthLoss;
+        damageFixCost = Mathf.FloorToInt(damageFixFactor * healthLoss);
         towerInfo.damageFixCost = damageFixCost;
     }
 
