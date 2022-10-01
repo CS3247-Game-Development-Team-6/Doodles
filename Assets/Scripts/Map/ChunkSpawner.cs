@@ -24,6 +24,7 @@ public class ChunkSpawner : MonoBehaviour {
     private OnScreenTutorialUI tutorialUI;
 
     public int WavesLeft => waves == null ? 0 : Mathf.Max(0, waves.Length - waveIndex);
+    public int WavesStarted => waveIndex;
 
     public void Init(ChunkInfoScriptableObject levelInfo, Vector3 spawnPointPos) {
         initialized = true;
@@ -80,8 +81,6 @@ public class ChunkSpawner : MonoBehaviour {
 
     private void SpawnWave() {
         if (waveIndex == waves.Length) return;
-
-        totalWaveCount++;
 
         WaveSet waveToSpawn = waves[waveIndex];
 
