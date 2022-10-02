@@ -20,7 +20,6 @@ public class NodeUITooltipTrigger : TooltipTrigger {
         if (!newTower || !currentTower || isFixButton) return content;
         int damageDiff = newTower.damage - currentTower.damage;
         float rangeDiff = newTower.range - currentTower.range;
-
         string effect = isUpgrade ? $"Upgrade to level {newTower.upgradeNum}" : $"Effect: {newTower.element.effect.Name}";
         string pattern = $"{effect}\nDMG: {newTower.damage} [{damageDiff}]\nRange: {newTower.range} [{rangeDiff}]";
         return pattern;
