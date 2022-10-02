@@ -56,7 +56,6 @@ namespace Yarn.Unity.Example {
         private void Update() {
             if (FindObjectOfType<DialogueRunner>().IsDialogueRunning == false) {
                 GotoButton.gameObject.SetActive(true);
-                return;
             }
         }
 
