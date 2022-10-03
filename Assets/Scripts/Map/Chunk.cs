@@ -26,7 +26,7 @@ public class Chunk : MonoBehaviour {
     private Barrier[] barriers;
     private ChunkSpawner chunkSpawner;
     public Barrier MainBarrier => barriers != null && barriers.Length == 4 ? barriers[(int)spawnDir] : null;
-    public Base Base => ContainsCell(startPos) && cells[startPos.x, startPos.y].tile != null ? 
+    public Base Base => cells != null && ContainsCell(startPos) && cells[startPos.x, startPos.y].tile != null ? 
         cells[startPos.x, startPos.y].tile.GetComponent<Base>() : null;
 
     private static Vector2Int RandomCellOnBorder(DIR dir, Vector2Int gridSize, bool isStart) {
