@@ -13,14 +13,20 @@ MonoBehaviour:
   m_Name: 1_SpikeyBase
   m_EditorClassIdentifier: 
   towerName: Spikey
+  towerDesc: 
   range: 1.5
   upgradeNum: 1
   fireRate: 1
   element: {fileID: 0}
   cost: 150
-  speed: 0
+  health: 180
+  healthDecayRate: 2.5
+  damageFixCost: 0
+  damageFixFactor: 0.35
+  allowedCellTypes: 00000000
+  speed: 1
   explosionRadius: 0
-  damage: 0
+  damage: 36
   penetratesEnemy: 0
   impactPrefab: {fileID: 0}
   towerPrefab: {fileID: 5135174605016635187, guid: 4d28ac568c6555345afb90b3d507984d, type: 3}

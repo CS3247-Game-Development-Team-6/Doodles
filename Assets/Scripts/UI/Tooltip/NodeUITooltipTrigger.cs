@@ -4,26 +4,29 @@ public class NodeUITooltipTrigger : TooltipTrigger {
     private TowerInfo currentTower;
     private TowerInfo newTower;
     private bool isUpgrade;
-    public bool isNotAvailable { get; set; }
+    public bool isFixButton = false;
+    public bool isNotAvailable { get; set; } 
 
     public void SetTowerInfo(TowerInfo currentTower, TowerInfo newTower) {
         this.currentTower = currentTower;
-        this.newTower = newTower;
-        this.isUpgrade = currentTower.element == newTower.element 
-            && currentTower.upgradeNum < newTower.upgradeNum; 
+        if (newTower != null) {
+            this.newTower = newTower;
+            this.isUpgrade = currentTower.element == newTower.element 
+                && currentTower.upgradeNum < newTower.upgradeNum;
+        }
     }
 
     private string FormatContent() {
-        if (!newTower || !currentTower) return content;
+        if (!newTower || !currentTower || isFixButton) return content;
         int damageDiff = newTower.damage - currentTower.damage;
         float rangeDiff = newTower.range - currentTower.range;
-
         string effect = isUpgrade ? $"Upgrade to level {newTower.upgradeNum}" : $"Effect: {newTower.element.effect.Name}";
         string pattern = $"{effect}\nDMG: {newTower.damage} [{damageDiff}]\nRange: {newTower.range} [{rangeDiff}]";
         return pattern;
     }
 
     private string FormatHeader() {
+        if (isFixButton) return header + $@" [${currentTower.damageFixCost}]";
         if (!newTower || !currentTower) return header;
         return header + $@" [${newTower.cost}]";
     }

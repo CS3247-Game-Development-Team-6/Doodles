@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: 0_SpikeyWater
   m_EditorClassIdentifier: 
   towerName: Spikey
+  towerDesc: 
   range: 1.5
   upgradeNum: 0
   fireRate: 1
   element: {fileID: 11400000, guid: 5f2ac61151ef7e347b4a722691241670, type: 2}
   cost: 75
-  speed: 0
+  health: 160
+  healthDecayRate: 2.3
+  damageFixCost: 0
+  damageFixFactor: 0.55
+  allowedCellTypes: 00000000
+  speed: 1
   explosionRadius: 0
   damage: 25
   penetratesEnemy: 0

@@ -1,0 +1,29 @@
+title: Start
+tags: 
+colorID: 0
+position: 0,0
+---
+<<Act Dan dan_normal left 0.38 green>>
+<<Act Doodle doodle_angry 1.25  0.38 #226677>>
+<<Move Doodle right  0.38 0.5>>
+Doodle: Wow, those clowns are more horrifying than I thought. I’m still in disbelief. Are you okay, Dan?
+Dan: I’m still sweating all over, but I guess I’m getting better at dealing with it.
+Dan: We might even encounter them in our future adventures, hahaha…
+Doodle: We’ll talk about our future adventures after we escape this prison of a world!
+<<Hide doodle_angry>>
+*Queen appears again*
+<<Act Queen queen_normal 1.25 0.45 #226677>>
+<<Move Queen right 0.45 0.5>>
+Queen: Tsk, that was the last of his fears! I have nothing left…
+Queen: Well well well, an amazing performance, Erdan my boy! Have you changed your mind about joining me in sculpting this world?
+Dan: Never! I have my own real world to get back to, and my own world of imagination in my room. Just let me out!
+Queen: Tsk, ever the stubborn little one. Whatever, you are becoming an eyesore! Leave, boy! And never let me see you again!
+<<Hide queen_normal>>
+*Dan wakes up again, seeing himself lying in the forest*
+<<Scene forest>>
+Voice from afar: Dannnn... Dannnn, where are you?
+Dan: That must be mom and dad. I’m back in the real world!!
+Dan runs towards the voices of his loved ones.
+<<StopAudioAll>>
+<<Fade black 0.0 1.0 2.0>>
+===

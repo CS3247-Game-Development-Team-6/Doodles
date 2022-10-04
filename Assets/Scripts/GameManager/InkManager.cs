@@ -8,19 +8,26 @@ public class InkManager : MonoBehaviour {
     [Range(0, 1)] public float startingAmount = 0.6f;
     private float ink;
     [SerializeField] private PlayerMovement movement;
-    public LevelInfoScriptableObject levelInfo;
+    private MapInfo mapInfo;
 
     public PlayerMovement Movement => movement;
     [SerializeField] private IndicatorUI playerInkIndicator;
 
-    private void Awake() {
+    private void Start() {
         if (instance != null) {
             Debug.Log("InkManager should be a singleton! Only 1 should exist in a scene.");
             return;
         }
         instance = this;
 
-        if (levelInfo != null) startingAmount = levelInfo.startingInkPercentage;
+        if (FindObjectOfType<Map>() != null) { 
+            mapInfo = FindObjectOfType<Map>().MapInfo;
+            if (mapInfo != null) {
+                startingAmount = mapInfo.startingInkFraction;
+                growthRate = mapInfo.inkRegenRate;
+            }
+        }
+
 
         ink = startingAmount * maxInk;
         playerInkIndicator.maxValue = (int)maxInk;

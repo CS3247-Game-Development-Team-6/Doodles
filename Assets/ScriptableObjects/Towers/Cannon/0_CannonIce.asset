@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: 0_CannonIce
   m_EditorClassIdentifier: 
   towerName: Ice Cannon
+  towerDesc: 
   range: 4
   upgradeNum: 0
   fireRate: 1
   element: {fileID: 11400000, guid: 2a9f0209ebf96cc4f8a2c63413522b7e, type: 2}
   cost: 25
+  health: 110
+  healthDecayRate: 1
+  damageFixCost: 0
+  damageFixFactor: 0.21
+  allowedCellTypes: 00000000
   speed: 40
   explosionRadius: 0
   damage: 35

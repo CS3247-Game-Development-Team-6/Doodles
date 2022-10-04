@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
+  m_Name: 0_GelBase
+  m_EditorClassIdentifier: 
+  towerName: Gel Explosion
+  towerDesc: 'Cost: $50
+
+    DMG: 20
+
+    Range: 3
+
+    Explode Radius: 1
+
+    Upgrade:
+    $25, +20% DMG and Explode Radius
+
+    Arrows explode on impact, small AOE damage,
+    AOE slow.'
+  range: 4
+  upgradeNum: 0
+  fireRate: 1
+  element: {fileID: 0}
+  cost: 50
+  health: 140
+  healthDecayRate: 1.8
+  damageFixCost: 0
+  damageFixFactor: 0.2
+  allowedCellTypes: 00000000
+  speed: 30
+  explosionRadius: 1
+  damage: 20
+  penetratesEnemy: 0
+  impactPrefab: {fileID: 4586470546859298135, guid: 024f097d68bf33d44ba2726d968af48c, type: 3}
+  towerPrefab: {fileID: 5135174605016635187, guid: f5da8a0dfb8a20449806ed7a66f573b7, type: 3}
+  bulletPrefab: {fileID: 1315704262782356680, guid: e446c4c3e5ae3e844b4af7096094e892, type: 3}
+  nextUpgrade: {fileID: 11400000, guid: 251661026f1aa5e4fbc3854eebd11826, type: 2}
+  nextElements:
+  - element: 0
+    tower: {fileID: 11400000, guid: ad4e7413f770f134f807b28700c193fe, type: 2}
+  - element: 1
+    tower: {fileID: 11400000, guid: 46656f756c6f8da4fa4722f2c9c99c8d, type: 2}
+  - element: 2
+    tower: {fileID: 11400000, guid: f85d2388144635e4cb8fa2530a3781f5, type: 2}

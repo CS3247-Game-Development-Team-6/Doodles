@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe4a39bb2062e524580495433674019c, type: 3}
+  m_Name: 0_Tutorial_Chunk_1
+  m_EditorClassIdentifier: 
+  levelName: 0_Tutorial_Chunk_1
+  startingInkPercentage: 0.5
+  waves:
+  - enemy: {fileID: 6540121397901334477, guid: d74de364f8d1dc943ba639ce7ec66331, type: 3}
+    count: 3
+    rate: 1
+    enemy2: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
+    count2: 0
+    rate2: 0
+    enemy3: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
+    count3: 0
+    rate3: 0
+  isFogChunk: 0
+  notes:
+  - text: Hi there! I'm Doodle, and welcome! Ain't it nice here? (Hit SKIP to skip
+      the tutorial notes)
+    rectPosition: {x: 231, y: -174, z: 0}
+  - text: Please help me defend my castle! It is the source of our power!
+    rectPosition: {x: 231, y: -174, z: 0}
+  - text: Move me around with WASD. Arrow keys work too!
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: Use weapons to attack enemies! Left Click in their direction to attack,
+      and using Q toggles between Bullet and Sword attacks.
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: But we're pretty fragile, so please be careful, or else we may be slain!
+    rectPosition: {x: -205, y: -222, z: 0}
+  - text: Here some of them come! Use your attacks to slay them!
+    rectPosition: {x: -205, y: -222, z: 0}

@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: 0_CannonFire
   m_EditorClassIdentifier: 
   towerName: Fire Cannon
+  towerDesc: 
   range: 4
   upgradeNum: 0
   fireRate: 1
   element: {fileID: 11400000, guid: 5503097e096315346a110e0488d9c960, type: 2}
   cost: 25
+  health: 110
+  healthDecayRate: 1
+  damageFixCost: 0
+  damageFixFactor: 0.21
+  allowedCellTypes: 00000000
   speed: 40
   explosionRadius: 0
   damage: 30

@@ -1,0 +1,77 @@
+title: Start
+tags: 
+colorID: 0
+position: 0,0
+---
+
+// sets background image to sprite called "forest"
+<<Scene forest>>
+Dan’s family is moving to a new town. A short distance nearby, there exists a mysterious forest, the Forest of Illusion, with a longstanding myth.
+The myth describes that those who dare enter the forest would meet the Queen of Illusion, hypnotised or led astray by her many illusory tricks, never to be seen again.
+Those who survived and escaped tell tales of overcoming their fears, emerging ever braver. 
+But those who disappear though, little is known of what came of their fate.
+<<Scene playground>>
+<<Act Dan dan_normal left 0.38 green>>
+One day, Dan was playing in the neighbourhood playground near the edge of the forest.
+Dan: Ooh, pretty butterfly!
+<<Hide dan_normal>>
+Dan runs after the butterfly, treading further and further into a murky clump of foilage.
+<<Act Dan dan_sleepy left 0.38 green>>
+His footsteps grow heavier and…
+// adds actor named "Dan", placed in left-half + center of screen, with green text label
+<<Scene forest>>
+<<PlayAudio ambient_birds 0.1 false>>
+<<Hide dan_sleepy>>
+<<Act Dan dan_worries left 0.38 green>>
+Dan wakes up with a start.
+Dan: …? Where am I? Is this the forest?
+Dan: More importantly, what am I? I feel so weird…
+Dan: I’m in doodle's world?
+Dan: Feels a little different than in my dreams…
+// horizontally flips Dan actor to face Doodle
+<<Flip Dan>>
+Dan looks around.
+<<Flip Dan>>
+// adds actor "Queen" off-screen right, with blue-ish text label
+<<Act Queen queen_normal 1.25 0.45 #226677>>
+<<Move Queen right 0.45 0.5>>
+Queen: Doodle, huh? What an interesting name for that entity you created.
+Dan: !!
+Dan: Who are you?
+Queen: Why, who am I does not matter, but instead it is you, who has been able to morph my reality into yours, that I want to know. What is your name, boy?
+<<Hide dan_worries>>
+<<Act Dan dan_normal left 0.38 green>>
+Dan: Err... Dan.
+Queen: Erdan…? A curious name, not really one befitting of your imaginative ability. It matters not, little one, for once you join me you can be anything you imagine!
+Dan: Join you? What are you talking about?
+Queen: Why, my Illusory World, dear boy! How beautiful it is, isn’t it? Together we can create a utopia that will last for eternity! What do you say, little boy? An irresistible proposition, is it not?
+Queen: What do you say, little boy? An irresistible proposition, is it not?
+Dan: That has to be the Queen of Illusion! Maybe if I ask her nicely…
+<<Hide dan_normal>>
+<<Act Dan dan_angry left 0.38 green>>
+Dan: I really don’t want to stay here, I just want to get out of here, please?
+Queen: Hmm, that is quite the letdown. Well, I guess it is due for a little test, dear boy.
+Queen: Perhaps facing your fears would change your mind and be a little more… open-minded.
+<<Hide dan_angry>>
+<<Act Dan dan_worries left 0.38 green>>
+Dan: What do you mean?
+The Queen waves her hand, and movement rippled through the entire forest.
+<<Shake Queen>>
+Queen: Prepare yourself, boy! And don’t let me down! Ta-ta for now!
+The Queen begins to fade away.
+<<Hide Queen>>
+<<Hide dan_worries>>
+<<Act Dan dan_angry left 0.38 green>>
+Dan: Wait!
+<<Hide dan_angry>>
+<<Act Dan dan_worries left 0.38 green>>
+Dan winces and braces himself.
+Dan: Ahh! Spiderwebs! There's gonna be spiders everywhere! What do we do, Doodle?
+<<Act Doodle doodle_happy 1.25  0.38 #226677>>
+<<Move Doodle right  0.38 0.5>>
+Doodle: Fear not, Dan! The Queen seems to be using your fears against us. Don’t worry! Spiders are nothing to be afraid of, and you’re not alone!
+Dan: Thanks, Doodle! They’re still pretty scary and icky, but I’m glad you’re here with me!
+Doodle: Me too, Dan. Go now! I believe in you!
+<<StopAudioAll>>
+<<Fade black 0.0 1.0 2.0>>
+===

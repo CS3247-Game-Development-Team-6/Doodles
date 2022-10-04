@@ -105,7 +105,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
 
     public void RemoveEffect() {
         if (enemy.GetStatus() == Status.CHILL) {
-            enemy.RestoreSpeed();
+            enemy.RestoreBaseSpeed();
             enemy.RemoveStatus();
         }
         if (enemy.GetStatus() == Status.DRENCH) {
@@ -113,7 +113,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
             enemy.RemoveStatus();
         }
         if (enemy.GetStatus() == Status.FROZE) {
-            enemy.RestoreSpeed();
+            enemy.RestoreBaseSpeed();
             enemy.RemoveStatus();
         }
         if (enemy.GetStatus() == Status.WEAKEN) {
@@ -146,7 +146,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
         if (enemy.GetStatus() == Status.FROZE && _currentEffectTime > _nextTickTime) {
             // Only triggered once
             if (_nextTickTime == 0) {
-                enemy.ReduceSpeed(0);
+                enemy.ReduceBaseSpeed(0);
             }
             _nextTickTime += _data.TickSpeed;
         }
@@ -172,7 +172,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
         // Slow Effect (Ice)
         else if (_data.SlowAmount != 0 && _currentEffectTime > _nextTickTime) {
             if (_nextTickTime == 0) {
-                enemy.ReduceSpeed(_data.SlowAmount);
+                enemy.ReduceBaseSpeed(_data.SlowAmount);
                 enemy.SetStatus(Status.CHILL);
             }
             _nextTickTime += _data.TickSpeed;

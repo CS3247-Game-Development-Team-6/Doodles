@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
   m_Name: 0_BallistaWater
   m_EditorClassIdentifier: 
-  towerName: Fire Ballista
+  towerName: Water Ballista
+  towerDesc: 
   range: 3
   upgradeNum: 0
   fireRate: 1
   element: {fileID: 11400000, guid: 5f2ac61151ef7e347b4a722691241670, type: 2}
   cost: 25
+  health: 130
+  healthDecayRate: 1.1
+  damageFixCost: 0
+  damageFixFactor: 0.2
+  allowedCellTypes: 00000000
   speed: 40
   explosionRadius: 1
   damage: 20

@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: 1_CannonBase
   m_EditorClassIdentifier: 
   towerName: Cannonizer
+  towerDesc: 
   range: 4
   upgradeNum: 1
   fireRate: 1
   element: {fileID: 0}
   cost: 25
+  health: 130
+  healthDecayRate: 1.1
+  damageFixCost: 0
+  damageFixFactor: 0.18
+  allowedCellTypes: 00000000
   speed: 40
   explosionRadius: 0
   damage: 36
