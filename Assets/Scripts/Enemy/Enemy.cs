@@ -223,7 +223,7 @@ public class Enemy : MonoBehaviour {
              */
             Enemy enemyScript = spawnGO.GetComponent<Enemy>();
             if (enemyScript != null) {
-                enemyScript.InitWaypoint(waypointIndex);
+                enemyScript.InitSpawnWhenDeath(this.chunkSpawner, waypointIndex);
             }
 
             /*
@@ -293,6 +293,21 @@ public class Enemy : MonoBehaviour {
         cells = currChunk.cells;
         waypoints = currChunk.GetComponent<Waypoints>();
         target = waypoints.points[0];
+        // cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
+
+        // get reference to its EnemyActiveEffectsManager
+        speedMultiplier = 1.0f;
+        enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
+    }
+
+    public void InitSpawnWhenDeath(ChunkSpawner chunkSpawner, int index) {
+        waypointIndex = index;
+
+        this.chunkSpawner = chunkSpawner;
+        Chunk currChunk = chunkSpawner.GetComponent<Chunk>();
+        cells = currChunk.cells;
+        waypoints = currChunk.GetComponent<Waypoints>();
+        target = waypoints.points[index];
         // cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
 
         // get reference to its EnemyActiveEffectsManager
@@ -385,10 +400,6 @@ public class Enemy : MonoBehaviour {
         // is inverted
         Cell cell = cells[row, col];
         return cell.isFog;
-    }
-
-    public void InitWaypoint(int index) {
-        waypointIndex = index;
     }
 
     private void GetNextWaypoint() {
