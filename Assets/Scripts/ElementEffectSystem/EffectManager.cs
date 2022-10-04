@@ -26,7 +26,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
     }
 
     public void ApplyEffect(ElementEffectInfo _data) {
-        if (enemy.GetStatus() == Status.INVUlNERABLE) {
+        if (enemy.GetStatus() == Status.INVULNERABLE) {
             return;
         }
 

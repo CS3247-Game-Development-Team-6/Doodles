@@ -17,7 +17,7 @@ public enum Status {
     /**
      * Unique status
      */
-    INVUlNERABLE, // immune to everything
+    INVULNERABLE, // immune to everything
     NONE // default
 }
 
@@ -124,7 +124,7 @@ public class Enemy : MonoBehaviour {
      * Reference: https://drive.google.com/drive/folders/1Ck3jqkF_k5snVlAlZsA441pl4-DpjStC  
      */
     public void TakeDamage(float amount, ElementInfo bulletElement) {
-        if (GetStatus() == Status.INVUlNERABLE) {
+        if (GetStatus() == Status.INVULNERABLE) {
             return;
         }
 
@@ -161,7 +161,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public void TakeDot(float amount) {
-        if (GetStatus() == Status.INVUlNERABLE) {
+        if (GetStatus() == Status.INVULNERABLE) {
             return;
         }
 
@@ -310,14 +310,14 @@ public class Enemy : MonoBehaviour {
             Die();
         }
 
-        if (isInvulnerable && GetStatus() == Status.INVUlNERABLE) {
+        if (isInvulnerable && GetStatus() == Status.INVULNERABLE) {
             if (duration <= 0f) {
                 DisableInvulnerability();
             }
             duration -= Time.deltaTime;
         }
 
-        if (isInvulnerable && GetStatus() != Status.INVUlNERABLE) {
+        if (isInvulnerable && GetStatus() != Status.INVULNERABLE) {
             if (cooldown <= 0f) {
                 EnableInvulnerability();
             }
@@ -420,7 +420,7 @@ public class Enemy : MonoBehaviour {
 
     private void EnableInvulnerability() {
         GetComponent<EffectManager>().RemoveEffect();
-        SetStatus(Status.INVUlNERABLE);
+        SetStatus(Status.INVULNERABLE);
         cooldown = enemyInfo.cooldown;
 
         // only for invulnerable enemy
