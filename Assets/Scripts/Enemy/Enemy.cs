@@ -83,7 +83,6 @@ public class Enemy : MonoBehaviour {
      */
     private bool isInFog = true;
     private Transform ballParentTransform;
-    private Canvas canvas;
     private int lastXCoord = 0;
     private int lastYCoord = 0;
     private Cell[,] cells;
@@ -281,7 +280,6 @@ public class Enemy : MonoBehaviour {
 
         model = transform.Find(MODEL_NAME).gameObject;
         animator = model.GetComponent<Animator>();
-        canvas = transform.Find(CANVAS_NAME).GetComponent<Canvas>();
         ballParentTransform = gameObject.transform;
     }
 
