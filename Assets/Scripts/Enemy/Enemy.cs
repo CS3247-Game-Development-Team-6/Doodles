@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour {
     /**
      * Spawnable after death
      */
-    private bool isSpawnable;
+    private bool spawnsOnDeath;
     private int spawnCount;
     private GameObject spawnPrefab;
 
@@ -237,7 +237,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Die() {
-        if (isSpawnable && spawnCount > 0 && spawnPrefab != null) {
+        if (spawnsOnDeath && spawnCount > 0 && spawnPrefab != null) {
             SpawnWhenDeath(spawnPrefab, transform.position,
                 -(target.position - transform.position).normalized,
                 target == waypoints.GetPoint(waypoints.Length - 1) ? // current enemy is near base, to avoid spawning mobs into the base
@@ -271,7 +271,7 @@ public class Enemy : MonoBehaviour {
         isInvulnerable = enemyInfo.isInvulnerable;
         duration = enemyInfo.duration;
         cooldown = enemyInfo.cooldown;
-        isSpawnable = enemyInfo.isSpawnable;
+        spawnsOnDeath = enemyInfo.isSpawnable;
         spawnCount = enemyInfo.spawnCount;
         spawnPrefab = enemyInfo.spawnPrefab;
         status = Status.NONE;
