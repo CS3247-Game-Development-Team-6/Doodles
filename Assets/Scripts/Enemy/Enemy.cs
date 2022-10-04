@@ -28,6 +28,8 @@ public enum Status {
 [RequireComponent(typeof(EnemyActiveEffects))]
 public class Enemy : MonoBehaviour {
     private const float EPSILON = 0.02f;
+    private const string CANVAS_NAME = "Canvas";
+    private const string SPHERE_NAME = "Sphere"; // for invulnerable enemy
 
     /**
      * basic enemy properties
@@ -278,7 +280,7 @@ public class Enemy : MonoBehaviour {
 
         model = transform.GetChild(2).gameObject;
         animator = model.GetComponent<Animator>();
-        canvas = transform.GetChild(0).GetComponent<Canvas>();
+        canvas = transform.Find(CANVAS_NAME).GetComponent<Canvas>();
         ballParentTransform = gameObject.transform;
     }
 
@@ -424,7 +426,7 @@ public class Enemy : MonoBehaviour {
         cooldown = enemyInfo.cooldown;
 
         // only for invulnerable enemy
-        transform.GetChild(4).gameObject.SetActive(true);
+        transform.Find(SPHERE_NAME).gameObject.SetActive(true);
     }
 
     private void DisableInvulnerability() {
@@ -432,7 +434,7 @@ public class Enemy : MonoBehaviour {
         duration = enemyInfo.duration;
 
         // only for invulnerable enemy
-        transform.GetChild(4).gameObject.SetActive(false);
+        transform.Find(SPHERE_NAME).gameObject.SetActive(false);
     }
 
 }
