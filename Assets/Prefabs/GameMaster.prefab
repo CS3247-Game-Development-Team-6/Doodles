@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6600273765185839074}
-  - component: {fileID: 6600273765185839069}
   - component: {fileID: 6600273765185839073}
+  - component: {fileID: 2930312957552281026}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -32,160 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6600273765185839069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6600273765185839068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dc6ba63b78af0d458b42947e4a974f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wavesCounterUI: {fileID: 0}
-  waves:
-  - enemy: {fileID: 6540121397901334477, guid: d74de364f8d1dc943ba639ce7ec66331, type: 3}
-    count: 5
-    rate: 0.5
-    enemy2: {fileID: 0}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: d74de364f8d1dc943ba639ce7ec66331, type: 3}
-    count: 12
-    rate: 0.6
-    enemy2: {fileID: 0}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: d74de364f8d1dc943ba639ce7ec66331, type: 3}
-    count: 18
-    rate: 0.7
-    enemy2: {fileID: 0}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: 300acf72d144c3145a64944ed02ec40c, type: 3}
-    count: 5
-    rate: 0.5
-    enemy2: {fileID: 0}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: 300acf72d144c3145a64944ed02ec40c, type: 3}
-    count: 10
-    rate: 0.6
-    enemy2: {fileID: 0}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: 300acf72d144c3145a64944ed02ec40c, type: 3}
-    count: 15
-    rate: 0.7
-    enemy2: {fileID: 0}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
-    count: 5
-    rate: 0.4
-    enemy2: {fileID: 0}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
-    count: 15
-    rate: 0.6
-    enemy2: {fileID: 0}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
-    count: 25
-    rate: 0.7
-    enemy2: {fileID: 0}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: d74de364f8d1dc943ba639ce7ec66331, type: 3}
-    count: 20
-    rate: 1
-    enemy2: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
-    count2: 10
-    rate2: 0.8
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: a9f462e45d43ada4690904da9c284f9e, type: 3}
-    count: 1
-    rate: 1
-    enemy2: {fileID: 0}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: 300acf72d144c3145a64944ed02ec40c, type: 3}
-    count: 10
-    rate: 0.8
-    enemy2: {fileID: 0}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
-    count: 100
-    rate: 2
-    enemy2: {fileID: 0}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: 300acf72d144c3145a64944ed02ec40c, type: 3}
-    count: 40
-    rate: 1.2
-    enemy2: {fileID: 6540121397901334477, guid: d74de364f8d1dc943ba639ce7ec66331, type: 3}
-    count2: 30
-    rate2: 1.5
-    enemy3: {fileID: 0}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: a9f462e45d43ada4690904da9c284f9e, type: 3}
-    count: 1
-    rate: 1
-    enemy2: {fileID: 6540121397901334477, guid: d74de364f8d1dc943ba639ce7ec66331, type: 3}
-    count2: 15
-    rate2: 0.9
-    enemy3: {fileID: 6540121397901334477, guid: 04053ef4c86eb00409bdc8c3874c5c63, type: 3}
-    count3: 20
-    rate3: 1
-  timeBetweenWaves: 8
-  waveCountdownIndicator: {fileID: 0}
-  enemiesLeftText: {fileID: 0}
-  levelInfo: {fileID: 11400000, guid: 198253c90dfd4c54e902e0dc8d46c03e, type: 2}
-  skipWaveCountdownButton: {fileID: 0}
 --- !u!114 &6600273765185839073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,3 +47,20 @@ MonoBehaviour:
   gameOverUI: {fileID: 0}
   winUI: {fileID: 0}
   nextSceneName: 
+--- !u!114 &2930312957552281026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600273765185839068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689b80af745fde6459e3711c4ce4d245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  insufficientInkEffect: {fileID: 8998585739324249827, guid: 1ae7d1e1c28d77444a3ba9f1bdf97d38, type: 3}
+  playerObj: {fileID: 0}
+  healthBarPrefab: {fileID: 9038127182088754521, guid: 23da22333cba243218fac5b7096ef31b, type: 3}
+  smokeEffectPrefab: {fileID: 100000, guid: 785f7f2ed47b94fbfa109bc55f7d1c07, type: 3}
+  soundEffectPrefab: {fileID: 1983200342343509110, guid: 75b77af14971248619980a0e1c41f97a, type: 3}
