@@ -663,6 +663,7 @@ GameObject:
   - component: {fileID: 986762576498338959}
   - component: {fileID: 904252060}
   - component: {fileID: 3927220003791629200}
+  - component: {fileID: 8078559375595622629}
   m_Layer: 0
   m_Name: Demon
   m_TagString: Enemy
@@ -763,6 +764,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyInfo: {fileID: 11400000, guid: 87822a7c5a1c4094dae76cdb8709f36d, type: 2}
+  waypointIndex: 0
+  speedMultiplier: 0
   healthBar: {fileID: 1929750958}
   healthText: {fileID: 7627375074670015471}
   damageText: {fileID: 2675300404428900392, guid: 934f2897b165c6b47b9aa966c0c7d01c, type: 3}
@@ -800,6 +803,18 @@ MonoBehaviour:
   _scaldedData: {fileID: 11400000, guid: 8982c217c37259142b4427dd206e7b0f, type: 2}
   _frozenData: {fileID: 11400000, guid: 528997d82f1193647a49ef9489883657, type: 2}
   _weakenedData: {fileID: 11400000, guid: 3736ed5fb54fd314eb72776659995569, type: 2}
+--- !u!114 &8078559375595622629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6540121397901334477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c0405fecb06d5408f42208e873bfd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8790860002384552885
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,7 +914,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d254bfd46e75e8749abbe8631b7c2c5f, type: 2}
     - target: {fileID: 919132149155446097, guid: dae1b2a630c2103408eac1778b720b71, type: 3}
       propertyPath: m_Name
-      value: GiantDummy
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dae1b2a630c2103408eac1778b720b71, type: 3}
       propertyPath: m_Controller

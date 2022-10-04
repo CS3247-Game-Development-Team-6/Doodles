@@ -29,6 +29,7 @@ public enum Status {
 public class Enemy : MonoBehaviour {
     private const float EPSILON = 0.02f;
     private const string CANVAS_NAME = "Canvas";
+    private const string MODEL_NAME = "Model";
     private const string SPHERE_NAME = "Sphere"; // for invulnerable enemy
 
     /**
@@ -278,7 +279,7 @@ public class Enemy : MonoBehaviour {
         spawnPrefab = enemyInfo.spawnPrefab;
         status = Status.NONE;
 
-        model = transform.GetChild(2).gameObject;
+        model = transform.Find(MODEL_NAME).gameObject;
         animator = model.GetComponent<Animator>();
         canvas = transform.Find(CANVAS_NAME).GetComponent<Canvas>();
         ballParentTransform = gameObject.transform;
@@ -401,11 +402,11 @@ public class Enemy : MonoBehaviour {
     private void SetEnemyVisibility(bool isVisible) {
         foreach (Transform childrenTransform in ballParentTransform) {
             // disable canvas
-            if (childrenTransform.name == canvas.name)
+            if (childrenTransform.name == CANVAS_NAME)
                 childrenTransform.gameObject.SetActive(isVisible);
 
             // disable every renderers
-            if (childrenTransform.name == model.name) {
+            if (childrenTransform.name == MODEL_NAME || childrenTransform.name == SPHERE_NAME) {
                 SkinnedMeshRenderer[] renderers = model.GetComponentsInChildren<SkinnedMeshRenderer>();
                 foreach (SkinnedMeshRenderer r in renderers) {
                     r.enabled = isVisible;
