@@ -45,6 +45,21 @@ public class Enemy : MonoBehaviour {
     private float damageMultiplier;
 
     /**
+     * Enemy Status
+     */
+    private Status status;
+
+    public void SetStatus(Status _status) {
+        status = _status;
+    }
+    public Status GetStatus() {
+        return status;
+    }
+    public void RemoveStatus() {
+        status = Status.NONE;
+    }
+
+    /**
      * Invulnerability
      */
     private bool isInvulnerable;
@@ -59,21 +74,6 @@ public class Enemy : MonoBehaviour {
     private GameObject spawnPrefab;
 
     [SerializeField] private EnemyInfo enemyInfo;
-
-    private Status status;
-
-    public void SetStatus(Status _status) {
-        status = _status;
-    }
-    public Status GetStatus() {
-        return status;
-    }
-    public void RemoveStatus() {
-        status = Status.NONE;
-    }
-
-    public Waypoints waypoints { get; set; }
-    public ChunkSpawner chunkSpawner { get; set; }
 
     /**
      * Visibility
@@ -97,23 +97,24 @@ public class Enemy : MonoBehaviour {
     private Transform target;
     public int waypointIndex = 0; // make public for a quick fix so that enemy dont attack base without reaching
 
-    private InkManager inkManager;
-    private Map map;
-
-    [Header("Unity Stuff")]
-    public Image healthBar;
-    public TMP_Text healthText;
-    public GameObject damageText;
-
     /**
      * EnemyActiveEffectsManager
      */
     public float speedMultiplier;
     private EnemyActiveEffects enemyActiveEffectsManager;
 
+    public Waypoints waypoints { get; set; }
+    public ChunkSpawner chunkSpawner { get; set; }
+
+    private InkManager inkManager;
+
+    [Header("Unity Stuff")]
+    public Image healthBar;
+    public TMP_Text healthText;
+    public GameObject damageText;
+
     private void Awake() {
         inkManager = InkManager.instance;
-        map = FindObjectOfType<Map>();
         enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
     }
 
@@ -279,12 +280,6 @@ public class Enemy : MonoBehaviour {
         animator = model.GetComponent<Animator>();
         canvas = transform.GetChild(0).GetComponent<Canvas>();
         ballParentTransform = gameObject.transform;
-
-        // first target, which is first waypoint in Waypoints
-
-        // get a reference to all cells for checking if a tile is fogged or not
-        // cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
-        // Chunk currChunk = FindObjectOfType<Map>().currentChunk;
     }
 
     public void Init(ChunkSpawner chunkSpawner) {
@@ -293,24 +288,17 @@ public class Enemy : MonoBehaviour {
         cells = currChunk.cells;
         waypoints = currChunk.GetComponent<Waypoints>();
         target = waypoints.points[0];
-        // cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
-
-        // get reference to its EnemyActiveEffectsManager
         speedMultiplier = 1.0f;
         enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
     }
 
     public void InitSpawnWhenDeath(ChunkSpawner chunkSpawner, int index) {
-        waypointIndex = index;
-
         this.chunkSpawner = chunkSpawner;
         Chunk currChunk = chunkSpawner.GetComponent<Chunk>();
         cells = currChunk.cells;
         waypoints = currChunk.GetComponent<Waypoints>();
+        waypointIndex = index;
         target = waypoints.points[index];
-        // cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
-
-        // get reference to its EnemyActiveEffectsManager
         speedMultiplier = 1.0f;
         enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
     }
@@ -372,13 +360,6 @@ public class Enemy : MonoBehaviour {
         if (Vector3.Distance(currentPosition, targetPosition) <= EPSILON) {
             GetNextWaypoint();
         }
-
-
-        /**
-         * visibility in fog
-         */
-        /*        int currentXCoord = Convert.ToInt32(Math.Floor(currentPosition.x));
-                int currentYCoord = Convert.ToInt32(Math.Floor(currentPosition.z));*/
 
         // Col on x axis
         int col = Convert.ToInt32(Math.Floor(currentPosition.x));
