@@ -12,8 +12,8 @@ public class SpellUI : MonoBehaviour
     [SerializeField] private TMP_Text textCost;
     [SerializeField] private TMP_Text notification;
 
-    [SerializeField] private GlobalEffect spell;
-    public bool isCooldown = false;
+    [SerializeField] private Spell spell;
+    private bool isCooldown = false;
     public float cooldownTime = 10.0f;
     private float cooldownTimer = 0.0f;
 
@@ -44,9 +44,10 @@ public class SpellUI : MonoBehaviour
     }
 
     private IEnumerator sendNotification(string text, int time) {
+        notification.gameObject.SetActive(true);
         notification.text = text;
-        yield return new WaitForSeconds(1);
-        notification.text = "";
+        yield return new WaitForSeconds(time);
+        notification.gameObject.SetActive(false);
     }
 
     public void UseSpell() {
@@ -61,8 +62,7 @@ public class SpellUI : MonoBehaviour
             imageCooldown.fillAmount = 1.0f;
             cooldownTimer = cooldownTime;
             InkManager.instance.ChangeInkAmount(-spell.cost);
-            SpellManager.HandleEffect(spell);
-            spell.Activate();
+            StartCoroutine(SpellHandler.instance.HandleEffect(spell));
         }
     }
 }

@@ -1770,6 +1770,18 @@ MonoBehaviour:
   healthBarPrefab: {fileID: 9038127182088754521, guid: 23da22333cba243218fac5b7096ef31b, type: 3}
   smokeEffectPrefab: {fileID: 100000, guid: 785f7f2ed47b94fbfa109bc55f7d1c07, type: 3}
   soundEffectPrefab: {fileID: 1983200342343509110, guid: 75b77af14971248619980a0e1c41f97a, type: 3}
+--- !u!114 &1306252973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306252971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e35b5a2c055b5646bc5410da1f82d84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1306252978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2305,6 +2317,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -183.97
       objectReference: {fileID: 0}
+    - target: {fileID: 2623709318659717481, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2623709318659717481, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2623709318659717481, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2623709318659717481, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2947530210773271024, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: raycastOccluder
       value: 
@@ -2413,6 +2441,22 @@ PrefabInstance:
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 7828996251632798774}
+    - target: {fileID: 5976217409757140208, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976217409757140208, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976217409757140208, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5976217409757140208, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6006458283406352016, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
       propertyPath: m_IsActive
       value: 0

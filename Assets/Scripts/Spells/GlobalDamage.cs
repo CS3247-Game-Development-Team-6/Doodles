@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class GlobalDamage : GlobalEffect
+public class GlobalDamage : Spell
 {
   
     private float origMultiplier;

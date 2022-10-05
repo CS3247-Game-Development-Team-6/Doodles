@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class DamageAugmentation : GlobalEffect
+public class DamageAugmentation : Spell
 {
   
 

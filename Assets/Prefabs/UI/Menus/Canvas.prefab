@@ -1668,7 +1668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5587049748400506391
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2763,8 +2763,7 @@ MonoBehaviour:
   button: {fileID: 2616947663012989400}
   textCost: {fileID: 5282002679136287792}
   notification: {fileID: 877376161070929620}
-  spell: {fileID: 4457657583381404896}
-  isCooldown: 0
+  spell: {fileID: 348242548234643733}
   cooldownTime: 10
 --- !u!1 &3976637554737408869
 GameObject:
@@ -3510,9 +3509,9 @@ GameObject:
   - component: {fileID: 2826989555835590674}
   - component: {fileID: 7553533608153501767}
   - component: {fileID: 2616947663012989400}
-  - component: {fileID: 4457657583381404896}
+  - component: {fileID: 348242548234643733}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Spell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3632,7 +3631,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4457657583381404896
+--- !u!114 &348242548234643733
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3641,12 +3640,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5182921610882838126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df0b8db5a22f9904fadd588394ad50ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 90149b7cc60ef5a45813ea13e570439b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   effectName: 
-  cost: 1
-  duration: 5
+  cost: 5
+  duration: 10
+  inkMultiplierIncrease: 3
 --- !u!1 &5198744563146489933
 GameObject:
   m_ObjectHideFlags: 0
@@ -3744,7 +3744,6 @@ MonoBehaviour:
   textCost: {fileID: 8335391644284742262}
   notification: {fileID: 877376161070929620}
   spell: {fileID: 5322119681920251826}
-  isCooldown: 0
   cooldownTime: 10
 --- !u!1 &5350042695278696018
 GameObject:
@@ -3992,7 +3991,6 @@ MonoBehaviour:
   textCost: {fileID: 1913754997501906276}
   notification: {fileID: 877376161070929620}
   spell: {fileID: 3350776343077615478}
-  isCooldown: 0
   cooldownTime: 10
 --- !u!1 &5792811291099686553
 GameObject:
@@ -4270,7 +4268,7 @@ GameObject:
   - component: {fileID: 8871201875670856508}
   - component: {fileID: 3350776343077615478}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Spell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5908,7 +5906,7 @@ GameObject:
   - component: {fileID: 896797057940101423}
   - component: {fileID: 5322119681920251826}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Spell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6040,7 +6038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0b8db5a22f9904fadd588394ad50ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectName: 
+  effectName: DmgMult
   cost: 1
   duration: 5
 --- !u!1 &8769975041959575869

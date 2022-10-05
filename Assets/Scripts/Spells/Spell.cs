@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GlobalEffect : MonoBehaviour {
+public class Spell : MonoBehaviour {
 
     [SerializeField] public string effectName;
 
