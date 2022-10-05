@@ -41,5 +41,6 @@ public class EnemyInfo : ScriptableObject {
     public bool isSpawnable;
     public int spawnCount;
     public GameObject spawnPrefab;
+    public GameObject spawnEffect;
 
 }

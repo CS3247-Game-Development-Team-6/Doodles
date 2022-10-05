@@ -75,6 +75,7 @@ public class Enemy : MonoBehaviour {
     private bool spawnsOnDeath;
     private int spawnCount;
     private GameObject spawnPrefab;
+    private GameObject spawnEffect;
 
     [SerializeField] private EnemyInfo enemyInfo;
 
@@ -221,6 +222,11 @@ public class Enemy : MonoBehaviour {
             );
             GameObject spawnGO = (GameObject)Instantiate(_prefab, _spawnPosition + spawnOffset, Quaternion.identity);
 
+            if (spawnEffect) {
+                // to spawn the effect following game object
+                Instantiate(spawnEffect, spawnGO.transform.position, Quaternion.identity, spawnGO.transform);
+            }
+
             /*
              * set movement
              */
@@ -276,6 +282,7 @@ public class Enemy : MonoBehaviour {
         spawnsOnDeath = enemyInfo.isSpawnable;
         spawnCount = enemyInfo.spawnCount;
         spawnPrefab = enemyInfo.spawnPrefab;
+        spawnEffect = enemyInfo.spawnEffect;
         status = Status.NONE;
 
         model = transform.Find(MODEL_NAME).gameObject;
