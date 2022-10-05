@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
-  m_Name: 0_LandmineBase
+  m_Name: 0_LandmineFire
   m_EditorClassIdentifier: 
-  towerName: Landmine
+  towerName: Fire Landmine
   towerDesc: 
-  range: 7
+  range: 0
   upgradeNum: 0
   fireRate: 0
   element: {fileID: 0}
-  cost: 10
-  health: 1
-  healthDecayRate: 1
+  cost: 0
+  health: 0
+  healthDecayRate: 0
   damageFixCost: 0
   damageFixFactor: 0
-  allowedCellTypes: 0100000002000000
-  speed: 1
+  allowedCellTypes: 
+  speed: 0
   explosionRadius: 0
   damage: 0
   penetratesEnemy: 0
@@ -32,8 +32,4 @@ MonoBehaviour:
   towerPrefab: {fileID: 0}
   bulletPrefab: {fileID: 0}
   nextUpgrade: {fileID: 0}
-  nextElements:
-  - element: 0
-    tower: {fileID: 0}
-  - element: 0
-    tower: {fileID: 0}
+  nextElements: []
