@@ -15,15 +15,15 @@ MonoBehaviour:
   towerName: Gel Explosion
   towerDesc: 
   range: 3
-  upgradeNum: 0
+  upgradeNum: 1
   fireRate: 1
   element: {fileID: 0}
   cost: 35
-  health: 150
-  healthDecayRate: 2
+  health: 180
+  healthDecayRate: 1.7
   damageFixCost: 0
-  damageFixFactor: 2
-  allowedCellTypes: 
+  damageFixFactor: 0.2
+  allowedCellTypes: 00000000
   speed: 30
   explosionRadius: 1.2
   damage: 24

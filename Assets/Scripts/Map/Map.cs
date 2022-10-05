@@ -48,6 +48,8 @@ public class Map : MonoBehaviour {
     private Transform player;
     private WaveUI waveUI;
     private OnScreenTutorialUI tutorialUI;
+    private int chunkWavesCleared;
+    public int WavesCleared => chunkWavesCleared + (currentChunk == null ? 0 : currentChunk.GetComponent<ChunkSpawner>().WavesStarted - 1);
 
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
@@ -55,6 +57,7 @@ public class Map : MonoBehaviour {
         tutorialUI = FindObjectOfType<OnScreenTutorialUI>();
         numChunks = mapInfo.levelInfo.Length;
         chunkSize = mapInfo.gridSize;
+        chunkWavesCleared = 0;
         // choose one edge for start and the other edge for end
         for (int chunk = 0; chunk < numChunks; chunk++) {
             GameObject newChunk = new GameObject("Chunk" + chunkList.Count);
@@ -92,7 +95,7 @@ public class Map : MonoBehaviour {
     }
 
     private void DeactivateChunk(Chunk chunk) {
-        if (chunk.isVisible) {
+        if (chunk.IsVisible) {
             chunk.SetVisible(false);
             currentChunk.GetComponent<Waypoints>().DeactivateLocalWaypoints();
         }
@@ -131,6 +134,8 @@ public class Map : MonoBehaviour {
             ChunkSpawner.WinGame();
             return;
         }
+        ChunkSpawner chunkSpawner = currentChunk.GetComponent<ChunkSpawner>();
+        chunkWavesCleared += chunkSpawner.WavesStarted;
         currentChunk.nextChunk.SetVisible(true);
         currentChunk.OpenBarrier();
         tutorialUI.Reset();

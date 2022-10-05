@@ -7,9 +7,11 @@ public class GameStateManager : MonoBehaviour {
     public string nextSceneName;
 
     private static bool isGameEnded;
+    private Map map;
 
     void Start() {
         isGameEnded = false;
+        map = FindObjectOfType<Map>();
 
         GameObject[] ddols = GetDontDestroyOnLoadObjects();
         for (int i = 0; i < ddols.Length; i++) {
@@ -21,7 +23,7 @@ public class GameStateManager : MonoBehaviour {
         if (isGameEnded)
             return;
 
-        if (Base.getHp() <= 0) {
+        if (map && map.currentChunk && map.currentChunk.Base && map.currentChunk.Base.hp <= 0) {
             EndGame();
         }
     }
