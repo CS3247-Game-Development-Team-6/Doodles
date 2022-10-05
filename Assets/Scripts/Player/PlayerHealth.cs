@@ -7,8 +7,8 @@ public class PlayerHealth : MonoBehaviour {
     /*
     Requires player game object to have a "HealthCanvas/HealthBar" game object containing a health bar Image.
     */
-    private float healthAmount;
-    private float maxHealth = 100;
+    public float healthAmount;
+    public float maxHealth = 100;
 
     private Image healthBar;
     private GameStateManager gameStateManager;

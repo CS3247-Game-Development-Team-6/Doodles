@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,6 +18,34 @@ public class GameStateManager : MonoBehaviour {
         for (int i = 0; i < ddols.Length; i++) {
             ddols[i].transform.Find("LoadingBar").gameObject.SetActive(false);
         }
+
+        Load();
+    }
+
+    public void Save() {
+        PlayerHealth player = FindObjectOfType<PlayerHealth>();
+        GameData data = new GameData {
+            health = player.healthAmount,
+            maxHealth = player.maxHealth,
+            playerPos = player.transform.position
+        };
+
+        string json = JsonUtility.ToJson(data);
+        string path = Application.dataPath + "/player.json";
+        File.WriteAllText(path, json);
+        Debug.Log($"Saving: {json} at {path}");
+    }
+
+    public void Load() {
+        string path = Application.dataPath + "/player.json";
+        if (!File.Exists(path)) {
+            Debug.LogWarning("No save found");
+            return;
+        }
+
+        string json = File.ReadAllText(path);
+        GameData data = JsonUtility.FromJson<GameData>(json);
+        Debug.Log("player pos: " + data.playerPos);
     }
 
     void Update() {
@@ -72,5 +101,12 @@ public class GameStateManager : MonoBehaviour {
             if (temp != null)
                 Object.DestroyImmediate(temp);
         }
+    }
+
+    private class GameData {
+        public float health;
+        public float maxHealth;
+        public Vector3 playerPos;
+
     }
 }
