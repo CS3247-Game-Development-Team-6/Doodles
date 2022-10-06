@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -10,11 +8,9 @@ public class SpellUI : MonoBehaviour
     [SerializeField] private TMP_Text textCooldown;
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text textCost;
-    [SerializeField] private TMP_Text notification;
 
     [SerializeField] private Spell spell;
     private bool isCooldown = false;
-    public float cooldownTime = 10.0f;
     private float cooldownTimer = 0.0f;
 
     private void Start() {
@@ -39,30 +35,22 @@ public class SpellUI : MonoBehaviour
             imageCooldown.fillAmount = 0.0f;
         } else {
             textCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
-            imageCooldown.fillAmount = cooldownTimer / cooldownTime;
+            imageCooldown.fillAmount = cooldownTimer / spell.cooldownTime;
         }
     }
 
-    private IEnumerator sendNotification(string text, int time) {
-        notification.gameObject.SetActive(true);
-        notification.text = text;
-        yield return new WaitForSeconds(time);
-        notification.gameObject.SetActive(false);
-    }
+    public void ResetCooldownTimer() {
+        isCooldown = true;
+        textCooldown.gameObject.SetActive(true);
+        imageCooldown.gameObject.SetActive(true);
+        imageCooldown.fillAmount = 1.0f;
+        cooldownTimer = spell.cooldownTime;
+    } 
 
     public void UseSpell() {
-        if (isCooldown) {
-            StartCoroutine(sendNotification("Spell is in cooldown", 1));
-        } else if (!InkManager.instance.hasEnoughInk(spell.cost)) {
-            StartCoroutine(sendNotification("Not enough ink", 1));
-        } else {
-            isCooldown = true;
-            textCooldown.gameObject.SetActive(true);
-            imageCooldown.gameObject.SetActive(true);
-            imageCooldown.fillAmount = 1.0f;
-            cooldownTimer = cooldownTime;
-            InkManager.instance.ChangeInkAmount(-spell.cost);
-            StartCoroutine(SpellHandler.instance.HandleEffect(spell));
+        if (!isCooldown) {
+            StartCoroutine(spell.Activate(this));
         }
     }
+
 }
