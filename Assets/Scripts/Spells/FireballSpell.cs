@@ -41,7 +41,7 @@ public class FireballSpell : Spell {
             targetImage.transform.position = player.position + hitPosDir * distance + OFFSET;
 
             // LEFT CLICK
-            if (Input.GetMouseButtonDown(0) && hit.collider.gameObject.layer != LayerMask.NameToLayer("UI")) {
+            if (Input.GetMouseButtonDown(0)) {
                 ChargeCost();
                 Attack();
                 ui.ResetCooldownTimer();
