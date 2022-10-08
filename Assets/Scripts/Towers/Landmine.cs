@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Landmine : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
+public class Landmine : Tower {
+    private Transform rotationBase;
+    private Transform firePoint;
+
+    public override void SetTowerInfo(TowerInfo towerInfo) {
+        base.SetTowerInfo(towerInfo);
+        rotationBase = transform.Find(Tower.ROTATION_BASE_NAME);
+        firePoint = rotationBase.Find(Tower.FIRE_POINT_NAME);
+    }
+
+    public void Start() {
         
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    public override void Update() {
         
     }
 }
