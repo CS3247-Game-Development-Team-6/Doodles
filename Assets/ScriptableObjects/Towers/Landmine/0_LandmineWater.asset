@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Water Landmine
   towerDesc: 
-  range: 0
+  range: 7
   upgradeNum: 0
   fireRate: 0
-  element: {fileID: 0}
-  cost: 0
-  health: 0
-  healthDecayRate: 0
+  element: {fileID: 11400000, guid: 5f2ac61151ef7e347b4a722691241670, type: 2}
+  cost: 5
+  health: 1
+  healthDecayRate: 1
   damageFixCost: 0
   damageFixFactor: 0
-  allowedCellTypes: 
+  allowedCellTypes: 0100000002000000
   speed: 0
   explosionRadius: 0
-  damage: 0
+  damage: 250
   penetratesEnemy: 0
-  impactPrefab: {fileID: 0}
-  towerPrefab: {fileID: 0}
-  bulletPrefab: {fileID: 0}
+  impactPrefab: {fileID: 4794043405585894037, guid: a22350dbd83d54b0990687ec8d58c950, type: 3}
+  towerPrefab: {fileID: 4210837861978277857, guid: f29dd277ea3e44bbfa7510bdf3167af6, type: 3}
+  bulletPrefab: {fileID: 1315704262782356680, guid: 5b29dc91b57c64e5381832ad155392bb, type: 3}
   nextUpgrade: {fileID: 0}
   nextElements: []
