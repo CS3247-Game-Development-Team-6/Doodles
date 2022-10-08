@@ -8,7 +8,7 @@ public class SpellUI : MonoBehaviour
     [SerializeField] private TMP_Text textCooldown;
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text textCost;
-
+    [SerializeField] private int healthNeed=0;
     [SerializeField] private Spell spell;
     private bool isCooldown = false;
     private float cooldownTimer = 0.0f;
@@ -48,6 +48,15 @@ public class SpellUI : MonoBehaviour
     } 
 
     public void UseSpell() {
+        if (healthNeed>0)
+        {
+            Transform player = FindObjectOfType<PlayerMovement>().transform;
+            PlayerHealth health = player.GetComponent<PlayerHealth>();
+            if (health.GetHealth()<=healthNeed)
+            {
+                return;
+            }
+        }
         if (!isCooldown) {
             StartCoroutine(spell.Activate(this));
         }

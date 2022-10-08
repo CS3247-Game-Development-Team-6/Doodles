@@ -132,7 +132,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
         _currentEffectTime += Time.deltaTime;
 
         // Remove status effect if lifetime is reached
-        if (_currentEffectTime >= _data.Lifetime) RemoveEffect();
+        if (_currentEffectTime >= _data.Lifetime*SpellManager.instance.GetElementEffectLifetimeFactor()) RemoveEffect();
 
         // Enemy is currently not affected by any status effects
         if (_data == null) return;
@@ -149,26 +149,26 @@ public class EffectManager : MonoBehaviour, IEffectable {
         // BurstDOT Effect (Fire + Water)
         else if (enemy.getEffectStatus() == EffectStatus.SCALD && _currentEffectTime > _nextTickTime) {
             if (_nextTickTime == 0) {
-                enemy.TakeDot(_data.DOTAmount * _data.TickSpeed * _data.Lifetime);
+                enemy.TakeDot(_data.DOTAmount * _data.TickSpeed * _data.Lifetime*(SpellManager.instance.GetElementAugmentationFactor()));
             }
             _nextTickTime += _data.TickSpeed;
         }
         // DefDecre Effect (Ice + Fire)
         else if (enemy.getEffectStatus() == EffectStatus.WEAKEN && _currentEffectTime > _nextTickTime) {
             if (_nextTickTime == 0) {
-                enemy.ReduceDefense(_data.DefDecreAmount);
+                enemy.ReduceDefense((int)(_data.DefDecreAmount*(SpellManager.instance.GetElementAugmentationFactor())));
             }
             _nextTickTime += _data.TickSpeed;
         }
         // DOT Effect (Fire)
         else if (_data.DOTAmount != 0 && _currentEffectTime > _nextTickTime) {
             _nextTickTime += _data.TickSpeed;
-            enemy.TakeDot(_data.DOTAmount);
+            enemy.TakeDot(_data.DOTAmount* SpellManager.instance.GetElementAugmentationFactor());
         }
         // Slow Effect (Ice)
         else if (_data.SlowAmount != 0 && _currentEffectTime > _nextTickTime) {
             if (_nextTickTime == 0) {
-                enemy.ReduceBaseSpeed(_data.SlowAmount);
+                enemy.ReduceBaseSpeed(_data.SlowAmount* SpellManager.instance.GetElementAugmentationFactor());
                 enemy.setEffectStatus(EffectStatus.CHILL);
             }
             _nextTickTime += _data.TickSpeed;
@@ -176,7 +176,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
         // Attack Decrease Effect (Water)
         else if (_data.AtkDecreAmount != 0 && _currentEffectTime > _nextTickTime) {
             if (_nextTickTime == 0) {
-                enemy.ReduceAttack(_data.AtkDecreAmount);
+                enemy.ReduceAttack((int)(_data.AtkDecreAmount* SpellManager.instance.GetElementAugmentationFactor()));
                 enemy.setEffectStatus(EffectStatus.DRENCH);
             }
             _nextTickTime += _data.TickSpeed;

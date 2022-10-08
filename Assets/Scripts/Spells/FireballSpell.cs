@@ -22,6 +22,7 @@ public class FireballSpell : Spell {
 
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
+     
     }
 
     private void Update() {

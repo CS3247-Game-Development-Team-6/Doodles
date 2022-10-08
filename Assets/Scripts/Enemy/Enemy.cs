@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour {
     private float damageMultiplier;
     private float inkGained;
     private GameObject deathEffect;
+    private float damageAugmentationFactor = 1.0f;
 
     [SerializeField] private EnemyInfo enemyInfo;
 
@@ -120,6 +121,7 @@ public class Enemy : MonoBehaviour {
      * Take account of enemy defense when reducing health
      */
     private void ReduceHealth(float amount) {
+        amount = amount * damageAugmentationFactor;
         if (defense < amount) {
             float temp = amount - defense;
             health -= temp;
@@ -141,7 +143,14 @@ public class Enemy : MonoBehaviour {
         DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
         indicator.SetDamageTextFromFloat(amount);
     }
-
+    public float GetDamamgeMultiplier()
+    {
+        return damageAugmentationFactor;
+    }
+    public void SetDamamgeMultiplier(float multiplyAmount)
+    {
+        damageAugmentationFactor = multiplyAmount;
+    }
     public void ApplyEffect(IEnemyEffect effect) {
         StartCoroutine(enemyActiveEffectsManager.HandleEffect(effect));
     }
