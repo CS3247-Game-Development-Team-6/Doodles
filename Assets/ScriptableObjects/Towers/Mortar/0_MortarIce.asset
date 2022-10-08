@@ -10,25 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
-  m_Name: 0_MortarBase
+  m_Name: 0_MortarIce
   m_EditorClassIdentifier: 
-  towerName: 0_MortarBase
-  towerDesc: 'Cost: $75
-
-    DMG: 100
-
-    Range: 3-8
-
-    Explode Radius: 2
-
-    Upgrade:
-    $25, +20% DMG and Explode Radius
-
-    Shots explode on impact, large AOE damage.'
+  towerName: 0_MortarIce
+  towerDesc: 
   range: 8
   upgradeNum: 0
   fireRate: 0.25
-  element: {fileID: 0}
+  element: {fileID: 11400000, guid: 2a9f0209ebf96cc4f8a2c63413522b7e, type: 2}
   cost: 75
   health: 200
   healthDecayRate: 1.8
@@ -42,11 +31,5 @@ MonoBehaviour:
   impactPrefab: {fileID: 7270330396955014377, guid: 5a87950d3447a57408da16911c4acb8b, type: 3}
   towerPrefab: {fileID: 2689636279851204399, guid: 81e5af41165768542bd55aa5fe7998ef, type: 3}
   bulletPrefab: {fileID: 5149562609060439765, guid: eb6d43d03636f12408b09dd69d35301a, type: 3}
-  nextUpgrade: {fileID: 11400000, guid: 2c9114d3e2fc6ac4387a3f835edc5c2b, type: 2}
-  nextElements:
-  - element: 0
-    tower: {fileID: 11400000, guid: 4f31768d99ec3aa47bd80cf7f13e045e, type: 2}
-  - element: 1
-    tower: {fileID: 11400000, guid: 54cd7e126fe65e742b4fa3f5eee33833, type: 2}
-  - element: 2
-    tower: {fileID: 11400000, guid: b4b8c73c25bdd91429175524e71bc2b2, type: 2}
+  nextUpgrade: {fileID: 11400000, guid: aa173a66ead94bb44a6357d323c15da2, type: 2}
+  nextElements: []
