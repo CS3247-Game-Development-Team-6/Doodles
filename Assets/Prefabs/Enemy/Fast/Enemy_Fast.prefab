@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 904252060}
   - component: {fileID: 3927220003791629200}
   - component: {fileID: 7694541954479672213}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy_Fast
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -611,6 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyInfo: {fileID: 11400000, guid: 40bb94349b0be824793e1b61c2d89294, type: 2}
+  waypointIndex: 0
   healthBar: {fileID: 2344494249134577957}
   healthText: {fileID: 2656935879816995319}
   damageText: {fileID: 2675300404428900392, guid: 934f2897b165c6b47b9aa966c0c7d01c, type: 3}

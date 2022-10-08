@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 904252060}
   - component: {fileID: 7208389763373003395}
   - component: {fileID: 9077097587882085728}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FireRangeSpider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -663,6 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyInfo: {fileID: 11400000, guid: b069fbd14cc699949b9e4c35458fc153, type: 2}
+  waypointIndex: 0
   healthBar: {fileID: 1929750958}
   healthText: {fileID: 4879313988388672468}
   damageText: {fileID: 2675300404428900392, guid: 934f2897b165c6b47b9aa966c0c7d01c, type: 3}
@@ -901,14 +902,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e95121065afa01645bc389b41929b478, type: 3}
---- !u!4 &4248262772745568908 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e95121065afa01645bc389b41929b478, type: 3}
-  m_PrefabInstance: {fileID: 4431090162855404903}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3584597947321702454 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e95121065afa01645bc389b41929b478, type: 3}
+  m_PrefabInstance: {fileID: 4431090162855404903}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4248262772745568908 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e95121065afa01645bc389b41929b478, type: 3}
   m_PrefabInstance: {fileID: 4431090162855404903}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &377461289496535759
