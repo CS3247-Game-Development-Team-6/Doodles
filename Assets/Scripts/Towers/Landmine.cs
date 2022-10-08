@@ -3,10 +3,8 @@ using UnityEngine;
 public class Landmine : Tower {
     private Collider[] enemyInRange;
     private const bool PENETRATE_TARGET = false;
-    private const int ENEMY_LAYER = 6;
     private Transform rotationBase;
     private Transform firePoint;
-
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
@@ -16,11 +14,10 @@ public class Landmine : Tower {
 
     public void Start() {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
-        enemyInRange = Physics.OverlapSphere(transform.position, range, ENEMY_LAYER);
     }
 
     public void UpdateTarget() {
-        enemyInRange = Physics.OverlapSphere(transform.position, range, ENEMY_LAYER);
+        enemyInRange = Physics.OverlapSphere(transform.position, range);
     }
 
     public override void Shoot()
@@ -28,7 +25,6 @@ public class Landmine : Tower {
         base.Shoot();
         foreach (var enemy in enemyInRange)
         {
-            print(enemy.name);
             if (enemy.gameObject.tag == ENEMY_TAG) {
                 GameObject bulletObj = (GameObject) Instantiate (
                     bulletPrefab, 
@@ -49,22 +45,25 @@ public class Landmine : Tower {
     }
 
     private float calculateDamage(float distance) {
-        float damage = Mathf.Cos((1/(range/3) * distance)) + 1; 
-        return damage;
+        float cosDamage = Mathf.Cos((1/(range/3) * distance)) + 1; 
+        return towerInfo.damage * cosDamage;
     }
 
     // Update is called once per frame
     public override void Update() {
-        base.Update();
-
-        if (health <= 0) return;
-        if (enemyInRange.Length == 0) return;
-
-        // TODO: Create trigger for enemy when stepped on landmine
+        Collider[] enemyTrigger = Physics.OverlapSphere(firePoint.position, 0.1f);
+        foreach (var enemy in enemyTrigger)
+        {
+            if (enemy.gameObject.tag == ENEMY_TAG) {
+                Shoot();
+            }
+        }
     }
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 3);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(firePoint.position, 0.1f);
     }
 }
