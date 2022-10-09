@@ -5,12 +5,17 @@ using UnityEngine;
 public class MortarBullet : Bullet {
 
     private Vector3 startPosition;
+    private Vector3 endPosition;
     private float parabolaHeight = 5f;
-    private float shotDuration = 2f;
+    private float shotDuration = 2f; // duration the shot is in the air in seconds
     private float time = 0f;
 
     void Start() {
         startPosition = this.transform.position;
+    }
+
+    public void RegisterTargetPosition(Vector3 targetPosition) { // used to register a static position; no homing
+        endPosition = targetPosition;
     }
 
     // Update is called once per frame
@@ -21,17 +26,19 @@ public class MortarBullet : Bullet {
             Destroy(gameObject);
             return;
         }
+        
+        // endPosition = target.position; // Constantly home in on enemy position
 
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = endPosition - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
-        if (dir.magnitude <= distanceThisFrame) {
+        if (dir.magnitude <= distanceThisFrame) { // check if reached target position
             HitTarget();
         }
 
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        transform.LookAt(target);
+        // transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        // transform.LookAt(target);
 
-        transform.position = MathParabola.Parabola(startPosition, target.position, parabolaHeight, time / shotDuration);
+        transform.position = MathParabola.Parabola(startPosition, endPosition, parabolaHeight, time / shotDuration);
     }
 }

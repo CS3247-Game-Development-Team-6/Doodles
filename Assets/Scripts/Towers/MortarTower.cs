@@ -49,11 +49,12 @@ public class MortarTower : Tower {
     public override void Shoot() {
         base.Shoot();
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
-        Bullet bullet = bulletObj.GetComponent<Bullet>();
+        MortarBullet bullet = bulletObj.GetComponent<MortarBullet>();
         bullet.SetBulletInfo(towerInfo);
         
         if (bullet != null) {
             bullet.Seek(target, PENETRATE_TARGET);
+            bullet.RegisterTargetPosition(target.position);
         }
     }
 
