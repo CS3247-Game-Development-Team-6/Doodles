@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour {
     public float speed = 70f;
     public float explosionRadius = 0f;
     public GameObject impactEffect;
-    [SerializeField] private float bulletDamage;
+    [SerializeField] private int bulletDamage;
     [SerializeField] private ElementEffectInfo _data;
     [SerializeField] private ElementInfo elementInfo;
     private bool isPassingThroughBullet;
@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour {
         return bulletDamage;
     }
 
-    public void SetBulletDamage(float damage) {
+    public void SetBulletDamage(int damage) {
         this.bulletDamage = damage;
     }
 

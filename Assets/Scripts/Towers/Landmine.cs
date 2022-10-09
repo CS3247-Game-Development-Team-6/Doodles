@@ -4,7 +4,9 @@ public class Landmine : Tower {
     
     // List that holds all the enemies in range
     private Collider[] enemyInRange;
+    private Collider[] enemyTrigger;
     private const bool PENETRATE_TARGET = false;
+    private bool isExploded = false;
     public const string VFX_NAME = "VFX";
     private Transform rotationBase;
     private Transform firePoint;
@@ -26,6 +28,7 @@ public class Landmine : Tower {
     // Find all objects in range
     public void UpdateTarget() {
         enemyInRange = Physics.OverlapSphere(transform.position, range);
+        enemyTrigger = Physics.OverlapSphere(firePoint.position, 0.1f);
     }
 
     public override void Shoot()
@@ -48,7 +51,7 @@ public class Landmine : Tower {
             }
         }
         TriggerEffect();
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.5f);
     }
 
     // Trigger visual and sound effects
@@ -61,17 +64,19 @@ public class Landmine : Tower {
     }
 
     // Calculate damage based on distance of the enemy from the origin of the landmine orb
-    private float CalculateDamage(float distance) {
-        float cosDamage = Mathf.Cos((1/(range/3) * distance)) + 1; 
-        return towerInfo.damage * cosDamage;
+    private int CalculateDamage(float distance) {
+        float cosDamage = .5f * Mathf.Cos((1/(0.4f*range) * distance)) + .5f; 
+        return Mathf.FloorToInt(towerInfo.damage * cosDamage);
     }
 
     public override void Update() {
         // Create a overlap sphere to detect enemy that touches the landmine orbs
-        Collider[] enemyTrigger = Physics.OverlapSphere(firePoint.position, 0.1f);
-        foreach (var enemy in enemyTrigger){
-            if (enemy.gameObject.tag == ENEMY_TAG) {
-                Shoot();
+        if (enemyTrigger != null && !isExploded) {
+            foreach (var enemy in enemyTrigger) {
+                if (enemy.gameObject.tag == ENEMY_TAG) {
+                    Shoot();
+                    isExploded = true;
+                }
             }
         }
     }
