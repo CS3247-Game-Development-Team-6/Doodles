@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
+  m_Name: 0_LaserIce
+  m_EditorClassIdentifier: 
+  towerName: Ice Laser
+  towerDesc: "Cost: \nDMG: \nRange: \nUpgrade: \nSingle Target\n"
+  range: 4
+  upgradeNum: 0
+  fireRate: 1
+  element: {fileID: 11400000, guid: 2a9f0209ebf96cc4f8a2c63413522b7e, type: 2}
+  cost: 50
+  health: 100
+  healthDecayRate: 1
+  damageFixCost: 0
+  damageFixFactor: 0.15
+  allowedCellTypes: 00000000
+  speed: 1
+  explosionRadius: 0
+  damage: 0
+  penetratesEnemy: 0
+  impactPrefab: {fileID: 0}
+  towerPrefab: {fileID: 3257071809379412333, guid: f107e6d5805d30e4d85d31fc822465ba, type: 3}
+  bulletPrefab: {fileID: 0}
+  nextUpgrade: {fileID: 11400000, guid: fbe7e6c9477214940a6e03d2fb9952d9, type: 2}
+  nextElements: []

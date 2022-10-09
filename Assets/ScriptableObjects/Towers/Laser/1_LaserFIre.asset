@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
+  m_Name: 1_LaserFIre
+  m_EditorClassIdentifier: 
+  towerName: Fire Laser 2
+  towerDesc: "Cost: \nDMG: \nRange: \nUpgrade: \nSingle Target\n"
+  range: 4
+  upgradeNum: 1
+  fireRate: 1
+  element: {fileID: 11400000, guid: 5503097e096315346a110e0488d9c960, type: 2}
+  cost: 50
+  health: 100
+  healthDecayRate: 1
+  damageFixCost: 0
+  damageFixFactor: 0.15
+  allowedCellTypes: 00000000
+  speed: 1
+  explosionRadius: 0
+  damage: 0
+  penetratesEnemy: 0
+  impactPrefab: {fileID: 0}
+  towerPrefab: {fileID: 3257071809379412333, guid: f6db0367f21ae05479b5c778cebe0252, type: 3}
+  bulletPrefab: {fileID: 0}
+  nextUpgrade: {fileID: 0}
+  nextElements: []
