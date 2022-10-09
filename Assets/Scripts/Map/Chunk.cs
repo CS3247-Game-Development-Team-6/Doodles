@@ -22,10 +22,12 @@ public class Chunk : MonoBehaviour {
     public bool prefabsGenerated;
     public ChunkInfoScriptableObject levelInfo { get; private set; }
     public List<Cell> waypoints { get; private set; }
-    public bool isVisible { get; private set; }
+    public bool IsVisible { get; private set; }
     private Barrier[] barriers;
     private ChunkSpawner chunkSpawner;
     public Barrier MainBarrier => barriers != null && barriers.Length == 4 ? barriers[(int)spawnDir] : null;
+    public Base Base => cells != null && ContainsCell(startPos) && cells[startPos.x, startPos.y].tile != null ? 
+        cells[startPos.x, startPos.y].tile.GetComponent<Base>() : null;
 
     private static Vector2Int RandomCellOnBorder(DIR dir, Vector2Int gridSize, bool isStart) {
         switch (dir) {
@@ -285,7 +287,7 @@ public class Chunk : MonoBehaviour {
     }
 
     public void SetVisible(bool state) {
-        isVisible = state;
+        IsVisible = state;
         for (int r = 0; r < gridSize.x; r++) {
             for (int c = 0; c < gridSize.y; c++) {
                 if (cells[r,c].fog != null) {

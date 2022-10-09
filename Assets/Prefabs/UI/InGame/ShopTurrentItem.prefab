@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 3217305879397314872}
   - component: {fileID: 3217305879397314873}
   - component: {fileID: 3217305879397314874}
-  - component: {fileID: 1179125665838084516}
   m_Layer: 5
   m_Name: ShopTurrentItem
   m_TagString: Untagged
@@ -199,7 +198,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1179125665838084516}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShopItemUI, Assembly-CSharp
         m_MethodName: SetTowerInShop
         m_Mode: 1
@@ -231,22 +230,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &1179125665838084516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3217305879397314879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b7da3e5f15c8f4692d1e6ef7479a3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 0}
-  tower: {fileID: 0}
-  selected: {fileID: 0}
-  unselected: {fileID: 0}
 --- !u!1 &3217305880091554993
 GameObject:
   m_ObjectHideFlags: 0

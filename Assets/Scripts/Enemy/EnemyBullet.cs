@@ -7,9 +7,14 @@ public class EnemyBullet : MonoBehaviour {
     private float speed;
     private int bulletDamage;
     private bool enableCameraShake;
+    private Map map;
 
     public GameObject impactEffect;
     public GameObject damageText;
+
+    private void Start() {
+        map = FindObjectOfType<Map>();
+    }
 
     public void Seek(Transform _target, float _speed, int damage, bool _enableCameraShake) {
         target = _target;
@@ -55,7 +60,10 @@ public class EnemyBullet : MonoBehaviour {
         }
 
         if (_target.CompareTag("Base")) {
-            Base.receiveDmg(bulletDamage);
+            if (_target.GetComponent<Base>() == null) {
+                Debug.LogError($"Missing Base script on {_target}");
+            }
+            _target.GetComponent<Base>().TakeDmg(bulletDamage);
         }
 
         // show damage number
