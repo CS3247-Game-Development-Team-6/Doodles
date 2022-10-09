@@ -25,17 +25,16 @@ public class Landmine : Tower {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
-    // Find all objects in range
     public void UpdateTarget() {
+        // A list of objects contained in a sphere of radius = towerInfo.range, centered at the tower's origin
         enemyInRange = Physics.OverlapSphere(transform.position, range);
+        // A list of objects contained in a sphere of radius = 0.1f, centered at the tower's orb
         enemyTrigger = Physics.OverlapSphere(firePoint.position, 0.1f);
     }
 
-    public override void Shoot()
-    {
+    public override void Shoot() {
         base.Shoot();
-        foreach (var enemy in enemyInRange)
-        {
+        foreach (var enemy in enemyInRange) {
             if (enemy.gameObject.tag == ENEMY_TAG) {
                 GameObject bulletObj = (GameObject) Instantiate (
                     bulletPrefab, 
@@ -70,7 +69,7 @@ public class Landmine : Tower {
     }
 
     public override void Update() {
-        // Create a overlap sphere to detect enemy that touches the landmine orbs
+        // Checks if an enemy has entered the trigger and if the landmine has not exploded yet
         if (enemyTrigger != null && !isExploded) {
             foreach (var enemy in enemyTrigger) {
                 if (enemy.gameObject.tag == ENEMY_TAG) {
