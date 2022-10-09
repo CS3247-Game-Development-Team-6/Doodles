@@ -43,7 +43,7 @@ public class Landmine : Tower {
                 Bullet bullet = bulletObj.GetComponent<Bullet>();
                 bullet.SetBulletInfo(towerInfo);
                 float distance = Vector3.Distance(transform.position, enemy.transform.position);
-                bullet.SetBulletDamage(calculateDamage(distance));
+                bullet.SetBulletDamage(CalculateDamage(distance));
                 bullet.Seek(enemy.transform, PENETRATE_TARGET);
             }
         }
@@ -61,7 +61,7 @@ public class Landmine : Tower {
     }
 
     // Calculate damage based on distance of the enemy from the origin of the landmine orb
-    private float calculateDamage(float distance) {
+    private float CalculateDamage(float distance) {
         float cosDamage = Mathf.Cos((1/(range/3) * distance)) + 1; 
         return towerInfo.damage * cosDamage;
     }
