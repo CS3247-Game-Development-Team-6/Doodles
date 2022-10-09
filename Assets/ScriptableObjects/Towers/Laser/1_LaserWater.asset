@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: 1_LaserWater
   m_EditorClassIdentifier: 
   towerName: Water Laser 2
-  towerDesc: "Cost: \nDMG: \nRange: \nUpgrade: \nSingle Target\n"
+  towerDesc: 
   range: 4
   upgradeNum: 1
   fireRate: 1
   element: {fileID: 11400000, guid: 5f2ac61151ef7e347b4a722691241670, type: 2}
   cost: 50
   health: 100
-  healthDecayRate: 1
+  healthDecayRate: 0
   damageFixCost: 0
-  damageFixFactor: 0.15
+  damageFixFactor: 1
   allowedCellTypes: 00000000
   speed: 1
   explosionRadius: 0
-  damage: 0
+  damage: 60
   penetratesEnemy: 0
   impactPrefab: {fileID: 0}
   towerPrefab: {fileID: 3257071809379412333, guid: c4513553609cc4c4db8f737e3bb04d41, type: 3}

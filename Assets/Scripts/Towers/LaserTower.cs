@@ -10,18 +10,19 @@ public class LaserTower : Tower {
     private float targetTime;
     private ElementInfo elementInfo;
     private IEffectable targetEffectable;
+    private int damagePerSecond;
 
     [Header("Use Laser")]
     public LineRenderer lineRenderer;
     public ParticleSystem impactEffect;
     public Light impactLight;
-    public float damagePerSecond;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
         rotationBase = transform.Find(Tower.ROTATION_BASE_NAME);
         firePoint = rotationBase.Find(Tower.FIRE_POINT_NAME);
         elementInfo = !towerInfo.element ? null : towerInfo.element;
+        damagePerSecond = towerInfo.damage;
     }
 
     public void Start() {
@@ -79,6 +80,9 @@ public class LaserTower : Tower {
         targetTime += Time.deltaTime;
         targetEnemy.TakeDamage(damagePerSecond * targetTime, elementInfo);
         targetEffectable.ApplyEffect(elementInfo ? elementInfo.effect : null);
+
+        // decrease health
+        base.DecreaseHealth(Time.deltaTime);
 
         // laser graphics
         if (!lineRenderer.enabled) {

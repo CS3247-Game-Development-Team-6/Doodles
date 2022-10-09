@@ -13,20 +13,22 @@ MonoBehaviour:
   m_Name: 1_LaserBase
   m_EditorClassIdentifier: 
   towerName: Laser 2
-  towerDesc: "Cost: \nDMG: \nRange: \nUpgrade: \nSingle Target\n"
+  towerDesc: '
+
+'
   range: 4
   upgradeNum: 1
   fireRate: 1
   element: {fileID: 0}
   cost: 50
   health: 100
-  healthDecayRate: 1
-  damageFixCost: 0
-  damageFixFactor: 0.15
+  healthDecayRate: 0
+  damageFixCost: 9
+  damageFixFactor: 1
   allowedCellTypes: 00000000
   speed: 1
   explosionRadius: 0
-  damage: 0
+  damage: 60
   penetratesEnemy: 0
   impactPrefab: {fileID: 0}
   towerPrefab: {fileID: 3257071809379412333, guid: a1fbba51149bac24da9c6fe114d95d22, type: 3}
