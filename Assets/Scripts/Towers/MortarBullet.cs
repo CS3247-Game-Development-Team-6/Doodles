@@ -5,7 +5,7 @@ using UnityEngine;
 public class MortarBullet : Bullet {
 
     private Vector3 startPosition;
-    private float parabolaHeight = 50f;
+    private float parabolaHeight = 5f;
     private float shotDuration = 2f;
     private float time = 0f;
 
