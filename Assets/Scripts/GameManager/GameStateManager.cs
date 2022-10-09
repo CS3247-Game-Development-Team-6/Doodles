@@ -18,35 +18,13 @@ public class GameStateManager : MonoBehaviour {
         for (int i = 0; i < ddols.Length; i++) {
             ddols[i].transform.Find("LoadingBar").gameObject.SetActive(false);
         }
-
-        Load();
     }
 
     public void Save() {
         PlayerHealth player = FindObjectOfType<PlayerHealth>();
-        GameData data = new GameData {
-            health = player.healthAmount,
-            maxHealth = player.maxHealth,
-            playerPos = player.transform.position
-        };
-
-        string json = JsonUtility.ToJson(data);
-        string path = Application.dataPath + "/player.json";
-        File.WriteAllText(path, json);
-        Debug.Log($"Saving: {json} at {path}");
+        player.Save();
     }
 
-    public void Load() {
-        string path = Application.dataPath + "/player.json";
-        if (!File.Exists(path)) {
-            Debug.LogWarning("No save found");
-            return;
-        }
-
-        string json = File.ReadAllText(path);
-        GameData data = JsonUtility.FromJson<GameData>(json);
-        Debug.Log("player pos: " + data.playerPos);
-    }
 
     void Update() {
         if (isGameEnded)
@@ -103,10 +81,19 @@ public class GameStateManager : MonoBehaviour {
         }
     }
 
-    private class GameData {
+    public class GameData {
+        // Player
         public float health;
         public float maxHealth;
         public Vector3 playerPos;
 
+        // Ink
+        public float ink;
+        public float maxInk;
+
+        // Map and Chunks
+        public MapInfo mapInfo;
+        public int currChunkIdx;
+        public ChunkData[] chunkData;
     }
 }

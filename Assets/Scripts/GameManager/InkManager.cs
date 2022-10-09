@@ -6,7 +6,7 @@ public class InkManager : MonoBehaviour {
     public float maxInk = 400f;
     public float growthRate;
     [Range(0, 1)] public float startingAmount = 0.6f;
-    private float ink;
+    public float ink;
     [SerializeField] private PlayerMovement movement;
     private MapInfo mapInfo;
 
@@ -27,7 +27,6 @@ public class InkManager : MonoBehaviour {
                 growthRate = mapInfo.inkRegenRate;
             }
         }
-
 
         ink = startingAmount * maxInk;
         playerInkIndicator.maxValue = (int)maxInk;
