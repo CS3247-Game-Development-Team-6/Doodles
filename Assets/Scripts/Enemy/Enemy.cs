@@ -127,8 +127,8 @@ public class Enemy : MonoBehaviour {
             // update health bar, float number between 0 and 1
             healthBar.fillAmount = health / enemyInfo.health;
 
-            DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
-            indicator.SetDamageTextFromFloat(temp);
+            //DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+            //indicator.SetDamageTextFromFloat(temp);
         }
     }
 
@@ -138,8 +138,10 @@ public class Enemy : MonoBehaviour {
         // float number between 0 and 1
         healthBar.fillAmount = health / enemyInfo.health;
 
-        DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
-        indicator.SetDamageTextFromFloat(amount);
+        Debug.Log(amount);
+
+        //DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+        //indicator.SetDamageTextFromFloat(amount);
     }
 
     public void ApplyEffect(IEnemyEffect effect) {
@@ -224,7 +226,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Update() {
-        healthText.text = string.Format("{0}", health);
+        healthText.text = string.Format("{0:N0}", health);
 
         if (health <= 0) {
             Die();
