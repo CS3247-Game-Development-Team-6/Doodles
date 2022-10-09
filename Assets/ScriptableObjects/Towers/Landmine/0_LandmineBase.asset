@@ -13,23 +13,23 @@ MonoBehaviour:
   m_Name: 0_LandmineBase
   m_EditorClassIdentifier: 
   towerName: Landmine
-  towerDesc: 'Cost: $10
+  towerDesc: 'Cost: $30
 
-    DMG: 200
+    DMG: 100
 
-    Range: 3
+    Range: 1.5
 
-    Upgrade: $5, +20% DMG
+    Upgrade: $10, +17% DMG
 
     One-time
     Explosion, high damage.
 
 '
-  range: 3
+  range: 1.5
   upgradeNum: 0
   fireRate: 0
   element: {fileID: 0}
-  cost: 10
+  cost: 30
   health: 1
   healthDecayRate: 1
   damageFixCost: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
   allowedCellTypes: 0100000002000000
   speed: 100
   explosionRadius: 0
-  damage: 200
+  damage: 100
   penetratesEnemy: 0
   impactPrefab: {fileID: 4794043405585894037, guid: a22350dbd83d54b0990687ec8d58c950, type: 3}
   towerPrefab: {fileID: 4210837861978277857, guid: 9b4afaaf72e2e4fa880f207c5ef52267, type: 3}

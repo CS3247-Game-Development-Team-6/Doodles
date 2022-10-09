@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Ice Landmine
   towerDesc: 
-  range: 4
+  range: 2
   upgradeNum: 0
   fireRate: 0
   element: {fileID: 11400000, guid: 2a9f0209ebf96cc4f8a2c63413522b7e, type: 2}
-  cost: 5
+  cost: 10
   health: 1
   healthDecayRate: 1
   damageFixCost: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
   allowedCellTypes: 0100000002000000
   speed: 100
   explosionRadius: 0
-  damage: 250
+  damage: 120
   penetratesEnemy: 0
   impactPrefab: {fileID: 4794043405585894037, guid: d8834e505283744789db73bfd6dd2b2d, type: 3}
   towerPrefab: {fileID: 4210837861978277857, guid: 688b6b479daac489597ecc72018be33e, type: 3}
