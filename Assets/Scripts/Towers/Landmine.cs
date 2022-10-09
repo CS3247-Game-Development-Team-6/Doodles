@@ -3,8 +3,12 @@ using UnityEngine;
 public class Landmine : Tower {
     private Collider[] enemyInRange;
     private const bool PENETRATE_TARGET = false;
+    public const string VFX_NAME = "VFX";
+
     private Transform rotationBase;
     private Transform firePoint;
+    public GameObject selfDestructEffect;
+    public GameObject selfDestructSound;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
@@ -39,9 +43,16 @@ public class Landmine : Tower {
                 bullet.Seek(enemy.transform, PENETRATE_TARGET);
             }
         }
-        // TODO: Create tower self destruction effect
-        // TODO: Create tower self destruction sound
-        Destroy(gameObject);
+        TriggerEffect();
+        Destroy(gameObject, 1f);
+    }
+
+    private void TriggerEffect() {
+        GameObject selfDestructEffectParticle = (GameObject)Instantiate(selfDestructEffect, transform.position, transform.rotation);
+        selfDestructEffectParticle.transform.parent = transform;
+        GameObject selfDestructEffectAudio = (GameObject)Instantiate(selfDestructSound, transform.position, transform.rotation);
+        selfDestructEffectAudio.transform.SetParent(transform);
+        selfDestructEffectAudio.GetComponent<AudioSource>().Play();
     }
 
     private float calculateDamage(float distance) {
