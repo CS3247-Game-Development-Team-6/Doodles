@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -87,7 +88,31 @@ public class Map : MonoBehaviour {
         player.position = currentChunk.cells[playerCell.x, playerCell.y].position + player.up * 0.25f + Vector3.up * 0.5f;
         tutorialUI.SetNotes(currentChunk.levelInfo);
 
+        Load();
+    }
 
+    public void Save() {
+        MapData data = new MapData {
+            mapInfo = this.mapInfo
+        };
+
+        string json = JsonUtility.ToJson(data);
+        string path = Application.dataPath + "/map.json";
+        File.WriteAllText(path, json);
+        Debug.Log($"Saving: {json} at {path}");
+    }
+
+    public bool Load() {
+        string path = Application.dataPath + "/map.json";
+        if (File.Exists(path)) {
+            string json = File.ReadAllText(path);
+            MapData data = JsonUtility.FromJson<MapData>(json);
+            Debug.Log($"{data.mapInfo.basePrefab}");
+            return true;
+        } else {
+            Debug.Log("no save found.");
+            return false;
+        }
     }
 
     private void DeactivatePrevChunk(object sender, EventArgs e) {
@@ -174,5 +199,9 @@ public class Map : MonoBehaviour {
             }
             SetCurrentChunk(currentChunk);
         }
+    }
+
+    private class MapData {
+        public MapInfo mapInfo;
     }
 }

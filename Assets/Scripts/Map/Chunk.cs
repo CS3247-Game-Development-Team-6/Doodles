@@ -331,10 +331,8 @@ public class ChunkData {
     public Vector2Int spawnPos;
     public Vector2Int gridSize;
     public DIR spawnDir;
-    public Chunk prevChunk;
-    public Chunk nextChunk;
     public Vector2Int[,] dirGrid;
-    public ChunkInfoScriptableObject levelInfo;
     public Cell[] waypoints;
+    public float baseHealth;
     public bool isVisible;
 }

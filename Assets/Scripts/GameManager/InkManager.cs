@@ -29,10 +29,12 @@ public class InkManager : MonoBehaviour {
             }
         }
 
-        ink = startingAmount * maxInk;
-        playerInkIndicator.maxValue = (int)maxInk;
-        playerInkIndicator.rawValue = (int)ink;
-        Load();
+        // If no load found, set default values
+        if (!Load()) {
+            ink = startingAmount * maxInk;
+            playerInkIndicator.maxValue = (int)maxInk;
+            playerInkIndicator.rawValue = (int)ink;
+        }
     }
 
     public bool hasEnoughInk(float cost) {
@@ -74,7 +76,7 @@ public class InkManager : MonoBehaviour {
 
     }
 
-    public void Load() {
+    public bool Load() {
         string path = Application.dataPath + "/ink.json";
         if (File.Exists(path)) {
             string json = File.ReadAllText(path);
@@ -82,8 +84,10 @@ public class InkManager : MonoBehaviour {
             maxInk = data.maxInk;
             SetInkAmount(data.ink);
             Debug.Log($"ink {data.ink}; max {maxInk};");
+            return true;
         } else {
             Debug.Log("no save found.");
+            return false;
         }
     }
 

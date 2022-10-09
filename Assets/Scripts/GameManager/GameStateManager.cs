@@ -24,6 +24,8 @@ public class GameStateManager : MonoBehaviour {
         PlayerHealth player = FindObjectOfType<PlayerHealth>();
         player.Save();
         InkManager.instance.Save();
+        Map map = FindObjectOfType<Map>();
+        map.Save();
     }
 
 

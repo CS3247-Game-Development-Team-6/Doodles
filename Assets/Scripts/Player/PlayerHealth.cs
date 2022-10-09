@@ -50,7 +50,7 @@ public class PlayerHealth : MonoBehaviour {
 
     }
 
-    public void Load() {
+    public bool Load() {
         string path = Application.dataPath + "/player.json";
         if (File.Exists(path)) {
             string json = File.ReadAllText(path);
@@ -59,8 +59,10 @@ public class PlayerHealth : MonoBehaviour {
             TakeDamage(data.maxHealth - data.health);
             transform.position = data.playerPos;
             Debug.Log($"health {healthAmount}; max {maxHealth}; {transform.position}");
+            return true;
         } else {
             Debug.Log("no save found.");
+            return false;
         }
     }
 
