@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 
 public class InkManager : MonoBehaviour {
@@ -6,7 +7,7 @@ public class InkManager : MonoBehaviour {
     public float maxInk = 400f;
     public float growthRate;
     [Range(0, 1)] public float startingAmount = 0.6f;
-    public float ink;
+    private float ink;
     [SerializeField] private PlayerMovement movement;
     private MapInfo mapInfo;
 
@@ -31,6 +32,7 @@ public class InkManager : MonoBehaviour {
         ink = startingAmount * maxInk;
         playerInkIndicator.maxValue = (int)maxInk;
         playerInkIndicator.rawValue = (int)ink;
+        Load();
     }
 
     public bool hasEnoughInk(float cost) {
@@ -48,9 +50,51 @@ public class InkManager : MonoBehaviour {
         // update visual
     }
 
+    public void SetInkAmount(float amount) {
+        // at most maxInk
+        ink = Mathf.Min(amount, maxInk);
+
+        // at least 0
+        ink = Mathf.Max(ink, 0.0f);
+        playerInkIndicator.rawValue = (int)ink;
+
+        // update visual
+    }
+
+    public void Save() {
+        InkData data = new InkData {
+            ink = this.ink,
+            maxInk = this.maxInk,
+        };
+
+        string json = JsonUtility.ToJson(data);
+        string path = Application.dataPath + "/ink.json";
+        File.WriteAllText(path, json);
+        Debug.Log($"Saving: {json} at {path}");
+
+    }
+
+    public void Load() {
+        string path = Application.dataPath + "/ink.json";
+        if (File.Exists(path)) {
+            string json = File.ReadAllText(path);
+            InkData data = JsonUtility.FromJson<InkData>(json);
+            maxInk = data.maxInk;
+            SetInkAmount(data.ink);
+            Debug.Log($"ink {data.ink}; max {maxInk};");
+        } else {
+            Debug.Log("no save found.");
+        }
+    }
+
     private void Update() {
-        if (ink < maxInk) {
+        if (ink < maxInk && growthRate > 0) {
             ChangeInkAmount(growthRate);
         }
+    }
+
+    private class InkData {
+        public float maxInk;
+        public float ink;
     }
 }

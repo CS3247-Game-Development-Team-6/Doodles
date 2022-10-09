@@ -23,6 +23,7 @@ public class GameStateManager : MonoBehaviour {
     public void Save() {
         PlayerHealth player = FindObjectOfType<PlayerHealth>();
         player.Save();
+        InkManager.instance.Save();
     }
 
 
