@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// MIGRATING: Eventually to become ChunkInfoScriptableObject, editable from MapInfo
 [CreateAssetMenu(fileName = "NewLevel", menuName = "Level Info")]
 public class ChunkInfoScriptableObject : ScriptableObject {
     // These are to be removed eventually

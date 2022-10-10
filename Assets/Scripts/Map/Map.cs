@@ -53,28 +53,34 @@ public class Map : MonoBehaviour {
     public int WavesCleared => chunkWavesCleared + (currentChunk == null ? 0 : currentChunk.GetComponent<ChunkSpawner>().WavesStarted - 1);
 
     private void Start() {
+        string path = Application.dataPath + "/map.json";
+        File.Delete(path);
+        /*
+        */
         player = FindObjectOfType<PlayerMovement>().transform;
         waveUI = FindObjectOfType<WaveUI>();
         tutorialUI = FindObjectOfType<OnScreenTutorialUI>();
-        numChunks = mapInfo.levelInfo.Length;
+        numChunks = mapInfo.chunkInfo.Length;
         chunkSize = mapInfo.gridSize;
         chunkWavesCleared = 0;
-        // choose one edge for start and the other edge for end
-        for (int chunk = 0; chunk < numChunks; chunk++) {
-            GameObject newChunk = new GameObject("Chunk" + chunkList.Count);
-            newChunk.transform.parent = transform;
-            newChunk.transform.localPosition = Vector3.zero;
-            newChunk.AddComponent<Chunk>();
-            currentChunk = newChunk.GetComponent<Chunk>();
-            currentChunk.chunkId = chunk;
-            currentChunk.cellSize = 1f;
-            currentChunk.gridSize = chunkSize;
-            if (chunk > 0) {
-                currentChunk.prevChunk = chunkList[chunk - 1];
-                chunkList[chunk - 1].nextChunk = currentChunk;
+        if (!Load()) {
+            // choose one edge for start and the other edge for end
+            for (int chunk = 0; chunk < numChunks; chunk++) {
+                GameObject newChunk = new GameObject("Chunk" + chunkList.Count);
+                newChunk.transform.parent = transform;
+                newChunk.transform.localPosition = Vector3.zero;
+                newChunk.AddComponent<Chunk>();
+                currentChunk = newChunk.GetComponent<Chunk>();
+                currentChunk.chunkId = chunk;
+                currentChunk.cellSize = 1f;
+                currentChunk.gridSize = chunkSize;
+                if (chunk > 0) {
+                    currentChunk.prevChunk = chunkList[chunk - 1];
+                    chunkList[chunk - 1].nextChunk = currentChunk;
+                }
+                if (barrierPrefab != null) currentChunk.Init(barrierPrefab.transform, mapInfo.chunkInfo[chunk]);
+                chunkList.Add(currentChunk);
             }
-            if (barrierPrefab != null) currentChunk.Init(barrierPrefab.transform, mapInfo.levelInfo[chunk]);
-            chunkList.Add(currentChunk);
         }
         if (chunkList.Count == 0) return;
 
@@ -86,14 +92,18 @@ public class Map : MonoBehaviour {
             playerCell = startCell + new Vector2Int(UnityEngine.Random.Range(0, 3) - 1, UnityEngine.Random.Range(0, 3) - 1);
         }
         player.position = currentChunk.cells[playerCell.x, playerCell.y].position + player.up * 0.25f + Vector3.up * 0.5f;
-        tutorialUI.SetNotes(currentChunk.levelInfo);
-
-        Load();
+        tutorialUI.SetNotes(currentChunk.chunkInfo);
     }
 
     public void Save() {
+        ChunkData[] chunkDatas = new ChunkData[currentChunk.chunkId+1];
+        for (int i = 0; i <= currentChunk.chunkId; i++) {
+            chunkDatas[i] = chunkList[i].GetChunkData();
+        }
         MapData data = new MapData {
-            mapInfo = this.mapInfo
+            mapInfo = this.mapInfo,
+            chunkDatas = chunkDatas,
+            chunkWavesCleared = chunkWavesCleared,
         };
 
         string json = JsonUtility.ToJson(data);
@@ -107,7 +117,21 @@ public class Map : MonoBehaviour {
         if (File.Exists(path)) {
             string json = File.ReadAllText(path);
             MapData data = JsonUtility.FromJson<MapData>(json);
-            Debug.Log($"{data.mapInfo.basePrefab}");
+            Debug.Log($"Chunk datas {data.chunkDatas}");
+            foreach (ChunkData chunk in data.chunkDatas) {
+                GameObject newChunk = new GameObject("Chunk" + chunkList.Count);
+                newChunk.transform.parent = transform;
+                newChunk.AddComponent<Chunk>();
+                currentChunk = newChunk.GetComponent<Chunk>();
+                currentChunk.LoadChunkData(barrierPrefab.transform, chunk);
+                currentChunk.gridSize = chunkSize;
+                if (chunk.chunkId > 0) {
+                    currentChunk.prevChunk = chunkList[chunk.chunkId - 1];
+                    chunkList[chunk.chunkId - 1].nextChunk = currentChunk;
+                }
+                if (barrierPrefab != null) currentChunk.Init(barrierPrefab.transform, mapInfo.chunkInfo[chunk.chunkId]);
+                chunkList.Add(currentChunk);
+            }
             return true;
         } else {
             Debug.Log("no save found.");
@@ -203,5 +227,7 @@ public class Map : MonoBehaviour {
 
     private class MapData {
         public MapInfo mapInfo;
+        public ChunkData[] chunkDatas;
+        public int chunkWavesCleared;
     }
 }

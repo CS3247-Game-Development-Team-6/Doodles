@@ -20,7 +20,7 @@ public class MapInfo : ScriptableObject {
     [SerializeField] public int minScore = 20;
     [SerializeField,Range(0,1)] public float startingInkFraction;
     [SerializeField,Range(0,1)] public float inkRegenRate;
-    [SerializeField] public ChunkInfoScriptableObject[] levelInfo;
+    [SerializeField] public ChunkInfoScriptableObject[] chunkInfo;
 
     public void GeneratePrefabs(Chunk chunk) {
         if (!chunk.cellsGenerated) return;

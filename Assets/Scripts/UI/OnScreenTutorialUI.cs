@@ -34,7 +34,7 @@ public class OnScreenTutorialUI : MonoBehaviour {
 
         Map map = FindObjectOfType<Map>();
         if (map != null && map.currentChunk != null) {
-            notes = map.currentChunk.levelInfo.notes;
+            notes = map.currentChunk.chunkInfo.notes;
         }
 
         if (defaultTextLength < 0) {
@@ -55,7 +55,7 @@ public class OnScreenTutorialUI : MonoBehaviour {
         if (!(sender is ChunkSpawner)) return;
         Chunk currChunk = ((ChunkSpawner)sender).GetComponent<Chunk>();
         if (currChunk.nextChunk == null) return;
-        SetNotes(currChunk.nextChunk.levelInfo);
+        SetNotes(currChunk.nextChunk.chunkInfo);
         Debug.Log($"Setting the notes for next chunk {currChunk.nextChunk}");
     }
 

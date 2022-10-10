@@ -20,7 +20,7 @@ public class Chunk : MonoBehaviour {
     public Vector2Int[,] dirGrid;
     public bool cellsGenerated { get; private set; }
     public bool prefabsGenerated;
-    public ChunkInfoScriptableObject levelInfo { get; private set; }
+    public ChunkInfoScriptableObject chunkInfo { get; private set; }
     public List<Cell> waypoints { get; private set; }
     public bool IsVisible { get; private set; }
     private Barrier[] barriers;
@@ -28,6 +28,84 @@ public class Chunk : MonoBehaviour {
     public Barrier MainBarrier => barriers != null && barriers.Length == 4 ? barriers[(int)spawnDir] : null;
     public Base Base => cells != null && ContainsCell(startPos) && cells[startPos.x, startPos.y].tile != null ? 
         cells[startPos.x, startPos.y].tile.GetComponent<Base>() : null;
+
+    public ChunkData GetChunkData() {
+        Vector2Int[] dirGrid1D = new Vector2Int[gridSize.x * gridSize.y];
+        for (int r = 0; r < gridSize.x; r++) {
+            for (int c = 0; c < gridSize.y; c++) {
+                dirGrid1D[r * gridSize.x + c] = dirGrid[r, c];
+            }
+        }
+
+        return new ChunkData() {
+            chunkId = this.chunkId,
+            chunkInfo = this.chunkInfo,
+            position = transform.position,
+            startPos = this.startPos,
+            spawnPos = this.spawnPos,
+            cellSize = this.cellSize,
+            gridSize = this.gridSize,
+            dirGridLinear = dirGrid1D,
+            spawnDir = this.spawnDir,
+            baseHealth = this.Base.HpFract,
+            isVisible = this.IsVisible
+
+        };
+    }
+
+    public void LoadChunkData(Transform barrierPrefab, ChunkData data) {
+        this.chunkId = data.chunkId;
+        this.chunkInfo = data.chunkInfo;
+        transform.position = data.position;
+        this.startPos = data.startPos;
+        this.spawnPos = data.spawnPos;
+        this.gridSize = data.gridSize;
+        this.spawnDir = data.spawnDir;
+        this.IsVisible = data.isVisible;
+        
+        Vector3 placeInPosition = transform.position + new Vector3(0.5f, 0, 0.5f) * cellSize;
+        cells = new Cell[gridSize.x, gridSize.y];
+
+        int err = (int)Mathf.Pow(Mathf.Min(gridSize.x, gridSize.y), 2f)/5;
+        for (int r = 0; r < gridSize.x; r++) {
+            for (int c = 0; c < gridSize.y; c++) {
+                Vector3 cellPos = placeInPosition + Vector3.right * c * cellSize;
+                Vector2Int index = new Vector2Int(r, c);
+                var typeOfCell = CellType.NONE;  // default every cell as a NONE-cell
+                var yRotation = 0;
+                var pathOrder = -1;
+                Vector3 newRotation = new Vector3(0, yRotation, 0);
+                bool isFog = chunkInfo.isFogChunk && (startPos - index).sqrMagnitude - err > 0;
+                cells[r, c] = new Cell(index, cellPos, typeOfCell, isFog, newRotation, pathOrder);
+                // NOTE: per default we initialise all tiles as foggy, then clear some close to the base.
+            }
+            placeInPosition += Vector3.forward * cellSize;
+        }
+
+        barriers = new Barrier[4];
+        for (int i = 0; i < 4; i++) {
+            DIR d = (DIR)i;
+            if (chunkId != 0 && d.Vec() == -prevChunk.spawnDir.Vec()) continue;
+
+            Transform wall = Instantiate(barrierPrefab, transform);
+            wall.name = $"Barrier {chunkId} {d}";
+            barriers[i] = wall.GetComponent<Barrier>();
+            barriers[i].Init(d);
+            float wallWidth = 0f;
+            float x = d == DIR.UP ? gridSize.y : d == DIR.DOWN ? wallWidth/2 : ((float)gridSize.y / 2);
+            float z = d == DIR.RIGHT ? gridSize.x : d == DIR.LEFT ? wallWidth/2 : ((float)gridSize.x / 2);
+            wall.position = transform.position + new Vector3(x, 1, z);
+            x = d == DIR.UP || d == DIR.DOWN ? wallWidth : gridSize.y;
+            z = d == DIR.RIGHT || d == DIR.LEFT ? wallWidth : gridSize.x;
+            wall.localScale = new Vector3(x, 2, z);
+        }
+
+        chunkSpawner = GetComponent<ChunkSpawner>();
+        //  First disable chunkSpawner.
+        chunkSpawner.enabled = false;
+        chunkSpawner.Init(chunkInfo, cells[spawnPos.x, spawnPos.y].position);
+        SetCellsOnPath();
+    }
 
     private static Vector2Int RandomCellOnBorder(DIR dir, Vector2Int gridSize, bool isStart) {
         switch (dir) {
@@ -40,8 +118,7 @@ public class Chunk : MonoBehaviour {
         }
     }
 
-    public void Init(Transform barrierPrefab, ChunkInfoScriptableObject levelInfo) {
-        this.levelInfo = levelInfo; 
+    private void SpawnNew() {
         var f = Random.Range(0f, 1f) / 0.2 % 1;
         spawnDir = f < 0.5 ? DIR.RIGHT : DIR.UP;
         if (prevChunk != null) { 
@@ -63,6 +140,11 @@ public class Chunk : MonoBehaviour {
             transform.position = prevChunk.transform.position + 
                 cellSize * (prevChunk.spawnDir == DIR.UP ? Vector3.right * gridSize.y : Vector3.forward * gridSize.x);
         }
+    }
+
+    public void Init(Transform barrierPrefab, ChunkInfoScriptableObject levelInfo) {
+        this.chunkInfo = levelInfo;
+        SpawnNew();
 
         Vector3 placeInPosition = transform.position + new Vector3(0.5f, 0, 0.5f) * cellSize;
         cells = new Cell[gridSize.x, gridSize.y];
@@ -325,14 +407,19 @@ public class Chunk : MonoBehaviour {
 
 }
 
+[System.Serializable]
 public class ChunkData {
     public int chunkId;
+    public ChunkInfoScriptableObject chunkInfo;
+    public Vector3 position;
     public Vector2Int startPos;
     public Vector2Int spawnPos;
+    public float cellSize;
     public Vector2Int gridSize;
     public DIR spawnDir;
-    public Vector2Int[,] dirGrid;
+    public Vector2Int[] dirGridLinear;
     public Cell[] waypoints;
     public float baseHealth;
     public bool isVisible;
+    public Cell[,] cells;
 }
