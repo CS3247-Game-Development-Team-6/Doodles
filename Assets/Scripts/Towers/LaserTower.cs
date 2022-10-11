@@ -78,7 +78,7 @@ public class LaserTower : Tower {
 
         // laser damage
         targetTime += Time.deltaTime;
-        targetEnemy.TakeDamage(damage * targetTime, elementInfo); // dmg*log(accumulated_time+1), start from 1
+        targetEnemy.TakeDamage(damage * Mathf.Log(targetTime + 1), elementInfo); // +1 so that is positive
         targetEffectable.ApplyEffect(elementInfo ? elementInfo.effect : null);
 
         // decrease health
