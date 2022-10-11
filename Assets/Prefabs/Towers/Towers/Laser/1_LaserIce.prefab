@@ -134,7 +134,6 @@ MonoBehaviour:
   lineRenderer: {fileID: 6657488694693797015}
   impactEffect: {fileID: 8065248931052215979}
   impactLight: {fileID: 2834895902178506158}
-  damagePerSecond: 60
 --- !u!120 &6657488694693797015
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -198,7 +197,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.21293166, g: 0.8207547, b: 0.63686085, a: 0.7254902}
+      key0: {r: 0.21176471, g: 0.6044849, b: 0.81960785, a: 0.7254902}
       key1: {r: 0.9528302, g: 0.94561374, b: 0.18427375, a: 0.58431375}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -460,9 +459,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4586470546859298134, guid: ef2abf0b672376547aa7e98b806c7f9f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fe9258d4a71b3a7459a0a29b3b616be6, type: 2}
     - target: {fileID: 4586470546859298135, guid: ef2abf0b672376547aa7e98b806c7f9f, type: 3}
       propertyPath: m_Name
       value: LaserHitEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736091537822765391, guid: ef2abf0b672376547aa7e98b806c7f9f, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.90588236
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736091537822765391, guid: ef2abf0b672376547aa7e98b806c7f9f, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.7910116
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736091537822765391, guid: ef2abf0b672376547aa7e98b806c7f9f, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.39607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582872771450578512, guid: ef2abf0b672376547aa7e98b806c7f9f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582872771450578512, guid: ef2abf0b672376547aa7e98b806c7f9f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7730723
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582872771450578512, guid: ef2abf0b672376547aa7e98b806c7f9f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.3921568
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef2abf0b672376547aa7e98b806c7f9f, type: 3}
