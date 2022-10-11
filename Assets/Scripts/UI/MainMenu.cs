@@ -7,19 +7,19 @@ public class MainMenu : MonoBehaviour {
     // Remember to add the desired scene to the open scenes list under File -> Build Settings
 
     public void Awake() {
-        if (!PlayerPrefs.HasKey(SettingsScriptableObject.MenuScenePref)) {
-            SettingsScriptableObject.Init();
+        if (!PlayerPrefs.HasKey(SettingsMenu.ResolutionHeightPref)) {
+            PlayerPrefs.SetInt(SettingsMenu.ResolutionWidthPref, 1920);
+            PlayerPrefs.SetInt(SettingsMenu.ResolutionHeightPref, 1080);
+            PlayerPrefs.SetInt(SettingsMenu.FullScreenPref, 1);
         }
 
-        string menuScene = PlayerPrefs.GetString(SettingsScriptableObject.MenuScenePref);
+        Screen.SetResolution(PlayerPrefs.GetInt(SettingsMenu.ResolutionWidthPref), 
+            PlayerPrefs.GetInt(SettingsMenu.ResolutionHeightPref), 
+            PlayerPrefs.GetInt(SettingsMenu.FullScreenPref) == 1);
+    }
 
-        // To prevent infinitely opening the same scene which crashes the app
-        if (SceneManager.GetActiveScene().name.Equals(menuScene)) return;
+    public void LoadScene() {
 
-        Screen.fullScreen =
-            PlayerPrefs.GetInt(SettingsScriptableObject.FullScreenPref) == SettingsScriptableObject.FULLSCREEN;
-
-        SceneManager.LoadScene(menuScene);
     }
 
     public void PlayGame() {
