@@ -138,8 +138,6 @@ public class Enemy : MonoBehaviour {
         // float number between 0 and 1
         healthBar.fillAmount = health / enemyInfo.health;
 
-        Debug.Log(amount);
-
         //DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
         //indicator.SetDamageTextFromFloat(amount);
     }
