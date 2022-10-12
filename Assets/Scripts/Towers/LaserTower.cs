@@ -1,21 +1,25 @@
 using UnityEngine;
 
 public class LaserTower : Tower {
+    private const string HIT_EFFECT_NAME = "HitEffect";
 
     private float rotationSpeed = 5f;
     private Transform rotationBase;
     private Transform firePoint;
     private Transform target;
+
+    /**
+     * Laser tower property: damage calculation, laser effect
+     */
     private Enemy targetEnemy;
     private float targetTime;
     private ElementInfo elementInfo;
     private IEffectable targetEffectable;
     private int damage;
+    private LineRenderer lineRenderer;
+    private GameObject impactEffect;
+    private Light impactLight;
 
-    [Header("Use Laser")]
-    public LineRenderer lineRenderer;
-    public ParticleSystem impactEffect;
-    public Light impactLight;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
@@ -27,6 +31,9 @@ public class LaserTower : Tower {
 
     public void Start() {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        lineRenderer = GetComponent<LineRenderer>();
+        impactEffect = transform.Find(HIT_EFFECT_NAME).gameObject;
+        impactLight = impactEffect.GetComponentInChildren<Light>();
     }
 
     /** Checks every second for the closest enemy in range. */
@@ -63,7 +70,7 @@ public class LaserTower : Tower {
         if (!target) {
             if (lineRenderer.enabled) {
                 lineRenderer.enabled = false;
-                impactEffect.Stop();
+                impactEffect.GetComponent<ParticleSystem>().Stop();
                 impactLight.enabled = false;
                 targetTime = 0;
             }
@@ -87,7 +94,7 @@ public class LaserTower : Tower {
         // laser graphics
         if (!lineRenderer.enabled) {
             lineRenderer.enabled = true;
-            impactEffect.Play();
+            impactEffect.GetComponent<ParticleSystem>().Play();
             impactLight.enabled = true;
         }
 
