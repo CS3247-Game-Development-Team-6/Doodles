@@ -48,13 +48,14 @@ public class FireballSpell : Spell {
                 ui.ResetCooldownTimer();
                 StartCoroutine(Deactivate(ui));
             // RIGHT CLICK
-            } else if (Input.GetMouseButtonDown(1)) {
-                StartCoroutine(Deactivate(ui));
             }
         }
         
     }
-
+    public void cancelCast()
+    {
+        StartCoroutine(Deactivate(ui));
+    }
     public override IEnumerator Activate(SpellUI ui) {
         indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
         indicator.transform.position = player.position;

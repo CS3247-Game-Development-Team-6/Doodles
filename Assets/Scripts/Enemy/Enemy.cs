@@ -175,9 +175,18 @@ public class Enemy : MonoBehaviour {
         GetComponent<EnemyShooting>().RestoreBulletDamage();
     }
 
+    public int GetDefense()
+    {
+        return defense;
+    }
     public void ReduceDefense(int defDecreAmount) {
         if (defDecreAmount > enemyInfo.defense) defense = 0;
         else defense = enemyInfo.defense - defDecreAmount;
+    }
+
+    public void SetDefense(int amount)
+    {
+        defense = amount;
     }
 
     public void RestoreDefense() {

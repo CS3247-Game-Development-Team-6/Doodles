@@ -43,8 +43,6 @@ public class IceboltSpell : Spell {
                 ui.ResetCooldownTimer();
                 StartCoroutine(Deactivate(ui));
             // RIGHT CLICK
-            } else if (Input.GetMouseButtonDown(1)) {
-                StartCoroutine(Deactivate(ui));
             }
         }
     }
@@ -65,7 +63,10 @@ public class IceboltSpell : Spell {
         yield return new WaitForSeconds(10);
         Destroy(fireball);
     }
-
+    public void cancelCast()
+    {
+        StartCoroutine(Deactivate(ui));
+    }
     public void Attack() {
         //fireball = Instantiate(fireballPrefab, targetImage.transform.position + Vector3.up * 10f, Quaternion.identity);
         Enemy[] allObjects = FindObjectsOfType<Enemy>();

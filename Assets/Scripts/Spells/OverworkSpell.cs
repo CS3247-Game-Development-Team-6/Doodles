@@ -56,8 +56,6 @@ public class OverworkSpell : Spell {
                 
                 StartCoroutine(Deactivate(ui));
             // RIGHT CLICK
-            } else if (Input.GetMouseButtonDown(1)) {
-                StartCoroutine(Deactivate(ui));
             }
         }
         
@@ -80,7 +78,10 @@ public class OverworkSpell : Spell {
         Destroy(indicator.gameObject);
         yield return new WaitForSeconds(10);
     }
-
+    public void cancelCast()
+    {
+        StartCoroutine(Deactivate(ui));
+    }
     public void HealTower() {
         Tower[] allObjects = FindObjectsOfType<Tower>();
         foreach (Tower t in allObjects) {
