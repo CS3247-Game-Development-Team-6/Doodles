@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TabGroup : MonoBehaviour {
-    public List<TabButton> tabButtons;
+    private List<TabButton> tabButtons;
     public Color tabIdle;
     public Color tabHover;
     public Color tabActive;

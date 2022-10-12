@@ -32,8 +32,6 @@ public class SettingsMenu : MonoBehaviour
             resolutionPicker.ClearOptions();
             resolutionPicker.AddOptions(options);
             resolutionPicker.SetValueWithoutNotify(pickedIndex);
-            Screen.SetResolution(resolutions[pickedIndex].width, resolutions[pickedIndex].height, 
-                !fullScreenToggle || fullScreenToggle.isOn);
             resolutionPicker.RefreshShownValue();
         }
 

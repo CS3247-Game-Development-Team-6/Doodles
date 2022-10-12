@@ -15,7 +15,8 @@ public class MapInfo : ScriptableObject {
 
     [Header("LevelInfo")]
     
-    [SerializeField] public string levelName;
+    [SerializeField] public string levelDialogueName;
+    [SerializeField] public string levelSceneName;
     [SerializeField] public Vector2Int gridSize;
     [SerializeField] public int minScore = 20;
     [SerializeField,Range(0,1)] public float startingInkFraction;

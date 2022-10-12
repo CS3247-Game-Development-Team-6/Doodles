@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class LevelsMenu : MonoBehaviour
-{
+public class LevelsMenu : MonoBehaviour {
+
     public ChunkInfoScriptableObject[] levels;
     public TMP_Dropdown levelsDropdown;
     public ChunkInfoScriptableObject levelToPlay;

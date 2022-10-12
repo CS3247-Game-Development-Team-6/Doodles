@@ -49,19 +49,4 @@ public class GameOverManager : MonoBehaviour {
         raycastOccluder.SetActive(false);
         Time.timeScale = 1f;
     }
-
-    public void Menu() {
-        // Resume time
-        Time.timeScale = 1f;
-        if (!PlayerPrefs.HasKey(SettingsScriptableObject.MenuScenePref)) {
-            SettingsScriptableObject.Init();
-        }
-
-        string menuScene = PlayerPrefs.GetString(SettingsScriptableObject.MenuScenePref);
-
-        // To prevent infinitely opening the same scene which crashes the app
-        if (SceneManager.GetActiveScene().name.Equals(menuScene)) return;
-
-        SceneManager.LoadScene(menuScene);
-    }
 }

@@ -14,12 +14,10 @@ public class FlexibleGridLayout : LayoutGroup {
     public override void CalculateLayoutInputHorizontal() {
         base.CalculateLayoutInputHorizontal();
 
-        if (rows == 0 && columns == 0) {
+        if (rows == 0 || columns == 0) {
             float sqRt = Mathf.Sqrt(transform.childCount);
             rows = Mathf.CeilToInt(sqRt);
             columns = rows;
-        } else {
-            columns = transform.childCount / rows;
         }
 
         float parentWidth = rectTransform.rect.width;
