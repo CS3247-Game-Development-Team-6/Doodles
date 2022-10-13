@@ -6,12 +6,14 @@ public class MortarBullet : Bullet {
 
     private Vector3 startPosition;
     private Vector3 endPosition;
+    private Vector3 previousPosition;
     private float parabolaHeight = 5f;
     private float shotDuration = 2f; // duration the shot is in the air in seconds
     private float time = 0f;
 
     void Start() {
         startPosition = this.transform.position;
+        previousPosition = this.transform.position;
     }
 
     public void RegisterTargetPosition(Vector3 targetPosition) { // used to register a static position; no homing
@@ -39,6 +41,15 @@ public class MortarBullet : Bullet {
         // transform.Translate(dir.normalized * distanceThisFrame, Space.World);
         // transform.LookAt(target);
 
+        Vector3 movementDirection = transform.position - previousPosition;
+        // Debug.Log("current position: " + transform.position);
+        // Debug.Log("previous position: " + previousPosition);
+        // Debug.Log("movement direction: " + movementDirection);
+
+        this.transform.rotation = Quaternion.LookRotation(movementDirection); // set rotation of mortar shell
+        Debug.Log("rotation: " + transform.rotation);
+        
+        previousPosition = transform.position;
         transform.position = MathParabola.Parabola(startPosition, endPosition, parabolaHeight, time / shotDuration);
     }
 }
