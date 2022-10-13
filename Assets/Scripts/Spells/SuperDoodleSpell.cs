@@ -6,9 +6,10 @@ public class SuperDoodleSpell : Spell {
     [SerializeField] private int doodleAttackIncrease;
     [SerializeField] private int healthRecover;
     [SerializeField] private Image imageEffectTime;
- 
+    [SerializeField] private GameObject DoodleBuffPrefab;
     private Transform player;
     private float effectTimer = 0.0f;
+    private GameObject doodleBuff;
     private void Start()
     {
         player = FindObjectOfType<PlayerMovement>().transform;
@@ -22,14 +23,17 @@ public class SuperDoodleSpell : Spell {
         {
             effectTimer -= Time.deltaTime;
             imageEffectTime.fillAmount = effectTimer / duration;
+            doodleBuff.transform.position = player.position;
         }
         else
         {
+            Destroy(doodleBuff);
             imageEffectTime.gameObject.SetActive(false);
         }
     }
     public override IEnumerator Activate(SpellUI ui)
     {
+        doodleBuff = Instantiate(DoodleBuffPrefab, player.position, Quaternion.identity);
         imageEffectTime.gameObject.SetActive(true);
         effectTimer = duration;
         ChargeCost();
@@ -54,6 +58,7 @@ public class SuperDoodleSpell : Spell {
     }
     public override IEnumerator Deactivate(SpellUI ui)
     {
+        
         SpellManager.instance.doodleDamageIncreasing = 0;
         imageEffectTime.gameObject.SetActive(false);
         yield return new WaitForEndOfFrame();
