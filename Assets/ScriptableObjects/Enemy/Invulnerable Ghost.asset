@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d1c5786862b98c44836f8cab5529806, type: 3}
-  m_Name: Ghost
+  m_Name: Invulnerable Ghost
   m_EditorClassIdentifier: 
   speed: 0.5
   health: 200
@@ -19,7 +19,7 @@ MonoBehaviour:
   deathEffect: {fileID: 6496939036694839794, guid: fa175d5aa33423f4a9406bdc4bd544aa, type: 3}
   element: {fileID: 0}
   damageMultiplier: 1.5
-  isInvulnerable: 0
+  isInvulnerable: 1
   duration: 3
   cooldown: 5
   isSpawnable: 0
