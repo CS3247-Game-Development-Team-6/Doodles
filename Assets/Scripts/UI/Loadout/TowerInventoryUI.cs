@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TowerInventoryUI : MonoBehaviour {
     public static bool isInGame;
+    public static string nextSceneName;
 
     public List<TowerSlotUI> inventoryList { get; private set; }
 
@@ -15,7 +16,6 @@ public class TowerInventoryUI : MonoBehaviour {
     [SerializeField] private Shop shop;
     public Button startGameButton;
 
-    public string nextSceneName;
 
     void Start() {
         isInGame = false;
@@ -46,14 +46,16 @@ public class TowerInventoryUI : MonoBehaviour {
     }
 
 
-    public void SelectTower(TowerSlotUI slot) {
+    public bool SelectTower(TowerSlotUI slot) {
         if (selectedIndexes.Contains(slot.Index)) {
             shop.Delete(slot);
             selectedIndexes.Remove(slot.Index);
+            return false;
         } else {
             towerDescriptionUI.SelectInfo(slot.towerInfo);
             shop.Add(slot);
             selectedIndexes.Add(slot.Index);
+            return true;
         }
     }
 

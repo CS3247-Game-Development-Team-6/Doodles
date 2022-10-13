@@ -4,36 +4,35 @@ using UnityEngine.EventSystems;
 
 public class ElementButtonUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler {
 
-    private TowerDescriptionUI desc;
+    private TowerDescriptionUI descUI;
     [SerializeField] private bool isUpgrade;
     [SerializeField] private ElementType type;
     private TowerInfo previousTowerInfo;
     private void Start() {
-        desc = GetComponentInParent<TowerDescriptionUI>();
-
-        
+        descUI = GetComponentInParent<TowerDescriptionUI>();
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
         // TODO: Remember to change the Sprite once updated
-        if (!desc) return;
-        previousTowerInfo = desc.towerInfo;
+        if (!descUI) return;
+        previousTowerInfo = descUI.towerInfo;
+        if (!previousTowerInfo) return;
         if (isUpgrade) {
-            desc.SetInfo(desc.towerInfo.nextUpgrade, desc.sprite);
+            descUI.SetInfo(descUI.towerInfo.nextUpgrade, descUI.sprite, false);
         } else {
-            foreach (var elementTower in desc.towerInfo.nextElements) {
+            foreach (var elementTower in descUI.towerInfo.nextElements) {
                 if (elementTower.element != type) continue;
-                desc.SetInfo(elementTower.tower, desc.sprite);
+                descUI.SetInfo(elementTower.tower, descUI.sprite, false);
             }
         }
     }
     public void OnPointerExit(PointerEventData eventData) {
-        if (!desc) return;
-        desc.SetInfo(previousTowerInfo, desc.sprite);
+        if (!descUI) return;
+        descUI.SetInfo(previousTowerInfo, descUI.sprite);
     }
 
     public void OnPointerDown(PointerEventData eventData) {
-        if (!desc) return;
+        if (!descUI) return;
         // For shop
     }
 }

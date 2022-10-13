@@ -20,27 +20,37 @@ public class TowerDescriptionUI : MonoBehaviour {
     public Sprite sprite;
 
     private TowerInfo lastClicked;
+    private bool isBase = true;
 
     private void Update() {
         if (towerInfo == null) {
             towerName.text = "View towers";
             towerDesc.text = $"You may choose up to {maxSlots} towers.";
             towerImage.enabled = false;
+            cost.text = range.text = attack.text = hp.text = "";
             return;
         }
         towerName.text = towerInfo.towerName;
         towerDesc.text = towerInfo.towerDesc;
-        cost.text = towerInfo.cost.ToString();
-        range.text = towerInfo.range.ToString();
-        attack.text = towerInfo.damage.ToString();
+        cost.text = isBase ? towerInfo.cost.ToString() : $"+{towerInfo.cost}";
+        int damageDiff = !lastClicked ? 0 : towerInfo.damage - lastClicked.damage;
+        float rangeDiff = !lastClicked ? 0 : towerInfo.range - lastClicked.range;
+
+        range.text = isBase ? towerInfo.range.ToString() : $"{towerInfo.range} [{rangeDiff}]";
+        attack.text = isBase ? towerInfo.damage.ToString() : $"{towerInfo.damage} [{damageDiff}]";
         hp.text = towerInfo.health.ToString();
         towerImage.sprite = sprite;
         towerImage.enabled = true;
     }
 
     public void SetInfo(TowerInfo towerInfo, Sprite sprite) {
+        SetInfo(towerInfo, sprite, true);
+    }
+
+    public void SetInfo(TowerInfo towerInfo, Sprite sprite, bool isBase) {
         this.towerInfo = towerInfo;
         this.sprite = sprite;
+        this.isBase = isBase;
     }
 
     public void SelectInfo(TowerInfo towerInfo) {

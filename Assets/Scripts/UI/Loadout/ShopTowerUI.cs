@@ -10,6 +10,8 @@ public class ShopTowerUI : MonoBehaviour, IComparable<ShopTowerUI> {
     public TowerInfo towerInfo;
     public Image image;
     public TextMeshProUGUI cost;
+    public Sprite selectedBg;
+    public Sprite unselectedBg;
     private Shop shop;
 
     private void Start() {

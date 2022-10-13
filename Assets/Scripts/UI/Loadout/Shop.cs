@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour {
     public CardManager defaultTower { get; private set; }
     [SerializeField] public CardManager selectedTower;
-    [SerializeField] public TowerSlotUI selectedTowerSlot;
+    [SerializeField] public ShopTowerUI currentTower;
     [SerializeField] private ParticleSystem invalidAction;
     [SerializeField] PlayerMovement playerMovement;
     public List<ShopTowerUI> emptySlots { get; private set; }
@@ -78,17 +78,17 @@ public class Shop : MonoBehaviour {
         TowerManager.instance.SetTowerToBuild(towerInfo);
     }
 
-    public void SetTowerToBuild(TowerSlotUI item) {
+    public void SetTowerToBuild(ShopTowerUI item) {
         if (playerMovement && playerMovement.GetIsBuilding()) {
             TriggerInvalidAction();
             return;
         }
         item.gameObject.GetComponent<Image>().sprite = item.image.sprite;
-        if (selectedTower != null && selectedTower != item) {
-            selectedTower.gameObject.GetComponent<Image>().sprite = selectedTower.unselected;
+        if (currentTower != null && currentTower != item) {
+            currentTower.gameObject.GetComponent<Image>().sprite = currentTower.unselectedBg;
         }
 
-        selectedTowerSlot = item;
+        currentTower = item;
         TowerInfo towerInfo = item.towerInfo;
         TowerManager.instance.SetTowerToBuild(towerInfo);
     }
