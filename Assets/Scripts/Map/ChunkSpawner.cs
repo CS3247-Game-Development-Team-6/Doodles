@@ -26,7 +26,7 @@ public class ChunkSpawner : MonoBehaviour {
     public int WavesLeft => waves == null ? 0 : Mathf.Max(0, waves.Length - waveIndex);
     public int WavesStarted => waveIndex;
 
-    public void Init(ChunkInfoScriptableObject levelInfo, Vector3 spawnPointPos) {
+    public void Init(ChunkInfo levelInfo, Vector3 spawnPointPos) {
         initialized = true;
         numEnemiesAlive = 0;
         numEnemiesLeftInWave = 0;

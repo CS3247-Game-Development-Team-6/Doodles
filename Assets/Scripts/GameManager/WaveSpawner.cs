@@ -19,7 +19,7 @@ public class WaveSpawner : MonoBehaviour {
     public float timeBetweenWaves = 5f;
     public IndicatorUI waveCountdownIndicator;
     public Text enemiesLeftText;
-    public ChunkInfoScriptableObject levelInfo;
+    public ChunkInfo levelInfo;
     public Button skipWaveCountdownButton;
 
     private bool isSkipWaveCountdownButtonVisible;
@@ -35,7 +35,7 @@ public class WaveSpawner : MonoBehaviour {
         return waves.Length == waveIndex && !isSpawningEnemy;
     }
 
-    public void SetNewLevel(ChunkInfoScriptableObject levelInfo) {
+    public void SetNewLevel(ChunkInfo levelInfo) {
         Debug.Log("Resetting wave");
         numEnemiesAlive = 0;
         numEnemiesLeftInWave = 0;

@@ -64,10 +64,18 @@ public class Shop : MonoBehaviour {
 
     // Deprecating
     public void SetTowerToBuild(CardManager item) {
+
+        // Redirects to the current default building method
+        if (item == null) { 
+            SetDefaultTowerToBuild();
+            return;
+        }
+
         if (playerMovement && playerMovement.GetIsBuilding()) {
             TriggerInvalidAction();
             return;
         }
+
         item.gameObject.GetComponent<Image>().sprite = item.selected;
         if (selectedTower != null && selectedTower != item) {
             selectedTower.gameObject.GetComponent<Image>().sprite = selectedTower.unselected;
@@ -78,14 +86,22 @@ public class Shop : MonoBehaviour {
         TowerManager.instance.SetTowerToBuild(towerInfo);
     }
 
+    public void SetDefaultTowerToBuild() {
+        if (slots.Count == 0) return;
+        if (currentTower == null) currentTower = slots[0];
+        SetTowerToBuild(currentTower);
+    }
+
     public void SetTowerToBuild(ShopTowerUI item) {
+        if (TowerManager.instance == null) return;
+
         if (playerMovement && playerMovement.GetIsBuilding()) {
             TriggerInvalidAction();
             return;
         }
-        item.gameObject.GetComponent<Image>().sprite = item.image.sprite;
+        item.background.sprite = item.selectedBg;
         if (currentTower != null && currentTower != item) {
-            currentTower.gameObject.GetComponent<Image>().sprite = currentTower.unselectedBg;
+            currentTower.background.sprite = currentTower.unselectedBg;
         }
 
         currentTower = item;

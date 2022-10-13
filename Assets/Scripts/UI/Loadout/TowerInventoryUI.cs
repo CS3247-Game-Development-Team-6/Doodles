@@ -4,9 +4,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class TowerInventoryUI : MonoBehaviour {
-    public static bool isInGame;
-    public static string nextSceneName;
-
     public List<TowerSlotUI> inventoryList { get; private set; }
 
     private HashSet<int> selectedIndexes;
@@ -18,7 +15,6 @@ public class TowerInventoryUI : MonoBehaviour {
 
 
     void Start() {
-        isInGame = false;
         selectedIndexes = new HashSet<int>();
 
         towerDescriptionUI.maxSlots = shop.MaxSlots;
@@ -32,8 +28,8 @@ public class TowerInventoryUI : MonoBehaviour {
     }
 
     void Update() {
-        startGameButton.enabled = inventoryList.Count == shop.MaxSlots;
-        startGameButton.interactable = inventoryList.Count == shop.MaxSlots;
+        startGameButton.enabled = shop.slots != null && shop.slots.Count == shop.MaxSlots;
+        startGameButton.interactable = shop.slots != null && shop.slots.Count == shop.MaxSlots;
     }
 
     public void HoverTower(TowerInfo towerInfo, Sprite sprite) {
@@ -59,15 +55,5 @@ public class TowerInventoryUI : MonoBehaviour {
         }
     }
 
-    public void StartGame() {
-        isInGame = true;
-        towerDescriptionUI.enabled = false;
-        /*
-        shop.SetDefaultTower(towerCards[0].GetComponent<TowerSlotUI>());
-        shop.enabled = true;
-        */
-        SceneManager.LoadScene(nextSceneName);
-        Destroy(this);
-    }
 
 }

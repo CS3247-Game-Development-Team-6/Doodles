@@ -20,7 +20,7 @@ public class Chunk : MonoBehaviour {
     public Vector2Int[,] dirGrid;
     public bool cellsGenerated { get; private set; }
     public bool prefabsGenerated;
-    public ChunkInfoScriptableObject levelInfo { get; private set; }
+    public ChunkInfo levelInfo { get; private set; }
     public List<Cell> waypoints { get; private set; }
     public bool isVisible { get; private set; }
     private Barrier[] barriers;
@@ -38,7 +38,7 @@ public class Chunk : MonoBehaviour {
         }
     }
 
-    public void Init(Transform barrierPrefab, ChunkInfoScriptableObject levelInfo) {
+    public void Init(Transform barrierPrefab, ChunkInfo levelInfo) {
         this.levelInfo = levelInfo; 
         var f = Random.Range(0f, 1f) / 0.2 % 1;
         spawnDir = f < 0.5 ? DIR.RIGHT : DIR.UP;

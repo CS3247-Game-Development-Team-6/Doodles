@@ -45,7 +45,7 @@ public class OnScreenTutorialUI : MonoBehaviour {
         if (notes.Length > 0) SetIndex(0);
     }
 
-    public void SetNotes(ChunkInfoScriptableObject chunkInfo) {
+    public void SetNotes(ChunkInfo chunkInfo) {
         this.notes = chunkInfo.notes;
         SetIndex(0);
     }

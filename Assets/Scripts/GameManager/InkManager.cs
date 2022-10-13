@@ -3,14 +3,14 @@ using UnityEngine;
 public class InkManager : MonoBehaviour {
 
     public static InkManager instance { get; private set; }
-    public float maxInk = 400f;
-    public float growthRate;
-    [Range(0, 1)] public float startingAmount = 0.6f;
+    private float maxInk = 400f;
+    private float growthRate;
     private float ink;
     [SerializeField] private PlayerMovement movement;
     private MapInfo mapInfo;
 
     public PlayerMovement Movement => movement;
+    // Deprecating
     [SerializeField] private IndicatorUI playerInkIndicator;
 
     private void Start() {
@@ -23,13 +23,13 @@ public class InkManager : MonoBehaviour {
         if (FindObjectOfType<Map>() != null) { 
             mapInfo = FindObjectOfType<Map>().MapInfo;
             if (mapInfo != null) {
-                startingAmount = mapInfo.startingInkFraction;
                 growthRate = mapInfo.inkRegenRate;
+                maxInk = mapInfo.totalInk;
             }
         }
 
 
-        ink = startingAmount * maxInk;
+        ink = mapInfo.startingInkFraction * maxInk;
         playerInkIndicator.maxValue = (int)maxInk;
         playerInkIndicator.rawValue = (int)ink;
     }
@@ -50,7 +50,7 @@ public class InkManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (ink < maxInk) {
+        if (ink < maxInk && growthRate != 0) {
             ChangeInkAmount(growthRate);
         }
     }

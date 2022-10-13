@@ -37,10 +37,8 @@ public class TowerSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     }
 
     public void OnPointerDown(PointerEventData eventData) {
-        if (!TowerInventoryUI.isInGame) {
-            bool isInLoadout = inventoryUI.SelectTower(this);
-            background.sprite = isInLoadout ? selectedBg : unselectedBg;
-        }
+        bool isInLoadout = inventoryUI.SelectTower(this);
+        background.sprite = isInLoadout ? selectedBg : unselectedBg;
     }
 
     public void OnPointerEnter(PointerEventData eventData) {

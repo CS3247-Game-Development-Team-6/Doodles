@@ -55,7 +55,7 @@ public class Map : MonoBehaviour {
         player = FindObjectOfType<PlayerMovement>().transform;
         waveUI = FindObjectOfType<WaveUI>();
         tutorialUI = FindObjectOfType<OnScreenTutorialUI>();
-        numChunks = mapInfo.levelInfo.Length;
+        numChunks = mapInfo.chunkInfo.Length;
         chunkSize = mapInfo.gridSize;
         chunkWavesCleared = 0;
         // choose one edge for start and the other edge for end
@@ -72,7 +72,7 @@ public class Map : MonoBehaviour {
                 currentChunk.prevChunk = chunkList[chunk - 1];
                 chunkList[chunk - 1].nextChunk = currentChunk;
             }
-            if (barrierPrefab != null) currentChunk.Init(barrierPrefab.transform, mapInfo.levelInfo[chunk]);
+            if (barrierPrefab != null) currentChunk.Init(barrierPrefab.transform, mapInfo.chunkInfo[chunk]);
             chunkList.Add(currentChunk);
         }
         if (chunkList.Count == 0) return;

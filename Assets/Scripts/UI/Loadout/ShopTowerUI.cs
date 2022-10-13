@@ -1,14 +1,14 @@
 using TMPro;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-/* deprecated: use CardManager
- */
-public class ShopTowerUI : MonoBehaviour, IComparable<ShopTowerUI> {
+public class ShopTowerUI : MonoBehaviour, IComparable<ShopTowerUI>, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler {
     public int Index { get; set; } = -1;
     public TowerInfo towerInfo;
     public Image image;
+    public Image background;
     public TextMeshProUGUI cost;
     public Sprite selectedBg;
     public Sprite unselectedBg;
@@ -41,7 +41,18 @@ public class ShopTowerUI : MonoBehaviour, IComparable<ShopTowerUI> {
             return;
         }
 
-        // shop.SetTowerToBuild(this);
+        shop.SetTowerToBuild(this);
+    }
+    public void OnPointerDown(PointerEventData eventData) {
+        shop.SetTowerToBuild(this);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) {
+        // inventoryUI.HoverTower(towerInfo, image.sprite);
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        // inventoryUI.UnhoverTower();
     }
 
     public int CompareTo(ShopTowerUI other) {

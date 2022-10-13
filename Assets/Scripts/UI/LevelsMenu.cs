@@ -5,14 +5,14 @@ using TMPro;
 
 public class LevelsMenu : MonoBehaviour {
 
-    public ChunkInfoScriptableObject[] levels;
+    public ChunkInfo[] levels;
     public TMP_Dropdown levelsDropdown;
-    public ChunkInfoScriptableObject levelToPlay;
+    public ChunkInfo levelToPlay;
 
     private void Start() {
         if (levelsDropdown != null && levels.Length != 0) {
             List<string> options = new List<string>();
-            foreach (ChunkInfoScriptableObject level in levels) {
+            foreach (ChunkInfo level in levels) {
                 options.Add(level.levelName);
             }
             levelsDropdown.ClearOptions();

@@ -9,20 +9,21 @@ public class MapInfoUI : MonoBehaviour {
     public Image enemySlider;
     public TextMeshProUGUI enemyText;
 
-    private void Start() {
+    private void Update() {
         if (!mapInfo) {
             Debug.Log("No map loaded.");
             return;
         }
 
         inkSlider.fillAmount = mapInfo.startingInkFraction;
-        inkText.text = $"{mapInfo.startingInkFraction}";
+        int startingInk = (int)(mapInfo.startingInkFraction * mapInfo.totalInk);
+        inkText.text = $"{startingInk} / {mapInfo.totalInk}";
         enemySlider.fillAmount = 0f;
         int numWaves = 0;
-        foreach (var chunk in mapInfo.levelInfo) {
+        foreach (var chunk in mapInfo.chunkInfo) {
             numWaves += chunk.waves.Length;
         }
-        enemyText.text = $"{mapInfo.levelInfo.Length} Chunks\n{numWaves} Waves";
+        enemyText.text = $"{mapInfo.chunkInfo.Length} Chunks\n{numWaves} Waves";
         
     }
 
