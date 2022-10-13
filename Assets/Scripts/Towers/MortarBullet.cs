@@ -42,14 +42,10 @@ public class MortarBullet : Bullet {
         // transform.LookAt(target);
 
         Vector3 movementDirection = transform.position - previousPosition;
-        // Debug.Log("current position: " + transform.position);
-        // Debug.Log("previous position: " + previousPosition);
-        // Debug.Log("movement direction: " + movementDirection);
 
-        this.transform.rotation = Quaternion.LookRotation(movementDirection); // set rotation of mortar shell
-        Debug.Log("rotation: " + transform.rotation);
+        this.transform.rotation = Quaternion.LookRotation(movementDirection); // set rotation of mortar shell based on movement direction
         
-        previousPosition = transform.position;
+        previousPosition = transform.position; // record previous position for calculating movement direction
         transform.position = MathParabola.Parabola(startPosition, endPosition, parabolaHeight, time / shotDuration);
     }
 }
