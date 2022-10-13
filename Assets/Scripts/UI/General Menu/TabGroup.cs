@@ -34,7 +34,11 @@ public class TabGroup : MonoBehaviour {
         ResetTabs();
         button.background.color = tabActive;
         button.text.color = textActive;
-        if (button.tab != null) button.tab.SetActive(true);
+        if (button.tabs != null) {
+            foreach (var tab in button.tabs) { 
+                tab.SetActive(true);
+            }
+        }
     }
 
     public void ResetTabs() {
@@ -42,7 +46,11 @@ public class TabGroup : MonoBehaviour {
             if (b == selectedTab) continue;
             b.background.color = tabIdle;
             b.text.color = textIdle;
-            if (b.tab != null) b.tab.SetActive(false);
+            if (b.tabs != null) {
+                foreach (var tab in b.tabs) { 
+                    tab.SetActive(false);
+                }
+            }
         }
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+
+[ExecuteInEditMode]
 public class ShopTowerUI : MonoBehaviour, IComparable<ShopTowerUI>, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler {
     public int Index { get; set; } = -1;
     public TowerInfo towerInfo;
@@ -18,7 +20,6 @@ public class ShopTowerUI : MonoBehaviour, IComparable<ShopTowerUI>, IPointerDown
         shop = GetComponentInParent<Shop>();
         cost.text = "";
     }
-
 
     private void Update() {
         if (towerInfo) {

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Image))]
 public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler {
     private TabGroup tabGroup;
-    public GameObject tab;
+    public GameObject[] tabs;
 
     public TextMeshProUGUI text { get; private set; }
     public Image background { get; private set; }
