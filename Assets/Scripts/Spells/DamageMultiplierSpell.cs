@@ -7,20 +7,26 @@ public class DamageMultiplierSpell : Spell {
     [SerializeField] private float defense_reducing;
     private float originalValue;
     [SerializeField] private Image imageEffectTime;
+    [SerializeField] private GameObject DefenseReducingPrefab;
     private float effectTimer = 0.0f;
     Dictionary<Enemy, int> originalValues;
+    List<GameObject> effect;
     private void Start()
     {
         imageEffectTime.gameObject.SetActive(false);
         imageEffectTime.fillAmount = 0.0f;
     }
-
+    public class Ref<T> where T : struct
+    {
+        public T Value { get; set; }
+    }
     private void Update()
     {
         if (effectTimer > 0.0f)
         {
             effectTimer -= Time.deltaTime;
             imageEffectTime.fillAmount = effectTimer / duration;
+           
         }
         else
         {
@@ -29,6 +35,7 @@ public class DamageMultiplierSpell : Spell {
     }
     public override IEnumerator Activate(SpellUI ui)
     {
+        effect = new List<GameObject>();
         imageEffectTime.gameObject.SetActive(true);
         effectTimer = duration;
         originalValues = new Dictionary<Enemy, int>();
@@ -36,9 +43,13 @@ public class DamageMultiplierSpell : Spell {
         Enemy[] allObjects = FindObjectsOfType<Enemy>();
         foreach (Enemy e in allObjects)
         {
-         
+
+            GameObject g = (GameObject)Instantiate(DefenseReducingPrefab, e.transform.position, Quaternion.identity);
+            g.transform.parent = e.transform;
+            effect.Add(g);
             originalValues.Add(e, e.GetDefense());
             e.ReduceDefense(e.GetDefense());
+            
         }
 
         ui.ResetCooldownTimer();
@@ -56,9 +67,18 @@ public class DamageMultiplierSpell : Spell {
             if (originalValues.ContainsKey(e))
             {
                 e.SetDefense(originalValues[e]);
+                
+                
             }
             
         }
+        foreach (GameObject e in effect)
+        {
+            Destroy(e);
+
+        }
+
+
         yield return new WaitForEndOfFrame();
     }
 

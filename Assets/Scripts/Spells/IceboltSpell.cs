@@ -33,7 +33,7 @@ public class IceboltSpell : Spell {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
             Vector3 position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-            Quaternion transRot = Quaternion.LookRotation(position - player.position);
+            Quaternion transRot = Quaternion.LookRotation(player.position-position);
             targetImage.transform.position = player.position + OFFSET;
             targetImage.rectTransform.localRotation = Quaternion.Euler(0, 0, transRot.eulerAngles.y);
             // LEFT CLICK
