@@ -8,7 +8,7 @@ public class OverworkSpell : Spell {
     [SerializeField] public float radiusOfEffect;
     [SerializeField] public float rangeRadius;
     [SerializeField] private float healingAmount;
-    [SerializeField] private int healthNeed;
+    [SerializeField] private int healthDeductForTower;
     [SerializeField] private GameObject indicatorPrefab;
    
 
@@ -48,7 +48,7 @@ public class OverworkSpell : Spell {
                 ChargeCost();
 
                 PlayerHealth health = player.GetComponent<PlayerHealth>();
-                health.TakeDamage(healthNeed);
+                health.TakeDamage(healthDeductForTower);
                 ui.ResetCooldownTimer();
 
 
@@ -63,15 +63,19 @@ public class OverworkSpell : Spell {
     }
 
     public override IEnumerator Activate(SpellUI ui) {
-        SpellManager.instance.isCasting = true;
-        indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
-        indicator.transform.position = player.position;
-        rangeImage = indicator.transform.Find("Range").GetComponent<Image>();
-        targetImage = indicator.transform.Find("Target").GetComponent<Image>();
-        rangeImage.rectTransform.sizeDelta = new Vector2(rangeRadius*2, rangeRadius*2);
-        targetImage.rectTransform.sizeDelta = new Vector2(radiusOfEffect*2, radiusOfEffect*2);
-        isSearching = true;
-        this.ui = ui;
+        if (player.GetComponent<PlayerHealth>().GetHealth()> healthDeductForTower)
+        {
+            SpellManager.instance.isCasting = true;
+            indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
+            indicator.transform.position = player.position;
+            rangeImage = indicator.transform.Find("Range").GetComponent<Image>();
+            targetImage = indicator.transform.Find("Target").GetComponent<Image>();
+            rangeImage.rectTransform.sizeDelta = new Vector2(rangeRadius * 2, rangeRadius * 2);
+            targetImage.rectTransform.sizeDelta = new Vector2(radiusOfEffect * 2, radiusOfEffect * 2);
+            isSearching = true;
+            this.ui = ui;
+        }
+        
         yield return new WaitForEndOfFrame();
     }
    
