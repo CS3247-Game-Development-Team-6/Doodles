@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170105550}
   m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 0, z: 0.801}
+  m_LocalPosition: {x: 0, y: 0, z: 0.612}
   m_LocalScale: {x: 0.0389346, y: 0.030937199, z: 0.06}
   m_Children:
   - {fileID: 1179090690}
@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 3.035}
+  m_AnchoredPosition: {x: 0, y: 4.756}
   m_SizeDelta: {x: 31.5478, y: 23.207}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1170105554
@@ -277,7 +277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2763888382346025745}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.476, z: 0}
+  m_LocalPosition: {x: 0, y: 2.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6544866205433202789}
@@ -544,7 +544,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4737686640270401318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.02, z: 0}
+  m_LocalPosition: {x: 0, y: 2.217, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3303414723684270421}
@@ -664,6 +664,7 @@ GameObject:
   - component: {fileID: 904252060}
   - component: {fileID: 3927220003791629200}
   - component: {fileID: 8078559375595622629}
+  - component: {fileID: 5273277940012407860}
   m_Layer: 0
   m_Name: Demon
   m_TagString: Enemy
@@ -747,10 +748,10 @@ SphereCollider:
   m_GameObject: {fileID: 6540121397901334477}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 1.3, z: 0}
+  m_Radius: 1.8
+  m_Center: {x: 0, y: 2.3, z: 0}
 --- !u!114 &986762576498338959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,7 +784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingInfo: {fileID: 11400000, guid: 813023248fe15c84eb5667092f545c0d, type: 2}
   isShooting: 0
-  bulletPrefab: {fileID: 5753786456684779845, guid: ccfd9cae814f8d04882ac19ea0c68e3d, type: 3}
+  bulletPrefab: {fileID: 5753786456684779845, guid: 00bbc02d9d4efa447b0390ad7602b0d4, type: 3}
   firePoint: {fileID: 5410826820070449313}
   partToRotate: {fileID: 6972352779643815576}
   playerTag: Player
@@ -815,6 +816,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c0405fecb06d5408f42208e873bfd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &5273277940012407860
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6540121397901334477}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 3, z: 1.5}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &8790860002384552885
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,7 +853,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8790860002384552885}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0303, y: 2.202, z: 0.86}
+  m_LocalPosition: {x: 0.0303, y: 0.787, z: 0.485}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6972352779643815576}

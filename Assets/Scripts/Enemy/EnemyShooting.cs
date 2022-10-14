@@ -166,10 +166,10 @@ public class EnemyShooting : MonoBehaviour {
     }
 
     // to test the range from rangeCenter
-    private void OnDrawGizmos() {
+    /*private void OnDrawGizmos() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(rangeCenter.position, range);
 
-    }
+    }*/
 
 }

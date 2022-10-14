@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8918444303886402276}
   - component: {fileID: -6692084267365264393}
   m_Layer: 0
-  m_Name: EnemyBullet
+  m_Name: GhostBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5753786456684779845}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -94,7 +94,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 106c2ddc9721c4f45bbcaa2605681b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
   impactEffect: {fileID: 1750940742320366, guid: ec1383a81f8b26e41bd5795fba065567, type: 3}
   damageText: {fileID: 2675300404428900392, guid: 9a5c6034ef2a6a64d97fa4099150c76c, type: 3}
-  initBulletDamage: 10
