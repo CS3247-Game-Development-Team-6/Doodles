@@ -17,6 +17,7 @@ public class TowerManager : MonoBehaviour {
     private void Awake() {
         if (instance != null) {
             Debug.Log("TowerManager should be a singleton! Only 1 should exist in a scene.");
+            Destroy(this);
             return;
         }
         instance = this;
