@@ -13,6 +13,8 @@ public class InkManager : MonoBehaviour {
     public PlayerMovement Movement => movement;
     [SerializeField] private IndicatorUI playerInkIndicator;
 
+    public float globalInkGainMultiplier { get; private set; } = 1.0f;
+
     private void Start() {
         if (instance != null) {
             Debug.Log("InkManager should be a singleton! Only 1 should exist in a scene.");
@@ -34,13 +36,19 @@ public class InkManager : MonoBehaviour {
         playerInkIndicator.rawValue = (int)ink;
     }
 
+    // Only applied on positive ink increments.
+    public void SetInkGainMultiplier(float mult) {
+        Debug.Log($"Set to {mult}");
+        globalInkGainMultiplier = mult;
+    }
+
     public bool hasEnoughInk(float cost) {
         return ink >= cost;
     }
 
     public void ChangeInkAmount(float deltaAmount) {
         // at most maxInk
-        ink = Mathf.Min(ink + deltaAmount, maxInk);
+        ink = Mathf.Min(ink + deltaAmount * (deltaAmount > 0 ? globalInkGainMultiplier : 1), maxInk);
 
         // at least 0
         ink = Mathf.Max(ink, 0.0f);

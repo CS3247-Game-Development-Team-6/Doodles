@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour {
     private int defense;
     private float inkGained;
     private GameObject deathEffect;
+    private float damageAugmentationFactor = 1.0f;
 
     /**
      * Elemental
@@ -151,6 +152,7 @@ public class Enemy : MonoBehaviour {
      * Take account of enemy defense when reducing health
      */
     private void ReduceHealth(float amount) {
+        amount = amount * damageAugmentationFactor;
         if (defense < amount) {
             float temp = amount - defense;
             health -= temp;
@@ -176,7 +178,14 @@ public class Enemy : MonoBehaviour {
         //DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
         //indicator.SetDamageTextFromFloat(amount);
     }
-
+    public float GetDamamgeMultiplier()
+    {
+        return damageAugmentationFactor;
+    }
+    public void SetDamamgeMultiplier(float multiplyAmount)
+    {
+        damageAugmentationFactor = multiplyAmount;
+    }
     public void ApplyEffect(IEnemyEffect effect) {
         StartCoroutine(enemyActiveEffectsManager.HandleEffect(effect));
     }
@@ -201,9 +210,18 @@ public class Enemy : MonoBehaviour {
         GetComponent<EnemyShooting>().RestoreBulletDamage();
     }
 
+    public int GetDefense()
+    {
+        return defense;
+    }
     public void ReduceDefense(int defDecreAmount) {
         if (defDecreAmount > enemyInfo.defense) defense = 0;
         else defense = enemyInfo.defense - defDecreAmount;
+    }
+
+    public void SetDefense(int amount)
+    {
+        defense = amount;
     }
 
     public void RestoreDefense() {
