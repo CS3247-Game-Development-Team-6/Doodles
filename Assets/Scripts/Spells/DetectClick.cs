@@ -11,18 +11,12 @@ public class DetectClick : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
-            onLeftClick.Invoke();
-        }
-        else if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            Debug.Log("good");
+        
             onRightClick.Invoke();
         }
-        else if (eventData.button == PointerEventData.InputButton.Middle)
-        {
-            onMiddleClick.Invoke();
-        }
+       
     }
 }

@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Chunk), typeof(ChunkSpawner))]
 public class Waypoints : MonoBehaviour {
@@ -51,19 +50,18 @@ public class Waypoints : MonoBehaviour {
 
     // DEPRECATING DO NOT USE
     public void ActivateWaypoints() {
-    /*
-        Debug.Log($"Activated {name}");
-        // assign array waypoints
-        points = new Transform[transform.childCount];
-        for (int i = 0; i < points.Length; i++)
-        {
-            transform.GetChild(i).position += offset;
-            points[i] = transform.GetChild(i);
-        }
+        /*
+            Debug.Log($"Activated {name}");
+            // assign array waypoints
+            points = new Transform[transform.childCount];
+            for (int i = 0; i < points.Length; i++) {
+                transform.GetChild(i).position += offset;
+                points[i] = transform.GetChild(i);
+            }
 
-        // waveSpawner.GetComponent<WaveSpawner>().spawnPoint = points[0];
-        waypointsActive = true;
-    */
+            // waveSpawner.GetComponent<WaveSpawner>().spawnPoint = points[0];
+            waypointsActive = true;
+            */
     }
 
     /* Red markers indicate waypoints, green marker indicates base.

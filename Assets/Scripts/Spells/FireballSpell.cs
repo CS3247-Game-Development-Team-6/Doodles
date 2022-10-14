@@ -49,7 +49,6 @@ public class FireballSpell : Spell {
                 ui.ResetCooldownTimer();
                 StartCoroutine(Deactivate(ui));
           
-            // RIGHT CLICK
             }
         }
         
