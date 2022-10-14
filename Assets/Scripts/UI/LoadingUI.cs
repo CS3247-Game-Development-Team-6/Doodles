@@ -8,7 +8,6 @@ public class LoadingUI : MonoBehaviour {
     public static string loadingUIName { get; private set; }
     public Image slider;
     private List<string> scenesToLoad;
-    private List<string> scenesToUnload;
     private List<AsyncOperation> scenesLoading;
 
     private float totalSceneProgress;
@@ -22,18 +21,8 @@ public class LoadingUI : MonoBehaviour {
         scenesToLoad.Add(sceneName);
     }
 
-    public void AddSceneToUnload(string sceneName) {
-        if (scenesToUnload == null) scenesToUnload = new List<string>();
-        scenesToUnload.Add(sceneName);
-    }
-
     public void StartLoad() {
         scenesLoading = new List<AsyncOperation>();
-        /*
-        foreach (string unload in scenesToUnload) {
-            scenesLoading.Add(SceneManager.UnloadSceneAsync(unload));
-        }
-        */
 
         foreach (string load in scenesToLoad) {
             scenesLoading.Add(SceneManager.LoadSceneAsync(load));

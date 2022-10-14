@@ -12,11 +12,13 @@ public class TowerInventoryUI : MonoBehaviour {
     [SerializeField] private TowerDescriptionUI towerDescriptionUI;
     [SerializeField] private Shop shop;
     public Button startGameButton;
+    private int maxSlots;
 
 
     void Start() {
         selectedIndexes = new HashSet<int>();
 
+        maxSlots = shop.MaxSlots;
         towerDescriptionUI.maxSlots = shop.MaxSlots;
     }
 
@@ -47,11 +49,14 @@ public class TowerInventoryUI : MonoBehaviour {
             shop.Delete(slot);
             selectedIndexes.Remove(slot.Index);
             return false;
-        } else {
+        } else if (selectedIndexes.Count < maxSlots) {
             towerDescriptionUI.SelectInfo(slot.towerInfo);
             shop.Add(slot);
             selectedIndexes.Add(slot.Index);
             return true;
+        } else {
+            towerDescriptionUI.SetInfo(slot.towerInfo, slot.image.sprite);
+            return false;
         }
     }
 

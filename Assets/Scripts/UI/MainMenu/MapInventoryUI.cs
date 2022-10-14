@@ -27,13 +27,24 @@ public class MapInventoryUI : MonoBehaviour {
 
     public void SelectMap(MapSlotUI map) {
         if (selectedSlot != null) {
-            selectedSlot.background.sprite = selectedSlot.unselectedBg;
+            selectedSlot.background.sprite = selectedSlot == map ? selectedSlot.selectedBg : selectedSlot.unselectedBg;
+            selectedSlot.background.color = selectedSlot == map ? selectedSlot.selectedBgColor : selectedSlot.unselectedBgColor;
         }
         selectedSlot = map;
     }
 
     public void StartMap() {
         //  TODO: Add loading screen and trigger the starting of the correct map
+        if (!loadingScreen || !selectedSlot || !selectedSlot.mapInfo) {
+            Debug.Log("Missing loading screen or slot/map not selected.");
+            return;
+        }
+        Debug.Log($"Loading {selectedSlot.mapInfo.levelName}");
+        Loadout.mapToLoad = selectedSlot.mapInfo;
+        loadingScreen.gameObject.SetActive(true);
+        loadingScreen.AddSceneToLoad(loadoutSceneName);
+        loadingScreen.StartLoad();
+        Destroy(this);
     }
 
 }

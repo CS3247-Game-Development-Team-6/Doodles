@@ -9,7 +9,7 @@ public class Loadout : MonoBehaviour {
     public FocusedInfoUI focusedInfoBox;
     public Button goToScene;
     public LoadingUI loadingScreen;
-    public MapInfo mapToLoad;
+    public static MapInfo mapToLoad;
 
     private void Start() {
         if (!mapToLoad) {

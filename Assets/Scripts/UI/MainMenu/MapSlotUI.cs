@@ -8,7 +8,9 @@ public class MapSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     public Image image;
     public Image background;
     public TextMeshProUGUI labelText;
+    public Color selectedBgColor;
     public Sprite selectedBg;
+    public Color unselectedBgColor;
     public Sprite unselectedBg;
     public MapInfo mapInfo;
     private MapInventoryUI inventoryUI;
@@ -17,7 +19,8 @@ public class MapSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         inventoryUI = GetComponentInParent<MapInventoryUI>();
         if (inventoryUI != null) Index = inventoryUI.Subscribe(this);
         else Debug.LogError($"inventoryUI not found in parent of {name}");
-
+        background.sprite = inventoryUI.selectedSlot == this ? selectedBg : unselectedBg;
+        background.color = inventoryUI.selectedSlot == this ? selectedBgColor : unselectedBgColor;
     }
 
     private void Update() {
@@ -29,14 +32,17 @@ public class MapSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     public void OnPointerDown(PointerEventData eventData) {
         inventoryUI.SelectMap(this);
         background.sprite = selectedBg;
+        background.color = selectedBgColor;
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
         background.sprite = selectedBg;
+        background.color = selectedBgColor;
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         background.sprite = inventoryUI.selectedSlot == this ? selectedBg : unselectedBg;
+        background.color = inventoryUI.selectedSlot == this ? selectedBgColor : unselectedBgColor;
     }
 }
 
