@@ -48,8 +48,8 @@ public class PlayerMeleeHitbox : MonoBehaviour {
                 // TODO: implement hit effect
                 // Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
                 // Destroy(effect, 5f); // destroy after 5 ticks
-
-                collider.GetComponentInParent<Enemy>().TakeDamage(meleeDamage, null);
+     
+                collider.GetComponentInParent<Enemy>().TakeDamage(meleeDamage+SpellManager.instance.doodleDamageIncreasing, null);
             }
         }
 

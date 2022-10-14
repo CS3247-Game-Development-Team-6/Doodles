@@ -99,7 +99,7 @@ public class Map : MonoBehaviour {
     }
 
     private void DeactivateChunk(Chunk chunk) {
-        if (chunk.isVisible) {
+        if (chunk.IsVisible) {
             chunk.SetVisible(false);
             currentChunk.GetComponent<Waypoints>().DeactivateLocalWaypoints();
         }

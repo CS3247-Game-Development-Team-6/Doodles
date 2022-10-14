@@ -48,7 +48,7 @@ public class Tower : MonoBehaviour {
         this.range = towerInfo.range;
         this.fireRate = towerInfo.fireRate;
         this.cost = towerInfo.cost;
-        this.damageFixCost = towerInfo.damageFixCost;
+        this.damageFixCost = 0;
         this.damageFixFactor = towerInfo.damageFixFactor;
         this.health = towerInfo.health;
         this.maxHealth = this.health;
@@ -121,7 +121,7 @@ public class Tower : MonoBehaviour {
     /** Function to update damageFixCost. */
     public void UpdateDamageFixCost() {
         float healthLoss = maxHealth - health;
-        damageFixCost = damageFixFactor * healthLoss;
+        damageFixCost = Mathf.FloorToInt(damageFixFactor * healthLoss);
         towerInfo.damageFixCost = damageFixCost;
     }
 

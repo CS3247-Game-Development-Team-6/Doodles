@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1170105554}
   - component: {fileID: 1170105553}
   - component: {fileID: 1170105552}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170105550}
   m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 0, z: 0.664}
+  m_LocalPosition: {x: 0, y: 0, z: 0.735}
   m_LocalScale: {x: 0.0389346, y: 0.030937199, z: 0.06}
   m_Children:
   - {fileID: 1179090690}
@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.564}
+  m_AnchoredPosition: {x: 0, y: 2.173}
   m_SizeDelta: {x: 31.5478, y: 23.207}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1170105554
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 1179090690}
   - component: {fileID: 1179090692}
   - component: {fileID: 1179090691}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: HealthBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 1929750957}
   - component: {fileID: 1929750959}
   - component: {fileID: 1929750958}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969701547163387473}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.646, z: 0}
+  m_LocalPosition: {x: 0, y: 0.843, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6544866205433202789}
@@ -307,7 +307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4737686640270401318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0.904, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3303414723684270421}
@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 6557656353932814699}
   - component: {fileID: 5303022927731147065}
   - component: {fileID: 4879313988388672468}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: HPText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,7 +649,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.7
-  m_Center: {x: 0, y: 0.65, z: 0}
+  m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!114 &986762576498338959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,10 +663,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyInfo: {fileID: 11400000, guid: c1ad9376296c387458f8c46ca8ffb241, type: 2}
+  waypointIndex: 0
+  speedMultiplier: 0
   healthBar: {fileID: 1929750958}
   healthText: {fileID: 4879313988388672468}
   damageText: {fileID: 2675300404428900392, guid: 934f2897b165c6b47b9aa966c0c7d01c, type: 3}
-  speedMultiplier: 0
 --- !u!114 &904252060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,7 +682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingInfo: {fileID: 11400000, guid: 7f5f579c27aca19449ad25facd6e21a7, type: 2}
   isShooting: 0
-  bulletPrefab: {fileID: 5753786456684779845, guid: b11f3588d36e3f84ba72fe1baeee0b34, type: 3}
+  bulletPrefab: {fileID: 5753786456684779845, guid: b056b26fe864cf34eb841dbd37a01f2d, type: 3}
   firePoint: {fileID: 5410826820070449313}
   partToRotate: {fileID: 6972352779643815576}
   playerTag: Player
@@ -725,7 +726,7 @@ GameObject:
   - component: {fileID: 849610498723153346}
   - component: {fileID: 2658463260948407239}
   - component: {fileID: 8444981318369897141}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -838,7 +839,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8790860002384552885}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0303, y: 0.33, z: 0.86}
+  m_LocalPosition: {x: 0.0303, y: 0.066, z: 0.497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6972352779643815576}
@@ -861,7 +862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b43e428f688830c44996207614756bb8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b43e428f688830c44996207614756bb8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -897,7 +898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b43e428f688830c44996207614756bb8, type: 3}
       propertyPath: m_Name
-      value: spider_water
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: b43e428f688830c44996207614756bb8, type: 3}
       propertyPath: m_Controller

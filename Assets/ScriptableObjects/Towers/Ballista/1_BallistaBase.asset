@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: 1_BallistaBase
   m_EditorClassIdentifier: 
   towerName: Ballista
+  towerDesc: 
   range: 3
   upgradeNum: 1
   fireRate: 1
   element: {fileID: 0}
   cost: 25
-  health: 100
-  healthDecayRate: 1
+  health: 140
+  healthDecayRate: 1.07
   damageFixCost: 0
-  damageFixFactor: 1
+  damageFixFactor: 0.18
   allowedCellTypes: 00000000
   speed: 40
   explosionRadius: 1
@@ -30,9 +31,6 @@ MonoBehaviour:
   impactPrefab: {fileID: 4232268957626667253, guid: 264947c3b0cb18d4096fa599d2e97062, type: 3}
   towerPrefab: {fileID: 2689636279851204399, guid: fb0e108e3648a84458f5b7748440670d, type: 3}
   bulletPrefab: {fileID: 5149562609060439765, guid: fc158721863904d4b9eacb456236e11b, type: 3}
-  smokePrefab: {fileID: 100000, guid: 785f7f2ed47b94fbfa109bc55f7d1c07, type: 3}
-  healthBarPrefab: {fileID: 9038127182088754521, guid: 23da22333cba243218fac5b7096ef31b, type: 3}
-  damagedSoundPrefab: {fileID: 1983200342343509110, guid: 75b77af14971248619980a0e1c41f97a, type: 3}
   nextUpgrade: {fileID: 0}
   nextElements:
   - element: 0
