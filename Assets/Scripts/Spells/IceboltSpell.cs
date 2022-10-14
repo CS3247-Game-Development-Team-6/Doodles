@@ -38,6 +38,7 @@ public class IceboltSpell : Spell {
             targetImage.rectTransform.localRotation = Quaternion.Euler(0, 0, transRot.eulerAngles.y);
             // LEFT CLICK
             if (Input.GetMouseButtonDown(0)) {
+                SpellManager.instance.isCasting = true;
                 ChargeCost();
                 Attack();
                 ui.ResetCooldownTimer();
@@ -48,6 +49,7 @@ public class IceboltSpell : Spell {
     }
 
     public override IEnumerator Activate(SpellUI ui) {
+        SpellManager.instance.isCasting =true;
         indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
         indicator.transform.position = player.position;
         targetImage = indicator.transform.Find("Target").GetComponent<Image>();
@@ -66,6 +68,7 @@ public class IceboltSpell : Spell {
     public void cancelCast()
     {
         StartCoroutine(Deactivate(ui));
+        SpellManager.instance.isCasting = false;
     }
     public void Attack() {
         //fireball = Instantiate(fireballPrefab, targetImage.transform.position + Vector3.up * 10f, Quaternion.identity);

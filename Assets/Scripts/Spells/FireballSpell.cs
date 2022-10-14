@@ -19,7 +19,7 @@ public class FireballSpell : Spell {
     private Transform player;
     private bool isSearching;
     private SpellUI ui;
-    Vector3 position;
+
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
      
@@ -31,37 +31,37 @@ public class FireballSpell : Spell {
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            if (hit.collider.gameObject != this.gameObject)
-            {
-                position = hit.point;
-            }
-        }
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
+            if (hit.collider.gameObject == this.gameObject) return;
 
             var hitPosDir = (hit.point - player.position).normalized;
             float distance = Vector3.Distance(hit.point, player.position);
             distance = Mathf.Min(distance, rangeRadius - radiusOfEffect);
 
             rangeImage.transform.position = player.position + OFFSET;
-            targetImage.transform.position = player.position + hitPosDir * distance;
+            targetImage.transform.position = player.position + hitPosDir * distance + OFFSET;
 
             // LEFT CLICK
             if (Input.GetMouseButtonDown(0)) {
+                SpellManager.instance.isCasting = false;
                 ChargeCost();
                 Attack();
                 ui.ResetCooldownTimer();
                 StartCoroutine(Deactivate(ui));
+          
             // RIGHT CLICK
             }
         }
         
-  
+    }
     public void cancelCast()
     {
         StartCoroutine(Deactivate(ui));
+        SpellManager.instance.isCasting = false;
+
     }
     public override IEnumerator Activate(SpellUI ui) {
+        SpellManager.instance.isCasting = true;
         indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
         indicator.transform.position = player.position;
         rangeImage = indicator.transform.Find("Range").GetComponent<Image>();
@@ -78,6 +78,7 @@ public class FireballSpell : Spell {
         Destroy(indicator.gameObject);
         yield return new WaitForSeconds(10);
         Destroy(fireball);
+    
     }
 
     public void Attack() {

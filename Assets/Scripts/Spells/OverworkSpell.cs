@@ -44,6 +44,7 @@ public class OverworkSpell : Spell {
 
             // LEFT CLICK
             if (Input.GetMouseButtonDown(0)) {
+                SpellManager.instance.isCasting = false;
                 ChargeCost();
 
                 PlayerHealth health = player.GetComponent<PlayerHealth>();
@@ -62,6 +63,7 @@ public class OverworkSpell : Spell {
     }
 
     public override IEnumerator Activate(SpellUI ui) {
+        SpellManager.instance.isCasting = true;
         indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
         indicator.transform.position = player.position;
         rangeImage = indicator.transform.Find("Range").GetComponent<Image>();
@@ -80,6 +82,7 @@ public class OverworkSpell : Spell {
     }
     public void cancelCast()
     {
+        SpellManager.instance.isCasting = false;
         StartCoroutine(Deactivate(ui));
     }
     public void HealTower() {

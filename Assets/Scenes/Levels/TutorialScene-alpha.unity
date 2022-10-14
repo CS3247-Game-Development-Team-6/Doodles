@@ -451,6 +451,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff03c2858a70d445ba29c8ff49b6a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &173505299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2217629395221884390, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &173505300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173505299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc6d70f215a9d14c987ff760d852126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onLeftClick:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 173505301}
+        m_TargetAssemblyTypeName: FireballSpell, Assembly-CSharp
+        m_MethodName: cancelCast
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onMiddleClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &173505301 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5154991217230026658, guid: dbc7f646b0d520f4f80caddd8d10a2c5, type: 3}
+  m_PrefabInstance: {fileID: 3773202538542358474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173505299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdea66429069cb47bf90a00607a953d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &351889076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1785,6 +1834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doodleDamageIncreasing: 0
+  isCasting: 0
 --- !u!114 &1306252978
 MonoBehaviour:
   m_ObjectHideFlags: 0

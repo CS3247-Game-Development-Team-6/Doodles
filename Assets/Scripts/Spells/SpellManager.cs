@@ -8,6 +8,7 @@ public class SpellManager : MonoBehaviour
     public int doodleDamageIncreasing=0;
     private float elementEffectLifeTimeFactor = 1.0f;
     private float elementEffectAugmentationFactor = 1.0f;
+    public bool isCasting = false;
     private void Awake()
     {
         if (instance == null)
