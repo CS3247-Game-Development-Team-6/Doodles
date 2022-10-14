@@ -21,9 +21,14 @@ public class Bullet : MonoBehaviour {
         this.isPassingThroughBullet = towerInfo.penetratesEnemy;
     }
 
-    public int GetBulletDamage() {
+    public float GetBulletDamage() {
         return bulletDamage;
     }
+
+    public void SetBulletDamage(int damage) {
+        this.bulletDamage = damage;
+    }
+
 
     public float GetExplosionRadius() {
         return explosionRadius;
