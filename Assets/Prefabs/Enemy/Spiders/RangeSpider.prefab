@@ -663,10 +663,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyInfo: {fileID: 11400000, guid: be87e98ef1e89b24b8e8910262724fa3, type: 2}
+  waypointIndex: 0
+  speedMultiplier: 0
   healthBar: {fileID: 1929750958}
   healthText: {fileID: 4879313988388672468}
   damageText: {fileID: 2675300404428900392, guid: 934f2897b165c6b47b9aa966c0c7d01c, type: 3}
-  speedMultiplier: 0
 --- !u!114 &904252060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,7 +898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4d9de10fdf60fca4c81a8a086f011365, type: 3}
       propertyPath: m_Name
-      value: spider_slow
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 4d9de10fdf60fca4c81a8a086f011365, type: 3}
       propertyPath: m_Controller

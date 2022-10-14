@@ -765,10 +765,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyInfo: {fileID: 11400000, guid: e41e9492c221f7342b93703b9d0108b6, type: 2}
   waypointIndex: 0
+  speedMultiplier: 0
   healthBar: {fileID: 1929750958}
   healthText: {fileID: 7627375074670015471}
   damageText: {fileID: 2675300404428900392, guid: 934f2897b165c6b47b9aa966c0c7d01c, type: 3}
-  speedMultiplier: 0
 --- !u!114 &904252060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +914,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d254bfd46e75e8749abbe8631b7c2c5f, type: 2}
     - target: {fileID: 919132149155446097, guid: dae1b2a630c2103408eac1778b720b71, type: 3}
       propertyPath: m_Name
-      value: GiantDummy
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: dae1b2a630c2103408eac1778b720b71, type: 3}
       propertyPath: m_Controller
