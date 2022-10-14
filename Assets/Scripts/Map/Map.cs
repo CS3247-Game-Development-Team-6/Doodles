@@ -55,6 +55,10 @@ public class Map : MonoBehaviour {
         player = FindObjectOfType<PlayerMovement>().transform;
         waveUI = FindObjectOfType<WaveUI>();
         tutorialUI = FindObjectOfType<OnScreenTutorialUI>();
+        if (mapInfo == null) {
+            Debug.LogError($"No MapInfo set in {name}");
+            return;
+        }
         numChunks = mapInfo.chunkInfo.Length;
         chunkSize = mapInfo.gridSize;
         chunkWavesCleared = 0;
