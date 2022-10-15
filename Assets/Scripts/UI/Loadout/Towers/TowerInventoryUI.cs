@@ -55,6 +55,7 @@ public class TowerInventoryUI : MonoBehaviour {
             selectedIndexes.Add(slot.Index);
             return true;
         } else {
+            Debug.Log($"selected {selectedIndexes.Count} out of {maxSlots}");
             towerDescriptionUI.SetInfo(slot.towerInfo, slot.image.sprite);
             return false;
         }

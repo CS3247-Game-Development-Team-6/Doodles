@@ -46,14 +46,16 @@ public class Map : MonoBehaviour {
     public Chunk currentChunk { get; private set; }
     private List<Chunk> chunkList = new List<Chunk>();
     private Transform player;
-    private WaveUI waveUI;
+    private GameStateInfoUI mapInfoUI;
+    // private WaveUI waveUI;
     private OnScreenTutorialUI tutorialUI;
     private int chunkWavesCleared;
     public int WavesCleared => chunkWavesCleared + (currentChunk == null ? 0 : currentChunk.GetComponent<ChunkSpawner>().WavesStarted - 1);
 
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
-        waveUI = FindObjectOfType<WaveUI>();
+        // waveUI = FindObjectOfType<WaveUI>();
+        mapInfoUI = FindObjectOfType<GameStateInfoUI>();
         tutorialUI = FindObjectOfType<OnScreenTutorialUI>();
         if (mapInfo == null) {
             Debug.LogError($"No MapInfo set in {name}");
@@ -128,7 +130,9 @@ public class Map : MonoBehaviour {
         chunk.StartSpawning();
         chunkSpawner.OnWaveEnd += OpenNextChunk;
         chunkSpawner.OnWaveEnd += tutorialUI.SetNotesForNextChunk;
-        waveUI.SetSpawner(chunkSpawner);
+        if (!mapInfoUI) Debug.Log("no mapinfoui");
+        else mapInfoUI.SetChunkSpawner(chunkSpawner);
+        // waveUI.SetSpawner(chunkSpawner);
         chunk.SetVisible(true);
         currentChunk = chunk;
     }

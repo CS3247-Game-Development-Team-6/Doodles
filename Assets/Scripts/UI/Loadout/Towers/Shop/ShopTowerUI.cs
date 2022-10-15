@@ -45,6 +45,7 @@ public class ShopTowerUI : MonoBehaviour, IComparable<ShopTowerUI>, IPointerDown
         shop.SetTowerToBuild(this);
     }
     public void OnPointerDown(PointerEventData eventData) {
+        Debug.Log($"Clicked {name}");
         shop.SetTowerToBuild(this);
     }
 

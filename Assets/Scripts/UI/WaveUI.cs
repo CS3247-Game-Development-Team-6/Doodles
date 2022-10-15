@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+// DEPRECATING, DO NOT USE (SEE MapInfoUI.cs instead)
 public class WaveUI : MonoBehaviour {
     private ChunkSpawner chunkSpawner;
     [SerializeField] private Text wavesCounterUI;

@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour {
     private GameObject spawnPrefab;
     private GameObject spawnEffect;
 
-    [SerializeField] private EnemyInfo enemyInfo;
+    [SerializeField] public EnemyInfo enemyInfo;
 
     /**
      * Visibility

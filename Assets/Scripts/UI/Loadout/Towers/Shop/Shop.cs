@@ -3,30 +3,39 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Shop : MonoBehaviour {
+
+    // Deprecating
     public CardManager defaultTower { get; private set; }
+    // Deprecating
     [SerializeField] public CardManager selectedTower;
+
     [SerializeField] public ShopTowerUI currentTower;
     [SerializeField] private ParticleSystem invalidAction;
     [SerializeField] PlayerMovement playerMovement;
     public List<ShopTowerUI> emptySlots { get; private set; }
     public List<ShopTowerUI> slots { get; private set; }
     public int MaxSlots { get; private set; }
+    public bool isSettingInventory;
 
     private void Start() {
-        emptySlots = new List<ShopTowerUI>();
-        slots = new List<ShopTowerUI>();
-        for (int i = 0; i < transform.childCount; i++) {
-            Transform child = transform.GetChild(i);
-            ShopTowerUI slot = child.GetComponent<ShopTowerUI>();
-            if (slot == null) continue;
-            slot.Index = i;
-            if (slot.towerInfo == null) {
-                emptySlots.Add(slot);
-            } else {
-                slots.Add(slot);
+        if (!isSettingInventory) {
+            LoadTowersIntoShop(FindObjectOfType<Loadout>());
+        } else {
+            emptySlots = new List<ShopTowerUI>();
+            slots = new List<ShopTowerUI>();
+            for (int i = 0; i < transform.childCount; i++) {
+                Transform child = transform.GetChild(i);
+                ShopTowerUI slot = child.GetComponent<ShopTowerUI>();
+                if (slot == null) continue;
+                slot.Index = i;
+                if (slot.towerInfo == null) {
+                    emptySlots.Add(slot);
+                } else {
+                    slots.Add(slot);
+                }
             }
+            MaxSlots = emptySlots.Count + slots.Count;
         }
-        MaxSlots = emptySlots.Count + slots.Count;
     }
 
     public void Add(TowerSlotUI slot) {
@@ -51,6 +60,41 @@ public class Shop : MonoBehaviour {
             } 
         }
         Debug.LogWarning($"Slot {slot} not found");
+    }
+
+    public List<TowerInfo> GetTowersForLoading() {
+        List<TowerInfo> towerInfos = new List<TowerInfo>();
+        foreach (var s in slots) {
+            towerInfos.Add(s.towerInfo);
+        }
+        return towerInfos;
+    }
+
+    public void LoadTowersIntoShop(Loadout loadout) {
+        if (!loadout) {
+            Debug.LogError("No Loadout found");
+            return;
+        }
+
+        List<TowerInfo> towerInfos = loadout.towersToLoad;
+        GameObject slotPrefab = loadout.shopSlotPrefab;
+        if (!slotPrefab.GetComponent<ShopTowerUI>()) {
+            Debug.LogError($"Shop Slot prefab {name} is not of type TowerSlotUI");
+            return;
+        }
+
+        // Start from blank
+        foreach (Transform child in transform) {
+            Destroy(child.gameObject);
+        }
+
+        emptySlots = new List<ShopTowerUI>();
+        slots = new List<ShopTowerUI>();
+        foreach (var towerInfo in towerInfos) {
+            ShopTowerUI shopSlot = Instantiate(slotPrefab, transform).GetComponent<ShopTowerUI>();
+            shopSlot.towerInfo = towerInfo;
+            slots.Add(shopSlot);
+        }
     }
 
     // Deprecating
@@ -93,7 +137,10 @@ public class Shop : MonoBehaviour {
     }
 
     public void SetTowerToBuild(ShopTowerUI item) {
-        if (TowerManager.instance == null) return;
+        if (TowerManager.instance == null) {
+            Debug.LogError("No TowerManager found");
+            return;
+        }
 
         if (playerMovement && playerMovement.GetIsBuilding()) {
             TriggerInvalidAction();

@@ -104,7 +104,7 @@ public class Chunk : MonoBehaviour {
         chunkSpawner = GetComponent<ChunkSpawner>();
         //  First disable chunkSpawner.
         chunkSpawner.enabled = false;
-        chunkSpawner.Init(levelInfo, cells[spawnPos.x, spawnPos.y].position);
+        chunkSpawner.Init(chunkId, levelInfo, cells[spawnPos.x, spawnPos.y].position);
     }
 
     public void OpenBarrier() {

@@ -16,6 +16,7 @@ public class InkManager : MonoBehaviour {
     public float globalInkGainMultiplier { get; private set; } = 1.0f;
     public float InkFraction => maxInk == 0 ? 0 : ink / maxInk;
     public string InkString => $"{ink} / {maxInk}";
+    private GameStateInfoUI ui;
 
     private void Start() {
         if (instance != null) {
@@ -24,18 +25,23 @@ public class InkManager : MonoBehaviour {
         }
         instance = this;
 
-        if (FindObjectOfType<Map>() != null) { 
-            mapInfo = FindObjectOfType<Map>().MapInfo;
+        if (FindObjectOfType<GameStateInfoUI>() != null) {
+            ui = FindObjectOfType<GameStateInfoUI>();
+            mapInfo = ui.mapInfo;
+            ui.SetInkManager(this);
             if (mapInfo != null) {
                 growthRate = mapInfo.inkRegenRate;
                 maxInk = mapInfo.totalInk;
+                ink = mapInfo.startingInkFraction * maxInk;
+            } else {
+                Debug.LogError("No MapInfo found for InkManager to read");
             }
+            // playerInkIndicator.maxValue = (int)maxInk;
+            // playerInkIndicator.rawValue = (int)ink;
+        } else {
+            Debug.LogError("No MapInfoUI display");
         }
 
-
-        ink = mapInfo.startingInkFraction * maxInk;
-        playerInkIndicator.maxValue = (int)maxInk;
-        playerInkIndicator.rawValue = (int)ink;
     }
 
     // Only applied on positive ink increments.
@@ -54,7 +60,7 @@ public class InkManager : MonoBehaviour {
 
         // at least 0
         ink = Mathf.Max(ink, 0.0f);
-        playerInkIndicator.rawValue = (int)ink;
+        // playerInkIndicator.rawValue = (int)ink;
 
         // update visual
     }

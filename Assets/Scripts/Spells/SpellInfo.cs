@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Spell", menuName = "Spell Info")]
 public class SpellInfo : ScriptableObject {
     public const int MAX_LEVELS = 4;
-    public string name;
+    [SerializeField] public string spellName;
     [TextArea(3, 6)] public string description;
 
     [SerializeField, Range(0, 1000)] public int cost;

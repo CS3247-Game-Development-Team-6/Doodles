@@ -108,6 +108,7 @@ public class Node : MonoBehaviour
         }
 
         if (!TowerManager.instance.CanBuildTower(this)){
+            Debug.Log($"{tileRenderer} {tileRenderer.material}");
             tileRenderer.material.color = invalidColor;
         } else if ((transform.position - playerObject.transform.position).magnitude > playerMovement.GetBuildDistance()) {
             tileRenderer.material.color = tooFarColor;

@@ -1,15 +1,16 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Loadout : MonoBehaviour {
     public TextMeshProUGUI title;
-    public GameObject infoMenu;
-    public GameObject shopBar;
-    public FocusedInfoUI focusedInfoBox;
-    public Button goToScene;
     public LoadingUI loadingScreen;
+    public Shop shop;
+    public EnemyInventoryUI enemyInventoryUI;
     public static MapInfo mapToLoad;
+    public List<TowerInfo> towersToLoad { get; private set; }
+    public GameObject shopSlotPrefab;
 
     private void Start() {
         if (!mapToLoad) {
@@ -17,7 +18,12 @@ public class Loadout : MonoBehaviour {
             return;
         }
 
+        if (enemyInventoryUI != null) {
+            enemyInventoryUI.LoadEnemies(mapToLoad);
+        }
+
         title.text = mapToLoad.levelName;
+        towersToLoad = new List<TowerInfo>();
     }
 
     public void StartGame() {
@@ -26,14 +32,9 @@ public class Loadout : MonoBehaviour {
             return;
         }
 
-        focusedInfoBox.MoveToHUDPos();
-        Destroy(title);
-        Destroy(infoMenu);
-        Destroy(goToScene);
+        towersToLoad = shop.GetTowersForLoading();
         loadingScreen.gameObject.SetActive(true);
-        // loadingScreen.AddSceneToUnload(SceneManager.GetActiveScene().name);
         loadingScreen.AddSceneToLoad(mapToLoad.gameSceneName);
         loadingScreen.StartLoad();
-        Destroy(this);
     }
 }

@@ -11,7 +11,7 @@ public class TabGroup : MonoBehaviour {
     public Color textActive;
 
     private TabButton selectedTab;
-    public GameObject deactivateOnClick;
+    public GameObject[] deactivateOnClick;
 
     public void Subscribe(TabButton button) {
         if (tabButtons == null) tabButtons = new List<TabButton>();
@@ -31,7 +31,11 @@ public class TabGroup : MonoBehaviour {
     }
 
     public void OnTabSelected(TabButton button) {
-        if (deactivateOnClick != null) deactivateOnClick.SetActive(false);
+        if (deactivateOnClick != null) {
+            foreach (var gameObj in deactivateOnClick) {
+                gameObj.SetActive(false);
+            }
+        }
         selectedTab = button;
         ResetTabs();
         button.background.color = tabActive;
