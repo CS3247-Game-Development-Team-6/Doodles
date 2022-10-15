@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InkManager : MonoBehaviour {
 
@@ -6,14 +8,14 @@ public class InkManager : MonoBehaviour {
     private float maxInk = 400f;
     private float growthRate;
     private float ink;
-    [SerializeField] private PlayerMovement movement;
     private MapInfo mapInfo;
 
-    public PlayerMovement Movement => movement;
     // Deprecating
     [SerializeField] private IndicatorUI playerInkIndicator;
 
     public float globalInkGainMultiplier { get; private set; } = 1.0f;
+    public float InkFraction => maxInk == 0 ? 0 : ink / maxInk;
+    public string InkString => $"{ink} / {maxInk}";
 
     private void Start() {
         if (instance != null) {

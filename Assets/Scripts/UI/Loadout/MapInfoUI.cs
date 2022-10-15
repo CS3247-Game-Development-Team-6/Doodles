@@ -9,7 +9,9 @@ public class MapInfoUI : MonoBehaviour {
     public Image enemySlider;
     public TextMeshProUGUI enemyText;
 
-    private void Update() {
+    public InkManager inkManager;
+
+    private void Start() {
         if (!mapInfo) {
             Debug.Log("No map loaded.");
             return;
@@ -26,5 +28,13 @@ public class MapInfoUI : MonoBehaviour {
         enemyText.text = $"{mapInfo.chunkInfo.Length} Chunks\n{numWaves} Waves";
         
     }
+
+    private void Update() {
+        if (inkManager != null) {
+            inkSlider.fillAmount = inkManager.InkFraction;
+            inkText.text = inkManager.InkString;
+        }
+    }
+
 
 }
