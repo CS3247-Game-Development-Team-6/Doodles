@@ -108,7 +108,8 @@ public class Enemy : MonoBehaviour {
 
     public Waypoints waypoints { get; set; }
     public ChunkSpawner chunkSpawner { get; set; }
-
+    public bool isShooting = false;
+    private EnemyShooting shootingScript;
     private InkManager inkManager;
 
     [Header("Unity Stuff")]
@@ -119,6 +120,7 @@ public class Enemy : MonoBehaviour {
     private void Awake() {
         inkManager = InkManager.instance;
         enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
+        shootingScript = GetComponent<EnemyShooting>();
     }
 
     /**
@@ -194,11 +196,11 @@ public class Enemy : MonoBehaviour {
     }
 
     public void ReduceAttack(int atkDecreAmount) {
-        GetComponent<EnemyShooting>().ReduceBulletDamage(atkDecreAmount);
+        shootingScript.ReduceBulletDamage(atkDecreAmount);
     }
 
     public void RestoreAttack() {
-        GetComponent<EnemyShooting>().RestoreBulletDamage();
+        shootingScript.RestoreBulletDamage();
     }
 
     public void ReduceDefense(int defDecreAmount) {
@@ -332,21 +334,11 @@ public class Enemy : MonoBehaviour {
             cooldown -= Time.deltaTime;
         }
 
-
-        if (GetComponent<EnemyShooting>().isShooting) {
-            if (GetStatus() == Status.FROZE) GetComponent<EnemyShooting>().enabled = false;
-            else GetComponent<EnemyShooting>().enabled = true;
-            // stop movement
+        if (isShooting || GetStatus() == Status.FROZE || !target) {
             animator.SetBool("isWalking", false);
             return;
         }
 
-        if (GetStatus() == Status.FROZE) {
-            animator.SetBool("isWalking", false);
-            return;
-        }
-
-        GetComponent<EnemyShooting>().enabled = true;
         animator.SetBool("isWalking", true);
 
         // movement direction to the target waypoint
@@ -401,6 +393,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private void EndPath() {
+        target = null;
         animator.SetBool("isWalking", false);
     }
 
