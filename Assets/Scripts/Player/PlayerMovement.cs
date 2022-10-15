@@ -325,7 +325,12 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         // Ink cost
-        if (!inkManager.hasEnoughInk(towerManager.GetTowerCost())) {
+        if (!InkManager.instance) {
+            Debug.LogWarning("No ink manager");
+            return;
+        }
+
+        if (!InkManager.instance.hasEnoughInk(towerManager.GetTowerCost())) {
             towerManager.TriggerInsufficientInk();
             return;
         }

@@ -72,7 +72,7 @@ public class Shop : MonoBehaviour {
 
     public void LoadTowersIntoShop(Loadout loadout) {
         if (!loadout) {
-            Debug.LogError("No Loadout found");
+            Debug.LogWarning("No Loadout found, default inventory displayed");
             return;
         }
 
@@ -131,7 +131,7 @@ public class Shop : MonoBehaviour {
     }
 
     public void SetDefaultTowerToBuild() {
-        if (slots.Count == 0) return;
+        if (slots == null || slots.Count == 0) return;
         if (currentTower == null) currentTower = slots[0];
         SetTowerToBuild(currentTower);
     }
