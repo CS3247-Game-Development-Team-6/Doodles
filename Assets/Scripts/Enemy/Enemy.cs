@@ -77,6 +77,7 @@ public class Enemy : MonoBehaviour {
     private int spawnCount;
     private GameObject spawnPrefab;
     private GameObject spawnEffect;
+    private bool bombCarry;
 
     [SerializeField] private EnemyInfo enemyInfo;
 
@@ -180,12 +181,10 @@ public class Enemy : MonoBehaviour {
         //DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
         //indicator.SetDamageTextFromFloat(amount);
     }
-    public float GetDamamgeMultiplier()
-    {
+    public float GetDamamgeMultiplier() {
         return damageAugmentationFactor;
     }
-    public void SetDamamgeMultiplier(float multiplyAmount)
-    {
+    public void SetDamamgeMultiplier(float multiplyAmount) {
         damageAugmentationFactor = multiplyAmount;
     }
     public void ApplyEffect(IEnemyEffect effect) {
@@ -212,8 +211,7 @@ public class Enemy : MonoBehaviour {
         shootingScript.RestoreBulletDamage();
     }
 
-    public int GetDefense()
-    {
+    public int GetDefense() {
         return defense;
     }
     public void ReduceDefense(int defDecreAmount) {
@@ -221,8 +219,7 @@ public class Enemy : MonoBehaviour {
         else defense = enemyInfo.defense - defDecreAmount;
     }
 
-    public void SetDefense(int amount)
-    {
+    public void SetDefense(int amount) {
         defense = amount;
     }
 
@@ -233,7 +230,15 @@ public class Enemy : MonoBehaviour {
     /**
      * offset to separate between mobs
      */
-    private void SpawnWhenDeath(GameObject _prefab, Vector3 _spawnPosition, Vector3 minRange, Vector3 maxRange, int _spawnCount) {
+    private void SpawnWhenDeath(GameObject _prefab, Vector3 _spawnPosition, Transform target,
+        int _spawnCount) {
+
+        Vector3 minRange = target ? -(target.position - transform.position).normalized : new Vector3(0, 0, 0);
+        Vector3 maxRange = target && target != waypoints.GetPoint(waypoints.Length - 1) ?
+                    // current enemy is near base, to avoid spawning mobs into the base
+                    (target.position - transform.position).normalized :
+                    new Vector3(0, 0, 0);
+
         for (int i = 0; i < _spawnCount; i++) {
             Vector3 spawnOffset = new Vector3(
                 UnityEngine.Random.Range(minRange.x, maxRange.x),
@@ -267,10 +272,7 @@ public class Enemy : MonoBehaviour {
     private void Die() {
         if (spawnsOnDeath && spawnCount > 0 && spawnPrefab != null) {
             SpawnWhenDeath(spawnPrefab, transform.position,
-                -(target.position - transform.position).normalized,
-                target == waypoints.GetPoint(waypoints.Length - 1) ? // current enemy is near base, to avoid spawning mobs into the base
-                    new Vector3(0, 0, 0) :
-                    (target.position - transform.position).normalized,
+                target,
                 spawnCount
             );
         }
@@ -303,6 +305,7 @@ public class Enemy : MonoBehaviour {
         spawnCount = enemyInfo.spawnCount;
         spawnPrefab = enemyInfo.spawnPrefab;
         spawnEffect = enemyInfo.spawnEffect;
+        bombCarry = enemyInfo.isBombCarry;
         status = Status.NONE;
 
         model = transform.Find(MODEL_NAME).gameObject;
@@ -375,7 +378,8 @@ public class Enemy : MonoBehaviour {
         var currentPosition = transform.position - chunkSpawner.transform.position;
         var targetPosition = target.position - chunkSpawner.transform.position;
 
-        if (Vector3.Distance(currentPosition, targetPosition) <= EPSILON) {
+        if (Vector3.Distance(currentPosition, targetPosition) <= EPSILON || target.CompareTag("Base") &&
+            Vector3.Distance(currentPosition, targetPosition) <= 0.5f) {
             GetNextWaypoint();
         }
 
@@ -411,6 +415,10 @@ public class Enemy : MonoBehaviour {
     }
 
     private void EndPath() {
+        if (bombCarry) {
+            Die();
+        }
+
         target = null;
         animator.SetBool("isWalking", false);
     }
