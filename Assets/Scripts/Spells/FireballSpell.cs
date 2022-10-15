@@ -20,12 +20,15 @@ public class FireballSpell : Spell {
     private bool isSearching;
     private SpellUI ui;
 
+    /*
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
      
     }
+    */
 
     private void Update() {
+        if (!Spell.InGame) return;
         if (!isSearching) return;
         if (!rangeImage || !targetImage) return;
 
@@ -60,6 +63,7 @@ public class FireballSpell : Spell {
 
     }
     public override IEnumerator Activate(SpellUI ui) {
+        player = FindObjectOfType<PlayerMovement>().transform;
         SpellManager.instance.isCasting = true;
         indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
         indicator.transform.position = player.position;

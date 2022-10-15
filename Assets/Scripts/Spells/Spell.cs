@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class Spell : MonoBehaviour {
 
+    public static bool InGame = false;
+
     [SerializeField] public string effectName;
 
     [SerializeField, Range(1, 1000)] public float cost;
     [SerializeField, Range(1, 100)] public float duration;
     [SerializeField, Range(1, 100)] public float cooldownTime;
+    // [SerializeField, Range(1, 100)] public float effectTime;
 
 
     protected void ChargeCost() {

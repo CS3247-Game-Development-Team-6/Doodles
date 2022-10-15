@@ -3283,7 +3283,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skill
+  m_text: Spell
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1108f562b03049d43b5fbbeec685d95b, type: 2}
   m_sharedMaterial: {fileID: 7128331142108198388, guid: 1108f562b03049d43b5fbbeec685d95b, type: 2}
@@ -4831,7 +4831,7 @@ GameObject:
   - component: {fileID: 736012971396051275}
   - component: {fileID: 736012971396051276}
   m_Layer: 5
-  m_Name: SkillsInfo
+  m_Name: SpellInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4872,12 +4872,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f8490ac955ea54ba390e1c014891e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: {fileID: 736012971004459644}
-  skillDesc: {fileID: 736012969998984542}
-  skillImage: {fileID: 736012971462737269}
+  spellName: {fileID: 736012971004459644}
+  spellDesc: {fileID: 736012969998984542}
+  spellImage: {fileID: 736012971462737269}
   cost: {fileID: 736012970404197975}
   level: {fileID: 736012970011585205}
-  reset: {fileID: 736012971336864217}
+  cooldown: {fileID: 736012971336864217}
 --- !u!1 &736012971409076393
 GameObject:
   m_ObjectHideFlags: 0

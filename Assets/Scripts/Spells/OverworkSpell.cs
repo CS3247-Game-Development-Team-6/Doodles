@@ -21,12 +21,14 @@ public class OverworkSpell : Spell {
     private bool isSearching;
     private SpellUI ui;
 
+    /*
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
-     
     }
+    */
 
     private void Update() {
+        if (!Spell.InGame) return;
         if (!isSearching) return;
         if (!rangeImage || !targetImage) return;
 
@@ -63,8 +65,8 @@ public class OverworkSpell : Spell {
     }
 
     public override IEnumerator Activate(SpellUI ui) {
-        if (player.GetComponent<PlayerHealth>().GetHealth()> healthDeductForTower)
-        {
+        player = FindObjectOfType<PlayerMovement>().transform;
+        if (player.GetComponent<PlayerHealth>().GetHealth()> healthDeductForTower) {
             SpellManager.instance.isCasting = true;
             indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
             indicator.transform.position = player.position;

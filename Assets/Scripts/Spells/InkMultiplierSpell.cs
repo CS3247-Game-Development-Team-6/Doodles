@@ -15,6 +15,7 @@ public class InkMultiplierSpell : Spell {
 
     private void Update()
     {
+        if (!Spell.InGame) return;
         if (effectTimer>0.0f)
         {
             effectTimer -= Time.deltaTime;

@@ -9,6 +9,8 @@ public class SpellManager : MonoBehaviour
     private float elementEffectLifeTimeFactor = 1.0f;
     private float elementEffectAugmentationFactor = 1.0f;
     public bool isCasting = false;
+
+    public List<SpellUI> spells;
     private void Awake()
     {
         if (instance == null)

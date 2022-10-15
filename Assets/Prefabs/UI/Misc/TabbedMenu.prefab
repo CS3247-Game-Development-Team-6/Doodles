@@ -673,6 +673,7 @@ MonoBehaviour:
   tabActive: {r: 0.8980393, g: 0.3137255, b: 0.22352943, a: 1}
   textIdle: {r: 0.8980393, g: 0.3137255, b: 0.22352943, a: 1}
   textActive: {r: 1, g: 1, b: 1, a: 1}
+  deactivateOnClick: {fileID: 0}
 --- !u!1 &7409271076546048407
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,7 +739,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SKILLS
+  m_text: SPELLS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fdb8ab8ae01dac140930b333dcca3d60, type: 2}
   m_sharedMaterial: {fileID: -5835368094087370710, guid: fdb8ab8ae01dac140930b333dcca3d60, type: 2}
@@ -820,7 +821,7 @@ GameObject:
   - component: {fileID: 7409271076802751924}
   - component: {fileID: 7409271076802751931}
   m_Layer: 5
-  m_Name: SKILLS
+  m_Name: SPELLS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
