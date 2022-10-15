@@ -7,7 +7,7 @@
 // Cartoon FX difference:
 // - uses Alpha8 monochrome textures to save up on texture memory size
 
-Shader "Cartoon FX/Particles Additive Alpha8"
+Shader "Cartoon FX/Legacy/Particles Additive Alpha8"
 {
 Properties
 {
