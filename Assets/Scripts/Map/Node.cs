@@ -85,7 +85,7 @@ public class Node : MonoBehaviour
         tower = towerObj.GetComponent<Tower>();
         tower.SetTowerInfo(towerInfo);
         if (decorationMesh != null) Destroy(decorationMesh);    // Destroy the flora on the tile.
-
+        
         return towerObj.GetComponent<Tower>();
     }
 

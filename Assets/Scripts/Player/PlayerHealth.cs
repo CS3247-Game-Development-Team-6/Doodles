@@ -30,6 +30,17 @@ public class PlayerHealth : MonoBehaviour {
         }
     }
 
+    public void Heal(int amount)
+    {
+        healthAmount = Mathf.Min(healthAmount+amount,maxHealth);
+
+        // float number between 0 and 1
+        healthBar.fillAmount = healthAmount / maxHealth;
+    }
+    public float GetHealth()
+    {
+        return healthAmount;
+    }
     void Die() {
         gameObject.SetActive(false);
         gameStateManager.EndGame();

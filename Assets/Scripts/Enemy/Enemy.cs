@@ -3,62 +3,91 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-/** 
- * Enemy's effect status caused by element reactions
- */
-public enum EffectStatus {
+public enum Status {
+    /**
+     * Element status
+     */
     SCORCH, // fire
     CHILL, // ice
     DRENCH, // water
     SCALD, // fire + water
     FROZE, // ice + water
     WEAKEN, // fire + ice
+
+    /**
+     * Unique status
+     */
+    INVULNERABLE, // immune to everything
     NONE // default
 }
 
+
+/**
+ * Main functionality: control movement, hp, death and visibility in fog
+ */
 [RequireComponent(typeof(EnemyActiveEffects))]
 public class Enemy : MonoBehaviour {
     private const float EPSILON = 0.02f;
+    private const string CANVAS_NAME = "Canvas";
+    private const string MODEL_NAME = "Model";
+    private const string SPHERE_NAME = "Sphere"; // for invulnerable enemy
 
     /**
-     * enemy properties from EnemyInfo
+     * basic enemy properties
      */
     private float speed;
     private float health;
     private int defense;
-    private ElementInfo element;
-    private float damageMultiplier;
     private float inkGained;
     private GameObject deathEffect;
+    private float damageAugmentationFactor = 1.0f;
+
+    /**
+     * Elemental
+     */
+    private ElementInfo element;
+    private float damageMultiplier;
+
+    /**
+     * Enemy Status
+     */
+    private Status status;
+
+    public void SetStatus(Status _status) {
+        status = _status;
+    }
+    public Status GetStatus() {
+        return status;
+    }
+    public void RemoveStatus() {
+        status = Status.NONE;
+    }
+
+    /**
+     * Invulnerability
+     */
+    private bool isInvulnerable;
+    private float duration;
+    private float cooldown;
+
+    /**
+     * Spawnable after death
+     */
+    private bool spawnsOnDeath;
+    private int spawnCount;
+    private GameObject spawnPrefab;
+    private GameObject spawnEffect;
 
     [SerializeField] private EnemyInfo enemyInfo;
-
-    private EffectStatus effectStatus;
-
-    public void setEffectStatus(EffectStatus status) {
-        effectStatus = status;
-    }
-    public EffectStatus getEffectStatus() {
-        return effectStatus;
-    }
-    public void removeEffectStatus() {
-        effectStatus = EffectStatus.NONE;
-    }
-
-    public Waypoints waypoints { get; set; }
-    public ChunkSpawner chunkSpawner { get; set; }
 
     /**
      * Visibility
      */
     private bool isInFog = true;
     private Transform ballParentTransform;
-    private Canvas canvas;
-
-    /**
-     * Shoot target
-     */
-    private Transform target;
+    private int lastXCoord = 0;
+    private int lastYCoord = 0;
+    private Cell[,] cells;
 
     /**
      * Rotation
@@ -69,18 +98,8 @@ public class Enemy : MonoBehaviour {
     /**
      * Translation
      */
+    private Transform target;
     public int waypointIndex = 0; // make public for a quick fix so that enemy dont attack base without reaching
-    private int lastXCoord = 0;
-    private int lastYCoord = 0;
-    private Cell[,] cells;
-
-    private InkManager inkManager;
-    private Map map;
-
-    [Header("Unity Stuff")]
-    public Image healthBar;
-    public TMP_Text healthText;
-    public GameObject damageText;
 
     /**
      * EnemyActiveEffectsManager
@@ -88,9 +107,18 @@ public class Enemy : MonoBehaviour {
     public float speedMultiplier;
     private EnemyActiveEffects enemyActiveEffectsManager;
 
+    public Waypoints waypoints { get; set; }
+    public ChunkSpawner chunkSpawner { get; set; }
+
+    private InkManager inkManager;
+
+    [Header("Unity Stuff")]
+    public Image healthBar;
+    public TMP_Text healthText;
+    public GameObject damageText;
+
     private void Awake() {
         inkManager = InkManager.instance;
-        map = FindObjectOfType<Map>();
         enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
     }
 
@@ -100,6 +128,10 @@ public class Enemy : MonoBehaviour {
      * Reference: https://drive.google.com/drive/folders/1Ck3jqkF_k5snVlAlZsA441pl4-DpjStC  
      */
     public void TakeDamage(float amount, ElementInfo bulletElement) {
+        if (GetStatus() == Status.INVULNERABLE) {
+            return;
+        }
+
         if (element == null || bulletElement == null) {
             ReduceHealth(amount);
             return;
@@ -120,6 +152,7 @@ public class Enemy : MonoBehaviour {
      * Take account of enemy defense when reducing health
      */
     private void ReduceHealth(float amount) {
+        amount = amount * damageAugmentationFactor;
         if (defense < amount) {
             float temp = amount - defense;
             health -= temp;
@@ -127,21 +160,32 @@ public class Enemy : MonoBehaviour {
             // update health bar, float number between 0 and 1
             healthBar.fillAmount = health / enemyInfo.health;
 
-            DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
-            indicator.SetDamageTextFromFloat(temp);
+            //DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+            //indicator.SetDamageTextFromFloat(temp);
         }
     }
 
     public void TakeDot(float amount) {
+        if (GetStatus() == Status.INVULNERABLE) {
+            return;
+        }
+
         health -= amount;
 
         // float number between 0 and 1
         healthBar.fillAmount = health / enemyInfo.health;
 
-        DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
-        indicator.SetDamageTextFromFloat(amount);
+        //DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
+        //indicator.SetDamageTextFromFloat(amount);
     }
-
+    public float GetDamamgeMultiplier()
+    {
+        return damageAugmentationFactor;
+    }
+    public void SetDamamgeMultiplier(float multiplyAmount)
+    {
+        damageAugmentationFactor = multiplyAmount;
+    }
     public void ApplyEffect(IEnemyEffect effect) {
         StartCoroutine(enemyActiveEffectsManager.HandleEffect(effect));
     }
@@ -166,16 +210,70 @@ public class Enemy : MonoBehaviour {
         GetComponent<EnemyShooting>().RestoreBulletDamage();
     }
 
+    public int GetDefense()
+    {
+        return defense;
+    }
     public void ReduceDefense(int defDecreAmount) {
         if (defDecreAmount > enemyInfo.defense) defense = 0;
         else defense = enemyInfo.defense - defDecreAmount;
+    }
+
+    public void SetDefense(int amount)
+    {
+        defense = amount;
     }
 
     public void RestoreDefense() {
         defense = enemyInfo.defense;
     }
 
+    /**
+     * offset to separate between mobs
+     */
+    private void SpawnWhenDeath(GameObject _prefab, Vector3 _spawnPosition, Vector3 minRange, Vector3 maxRange, int _spawnCount) {
+        for (int i = 0; i < _spawnCount; i++) {
+            Vector3 spawnOffset = new Vector3(
+                UnityEngine.Random.Range(minRange.x, maxRange.x),
+                UnityEngine.Random.Range(minRange.y, maxRange.y),
+                UnityEngine.Random.Range(minRange.z, maxRange.z)
+            );
+            GameObject spawnGO = (GameObject)Instantiate(_prefab, _spawnPosition + spawnOffset, Quaternion.identity);
+
+            if (spawnEffect) {
+                // to spawn the effect following game object
+                Instantiate(spawnEffect, spawnGO.transform.position, Quaternion.identity, spawnGO.transform);
+            }
+
+            /*
+             * set movement
+             */
+            Enemy enemyScript = spawnGO.GetComponent<Enemy>();
+            if (enemyScript != null) {
+                enemyScript.InitSpawnWhenDeath(this.chunkSpawner, waypointIndex);
+            }
+
+            /*
+             * wave enemy number
+             */
+            chunkSpawner.numEnemiesLeftInWave++;
+            chunkSpawner.numEnemiesAlive++;
+        }
+
+    }
+
     private void Die() {
+        if (spawnsOnDeath && spawnCount > 0 && spawnPrefab != null) {
+            SpawnWhenDeath(spawnPrefab, transform.position,
+                -(target.position - transform.position).normalized,
+                target == waypoints.GetPoint(waypoints.Length - 1) ? // current enemy is near base, to avoid spawning mobs into the base
+                    new Vector3(0, 0, 0) :
+                    (target.position - transform.position).normalized,
+                spawnCount
+            );
+        }
+
+
         // add ink
         inkManager.ChangeInkAmount(inkGained);
 
@@ -196,18 +294,18 @@ public class Enemy : MonoBehaviour {
         damageMultiplier = enemyInfo.damageMultiplier;
         inkGained = enemyInfo.inkGained;
         deathEffect = enemyInfo.deathEffect;
-        effectStatus = EffectStatus.NONE;
+        isInvulnerable = enemyInfo.isInvulnerable;
+        duration = enemyInfo.duration;
+        cooldown = enemyInfo.cooldown;
+        spawnsOnDeath = enemyInfo.isSpawnable;
+        spawnCount = enemyInfo.spawnCount;
+        spawnPrefab = enemyInfo.spawnPrefab;
+        spawnEffect = enemyInfo.spawnEffect;
+        status = Status.NONE;
 
-        model = transform.GetChild(2).gameObject;
+        model = transform.Find(MODEL_NAME).gameObject;
         animator = model.GetComponent<Animator>();
-        canvas = transform.GetChild(0).GetComponent<Canvas>();
         ballParentTransform = gameObject.transform;
-
-        // first target, which is first waypoint in Waypoints
-
-        // get a reference to all cells for checking if a tile is fogged or not
-        // cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
-        // Chunk currChunk = FindObjectOfType<Map>().currentChunk;
     }
 
     public void Init(ChunkSpawner chunkSpawner) {
@@ -216,32 +314,56 @@ public class Enemy : MonoBehaviour {
         cells = currChunk.cells;
         waypoints = currChunk.GetComponent<Waypoints>();
         target = waypoints.points[0];
-        // cells = GameObject.Find("Map").GetComponent<MapGenerator>().GetCells();
+        speedMultiplier = 1.0f;
+        enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
+    }
 
-        // get reference to its EnemyActiveEffectsManager
+    public void InitSpawnWhenDeath(ChunkSpawner chunkSpawner, int index) {
+        this.chunkSpawner = chunkSpawner;
+        Chunk currChunk = chunkSpawner.GetComponent<Chunk>();
+        cells = currChunk.cells;
+        waypoints = currChunk.GetComponent<Waypoints>();
+        waypointIndex = index;
+        target = waypoints.points[index];
         speedMultiplier = 1.0f;
         enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
     }
 
     private void Update() {
-        healthText.text = string.Format("{0}", health);
+        healthText.text = string.Format("{0:N0}", health);
 
         if (health <= 0) {
             Die();
         }
 
+        if (isInvulnerable && GetStatus() == Status.INVULNERABLE) {
+            if (duration <= 0f) {
+                DisableInvulnerability();
+            }
+            duration -= Time.deltaTime;
+        }
+
+        if (isInvulnerable && GetStatus() != Status.INVULNERABLE) {
+            if (cooldown <= 0f) {
+                EnableInvulnerability();
+            }
+            cooldown -= Time.deltaTime;
+        }
+
+
         if (GetComponent<EnemyShooting>().isShooting) {
-            if (getEffectStatus() == EffectStatus.FROZE) GetComponent<EnemyShooting>().enabled = false;
+            if (GetStatus() == Status.FROZE) GetComponent<EnemyShooting>().enabled = false;
             else GetComponent<EnemyShooting>().enabled = true;
             // stop movement
             animator.SetBool("isWalking", false);
             return;
         }
 
-        if (getEffectStatus() == EffectStatus.FROZE) {
+        if (GetStatus() == Status.FROZE) {
             animator.SetBool("isWalking", false);
             return;
         }
+
         GetComponent<EnemyShooting>().enabled = true;
         animator.SetBool("isWalking", true);
 
@@ -270,6 +392,7 @@ public class Enemy : MonoBehaviour {
         // Row on y axis
         int row = Convert.ToInt32(Math.Floor(currentPosition.z));
 
+
         if (row != lastYCoord || col != lastXCoord) {
             lastYCoord = row;
             lastXCoord = col;
@@ -285,6 +408,7 @@ public class Enemy : MonoBehaviour {
         Cell cell = cells[row, col];
         return cell.isFog;
     }
+
     private void GetNextWaypoint() {
         if (waypointIndex >= waypoints.Length - 1) {
             EndPath();
@@ -301,11 +425,11 @@ public class Enemy : MonoBehaviour {
     private void SetEnemyVisibility(bool isVisible) {
         foreach (Transform childrenTransform in ballParentTransform) {
             // disable canvas
-            if (childrenTransform.name == canvas.name)
+            if (childrenTransform.name == CANVAS_NAME)
                 childrenTransform.gameObject.SetActive(isVisible);
 
             // disable every renderers
-            if (childrenTransform.name == model.name) {
+            if (childrenTransform.name == MODEL_NAME || childrenTransform.name == SPHERE_NAME) {
                 SkinnedMeshRenderer[] renderers = model.GetComponentsInChildren<SkinnedMeshRenderer>();
                 foreach (SkinnedMeshRenderer r in renderers) {
                     r.enabled = isVisible;
@@ -318,6 +442,23 @@ public class Enemy : MonoBehaviour {
             }
 
         }
+    }
+
+    private void EnableInvulnerability() {
+        GetComponent<EffectManager>().RemoveEffect();
+        SetStatus(Status.INVULNERABLE);
+        cooldown = enemyInfo.cooldown;
+
+        // only for invulnerable enemy
+        transform.Find(SPHERE_NAME).gameObject.SetActive(true);
+    }
+
+    private void DisableInvulnerability() {
+        SetStatus(Status.NONE);
+        duration = enemyInfo.duration;
+
+        // only for invulnerable enemy
+        transform.Find(SPHERE_NAME).gameObject.SetActive(false);
     }
 
 }

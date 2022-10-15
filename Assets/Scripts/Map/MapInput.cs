@@ -14,7 +14,7 @@ public class MapInput : MonoBehaviour {
 
     void Update() {
         // Right click is detected
-        if (Input.GetMouseButtonDown(1)) {
+        if ((!SpellManager.instance.isCasting) && Input.GetMouseButtonDown(1)) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {

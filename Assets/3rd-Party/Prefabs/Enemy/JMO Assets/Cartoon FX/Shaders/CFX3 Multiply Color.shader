@@ -1,7 +1,7 @@
 // CartoonFX 3 Shader
 // (c) 2015, Jean Moreno
 
-Shader "Cartoon FX/Particle Multiply Colored"
+Shader "Cartoon FX/Legacy/Particle Multiply Colored"
 {
 	Properties
 	{
