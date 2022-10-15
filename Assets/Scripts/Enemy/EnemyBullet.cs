@@ -59,6 +59,10 @@ public class EnemyBullet : MonoBehaviour {
             _target.GetComponent<PlayerHealth>().TakeDamage(bulletDamage);
         }
 
+        if (_target.CompareTag("PlayerWall")) {
+            _target.GetComponent<BarrierWall>().TakeDamage(bulletDamage);
+        }
+
         if (_target.CompareTag("Base")) {
             if (_target.GetComponent<Base>() == null) {
                 Debug.LogError($"Missing Base script on {_target}");
