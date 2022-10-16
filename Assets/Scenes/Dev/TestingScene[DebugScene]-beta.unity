@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70dea9fd3b675394d9459f5093987ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapInfo: {fileID: 11400000, guid: 15e7eaca847a3b743b6278a914a5b5ca, type: 2}
+  mapInfo: {fileID: 11400000, guid: 9a1bdc9b04830704682bed5329d3d332, type: 2}
   basePlane: {fileID: 1546535281}
   barrierPrefab: {fileID: 7592276886298649118, guid: c4e1a81ac38611a4dac2f705f32c6099, type: 3}
   waypointEmpty: {fileID: 8396853103122026701, guid: 71d519184add2f346ac3e1e498fb244d, type: 3}
@@ -1568,6 +1568,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1944835089349103180, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2122994696734420885, guid: 636b4af0198ef8246beebccec196472b, type: 3}
       propertyPath: m_ChildForceExpandHeight
       value: 0
@@ -2126,16 +2130,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 636b4af0198ef8246beebccec196472b, type: 3}
---- !u!1 &476527617 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6212984491611131555, guid: 636b4af0198ef8246beebccec196472b, type: 3}
-  m_PrefabInstance: {fileID: 476527616}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &476527618 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6185660578774322227, guid: 636b4af0198ef8246beebccec196472b, type: 3}
-  m_PrefabInstance: {fileID: 476527616}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &557443432
 GameObject:
   m_ObjectHideFlags: 0
@@ -3408,11 +3402,11 @@ PrefabInstance:
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: winUI
       value: 
-      objectReference: {fileID: 476527618}
+      objectReference: {fileID: 0}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: gameOverUI
       value: 
-      objectReference: {fileID: 476527617}
+      objectReference: {fileID: 0}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: nextSceneName
       value: spider_theme_dialogue

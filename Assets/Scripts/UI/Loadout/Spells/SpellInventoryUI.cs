@@ -11,6 +11,14 @@ public class SpellInventoryUI : MonoBehaviour {
 
     public int MaxLevelUnlocked { get; private set; }
 
+    private void OnEnable() {
+        SpellManager.IsChoosingSpell = true;
+    }
+
+    private void OnDisable() {
+        SpellManager.IsChoosingSpell = false;
+    }
+
     public int Subscribe(SpellSlotUI slot) {
         if (inventoryList == null) inventoryList = new List<SpellSlotUI>();
         int index = inventoryList.Count;

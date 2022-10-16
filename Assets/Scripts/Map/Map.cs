@@ -48,13 +48,14 @@ public class Map : MonoBehaviour {
     private Transform player;
     private GameStateInfoUI mapInfoUI;
     // private WaveUI waveUI;
+    private PlayerXP playerXP;
     private OnScreenTutorialUI tutorialUI;
     private int chunkWavesCleared;
     public int WavesCleared => chunkWavesCleared + (currentChunk == null ? 0 : currentChunk.GetComponent<ChunkSpawner>().WavesStarted - 1);
 
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
-        // waveUI = FindObjectOfType<WaveUI>();
+        playerXP = player.GetComponent<PlayerXP>();
         mapInfoUI = FindObjectOfType<GameStateInfoUI>();
         tutorialUI = FindObjectOfType<OnScreenTutorialUI>();
         if (mapInfo == null) {
@@ -130,7 +131,7 @@ public class Map : MonoBehaviour {
         chunk.StartSpawning();
         chunkSpawner.OnWaveEnd += OpenNextChunk;
         chunkSpawner.OnWaveEnd += tutorialUI.SetNotesForNextChunk;
-        if (!mapInfoUI) Debug.Log("no mapinfoui");
+        if (!mapInfoUI) Debug.LogError("No MapInfoUI found in this Scene");
         else mapInfoUI.SetChunkSpawner(chunkSpawner);
         // waveUI.SetSpawner(chunkSpawner);
         chunk.SetVisible(true);
@@ -148,6 +149,12 @@ public class Map : MonoBehaviour {
         currentChunk.OpenBarrier();
         tutorialUI.Reset();
         currentChunk.MainBarrier.CrossBarrier += ActivateNextChunk;
+
+        if (!playerXP) Debug.LogError("No PlayerXP for in this Scene");
+        else { 
+            playerXP.IncreaseByXPPerChunk();
+            playerXP.TryUnlockSpell();
+        }
         // currentChunk.MainBarrier.CloseBarrier += DeactivatePrevChunk;
     }
 

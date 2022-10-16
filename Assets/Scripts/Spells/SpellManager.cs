@@ -9,6 +9,7 @@ public class SpellManager : MonoBehaviour
     private float elementEffectLifeTimeFactor = 1.0f;
     private float elementEffectAugmentationFactor = 1.0f;
     public bool isCasting = false;
+    public static bool IsChoosingSpell = false;
 
     // public List<SpellUI> emptySlots { get; private set; }
     public List<SpellUI> slots { get; private set; }
@@ -67,6 +68,5 @@ public class SpellManager : MonoBehaviour
         elementEffectLifeTimeFactor = 1.0f;
         elementEffectAugmentationFactor = 1.0f;
     }
-
 
 }
