@@ -54,8 +54,8 @@ public class SpellUI : MonoBehaviour, IPointerDownHandler {
     } 
 
     public void UseSpell() {
-        
         if (!isCooldown) {
+            spell.Init(spellInfo);
             StartCoroutine(spell.Activate(this));
         }
     }

@@ -10,5 +10,5 @@ public class SpellInfo : ScriptableObject {
     [SerializeField, Range(0, MAX_LEVELS)] public int level;
     [SerializeField, Range(0, 100)] public float cooldownTime;
     [SerializeField, Range(0, 100)] public float effectTime;
-    public Sprite sprite;
+    [SerializeField] public Sprite sprite;
 }
