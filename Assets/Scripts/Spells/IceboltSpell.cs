@@ -13,7 +13,7 @@ public class IceboltSpell : Spell {
     [SerializeField] private GameObject fireballPrefab;
 
     private Canvas indicator;
-    private GameObject fireball;
+    // private GameObject fireball;
     private Image targetImage;
 
     private Transform player;
@@ -28,7 +28,6 @@ public class IceboltSpell : Spell {
     */
 
     private void Update() {
-        if (!Spell.InGame) return;
         if (!isSearching) return;
         if (!targetImage) return;
 
@@ -67,7 +66,7 @@ public class IceboltSpell : Spell {
         isSearching = false;
         Destroy(indicator.gameObject);
         yield return new WaitForSeconds(10);
-        Destroy(fireball);
+        // Destroy(fireball);
     }
     public void cancelCast()
     {

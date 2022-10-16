@@ -28,7 +28,6 @@ public class OverworkSpell : Spell {
     */
 
     private void Update() {
-        if (!Spell.InGame) return;
         if (!isSearching) return;
         if (!rangeImage || !targetImage) return;
 

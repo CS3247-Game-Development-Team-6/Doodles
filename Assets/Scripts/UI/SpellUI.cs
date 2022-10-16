@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class SpellUI : MonoBehaviour, IPointerDownHandler {
     [SerializeField] private Image imageCooldown;
+    [SerializeField] private Image effectCooldown;
     [SerializeField] private TMP_Text textCooldown;
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text textCost;

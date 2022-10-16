@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ElementBurstSpell : Spell {
     [SerializeField] private float elememtEffectLifeTimeFactor=1.0f;
     [SerializeField] private float elememtEffectAugmentationFactor=1.0f;
+
     [SerializeField] private Image imageEffectTime;
     private float effectTimer = 0.0f;
     private void Start() {
@@ -16,23 +17,18 @@ public class ElementBurstSpell : Spell {
         imageEffectTime.fillAmount = 0.0f;
     }
 
-    private void Update()
-    {
-        if (!Spell.InGame) return;
-        if (effectTimer > 0.0f)
-        {
+    private void Update() {
+        if (effectTimer > 0.0f) {
             effectTimer -= Time.deltaTime;
-            imageEffectTime.fillAmount = effectTimer / duration;
-        }
-        else
-        {
+            imageEffectTime.fillAmount = effectTimer / effectTime;
+        } else {
             imageEffectTime.gameObject.SetActive(false);
         }
     }
-    public override IEnumerator Activate(SpellUI ui)
-    {
+
+    public override IEnumerator Activate(SpellUI ui) {
         imageEffectTime.gameObject.SetActive(true);
-        effectTimer = duration;
+        effectTimer = effectTime;
         ChargeCost();
         SpellManager.instance.ActivateElementBurst(elememtEffectLifeTimeFactor, elememtEffectAugmentationFactor);
         
@@ -40,7 +36,7 @@ public class ElementBurstSpell : Spell {
         ui.ResetCooldownTimer();
 
         // The effect will now be activated for {duration} seconds.
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(effectTime);
         StartCoroutine(Deactivate(ui));
     }
     public override IEnumerator Deactivate(SpellUI ui)
