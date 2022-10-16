@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    private Transform target;
+    protected Transform target;
     public float speed = 70f;
     public float explosionRadius = 0f;
     public GameObject impactEffect;
@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    protected virtual void Update() {
         if (target == null) {
             Destroy(gameObject);
             return;
@@ -57,7 +57,7 @@ public class Bullet : MonoBehaviour {
         transform.LookAt(target);
     }
 
-    public virtual void HitTarget(bool toDestroyThisFrame = true, Collider hitEnemy = null) {
+    protected virtual void HitTarget(bool toDestroyThisFrame = true, Collider hitEnemy = null) {
         if (impactEffect) {
             GameObject impactEffectParticle = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(impactEffectParticle, 5f);
@@ -84,7 +84,7 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    public virtual void Explode() {
+    protected virtual void Explode() {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider collider in colliders) {
             if (collider.CompareTag("Enemy")) {
