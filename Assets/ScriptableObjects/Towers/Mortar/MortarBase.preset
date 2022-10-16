@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MortarBase
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: towerName
+    value: 0_MortarBase
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: towerDesc
+    value: 'Cost: $75
+
+      DMG: 100
+
+      Range: 3-8
+
+      Explode Radius: 2
+
+      Upgrade:
+      $25, +20% DMG and Explode Radius
+
+      Shots explode on impact, large AOE
+      damage.'
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: range
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upgradeNum
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: fireRate
+    value: 0.25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: element
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: cost
+    value: 75
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: health
+    value: 200
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: healthDecayRate
+    value: 1.8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageFixCost
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageFixFactor
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: allowedCellTypes.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: allowedCellTypes.Array.data[0]
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speed
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: explosionRadius
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damage
+    value: 100
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: penetratesEnemy
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: impactPrefab
+    value: 
+    objectReference: {fileID: 7270330396955014377, guid: 5a87950d3447a57408da16911c4acb8b, type: 3}
+  - target: {fileID: 0}
+    propertyPath: towerPrefab
+    value: 
+    objectReference: {fileID: 2689636279851204399, guid: 81e5af41165768542bd55aa5fe7998ef, type: 3}
+  - target: {fileID: 0}
+    propertyPath: bulletPrefab
+    value: 
+    objectReference: {fileID: 5149562609060439765, guid: eb6d43d03636f12408b09dd69d35301a, type: 3}
+  - target: {fileID: 0}
+    propertyPath: nextUpgrade
+    value: 
+    objectReference: {fileID: 11400000, guid: 2c9114d3e2fc6ac4387a3f835edc5c2b, type: 2}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.data[0].element
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.data[0].tower
+    value: 
+    objectReference: {fileID: 11400000, guid: 4f31768d99ec3aa47bd80cf7f13e045e, type: 2}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.data[1].element
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.data[1].tower
+    value: 
+    objectReference: {fileID: 11400000, guid: 54cd7e126fe65e742b4fa3f5eee33833, type: 2}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.data[2].element
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: nextElements.Array.data[2].tower
+    value: 
+    objectReference: {fileID: 11400000, guid: b4b8c73c25bdd91429175524e71bc2b2, type: 2}
+  m_ExcludedProperties: []
