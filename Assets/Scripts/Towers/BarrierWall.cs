@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BarrierWall : Tower {
+public class BarrierWall : Tower, PlayerWall {
     
     // private Transform rotationBase;
     // private Transform firePoint;

@@ -309,7 +309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41076050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2000,11 +2000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964724c1303ab404fb70e917d75da39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
-  towerManager: {fileID: 1306252972}
-  inkManager: {fileID: 1306252978}
   playerMovement: {fileID: 7828996251632798774}
-  playerGO: {fileID: 1789031178}
   insufficientInkEffect: {fileID: 1252599804982201016, guid: 1ae7d1e1c28d77444a3ba9f1bdf97d38, type: 3}
 --- !u!4 &1040735802
 Transform:
@@ -2264,6 +2260,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   insufficientInkEffect: {fileID: 8998585739324249827, guid: 1ae7d1e1c28d77444a3ba9f1bdf97d38, type: 3}
   playerObj: {fileID: 1789031178}
+  healthBarPrefab: {fileID: 0}
+  smokeEffectPrefab: {fileID: 0}
+  soundEffectPrefab: {fileID: 0}
 --- !u!114 &1306252978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2280,7 +2279,6 @@ MonoBehaviour:
   growthRate: 1
   startingAmount: 0.7
   movement: {fileID: 7828996251632798774}
-  levelInfo: {fileID: 11400000, guid: 140bbd25839f53543813e69e02eb8db3, type: 2}
   playerInkIndicator: {fileID: 889571982}
 --- !u!1001 &1329500688
 PrefabInstance:
@@ -2425,6 +2423,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1420675848}
   - component: {fileID: 1420675847}
+  - component: {fileID: 1420675850}
+  - component: {fileID: 1420675849}
   m_Layer: 0
   m_Name: Waypoints
   m_TagString: Untagged
@@ -2444,8 +2444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34dca5f1a69e4d429b22d142cf59d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
-  gameMaster: {fileID: 1306252971}
+  points: []
 --- !u!4 &1420675848
 Transform:
   m_ObjectHideFlags: 0
@@ -2460,6 +2459,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1420675849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420675846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad6b8bf06f323b49ae8a0d40f45ece6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSize: 0
+  gridSize: {x: 0, y: 0}
+  chunkId: 0
+  startPos: {x: 0, y: 0}
+  spawnPos: {x: 0, y: 0}
+  spawnDir: 0
+  prevChunk: {fileID: 0}
+  nextChunk: {fileID: 0}
+  prefabsGenerated: 0
+--- !u!114 &1420675850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420675846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c4c90f5ff1211e4bbc862851b8598fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numEnemiesAlive: 0
+  numEnemiesLeftInWave: 0
+  isSpawningEnemy: 0
+  waves: []
 --- !u!1 &1458396411 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4600644439624492359, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
