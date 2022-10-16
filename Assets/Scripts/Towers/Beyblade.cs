@@ -70,7 +70,6 @@ public class Beyblade : Tower {
         base.Update();
         if (health <= 0) return;
 
-        // check if enemyInRange contains gameobject tagged as enemy
         if (enemyInRange != null) {
             foreach (var enemy in enemyInRange) {
                 if (enemy != null && enemy.gameObject.tag == ENEMY_TAG) {
@@ -89,6 +88,13 @@ public class Beyblade : Tower {
                 TriggerEffect();
             }
         }
+    }
+
+    public void OnDrawGizmosSelected() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, spinningDetectRadius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(firePoint.position, range);
     }
 
 }
