@@ -6,8 +6,8 @@ public class PlayerXP : MonoBehaviour {
     [SerializeField] private List<float> xpToUnlockSpellLevel;
 
     private float xp;
-    public SpellInventoryUI spellInventory;
-    public Transform spellOverlay;
+    private SpellInventoryUI spellInventory;
+    private Transform spellOverlay;
 
     private void Start() {
         xp = 0;
@@ -21,6 +21,9 @@ public class PlayerXP : MonoBehaviour {
 
     public void TryUnlockSpell() {
         Debug.Log($"xp {xp} [threshold {xpToUnlockSpellLevel[spellInventory.MaxLevelUnlocked]}]");
+        float xpThreshold =
+            spellInventory.MaxLevelUnlocked < xpToUnlockSpellLevel.Count ?
+            xpToUnlockSpellLevel[spellInventory.MaxLevelUnlocked] : xpToUnlockSpellLevel[xpToUnlockSpellLevel.Count - 1];
         if (xp >= xpToUnlockSpellLevel[spellInventory.MaxLevelUnlocked]) {
             spellOverlay.gameObject.SetActive(true);
             spellInventory.gameObject.SetActive(true);

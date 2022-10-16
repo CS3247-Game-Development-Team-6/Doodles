@@ -233,10 +233,10 @@ RectTransform:
   m_Father: {fileID: 5739307382905938305}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1959793112971853943
 CanvasRenderer:
@@ -305,6 +305,7 @@ MonoBehaviour:
   textCooldown: {fileID: 2604619676201921637}
   button: {fileID: 5603220970287260936}
   textCost: {fileID: 5739307382594981972}
+  spellInfo: {fileID: 0}
   spell: {fileID: 0}
 --- !u!1 &4015712457719602177
 GameObject:
@@ -585,7 +586,6 @@ GameObject:
   - component: {fileID: 5739307382905938305}
   - component: {fileID: 5739307382905938319}
   - component: {fileID: 5739307382905938318}
-  - component: {fileID: 2284787004033806484}
   - component: {fileID: 3779859284904044628}
   m_Layer: 5
   m_Name: GenericSpellInventoryCard
@@ -652,32 +652,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2284787004033806484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5739307382905938304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 12
-    m_Right: 12
-    m_Top: 12
-    m_Bottom: 12
-  m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &3779859284904044628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,5 +669,6 @@ MonoBehaviour:
   costText: {fileID: 5739307382594981972}
   selectedBg: {fileID: 21300000, guid: c29001bf44c924f4caefbb92d847ff60, type: 3}
   unselectedBg: {fileID: 21300000, guid: ba1cf05d3f31aa843bcee21a71b8c219, type: 3}
+  addedToInventoryColor: {r: 0.21698111, g: 0, b: 0, a: 1}
   spellUi: {fileID: 333983458787450025}
   spellInfo: {fileID: 0}

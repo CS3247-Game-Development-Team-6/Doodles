@@ -29,7 +29,9 @@ public class SpellInventoryUI : MonoBehaviour {
     public void AddSelectedToSpellManager() {
         // IF IS IN GAME, add to the SpellManager (Shop) 
         if (spellManager != null) {
-            spellManager.Add(currentSpellSelected.spellUi);
+            GameObject newSpell = Instantiate(currentSpellSelected.spellUi.gameObject, transform);
+            spellManager.Add(newSpell.GetComponent<SpellUI>());
+            currentSpellSelected.DisableSelect();
         }
     }
 
@@ -39,10 +41,8 @@ public class SpellInventoryUI : MonoBehaviour {
         for (int i = MaxLevelUnlocked + 1; i < transform.childCount; i++) {
             Transform child = transform.GetChild(i);
             CanvasGroup canvas = child.GetComponent<CanvasGroup>();
-            if (canvas != null) {
-                canvas.alpha = 0.5f;
-                // canvas.interactable = false;
-                canvas.blocksRaycasts = false;
+            if (canvas != null) { 
+                LockLevel(canvas);
             }
         }
     }
@@ -64,13 +64,26 @@ public class SpellInventoryUI : MonoBehaviour {
         spellDescriptionUI.SelectInfo(slot.spellInfo);
     }
 
+    private void LockLevel(CanvasGroup canvas) {
+        canvas.alpha = 0.5f;
+        canvas.blocksRaycasts = false;
+    }
+
+    private void UnlockLevel(CanvasGroup canvas) {
+        canvas.alpha = 1f;
+        canvas.blocksRaycasts = true;
+    }
+
     public void UnlockNextLevel() {
-        MaxLevelUnlocked++;
         Transform child = transform.GetChild(MaxLevelUnlocked);
         CanvasGroup canvas = child.GetComponent<CanvasGroup>();
-        canvas.alpha = 1f;
-        // canvas.interactable = true; 
-        canvas.blocksRaycasts = true;
+        LockLevel(canvas);
+
+        MaxLevelUnlocked++;
+
+        child = transform.GetChild(MaxLevelUnlocked);
+        canvas = child.GetComponent<CanvasGroup>();
+        UnlockLevel(canvas);
     }
 
 
