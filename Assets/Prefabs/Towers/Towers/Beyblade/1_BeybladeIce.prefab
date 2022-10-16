@@ -64,6 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15738c6d0ce334579a7eb5b944585fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spinningEffect: {fileID: 1892078723244562, guid: 079dc74c3ee8645f989ac421f29d8692, type: 3}
+  spinningSound: {fileID: 1983200342343509110, guid: 365e68602d09c4b50b58f3bd31528e2a, type: 3}
 --- !u!1 &8441780280962828979
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eb31a32a9acefbc4ca1c5429aaf70022, type: 3}
       propertyPath: m_Name
-      value: Beyblade_Upgraded_Blade_Ice
+      value: RotationBase
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb31a32a9acefbc4ca1c5429aaf70022, type: 3}

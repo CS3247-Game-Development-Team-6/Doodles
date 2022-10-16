@@ -6,9 +6,16 @@ public class Beyblade : Tower {
     private Collider[] enemyInDamageRange;
     private const bool PENETRATE_TARGET = false;
     private bool isSpinning = false;
+    private bool isEffectTriggered = false;
     public const string VFX_NAME = "VFX";
     private Transform rotationBase;
     private Transform firePoint;
+
+    [Header("Effect Prefabs")]
+    public GameObject spinningEffect;
+    public GameObject spinningSound;
+    protected GameObject spinningEffectParticle;
+    protected GameObject spinningEffectAudio;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
@@ -45,6 +52,20 @@ public class Beyblade : Tower {
         }
     }
 
+    // Trigger visual and sound effects
+    private void TriggerEffect() {
+        if (spinningEffectParticle == null && spinningEffectAudio == null) {
+            spinningEffectParticle = (GameObject)Instantiate(spinningEffect, transform.position, transform.rotation);
+            spinningEffectParticle.transform.parent = transform;
+            spinningEffectAudio = (GameObject)Instantiate(spinningSound, transform.position, transform.rotation);
+            spinningEffectAudio.transform.parent = transform;
+            spinningEffectAudio.GetComponent<AudioSource>().Play();
+        }
+
+        Destroy(spinningEffectParticle, 10f);
+        Destroy(spinningEffectAudio, 10f);
+    }
+
     public override void Update() {
         base.Update();
         if (health <= 0) return;
@@ -57,11 +78,16 @@ public class Beyblade : Tower {
                     break;
                 }
                 isSpinning = false;
+                isEffectTriggered = false;
             }
         }
 
         if (isSpinning) {
             rotationBase.Rotate(0f, 360f * Time.deltaTime, 0f);
+            if (!isEffectTriggered) {
+                isEffectTriggered = true;
+                TriggerEffect();
+            }
         }
     }
 

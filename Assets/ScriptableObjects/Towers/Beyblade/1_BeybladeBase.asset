@@ -13,31 +13,20 @@ MonoBehaviour:
   m_Name: 1_BeybladeBase
   m_EditorClassIdentifier: 
   towerName: Beyblade
-  towerDesc: 'Cost: $30
-
-    DMG: 100
-
-    Range: 1.5
-
-    Upgrade: $10, +17% DMG
-
-    One-time
-    Explosion, high damage.
-
-'
+  towerDesc: 
   range: 1.1
-  upgradeNum: 0
+  upgradeNum: 1
   fireRate: 0
   element: {fileID: 0}
-  cost: 40
-  health: 45
-  healthDecayRate: 1.2
+  cost: 20
+  health: 70
+  healthDecayRate: 1.1
   damageFixCost: 0
-  damageFixFactor: 0
+  damageFixFactor: 1.03
   allowedCellTypes: 0100000002000000
   speed: 100
   explosionRadius: 0
-  damage: 100
+  damage: 50
   penetratesEnemy: 0
   impactPrefab: {fileID: 4794043405585894037, guid: 593199f920f7c467aa6e73f15b9faf46, type: 3}
   towerPrefab: {fileID: 4210837861978277857, guid: 0f08065ade5984fb090437bd58db786a, type: 3}
@@ -45,8 +34,8 @@ MonoBehaviour:
   nextUpgrade: {fileID: 0}
   nextElements:
   - element: 0
-    tower: {fileID: 11400000, guid: 2eab2706ef12747f78f7ca60cfc0eed2, type: 2}
+    tower: {fileID: 11400000, guid: 1174cc7cf090149998932c072e1c212d, type: 2}
   - element: 1
-    tower: {fileID: 11400000, guid: c690d3a04b4304a858dfaf4f29647dbc, type: 2}
+    tower: {fileID: 11400000, guid: 23f06b6600128422c86eeee885897702, type: 2}
   - element: 2
-    tower: {fileID: 11400000, guid: 258293e351d9e4ef7b8d8b2125a03176, type: 2}
+    tower: {fileID: 11400000, guid: 8e931c4266fc3435e821d421c13ba87d, type: 2}

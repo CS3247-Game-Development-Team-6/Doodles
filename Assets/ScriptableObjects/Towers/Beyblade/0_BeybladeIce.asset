@@ -19,17 +19,17 @@ MonoBehaviour:
   fireRate: 0
   element: {fileID: 11400000, guid: 2a9f0209ebf96cc4f8a2c63413522b7e, type: 2}
   cost: 10
-  health: 40
-  healthDecayRate: 1.3
+  health: 60
+  healthDecayRate: 1.2
   damageFixCost: 0
-  damageFixFactor: 0
+  damageFixFactor: 1.05
   allowedCellTypes: 0100000002000000
   speed: 100
   explosionRadius: 0
-  damage: 30
+  damage: 40
   penetratesEnemy: 0
   impactPrefab: {fileID: 4794043405585894037, guid: 34521f685e30a4a3795702ccab642832, type: 3}
   towerPrefab: {fileID: 4210837861978277857, guid: 0d7b177ad497140c796f2e491f370b8c, type: 3}
   bulletPrefab: {fileID: 1315704262782356680, guid: a504eb93c3b194519a2bac2731ad2db9, type: 3}
-  nextUpgrade: {fileID: 0}
+  nextUpgrade: {fileID: 11400000, guid: 23f06b6600128422c86eeee885897702, type: 2}
   nextElements: []
