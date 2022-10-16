@@ -233,17 +233,17 @@ public class Enemy : MonoBehaviour {
     private void SpawnWhenDeath(GameObject _prefab, Vector3 _spawnPosition, Transform target,
         int _spawnCount) {
 
-        Vector3 minRange = target ? -(target.position - transform.position).normalized : new Vector3(0, 0, 0);
-        Vector3 maxRange = target && target != waypoints.GetPoint(waypoints.Length - 1) ?
+        Vector3 minOffset = target ? -(target.position - transform.position).normalized : new Vector3(0, 0, 0);
+        Vector3 maxOffset = target && target != waypoints.GetPoint(waypoints.Length - 1) ?
                     // current enemy is near base, to avoid spawning mobs into the base
                     (target.position - transform.position).normalized :
                     new Vector3(0, 0, 0);
 
         for (int i = 0; i < _spawnCount; i++) {
             Vector3 spawnOffset = new Vector3(
-                UnityEngine.Random.Range(minRange.x, maxRange.x),
-                UnityEngine.Random.Range(minRange.y, maxRange.y),
-                UnityEngine.Random.Range(minRange.z, maxRange.z)
+                UnityEngine.Random.Range(minOffset.x, maxOffset.x),
+                UnityEngine.Random.Range(minOffset.y, maxOffset.y),
+                UnityEngine.Random.Range(minOffset.z, maxOffset.z)
             );
             GameObject spawnGO = (GameObject)Instantiate(_prefab, _spawnPosition + spawnOffset, Quaternion.identity);
 
@@ -252,39 +252,23 @@ public class Enemy : MonoBehaviour {
                 Instantiate(spawnEffect, spawnGO.transform.position, Quaternion.identity, spawnGO.transform);
             }
 
-            /*
-             * set movement
-             */
             Enemy enemyScript = spawnGO.GetComponent<Enemy>();
             if (enemyScript != null) {
                 enemyScript.InitSpawnWhenDeath(this.chunkSpawner, waypointIndex);
+                chunkSpawner.numEnemiesLeftInWave++;
+                chunkSpawner.numEnemiesAlive++;
             }
-
-            /*
-             * wave enemy number
-             */
-            chunkSpawner.numEnemiesLeftInWave++;
-            chunkSpawner.numEnemiesAlive++;
         }
 
     }
 
     private void Die() {
         if (spawnsOnDeath && spawnCount > 0 && spawnPrefab != null) {
-            SpawnWhenDeath(spawnPrefab, transform.position,
-                target,
-                spawnCount
-            );
+            SpawnWhenDeath(spawnPrefab, transform.position, target, spawnCount);
         }
-
-
-        // add ink
         inkManager.ChangeInkAmount(inkGained);
-
-        // for new wave
         chunkSpawner.numEnemiesAlive--;
         chunkSpawner.numEnemiesLeftInWave--;
-
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
         Destroy(gameObject);

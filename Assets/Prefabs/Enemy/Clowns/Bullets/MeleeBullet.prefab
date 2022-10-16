@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7014667810315128063}
   - component: {fileID: 5195746852043850764}
   - component: {fileID: 8918444303886402276}
-  - component: {fileID: -6692084267365264393}
+  - component: {fileID: -4391339943023607291}
   m_Layer: 0
   m_Name: MeleeBullet
   m_TagString: Untagged
@@ -82,7 +82,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-6692084267365264393
+--- !u!114 &-4391339943023607291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,8 +91,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5753786456684779845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 106c2ddc9721c4f45bbcaa2605681b45, type: 3}
+  m_Script: {fileID: 11500000, guid: 07221e576bd039742a7f6aa7c367b977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   impactEffect: {fileID: 1750940742320366, guid: 26a1eb2dfd99f6f4ca129fcfd5492a21, type: 3}
   damageText: {fileID: 2675300404428900392, guid: 9a5c6034ef2a6a64d97fa4099150c76c, type: 3}
+  amountInkReduce: 10
