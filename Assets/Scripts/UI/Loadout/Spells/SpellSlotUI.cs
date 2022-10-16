@@ -20,7 +20,6 @@ public class SpellSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         inventoryUI = GetComponentInParent<SpellInventoryUI>();
         if (inventoryUI != null) Index = inventoryUI.Subscribe(this);
         else Debug.LogError($"inventoryUI not found in parent of {name}");
-
     }
 
     private void Update() {

@@ -9,6 +9,10 @@ public class InkMultiplierSpell : Spell {
 
     private void Start()
     {
+        if (imageEffectTime == null) {
+            Debug.LogWarning("TODO: Haven't put in imageEffectTime yet");
+            return;
+        }
         imageEffectTime.gameObject.SetActive(false);
         imageEffectTime.fillAmount = 0.0f;
     }

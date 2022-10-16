@@ -19,6 +19,7 @@ public class SpellDescriptionUI : MonoBehaviour {
     private void Update() {
         if (spellInfo == null) {
             spellName.text = "Spell";
+            spellDesc.text = "Hover over a spell to see it's effect!";
             cost.text = "--";
             level.text = "--";
             cooldown.text = "--";

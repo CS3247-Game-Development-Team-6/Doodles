@@ -1,22 +1,28 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
-public class SpellUI : MonoBehaviour
-{
+public class SpellUI : MonoBehaviour, IPointerDownHandler {
     [SerializeField] private Image imageCooldown;
     [SerializeField] private TMP_Text textCooldown;
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text textCost;
-    [SerializeField] private Spell spell;
+
+    [Header("Spell Script [Must attach child class from editor]")]
+    [SerializeField] public SpellInfo spellInfo;
+    [SerializeField] public Spell spell;
     private bool isCooldown = false;
     private float cooldownTimer = 0.0f;
+    public int Level { get; set; }
 
     private void Start() {
+        if (spell == null) return;
         textCost.text = spell.cost.ToString();
         textCooldown.gameObject.SetActive(false);
         imageCooldown.gameObject.SetActive(false);
         imageCooldown.fillAmount = 0.0f;
+        gameObject.name = spellInfo.spellName;
     }
 
     private void Update() {
@@ -51,6 +57,11 @@ public class SpellUI : MonoBehaviour
         if (!isCooldown) {
             StartCoroutine(spell.Activate(this));
         }
+    }
+
+    public void OnPointerDown(PointerEventData eventData) {
+        if (spell != null) UseSpell();
+        else Debug.LogError($"No spell registered under {name}");
     }
 
 }

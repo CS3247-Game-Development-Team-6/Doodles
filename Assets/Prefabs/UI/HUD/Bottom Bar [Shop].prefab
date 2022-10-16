@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.525, g: 0.1834061, b: 0.13067684, a: 1}
+  m_Color: {r: 0.525, g: 0.1834061, b: 0.13067684, a: 0.6}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -163,6 +163,7 @@ MonoBehaviour:
   currentTower: {fileID: 0}
   invalidAction: {fileID: 0}
   playerMovement: {fileID: 0}
+  isSettingInventory: 0
 --- !u!1001 &1989844170767757336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -789,7 +790,7 @@ PrefabInstance:
     - target: {fileID: 914212762986161286, guid: d8e31507477a7c64e8e2c456bb697ce5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: bd50570a2f1314c66b5dfa3ff61b68ff, type: 3}
     - target: {fileID: 914212762986161286, guid: d8e31507477a7c64e8e2c456bb697ce5, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -1097,7 +1098,7 @@ PrefabInstance:
     - target: {fileID: 914212762986161286, guid: d8e31507477a7c64e8e2c456bb697ce5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: c8f486dfbae1bc143b9fabf3e95aabd3, type: 3}
     - target: {fileID: 914212762986161286, guid: d8e31507477a7c64e8e2c456bb697ce5, type: 3}
       propertyPath: m_Color.a
       value: 1

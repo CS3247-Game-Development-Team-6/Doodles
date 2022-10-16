@@ -6,7 +6,10 @@ public class SpellInventoryUI : MonoBehaviour {
     public SpellSlotUI currentSpellSelected { get; private set; }
 
     [Header("UI Components")]
-    [SerializeField] private SpellDescriptionUI skillDescriptionUI;
+    [SerializeField] private SpellDescriptionUI spellDescriptionUI;
+    private SpellManager spellManager;
+
+    public int MaxLevelUnlocked { get; private set; }
 
     public int Subscribe(SpellSlotUI slot) {
         if (inventoryList == null) inventoryList = new List<SpellSlotUI>();
@@ -15,12 +18,32 @@ public class SpellInventoryUI : MonoBehaviour {
         return index;
     }
 
+    public void AddSelectedToSpellManager() {
+        // IF IS IN GAME, add to the SpellManager (Shop) 
+        if (spellManager != null) {
+            spellManager.Add(currentSpellSelected.spellUi);
+        }
+    }
+
+    public void AttachSpellManager(SpellManager spellManager) {
+        this.spellManager = spellManager;
+        // foreach (Transform child in transform) {
+        for (int i = MaxLevelUnlocked + 1; i < transform.childCount; i++) {
+            Transform child = transform.GetChild(i);
+            CanvasGroup canvas = child.GetComponent<CanvasGroup>();
+            if (canvas != null) {
+                canvas.alpha = 0.5f;
+                canvas.interactable = false;
+            }
+        }
+    }
+
     public void Hover(SpellInfo spellInfo) {
-        skillDescriptionUI.SetInfo(spellInfo);
+        spellDescriptionUI.SetInfo(spellInfo);
     }
 
     public void Unhover() {
-        skillDescriptionUI.ResetInfo();
+        spellDescriptionUI.ResetInfo();
     }
 
     public void Select(SpellSlotUI slot) {
@@ -28,9 +51,17 @@ public class SpellInventoryUI : MonoBehaviour {
             currentSpellSelected.background.sprite = currentSpellSelected.unselectedBg;
         }
         currentSpellSelected = slot;
-        skillDescriptionUI.SelectInfo(slot.spellInfo);
-        // IF IS IN GAME, add to the SpellManager (Shop) 
+        currentSpellSelected.background.sprite = currentSpellSelected.selectedBg;
+        spellDescriptionUI.SelectInfo(slot.spellInfo);
+    }
 
+    public int UnlockNextLevel() {
+        MaxLevelUnlocked++;
+        Transform child = transform.GetChild(MaxLevelUnlocked);
+        CanvasGroup canvas = child.GetComponent<CanvasGroup>();
+        canvas.alpha = 1f;
+        canvas.interactable = true;
+        return MaxLevelUnlocked;
     }
 
 }

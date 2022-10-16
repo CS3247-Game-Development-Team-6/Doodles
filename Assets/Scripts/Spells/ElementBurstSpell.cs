@@ -7,8 +7,11 @@ public class ElementBurstSpell : Spell {
     [SerializeField] private float elememtEffectAugmentationFactor=1.0f;
     [SerializeField] private Image imageEffectTime;
     private float effectTimer = 0.0f;
-    private void Start()
-    {
+    private void Start() {
+        if (imageEffectTime == null) {
+            Debug.LogWarning("TODO: Haven't put in imageEffectTime yet");
+            return;
+        }
         imageEffectTime.gameObject.SetActive(false);
         imageEffectTime.fillAmount = 0.0f;
     }
