@@ -33,7 +33,8 @@ public class SpellInventoryUI : MonoBehaviour {
             CanvasGroup canvas = child.GetComponent<CanvasGroup>();
             if (canvas != null) {
                 canvas.alpha = 0.5f;
-                canvas.interactable = false;
+                // canvas.interactable = false;
+                canvas.blocksRaycasts = false;
             }
         }
     }
@@ -55,14 +56,15 @@ public class SpellInventoryUI : MonoBehaviour {
         spellDescriptionUI.SelectInfo(slot.spellInfo);
     }
 
-    public int UnlockNextLevel() {
+    public void UnlockNextLevel() {
         MaxLevelUnlocked++;
         Transform child = transform.GetChild(MaxLevelUnlocked);
         CanvasGroup canvas = child.GetComponent<CanvasGroup>();
         canvas.alpha = 1f;
-        canvas.interactable = true;
-        return MaxLevelUnlocked;
+        // canvas.interactable = true; 
+        canvas.blocksRaycasts = true;
     }
+
 
 }
 
