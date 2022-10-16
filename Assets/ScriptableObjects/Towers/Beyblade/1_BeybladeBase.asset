@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
   m_Name: 1_BeybladeBase
   m_EditorClassIdentifier: 
-  towerName: Landmine
+  towerName: Beyblade
   towerDesc: 'Cost: $30
 
     DMG: 100
@@ -25,13 +25,13 @@ MonoBehaviour:
     Explosion, high damage.
 
 '
-  range: 1.5
+  range: 1.1
   upgradeNum: 0
   fireRate: 0
   element: {fileID: 0}
-  cost: 30
-  health: 1
-  healthDecayRate: 1
+  cost: 40
+  health: 45
+  healthDecayRate: 1.2
   damageFixCost: 0
   damageFixFactor: 0
   allowedCellTypes: 0100000002000000
@@ -39,7 +39,7 @@ MonoBehaviour:
   explosionRadius: 0
   damage: 100
   penetratesEnemy: 0
-  impactPrefab: {fileID: 4794043405585894037, guid: a22350dbd83d54b0990687ec8d58c950, type: 3}
+  impactPrefab: {fileID: 4794043405585894037, guid: 593199f920f7c467aa6e73f15b9faf46, type: 3}
   towerPrefab: {fileID: 4210837861978277857, guid: 0f08065ade5984fb090437bd58db786a, type: 3}
   bulletPrefab: {fileID: 1315704262782356680, guid: 4dcc2c1c411b14d3499f000ab5a0fc42, type: 3}
   nextUpgrade: {fileID: 0}

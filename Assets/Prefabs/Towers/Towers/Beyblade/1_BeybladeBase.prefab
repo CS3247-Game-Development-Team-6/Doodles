@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6724195651195510102}
   - component: {fileID: 1718193169022641333}
-  - component: {fileID: 8877644288227008687}
+  - component: {fileID: -4246806363812285979}
   m_Layer: 0
   m_Name: 1_BeybladeBase
   m_TagString: Landmine
@@ -52,7 +52,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &8877644288227008687
+--- !u!114 &-4246806363812285979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,8 +64,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15738c6d0ce334579a7eb5b944585fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfDestructEffect: {fileID: 0}
-  selfDestructSound: {fileID: 0}
 --- !u!1 &8441780280962828979
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 57860eaccf1bbdc4bbf22c5f54568c57, type: 3}
       propertyPath: m_Name
-      value: Beyblade_Upgraded_Blade
+      value: RotationBase
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57860eaccf1bbdc4bbf22c5f54568c57, type: 3}

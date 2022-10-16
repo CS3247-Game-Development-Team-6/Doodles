@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
   m_Name: 1_BeybladeIce
   m_EditorClassIdentifier: 
-  towerName: Ice Landmine
+  towerName: Ice Beyblade
   towerDesc: 
-  range: 2
+  range: 1.1
   upgradeNum: 0
   fireRate: 0
   element: {fileID: 11400000, guid: 2a9f0209ebf96cc4f8a2c63413522b7e, type: 2}
   cost: 10
-  health: 1
+  health: 50
   healthDecayRate: 1
   damageFixCost: 0
   damageFixFactor: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
   explosionRadius: 0
   damage: 120
   penetratesEnemy: 0
-  impactPrefab: {fileID: 4794043405585894037, guid: d8834e505283744789db73bfd6dd2b2d, type: 3}
+  impactPrefab: {fileID: 4794043405585894037, guid: 34521f685e30a4a3795702ccab642832, type: 3}
   towerPrefab: {fileID: 4210837861978277857, guid: abfff11c75f954cb1b5ddf8ae8b20abe, type: 3}
   bulletPrefab: {fileID: 1315704262782356680, guid: 8822071b4ef0f418498594ecb86e101b, type: 3}
   nextUpgrade: {fileID: 0}

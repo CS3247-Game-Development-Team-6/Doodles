@@ -12,23 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
   m_Name: 0_BeybladeWater
   m_EditorClassIdentifier: 
-  towerName: Water Landmine
+  towerName: Water Beyblade
   towerDesc: 
-  range: 2
+  range: 0.8
   upgradeNum: 0
   fireRate: 0
   element: {fileID: 11400000, guid: 5f2ac61151ef7e347b4a722691241670, type: 2}
   cost: 10
-  health: 1
-  healthDecayRate: 1
+  health: 40
+  healthDecayRate: 1.3
   damageFixCost: 0
   damageFixFactor: 0
   allowedCellTypes: 0100000002000000
   speed: 100
   explosionRadius: 0
-  damage: 120
+  damage: 30
   penetratesEnemy: 0
-  impactPrefab: {fileID: 4794043405585894037, guid: 6ea227af7e37d43c0b1123dd676e606c, type: 3}
+  impactPrefab: {fileID: 4794043405585894037, guid: 7d76c8a86e5494a8796d20165968bdf5, type: 3}
   towerPrefab: {fileID: 4210837861978277857, guid: 7e64d7d2bfdcb4a9e86e2af7a153b0c6, type: 3}
   bulletPrefab: {fileID: 1315704262782356680, guid: 4fe2b7c7eb4884500a73bf4136cedb27, type: 3}
   nextUpgrade: {fileID: 0}
