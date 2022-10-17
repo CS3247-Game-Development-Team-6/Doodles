@@ -58,7 +58,10 @@ public class SpellUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler,
         Debug.Log($"Clickced {name}");
         if (spell == null) {
             Debug.LogError($"No spell registered under {name}");
-        } else if (!isCooldown) {
+        } else if (!InkManager.instance.hasEnoughInk(spell.cost)) {
+            return;
+        }
+        else if (!isCooldown) {
             spell.Init(spellInfo);
             StartCoroutine(spell.Activate(this));
         }
@@ -66,6 +69,10 @@ public class SpellUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler,
     
     public void OnPointerDown(PointerEventData eventData) {
         Debug.Log($"Clicked {name}");
+        // the left clock has pointerID -1, the right click has pointerID -2, and middle clock has pointer ID -3, if user use middle or right click, just ignore the click;
+        if (eventData.pointerId!=-1){
+            return;
+        }
         if (spell != null) UseSpell();
         else Debug.LogError($"No spell registered under {name}");
     }
