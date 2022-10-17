@@ -26,10 +26,10 @@ public class GelExplosionTower : Tower {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
 
         float shortestDistance = Mathf.Infinity;
-        
+
         GameObject nearestEnemy = null;
         target = null;
-        
+
         foreach (GameObject enemy in enemies) {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy < shortestDistance) {
@@ -48,7 +48,7 @@ public class GelExplosionTower : Tower {
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         GelExplosionBullet bullet = bulletObj.GetComponent<GelExplosionBullet>();
         bullet.SetBulletInfo(towerInfo);
-        
+
         if (bullet != null) {
             bullet.Seek(target, PENETRATE_TARGET);
         }
@@ -56,7 +56,7 @@ public class GelExplosionTower : Tower {
 
     public override void Update() {
         base.Update();
-        if (!target) return;
+        if (!target || isStopShooting) return;
 
         // Enemy target lock on 
         Vector3 dir = target.position - transform.position;
@@ -71,5 +71,5 @@ public class GelExplosionTower : Tower {
 
         fireCountdown -= Time.deltaTime;
     }
-    
+
 }
