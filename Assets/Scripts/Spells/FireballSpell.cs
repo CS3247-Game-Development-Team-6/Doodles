@@ -79,7 +79,7 @@ public class FireballSpell : Spell
                 StartCoroutine(Deactivate(ui));
 
             }
-        }
+        };
 
     }
     public void cancelCast()
