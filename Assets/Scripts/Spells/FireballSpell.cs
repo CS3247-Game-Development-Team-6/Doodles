@@ -32,12 +32,13 @@ public class FireballSpell : Spell
         //TODO, this way is working, but probably could change to "standard way later, add collider to fireball and remove the isfalling flag
         if (inFalling)
         {
+
             if (player.position.y >= fireball.transform.position.y)
             {
                 Attack();
                 inFalling = false;
                 Destroy(fireball);
-                Destroy(indicator.gameObject);
+               
             }
             return;
 
@@ -59,10 +60,12 @@ public class FireballSpell : Spell
             targetImage.transform.position = player.position + hitPosDir * distance + OFFSET;
 
             // LEFT CLICK
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
+               
+                
 
-                if (hit.collider.gameObject.name == "GroundTest")
+                if (hit.collider.gameObject.name == "GroundTest" | hit.collider.gameObject.name == "InvisibleWall")
                 {
 
                     return;
@@ -72,6 +75,7 @@ public class FireballSpell : Spell
                 inFalling = true;
                 ChargeCost();
                 ui.ResetCooldownTimer();
+                indicator.gameObject.SetActive(false);
                 StartCoroutine(Deactivate(ui));
 
             }
@@ -82,28 +86,32 @@ public class FireballSpell : Spell
     {
         StartCoroutine(Deactivate(ui));
         SpellManager.instance.isCasting = false;
+        Destroy(indicator.gameObject);
      
     }
     public override IEnumerator Activate(SpellUI ui)
     {
-        SpellManager.instance.isCasting = true;
-        // is this okay?
-        indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
-        indicator.transform.position = player.position;
-        rangeImage = indicator.transform.Find("Range").GetComponent<Image>();
-        targetImage = indicator.transform.Find("Target").GetComponent<Image>();
-        radiusOfEffect = Mathf.Min(rangeRadius * 0.8f, radiusOfEffect);
-        rangeImage.rectTransform.sizeDelta = new Vector2(rangeRadius * 2, rangeRadius * 2);
-        targetImage.rectTransform.sizeDelta = new Vector2(radiusOfEffect * 2, radiusOfEffect * 2);
-        isSearching = true;
-        this.ui = ui;
-        yield return new WaitForEndOfFrame();
+        if (!isSearching)
+        {
+            SpellManager.instance.isCasting = true;
+            // is this okay?
+            indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
+            indicator.transform.position = player.position;
+            rangeImage = indicator.transform.Find("Range").GetComponent<Image>();
+            targetImage = indicator.transform.Find("Target").GetComponent<Image>();
+            radiusOfEffect = Mathf.Min(rangeRadius * 0.8f, radiusOfEffect);
+            rangeImage.rectTransform.sizeDelta = new Vector2(rangeRadius * 2, rangeRadius * 2);
+            targetImage.rectTransform.sizeDelta = new Vector2(radiusOfEffect * 2, radiusOfEffect * 2);
+            isSearching = true;
+            this.ui = ui;
+            yield return new WaitForEndOfFrame();
+        }
+       
     }
 
     public override IEnumerator Deactivate(SpellUI ui)
     {
         isSearching = false;
-        indicator.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(10);
 
@@ -116,11 +124,14 @@ public class FireballSpell : Spell
         Enemy[] allObjects = FindObjectsOfType<Enemy>();
         foreach (Enemy e in allObjects)
         {
+            Debug.Log("enemies distance to the center" + Vector3.Distance(targetImage.transform.position, e.transform.position));
             if (Vector3.Distance(targetImage.transform.position, e.transform.position) <= radiusOfEffect)
             {
+              
                 e.TakeDamage(damage, null);
             }
         }
+        Destroy(indicator.gameObject);
     }
 
 }
