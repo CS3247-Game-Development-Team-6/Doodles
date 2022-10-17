@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: 0_BarrierWallBase
   m_EditorClassIdentifier: 
   towerName: BarrierWall
-  towerDesc: 'Cost: $30
+  towerDesc: 'Cost: $25
 
     Health: 300
 
-    Upgrade: $15, +50% Health
+    Upgrade: $12, +50% Health
 
     A wall
     that blocks enemies.
@@ -27,7 +27,7 @@ MonoBehaviour:
   upgradeNum: 0
   fireRate: 0
   element: {fileID: 11400000, guid: d4c1a1e646b6edb47bab905e45f96683, type: 2}
-  cost: 30
+  cost: 25
   health: 300
   healthDecayRate: 1
   damageFixCost: 20
@@ -38,7 +38,7 @@ MonoBehaviour:
   damage: 100
   penetratesEnemy: 0
   impactPrefab: {fileID: 4794043405585894037, guid: a22350dbd83d54b0990687ec8d58c950, type: 3}
-  towerPrefab: {fileID: 4210837861978277857, guid: 8764db19e9d6c2843a8f876e6baefa13, type: 3}
+  towerPrefab: {fileID: 4210837861978277857, guid: 9b005e46592b4b140b6463910f9cf450, type: 3}
   bulletPrefab: {fileID: 1315704262782356680, guid: e9ded98d34bdc4432874dc24f3e6358f, type: 3}
   nextUpgrade: {fileID: 11400000, guid: 3bfb226650005214bbda698a637874e2, type: 2}
   nextElements: []
