@@ -692,7 +692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: 
   cost: 30
-  duration: 5
+  effectTime: 0
   cooldownTime: 10
   effectWidth: 2
   effectLength: 4
@@ -828,11 +828,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
---- !u!224 &4592298164715895482 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5739307382905938305, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
-  m_PrefabInstance: {fileID: 8078617093063514939}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6385960295093342863 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2919034580717177268, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
@@ -849,6 +844,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &4592298164715895482 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5739307382905938305, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
+  m_PrefabInstance: {fileID: 8078617093063514939}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8078617093063514936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,7 +863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: 
   cost: 0
-  duration: 0
+  effectTime: 0
   cooldownTime: 0
   doodleAttackIncrease: 0
   healthRecover: 0
@@ -904,6 +904,34 @@ PrefabInstance:
       propertyPath: spellInfo
       value: 
       objectReference: {fileID: 11400000, guid: f85a0e6242237594181c0ee6b301458f, type: 2}
+    - target: {fileID: 5603220970287260936, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603220970287260936, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603220970287260936, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8412600263347972689}
+    - target: {fileID: 5603220970287260936, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603220970287260936, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseSpell
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603220970287260936, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SpellUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603220970287260936, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5739307382594981972, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_text
       value: 30
@@ -1022,6 +1050,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
+--- !u!1 &8195998232210717044 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 117950687432757132, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
+  m_PrefabInstance: {fileID: 8078617093455967992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8412600263347972689 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 333983458787450025, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
+  m_PrefabInstance: {fileID: 8078617093455967992}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6385960295540326220}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cff43649aa530a42940a77da065b19c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6385960295540326220 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2919034580717177268, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
@@ -1046,13 +1090,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: 
   cost: 20
-  duration: 5
+  effectTime: 0
   cooldownTime: 10
   radiusOfEffect: 3
   rangeRadius: 1
   damage: 30
   indicatorPrefab: {fileID: 6436896666759797090, guid: c86b88a70b6a88b49bea579a3a0f3c9d, type: 3}
   fireballPrefab: {fileID: 2504852280125810859, guid: 083f94eb80795c2409049a57e45742b3, type: 3}
+--- !u!114 &5524312334228792821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195998232210717044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc6d70f215a9d14c987ff760d852126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onLeftClick:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8078617093455967997}
+        m_TargetAssemblyTypeName: FireballSpell, Assembly-CSharp
+        m_MethodName: cancelCast
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onMiddleClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &8078617093724723519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1198,13 +1275,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: 
   cost: 30
-  duration: 10
+  effectTime: 0
   cooldownTime: 15
   radiusOfEffect: 2
   rangeRadius: 1
   healingAmount: 100
   healthDeductForTower: 20
-  indicatorPrefab: {fileID: 0}
+  indicatorPrefab: {fileID: 6436896666759797090, guid: 09f32c29b0bfb1840a8a6217fec36ff5, type: 3}
 --- !u!1001 &8078617093803664681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1357,7 +1434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: 
   cost: 20
-  duration: 10
+  effectTime: 0
   cooldownTime: 20
   imageEffectTime: {fileID: 2657915260729682641}
   inkMultiplierIncrease: 2
@@ -1513,7 +1590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: 
   cost: 30
-  duration: 15
+  effectTime: 0
   cooldownTime: 20
   defense_reducing: 2
   imageEffectTime: {fileID: 2657915260074793730}
@@ -1670,7 +1747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectName: 
   cost: 30
-  duration: 20
+  effectTime: 0
   cooldownTime: 25
   elememtEffectLifeTimeFactor: 1.2
   elememtEffectAugmentationFactor: 2
