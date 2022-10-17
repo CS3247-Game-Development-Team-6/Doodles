@@ -21,6 +21,12 @@ public class FireballSpell : Spell
     private bool isSearching;
     private SpellUI ui;
     private bool inFalling;
+    private bool firstPress = true;
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerMovement>().transform;
+
+    }
 
     private void Update()
     {
@@ -33,7 +39,7 @@ public class FireballSpell : Spell
                 Attack();
                 inFalling = false;
                 Destroy(fireball);
-               
+
             }
             return;
 
@@ -57,8 +63,12 @@ public class FireballSpell : Spell
             // LEFT CLICK
             if (Input.GetMouseButtonDown(0))
             {
-               
-                
+
+                if (firstPress)
+                {
+                    firstPress = false;
+                    return;
+                }
 
                 if (hit.collider.gameObject.name == "GroundTest" | hit.collider.gameObject.name == "InvisibleWall")
                 {
@@ -74,21 +84,24 @@ public class FireballSpell : Spell
                 StartCoroutine(Deactivate(ui));
 
             }
-        };
+        }
 
     }
     public void cancelCast()
     {
+        if(! isSearching){
+            return;
+        }
         StartCoroutine(Deactivate(ui));
         SpellManager.instance.isCasting = false;
         Destroy(indicator.gameObject);
-     
+
     }
     public override IEnumerator Activate(SpellUI ui)
     {
-        player = FindObjectOfType<PlayerMovement>().transform;
-        if (player != null && !isSearching)
+        if (!isSearching)
         {
+            firstPress = true;
             SpellManager.instance.isCasting = true;
             // is this okay?
             indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
@@ -104,7 +117,7 @@ public class FireballSpell : Spell
             // yield return new WaitForEndOfFrame();
             yield return new WaitForFixedUpdate();
         }
-       
+
     }
 
     public override IEnumerator Deactivate(SpellUI ui)

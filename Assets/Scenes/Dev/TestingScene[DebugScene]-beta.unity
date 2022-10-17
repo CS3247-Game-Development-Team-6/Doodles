@@ -1002,6 +1002,55 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5253943536085481847, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
   m_PrefabInstance: {fileID: 351889076}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &354264854 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6139155084784201457, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+  m_PrefabInstance: {fileID: 476527616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &354264856 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9056975768137164608, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+  m_PrefabInstance: {fileID: 476527616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354264854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdea66429069cb47bf90a00607a953d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &354264860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354264854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc6d70f215a9d14c987ff760d852126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onLeftClick:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 354264856}
+        m_TargetAssemblyTypeName: FireballSpell, Assembly-CSharp
+        m_MethodName: cancelCast
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onMiddleClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &367379735 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5253943535555894459, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
@@ -2042,6 +2091,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9056975768942921857, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: cooldownTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9056975768942921857, guid: 636b4af0198ef8246beebccec196472b, type: 3}
       propertyPath: indicatorPrefab
       value: 
       objectReference: {fileID: 6436896666759797090, guid: c86b88a70b6a88b49bea579a3a0f3c9d, type: 3}
@@ -2084,7 +2137,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8724135853275954156, guid: 636b4af0198ef8246beebccec196472b, type: 3}
   m_PrefabInstance: {fileID: 476527616}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 354264854}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cff43649aa530a42940a77da065b19c, type: 3}

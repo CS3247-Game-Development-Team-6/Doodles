@@ -92,6 +92,9 @@ public class OverworkSpell : Spell {
     }
     public void cancelCast()
     {
+        if (!isSearching){
+            return;
+        }
         SpellManager.instance.isCasting = false;
         StartCoroutine(Deactivate(ui));
         Destroy(indicator.gameObject);
