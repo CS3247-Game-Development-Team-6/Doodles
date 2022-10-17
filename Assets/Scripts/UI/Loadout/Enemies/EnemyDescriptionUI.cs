@@ -32,6 +32,7 @@ public class EnemyDescriptionUI : MonoBehaviour {
         attack.text = enemyInfo.shotInfo.bulletDamage.ToString();
         defense.text = enemyInfo.defense.ToString();
         hp.text = enemyInfo.health.ToString();
+        enemyImage.sprite = enemyInfo.sprite;
         enemyImage.enabled = true;
     }
 
