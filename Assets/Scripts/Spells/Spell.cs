@@ -10,15 +10,17 @@ public class Spell : MonoBehaviour {
     public float effectTime { get; protected set; }
     public float cooldownTime { get; protected set; }
     */
-    [HideInInspector] public float cost;
-    [HideInInspector] public float effectTime;
-    [HideInInspector] public float cooldownTime;
+    public SpellInfo spellInfo;
+    public float cost;
+    public float effectTime;
+    public float cooldownTime;
 
     public virtual void Init(SpellInfo spellInfo) {
         if (spellInfo == null) {
             Debug.LogError($"SpellInfo not provided for {name}");
             return;
         }
+        this.spellInfo = spellInfo;
 
         cost = spellInfo.cost;
         effectTime = spellInfo.effectTime;
