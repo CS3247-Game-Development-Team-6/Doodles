@@ -20,6 +20,7 @@ public class OverworkSpell : Spell {
     private Transform player;
     private bool isSearching;
     private SpellUI ui;
+    private bool firstPress = true;
 
     /*
     private void Start() {
@@ -45,10 +46,16 @@ public class OverworkSpell : Spell {
 
             // LEFT CLICK
             if (Input.GetMouseButtonDown(0)) {
+                if (firstPress)
+                {
+                    firstPress = false;
+                    return;
+                }
                 if (hit.collider.gameObject.name == "GroundTest" | hit.collider.gameObject.name == "InvisibleWall")
                 {
                     return;
                 }
+             
                 SpellManager.instance.isCasting = false;
                 ChargeCost();
 
@@ -71,6 +78,7 @@ public class OverworkSpell : Spell {
         player = FindObjectOfType<PlayerMovement>().transform;
         if (!isSearching && player.GetComponent<PlayerHealth>().GetHealth()> healthDeductForTower) {
             SpellManager.instance.isCasting = true;
+            firstPress = true;
             indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
             indicator.transform.position = player.position;
             rangeImage = indicator.transform.Find("Range").GetComponent<Image>();
