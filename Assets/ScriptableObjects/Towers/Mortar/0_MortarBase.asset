@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
+  m_Name: 0_MortarBase
+  m_EditorClassIdentifier: 
+  towerName: Mortar
+  towerDesc: 'Cost: $75
+
+    DMG: 100
+
+    Range: 3-6
+
+    Explode Radius: 2
+
+    Upgrade:
+    $25, +20% DMG
+
+    Shots explode on impact, large AOE and damage.'
+  range: 6
+  upgradeNum: 0
+  fireRate: 0.25
+  element: {fileID: 0}
+  cost: 75
+  health: 200
+  healthDecayRate: 1.8
+  damageFixCost: 0
+  damageFixFactor: 0.2
+  allowedCellTypes: 00000000
+  speed: 10
+  explosionRadius: 2
+  damage: 100
+  penetratesEnemy: 0
+  impactPrefab: {fileID: 7270330396955014377, guid: 5a87950d3447a57408da16911c4acb8b, type: 3}
+  towerPrefab: {fileID: 2689636279851204399, guid: 34e6e46d05ef12d4b8dc6bedb2e3c06e, type: 3}
+  bulletPrefab: {fileID: 2267716634467308484, guid: ad58ee5444aa2474cab28fdf080713d1, type: 3}
+  nextUpgrade: {fileID: 11400000, guid: 2c9114d3e2fc6ac4387a3f835edc5c2b, type: 2}
+  nextElements:
+  - element: 0
+    tower: {fileID: 11400000, guid: 4f31768d99ec3aa47bd80cf7f13e045e, type: 2}
+  - element: 1
+    tower: {fileID: 11400000, guid: 54cd7e126fe65e742b4fa3f5eee33833, type: 2}
+  - element: 2
+    tower: {fileID: 11400000, guid: b4b8c73c25bdd91429175524e71bc2b2, type: 2}

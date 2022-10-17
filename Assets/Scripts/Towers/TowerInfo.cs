@@ -39,6 +39,8 @@ public class TowerInfo : ScriptableObject {
     public float damageFixFactor;
     /** the celltypes this tower can be built on. */
     public List<CellType> allowedCellTypes;
+    /** effect that causes tower to stop shooting */
+    public bool stoppable;
 
     [Header("Bullet")]
     /** Speed of bullet per second. */
@@ -80,6 +82,6 @@ public class TowerInfo : ScriptableObject {
         this.nextUpgrade.range = this.range;
         this.nextUpgrade.fireRate = this.fireRate;
         this.nextUpgrade.penetratesEnemy = this.penetratesEnemy;
-    } 
+    }
 
 }
