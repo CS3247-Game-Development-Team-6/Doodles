@@ -2588,6 +2588,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+--- !u!1 &1555788714 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6212984491611131555, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+  m_PrefabInstance: {fileID: 1555788713}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1555788715 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6185660578774322227, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+  m_PrefabInstance: {fileID: 1555788713}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1789031178 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7828996249860865855, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
@@ -2790,11 +2800,11 @@ PrefabInstance:
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: winUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1555788715}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: gameOverUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1555788714}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: nextSceneName
       value: spider_theme_dialogue

@@ -379,6 +379,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &56506076 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6185660578774322227, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+  m_PrefabInstance: {fileID: 476527616}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &82043829 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7889651949126038097, guid: 636b4af0198ef8246beebccec196472b, type: 3}
@@ -1443,6 +1448,10 @@ PrefabInstance:
     - target: {fileID: 2768851690306522593, guid: 636b4af0198ef8246beebccec196472b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976628461817791870, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3490980963328918093, guid: 636b4af0198ef8246beebccec196472b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2631,6 +2640,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078846375}
   m_CullTransparentMesh: 1
+--- !u!1 &1079796903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6212984491611131555, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+  m_PrefabInstance: {fileID: 476527616}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1222743743 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8448678081358125985, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
@@ -3354,11 +3368,11 @@ PrefabInstance:
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: winUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 56506076}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: gameOverUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1079796903}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: nextSceneName
       value: spider_theme_dialogue

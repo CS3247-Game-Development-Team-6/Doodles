@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class SpellUI : MonoBehaviour, IPointerDownHandler {
+public class SpellUI : MonoBehaviour {
     [SerializeField] private Image imageCooldown;
     [SerializeField] private Image effectCooldown;
     [SerializeField] private TMP_Text textCooldown;
@@ -54,15 +54,19 @@ public class SpellUI : MonoBehaviour, IPointerDownHandler {
     } 
 
     public void UseSpell() {
-        if (!isCooldown) {
+        if (spell == null) {
+            Debug.LogError($"No spell registered under {name}");
+        } else if (!isCooldown) {
             spell.Init(spellInfo);
             StartCoroutine(spell.Activate(this));
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData) {
+    /*
+    public void OnClick() {
         if (spell != null) UseSpell();
         else Debug.LogError($"No spell registered under {name}");
     }
+    */
 
 }

@@ -10,9 +10,9 @@ public class Spell : MonoBehaviour {
     public float effectTime { get; protected set; }
     public float cooldownTime { get; protected set; }
     */
-    public float cost;
-    public float effectTime;
-    public float cooldownTime;
+    [HideInInspector] public float cost;
+    [HideInInspector] public float effectTime;
+    [HideInInspector] public float cooldownTime;
 
     public virtual void Init(SpellInfo spellInfo) {
         if (spellInfo == null) {
