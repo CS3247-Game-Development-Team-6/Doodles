@@ -37,6 +37,8 @@ public class Tower : MonoBehaviour {
 
     // Tower effects
     private TowerEffects towerEffectsManager;
+    protected bool stoppable;
+    protected bool isStopShooting;
 
     public ElementInfo element { get; private set; }
     public TowerInfo towerInfo { get; protected set; }
@@ -47,6 +49,7 @@ public class Tower : MonoBehaviour {
 
     private void Awake() {
         towerEffectsManager = GetComponent<TowerEffects>();
+        isStopShooting = false;
     }
 
     /** Set tower info from Node. */
@@ -67,6 +70,7 @@ public class Tower : MonoBehaviour {
         this.nextUpgrade = towerInfo.nextUpgrade;
         this.nextElement = new Dictionary<ElementType, TowerInfo>(3);
         this.allowedCellTypes = towerInfo.allowedCellTypes;
+        this.stoppable = towerInfo.stoppable;
         foreach (ElementKeyValue pair in towerInfo.nextElements) {
             this.nextElement.Add(pair.element, pair.tower);
         }
@@ -149,5 +153,10 @@ public class Tower : MonoBehaviour {
 
     public void ApplyEffect(ITowerEffect effect) {
         StartCoroutine(towerEffectsManager.HandleEffect(effect));
+    }
+
+    public bool SetStopShooting(bool boo) {
+        if (stoppable) isStopShooting = boo;
+        return isStopShooting;
     }
 }

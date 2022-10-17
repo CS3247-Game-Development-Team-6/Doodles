@@ -10,7 +10,6 @@ public class EnemyBombDisableTower : MonoBehaviour {
     public float fireCountDown;
 
     [Header("Effect Prefabs")]
-    public GameObject selfDestructEffect;
     public GameObject selfDestructSound;
 
 
@@ -42,7 +41,6 @@ public class EnemyBombDisableTower : MonoBehaviour {
 
     // Trigger visual and sound effects
     private void TriggerEffect() {
-        GameObject selfDestructEffectParticle = (GameObject)Instantiate(selfDestructEffect, transform.position, transform.rotation);
         GameObject selfDestructEffectAudio = (GameObject)Instantiate(selfDestructSound, transform.position, transform.rotation);
         selfDestructEffectAudio.GetComponent<AudioSource>().Play();
     }

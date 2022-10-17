@@ -16,12 +16,12 @@ public class StopTowerShootingEffect : ITowerEffect {
     }
 
     public IEnumerator Activate(Tower tower) {
-        tower.enabled = false;
+        tower.SetStopShooting(true);
         yield return new WaitForSeconds(lifeTime);
     }
 
     public IEnumerator Deactivate(Tower tower) {
-        tower.enabled = true;
+        tower.SetStopShooting(false);
         yield return new WaitForEndOfFrame();
     }
 }

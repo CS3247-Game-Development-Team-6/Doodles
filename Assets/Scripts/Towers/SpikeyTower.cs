@@ -44,7 +44,7 @@ public class SpikeyTower : Tower {
             GameObject bulletObj = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
             Bullet bullet = bulletObj.GetComponent<Bullet>();
             bullet.SetBulletInfo(towerInfo);
-            
+
             if (bullet != null) {
                 bullet.Seek(targetTransform, PENETRATE_TARGET);
             }
@@ -54,6 +54,7 @@ public class SpikeyTower : Tower {
     public override void Update() {
         base.Update();
         if (health <= 0) return;
+        if (isStopShooting) return;
 
         if (isShooting && fireCountdown <= 0f) {
             Shoot();
@@ -81,13 +82,13 @@ public class SpikeyTower : Tower {
         }
 
         return arrOfTransforms;
-    } 
-    
+    }
+
     private (float, float) polarCoordinates(float radius, float angle) {
-        float x = (float) (radius * Mathf.Cos(angle));
-        float y = (float) (radius * Mathf.Sin(angle));
+        float x = (float)(radius * Mathf.Cos(angle));
+        float y = (float)(radius * Mathf.Sin(angle));
 
         return (x, y);
     }
-    
+
 }

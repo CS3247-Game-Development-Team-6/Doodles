@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour {
     private int spawnCount;
     private GameObject spawnPrefab;
     private GameObject spawnEffect;
-    private bool bombCarry;
+    private bool dieOnBase;
 
     [SerializeField] private EnemyInfo enemyInfo;
 
@@ -289,7 +289,7 @@ public class Enemy : MonoBehaviour {
         spawnCount = enemyInfo.spawnCount;
         spawnPrefab = enemyInfo.spawnPrefab;
         spawnEffect = enemyInfo.spawnEffect;
-        bombCarry = enemyInfo.isBombCarry;
+        dieOnBase = enemyInfo.dieOnBase;
         status = Status.NONE;
 
         model = transform.Find(MODEL_NAME).gameObject;
@@ -399,7 +399,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private void EndPath() {
-        if (bombCarry) {
+        if (dieOnBase) {
             Die();
         }
 

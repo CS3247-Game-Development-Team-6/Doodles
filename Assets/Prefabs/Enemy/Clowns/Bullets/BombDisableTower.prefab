@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 4
-  fireCountDown: 3
-  selfDestructEffect: {fileID: 1892078723244562, guid: 64978183634de471fa7992274f2b1fff, type: 3}
+  fireCountDown: 0
+  selfDestructEffect: {fileID: 0}
   selfDestructSound: {fileID: 1983200342343509110, guid: b5996c3e7d11f4372be6595d7118a326, type: 3}
 --- !u!1001 &3992492792943886297
 PrefabInstance:
@@ -97,6 +97,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 27e295963f4cec9419ab9b3a9fcd1716, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 27e295963f4cec9419ab9b3a9fcd1716, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 27e295963f4cec9419ab9b3a9fcd1716, type: 3}
