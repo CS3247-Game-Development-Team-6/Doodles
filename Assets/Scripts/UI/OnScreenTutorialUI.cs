@@ -108,5 +108,6 @@ public class OnScreenTutorialUI : MonoBehaviour {
     private void Update() {
         GetComponent<CanvasGroup>().alpha = 
             IsClosed ? 0 : 1;
+        GetComponent<CanvasGroup>().blocksRaycasts = !IsClosed;
     }
 }
