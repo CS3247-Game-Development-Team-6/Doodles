@@ -21,6 +21,7 @@ public class FireballSpell : Spell
     private bool isSearching;
     private SpellUI ui;
     private bool inFalling;
+    private bool firstPress = true;
     private void Start()
     {
         player = FindObjectOfType<PlayerMovement>().transform;
@@ -62,8 +63,12 @@ public class FireballSpell : Spell
             // LEFT CLICK
             if (Input.GetMouseButtonDown(0))
             {
-               
-                
+
+                if (firstPress)
+                {
+                    firstPress = false;
+                    return;
+                }
 
                 if (hit.collider.gameObject.name == "GroundTest" | hit.collider.gameObject.name == "InvisibleWall")
                 {
@@ -93,6 +98,7 @@ public class FireballSpell : Spell
     {
         if (!isSearching)
         {
+            firstPress = true;
             SpellManager.instance.isCasting = true;
             // is this okay?
             indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
