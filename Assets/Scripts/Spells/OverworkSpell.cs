@@ -45,6 +45,10 @@ public class OverworkSpell : Spell {
 
             // LEFT CLICK
             if (Input.GetMouseButtonDown(0)) {
+                if (hit.collider.gameObject.name == "GroundTest" | hit.collider.gameObject.name == "InvisibleWall")
+                {
+                    return;
+                }
                 SpellManager.instance.isCasting = false;
                 ChargeCost();
 
@@ -83,13 +87,14 @@ public class OverworkSpell : Spell {
    
     public override IEnumerator Deactivate(SpellUI ui) {
         isSearching = false;
-        Destroy(indicator.gameObject);
+  
         yield return new WaitForSeconds(10);
     }
     public void cancelCast()
     {
         SpellManager.instance.isCasting = false;
         StartCoroutine(Deactivate(ui));
+        Destroy(indicator.gameObject);
     }
     public void HealTower() {
         Tower[] allObjects = FindObjectsOfType<Tower>();
@@ -98,7 +103,8 @@ public class OverworkSpell : Spell {
                 t.IncreaseHealth(healingAmount);
             }
         }
-       
+        Destroy(indicator.gameObject);
+
     }
 
 }
