@@ -21,6 +21,7 @@ public class EnemySlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
         if (enemyInfo == null) return;
         if (earnText != null) earnText.text = $"+${enemyInfo.inkGained}";
+        if (image != null) image.sprite = enemyInfo.sprite;
     }
 
     public void OnPointerDown(PointerEventData eventData) {

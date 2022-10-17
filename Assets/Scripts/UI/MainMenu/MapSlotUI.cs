@@ -19,14 +19,12 @@ public class MapSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         inventoryUI = GetComponentInParent<MapInventoryUI>();
         if (inventoryUI != null) Index = inventoryUI.Subscribe(this);
         else Debug.LogError($"inventoryUI not found in parent of {name}");
+        if (mapInfo != null) {
+            if (image != null) image.sprite = mapInfo.levelPreview;
+            if (labelText != null) labelText.text = mapInfo.levelName;
+        }
         background.sprite = inventoryUI.selectedSlot == this ? selectedBg : unselectedBg;
         background.color = inventoryUI.selectedSlot == this ? selectedBgColor : unselectedBgColor;
-    }
-
-    private void Update() {
-        if (mapInfo == null) return;
-
-        labelText.text = mapInfo.levelName;
     }
 
     public void OnPointerDown(PointerEventData eventData) {
