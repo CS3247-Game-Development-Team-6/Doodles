@@ -60,7 +60,7 @@ public class FireballSpell : Spell
             targetImage.transform.position = player.position + hitPosDir * distance + OFFSET;
 
             // LEFT CLICK
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(0))
             {
                
                 
@@ -99,12 +99,14 @@ public class FireballSpell : Spell
             indicator.transform.position = player.position;
             rangeImage = indicator.transform.Find("Range").GetComponent<Image>();
             targetImage = indicator.transform.Find("Target").GetComponent<Image>();
+            // TODO: 
             radiusOfEffect = Mathf.Min(rangeRadius * 0.8f, radiusOfEffect);
             rangeImage.rectTransform.sizeDelta = new Vector2(rangeRadius * 2, rangeRadius * 2);
             targetImage.rectTransform.sizeDelta = new Vector2(radiusOfEffect * 2, radiusOfEffect * 2);
             isSearching = true;
             this.ui = ui;
-            yield return new WaitForEndOfFrame();
+            // yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
        
     }
@@ -124,10 +126,8 @@ public class FireballSpell : Spell
         Enemy[] allObjects = FindObjectsOfType<Enemy>();
         foreach (Enemy e in allObjects)
         {
-            Debug.Log("enemies distance to the center" + Vector3.Distance(targetImage.transform.position, e.transform.position));
             if (Vector3.Distance(targetImage.transform.position, e.transform.position) <= radiusOfEffect)
             {
-              
                 e.TakeDamage(damage, null);
             }
         }

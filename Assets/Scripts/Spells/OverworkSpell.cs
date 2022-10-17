@@ -65,7 +65,7 @@ public class OverworkSpell : Spell {
 
     public override IEnumerator Activate(SpellUI ui) {
         player = FindObjectOfType<PlayerMovement>().transform;
-        if (player.GetComponent<PlayerHealth>().GetHealth()> healthDeductForTower) {
+        if (!isSearching && player.GetComponent<PlayerHealth>().GetHealth()> healthDeductForTower) {
             SpellManager.instance.isCasting = true;
             indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
             indicator.transform.position = player.position;
@@ -76,9 +76,9 @@ public class OverworkSpell : Spell {
             targetImage.rectTransform.sizeDelta = new Vector2(radiusOfEffect * 2, radiusOfEffect * 2);
             isSearching = true;
             this.ui = ui;
+            // yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
-        
-        yield return new WaitForEndOfFrame();
     }
    
     public override IEnumerator Deactivate(SpellUI ui) {

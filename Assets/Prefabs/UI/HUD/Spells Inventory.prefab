@@ -1052,11 +1052,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
---- !u!1 &8195998232210717044 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 117950687432757132, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
-  m_PrefabInstance: {fileID: 8078617093455967992}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8412600263347972689 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 333983458787450025, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
@@ -1100,39 +1095,6 @@ MonoBehaviour:
   damage: 30
   indicatorPrefab: {fileID: 6436896666759797090, guid: c86b88a70b6a88b49bea579a3a0f3c9d, type: 3}
   fireballPrefab: {fileID: 2504852280125810859, guid: 083f94eb80795c2409049a57e45742b3, type: 3}
---- !u!114 &5524312334228792821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8195998232210717044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fc6d70f215a9d14c987ff760d852126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onLeftClick:
-    m_PersistentCalls:
-      m_Calls: []
-  onRightClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8078617093455967997}
-        m_TargetAssemblyTypeName: FireballSpell, Assembly-CSharp
-        m_MethodName: cancelCast
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onMiddleClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &8078617093724723519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1281,8 +1243,8 @@ MonoBehaviour:
   cost: 30
   effectTime: 0
   cooldownTime: 15
-  radiusOfEffect: 2
-  rangeRadius: 1
+  radiusOfEffect: 4
+  rangeRadius: 2
   healingAmount: 100
   healthDeductForTower: 20
   indicatorPrefab: {fileID: 6436896666759797090, guid: 09f32c29b0bfb1840a8a6217fec36ff5, type: 3}
