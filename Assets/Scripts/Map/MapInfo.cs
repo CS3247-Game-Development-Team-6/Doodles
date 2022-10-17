@@ -16,6 +16,7 @@ public class MapInfo : ScriptableObject {
     [Header("Map and Chunk Info")]
     
     [SerializeField] public string levelName;
+    [SerializeField] public Sprite levelPreview;
     [SerializeField] public string dialogueSceneName;
     [SerializeField] public string gameSceneName;
     [SerializeField] public Vector2Int gridSize;
