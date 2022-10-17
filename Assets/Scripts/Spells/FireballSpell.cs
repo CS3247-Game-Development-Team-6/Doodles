@@ -21,11 +21,6 @@ public class FireballSpell : Spell
     private bool isSearching;
     private SpellUI ui;
     private bool inFalling;
-    private void Start()
-    {
-        player = FindObjectOfType<PlayerMovement>().transform;
-
-    }
 
     private void Update()
     {
@@ -91,7 +86,8 @@ public class FireballSpell : Spell
     }
     public override IEnumerator Activate(SpellUI ui)
     {
-        if (!isSearching)
+        player = FindObjectOfType<PlayerMovement>().transform;
+        if (player != null && !isSearching)
         {
             SpellManager.instance.isCasting = true;
             // is this okay?

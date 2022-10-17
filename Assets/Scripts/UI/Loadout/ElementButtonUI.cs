@@ -18,17 +18,17 @@ public class ElementButtonUI : MonoBehaviour, IPointerDownHandler, IPointerEnter
         previousTowerInfo = descUI.towerInfo;
         if (!previousTowerInfo) return;
         if (isUpgrade) {
-            descUI.SetInfo(descUI.towerInfo.nextUpgrade, descUI.sprite, false);
+            descUI.SetInfo(descUI.towerInfo.nextUpgrade, false);
         } else {
             foreach (var elementTower in descUI.towerInfo.nextElements) {
                 if (elementTower.element != type) continue;
-                descUI.SetInfo(elementTower.tower, descUI.sprite, false);
+                descUI.SetInfo(elementTower.tower, false);
             }
         }
     }
     public void OnPointerExit(PointerEventData eventData) {
         if (!descUI) return;
-        descUI.SetInfo(previousTowerInfo, descUI.sprite);
+        descUI.SetInfo(previousTowerInfo);
     }
 
     public void OnPointerDown(PointerEventData eventData) {

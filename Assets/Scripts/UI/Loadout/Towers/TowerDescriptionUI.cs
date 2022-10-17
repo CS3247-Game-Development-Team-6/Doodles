@@ -15,9 +15,8 @@ public class TowerDescriptionUI : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI hp;
 
     [Header("Current Tower (Do not edit)")]
-    public int maxSlots; 
-    public TowerInfo towerInfo;
-    public Sprite sprite;
+    private int maxSlots; 
+    public TowerInfo towerInfo { get; private set; }
 
     private TowerInfo lastClicked;
     private bool isBase = true;
@@ -27,7 +26,7 @@ public class TowerDescriptionUI : MonoBehaviour {
             towerName.text = "View towers";
             towerDesc.text = $"You may choose up to {maxSlots} towers.";
             towerImage.enabled = false;
-            cost.text = range.text = attack.text = hp.text = "";
+            cost.text = range.text = attack.text = hp.text = "--";
             return;
         }
         towerName.text = towerInfo.towerName;
@@ -39,17 +38,16 @@ public class TowerDescriptionUI : MonoBehaviour {
         range.text = isBase ? towerInfo.range.ToString() : $"{towerInfo.range} [{rangeDiff}]";
         attack.text = isBase ? towerInfo.damage.ToString() : $"{towerInfo.damage} [{damageDiff}]";
         hp.text = towerInfo.health.ToString();
-        towerImage.sprite = sprite;
+        towerImage.sprite = towerInfo.sprite;
         towerImage.enabled = true;
     }
 
-    public void SetInfo(TowerInfo towerInfo, Sprite sprite) {
-        SetInfo(towerInfo, sprite, true);
+    public void SetInfo(TowerInfo towerInfo) {
+        SetInfo(towerInfo, true);
     }
 
-    public void SetInfo(TowerInfo towerInfo, Sprite sprite, bool isBase) {
+    public void SetInfo(TowerInfo towerInfo, bool isBase) {
         this.towerInfo = towerInfo;
-        this.sprite = sprite;
         this.isBase = isBase;
     }
 
@@ -60,10 +58,8 @@ public class TowerDescriptionUI : MonoBehaviour {
     public void ResetInfo() {
         if (!lastClicked) {
             towerInfo = null;
-            sprite = null;
         } else {
             towerInfo = lastClicked;
-            sprite = lastClicked.sprite;
         }
     }
 }

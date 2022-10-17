@@ -21,6 +21,7 @@ public class EnemyDescriptionUI : MonoBehaviour {
         if (enemyInfo == null) {
             enemyName.text = "Enemy";
             earn.text = "--";
+            attack.text = "--";
             defense.text = "--";
             hp.text = "--";
             enemyImage.enabled = false;
@@ -28,6 +29,7 @@ public class EnemyDescriptionUI : MonoBehaviour {
         }
         enemyName.text = enemyInfo.name;
         earn.text = enemyInfo.inkGained.ToString();
+        attack.text = enemyInfo.shotInfo.bulletDamage.ToString();
         defense.text = enemyInfo.defense.ToString();
         hp.text = enemyInfo.health.ToString();
         enemyImage.enabled = true;

@@ -17,9 +17,7 @@ public class TowerInventoryUI : MonoBehaviour {
 
     void Start() {
         selectedIndexes = new HashSet<int>();
-
         maxSlots = shop.MaxSlots;
-        towerDescriptionUI.maxSlots = shop.MaxSlots;
     }
 
     public int Subscribe(TowerSlotUI slot) {
