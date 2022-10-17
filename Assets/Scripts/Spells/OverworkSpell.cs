@@ -71,6 +71,7 @@ public class OverworkSpell : Spell {
             indicator.transform.position = player.position;
             rangeImage = indicator.transform.Find("Range").GetComponent<Image>();
             targetImage = indicator.transform.Find("Target").GetComponent<Image>();
+            radiusOfEffect = Mathf.Min(rangeRadius * 0.8f, radiusOfEffect);
             rangeImage.rectTransform.sizeDelta = new Vector2(rangeRadius * 2, rangeRadius * 2);
             targetImage.rectTransform.sizeDelta = new Vector2(radiusOfEffect * 2, radiusOfEffect * 2);
             isSearching = true;

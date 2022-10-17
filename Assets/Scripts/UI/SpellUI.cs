@@ -18,7 +18,8 @@ public class SpellUI : MonoBehaviour {
     public int Level { get; set; }
 
     private void Start() {
-        if (spell == null) return;
+        if (spell == null) Debug.LogWarning($"No spell on {name}");
+        spell.Init(spellInfo);
         textCost.text = spell.cost.ToString();
         textCooldown.gameObject.SetActive(false);
         imageCooldown.gameObject.SetActive(false);
