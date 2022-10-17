@@ -14,16 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Landmine
   sprite: {fileID: 21300000, guid: bd50570a2f1314c66b5dfa3ff61b68ff, type: 3}
-  towerDesc: 'Cost: $30
-
-    DMG: 100
-
-    Range: 1.5
+  towerDesc: 'Triggers explosion on path, high damage.
 
     Upgrade: $10, +17% DMG
-
-    One-time
-    Explosion, high damage.
 
 '
   range: 1.5
@@ -36,6 +29,7 @@ MonoBehaviour:
   damageFixCost: 0
   damageFixFactor: 0
   allowedCellTypes: 0100000002000000
+  stoppable: 0
   speed: 100
   explosionRadius: 0
   damage: 100
