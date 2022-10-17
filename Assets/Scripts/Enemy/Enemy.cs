@@ -77,6 +77,7 @@ public class Enemy : MonoBehaviour {
     private int spawnCount;
     private GameObject spawnPrefab;
     private GameObject spawnEffect;
+    private bool dieOnBase;
 
     [SerializeField] public EnemyInfo enemyInfo;
 
@@ -109,7 +110,8 @@ public class Enemy : MonoBehaviour {
 
     public Waypoints waypoints { get; set; }
     public ChunkSpawner chunkSpawner { get; set; }
-
+    public bool isShooting = false;
+    private EnemyShooting shootingScript;
     private InkManager inkManager;
 
     [Header("Unity Stuff")]
@@ -120,6 +122,7 @@ public class Enemy : MonoBehaviour {
     private void Awake() {
         inkManager = InkManager.instance;
         enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
+        shootingScript = GetComponent<EnemyShooting>();
     }
 
     /**
@@ -178,12 +181,10 @@ public class Enemy : MonoBehaviour {
         //DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
         //indicator.SetDamageTextFromFloat(amount);
     }
-    public float GetDamamgeMultiplier()
-    {
+    public float GetDamamgeMultiplier() {
         return damageAugmentationFactor;
     }
-    public void SetDamamgeMultiplier(float multiplyAmount)
-    {
+    public void SetDamamgeMultiplier(float multiplyAmount) {
         damageAugmentationFactor = multiplyAmount;
     }
     public void ApplyEffect(IEnemyEffect effect) {
@@ -203,15 +204,14 @@ public class Enemy : MonoBehaviour {
     }
 
     public void ReduceAttack(int atkDecreAmount) {
-        GetComponent<EnemyShooting>().ReduceBulletDamage(atkDecreAmount);
+        shootingScript.ReduceBulletDamage(atkDecreAmount);
     }
 
     public void RestoreAttack() {
-        GetComponent<EnemyShooting>().RestoreBulletDamage();
+        shootingScript.RestoreBulletDamage();
     }
 
-    public int GetDefense()
-    {
+    public int GetDefense() {
         return defense;
     }
     public void ReduceDefense(int defDecreAmount) {
@@ -219,8 +219,7 @@ public class Enemy : MonoBehaviour {
         else defense = enemyInfo.defense - defDecreAmount;
     }
 
-    public void SetDefense(int amount)
-    {
+    public void SetDefense(int amount) {
         defense = amount;
     }
 
@@ -231,12 +230,20 @@ public class Enemy : MonoBehaviour {
     /**
      * offset to separate between mobs
      */
-    private void SpawnWhenDeath(GameObject _prefab, Vector3 _spawnPosition, Vector3 minRange, Vector3 maxRange, int _spawnCount) {
+    private void SpawnWhenDeath(GameObject _prefab, Vector3 _spawnPosition, Transform target,
+        int _spawnCount) {
+
+        Vector3 minOffset = target ? -(target.position - transform.position).normalized : new Vector3(0, 0, 0);
+        Vector3 maxOffset = target && target != waypoints.GetPoint(waypoints.Length - 1) ?
+                    // current enemy is near base, to avoid spawning mobs into the base
+                    (target.position - transform.position).normalized :
+                    new Vector3(0, 0, 0);
+
         for (int i = 0; i < _spawnCount; i++) {
             Vector3 spawnOffset = new Vector3(
-                UnityEngine.Random.Range(minRange.x, maxRange.x),
-                UnityEngine.Random.Range(minRange.y, maxRange.y),
-                UnityEngine.Random.Range(minRange.z, maxRange.z)
+                UnityEngine.Random.Range(minOffset.x, maxOffset.x),
+                UnityEngine.Random.Range(minOffset.y, maxOffset.y),
+                UnityEngine.Random.Range(minOffset.z, maxOffset.z)
             );
             GameObject spawnGO = (GameObject)Instantiate(_prefab, _spawnPosition + spawnOffset, Quaternion.identity);
 
@@ -245,42 +252,23 @@ public class Enemy : MonoBehaviour {
                 Instantiate(spawnEffect, spawnGO.transform.position, Quaternion.identity, spawnGO.transform);
             }
 
-            /*
-             * set movement
-             */
             Enemy enemyScript = spawnGO.GetComponent<Enemy>();
             if (enemyScript != null) {
                 enemyScript.InitSpawnWhenDeath(this.chunkSpawner, waypointIndex);
+                chunkSpawner.numEnemiesLeftInWave++;
+                chunkSpawner.numEnemiesAlive++;
             }
-
-            /*
-             * wave enemy number
-             */
-            chunkSpawner.numEnemiesLeftInWave++;
-            chunkSpawner.numEnemiesAlive++;
         }
 
     }
 
     private void Die() {
         if (spawnsOnDeath && spawnCount > 0 && spawnPrefab != null) {
-            SpawnWhenDeath(spawnPrefab, transform.position,
-                -(target.position - transform.position).normalized,
-                target == waypoints.GetPoint(waypoints.Length - 1) ? // current enemy is near base, to avoid spawning mobs into the base
-                    new Vector3(0, 0, 0) :
-                    (target.position - transform.position).normalized,
-                spawnCount
-            );
+            SpawnWhenDeath(spawnPrefab, transform.position, target, spawnCount);
         }
-
-
-        // add ink
         inkManager.ChangeInkAmount(inkGained);
-
-        // for new wave
         chunkSpawner.numEnemiesAlive--;
         chunkSpawner.numEnemiesLeftInWave--;
-
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
         Destroy(gameObject);
@@ -301,6 +289,7 @@ public class Enemy : MonoBehaviour {
         spawnCount = enemyInfo.spawnCount;
         spawnPrefab = enemyInfo.spawnPrefab;
         spawnEffect = enemyInfo.spawnEffect;
+        dieOnBase = enemyInfo.dieOnBase;
         status = Status.NONE;
 
         model = transform.Find(MODEL_NAME).gameObject;
@@ -350,21 +339,11 @@ public class Enemy : MonoBehaviour {
             cooldown -= Time.deltaTime;
         }
 
-
-        if (GetComponent<EnemyShooting>().isShooting) {
-            if (GetStatus() == Status.FROZE) GetComponent<EnemyShooting>().enabled = false;
-            else GetComponent<EnemyShooting>().enabled = true;
-            // stop movement
+        if (isShooting || GetStatus() == Status.FROZE || !target) {
             animator.SetBool("isWalking", false);
             return;
         }
 
-        if (GetStatus() == Status.FROZE) {
-            animator.SetBool("isWalking", false);
-            return;
-        }
-
-        GetComponent<EnemyShooting>().enabled = true;
         animator.SetBool("isWalking", true);
 
         // movement direction to the target waypoint
@@ -383,7 +362,8 @@ public class Enemy : MonoBehaviour {
         var currentPosition = transform.position - chunkSpawner.transform.position;
         var targetPosition = target.position - chunkSpawner.transform.position;
 
-        if (Vector3.Distance(currentPosition, targetPosition) <= EPSILON) {
+        if (Vector3.Distance(currentPosition, targetPosition) <= EPSILON || target.CompareTag("Base") &&
+            Vector3.Distance(currentPosition, targetPosition) <= 0.5f) {
             GetNextWaypoint();
         }
 
@@ -419,6 +399,11 @@ public class Enemy : MonoBehaviour {
     }
 
     private void EndPath() {
+        if (dieOnBase) {
+            Die();
+        }
+
+        target = null;
         animator.SetBool("isWalking", false);
     }
 

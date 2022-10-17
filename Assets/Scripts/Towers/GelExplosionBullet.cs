@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GelExplosionBullet : Bullet {
     
-    public override void HitTarget(bool toDestroyThisFrame = true, Collider hitEnemy = null) {
+    protected override void HitTarget(bool toDestroyThisFrame = true, Collider hitEnemy = null) {
         base.HitTarget(toDestroyThisFrame, hitEnemy);
 
         // apply gel to enemy
@@ -16,7 +16,7 @@ public class GelExplosionBullet : Bullet {
         }
     }
 
-    public override void Explode() {
+    protected override void Explode() {
         base.Explode();
 
         // apply gel in an area

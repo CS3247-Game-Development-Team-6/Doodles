@@ -44,5 +44,6 @@ public class EnemyInfo : ScriptableObject {
     public int spawnCount;
     public GameObject spawnPrefab;
     public GameObject spawnEffect;
+    public bool dieOnBase;
 
 }

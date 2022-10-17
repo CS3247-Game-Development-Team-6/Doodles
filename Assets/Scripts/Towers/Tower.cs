@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(TowerEffects))]
 public class Tower : MonoBehaviour {
 
     // Tower info
@@ -34,12 +35,22 @@ public class Tower : MonoBehaviour {
     // Image
     protected Image healthBar;
 
+    // Tower effects
+    private TowerEffects towerEffectsManager;
+    protected bool stoppable;
+    protected bool isStopShooting;
+
     public ElementInfo element { get; private set; }
     public TowerInfo towerInfo { get; protected set; }
     public TowerInfo nextUpgrade { get; private set; }
     public ElementKeyValue[] nextElements { get; private set; }
     public Dictionary<ElementType, TowerInfo> nextElement { get; private set; }
     public List<CellType> allowedCellTypes { get; private set; }
+
+    private void Awake() {
+        towerEffectsManager = GetComponent<TowerEffects>();
+        isStopShooting = false;
+    }
 
     /** Set tower info from Node. */
     public virtual void SetTowerInfo(TowerInfo towerInfo) {
@@ -59,6 +70,7 @@ public class Tower : MonoBehaviour {
         this.nextUpgrade = towerInfo.nextUpgrade;
         this.nextElement = new Dictionary<ElementType, TowerInfo>(3);
         this.allowedCellTypes = towerInfo.allowedCellTypes;
+        this.stoppable = towerInfo.stoppable;
         foreach (ElementKeyValue pair in towerInfo.nextElements) {
             this.nextElement.Add(pair.element, pair.tower);
         }
@@ -72,12 +84,12 @@ public class Tower : MonoBehaviour {
         GameObject healthBarPrefab = Instantiate(TowerManager.instance.GetHealthBarPrefab(), transform.position, transform.rotation);
         healthBarPrefab.transform.SetParent(transform);
         healthBarPrefab.transform.position = new Vector3( // hard coded offset
-            healthBarPrefab.transform.position.x, 
-            healthBarPrefab.transform.position.y + 1.3f, 
+            healthBarPrefab.transform.position.x,
+            healthBarPrefab.transform.position.y + 1.3f,
             healthBarPrefab.transform.position.z + 0.5f);
         healthBarPrefab.transform.rotation = Quaternion.Euler(50, 0, 0);
         this.healthBar = healthBarPrefab.transform.Find("HealthBG/HealthBar").GetComponent<Image>();
-        
+
         // Prepare audio to be played
         GameObject damagedSoundPrefab = Instantiate(TowerManager.instance.GetSoundEffectPrefab(), transform.position, transform.rotation);
         damagedSoundPrefab.transform.SetParent(transform);
@@ -137,5 +149,14 @@ public class Tower : MonoBehaviour {
             this.damagedSound.Stop();
             damageEffectPlayed = false;
         }
+    }
+
+    public void ApplyEffect(ITowerEffect effect) {
+        StartCoroutine(towerEffectsManager.HandleEffect(effect));
+    }
+
+    public bool SetStopShooting(bool boo) {
+        if (stoppable) isStopShooting = boo;
+        return isStopShooting;
     }
 }

@@ -26,11 +26,10 @@ public class DamageMultiplierSpell : Spell {
     }
     private void Update()
     {
-        if (!Spell.InGame) return;
         if (effectTimer > 0.0f)
         {
             effectTimer -= Time.deltaTime;
-            imageEffectTime.fillAmount = effectTimer / duration;
+            imageEffectTime.fillAmount = effectTimer / effectTime;
            
         }
         else
@@ -42,7 +41,7 @@ public class DamageMultiplierSpell : Spell {
     {
         effect = new List<GameObject>();
         imageEffectTime.gameObject.SetActive(true);
-        effectTimer = duration;
+        effectTimer = effectTime;
         originalValues = new Dictionary<Enemy, int>();
         ChargeCost();
         Enemy[] allObjects = FindObjectsOfType<Enemy>();
@@ -60,7 +59,7 @@ public class DamageMultiplierSpell : Spell {
         ui.ResetCooldownTimer();
 
         // The effect will now be activated for {duration} seconds.
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(effectTime);
         StartCoroutine(Deactivate(ui));
     }
     public override IEnumerator Deactivate(SpellUI ui)

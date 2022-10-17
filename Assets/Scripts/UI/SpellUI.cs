@@ -3,8 +3,9 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class SpellUI : MonoBehaviour, IPointerDownHandler {
+public class SpellUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler {
     [SerializeField] private Image imageCooldown;
+    [SerializeField] private Image effectCooldown;
     [SerializeField] private TMP_Text textCooldown;
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text textCost;
@@ -17,7 +18,8 @@ public class SpellUI : MonoBehaviour, IPointerDownHandler {
     public int Level { get; set; }
 
     private void Start() {
-        if (spell == null) return;
+        if (spell == null) Debug.LogWarning($"No spell on {name}");
+        spell.Init(spellInfo);
         textCost.text = spell.cost.ToString();
         textCooldown.gameObject.SetActive(false);
         imageCooldown.gameObject.SetActive(false);
@@ -53,15 +55,27 @@ public class SpellUI : MonoBehaviour, IPointerDownHandler {
     } 
 
     public void UseSpell() {
-        
-        if (!isCooldown) {
+        Debug.Log($"Clickced {name}");
+        if (spell == null) {
+            Debug.LogError($"No spell registered under {name}");
+        } else if (!isCooldown) {
+            spell.Init(spellInfo);
             StartCoroutine(spell.Activate(this));
         }
     }
-
+    
     public void OnPointerDown(PointerEventData eventData) {
+        Debug.Log($"Clicked {name}");
         if (spell != null) UseSpell();
         else Debug.LogError($"No spell registered under {name}");
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) {
+        // inventoryUI.HoverTower(towerInfo, image.sprite);
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        // inventoryUI.UnhoverTower();
     }
 
 }

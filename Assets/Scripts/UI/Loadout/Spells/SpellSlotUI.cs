@@ -11,12 +11,15 @@ public class SpellSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     public TextMeshProUGUI costText;
     public Sprite selectedBg;
     public Sprite unselectedBg;
+    public Color addedToInventoryColor = Color.white;
     private SpellInventoryUI inventoryUI;
 
     public SpellUI spellUi;
     public SpellInfo spellInfo;
+    private bool selectable;
 
     void Start() {
+        selectable = true;
         inventoryUI = GetComponentInParent<SpellInventoryUI>();
         if (inventoryUI != null) Index = inventoryUI.Subscribe(this);
         else Debug.LogError($"inventoryUI not found in parent of {name}");
@@ -29,8 +32,14 @@ public class SpellSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         }
     }
 
+    public void DisableSelect() {
+        background.color = addedToInventoryColor;
+        background.sprite = unselectedBg;
+        selectable = false;
+    }
+
     public void OnPointerDown(PointerEventData eventData) {
-        inventoryUI.Select(this);
+        if (selectable) inventoryUI.Select(this);
     }
 
     public void OnPointerEnter(PointerEventData eventData) {

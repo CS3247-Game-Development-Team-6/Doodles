@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour {
                 Ray mouseRay = playerCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
                     mousePositionVector = raycastHit.point;
-                    Debug.DrawLine(mouseRay.origin, raycastHit.point);
+                    // Debug.DrawLine(mouseRay.origin, raycastHit.point);
                     // mousePositionVector.y = transform.position.y; // set to same vertical height as player
                 }
                 break;
@@ -189,6 +189,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void ProcessInputs() {
+        if (SpellManager.IsChoosingSpell) return;
         switch (state) {
             case State.Normal:
                 HandleMovementInputs();
