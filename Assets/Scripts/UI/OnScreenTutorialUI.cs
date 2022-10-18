@@ -75,13 +75,11 @@ public class OnScreenTutorialUI : MonoBehaviour {
     }
 
     public void SetPrevIndex() {
-        currentIndex = Mathf.Max(currentIndex-1, -1);
+        currentIndex = Mathf.Max(currentIndex-1, 0);
         if (currentIndex > 0) {
             SetText(notes[currentIndex].text);
             GetComponent<RectTransform>().anchoredPosition
                 = notes[currentIndex].rectPosition;
-        } else {
-            IsClosed = true;
         }
     }
 
