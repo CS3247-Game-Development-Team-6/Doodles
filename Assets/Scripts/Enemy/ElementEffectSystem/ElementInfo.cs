@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public enum ElementType {
-    FIRE, ICE, WATER, NONE
+    FIRE, ICE, WATER, NULL
 }
 
 [CreateAssetMenu(fileName = "NewElement", menuName = "Element Info")]
