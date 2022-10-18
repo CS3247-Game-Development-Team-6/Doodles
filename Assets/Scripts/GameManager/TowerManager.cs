@@ -172,10 +172,10 @@ public class TowerManager : MonoBehaviour {
     public void FixTower() {
         Tower selectedTower = selectedNode.towerObj.GetComponent<Tower>();
         InkManager inkManager = InkManager.instance;
-        if (!inkManager.hasEnoughInk(selectedTower.towerInfo.damageFixCost)) {
+        if (!inkManager.hasEnoughInk(selectedTower.damageFixCost)) {
             TriggerInsufficientInk();
         } else if (selectedTower.RestoreHealth()) {
-            inkManager.ChangeInkAmount(-selectedTower.towerInfo.damageFixCost);
+            inkManager.ChangeInkAmount(-selectedTower.damageFixCost);
         } else {
             Debug.LogError("Tower not fixed at Node " + selectedNode);
         }

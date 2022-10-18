@@ -9,8 +9,8 @@ public class Tower : MonoBehaviour {
     protected string towerName;
     protected int versionNum;
     protected int cost;
-    protected float damageFixCost;
     protected float damageFixFactor;
+    public float damageFixCost;
 
     // Macros
     public const string ENEMY_TAG = "Enemy";
@@ -134,7 +134,6 @@ public class Tower : MonoBehaviour {
     public void UpdateDamageFixCost() {
         float healthLoss = maxHealth - health;
         damageFixCost = Mathf.FloorToInt(damageFixFactor * healthLoss);
-        towerInfo.damageFixCost = damageFixCost;
     }
 
     public virtual void Update() {
