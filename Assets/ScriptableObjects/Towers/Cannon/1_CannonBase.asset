@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
   m_Name: 1_CannonBase
   m_EditorClassIdentifier: 
-  towerName: Cannonizer
+  towerName: Cannon 2
+  sprite: {fileID: 0}
   towerDesc: 
   range: 4
   upgradeNum: 1
@@ -21,7 +22,6 @@ MonoBehaviour:
   cost: 25
   health: 130
   healthDecayRate: 1.1
-  damageFixCost: 0
   damageFixFactor: 0.18
   allowedCellTypes: 00000000
   stoppable: 1

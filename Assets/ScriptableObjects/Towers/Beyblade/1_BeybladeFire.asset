@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
   m_Name: 1_BeybladeFire
   m_EditorClassIdentifier: 
-  towerName: Fire Beyblade
+  towerName: Fire Beyblade 2
+  sprite: {fileID: 0}
   towerDesc: 
   range: 1
   upgradeNum: 1
@@ -21,9 +22,9 @@ MonoBehaviour:
   cost: 20
   health: 80
   healthDecayRate: 1
-  damageFixCost: 0
   damageFixFactor: 1
   allowedCellTypes: 0100000002000000
+  stoppable: 0
   speed: 100
   explosionRadius: 0
   damage: 60

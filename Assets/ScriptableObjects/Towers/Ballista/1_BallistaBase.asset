@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
   m_Name: 1_BallistaBase
   m_EditorClassIdentifier: 
-  towerName: Ballista
+  towerName: Ballista 2
+  sprite: {fileID: 0}
   towerDesc: 
   range: 3
   upgradeNum: 1
@@ -21,9 +22,9 @@ MonoBehaviour:
   cost: 25
   health: 140
   healthDecayRate: 1.07
-  damageFixCost: 0
   damageFixFactor: 0.18
   allowedCellTypes: 00000000
+  stoppable: 0
   speed: 40
   explosionRadius: 1
   damage: 30
