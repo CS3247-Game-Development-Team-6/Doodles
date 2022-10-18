@@ -4,10 +4,19 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour {
     public static bool GameIsPaused;
 
+    public string menuSceneName;
     public GameObject pauseMenuUI;
     public GameObject gameplayCanvas;
     public GameObject raycastOccluder;
 
+
+    private void Start() {
+        if (menuSceneName.Length == 0) {
+            Debug.LogError($"Empty menuSceneName\nSet in {name}");
+        } else if (SceneManager.GetSceneByName(menuSceneName).IsValid()) {
+            Debug.LogError($"menuSceneName not found: {menuSceneName}\nSet in {name}");
+        }
+    }
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -66,7 +75,7 @@ public class PauseMenu : MonoBehaviour {
 
     public void LoadMenu() {
         Resume();
-        raycastOccluder.SetActive(false);
+        SceneManager.LoadScene(menuSceneName);
     }
 
     public void Retry() {
