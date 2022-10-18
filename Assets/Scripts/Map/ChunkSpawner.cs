@@ -23,6 +23,7 @@ public class ChunkSpawner : MonoBehaviour {
     public event EventHandler OnWaveActivity;
     public event EventHandler OnWaveEnd;
     private OnScreenTutorialUI tutorialUI;
+    private SpellInventoryUI spellInventoryUI;
 
     public int WavesLeft => waves == null ? 0 : Mathf.Max(0, waves.Length - waveIndex);
     public int WavesStarted => waveIndex;
@@ -39,6 +40,7 @@ public class ChunkSpawner : MonoBehaviour {
         if (levelInfo != null) waves = levelInfo.waves;
         this.spawnPointPos = spawnPointPos;
         tutorialUI = FindObjectOfType<OnScreenTutorialUI>();
+        spellInventoryUI = FindObjectOfType<SpellInventoryUI>();
     }
 
     public void ResetTimer() {
@@ -49,6 +51,7 @@ public class ChunkSpawner : MonoBehaviour {
         if (!initialized) { return; }
         // Pause if player is viewing tutorial
         if (!tutorialUI.IsClosed) return;
+        if (spellInventoryUI.gameObject.activeInHierarchy) return;
 
         /*
         if (!PlayerPrefs.HasKey(OnScreenTutorialUI.OnScreenTutorialPref)
