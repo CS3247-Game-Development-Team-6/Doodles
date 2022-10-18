@@ -9,7 +9,7 @@ public class Loadout : MonoBehaviour {
     public Shop shop;
     public EnemyInventoryUI enemyInventoryUI;
     public static MapInfo mapToLoad;
-    public List<TowerInfo> towersToLoad { get; private set; }
+    public List<TowerInfo> towersToLoad;
     public GameObject shopSlotPrefab;
 
     private void Start() {
@@ -32,8 +32,6 @@ public class Loadout : MonoBehaviour {
             return;
         }
 
-        GameObject loadoutToBeCarried = Instantiate(gameObject);
-        loadoutToBeCarried.AddComponent<DontDestroy>();
 
         towersToLoad = shop.GetTowersForLoading();
         loadingScreen.gameObject.SetActive(true);
