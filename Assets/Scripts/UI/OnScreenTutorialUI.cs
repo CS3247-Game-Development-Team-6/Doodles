@@ -45,7 +45,7 @@ public class OnScreenTutorialUI : MonoBehaviour {
         if (notes.Length > 0) SetIndex(0);
     }
 
-    public void SetNotes(ChunkInfoScriptableObject chunkInfo) {
+    public void SetNotes(ChunkInfo chunkInfo) {
         this.notes = chunkInfo.notes;
         SetIndex(0);
     }
@@ -108,5 +108,6 @@ public class OnScreenTutorialUI : MonoBehaviour {
     private void Update() {
         GetComponent<CanvasGroup>().alpha = 
             IsClosed ? 0 : 1;
+        GetComponent<CanvasGroup>().blocksRaycasts = !IsClosed;
     }
 }

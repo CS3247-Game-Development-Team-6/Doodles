@@ -16,7 +16,8 @@ public class TowerInfo : ScriptableObject {
 
     [Header("Stats")]
     public string towerName;
-    [TextArea(4, 8)] public string towerDesc;
+    public Sprite sprite;
+    [TextArea(4,8)] public string towerDesc;
 
     /** Range of detection and shooting. */
     [Range(0, MAX_RANGE)] public float range;

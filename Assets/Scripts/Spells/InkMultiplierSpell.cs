@@ -9,6 +9,10 @@ public class InkMultiplierSpell : Spell {
 
     private void Start()
     {
+        if (imageEffectTime == null) {
+            Debug.LogWarning("TODO: Haven't put in imageEffectTime yet");
+            return;
+        }
         imageEffectTime.gameObject.SetActive(false);
         imageEffectTime.fillAmount = 0.0f;
     }
@@ -18,7 +22,7 @@ public class InkMultiplierSpell : Spell {
         if (effectTimer>0.0f)
         {
             effectTimer -= Time.deltaTime;
-            imageEffectTime.fillAmount = effectTimer / duration;
+            imageEffectTime.fillAmount = effectTimer / effectTime;
         }
         else
         {
@@ -27,7 +31,7 @@ public class InkMultiplierSpell : Spell {
     }
     public override IEnumerator Activate(SpellUI ui) {
         imageEffectTime.gameObject.SetActive(true);
-        effectTimer = duration;
+        effectTimer = effectTime;
         ChargeCost();
         
         float mult = InkManager.instance.globalInkGainMultiplier * inkMultiplierIncrease;
@@ -35,7 +39,7 @@ public class InkMultiplierSpell : Spell {
         ui.ResetCooldownTimer();
 
         // The effect will now be activated for {duration} seconds.
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(effectTime);
         StartCoroutine(Deactivate(ui));
     }
 

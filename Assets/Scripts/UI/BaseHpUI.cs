@@ -13,8 +13,6 @@ public class BaseHpUI : MonoBehaviour {
     }
 
     private void Update() {
-        if (startBase.HpFract != baseHpSlider.fillAmount)
-            Debug.Log(startBase.hp + " " + startBase.HpFract);
         if (baseHpText) {
             baseHpText.text = startBase.hp.ToString();
         }

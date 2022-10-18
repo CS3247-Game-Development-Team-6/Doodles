@@ -1,33 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
     // Remember to add the desired scene to the open scenes list under File -> Build Settings
+    public static string MenuSceneName { get; private set; }
+    [SerializeField] private string[] levelSceneNames;
+    [SerializeField] private string[] dialogueSceneNames;
 
     public void Awake() {
-        if (!PlayerPrefs.HasKey(SettingsScriptableObject.MenuScenePref)) {
-            SettingsScriptableObject.Init();
+        if (!PlayerPrefs.HasKey(SettingsMenu.ResolutionHeightPref)) {
+            PlayerPrefs.SetInt(SettingsMenu.ResolutionWidthPref, 1920);
+            PlayerPrefs.SetInt(SettingsMenu.ResolutionHeightPref, 1080);
+            PlayerPrefs.SetInt(SettingsMenu.FullScreenPref, 1);
         }
 
-        string menuScene = PlayerPrefs.GetString(SettingsScriptableObject.MenuScenePref);
+        Screen.SetResolution(PlayerPrefs.GetInt(SettingsMenu.ResolutionWidthPref), 
+            PlayerPrefs.GetInt(SettingsMenu.ResolutionHeightPref), 
+            PlayerPrefs.GetInt(SettingsMenu.FullScreenPref) == 1);
 
-        // To prevent infinitely opening the same scene which crashes the app
-        if (SceneManager.GetActiveScene().name.Equals(menuScene)) return;
-
-        Screen.fullScreen =
-            PlayerPrefs.GetInt(SettingsScriptableObject.FullScreenPref) == SettingsScriptableObject.FULLSCREEN;
-
-        SceneManager.LoadScene(menuScene);
+        MenuSceneName = SceneManager.GetActiveScene().name;
     }
 
-    public void PlayGame() {
-        if (!PlayerPrefs.HasKey(SettingsScriptableObject.GameScenePref)) {
-            SettingsScriptableObject.Init();
+    public void LoadLevel(int index) {
+        if (levelSceneNames == null || levelSceneNames.Length <= index) {
+            Debug.LogError($"Level {index} not found!");
+            return;
         }
 
-        //string gameScene = PlayerPrefs.GetString(SettingsScriptableObject.GameScenePref);
+        SceneManager.LoadScene(levelSceneNames[index]);
+    }
+
+    public void StartNewGame() {
+        if (dialogueSceneNames == null || dialogueSceneNames.Length == 0) {
+            Debug.LogError("No dialogues found!");
+            return;
+        }
+
+        SceneManager.LoadScene(dialogueSceneNames[0]);
+    }
+
+    public void ContinueGame() {
         string gameScene = "tutorial_scene";
         SceneManager.LoadScene(gameScene);
     }

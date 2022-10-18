@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour {
     private GameObject spawnEffect;
     private bool dieOnBase;
 
-    [SerializeField] private EnemyInfo enemyInfo;
+    [SerializeField] public EnemyInfo enemyInfo;
 
     /**
      * Visibility

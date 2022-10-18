@@ -20,11 +20,13 @@ public class OverworkSpell : Spell {
     private Transform player;
     private bool isSearching;
     private SpellUI ui;
+    private bool firstPress = true;
 
+    /*
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
-     
     }
+    */
 
     private void Update() {
         if (!isSearching) return;
@@ -44,6 +46,16 @@ public class OverworkSpell : Spell {
 
             // LEFT CLICK
             if (Input.GetMouseButtonDown(0)) {
+                if (firstPress)
+                {
+                    firstPress = false;
+                    return;
+                }
+                if (hit.collider.gameObject.name == "GroundTest" | hit.collider.gameObject.name == "InvisibleWall")
+                {
+                    return;
+                }
+             
                 SpellManager.instance.isCasting = false;
                 ChargeCost();
 
@@ -63,31 +75,37 @@ public class OverworkSpell : Spell {
     }
 
     public override IEnumerator Activate(SpellUI ui) {
-        if (player.GetComponent<PlayerHealth>().GetHealth()> healthDeductForTower)
-        {
+        player = FindObjectOfType<PlayerMovement>().transform;
+        if (!isSearching && player.GetComponent<PlayerHealth>().GetHealth()> healthDeductForTower) {
             SpellManager.instance.isCasting = true;
+            firstPress = true;
             indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
             indicator.transform.position = player.position;
             rangeImage = indicator.transform.Find("Range").GetComponent<Image>();
             targetImage = indicator.transform.Find("Target").GetComponent<Image>();
+            radiusOfEffect = Mathf.Min(rangeRadius * 0.8f, radiusOfEffect);
             rangeImage.rectTransform.sizeDelta = new Vector2(rangeRadius * 2, rangeRadius * 2);
             targetImage.rectTransform.sizeDelta = new Vector2(radiusOfEffect * 2, radiusOfEffect * 2);
             isSearching = true;
             this.ui = ui;
+            // yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
-        
-        yield return new WaitForEndOfFrame();
     }
    
     public override IEnumerator Deactivate(SpellUI ui) {
         isSearching = false;
-        Destroy(indicator.gameObject);
+  
         yield return new WaitForSeconds(10);
     }
     public void cancelCast()
     {
+        if (!isSearching){
+            return;
+        }
         SpellManager.instance.isCasting = false;
         StartCoroutine(Deactivate(ui));
+        Destroy(indicator.gameObject);
     }
     public void HealTower() {
         Tower[] allObjects = FindObjectsOfType<Tower>();
@@ -96,7 +114,8 @@ public class OverworkSpell : Spell {
                 t.IncreaseHealth(healingAmount);
             }
         }
-       
+        Destroy(indicator.gameObject);
+
     }
 
 }

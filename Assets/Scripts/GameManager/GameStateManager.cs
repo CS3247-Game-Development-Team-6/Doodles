@@ -13,10 +13,12 @@ public class GameStateManager : MonoBehaviour {
         isGameEnded = false;
         map = FindObjectOfType<Map>();
 
+        /*
         GameObject[] ddols = GetDontDestroyOnLoadObjects();
         for (int i = 0; i < ddols.Length; i++) {
-            ddols[i].transform.Find("LoadingBar").gameObject.SetActive(false);
+            ddols[i].transform.Find(LoadingUI.loadingUIName).gameObject.SetActive(false);
         }
+        */
     }
 
     void Update() {

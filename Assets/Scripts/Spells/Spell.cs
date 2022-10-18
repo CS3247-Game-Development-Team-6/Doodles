@@ -5,10 +5,27 @@ public class Spell : MonoBehaviour {
 
     [SerializeField] public string effectName;
 
-    [SerializeField, Range(1, 1000)] public float cost;
-    [SerializeField, Range(1, 100)] public float duration;
-    [SerializeField, Range(1, 100)] public float cooldownTime;
+    /*
+    public float cost { get; protected set; }
+    public float effectTime { get; protected set; }
+    public float cooldownTime { get; protected set; }
+    */
+    public SpellInfo spellInfo;
+    public float cost;
+    public float effectTime;
+    public float cooldownTime;
 
+    public virtual void Init(SpellInfo spellInfo) {
+        if (spellInfo == null) {
+            Debug.LogError($"SpellInfo not provided for {name}");
+            return;
+        }
+        this.spellInfo = spellInfo;
+
+        cost = spellInfo.cost;
+        effectTime = spellInfo.effectTime;
+        cooldownTime = spellInfo.cooldownTime;
+    }
 
     protected void ChargeCost() {
         InkManager.instance.ChangeInkAmount(-cost);

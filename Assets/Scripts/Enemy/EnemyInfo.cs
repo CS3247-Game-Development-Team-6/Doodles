@@ -8,11 +8,13 @@ public class EnemyInfo : ScriptableObject {
     public float speed;
     public float health;
     public int defense;
+    public Sprite sprite;
 
     /**
      * Amount of ink after killing enemy
      */
     public float inkGained;
+    public EnemyShootingInfo shotInfo;
 
     /**
      * Custom visual effect

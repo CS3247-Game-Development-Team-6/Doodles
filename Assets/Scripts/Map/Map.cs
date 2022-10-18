@@ -46,16 +46,23 @@ public class Map : MonoBehaviour {
     public Chunk currentChunk { get; private set; }
     private List<Chunk> chunkList = new List<Chunk>();
     private Transform player;
-    private WaveUI waveUI;
+    private GameStateInfoUI mapInfoUI;
+    // private WaveUI waveUI;
+    private PlayerXP playerXP;
     private OnScreenTutorialUI tutorialUI;
     private int chunkWavesCleared;
     public int WavesCleared => chunkWavesCleared + (currentChunk == null ? 0 : currentChunk.GetComponent<ChunkSpawner>().WavesStarted - 1);
 
     private void Start() {
         player = FindObjectOfType<PlayerMovement>().transform;
-        waveUI = FindObjectOfType<WaveUI>();
+        playerXP = player.GetComponent<PlayerXP>();
+        mapInfoUI = FindObjectOfType<GameStateInfoUI>();
         tutorialUI = FindObjectOfType<OnScreenTutorialUI>();
-        numChunks = mapInfo.levelInfo.Length;
+        if (mapInfo == null) {
+            Debug.LogError($"No MapInfo set in {name}");
+            return;
+        }
+        numChunks = mapInfo.chunkInfo.Length;
         chunkSize = mapInfo.gridSize;
         chunkWavesCleared = 0;
         // choose one edge for start and the other edge for end
@@ -72,7 +79,7 @@ public class Map : MonoBehaviour {
                 currentChunk.prevChunk = chunkList[chunk - 1];
                 chunkList[chunk - 1].nextChunk = currentChunk;
             }
-            if (barrierPrefab != null) currentChunk.Init(barrierPrefab.transform, mapInfo.levelInfo[chunk]);
+            if (barrierPrefab != null) currentChunk.Init(barrierPrefab.transform, mapInfo.chunkInfo[chunk]);
             chunkList.Add(currentChunk);
         }
         if (chunkList.Count == 0) return;
@@ -124,7 +131,9 @@ public class Map : MonoBehaviour {
         chunk.StartSpawning();
         chunkSpawner.OnWaveEnd += OpenNextChunk;
         chunkSpawner.OnWaveEnd += tutorialUI.SetNotesForNextChunk;
-        waveUI.SetSpawner(chunkSpawner);
+        if (!mapInfoUI) Debug.LogError("No MapInfoUI found in this Scene");
+        else mapInfoUI.SetChunkSpawner(chunkSpawner);
+        // waveUI.SetSpawner(chunkSpawner);
         chunk.SetVisible(true);
         currentChunk = chunk;
     }
@@ -140,6 +149,12 @@ public class Map : MonoBehaviour {
         currentChunk.OpenBarrier();
         tutorialUI.Reset();
         currentChunk.MainBarrier.CrossBarrier += ActivateNextChunk;
+
+        if (!playerXP) Debug.LogError("No PlayerXP for in this Scene");
+        else { 
+            playerXP.IncreaseByXPPerChunk();
+            playerXP.TryUnlockSpell();
+        }
         // currentChunk.MainBarrier.CloseBarrier += DeactivatePrevChunk;
     }
 

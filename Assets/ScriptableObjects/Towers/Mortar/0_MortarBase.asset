@@ -13,18 +13,11 @@ MonoBehaviour:
   m_Name: 0_MortarBase
   m_EditorClassIdentifier: 
   towerName: Mortar
-  towerDesc: 'Cost: $75
+  sprite: {fileID: 21300000, guid: 708696cc629c51b4e93144db6c271da0, type: 3}
+  towerDesc: 'Fires long range mortars, large AOE and damage.
 
-    DMG: 100
-
-    Range: 3-6
-
-    Explode Radius: 2
-
-    Upgrade:
-    $25, +20% DMG
-
-    Shots explode on impact, large AOE and damage.'
+    Upgrade: $25,
+    +20% DMG'
   range: 6
   upgradeNum: 0
   fireRate: 0.25
@@ -35,6 +28,7 @@ MonoBehaviour:
   damageFixCost: 0
   damageFixFactor: 0.2
   allowedCellTypes: 00000000
+  stoppable: 0
   speed: 10
   explosionRadius: 2
   damage: 100

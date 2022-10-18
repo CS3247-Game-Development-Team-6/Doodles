@@ -13,19 +13,13 @@ MonoBehaviour:
   m_Name: 0_GelBase
   m_EditorClassIdentifier: 
   towerName: Gel Explosion
-  towerDesc: 'Cost: $50
+  sprite: {fileID: 21300000, guid: 772c23bed23e6374eaed0480a3cb319d, type: 3}
+  towerDesc: 'Shoots globs of slowing gel.
 
-    DMG: 20
+    Upgrade: $25, +20% DMG and Explode
+    Radius
 
-    Range: 3
-
-    Explode Radius: 1
-
-    Upgrade:
-    $25, +20% DMG and Explode Radius
-
-    Arrows explode on impact, small AOE damage,
-    AOE slow.'
+'
   range: 4
   upgradeNum: 0
   fireRate: 1
