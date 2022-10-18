@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour {
     public GameObject pauseMenuUI;
     public GameObject gameplayCanvas;
     public GameObject raycastOccluder;
-
+    public LoadingUI loadingScreen;
 
     private void Start() {
         if (menuSceneName.Length == 0) {
@@ -75,7 +75,14 @@ public class PauseMenu : MonoBehaviour {
 
     public void LoadMenu() {
         Resume();
-        SceneManager.LoadScene(menuSceneName);
+        if (loadingScreen != null) {
+            loadingScreen.gameObject.SetActive(true);
+            loadingScreen.AddSceneToLoad(menuSceneName);
+            loadingScreen.StartLoad();
+        } else {
+            Debug.LogWarning("No loading screen found. Add one later!");
+            SceneManager.LoadScene(menuSceneName);
+        }
     }
 
     public void Retry() {

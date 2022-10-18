@@ -18,6 +18,7 @@ public class TooltipSystem : MonoBehaviour {
     }
 
     public static void Hide() {
+        if (!instance) return;
         instance.tooltip.SetVisibility(false);
     }
 
