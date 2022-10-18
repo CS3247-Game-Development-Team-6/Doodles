@@ -22,7 +22,6 @@ public class Shop : MonoBehaviour {
             //LoadTowersIntoShop(FindObjectOfType<Loadout>());
             LoadoutContainer loadout = FindObjectOfType<LoadoutContainer>();
             LoadTowersIntoShop(loadout);
-            Destroy(loadout.gameObject);
         } else {
             emptySlots = new List<ShopTowerUI>();
             slots = new List<ShopTowerUI>();
