@@ -13,14 +13,18 @@ public class MapInfo : ScriptableObject {
     [SerializeField] public GameObject straightPrefab;
     [SerializeField] public GameObject waypointPrefab;
 
-    [Header("LevelInfo")]
+    [Header("Map and Chunk Info")]
     
     [SerializeField] public string levelName;
+    [SerializeField] public Sprite levelPreview;
+    [SerializeField] public string dialogueSceneName;
+    [SerializeField] public string gameSceneName;
     [SerializeField] public Vector2Int gridSize;
     [SerializeField] public int minScore = 20;
     [SerializeField,Range(0,1)] public float startingInkFraction;
     [SerializeField,Range(0,1)] public float inkRegenRate;
-    [SerializeField] public ChunkInfoScriptableObject[] levelInfo;
+    [SerializeField,Range(0,2000)] public float totalInk;
+    [SerializeField] public ChunkInfo[] chunkInfo;
 
     public void GeneratePrefabs(Chunk chunk) {
         if (!chunk.cellsGenerated) return;

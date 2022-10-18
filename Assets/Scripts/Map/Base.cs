@@ -9,7 +9,7 @@ public class Base : MonoBehaviour {
     public int hp { get;  private set; }
     public float HpFract => (float)hp / maxHealth;
 
-    private void Start() {
+    private void Awake() {
         hp = maxHealth;
     }
 

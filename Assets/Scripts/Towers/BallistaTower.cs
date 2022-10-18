@@ -25,10 +25,10 @@ public class BallistaTower : Tower {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
 
         float shortestDistance = Mathf.Infinity;
-        
+
         GameObject nearestEnemy = null;
         target = null;
-        
+
         foreach (GameObject enemy in enemies) {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy < shortestDistance) {
@@ -47,7 +47,7 @@ public class BallistaTower : Tower {
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         bullet.SetBulletInfo(towerInfo);
-        
+
         if (bullet != null) {
             bullet.Seek(target, PENETRATE_TARGET);
         }
@@ -57,9 +57,9 @@ public class BallistaTower : Tower {
         base.Update();
 
         if (health <= 0) return;
-        if (!target) return;
+        if (!target || isStopShooting) return;
 
-        
+
         // Enemy target lock on 
         Vector3 dir = target.position - transform.position;
         Quaternion lookAtRotation = Quaternion.LookRotation(dir);
@@ -73,5 +73,5 @@ public class BallistaTower : Tower {
 
         fireCountdown -= Time.deltaTime;
     }
-    
+
 }

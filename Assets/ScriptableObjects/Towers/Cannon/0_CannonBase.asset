@@ -13,16 +13,10 @@ MonoBehaviour:
   m_Name: 0_CannonBase
   m_EditorClassIdentifier: 
   towerName: Cannon
-  towerDesc: 'Cost: $30
-
-    DMG: 30
-
-    Range: 4
+  sprite: {fileID: 21300000, guid: 75db3c3abcd6d1b46bb90a61ab46e61b, type: 3}
+  towerDesc: 'Single target, high damage.
 
     Upgrade: $25, +20% DMG
-
-    Single
-    target, high damage.
 
 '
   range: 4
@@ -32,9 +26,10 @@ MonoBehaviour:
   cost: 30
   health: 100
   healthDecayRate: 1
-  damageFixCost: 0
+  damageFixCost: 13
   damageFixFactor: 0.15
   allowedCellTypes: 00000000
+  stoppable: 1
   speed: 40
   explosionRadius: 0
   damage: 30

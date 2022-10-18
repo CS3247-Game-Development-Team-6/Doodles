@@ -2,10 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+// DEPRECATING, DO NOT USE (SEE MapInfoUI.cs instead)
 public class WaveUI : MonoBehaviour {
     private ChunkSpawner chunkSpawner;
     [SerializeField] private Text wavesCounterUI;
     [SerializeField] private IndicatorUI waveCountdownIndicator;
+    [SerializeField] private Image slider;
     [SerializeField] private Text enemiesLeftText;
     [SerializeField] private Button skipWaveCountdownButton;
 

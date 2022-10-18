@@ -16,7 +16,7 @@ public class EnemyBullet : MonoBehaviour {
         map = FindObjectOfType<Map>();
     }
 
-    public void Seek(Transform _target, float _speed, int damage, bool _enableCameraShake) {
+    public virtual void Seek(Transform _target, float _speed, int damage, bool _enableCameraShake) {
         target = _target;
         speed = _speed;
         bulletDamage = damage;
@@ -54,7 +54,7 @@ public class EnemyBullet : MonoBehaviour {
         Destroy(gameObject);    // destroys the bullet
     }
 
-    private void Damage(Transform _target) {
+    public virtual void Damage(Transform _target) {
         if (_target.CompareTag("Player")) {
             _target.GetComponent<PlayerHealth>().TakeDamage(bulletDamage);
         }

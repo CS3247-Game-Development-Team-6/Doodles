@@ -34,9 +34,6 @@ public class TowerSelectionManager : MonoBehaviour {
         for (int i = 0; i < cardAmount; i++) {
             AddSelectionCards(i);
         }
-
-        // TEMPORARY
-        towerDescriptionUI.maxSlots = validCardAllowed;
     }
 
     void Update() {

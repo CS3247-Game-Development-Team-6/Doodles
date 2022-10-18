@@ -11,6 +11,7 @@ public class ChunkSpawner : MonoBehaviour {
 
     public WaveSet[] waves;
     public int waveIndex { get; private set; }
+    public int chunkIndex { get; private set; }
 
     public Vector3 spawnPointPos { get; set; }
     public float timeBetweenWaves { get; private set; }  = 2f;
@@ -26,13 +27,14 @@ public class ChunkSpawner : MonoBehaviour {
     public int WavesLeft => waves == null ? 0 : Mathf.Max(0, waves.Length - waveIndex);
     public int WavesStarted => waveIndex;
 
-    public void Init(ChunkInfoScriptableObject levelInfo, Vector3 spawnPointPos) {
+    public void Init(int chunkId, ChunkInfo levelInfo, Vector3 spawnPointPos) {
         initialized = true;
         numEnemiesAlive = 0;
         numEnemiesLeftInWave = 0;
         isSpawningEnemy = false;
         countdownTimer = timeBetweenWaves;
         waveIndex = 0;
+        chunkIndex = chunkId;
 
         if (levelInfo != null) waves = levelInfo.waves;
         this.spawnPointPos = spawnPointPos;

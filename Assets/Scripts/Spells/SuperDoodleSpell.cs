@@ -12,17 +12,17 @@ public class SuperDoodleSpell : Spell {
     private GameObject doodleBuff;
     private void Start()
     {
-        player = FindObjectOfType<PlayerMovement>().transform;
+        // player = FindObjectOfType<PlayerMovement>().transform;
         imageEffectTime.gameObject.SetActive(false);
         imageEffectTime.fillAmount = 0.0f;
 
     }
-    private void Update()
-    {
+
+    private void Update() {
         if (effectTimer > 0.0f)
         {
             effectTimer -= Time.deltaTime;
-            imageEffectTime.fillAmount = effectTimer / duration;
+            imageEffectTime.fillAmount = effectTimer / effectTime;
             doodleBuff.transform.position = player.position;
         }
         else
@@ -33,13 +33,14 @@ public class SuperDoodleSpell : Spell {
     }
     public override IEnumerator Activate(SpellUI ui)
     {
+        player = FindObjectOfType<PlayerMovement>().transform;
         doodleBuff = Instantiate(DoodleBuffPrefab, player.position, Quaternion.identity);
         imageEffectTime.gameObject.SetActive(true);
-        effectTimer = duration;
+        effectTimer = effectTime;
         ChargeCost();
         ui.ResetCooldownTimer();
         SpellManager.instance.doodleDamageIncreasing = doodleAttackIncrease;
-        float effectTimer2 =duration;
+        float effectTimer2 =effectTime;
         PlayerHealth health = player.GetComponent<PlayerHealth>();
         while (effectTimer2>=0.0f)
         {

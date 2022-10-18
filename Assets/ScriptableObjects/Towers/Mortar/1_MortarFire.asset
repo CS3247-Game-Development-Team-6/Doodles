@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
+  m_Name: 1_MortarFire
+  m_EditorClassIdentifier: 
+  towerName: Fire Mortar
+  towerDesc: 
+  range: 6
+  upgradeNum: 1
+  fireRate: 0.25
+  element: {fileID: 11400000, guid: 5503097e096315346a110e0488d9c960, type: 2}
+  cost: 40
+  health: 200
+  healthDecayRate: 1.8
+  damageFixCost: 0
+  damageFixFactor: 0.2
+  allowedCellTypes: 00000000
+  speed: 10
+  explosionRadius: 2
+  damage: 80
+  penetratesEnemy: 0
+  impactPrefab: {fileID: 7270330396955014377, guid: 5a87950d3447a57408da16911c4acb8b, type: 3}
+  towerPrefab: {fileID: 2689636279851204399, guid: c66ea2582ef366e42911a269cc38e38e, type: 3}
+  bulletPrefab: {fileID: 5019152116910721628, guid: a154b692c7bb8f4479c7c4c8adc2ff30, type: 3}
+  nextUpgrade: {fileID: 0}
+  nextElements: []

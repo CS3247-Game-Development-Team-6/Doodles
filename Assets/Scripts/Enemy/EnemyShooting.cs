@@ -17,12 +17,12 @@ public class EnemyShooting : MonoBehaviour {
     /**
      * Shooting mechanism
      */
-    public bool isShooting = false;
     public GameObject bulletPrefab;
     public Transform firePoint;
     private Transform target; // player or base
     private Transform rangeCenter;
     private float fireCountDown = 0f;
+    private Enemy enemyScript;
 
     /**
      * Rotation
@@ -58,6 +58,7 @@ public class EnemyShooting : MonoBehaviour {
         rangeCenter = transform.GetChild(3).gameObject.transform;
         rotationSpeed = 10f;
         fireCountDown = 1f / fireRate;
+        enemyScript = GetComponent<Enemy>();
     }
 
     // dont need to find target every frame
@@ -128,12 +129,12 @@ public class EnemyShooting : MonoBehaviour {
 
 
     private void Update() {
-        if (target == null) {
-            isShooting = false;
+        if (target == null || enemyScript.GetStatus() == Status.FROZE) {
+            enemyScript.isShooting = false;
             fireCountDown = 1f / fireRate;
             return;
         }
-        isShooting = true;
+        enemyScript.isShooting = true;
 
         // rotate enemy using quaternion
         Vector3 dir = target.position - transform.position;
