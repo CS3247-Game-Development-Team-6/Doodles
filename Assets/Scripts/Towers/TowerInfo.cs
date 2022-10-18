@@ -33,8 +33,6 @@ public class TowerInfo : ScriptableObject {
     public float health;
     /** health decay rate is the rate at which the tower loses health. */
     public float healthDecayRate;
-    /** the cost to fix a damaged tower*/
-    // public float damageFixCost;
     /** the factor that is multiplied by when fixing a tower*/
     public float damageFixFactor;
     /** the celltypes this tower can be built on. */
