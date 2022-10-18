@@ -3,12 +3,15 @@ using UnityEngine.EventSystems;
 public class NodeUITooltipTrigger : TooltipTrigger {
     private TowerInfo currentTower;
     private TowerInfo newTower;
+    private Tower currentTowerInstance;
     private bool isUpgrade;
     public bool isFixButton = false;
     public bool isNotAvailable { get; set; } 
 
-    public void SetTowerInfo(TowerInfo currentTower, TowerInfo newTower) {
+    public void SetTowerInfo(TowerInfo currentTower, TowerInfo newTower, Tower currentTowerInstance = null) {
         this.currentTower = currentTower;
+        this.currentTowerInstance = currentTowerInstance;
+
         if (newTower != null) {
             this.newTower = newTower;
             this.isUpgrade = currentTower.element == newTower.element 
@@ -26,7 +29,7 @@ public class NodeUITooltipTrigger : TooltipTrigger {
     }
 
     private string FormatHeader() {
-        if (isFixButton) return header + $@" [${currentTower.damageFixCost}]";
+        if (isFixButton && currentTowerInstance != null) return header + $@" [${currentTowerInstance.damageFixCost}]";
         if (!newTower || !currentTower) return header;
         return header + $@" [${newTower.cost}]";
     }

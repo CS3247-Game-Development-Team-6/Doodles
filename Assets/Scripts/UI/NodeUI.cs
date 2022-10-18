@@ -91,7 +91,7 @@ public class NodeUI : MonoBehaviour
             upgrade.tooltip.SetTowerInfo(selectedNode.tower.towerInfo, selectedNode.tower.nextUpgrade);
             
             fix.tooltip.isFixButton = true;
-            fix.tooltip.SetTowerInfo(selectedNode.tower.towerInfo, selectedNode.tower.nextUpgrade);
+            fix.tooltip.SetTowerInfo(selectedNode.tower.towerInfo, selectedNode.tower.nextUpgrade, selectedNode.tower);
             
             TowerInfo currTower = selectedNode.tower.towerInfo;
 
