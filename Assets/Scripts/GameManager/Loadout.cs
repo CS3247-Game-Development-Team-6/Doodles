@@ -32,6 +32,9 @@ public class Loadout : MonoBehaviour {
             return;
         }
 
+        GameObject loadoutToBeCarried = Instantiate(gameObject);
+        loadoutToBeCarried.AddComponent<DontDestroy>();
+
         towersToLoad = shop.GetTowersForLoading();
         loadingScreen.gameObject.SetActive(true);
         loadingScreen.AddSceneToLoad(mapToLoad.gameSceneName);
