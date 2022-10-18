@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1c5786862b98c44836f8cab5529806, type: 3}
   m_Name: Demon
   m_EditorClassIdentifier: 
+  enemyName: Demon
+  description: 'Deal melee attack with huge damage. Skill: spawn 3 normal ghost after
+    death'
   speed: 0.5
   health: 1500
   defense: 15
@@ -28,3 +31,4 @@ MonoBehaviour:
   spawnCount: 3
   spawnPrefab: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
   spawnEffect: {fileID: 100006, guid: 67099659247ae7449b114698a82c6213, type: 3}
+  dieOnBase: 0

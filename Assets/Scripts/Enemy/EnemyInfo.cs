@@ -3,6 +3,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Enemy Info", menuName = "Enemy Info")]
 public class EnemyInfo : ScriptableObject {
     /**
+     * UI stuff
+     */
+    public string enemyName;
+    [TextArea(3, 6)] public string description;
+
+    /**
      * Basic stats
      */
     public float speed;

@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1c5786862b98c44836f8cab5529806, type: 3}
   m_Name: NormalClown
   m_EditorClassIdentifier: 
+  enemyName: Normal Clown
+  description: Deals melee attack with normal damage. Has normal health and normal
+    walking speed.
   speed: 1
   health: 200
   defense: 10
+  sprite: {fileID: 0}
   inkGained: 3
+  shotInfo: {fileID: 0}
   deathEffect: {fileID: 6496939036694839794, guid: fa175d5aa33423f4a9406bdc4bd544aa, type: 3}
   element: {fileID: 0}
   damageMultiplier: 1.5
@@ -26,3 +31,4 @@ MonoBehaviour:
   spawnCount: 0
   spawnPrefab: {fileID: 0}
   spawnEffect: {fileID: 0}
+  dieOnBase: 0
