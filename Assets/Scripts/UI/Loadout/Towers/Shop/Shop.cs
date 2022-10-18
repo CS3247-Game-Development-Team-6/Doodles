@@ -19,7 +19,10 @@ public class Shop : MonoBehaviour {
 
     private void Start() {
         if (!isSettingInventory) {
-            LoadTowersIntoShop(FindObjectOfType<Loadout>());
+            //LoadTowersIntoShop(FindObjectOfType<Loadout>());
+            LoadoutContainer loadout = FindObjectOfType<LoadoutContainer>();
+            LoadTowersIntoShop(loadout);
+            Destroy(loadout.gameObject);
         } else {
             emptySlots = new List<ShopTowerUI>();
             slots = new List<ShopTowerUI>();
@@ -71,6 +74,33 @@ public class Shop : MonoBehaviour {
     }
 
     public void LoadTowersIntoShop(Loadout loadout) {
+        if (!loadout) {
+            Debug.LogWarning("No Loadout found, default inventory displayed");
+            return;
+        }
+
+        List<TowerInfo> towerInfos = loadout.towersToLoad;
+        GameObject slotPrefab = loadout.shopSlotPrefab;
+        if (!slotPrefab.GetComponent<ShopTowerUI>()) {
+            Debug.LogError($"Shop Slot prefab {name} is not of type TowerSlotUI");
+            return;
+        }
+
+        // Start from blank
+        foreach (Transform child in transform) {
+            Destroy(child.gameObject);
+        }
+
+        emptySlots = new List<ShopTowerUI>();
+        slots = new List<ShopTowerUI>();
+        foreach (var towerInfo in towerInfos) {
+            ShopTowerUI shopSlot = Instantiate(slotPrefab, transform).GetComponent<ShopTowerUI>();
+            shopSlot.towerInfo = towerInfo;
+            slots.Add(shopSlot);
+        }
+    }
+
+    public void LoadTowersIntoShop(LoadoutContainer loadout) {
         if (!loadout) {
             Debug.LogWarning("No Loadout found, default inventory displayed");
             return;
