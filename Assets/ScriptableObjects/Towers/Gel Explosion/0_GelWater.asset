@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
   m_Name: 0_GelWater
   m_EditorClassIdentifier: 
-  towerName: Water Gel Explosion
+  towerName: Water Sticky
+  sprite: {fileID: 0}
   towerDesc: 
   range: 3
   upgradeNum: 0
@@ -21,7 +22,6 @@ MonoBehaviour:
   cost: 40
   health: 160
   healthDecayRate: 1.75
-  damageFixCost: 0
   damageFixFactor: 0.25
   allowedCellTypes: 00000000
   stoppable: 1

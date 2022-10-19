@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe4a39bb2062e524580495433674019c, type: 3}
+  m_Name: 3_Clown_Chunk_2
+  m_EditorClassIdentifier: 
+  levelName: 1_Spider_Chunk_1
+  startingInkPercentage: 0.5
+  waves:
+  - enemy: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
+    count: 1
+    rate: 1
+    enemy2: {fileID: 6540121397901334477, guid: bb654b05217e54e409befc0b55becb13, type: 3}
+    count2: 1
+    rate2: 1
+    enemy3: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
+    count3: 1
+    rate3: 1
+  - enemy: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
+    count: 3
+    rate: 1
+    enemy2: {fileID: 6540121397901334477, guid: bb654b05217e54e409befc0b55becb13, type: 3}
+    count2: 1
+    rate2: 1
+    enemy3: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
+    count3: 2
+    rate3: 1
+  - enemy: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
+    count: 2
+    rate: 1
+    enemy2: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
+    count2: 3
+    rate2: 1
+    enemy3: {fileID: 6540121397901334477, guid: bb654b05217e54e409befc0b55becb13, type: 3}
+    count3: 2
+    rate3: 1
+  isFogChunk: 0
+  notes:
+  - text: 'More clowns to come, Dan. Stand tall, we got this.
+
+'
+    rectPosition: {x: 231, y: -174, z: 0}

@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1c5786862b98c44836f8cab5529806, type: 3}
   m_Name: FireRangeSpider
   m_EditorClassIdentifier: 
+  enemyName: Fire Spider
+  description: Deals range attack with lower damage.  Immune to fire tower. Receives
+    50% more damage from water tower.
   speed: 0.7
   health: 600
   defense: 20
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: b20ebc1a3872ead408bd5fafb64730c0, type: 3}
   inkGained: 30
   shotInfo: {fileID: 11400000, guid: 2266f9f163ac96640a51598db28e9ade, type: 2}
   deathEffect: {fileID: 6496939036694839794, guid: 093c5d3c57ae03945ba14fc782d1fb9e, type: 3}
@@ -28,3 +31,4 @@ MonoBehaviour:
   spawnCount: 0
   spawnPrefab: {fileID: 0}
   spawnEffect: {fileID: 0}
+  dieOnBase: 0
