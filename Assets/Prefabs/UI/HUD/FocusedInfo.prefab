@@ -1713,9 +1713,6 @@ MonoBehaviour:
   range: {fileID: 736012970724563841}
   attack: {fileID: 736012971751932692}
   hp: {fileID: 736012971017018762}
-  maxSlots: 5
-  towerInfo: {fileID: 0}
-  sprite: {fileID: 0}
 --- !u!1 &736012970580734968
 GameObject:
   m_ObjectHideFlags: 0
@@ -5609,6 +5606,7 @@ GameObject:
   - component: {fileID: 736012971764686193}
   - component: {fileID: 736012971764686192}
   - component: {fileID: 736012971764686195}
+  - component: {fileID: 1007300561537567598}
   m_Layer: 5
   m_Name: Upgrade
   m_TagString: Untagged
@@ -5732,6 +5730,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpgrade: 1
   type: 0
+--- !u!225 &1007300561537567598
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736012971764686206}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &736012971831848822
 GameObject:
   m_ObjectHideFlags: 0
