@@ -40,6 +40,7 @@ public class EnemyShooting : MonoBehaviour {
 
     [Header("Setup Fields")]
     public string playerTag = "Player";
+    public string playerWallTag = "PlayerWall";
     public string baseTag = "Base";
 
 
@@ -64,9 +65,10 @@ public class EnemyShooting : MonoBehaviour {
     private void UpdateTarget() {
 
         GameObject[] targets = GameObject.FindGameObjectsWithTag(playerTag);
+        GameObject[] playerWalls = GameObject.FindGameObjectsWithTag(playerWallTag);
         GameObject[] bases = GameObject.FindGameObjectsWithTag(baseTag);
 
-        (GameObject, float) result = FindNearestTarget(targets, bases);
+        (GameObject, float) result = FindNearestTarget(targets, bases, playerWalls);
         GameObject nearestTarget = result.Item1;
         float shortestDistance = result.Item2;
 
@@ -81,6 +83,8 @@ public class EnemyShooting : MonoBehaviour {
             target = nearestTarget.transform;
         } else if (nearestTarget != null && nearestTarget.gameObject.tag == playerTag && shortestDistance <= range) {
             target = nearestTarget.transform;
+        } else if (nearestTarget != null && nearestTarget.gameObject.tag == playerWallTag && shortestDistance <= range) {
+            target = nearestTarget.transform;
         } else {
             target = null;
         }
@@ -90,7 +94,7 @@ public class EnemyShooting : MonoBehaviour {
     // _targets are player
     // _bases are multiple bases
     // return tuples of either nearest player/base and shortest distance to the enemy
-    private (GameObject, float) FindNearestTarget(GameObject[] _targets, GameObject[] _bases) {
+    private (GameObject, float) FindNearestTarget(GameObject[] _targets, GameObject[] _bases, GameObject[] _playerWalls) {
         float shortestDistance = Mathf.Infinity;
         GameObject nearestTarget = null;
 
@@ -103,6 +107,15 @@ public class EnemyShooting : MonoBehaviour {
         }
 
         foreach (GameObject tempTarget in _bases) {
+            // range from the model
+            float distanceToPlayer = Vector3.Distance(rangeCenter.position, tempTarget.transform.position);
+            if (distanceToPlayer < shortestDistance) {
+                shortestDistance = distanceToPlayer;
+                nearestTarget = tempTarget;
+            }
+        }
+        
+        foreach (GameObject tempTarget in _playerWalls) {
             // range from the model
             float distanceToPlayer = Vector3.Distance(rangeCenter.position, tempTarget.transform.position);
             if (distanceToPlayer < shortestDistance) {
