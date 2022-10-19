@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1c5786862b98c44836f8cab5529806, type: 3}
   m_Name: SurpriseClown
   m_EditorClassIdentifier: 
+  enemyName: Surprise Clown
+  description: 'Does not deal melee/range attack. Skill: leave a bomb after death
+    or when he reaches your base. The bomb deals damage around it with 4 tiles range.'
   speed: 2
   health: 200
   defense: 10
+  sprite: {fileID: 21300000, guid: 4ae128a13069fa04b975f687b9d61525, type: 3}
   inkGained: 3
+  shotInfo: {fileID: 11400000, guid: 54d56430c040e904b82e0181691079af, type: 2}
   deathEffect: {fileID: 459345278128415763, guid: b19556a3b1fff60439cbbed185c02067, type: 3}
   element: {fileID: 0}
   damageMultiplier: 1.5
