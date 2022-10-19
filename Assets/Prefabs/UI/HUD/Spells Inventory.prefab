@@ -576,7 +576,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: e5c68107b63392848a7a2d9ed558d477, type: 2}
     - target: {fileID: 5739307382594981972, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_text
-      value: 25
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5739307382905938304, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_Name
@@ -695,9 +695,9 @@ MonoBehaviour:
   cost: 30
   effectTime: 0
   cooldownTime: 10
-  effectWidth: 2
-  effectLength: 4
-  damage: 20
+  effectWidth: 1.5
+  effectLength: 6
+  damage: 150
   indicatorPrefab: {fileID: 6436896666759797090, guid: 09f32c29b0bfb1840a8a6217fec36ff5, type: 3}
   fireballPrefab: {fileID: 2504852280125810859, guid: 083f94eb80795c2409049a57e45742b3, type: 3}
 --- !u!1001 &8078617093063514939
@@ -733,7 +733,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 6b6f2ea81915da74b9bef6dcb93b2d96, type: 2}
     - target: {fileID: 5739307382594981972, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_text
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5739307382905938304, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_Name
@@ -867,8 +867,8 @@ MonoBehaviour:
   cost: 0
   effectTime: 0
   cooldownTime: 0
-  doodleAttackIncrease: 0
-  healthRecover: 0
+  doodleAttackIncrease: 30
+  healthRecover: 10
   imageEffectTime: {fileID: 2657915259842598083}
   DoodleBuffPrefab: {fileID: 8238168866713869955, guid: f8eeeab4c06fabd4e8eb1f62a290d691, type: 3}
 --- !u!1001 &8078617093455967992
@@ -936,7 +936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5739307382594981972, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_text
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5739307382905938304, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_Name
@@ -1090,9 +1090,9 @@ MonoBehaviour:
   cost: 20
   effectTime: 0
   cooldownTime: 10
-  radiusOfEffect: 1
+  radiusOfEffect: 1.8
   rangeRadius: 4
-  damage: 30
+  damage: 200
   indicatorPrefab: {fileID: 6436896666759797090, guid: c86b88a70b6a88b49bea579a3a0f3c9d, type: 3}
   fireballPrefab: {fileID: 2504852280125810859, guid: 083f94eb80795c2409049a57e45742b3, type: 3}
 --- !u!1001 &8078617093724723519
@@ -1124,7 +1124,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 0101ba1064fdd9e48881c0b7ecb358b1, type: 2}
     - target: {fileID: 5739307382594981972, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_text
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5739307382905938304, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_Name
@@ -1246,8 +1246,8 @@ MonoBehaviour:
   radiusOfEffect: 4
   rangeRadius: 2
   healingAmount: 100
-  healthDeductForTower: 20
-  indicatorPrefab: {fileID: 6436896666759797090, guid: 09f32c29b0bfb1840a8a6217fec36ff5, type: 3}
+  healthDeductForTower: 15
+  indicatorPrefab: {fileID: 6436896666759797090, guid: c86b88a70b6a88b49bea579a3a0f3c9d, type: 3}
 --- !u!1001 &8078617093803664681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1273,7 +1273,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 162ca779588bc3b45b3fcfd478821953, type: 2}
     - target: {fileID: 5739307382594981972, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_text
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5739307382905938304, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_Name
@@ -1560,7 +1560,7 @@ MonoBehaviour:
   cost: 30
   effectTime: 0
   cooldownTime: 20
-  defense_reducing: 2
+  defense_reducing: 0.5
   imageEffectTime: {fileID: 2657915260074793730}
   DefenseReducingPrefab: {fileID: 100000, guid: f5bb55a5470a8c24d9c76cf8490594b3, type: 3}
 --- !u!1001 &8078617094245179886
@@ -1588,7 +1588,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 6cc2ab083c606314cbf1aaac31ef08bd, type: 2}
     - target: {fileID: 5739307382594981972, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_text
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5739307382905938304, guid: d12aced6777e5c548b842ed39dd728d6, type: 3}
       propertyPath: m_Name
@@ -1718,6 +1718,6 @@ MonoBehaviour:
   cost: 30
   effectTime: 0
   cooldownTime: 25
-  elememtEffectLifeTimeFactor: 1.2
-  elememtEffectAugmentationFactor: 2
+  elememtEffectLifeTimeFactor: 1.4
+  elememtEffectAugmentationFactor: 1.4
   imageEffectTime: {fileID: 2657915260019731990}

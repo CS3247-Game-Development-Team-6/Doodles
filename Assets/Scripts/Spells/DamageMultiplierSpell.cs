@@ -52,7 +52,7 @@ public class DamageMultiplierSpell : Spell {
             g.transform.parent = e.transform;
             effect.Add(g);
             originalValues.Add(e, e.GetDefense());
-            e.ReduceDefense(e.GetDefense());
+            e.ReduceDefense((int)(e.GetDefense()*defense_reducing));
             
         }
 

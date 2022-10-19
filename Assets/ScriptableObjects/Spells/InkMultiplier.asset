@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: InkMultiplier
   m_EditorClassIdentifier: 
   spellName: Ink Drops
-  description: Each enemy drops more ink once defeated!
-  cost: 10
+  description: Each enemy drops 2 times ink if you defeat them in the next 6 seconds!
+  cost: 25
   level: 2
-  cooldownTime: 40
-  effectTime: 10
+  cooldownTime: 60
+  effectTime: 6
   sprite: {fileID: 21300000, guid: c9fb1c6bc7152514e87d95e5761bc30f, type: 3}
