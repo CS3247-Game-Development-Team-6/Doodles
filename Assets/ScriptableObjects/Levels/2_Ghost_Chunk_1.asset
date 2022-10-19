@@ -12,29 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4a39bb2062e524580495433674019c, type: 3}
   m_Name: 2_Ghost_Chunk_1
   m_EditorClassIdentifier: 
-  levelName: 1_Spider_Chunk_1
-  startingInkPercentage: 0.5
+  levelName: 2_Ghost_Chunk_1
+  startingInkPercentage: 1
   waves:
   - enemy: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
-    count: 1
+    count: 5
     rate: 1
     enemy2: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
     count2: 0
-    rate2: 1
+    rate2: 0
     enemy3: {fileID: 6540121397901334477, guid: e8cb845b01810e14a94462de9bf9e8eb, type: 3}
     count3: 0
     rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: c90e3299c86e73c4884137f1a53a1cac, type: 3}
-    count: 0
+  - enemy: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
+    count: 5
     rate: 1
     enemy2: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
-    count2: 1
-    rate2: 2
+    count2: 2
+    rate2: 1
     enemy3: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
     count3: 0
     rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: c90e3299c86e73c4884137f1a53a1cac, type: 3}
-    count: 1
+  - enemy: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
+    count: 5
     rate: 1
     enemy2: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
     count2: 0
@@ -44,7 +44,11 @@ MonoBehaviour:
     rate3: 0
   isFogChunk: 0
   notes:
-  - text: 'Ghost level starts
+  - text: 'Happy Halloween! Let''s fight the ghosts with Doodle.
 
 '
     rectPosition: {x: 231, y: -174, z: 0}
+  - text: 'Remember to save ink for next chunk!
+
+'
+    rectPosition: {x: 200, y: -174, z: 0}
