@@ -23,6 +23,11 @@ public class GameStateInfoUI : MonoBehaviour {
     }
 
     private void Start() {
+        Map map = FindObjectOfType<Map>();
+        if (map != null) {
+            mapInfo = map.MapInfo;
+        }
+
         if (!mapInfo) {
             Debug.Log("No map loaded.");
             return;
