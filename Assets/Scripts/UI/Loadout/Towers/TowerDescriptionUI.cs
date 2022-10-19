@@ -1,6 +1,8 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class TowerDescriptionUI : MonoBehaviour {
     [Header("Tower Descriptions")]
@@ -20,6 +22,7 @@ public class TowerDescriptionUI : MonoBehaviour {
 
     private TowerInfo lastClicked;
     private bool isBase = true;
+    public event EventHandler SetUpgradesElements;
 
     private void Update() {
         if (towerInfo == null) {
@@ -49,6 +52,7 @@ public class TowerDescriptionUI : MonoBehaviour {
     public void SetInfo(TowerInfo towerInfo, bool isBase) {
         this.towerInfo = towerInfo;
         this.isBase = isBase;
+        if (isBase) SetUpgradesElements?.Invoke(this, EventArgs.Empty);
     }
 
     public void SelectInfo(TowerInfo towerInfo) {
@@ -60,6 +64,7 @@ public class TowerDescriptionUI : MonoBehaviour {
             towerInfo = null;
         } else {
             towerInfo = lastClicked;
+            if (isBase) SetUpgradesElements?.Invoke(this, EventArgs.Empty);
         }
     }
 }

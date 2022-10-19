@@ -9,8 +9,9 @@ public class Loadout : MonoBehaviour {
     public Shop shop;
     public EnemyInventoryUI enemyInventoryUI;
     public static MapInfo mapToLoad;
-    public List<TowerInfo> towersToLoad { get; private set; }
+    public List<TowerInfo> towersToLoad;
     public GameObject shopSlotPrefab;
+    public GameObject containerPrefab;
 
     private void Start() {
         if (!mapToLoad) {
@@ -27,12 +28,28 @@ public class Loadout : MonoBehaviour {
     }
 
     public void StartGame() {
+        LoadoutContainer loadout = FindObjectOfType<LoadoutContainer>();
+        GameObject loadoutContainerObj;
+        if (loadout == null) {
+            loadoutContainerObj = Instantiate(containerPrefab);
+            loadout = loadoutContainerObj.GetComponent<LoadoutContainer>();
+            DontDestroyOnLoad(loadoutContainerObj);
+            Debug.Log($"created loadout container {loadoutContainerObj}");
+        } else {
+            loadoutContainerObj = loadout.gameObject;
+            Debug.Log($"updated loadout container {loadoutContainerObj}");
+        }
+
+        loadout.towersToLoad = shop.GetTowersForLoading();
+        loadout.shopSlotPrefab = shopSlotPrefab;
+        loadoutContainerObj.SetActive(true);
+
+
         if (!mapToLoad) {
             Debug.Log("No map to load");
             return;
         }
 
-        towersToLoad = shop.GetTowersForLoading();
         loadingScreen.gameObject.SetActive(true);
         loadingScreen.AddSceneToLoad(mapToLoad.gameSceneName);
         loadingScreen.StartLoad();
