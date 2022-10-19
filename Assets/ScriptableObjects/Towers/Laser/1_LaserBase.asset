@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 1_LaserBase
   m_EditorClassIdentifier: 
   towerName: Laser 2
+  sprite: {fileID: 0}
   towerDesc: '
 
 '
@@ -21,10 +22,9 @@ MonoBehaviour:
   fireRate: 1
   element: {fileID: 0}
   cost: 50
-  health: 100
-  healthDecayRate: 0
-  damageFixCost: 20
-  damageFixFactor: 1
+  health: 130
+  healthDecayRate: 0.5
+  damageFixFactor: 0.18
   allowedCellTypes: 00000000
   stoppable: 1
   speed: 1
