@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
   m_Name: 1_BallistaWater
   m_EditorClassIdentifier: 
-  towerName: Water Ballista
+  towerName: Water Ballista 2
+  sprite: {fileID: 0}
   towerDesc: 
   range: 3
   upgradeNum: 1
@@ -21,12 +22,12 @@ MonoBehaviour:
   cost: 25
   health: 150
   healthDecayRate: 1.1
-  damageFixCost: 0
   damageFixFactor: 0.2
   allowedCellTypes: 00000000
-  speed: 30
-  explosionRadius: 1
-  damage: 30
+  stoppable: 0
+  speed: 40
+  explosionRadius: 1.2
+  damage: 24
   penetratesEnemy: 0
   impactPrefab: {fileID: 4232268957626667253, guid: 264947c3b0cb18d4096fa599d2e97062, type: 3}
   towerPrefab: {fileID: 2689636279851204399, guid: b96098e67272eaf4bbfdb5b7519b2c48, type: 3}
