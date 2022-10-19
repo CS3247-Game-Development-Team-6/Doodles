@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1555284926028341123}
   - component: {fileID: 7102422345573917434}
   - component: {fileID: 2539931053556847174}
+  - component: {fileID: 7706830809548099429}
   m_Layer: 0
   m_Name: LevelSelectMenu
   m_TagString: Untagged
@@ -62,15 +63,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9843138, b: 0.8705883, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8a86f779fb69bc34488b952ea5a80116, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: ba1cf05d3f31aa843bcee21a71b8c219, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -79,6 +80,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7706830809548099429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169795743919048075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1057739992794574608
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,7 +130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 760.78784, y: -377.78784}
+  m_AnchoredPosition: {x: 704, y: -199}
   m_SizeDelta: {x: 102.4243, y: 102.4243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8822781451121233598
@@ -250,8 +266,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -38.066, y: -11.898}
-  m_SizeDelta: {x: 1061.2, y: 834.2083}
+  m_AnchoredPosition: {x: -186, y: 17.565}
+  m_SizeDelta: {x: 1168.3303, y: 893.1301}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2436627289307994004
 MonoBehaviour:
@@ -456,11 +472,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2671819867858462921, guid: 0bc920ea3cb72aa4ca87f36b4548c883, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 164.6688
+      value: 145.2118
       objectReference: {fileID: 0}
     - target: {fileID: 2671819867858462921, guid: 0bc920ea3cb72aa4ca87f36b4548c883, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 59.7238
+      value: 52.6651
       objectReference: {fileID: 0}
     - target: {fileID: 2671819867858462921, guid: 0bc920ea3cb72aa4ca87f36b4548c883, type: 3}
       propertyPath: m_LocalPosition.x
@@ -492,11 +508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2671819867858462921, guid: 0bc920ea3cb72aa4ca87f36b4548c883, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -651
+      value: 697
       objectReference: {fileID: 0}
     - target: {fileID: 2671819867858462921, guid: 0bc920ea3cb72aa4ca87f36b4548c883, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -399.14
+      value: -377.79
       objectReference: {fileID: 0}
     - target: {fileID: 2671819867858462921, guid: 0bc920ea3cb72aa4ca87f36b4548c883, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
