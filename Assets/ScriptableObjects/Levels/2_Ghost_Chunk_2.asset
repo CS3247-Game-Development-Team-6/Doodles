@@ -13,38 +13,54 @@ MonoBehaviour:
   m_Name: 2_Ghost_Chunk_2
   m_EditorClassIdentifier: 
   levelName: 1_Spider_Chunk_1
-  startingInkPercentage: 0.5
+  startingInkPercentage: 1
   waves:
   - enemy: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
-    count: 1
+    count: 5
     rate: 1
     enemy2: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
     count2: 0
-    rate2: 1
+    rate2: 0
     enemy3: {fileID: 6540121397901334477, guid: e8cb845b01810e14a94462de9bf9e8eb, type: 3}
     count3: 0
     rate3: 0
   - enemy: {fileID: 6540121397901334477, guid: c90e3299c86e73c4884137f1a53a1cac, type: 3}
     count: 0
-    rate: 1
+    rate: 0
     enemy2: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
-    count2: 1
-    rate2: 2
+    count2: 5
+    rate2: 1
     enemy3: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
     count3: 0
     rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: c90e3299c86e73c4884137f1a53a1cac, type: 3}
-    count: 1
-    rate: 1
-    enemy2: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
+  - enemy: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
+    count: 10
+    rate: 2
+    enemy2: {fileID: 6540121397901334477, guid: c90e3299c86e73c4884137f1a53a1cac, type: 3}
     count2: 0
     rate2: 0
     enemy3: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
     count3: 0
     rate3: 0
+  - enemy: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
+    count: 10
+    rate: 2
+    enemy2: {fileID: 6540121397901334477, guid: c90e3299c86e73c4884137f1a53a1cac, type: 3}
+    count2: 0
+    rate2: 0
+    enemy3: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
+    count3: 0
+    rate3: 0
+  - enemy: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
+    count: 5
+    rate: 2
+    enemy2: {fileID: 6540121397901334477, guid: c90e3299c86e73c4884137f1a53a1cac, type: 3}
+    count2: 1
+    rate2: 1
+    enemy3: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
+    count3: 0
+    rate3: 0
   isFogChunk: 0
   notes:
-  - text: 'Ghost level starts
-
-'
+  - text: 'Tips: there will be a Demon in the last wave.'
     rectPosition: {x: 231, y: -174, z: 0}
