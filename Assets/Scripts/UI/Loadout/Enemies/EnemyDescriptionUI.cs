@@ -27,7 +27,8 @@ public class EnemyDescriptionUI : MonoBehaviour {
             enemyImage.enabled = false;
             return;
         }
-        enemyName.text = enemyInfo.name;
+        enemyName.text = enemyInfo.enemyName;
+        enemyDesc.text = enemyInfo.description;
         earn.text = enemyInfo.inkGained.ToString();
         attack.text = enemyInfo.shotInfo.bulletDamage.ToString();
         defense.text = enemyInfo.defense.ToString();

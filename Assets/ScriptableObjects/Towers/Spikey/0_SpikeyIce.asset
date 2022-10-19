@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
   m_Name: 0_SpikeyIce
   m_EditorClassIdentifier: 
-  towerName: Spikey
+  towerName: Ice Spikey
+  sprite: {fileID: 0}
   towerDesc: 
   range: 1.5
   upgradeNum: 0
@@ -21,7 +22,6 @@ MonoBehaviour:
   cost: 75
   health: 160
   healthDecayRate: 2.3
-  damageFixCost: 0
   damageFixFactor: 0.55
   allowedCellTypes: 00000000
   stoppable: 1

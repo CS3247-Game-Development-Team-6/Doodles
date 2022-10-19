@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 128
   tileAndFogLayerMask:
     serializedVersion: 2
     m_Bits: 2056
@@ -545,6 +545,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7828996249860865851}
     m_Modifications:
+    - target: {fileID: 430836549931859169, guid: 912350abf2cd649c0a471334c0dd360c, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 430836549931859172, guid: 912350abf2cd649c0a471334c0dd360c, type: 3}
       propertyPath: m_Name
       value: HealthCanvas

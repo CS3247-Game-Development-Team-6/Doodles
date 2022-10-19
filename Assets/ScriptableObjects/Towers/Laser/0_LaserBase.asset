@@ -17,7 +17,7 @@ MonoBehaviour:
   towerDesc: 'Locks on moving target, damage increases over time attached.
 
     Upgrade:
-    50
+    $50, +100% DMG
 
 '
   range: 4
@@ -26,9 +26,8 @@ MonoBehaviour:
   element: {fileID: 0}
   cost: 50
   health: 100
-  healthDecayRate: 0
-  damageFixCost: 17
-  damageFixFactor: 1
+  healthDecayRate: 0.5
+  damageFixFactor: 0.15
   allowedCellTypes: 00000000
   stoppable: 1
   speed: 1

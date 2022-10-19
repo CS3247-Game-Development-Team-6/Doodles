@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.34509805}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.27058825, g: 0.9647059, b: 0.27450982, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -753,6 +753,7 @@ MonoBehaviour:
   enemyInfo: {fileID: 11400000, guid: e41e9492c221f7342b93703b9d0108b6, type: 2}
   waypointIndex: 0
   speedMultiplier: 0
+  isShooting: 0
   healthBar: {fileID: 1929750958}
   healthText: {fileID: 7627375074670015471}
   damageText: {fileID: 2675300404428900392, guid: 934f2897b165c6b47b9aa966c0c7d01c, type: 3}
@@ -769,7 +770,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingInfo: {fileID: 11400000, guid: e2ab45de7739ac0488dcab7aa96d2718, type: 2}
-  isShooting: 0
   bulletPrefab: {fileID: 5753786456684779845, guid: ccfd9cae814f8d04882ac19ea0c68e3d, type: 3}
   firePoint: {fileID: 5410826820070449313}
   partToRotate: {fileID: 6972352779643815576}

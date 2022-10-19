@@ -13,16 +13,11 @@ MonoBehaviour:
   m_Name: 0_BeybladeBase
   m_EditorClassIdentifier: 
   towerName: Beyblade
-  towerDesc: 'Cost: $30
+  sprite: {fileID: 21300000, guid: 92fb88960340a4edd9587d789f0dd750, type: 3}
+  towerDesc: 'Spinning Blade cuts at enemies on path, high damage.
 
-    DMG: 30
-
-    Range: 0.8
-
-    Upgrade: $20, +67% DMG
-
-    Spinning
-    Blade, high damage.
+    Upgrade:
+    $20, +67% DMG
 
 '
   range: 0.8
@@ -32,9 +27,9 @@ MonoBehaviour:
   cost: 30
   health: 50
   healthDecayRate: 1.3
-  damageFixCost: 21
   damageFixFactor: 1.1
   allowedCellTypes: 0100000002000000
+  stoppable: 0
   speed: 100
   explosionRadius: 0
   damage: 30
