@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 0_LaserIce
   m_EditorClassIdentifier: 
   towerName: Ice Laser
+  sprite: {fileID: 0}
   towerDesc: "Cost: 50\nDamage per second: 30 \nRange: 4\nUpgrade: 50\nSingle Target,
     Damage increase over time."
   range: 4
@@ -20,10 +21,9 @@ MonoBehaviour:
   fireRate: 1
   element: {fileID: 11400000, guid: 2a9f0209ebf96cc4f8a2c63413522b7e, type: 2}
   cost: 50
-  health: 100
-  healthDecayRate: 0
-  damageFixCost: 5
-  damageFixFactor: 1
+  health: 110
+  healthDecayRate: 0.5
+  damageFixFactor: 0.21
   allowedCellTypes: 00000000
   stoppable: 1
   speed: 1

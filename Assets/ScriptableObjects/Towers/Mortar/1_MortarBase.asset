@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02acc0fa88f06934f9c8db381de21961, type: 3}
   m_Name: 1_MortarBase
   m_EditorClassIdentifier: 
-  towerName: Mortar
+  towerName: Mortar 2
+  sprite: {fileID: 0}
   towerDesc: 
   range: 6
   upgradeNum: 1
@@ -21,9 +22,9 @@ MonoBehaviour:
   cost: 25
   health: 200
   healthDecayRate: 1.8
-  damageFixCost: 0
   damageFixFactor: 0.2
   allowedCellTypes: 00000000
+  stoppable: 0
   speed: 10
   explosionRadius: 2
   damage: 120
