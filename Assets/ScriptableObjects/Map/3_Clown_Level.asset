@@ -19,13 +19,16 @@ MonoBehaviour:
   curvePrefab: {fileID: 1355420953937332540, guid: 006b9dc87e65141f29b53654208c099c, type: 3}
   straightPrefab: {fileID: 7894887961081992580, guid: 4c85730c47d6f47ea907c33ec17975d2, type: 3}
   waypointPrefab: {fileID: 8396853103122026701, guid: 71d519184add2f346ac3e1e498fb244d, type: 3}
-  levelName: Clown_Level
-  levelPreview: {fileID: 0}
+  levelName: Circus of Horrors
+  levelPreview: {fileID: 21300000, guid: 3a1626015021e44429ae5197d84692ca, type: 3}
   dialogueSceneName: 
-  gameSceneName: 
+  gameSceneName: ClownScene-beta
   gridSize: {x: 8, y: 8}
   minScore: 35
   startingInkFraction: 0.6
-  inkRegenRate: 0
-  totalInk: 0
-  chunkInfo: []
+  inkRegenRate: 1
+  totalInk: 200
+  chunkInfo:
+  - {fileID: 11400000, guid: 2163bc6b6e81bf34c99a74f47192dbd5, type: 2}
+  - {fileID: 11400000, guid: f111abe7d9c27bf4a9ced9eda8e37288, type: 2}
+  - {fileID: 11400000, guid: eb0c8f60555a4b8479da792adb00d1c2, type: 2}
