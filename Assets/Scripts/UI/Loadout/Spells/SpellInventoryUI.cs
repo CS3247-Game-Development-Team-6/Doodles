@@ -79,11 +79,11 @@ public class SpellInventoryUI : MonoBehaviour {
     }
 
     public void UnlockNextLevel() {
-            Transform child = transform.GetChild(MaxLevelUnlocked);
-            CanvasGroup canvas = child.GetComponent<CanvasGroup>();
-            LockLevel(canvas);
+        Transform child = transform.GetChild(MaxLevelUnlocked);
+        CanvasGroup canvas = child.GetComponent<CanvasGroup>();
+        LockLevel(canvas);
 
-            MaxLevelUnlocked++;
+        MaxLevelUnlocked++;
 
         if (MaxLevelUnlocked <= MAX_LEVEL) {
             child = transform.GetChild(MaxLevelUnlocked);
