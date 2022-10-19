@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 824144073779540406}
   - component: {fileID: 8624064616180105389}
   - component: {fileID: 270335754052975260}
+  - component: {fileID: 2455035058798760635}
   m_Layer: 0
   m_Name: 0_LaserWater
   m_TagString: Turret
@@ -164,6 +165,18 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &2455035058798760635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3257071809379412333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98458dcd6d1b70a46a1b8d2bb054e8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3257071809379412335
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +446,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4f16ef3587ea198468698d93e48c230a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 63e7366a858eaf248aee5473301e9778, type: 2}
     - target: {fileID: 919132149155446097, guid: 4f16ef3587ea198468698d93e48c230a, type: 3}
       propertyPath: m_Name
       value: Laser_Tower
