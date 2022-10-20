@@ -15,7 +15,7 @@ public class InkManager : MonoBehaviour {
 
     public float globalInkGainMultiplier { get; private set; } = 1.0f;
     public float InkFraction => maxInk == 0 ? 0 : ink / maxInk;
-    public string InkString => $"{ink} / {maxInk}";
+    public string InkString => $"{(int)ink} / {(int)maxInk}";
     private GameStateInfoUI ui;
 
     private void Start() {
