@@ -8,6 +8,7 @@ public class GameStateInfoUI : MonoBehaviour {
     public TextMeshProUGUI inkText;
     public Image enemySlider;
     public TextMeshProUGUI enemyText;
+    public Image countdownSlider;
 
     private InkManager inkManager;
     private ChunkSpawner chunkSpawner;
@@ -64,6 +65,7 @@ public class GameStateInfoUI : MonoBehaviour {
         if (chunkSpawner != null) {
             enemyText.text = GetWaveStatus();
             enemySlider.fillAmount = GetChunkCompletion();
+            countdownSlider.fillAmount = chunkSpawner.countdownTimer / chunkSpawner.timeBetweenWaves;
         }
     }
 
