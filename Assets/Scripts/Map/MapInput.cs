@@ -22,6 +22,7 @@ public class MapInput : MonoBehaviour {
                 Fog fog = hit.transform.gameObject.GetComponent<Fog>();
                 Node node = hit.transform.gameObject.GetComponent<Node>();
                 if (fog != null) {
+                    // TODO: Check for fog whether is in current chunk
                     if (inkManager.hasEnoughInk(fog.cost)) {
                         inkManager.ChangeInkAmount(-fog.cost);
                         fog.ClearFog();

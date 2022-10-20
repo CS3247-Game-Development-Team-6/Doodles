@@ -11,6 +11,10 @@ public class SpellInventoryUI : MonoBehaviour {
 
     public int MaxLevelUnlocked { get; private set; }
 
+    public static readonly int MAX_LEVEL = 3;
+
+    public bool isMaxLevelUnlocked => MaxLevelUnlocked >= MAX_LEVEL;
+
     private void OnEnable() {
         SpellManager.IsChoosingSpell = true;
     }
@@ -81,9 +85,12 @@ public class SpellInventoryUI : MonoBehaviour {
 
         MaxLevelUnlocked++;
 
-        child = transform.GetChild(MaxLevelUnlocked);
-        canvas = child.GetComponent<CanvasGroup>();
-        UnlockLevel(canvas);
+        if (MaxLevelUnlocked <= MAX_LEVEL) {
+            child = transform.GetChild(MaxLevelUnlocked);
+            canvas = child.GetComponent<CanvasGroup>();
+            UnlockLevel(canvas);
+        }
+
     }
 
 
