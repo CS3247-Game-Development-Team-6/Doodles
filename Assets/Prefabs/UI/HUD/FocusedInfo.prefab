@@ -335,10 +335,10 @@ RectTransform:
   m_Father: {fileID: 736012970724131224}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 427.5, y: -50}
-  m_SizeDelta: {x: 105, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &736012969951553386
 CanvasRenderer:
@@ -436,6 +436,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpgrade: 0
   type: 2
+  templateElementTowerInfo: 'Deals DoT to enemies for 5 seconds
+
+    (Water + Ice:
+    Freezes enemies for 3 seconds)
+
+    (Fire + Water: Deal DoT in one burst)'
 --- !u!225 &6940134385046773809
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1489,9 +1495,9 @@ RectTransform:
   m_Father: {fileID: 736012969925533002}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 163.32236, y: -168.4776}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 125.0557, y: 44.9529}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &736012970519514631
@@ -1682,7 +1688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &736012970557051529
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1818,9 +1824,9 @@ RectTransform:
   m_Father: {fileID: 736012969925533002}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 163.32236, y: -24.068226}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 125.0557, y: 44.9529}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &736012970598482287
@@ -2533,7 +2539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &736012970733981678
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3128,10 +3134,10 @@ RectTransform:
   m_Father: {fileID: 736012970724131224}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 177.5, y: -50}
-  m_SizeDelta: {x: 105, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &736012970998031611
 CanvasRenderer:
@@ -3229,6 +3235,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpgrade: 0
   type: 0
+  templateElementTowerInfo: 'Deals DoT to enemies for 5 seconds
+
+    (Fire + Ice:
+    Decreases enemy defense for 5 seconds)
+
+    (Fire + Water: Deal DoT in one burst)'
 --- !u!225 &7544134940594648718
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3680,10 +3692,10 @@ RectTransform:
   m_Father: {fileID: 736012970724131224}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 302.5, y: -50}
-  m_SizeDelta: {x: 105, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &736012971062835415
 CanvasRenderer:
@@ -3781,6 +3793,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpgrade: 0
   type: 1
+  templateElementTowerInfo: 'Slows enemies for 5 seconds
+
+    (Fire + Ice: Decreases
+    enemy defense for 5 seconds)
+
+    (Water + Ice: Freezes enemies for 3 seconds)'
 --- !u!225 &6387166552745963186
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4275,9 +4293,9 @@ RectTransform:
   m_Father: {fileID: 736012969925533002}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 163.32236, y: -120.341125}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 125.0557, y: 44.9529}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &736012971211014790
@@ -4485,9 +4503,9 @@ RectTransform:
   m_Father: {fileID: 736012969925533002}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 163.32236, y: -72.20467}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 125.0557, y: 44.9529}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &736012971325692681
@@ -5668,10 +5686,10 @@ RectTransform:
   m_Father: {fileID: 736012970724131224}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 52.5, y: -50}
-  m_SizeDelta: {x: 105, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &736012971764686194
 CanvasRenderer:
@@ -5769,6 +5787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpgrade: 1
   type: 0
+  templateElementTowerInfo: Increases damage and explosion radius (if any).
 --- !u!225 &1007300561537567598
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -5912,7 +5931,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &736012971874464761
