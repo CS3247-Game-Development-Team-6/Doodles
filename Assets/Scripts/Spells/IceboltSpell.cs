@@ -95,9 +95,11 @@ public class IceboltSpell : Spell
         Enemy[] allObjects = FindObjectsOfType<Enemy>();
         foreach (Enemy e in allObjects)
         {
-            float angle1 = Vector3.Angle(targetImage.transform.position, player.position);
-            float angle2 = Vector3.Angle(e.transform.position, player.transform.position);
-            if (Vector3.Distance(targetImage.transform.position, e.transform.position) <= effectLength && Mathf.Abs(angle1 - angle2) <= 25)
+            Vector3 v1 = new Vector3(targetImage.transform.position.x, player.position.y, targetImage.transform.position.z);
+            Vector3 v2 = new Vector3(e.transform.position.x, player.position.y, e.transform.position.z);
+            float angle1 = Vector3.Angle(v1, player.position);
+            float angle2 = Vector3.Angle(v2, player.position);
+            if (Vector3.Distance(targetImage.transform.position, e.transform.position) <= effectLength && Mathf.Abs(angle1 - angle2) <= 30)
             {
                 e.TakeDamage(damage, null);
             }

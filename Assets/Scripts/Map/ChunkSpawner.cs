@@ -14,9 +14,9 @@ public class ChunkSpawner : MonoBehaviour {
     public int chunkIndex { get; private set; }
 
     public Vector3 spawnPointPos { get; set; }
-    public float timeBetweenWaves { get; private set; }  = 2f;
+    public float timeBetweenWaves = 10f;
 
-    public float countdownTimer { get; private set; }  = 2f; // decrease with time, countdown for new wave
+    public float countdownTimer { get; private set; } // decrease with time, countdown for new wave
     private bool initialized;
 
     // Event to publish to UI elements. WaveUI elements should subscribe.

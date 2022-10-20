@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 736012969951553385}
   - component: {fileID: 736012969951553384}
   - component: {fileID: 736012969951553387}
+  - component: {fileID: 6940134385046773809}
   m_Layer: 5
   m_Name: Water
   m_TagString: Untagged
@@ -435,6 +436,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpgrade: 0
   type: 2
+  templateElementTowerInfo: 'Deals DoT to enemies for 5 seconds
+
+    (Water + Ice:
+    Freezes enemies for 3 seconds)
+
+    (Fire + Water: Deal DoT in one burst)'
+--- !u!225 &6940134385046773809
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736012969951553398}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &736012969974642830
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,8 +656,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Checkout the skill's description!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7c4b4b85df4c9f440b4e3194d445e585, type: 2}
-  m_sharedMaterial: {fileID: -8503256473112591109, guid: 7c4b4b85df4c9f440b4e3194d445e585, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 892c1d85cd5592c4d8c668d04a926dfb, type: 2}
+  m_sharedMaterial: {fileID: 4497220659931531076, guid: 892c1d85cd5592c4d8c668d04a926dfb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -662,8 +681,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -908,7 +927,7 @@ MonoBehaviour:
 
     It has special abilities and stuff!'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7c4b4b85df4c9f440b4e3194d445e585, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 892c1d85cd5592c4d8c668d04a926dfb, type: 2}
   m_sharedMaterial: {fileID: -8503256473112591109, guid: 7c4b4b85df4c9f440b4e3194d445e585, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -933,8 +952,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -972,7 +991,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &736012970114958673
@@ -3092,6 +3111,7 @@ GameObject:
   - component: {fileID: 736012970998031610}
   - component: {fileID: 736012970998031612}
   - component: {fileID: 736012970998031613}
+  - component: {fileID: 7544134940594648718}
   m_Layer: 5
   m_Name: Fire
   m_TagString: Untagged
@@ -3215,6 +3235,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpgrade: 0
   type: 0
+  templateElementTowerInfo: 'Deals DoT to enemies for 5 seconds
+
+    (Fire + Ice:
+    Decreases enemy defense for 5 seconds)
+
+    (Fire + Water: Deal DoT in one burst)'
+--- !u!225 &7544134940594648718
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736012970998031608}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &736012971004459642
 GameObject:
   m_ObjectHideFlags: 0
@@ -3631,6 +3669,7 @@ GameObject:
   - component: {fileID: 736012971062835414}
   - component: {fileID: 736012971062835413}
   - component: {fileID: 736012971062835400}
+  - component: {fileID: 6387166552745963186}
   m_Layer: 5
   m_Name: Ice
   m_TagString: Untagged
@@ -3754,6 +3793,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpgrade: 0
   type: 1
+  templateElementTowerInfo: 'Slows enemies for 5 seconds
+
+    (Fire + Ice: Decreases
+    enemy defense for 5 seconds)
+
+    (Water + Ice: Freezes enemies for 3 seconds)'
+--- !u!225 &6387166552745963186
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736012971062835411}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &736012971072008911
 GameObject:
   m_ObjectHideFlags: 0
@@ -5730,6 +5787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpgrade: 1
   type: 0
+  templateElementTowerInfo: Increases damage and explosion radius (if any).
 --- !u!225 &1007300561537567598
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -5809,8 +5867,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tower one line description.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7c4b4b85df4c9f440b4e3194d445e585, type: 2}
-  m_sharedMaterial: {fileID: -8503256473112591109, guid: 7c4b4b85df4c9f440b4e3194d445e585, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 892c1d85cd5592c4d8c668d04a926dfb, type: 2}
+  m_sharedMaterial: {fileID: 4497220659931531076, guid: 892c1d85cd5592c4d8c668d04a926dfb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

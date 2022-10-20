@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ElementBuff
   m_EditorClassIdentifier: 
   spellName: Elemental Overdrive
-  description: Extend the elements' effect duration and buffs the effect itself.
-  cost: 30
+  description: Extend the elements' effect duration by 40% and buffs the effect itself
+    by 40%.
+  cost: 15
   level: 3
   cooldownTime: 30
-  effectTime: 1
+  effectTime: 10
   sprite: {fileID: 21300000, guid: c7dbbc3db56c6ed468c6c20a8e8cefdf, type: 3}

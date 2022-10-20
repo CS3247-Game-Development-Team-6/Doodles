@@ -11,11 +11,11 @@ public class InkManager : MonoBehaviour {
     private MapInfo mapInfo;
 
     // Deprecating
-    [SerializeField] private IndicatorUI playerInkIndicator;
+    [HideInInspector, SerializeField] private IndicatorUI playerInkIndicator;
 
     public float globalInkGainMultiplier { get; private set; } = 1.0f;
     public float InkFraction => maxInk == 0 ? 0 : ink / maxInk;
-    public string InkString => $"{ink} / {maxInk}";
+    public string InkString => $"{(int)ink} / {(int)maxInk}";
     private GameStateInfoUI ui;
 
     private void Start() {
@@ -27,7 +27,7 @@ public class InkManager : MonoBehaviour {
 
         if (FindObjectOfType<GameStateInfoUI>() != null) {
             ui = FindObjectOfType<GameStateInfoUI>();
-            mapInfo = ui.mapInfo;
+            mapInfo = Loadout.mapToLoad;
             ui.SetInkManager(this);
             if (mapInfo != null) {
                 growthRate = mapInfo.inkRegenRate;
@@ -36,8 +36,6 @@ public class InkManager : MonoBehaviour {
             } else {
                 Debug.LogError("No MapInfo found for InkManager to read");
             }
-            // playerInkIndicator.maxValue = (int)maxInk;
-            // playerInkIndicator.rawValue = (int)ink;
         } else {
             Debug.LogError("No MapInfoUI display");
         }
@@ -60,9 +58,6 @@ public class InkManager : MonoBehaviour {
 
         // at least 0
         ink = Mathf.Max(ink, 0.0f);
-        // playerInkIndicator.rawValue = (int)ink;
-
-        // update visual
     }
 
     private void Update() {

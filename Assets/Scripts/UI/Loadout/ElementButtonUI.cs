@@ -14,6 +14,8 @@ public class ElementButtonUI : MonoBehaviour, IPointerDownHandler, IPointerEnter
     private Image image;
     private CanvasGroup canvasGroup;
 
+    [TextArea(2,4), SerializeField] private string templateElementTowerInfo = "";
+
     private void Start() {
         descUI = GetComponentInParent<TowerDescriptionUI>();
         image = GetComponent<Image>();
@@ -66,6 +68,9 @@ public class ElementButtonUI : MonoBehaviour, IPointerDownHandler, IPointerEnter
         // TODO: Remember to change the Sprite once updated
         if (!descUI) return;
         if (myTowerInfo == null) return;
+        if (myTowerInfo.towerDesc.Length == 0) {
+            myTowerInfo.towerDesc = templateElementTowerInfo;
+        }
         descUI.SetInfo(myTowerInfo, false);
         /*
         previousTowerInfo = descUI.towerInfo;
