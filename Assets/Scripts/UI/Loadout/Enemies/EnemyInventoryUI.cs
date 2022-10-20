@@ -19,7 +19,9 @@ public class EnemyInventoryUI : MonoBehaviour {
             }
         }
         foreach (var slot in inventoryList) {
-            Debug.Log($"slot {slot.enemyInfo.name} ");
+            if (slot.enemyInfo != null) { 
+                Debug.Log($"slot {slot.enemyInfo.name} ");
+            }
             Destroy(slot.gameObject);
         }
         inventoryList.Clear();
