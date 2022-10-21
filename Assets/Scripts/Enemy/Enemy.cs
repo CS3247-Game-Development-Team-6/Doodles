@@ -30,6 +30,9 @@ public class Enemy : MonoBehaviour {
     private const float EPSILON = 0.02f;
     private const string CANVAS_NAME = "Canvas";
     private const string MODEL_NAME = "Model";
+    private const string HEALTH_BG_NAME = "HealthBG";
+    private const string HEALTH_BAR_NAME = "HealthBar";
+    private const string HEALTH_TEXT_NAME = "HPText";
     private const string SPHERE_NAME = "Sphere"; // for invulnerable enemy
 
     /**
@@ -77,7 +80,6 @@ public class Enemy : MonoBehaviour {
     private int spawnCount;
     private GameObject spawnPrefab;
     private GameObject spawnEffect;
-    private bool dieOnBase;
 
     [SerializeField] public EnemyInfo enemyInfo;
 
@@ -114,10 +116,8 @@ public class Enemy : MonoBehaviour {
     private EnemyShooting shootingScript;
     private InkManager inkManager;
 
-    [Header("Unity Stuff")]
-    public Image healthBar;
-    public TMP_Text healthText;
-    public GameObject damageText;
+    private Image healthBar;
+    private TMP_Text healthText;
 
     private void Awake() {
         inkManager = InkManager.instance;
@@ -159,12 +159,8 @@ public class Enemy : MonoBehaviour {
         if (defense < amount) {
             float temp = amount - defense;
             health -= temp;
-
             // update health bar, float number between 0 and 1
             healthBar.fillAmount = health / enemyInfo.health;
-
-            //DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
-            //indicator.SetDamageTextFromFloat(temp);
         }
     }
 
@@ -172,14 +168,9 @@ public class Enemy : MonoBehaviour {
         if (GetStatus() == Status.INVULNERABLE) {
             return;
         }
-
         health -= amount;
-
         // float number between 0 and 1
         healthBar.fillAmount = health / enemyInfo.health;
-
-        //DamageIndicator indicator = Instantiate(damageText, transform.position, Quaternion.identity).GetComponent<DamageIndicator>();
-        //indicator.SetDamageTextFromFloat(amount);
     }
     public float GetDamamgeMultiplier() {
         return damageAugmentationFactor;
@@ -262,7 +253,7 @@ public class Enemy : MonoBehaviour {
 
     }
 
-    private void Die() {
+    protected void Die() {
         if (spawnsOnDeath && spawnCount > 0 && spawnPrefab != null) {
             SpawnWhenDeath(spawnPrefab, transform.position, target, spawnCount);
         }
@@ -274,7 +265,7 @@ public class Enemy : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    void Start() {
+    public virtual void Start() {
         health = enemyInfo.health;
         speed = enemyInfo.speed;
         defense = enemyInfo.defense;
@@ -289,9 +280,10 @@ public class Enemy : MonoBehaviour {
         spawnCount = enemyInfo.spawnCount;
         spawnPrefab = enemyInfo.spawnPrefab;
         spawnEffect = enemyInfo.spawnEffect;
-        dieOnBase = enemyInfo.dieOnBase;
-        status = Status.NONE;
 
+        status = Status.NONE;
+        healthBar = transform.Find(CANVAS_NAME).Find(HEALTH_BG_NAME).Find(HEALTH_BAR_NAME).GetComponent<Image>();
+        healthText = transform.Find(CANVAS_NAME).Find(HEALTH_TEXT_NAME).GetComponent<TMP_Text>(); ;
         model = transform.Find(MODEL_NAME).gameObject;
         animator = model.GetComponent<Animator>();
         ballParentTransform = gameObject.transform;
@@ -398,11 +390,7 @@ public class Enemy : MonoBehaviour {
         target = waypoints.GetPoint(waypointIndex);
     }
 
-    private void EndPath() {
-        if (dieOnBase) {
-            Die();
-        }
-
+    public virtual void EndPath() {
         target = null;
         animator.SetBool("isWalking", false);
     }
