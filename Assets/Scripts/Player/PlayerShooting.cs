@@ -9,8 +9,9 @@ public class PlayerShooting : MonoBehaviour {
     */
     [SerializeField] private LayerMask groundLayerMask;
 
-    private Transform firePoint; // TODO: firepoint may need changes to rotation
+    private Transform firePoint;
     public GameObject bulletPrefab; // TODO: get an actual bullet prefab
+    public GameObject fireSoundPrefab;
 
     private float bulletForce = 4f;
     private float shootingCooldown = 0.2f; 
@@ -42,7 +43,7 @@ public class PlayerShooting : MonoBehaviour {
             default:
                 Ray mouseRay = mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(mouseRay, out RaycastHit raycastHit, float.MaxValue, groundLayerMask)) {
-                    mousePositionVector = raycastHit.point;
+                    mousePositionVector = new Vector3(raycastHit.point.x, firePoint.transform.position.y, raycastHit.point.z);
                     //mousePositionVector.y = transform.position.y; // set to same vertical height as player
                 }
                 if (!IsPointerOverUIObject() && isUsingShooting && Input.GetButtonDown("Fire1")) {
@@ -87,9 +88,11 @@ public class PlayerShooting : MonoBehaviour {
 
     private void Shoot() {
         if (currentCooldown <= 0) {
+            Instantiate(fireSoundPrefab, firePoint.position, firePoint.rotation); // create the sound for firing a bullet
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Rigidbody rigidBody = bullet.GetComponent<Rigidbody>();
             rigidBody.AddForce(bulletDirection * bulletForce, ForceMode.Impulse);
+            
             // TODO: add shooting animation somewhere
             currentCooldown = shootingCooldown;
         }
