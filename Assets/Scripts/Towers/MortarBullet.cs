@@ -23,11 +23,6 @@ public class MortarBullet : Bullet {
     // Update is called once per frame
     protected override void Update() {
         time += Time.deltaTime;
-
-        if (target == null) {
-            Destroy(gameObject);
-            return;
-        }
         
         // endPosition = target.position; // Constantly home in on enemy position
 
