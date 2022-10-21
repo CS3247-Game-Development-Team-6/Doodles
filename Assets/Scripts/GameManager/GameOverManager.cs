@@ -3,10 +3,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+/** Used by WinScreen and GameOverScreen
+ */
 public class GameOverManager : MonoBehaviour {
+    public string mainMenuScene;
     public Text wavesText;
     public GameObject raycastOccluder;
-    public string retrySceneName;
 
     // Enabled when game is running
     void OnEnable() {
@@ -27,22 +29,17 @@ public class GameOverManager : MonoBehaviour {
 
         // pause
         Time.timeScale = 0f;
-
     }
 
     public void Retry() {
-        // load current active scene
-        // deprecated: SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
-        GameObject[] ddols = GameStateManager.GetDontDestroyOnLoadObjects();
-        for (int i = 0; i < ddols.Length; i++) {
-            Destroy(ddols[i]);
-        }
-
-        SceneManager.LoadScene(retrySceneName);
-
-        // remove occluder
-        raycastOccluder.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
+        raycastOccluder.SetActive(false);
+    }
+
+    public void GotoMainMenu() {
+        SceneManager.LoadScene(mainMenuScene);
+        Time.timeScale = 1f;
+        raycastOccluder.SetActive(false);
     }
 }
