@@ -154,6 +154,7 @@ public class PlayerMovement : MonoBehaviour {
                 break;
             case State.Paused:
             // game is paused, pause all updates for player
+                StopMovement();
             break;
         }
         
@@ -295,11 +296,11 @@ public class PlayerMovement : MonoBehaviour {
         case State.Attacking:
             rigidBody.velocity = Vector3.zero;
             break;
-
-        case State.Paused:
-            rigidBody.velocity = Vector3.zero;
-            break;
         }
+    }
+
+    private void StopMovement() {
+        rigidBody.velocity = Vector3.zero;
     }
 
     /////////////////////////////////////
