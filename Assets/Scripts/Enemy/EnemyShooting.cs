@@ -72,12 +72,6 @@ public class EnemyShooting : MonoBehaviour {
         GameObject nearestTarget = result.Item1;
         float shortestDistance = result.Item2;
 
-        /*if (nearestTarget != null && shortestDistance <= range) {
-            target = nearestTarget.transform;
-        } else {
-            target = null;
-        }*/
-
         if (nearestTarget != null && nearestTarget.gameObject.tag == baseTag && GetComponent<Enemy>().waypointIndex >= GetComponent<Enemy>().waypoints.Length - 1
             && shortestDistance <= range) {
             target = nearestTarget.transform;
@@ -114,7 +108,7 @@ public class EnemyShooting : MonoBehaviour {
                 nearestTarget = tempTarget;
             }
         }
-        
+
         foreach (GameObject tempTarget in _playerWalls) {
             // range from the model
             float distanceToPlayer = Vector3.Distance(rangeCenter.position, tempTarget.transform.position);

@@ -101,7 +101,7 @@ public class Enemy : MonoBehaviour {
     /**
      * Translation
      */
-    private Transform target;
+    protected Transform target;
     public int waypointIndex = 0; // make public for a quick fix so that enemy dont attack base without reaching
 
     /**
@@ -221,13 +221,13 @@ public class Enemy : MonoBehaviour {
     /**
      * offset to separate between mobs
      */
-    private void SpawnWhenDeath(GameObject _prefab, Vector3 _spawnPosition, Transform target,
+    private void SpawnWhenDeath(GameObject _prefab, Vector3 _spawnPosition, Transform _target,
         int _spawnCount) {
 
-        Vector3 minOffset = target ? -(target.position - transform.position).normalized : new Vector3(0, 0, 0);
-        Vector3 maxOffset = target && target != waypoints.GetPoint(waypoints.Length - 1) ?
+        Vector3 minOffset = _target ? -(_target.position - transform.position).normalized : new Vector3(0, 0, 0);
+        Vector3 maxOffset = _target && _target != waypoints.GetPoint(waypoints.Length - 1) ?
                     // current enemy is near base, to avoid spawning mobs into the base
-                    (target.position - transform.position).normalized :
+                    (_target.position - transform.position).normalized :
                     new Vector3(0, 0, 0);
 
         for (int i = 0; i < _spawnCount; i++) {
@@ -310,7 +310,7 @@ public class Enemy : MonoBehaviour {
         enemyActiveEffectsManager = GetComponent<EnemyActiveEffects>();
     }
 
-    private void Update() {
+    protected virtual void Update() {
         healthText.text = string.Format("{0:N0}", health);
 
         if (health <= 0) {
