@@ -1557,6 +1557,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6600273765387948035}
+    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GotoNextScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameStateManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 378319769803560576, guid: 636b4af0198ef8246beebccec196472b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2739,6 +2767,7 @@ MonoBehaviour:
   numEnemiesLeftInWave: 0
   isSpawningEnemy: 0
   waves: []
+  timeBetweenWaves: 10
 --- !u!1 &1458396411 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4600644439624492359, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
@@ -3110,7 +3139,7 @@ PrefabInstance:
       objectReference: {fileID: 827046482}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: nextSceneName
-      value: spider_theme_dialogue
+      value: Menu-beta
       objectReference: {fileID: 0}
     - target: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
       propertyPath: wavesCounterUI
@@ -3195,6 +3224,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6600273765185839075, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+--- !u!114 &6600273765387948035 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6600273765185839073, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}
+  m_PrefabInstance: {fileID: 6600273765387948034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240270875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b52799cdd58d584686b6444020408c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6600273765387948036 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2930312957552281026, guid: 737c34c281d203e49a385a75b0cfbb8d, type: 3}

@@ -19,10 +19,6 @@ public class GameOverManager : MonoBehaviour {
 
         StartCoroutine(PauseGame());
 
-        GameObject[] ddols = GameStateManager.GetDontDestroyOnLoadObjects();
-        for (int i = 0; i < ddols.Length; i++) {
-            Destroy(ddols[i]);
-        }
     }
 
     IEnumerator PauseGame() {

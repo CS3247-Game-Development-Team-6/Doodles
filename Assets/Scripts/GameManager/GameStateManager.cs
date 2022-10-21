@@ -37,10 +37,10 @@ public class GameStateManager : MonoBehaviour {
     }
 
     public void WinGame() {
-        GameObject[] ddols = GetDontDestroyOnLoadObjects();
+        /*GameObject[] ddols = GetDontDestroyOnLoadObjects();
         for (int i = 0; i < ddols.Length; i++) {
             ddols[i].SetActive(false);
-        }
+        }*/
 
         isGameEnded = true;
 
@@ -48,10 +48,10 @@ public class GameStateManager : MonoBehaviour {
     }
 
     public void GotoNextScene() {
-        GameObject[] ddols = GetDontDestroyOnLoadObjects();
+        /*GameObject[] ddols = GetDontDestroyOnLoadObjects();
         for (int i = 0; i < ddols.Length; i++) {
             Destroy(ddols[i]);
-        }
+        }*/
         SceneManager.LoadScene(nextSceneName);
     }
 
