@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Toggle))]
 public class DisableUI : MonoBehaviour {
     public bool dontShow { get; private set; }
     public GameObject target;
@@ -9,8 +11,11 @@ public class DisableUI : MonoBehaviour {
 
     private void Start() {
         dontShow = PlayerPrefs.GetInt(Key) > 0;
-        if (dontShow && target != null) {
-            target.SetActive(false);
+        Toggle t = GetComponent<Toggle>();
+        if (dontShow) {
+            t.isOn = true;
+            t.enabled = false;
+            if (target != null) target.SetActive(false);
         }
     }
 
@@ -21,4 +26,5 @@ public class DisableUI : MonoBehaviour {
 
         PlayerPrefs.SetInt(Key, val);
     }
+
 }
