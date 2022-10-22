@@ -10,13 +10,18 @@ public class PlayerXP : MonoBehaviour {
     private Transform spellOverlay;
 
     private void Start() {
-        xp = 0;
+        xp = -1;
         spellInventory = FindObjectOfType<SpellInventoryUI>();
         spellOverlay = spellInventory.transform.parent;
     }
 
     public void IncreaseByXPPerChunk() {
         xp += xpPerChunk;
+    }
+
+    public void LockSpell() {
+        spellOverlay.gameObject.SetActive(false);
+        spellInventory.gameObject.SetActive(false);
     }
 
     public void TryUnlockSpell() {
