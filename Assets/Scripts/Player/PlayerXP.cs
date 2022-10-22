@@ -5,11 +5,12 @@ public class PlayerXP : MonoBehaviour {
     [SerializeField] private float xpPerChunk; 
     [SerializeField] private List<float> xpToUnlockSpellLevel;
 
-    private float xp;
+    private float xp = -1;
     private SpellInventoryUI spellInventory;
     private Transform spellOverlay;
 
-    private void Start() {
+    private void Awake() {
+        // DO NOT MOVE TO Start: Need to happen before SpellInventoryUI is locked.
         xp = -1;
         spellInventory = FindObjectOfType<SpellInventoryUI>();
         spellOverlay = spellInventory.transform.parent;
