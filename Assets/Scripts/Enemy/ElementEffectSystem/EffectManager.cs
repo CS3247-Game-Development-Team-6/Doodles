@@ -60,7 +60,9 @@ public class EffectManager : MonoBehaviour, IEffectable {
                 }
                 // Same element is inflicted on enemy
                 else {
-                    // refresh the effect time
+                    if (_data.DOTAmount != 0) return; // fire
+
+                    // refresh effect time
                     _currentEffectTime = 0;
                     _nextTickTime = 0;
                     this._data = _data;
