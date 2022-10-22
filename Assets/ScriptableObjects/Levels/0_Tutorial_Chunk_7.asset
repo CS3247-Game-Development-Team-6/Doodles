@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe4a39bb2062e524580495433674019c, type: 3}
+  m_Name: 0_Tutorial_Chunk_7
+  m_EditorClassIdentifier: 
+  levelName: 0_Tutorial_Chunk_7
+  startingInkPercentage: 1
+  waves:
+  - enemy: {fileID: 6540121397901334477, guid: 300acf72d144c3145a64944ed02ec40c, type: 3}
+    count: 5
+    rate: 0.75
+    enemy2: {fileID: 6540121397901334477, guid: 300acf72d144c3145a64944ed02ec40c, type: 3}
+    count2: 5
+    rate2: 1
+    enemy3: {fileID: 6540121397901334477, guid: 300acf72d144c3145a64944ed02ec40c, type: 3}
+    count3: 10
+    rate3: 1
+  - enemy: {fileID: 6540121397901334477, guid: a9f462e45d43ada4690904da9c284f9e, type: 3}
+    count: 2
+    rate: 0.75
+    enemy2: {fileID: 6540121397901334477, guid: 300acf72d144c3145a64944ed02ec40c, type: 3}
+    count2: 10
+    rate2: 1
+    enemy3: {fileID: 6540121397901334477, guid: a9f462e45d43ada4690904da9c284f9e, type: 3}
+    count3: 5
+    rate3: 1
+  isFogChunk: 0
+  notes:
+  - text: 'We''re nearing the end of this, i''m sure of it! '
+    rectPosition: {x: 231, y: -174, z: 0}
+  - text: Let's push through!
+    rectPosition: {x: 231, y: -174, z: 0}

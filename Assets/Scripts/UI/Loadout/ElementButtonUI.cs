@@ -34,6 +34,7 @@ public class ElementButtonUI : MonoBehaviour, IPointerDownHandler, IPointerEnter
             return;
         }
 
+        myTowerInfo = null;
         if (isUpgrade) {
             myTowerInfo = descUI.towerInfo.nextUpgrade;
             // descUI.SetInfo(descUI.towerInfo.nextUpgrade, false);

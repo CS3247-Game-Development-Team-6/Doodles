@@ -16,6 +16,12 @@ public class EnemyInventoryUI : MonoBehaviour {
         foreach (var chunk in mapInfo.chunkInfo) {
             foreach (var wave in chunk.waves) {
                 uniqueEnemies.Add(wave.enemy.GetComponent<Enemy>().enemyInfo);
+                if (wave.enemy2 != null) {
+                    uniqueEnemies.Add(wave.enemy2.GetComponent<Enemy>().enemyInfo);
+                } 
+                if (wave.enemy3 != null) {
+                    uniqueEnemies.Add(wave.enemy3.GetComponent<Enemy>().enemyInfo);
+                }
             }
         }
         foreach (var slot in inventoryList) {

@@ -152,6 +152,7 @@ public class Map : MonoBehaviour {
 
         if (!playerXP) Debug.LogError("No PlayerXP for in this Scene");
         else { 
+            playerXP.LockSpell();
             playerXP.IncreaseByXPPerChunk();
             playerXP.TryUnlockSpell();
         }
@@ -188,6 +189,13 @@ public class Map : MonoBehaviour {
                 }
             }
             SetCurrentChunk(currentChunk);
+            if (playerXP != null) {
+                playerXP.LockSpell();
+                playerXP.IncreaseByXPPerChunk();
+                playerXP.TryUnlockSpell();
+            } else {
+                Debug.LogError("Missing playerXP");
+            }
         }
     }
 }
