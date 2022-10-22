@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour {
 
-    public GameObject hitEffect; // TODO: get a hit effect for the bullets
+    public ParticleSystem hitEffect; 
 
     public int bulletDamage = 20;
 
-    private float maxLifeTime = 10f;
+    private float maxLifeTime = 2f;
     private float currentLifeTime;
 
     void Start() {
@@ -28,19 +28,16 @@ public class PlayerBullet : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision other) {
-        // TODO: implement hit effect
-        // Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
-        // Destroy(effect, 5f); // destroy after 5 ticks
-
         if (other.collider.CompareTag("Enemy")) {
             other.collider.GetComponentInParent<Enemy>().TakeDamage(bulletDamage, null);
         }
-        Destroy(gameObject);
+        Instantiate(hitEffect, transform.position, Quaternion.identity); // Quaternion.identity is the default rotation
+        Destroy(this.gameObject);
     }
 
     private void CheckLifeTime() {
         if (currentLifeTime <= 0) {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

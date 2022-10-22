@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour {
     */
     [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] private LayerMask tileAndFogLayerMask;
-    private TowerManager towerManager;
     private InkManager inkManager;
     private IndicatorUI buildIndicator;
     public GameObject playerGO;
@@ -63,6 +62,7 @@ public class PlayerMovement : MonoBehaviour {
     private PlayerMelee playerMeleeScript;
     private Transform firePoint;
     private PauseMenu pauseMenu;
+    private TowerManager towerManager;
 
 
     // directions and positions
@@ -154,6 +154,7 @@ public class PlayerMovement : MonoBehaviour {
                 break;
             case State.Paused:
             // game is paused, pause all updates for player
+                StopMovement();
             break;
         }
         
@@ -168,7 +169,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void UpdatePauseState() {
-        if (pauseMenu.IsPaused()) {
+        if (pauseMenu.IsPaused() || SpellManager.IsChoosingSpell) {
             // game is paused, update state
             isPaused = true;
             state = State.Paused;
@@ -189,7 +190,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void ProcessInputs() {
-        if (SpellManager.IsChoosingSpell) return;
         switch (state) {
             case State.Normal:
                 HandleMovementInputs();
@@ -297,6 +297,10 @@ public class PlayerMovement : MonoBehaviour {
             rigidBody.velocity = Vector3.zero;
             break;
         }
+    }
+
+    private void StopMovement() {
+        rigidBody.velocity = Vector3.zero;
     }
 
     /////////////////////////////////////

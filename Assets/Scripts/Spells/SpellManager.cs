@@ -22,6 +22,10 @@ public class SpellManager : MonoBehaviour
             Debug.LogError($"More than one SpellManager found in scene, destroying {name}");
             Destroy(gameObject);
         }
+
+        // DO NOT MOVE: Need to happen before SpellInventoryUI is locked.
+        SpellInventoryUI spellInventory = FindObjectOfType<SpellInventoryUI>();
+        spellInventory.AttachSpellManager(this);
     }
 
     private void Start() {
@@ -35,8 +39,6 @@ public class SpellManager : MonoBehaviour
             slot.Level = i;
             if (slot.spell != null) slots.Add(slot);
         }
-        SpellInventoryUI spellInventory = FindObjectOfType<SpellInventoryUI>();
-        spellInventory.AttachSpellManager(this);
     }
 
     public void Add(SpellUI slot) {

@@ -40,14 +40,14 @@ public class GameStateInfoUI : MonoBehaviour {
             totalWaves += chunk.waves.Length;
         }
         totalChunks = mapInfo.chunkInfo.Length;
-        enemyText.text = $"{mapInfo.chunkInfo.Length} Chunks\n{totalWaves} Total Waves";
+        enemyText.text = $"{mapInfo.chunkInfo.Length} Levels\n{totalWaves} Total Waves";
     }
 
     private string GetWaveStatus() {
         int chunkNum = chunkSpawner.chunkIndex;
         int waveNum = chunkSpawner.WavesStarted;
         int totalWavesInChunk = chunkSpawner.waves.Length;
-        return $"\nWave {waveNum} / {totalWavesInChunk}\nin chunk {chunkNum} / {totalChunks}";
+        return $"\nWave {waveNum} / {totalWavesInChunk}\nin level {chunkNum} / {totalChunks}";
     }
 
     private float GetChunkCompletion() {
