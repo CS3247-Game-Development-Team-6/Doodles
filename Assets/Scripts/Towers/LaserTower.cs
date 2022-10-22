@@ -63,8 +63,7 @@ public class LaserTower : Tower {
     public override void Update() {
         base.Update();
 
-        if (health <= 0) return;
-        if (!target || isStopShooting) {
+        if (health <= 0 || !target || isStopShooting) {
             if (lineRenderer.enabled) {
                 lineRenderer.enabled = false;
                 impactEffect.GetComponent<ParticleSystem>().Stop();

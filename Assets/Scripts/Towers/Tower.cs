@@ -97,7 +97,7 @@ public class Tower : MonoBehaviour {
     }
 
     /** Function accessable by enemy to damage tower. */
-    public void DecreaseHealth(float amount) {
+    public virtual void DecreaseHealth(float amount) {
         health -= amount;
     }
 

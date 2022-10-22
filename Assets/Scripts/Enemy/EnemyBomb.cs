@@ -43,6 +43,7 @@ public class EnemyBomb : MonoBehaviour {
 
     public void Shoot() {
         foreach (var tower in towerInRange) {
+            if (!tower) continue;
             Tower towerScript = tower.GetComponent<Tower>();
             if (towerScript) {
                 float distance = Vector3.Distance(transform.position, tower.transform.position);
