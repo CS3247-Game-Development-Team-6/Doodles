@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpellInventoryUI : MonoBehaviour {
     public List<SpellSlotUI> inventoryList { get; private set; }
@@ -7,6 +8,7 @@ public class SpellInventoryUI : MonoBehaviour {
 
     [Header("UI Components")]
     [SerializeField] private SpellDescriptionUI spellDescriptionUI;
+    [SerializeField] private Button startButton;
     private SpellManager spellManager;
 
     public int MaxLevelUnlocked { get; private set; } = -1;
@@ -21,6 +23,12 @@ public class SpellInventoryUI : MonoBehaviour {
 
     private void OnDisable() {
         SpellManager.IsChoosingSpell = false;
+    }
+
+    private void Update() {
+        if (startButton != null) {
+            startButton.interactable = currentSpellSelected != null;
+        }
     }
 
     public int Subscribe(SpellSlotUI slot) {
