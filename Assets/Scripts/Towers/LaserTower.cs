@@ -20,11 +20,16 @@ public class LaserTower : Tower {
     private GameObject impactEffect;
     private Light impactLight;
 
+    private bool newElementSet = false;
+
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
         rotationBase = transform.Find(Tower.ROTATION_BASE_NAME);
         firePoint = rotationBase.Find(Tower.FIRE_POINT_NAME);
+        if (towerInfo.element != elementInfo) {
+            newElementSet = true;
+        }
         elementInfo = !towerInfo.element ? null : towerInfo.element;
         damage = towerInfo.damage;
     }
@@ -36,7 +41,6 @@ public class LaserTower : Tower {
         impactLight = impactEffect.GetComponentInChildren<Light>();
     }
 
-    /** Checks every second for the closest enemy in range. */
     void UpdateTarget() {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
 
@@ -62,7 +66,6 @@ public class LaserTower : Tower {
         }
     }
 
-
     public override void Update() {
         base.Update();
 
@@ -86,7 +89,10 @@ public class LaserTower : Tower {
         // laser damage
         targetTime += Time.deltaTime;
         targetEnemy.TakeDamage(damage * Mathf.Log(targetTime + 1), elementInfo); // +1 so that is positive
-        targetEffectable.ApplyEffect(elementInfo ? elementInfo.effect : null);
+        if (newElementSet) {
+            targetEffectable.ApplyEffect(elementInfo ? elementInfo.effect : null);
+            newElementSet = false;
+        }
 
         // decrease health
         base.DecreaseHealth(Time.deltaTime);
