@@ -9,7 +9,7 @@ public class SpellInventoryUI : MonoBehaviour {
     [SerializeField] private SpellDescriptionUI spellDescriptionUI;
     private SpellManager spellManager;
 
-    public int MaxLevelUnlocked { get; private set; }
+    public int MaxLevelUnlocked { get; private set; } = -1;
 
     public static readonly int MAX_LEVEL = 3;
 
@@ -79,15 +79,17 @@ public class SpellInventoryUI : MonoBehaviour {
     }
 
     public void UnlockNextLevel() {
-        Transform child = transform.GetChild(MaxLevelUnlocked);
-        CanvasGroup canvas = child.GetComponent<CanvasGroup>();
-        LockLevel(canvas);
+        if (MaxLevelUnlocked > -1) {
+            Transform child = transform.GetChild(MaxLevelUnlocked);
+            CanvasGroup canvas = child.GetComponent<CanvasGroup>();
+            LockLevel(canvas);
+        }
 
         MaxLevelUnlocked++;
 
         if (MaxLevelUnlocked <= MAX_LEVEL) {
-            child = transform.GetChild(MaxLevelUnlocked);
-            canvas = child.GetComponent<CanvasGroup>();
+            Transform child = transform.GetChild(MaxLevelUnlocked);
+            CanvasGroup canvas = child.GetComponent<CanvasGroup>();
             UnlockLevel(canvas);
         }
 

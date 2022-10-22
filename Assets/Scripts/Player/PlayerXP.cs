@@ -27,12 +27,12 @@ public class PlayerXP : MonoBehaviour {
     public void TryUnlockSpell() {
         if (spellInventory.isMaxLevelUnlocked) return;
 
-        Debug.Log($"xp {xp} [threshold {xpToUnlockSpellLevel[spellInventory.MaxLevelUnlocked]}]");
+        Debug.Log($"xp {xp} [threshold {xpToUnlockSpellLevel[spellInventory.MaxLevelUnlocked+1]}]");
         float xpThreshold =
-            spellInventory.MaxLevelUnlocked < xpToUnlockSpellLevel.Count ?
-            xpToUnlockSpellLevel[spellInventory.MaxLevelUnlocked] : xpToUnlockSpellLevel[xpToUnlockSpellLevel.Count - 1];
+            spellInventory.MaxLevelUnlocked+1 < xpToUnlockSpellLevel.Count ?
+            xpToUnlockSpellLevel[spellInventory.MaxLevelUnlocked+1] : xpToUnlockSpellLevel[xpToUnlockSpellLevel.Count - 1];
         
-        if (xp >= xpToUnlockSpellLevel[spellInventory.MaxLevelUnlocked]) {
+        if (xp >= xpToUnlockSpellLevel[spellInventory.MaxLevelUnlocked + 1]) {
             spellOverlay.gameObject.SetActive(true);
             spellInventory.gameObject.SetActive(true);
             spellInventory.UnlockNextLevel();
