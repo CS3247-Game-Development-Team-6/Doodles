@@ -283,7 +283,7 @@ public class Enemy : MonoBehaviour {
 
         status = Status.NONE;
         healthBar = transform.Find(CANVAS_NAME).Find(HEALTH_BG_NAME).Find(HEALTH_BAR_NAME).GetComponent<Image>();
-        healthText = transform.Find(CANVAS_NAME).Find(HEALTH_TEXT_NAME).GetComponent<TMP_Text>(); ;
+        healthText = transform.Find(CANVAS_NAME).Find(HEALTH_TEXT_NAME).GetComponent<TMP_Text>();
         model = transform.Find(MODEL_NAME).gameObject;
         animator = model.GetComponent<Animator>();
         ballParentTransform = gameObject.transform;
