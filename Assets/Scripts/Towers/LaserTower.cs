@@ -20,7 +20,6 @@ public class LaserTower : Tower {
     private GameObject impactEffect;
     private Light impactLight;
 
-
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
         rotationBase = transform.Find(Tower.ROTATION_BASE_NAME);
@@ -36,7 +35,6 @@ public class LaserTower : Tower {
         impactLight = impactEffect.GetComponentInChildren<Light>();
     }
 
-    /** Checks every second for the closest enemy in range. */
     void UpdateTarget() {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
 
@@ -61,7 +59,6 @@ public class LaserTower : Tower {
             targetEffectable = target.GetComponent<IEffectable>();
         }
     }
-
 
     public override void Update() {
         base.Update();

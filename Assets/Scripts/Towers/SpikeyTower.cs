@@ -29,13 +29,15 @@ public class SpikeyTower : Tower {
     void UpdateTarget() {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
 
+        bool enemyFound = false;
         foreach (GameObject enemy in enemies) {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy <= range) {
-                this.isShooting = true;
+                enemyFound = true;
                 break;
             }
         }
+        this.isShooting = enemyFound;
     }
 
     public override void Shoot() {

@@ -8,7 +8,7 @@ public class InkManager : MonoBehaviour {
     private float maxInk = 400f;
     private float growthRate;
     private float ink;
-    private MapInfo mapInfo;
+    public MapInfo mapInfo;
 
     // Deprecating
     [HideInInspector, SerializeField] private IndicatorUI playerInkIndicator;
@@ -27,7 +27,7 @@ public class InkManager : MonoBehaviour {
 
         if (FindObjectOfType<GameStateInfoUI>() != null) {
             ui = FindObjectOfType<GameStateInfoUI>();
-            mapInfo = Loadout.mapToLoad;
+            if (Loadout.mapToLoad != null) mapInfo = Loadout.mapToLoad;
             ui.SetInkManager(this);
             if (mapInfo != null) {
                 growthRate = mapInfo.inkRegenRate;
