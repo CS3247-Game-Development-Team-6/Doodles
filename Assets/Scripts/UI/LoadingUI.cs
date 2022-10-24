@@ -31,12 +31,18 @@ public class LoadingUI : MonoBehaviour {
         if (scenesLoading.Count != 0) StartCoroutine(GetSceneLoadProgress());
     }
 
+    public void GotoScene(string sceneName) {
+        this.gameObject.SetActive(true);
+        AddSceneToLoad(sceneName);
+        StartLoad();
+    }
+
     public IEnumerator GetSceneLoadProgress() {
         for (int i = 0; i < scenesLoading.Count; i++) {
             while (!scenesLoading[i].isDone) {
                 totalSceneProgress = 0;
 
-                foreach(AsyncOperation op in scenesLoading) {
+                foreach (AsyncOperation op in scenesLoading) {
                     totalSceneProgress += op.progress;
                 }
 
