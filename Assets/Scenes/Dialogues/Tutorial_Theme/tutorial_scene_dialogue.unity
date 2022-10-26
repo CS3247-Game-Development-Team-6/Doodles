@@ -410,18 +410,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5154893421198816428, guid: 9e0841b82a4ebcd438730d23886e17e6, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
+    - target: {fileID: 6167349947878513351, guid: 9e0841b82a4ebcd438730d23886e17e6, type: 3}
+      propertyPath: level
+      value: 
+      objectReference: {fileID: 11400000, guid: ec5b0ab1089facf4f83026846d116649, type: 2}
     - target: {fileID: 6167349947878513351, guid: 9e0841b82a4ebcd438730d23886e17e6, type: 3}
       propertyPath: GotoButton
       value: 
       objectReference: {fileID: 484263813}
     - target: {fileID: 6167349947878513351, guid: 9e0841b82a4ebcd438730d23886e17e6, type: 3}
-      propertyPath: NextSceneName
-      value: TutorialLoadout
+      propertyPath: LoadoutScene
+      value: Loadout
       objectReference: {fileID: 0}
+    - target: {fileID: 6167349947878513351, guid: 9e0841b82a4ebcd438730d23886e17e6, type: 3}
+      propertyPath: NextSceneName
+      value: Loadout
+      objectReference: {fileID: 0}
+    - target: {fileID: 6167349947878513351, guid: 9e0841b82a4ebcd438730d23886e17e6, type: 3}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 632975524}
     - target: {fileID: 6167349947878513351, guid: 9e0841b82a4ebcd438730d23886e17e6, type: 3}
       propertyPath: loadSprites.Array.size
       value: 9
@@ -581,6 +589,17 @@ MonoBehaviour:
   dialogueView: {fileID: 0}
   continueActionType: 1
   continueActionKeyCode: 32
+--- !u!114 &632975524 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4991266092997421623, guid: 9e0841b82a4ebcd438730d23886e17e6, type: 3}
+  m_PrefabInstance: {fileID: 484263810}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22be951dbbdcbbf4d96d349868dd1380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &929377106
 GameObject:
   m_ObjectHideFlags: 0
