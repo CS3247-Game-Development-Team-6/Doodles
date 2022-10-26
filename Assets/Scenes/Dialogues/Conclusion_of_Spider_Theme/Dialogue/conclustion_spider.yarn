@@ -3,11 +3,29 @@ tags:
 colorID: 0
 position: 0,0
 ---
+<<Scene forest>>
 <<Act Dan dan_normal left 0.38 green>>
 <<Act Doodle doodle_happy 1.25  0.38 #226677>>
 <<Move Doodle right  0.38 0.5>>
-Doodle: Phew, that was a lot of ghosts and demons to face. How are you feeling, Dan? Are you good?
-Dan: Thanks for your help, Doodle! Ghosts really only exist in imaginary worlds like this one–nothing to be afraid of!
+Doodle: Pow! Those spiders are no match for us!
+Dan: Yeah! They’re just slightly larger spiders of the real world! 
+Dan: Seeing so many of them up close, they really don’t seem too scary after all.
+<<Scene forest>>
+<<Hide Doodle>>
+<<Act Queen queen_normal 1.25 0.45 #226677>>
+<<Move Queen right 0.45 0.5>>
+The Queen appears.
+Queen: (Tsk. What a bother.)
+Queen: Seems to me you’re still cheerful and upbeat, little boy. Not to worry, everyone fears many things. Let’s move on to the next one, shall we?
+Dan: Hey, if I face all of my fears, will you let me out of this world?
+Queen: Silly boy, a little one like you stands no chance, as you will learn in due time. 
+Queen: If you decide to join me now, however, we can stop the scary theatrics right now. Isn’t that just swell?
+Dan: No way! I just want to go back to the real world!
+Queen: Stubborn and naive as those that came before you. But as you can see, I have all the time in the world. See ya later, little one!
+The Queen fades away, with a smaller smirk this time.
+<<Move Queen 1.25 0.45 0.5>>
+<<Hide Queen>>
 <<StopAudioAll>>
 <<Fade black 0.0 1.0 2.0>>
 ===
+

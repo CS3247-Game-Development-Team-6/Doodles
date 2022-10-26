@@ -3,25 +3,23 @@ tags:
 colorID: 0
 position: 0,0
 ---
-
-// sets background image to sprite called "bg_office"
 <<Act Dan dan_normal left 0.38 green>>
 <<Act Doodle doodle_happy 1.25  0.38 #226677>>
 <<Move Doodle right  0.38 0.5>>
-Doodle: Pow! Those spiders are no match for us huh Dan?
-Dan: Yeah! They’re really just slightly larger spiders of the real world! Seeing so many of them up close, they really don’t seem too scary after all.” (I want to Dan to have a progression of his attitude against his fears, so not immediately no longer afraid of that anymore)
-*Queen appears again*
-<<Scene forest>>
-<<Hide Doodle>>
+Doodle: Phew, that was a lot of ghostly and demonic creatures. How are you feeling, Dan? Are you good for now?
+Dan: I'm alright, Doodle! Ghosts really only exist in imaginary worlds like this one – nothing to be afraid of!
+
+<<Act Dan dan_angry left 0.38 green>>
 <<Act Queen queen_normal 1.25 0.45 #226677>>
 <<Move Queen right 0.45 0.5>>
-Queen: Tsk. What a bother.
-Queen: Seems to me you’re still cheerful and upbeat, little boy. Not to worry, everyone fears many things. Let’s move on to the next one, shall we?
-Dan: Hey, if I face all of my fears, will you let me out of this world with my Dad and Annie?
-Queen: Silly boy, a little one like you stands no chance, as you will learn in due time. If you decide to join me now, however, I will let your “Dad” and Annie join us too, isn’t that just swell?
-Dan: No way! I just want to go back to the real world!
-Queen: Stubborn and naive as those as young as you. But as you can see, I have all the time in the world. See ya later, little one!
-*Queen leaves*
+The Queen appears.
+Queen: (Tsk, again?)
+Queen: Well, what a resilient little boy you are. I admire your tenacity, befitting of one that is going to join me soon enough. 
+Queen: It would be tragic if you were to fail shortly after we join hands, won’t it?
+Dan: I won’t ever be joining you! I’m getting the hang of this, show me your worst!
+Queen: Oh! Getting complacent, aren’t we? Then don’t mind if I do! This one’s a real doozy, little boy.
+<<Move Queen 1.25 0.45 0.5>>
+The Queen fades away yet again, the smirk notacibly missing this time.
 <<Hide Queen>>
 <<StopAudioAll>>
 <<Fade black 0.0 1.0 2.0>>
