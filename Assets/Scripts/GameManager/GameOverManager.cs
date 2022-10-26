@@ -7,6 +7,8 @@ using System.Collections;
  */
 public class GameOverManager : MonoBehaviour {
     public string mainMenuScene;
+    public string nextDialogueScene;
+    public LoadingUI loadingScreen;
     public Text wavesText;
     public GameObject raycastOccluder;
 
@@ -38,8 +40,24 @@ public class GameOverManager : MonoBehaviour {
     }
 
     public void GotoMainMenu() {
-        SceneManager.LoadScene(mainMenuScene);
+        if (mainMenuScene == "") {
+            Debug.LogWarning("empty name for main menu scene ");
+            return;
+        }
+        loadingScreen.GotoScene(mainMenuScene);
         Time.timeScale = 1f;
         raycastOccluder.SetActive(false);
+        Destroy(this);
+    }
+
+    public void GotoNextDialogue() {
+        if (nextDialogueScene == "") {
+            Debug.LogWarning("empty name for next dialogue scene ");
+            return;
+        }
+        loadingScreen.GotoScene(nextDialogueScene);
+        Time.timeScale = 1f;
+        raycastOccluder.SetActive(false);
+        Destroy(this);
     }
 }

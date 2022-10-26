@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4497019, g: 0.49976808, b: 0.57563424, a: 1}
+  m_IndirectSpecularColor: {r: 0.44970167, g: 0.49976736, b: 0.5756334, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1533,34 +1533,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 827046487}
-    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GotoMainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameOverManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 157767887926934042, guid: 636b4af0198ef8246beebccec196472b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 188956860012959090, guid: 636b4af0198ef8246beebccec196472b, type: 3}
       propertyPath: towerInfo
       value: 
@@ -1849,10 +1821,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3944042296333450208, guid: 636b4af0198ef8246beebccec196472b, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 4078675094712855791, guid: 636b4af0198ef8246beebccec196472b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1917,10 +1885,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5202906098347979621, guid: 636b4af0198ef8246beebccec196472b, type: 3}
-      propertyPath: m_Text
-      value: Menu
-      objectReference: {fileID: 0}
+    - target: {fileID: 5215887617002473692, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 1498209071}
     - target: {fileID: 5215887617002473692, guid: 636b4af0198ef8246beebccec196472b, type: 3}
       propertyPath: mainMenuScene
       value: Menu-beta
@@ -1929,6 +1897,10 @@ PrefabInstance:
       propertyPath: raycastOccluder
       value: 
       objectReference: {fileID: 26158120}
+    - target: {fileID: 5215887617002473692, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: nextDialogueScene
+      value: graveyard_theme_dialogue
+      objectReference: {fileID: 0}
     - target: {fileID: 5247938624539349097, guid: 636b4af0198ef8246beebccec196472b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2041,6 +2013,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6212984491611131557, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 1498209071}
     - target: {fileID: 6212984491611131557, guid: 636b4af0198ef8246beebccec196472b, type: 3}
       propertyPath: mainMenuScene
       value: Menu-beta
@@ -2380,17 +2356,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 827046481}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827046482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1967037e59a1c245a40bec85163e698, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &827046487 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5215887617002473692, guid: 636b4af0198ef8246beebccec196472b, type: 3}
-  m_PrefabInstance: {fileID: 827046481}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 827046483}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1967037e59a1c245a40bec85163e698, type: 3}
@@ -2892,6 +2857,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4600644439624492359, guid: 6976bd883f3cfbf4e93c609cb365af3c, type: 3}
   m_PrefabInstance: {fileID: 351889076}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1498209071 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1446630734479758154, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+  m_PrefabInstance: {fileID: 827046481}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22be951dbbdcbbf4d96d349868dd1380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1546535280
 GameObject:
   m_ObjectHideFlags: 0
