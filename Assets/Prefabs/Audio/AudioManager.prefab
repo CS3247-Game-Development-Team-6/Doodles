@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5263057130071336391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5263057130071336389}
+  - component: {fileID: 5263057130071336390}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5263057130071336389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5263057130071336391}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 766.1135, y: 247.64415, z: -105.69332}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5263057130071336390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5263057130071336391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff03c2858a70d445ba29c8ff49b6a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 0}
+  sounds:
+  - name: LoadoutBGM
+    clip: {fileID: 8300000, guid: 88468bfecb0e84323b65bb16a63503ee, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
+    source: {fileID: 0}
+  - name: MainMenuBGM
+    clip: {fileID: 8300000, guid: 036ec35af623a40a4be9e3e7a51fb138, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
+    source: {fileID: 0}
+  - name: Game Over
+    clip: {fileID: 8300000, guid: f0aba2c0a4ad9b343b984870384027a9, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
+    source: {fileID: 0}
+  - name: Game Won
+    clip: {fileID: 8300000, guid: c311e965594f24a418f9ff35f72c71be, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
+    source: {fileID: 0}
+  - name: ClownSceneBGM
+    clip: {fileID: 8300000, guid: ce2a086caf87a564ebf280a26cc4ae9f, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
+    source: {fileID: 0}
+  - name: GhostSceneBGM
+    clip: {fileID: 8300000, guid: 16f6a1145682b334aabf14b9785de0a4, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
+    source: {fileID: 0}
+  - name: SpiderSceneBGM
+    clip: {fileID: 8300000, guid: f0ab2a8e3039d47469830d1b2faa8526, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
+    source: {fileID: 0}
+  - name: TutorialSceneBGM
+    clip: {fileID: 8300000, guid: 87b765954000848d999334178960476c, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
+    source: {fileID: 0}

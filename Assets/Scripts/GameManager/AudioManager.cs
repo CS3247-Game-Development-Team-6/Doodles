@@ -1,11 +1,9 @@
-using UnityEngine.Audio;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class AudioManager : MonoBehaviour
-{
+public class AudioManager : MonoBehaviour {
     private static readonly string FirstPlay = "FirstPlay";
     public static readonly string VolumePref = "VolumePref";
     private int firstPlayInt;
@@ -13,12 +11,9 @@ public class AudioManager : MonoBehaviour
     private float volumeFloat;
     public Sound[] sounds;
     
-    void Awake()
-    {
-        if (firstPlayInt == 0)
-        {
-            foreach (Sound s in sounds)
-            {
+    void Awake() {
+        if (firstPlayInt == 0) {
+            foreach (Sound s in sounds) {
                 s.source = gameObject.AddComponent<AudioSource>();
                 s.source.clip = s.clip;
 
@@ -28,92 +23,80 @@ public class AudioManager : MonoBehaviour
 
                 s.source.outputAudioMixerGroup = s.group;
             }
-        } 
-        else
-        {
+        } else {
             ContinueSettings();
         }
     }
 
-    private void Start()
-    {
+    private void Start() {
         firstPlayInt = PlayerPrefs.GetInt(FirstPlay);
 
-        if (firstPlayInt == 0)
-        {
+        if (firstPlayInt == 0) {
             volumeFloat = 0.6f;
             volumeSlider.value = volumeFloat;
             PlayerPrefs.SetFloat(VolumePref, volumeFloat);
             PlayerPrefs.SetInt(FirstPlay, -1);
-        }
-        else
-        {
+        } else {
             volumeFloat = PlayerPrefs.GetFloat(VolumePref);
             volumeSlider.value = volumeFloat;
         }
 
         if (SceneManager.GetActiveScene().name.StartsWith("Menu"))
-            Play("Main Menu BGM");
-        else if (SceneManager.GetActiveScene().name.StartsWith("ShaderScene"))
-            Play("Level 1 BGM");
-
+            Play("MainMenuBGM");
+        else if (SceneManager.GetActiveScene().name.StartsWith("Loadout"))
+            Play("LoadoutBGM");
+        else if (SceneManager.GetActiveScene().name.StartsWith("Tutorial"))
+            Play("TutorialSceneBGM");
+        else if (SceneManager.GetActiveScene().name.StartsWith("Ghost"))
+            Play("GhostSceneBGM");
+        else if (SceneManager.GetActiveScene().name.StartsWith("Clown"))
+            Play("ClownSceneBGM");
+        else if (SceneManager.GetActiveScene().name.StartsWith("Spider"))
+            Play("SpiderSceneBGM");
     }
 
-    public void SaveSoundSettings()
-    {
+    public void SaveSoundSettings() {
         PlayerPrefs.SetFloat(VolumePref, volumeSlider.value);
     }
 
     // Save Player Pref values when not in focus or player exits
-    private void OnApplicationFocus(bool inFocus)
-    {
-        if (!inFocus)
-        {
+    private void OnApplicationFocus(bool inFocus) {
+        if (!inFocus) {
             SaveSoundSettings();
         }
     }
 
-    public void UpdateSound()
-    {
-        foreach (Sound s in sounds)
-        {
+    public void UpdateSound() {
+        foreach (Sound s in sounds) {
             s.source.volume = volumeSlider.value;
-
         }
     }
 
-    public void Play (string name)
-    {
+    public void Play (string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
         // Sound not found
-        if (s == null)
-        {
+        if (s == null) {
             Debug.LogWarning("Sound: " + name + " not found!");
             return;
         }
         s.source.Play();
     }
 
-    public void Stop (string sound)
-    {
+    public void Stop (string sound) {
         Sound s = Array.Find(sounds, item => item.name == sound);
-        if (s == null)
-        {
+        if (s == null) {
             Debug.LogWarning("Sound: " + name + " not found!");
             return;
         }
         s.source.Stop();
     }
 
-    public void ContinueSettings()
-    {
+    public void ContinueSettings() {
         volumeFloat = PlayerPrefs.GetFloat(VolumePref);
 
-        foreach (Sound s in sounds)
-        {
+        foreach (Sound s in sounds) {
             s.source.volume = volumeFloat;
-
         }
     }
 }
