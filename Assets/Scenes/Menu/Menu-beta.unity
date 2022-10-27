@@ -625,6 +625,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742614472}
   m_CullTransparentMesh: 1
+--- !u!114 &1749272477 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4590509386543256287, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
+  m_PrefabInstance: {fileID: 4413762795411869816}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22be951dbbdcbbf4d96d349868dd1380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2103911251 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5037827429528788699, guid: 0c489d898b5f75a43a2592a409bf4863, type: 3}
@@ -711,7 +722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1726927277765077784, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1871711413455868510, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
       propertyPath: m_AnchorMax.y
@@ -834,45 +845,9 @@ PrefabInstance:
       value: -410.20233
       objectReference: {fileID: 0}
     - target: {fileID: 4413762795389943737, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
-      propertyPath: levelSceneNames.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413762795389943737, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
-      propertyPath: dialogueSceneNames.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413762795389943737, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
-      propertyPath: levelSceneNames.Array.data[0]
-      value: TutorialScene-beta
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413762795389943737, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
-      propertyPath: levelSceneNames.Array.data[1]
-      value: TutorialScene-beta
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413762795389943737, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
-      propertyPath: levelSceneNames.Array.data[2]
-      value: TutorialScene-beta
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413762795389943737, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
-      propertyPath: levelSceneNames.Array.data[3]
-      value: TutorialScene-beta
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413762795389943737, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
-      propertyPath: dialogueSceneNames.Array.data[0]
-      value: tutorial_scene_dialogue
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413762795389943737, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
-      propertyPath: dialogueSceneNames.Array.data[1]
-      value: spider_theme_dialogue
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413762795389943737, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
-      propertyPath: dialogueSceneNames.Array.data[2]
-      value: graveyard_theme_dialogue
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413762795389943737, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
-      propertyPath: dialogueSceneNames.Array.data[3]
-      value: clown_theme_dialogue
-      objectReference: {fileID: 0}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 1749272477}
     - target: {fileID: 4413762795649445078, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -967,27 +942,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4554040299966672500, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4554040299966672500, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4554040299966672500, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 278.5001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4554040299966672500, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 92.72486
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4554040299966672500, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 139.25005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4554040299966672500, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -46.36243
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5120232886472295704, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1108,10 +1083,6 @@ PrefabInstance:
     - target: {fileID: 8917566276522613492, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -207.2262
-      objectReference: {fileID: 0}
-    - target: {fileID: 8953240351090266925, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartNewGame
       objectReference: {fileID: 0}
     - target: {fileID: 8997790870593193979, guid: d34655e989668ff42b3f7ddd6af9b028, type: 3}
       propertyPath: m_Name

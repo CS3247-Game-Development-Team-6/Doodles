@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour {
     // Remember to add the desired scene to the open scenes list under File -> Build Settings
     public static string MenuSceneName { get; private set; }
+    public LoadingUI loadingScreen;
     [SerializeField] private string[] levelSceneNames;
     [SerializeField] private string[] dialogueSceneNames;
 
@@ -14,8 +15,8 @@ public class MainMenu : MonoBehaviour {
             PlayerPrefs.SetInt(SettingsMenu.FullScreenPref, 1);
         }
 
-        Screen.SetResolution(PlayerPrefs.GetInt(SettingsMenu.ResolutionWidthPref), 
-            PlayerPrefs.GetInt(SettingsMenu.ResolutionHeightPref), 
+        Screen.SetResolution(PlayerPrefs.GetInt(SettingsMenu.ResolutionWidthPref),
+            PlayerPrefs.GetInt(SettingsMenu.ResolutionHeightPref),
             PlayerPrefs.GetInt(SettingsMenu.FullScreenPref) == 1);
 
         MenuSceneName = SceneManager.GetActiveScene().name;
@@ -36,12 +37,19 @@ public class MainMenu : MonoBehaviour {
             return;
         }
 
-        SceneManager.LoadScene(dialogueSceneNames[0]);
+        loadingScreen.GotoScene(dialogueSceneNames[0]);
+        Destroy(this);
     }
 
     public void ContinueGame() {
-        string gameScene = "tutorial_scene";
-        SceneManager.LoadScene(gameScene);
+        if (!PlayerPrefs.HasKey("lastSceneName") || PlayerPrefs.GetString("lastSceneName") == "") {
+            Debug.LogWarning("last scene name not found in player pref, starting new game");
+            StartNewGame();
+            return;
+        }
+        string lastSceneName = PlayerPrefs.GetString("lastSceneName");
+        loadingScreen.GotoScene(lastSceneName); // TODO: if level scene, load loadout
+        Destroy(this);
     }
 
     public void QuitGame() {

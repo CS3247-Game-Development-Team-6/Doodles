@@ -34,7 +34,7 @@ public class GameOverManager : MonoBehaviour {
     }
 
     public void Retry() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // TODO: add loadingUI
         Time.timeScale = 1f;
         raycastOccluder.SetActive(false);
     }
