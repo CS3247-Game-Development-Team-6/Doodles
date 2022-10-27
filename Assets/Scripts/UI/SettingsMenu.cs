@@ -4,8 +4,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 
-public class SettingsMenu : MonoBehaviour
-{
+public class SettingsMenu : MonoBehaviour {
 
     private List<Resolution> resolutions;
     public TMP_Dropdown resolutionPicker;
@@ -52,8 +51,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetInt(ResolutionHeightPref, resolutions[index].height);
     }
 
-    public void SetVolume (float volume)
-    {
+    public void SetVolume (float volume){
         audioMixer.SetFloat("volume", Mathf.Log10(volume)*20);
         // immediately save pref volume
         PlayerPrefs.SetFloat(AudioManager.VolumePref, volume);

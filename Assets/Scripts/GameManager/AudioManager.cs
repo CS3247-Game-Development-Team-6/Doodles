@@ -41,11 +41,18 @@ public class AudioManager : MonoBehaviour {
             volumeSlider.value = volumeFloat;
         }
 
-        if (SceneManager.GetActiveScene().name.StartsWith("Menu-beta"))
-            Play("Main Menu BGM");
+        if (SceneManager.GetActiveScene().name.StartsWith("Menu"))
+            Play("MainMenuBGM");
         else if (SceneManager.GetActiveScene().name.StartsWith("Loadout"))
-            Play("Loadout BGM");
-
+            Play("LoadoutBGM");
+        else if (SceneManager.GetActiveScene().name.StartsWith("Tutorial"))
+            Play("TutorialSceneBGM");
+        else if (SceneManager.GetActiveScene().name.StartsWith("Ghost"))
+            Play("GhostSceneBGM");
+        else if (SceneManager.GetActiveScene().name.StartsWith("Clown"))
+            Play("ClownSceneBGM");
+        else if (SceneManager.GetActiveScene().name.StartsWith("Spider"))
+            Play("SpiderSceneBGM");
     }
 
     public void SaveSoundSettings() {
@@ -62,7 +69,6 @@ public class AudioManager : MonoBehaviour {
     public void UpdateSound() {
         foreach (Sound s in sounds) {
             s.source.volume = volumeSlider.value;
-
         }
     }
 
