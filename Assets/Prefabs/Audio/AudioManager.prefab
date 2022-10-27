@@ -43,28 +43,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff03c2858a70d445ba29c8ff49b6a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 0}
   sounds:
   - name: Level 1 BGM
     clip: {fileID: 8300000, guid: 8133d1b9c1eea6f4e9472b48d0521f40, type: 3}
     volume: 0.6
     pitch: 1
     loop: 1
+    group: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
     source: {fileID: 0}
   - name: Main Menu BGM
-    clip: {fileID: 8300000, guid: 2ea5116acc97ae6409cc328f179502c0, type: 3}
+    clip: {fileID: 8300000, guid: 036ec35af623a40a4be9e3e7a51fb138, type: 3}
     volume: 0.6
     pitch: 1
     loop: 1
+    group: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
     source: {fileID: 0}
   - name: Game Over
     clip: {fileID: 8300000, guid: f0aba2c0a4ad9b343b984870384027a9, type: 3}
     volume: 0.7
     pitch: 1
     loop: 1
+    group: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
     source: {fileID: 0}
   - name: Game Won
     clip: {fileID: 8300000, guid: c311e965594f24a418f9ff35f72c71be, type: 3}
     volume: 0.5
     pitch: 1
     loop: 1
+    group: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
     source: {fileID: 0}
