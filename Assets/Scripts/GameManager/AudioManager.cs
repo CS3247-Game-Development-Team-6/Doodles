@@ -4,14 +4,18 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour {
+    public static AudioManager instance;
     private static readonly string FirstPlay = "FirstPlay";
     public static readonly string VolumePref = "VolumePref";
     private int firstPlayInt;
     public Slider volumeSlider;
     private float volumeFloat;
     public Sound[] sounds;
+    public string currentBGM;
     
     void Awake() {
+        CreateInstance();
+
         if (firstPlayInt == 0) {
             foreach (Sound s in sounds) {
                 s.source = gameObject.AddComponent<AudioSource>();
@@ -55,6 +59,14 @@ public class AudioManager : MonoBehaviour {
             Play("SpiderSceneBGM");
     }
 
+    void CreateInstance() {
+        if (instance == null) {
+            instance = this;
+        } else {
+            Destroy(gameObject);
+        }
+    }
+
     public void SaveSoundSettings() {
         PlayerPrefs.SetFloat(VolumePref, volumeSlider.value);
     }
@@ -74,7 +86,7 @@ public class AudioManager : MonoBehaviour {
 
     public void Play (string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name);
-
+        currentBGM = name;
         // Sound not found
         if (s == null) {
             Debug.LogWarning("Sound: " + name + " not found!");
