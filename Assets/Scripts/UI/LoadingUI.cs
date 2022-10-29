@@ -32,9 +32,50 @@ public class LoadingUI : MonoBehaviour {
     }
 
     public void GotoScene(string sceneName) {
+        SaveSceneToPref(sceneName);
         this.gameObject.SetActive(true);
         AddSceneToLoad(sceneName);
         StartLoad();
+    }
+
+    public void SaveSceneToPref(string sceneName) {
+        int latestSceneIndex = 1;
+        int currSceneIndex = 0;
+        if (PlayerPrefs.HasKey("latestSceneIndex")) {
+            latestSceneIndex = PlayerPrefs.GetInt("latestSceneIndex");
+        }
+        switch (sceneName) {
+            case "tutorial_scene_dialogue":
+                currSceneIndex = 1;
+                break;
+            case "spider_theme_dialogue":
+                currSceneIndex = 3;
+                break;
+            case "graveyard_theme_dialogue":
+                currSceneIndex = 5;
+                break;
+            case "clown_theme_dialogue":
+                currSceneIndex = 7;
+                break;
+            case "TutorialScene-beta":
+                currSceneIndex = 2;
+                break;
+            case "SpiderScene-beta":
+                currSceneIndex = 4;
+                break;
+            case "GhostScene-beta":
+                currSceneIndex = 6;
+                break;
+            case "ClownScene-beta":
+                currSceneIndex = 8;
+                break;
+            default: // loadout and menu-beta
+                break;
+        }
+        if (currSceneIndex > latestSceneIndex) {
+            latestSceneIndex = currSceneIndex;
+        }
+        PlayerPrefs.SetInt("latestSceneIndex", latestSceneIndex);
     }
 
     public IEnumerator GetSceneLoadProgress() {

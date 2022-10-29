@@ -50,8 +50,6 @@ public class Loadout : MonoBehaviour {
             return;
         }
 
-        loadingScreen.gameObject.SetActive(true);
-        loadingScreen.AddSceneToLoad(mapToLoad.gameSceneName);
-        loadingScreen.StartLoad();
+        loadingScreen.GotoScene(mapToLoad.gameSceneName);
     }
 }

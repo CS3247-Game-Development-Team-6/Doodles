@@ -54,7 +54,6 @@ namespace Yarn.Unity.Example {
                 return;
             }
             Loadout.mapToLoad = level;
-            //SceneManager.LoadScene(LoadoutScene);
             loadingScreen.GotoScene(LoadoutScene);
             Destroy(this);
         }

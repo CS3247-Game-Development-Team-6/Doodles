@@ -5,7 +5,9 @@ public class MainMenu : MonoBehaviour {
     // Remember to add the desired scene to the open scenes list under File -> Build Settings
     public static string MenuSceneName { get; private set; }
     public LoadingUI loadingScreen;
-    [SerializeField] private string[] levelSceneNames;
+    [SerializeField] private string loadoutSceneName;
+    //[SerializeField] private string[] levelSceneNames;
+    [SerializeField] private MapInfo[] mapInfos;
     [SerializeField] private string[] dialogueSceneNames;
 
     public void Awake() {
@@ -22,14 +24,14 @@ public class MainMenu : MonoBehaviour {
         MenuSceneName = SceneManager.GetActiveScene().name;
     }
 
-    public void LoadLevel(int index) {
-        if (levelSceneNames == null || levelSceneNames.Length <= index) {
-            Debug.LogError($"Level {index} not found!");
-            return;
-        }
+    /*    public void LoadLevel(int index) {
+            if (levelSceneNames == null || levelSceneNames.Length <= index) {
+                Debug.LogError($"Level {index} not found!");
+                return;
+            }
 
-        SceneManager.LoadScene(levelSceneNames[index]);
-    }
+            SceneManager.LoadScene(levelSceneNames[index]);
+        }*/
 
     public void StartNewGame() {
         if (dialogueSceneNames == null || dialogueSceneNames.Length == 0) {
@@ -42,14 +44,22 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void ContinueGame() {
-        if (!PlayerPrefs.HasKey("lastSceneName") || PlayerPrefs.GetString("lastSceneName") == "") {
-            Debug.LogWarning("last scene name not found in player pref, starting new game");
+        if (!PlayerPrefs.HasKey("latestSceneIndex")) {
+            Debug.LogWarning("latestSceneIndex not found in player pref, starting new game");
             StartNewGame();
             return;
         }
-        string lastSceneName = PlayerPrefs.GetString("lastSceneName");
-        loadingScreen.GotoScene(lastSceneName); // TODO: if level scene, load loadout
-        Destroy(this);
+        int latestSceneIndex = PlayerPrefs.GetInt("latestSceneIndex");
+        if (latestSceneIndex % 2 == 0) {
+            // load chapter
+            Loadout.mapToLoad = mapInfos[latestSceneIndex / 2 - 1];
+            loadingScreen.GotoScene(loadoutSceneName);
+            Destroy(this);
+        } else {
+            // load dialogue
+            loadingScreen.GotoScene(dialogueSceneNames[(latestSceneIndex - 1) / 2]);
+            Destroy(this);
+        }
     }
 
     public void QuitGame() {
