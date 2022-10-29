@@ -94,6 +94,9 @@ public class Tower : MonoBehaviour {
         GameObject damagedSoundPrefab = Instantiate(TowerManager.instance.GetSoundEffectPrefab(), transform.position, transform.rotation);
         damagedSoundPrefab.transform.SetParent(transform);
         this.damagedSound = damagedSoundPrefab.GetComponent<AudioSource>();
+
+        // Prepare tower construction effect
+        
     }
 
     /** Function accessable by enemy to damage tower. */
