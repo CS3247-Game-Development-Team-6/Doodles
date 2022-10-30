@@ -6,10 +6,12 @@ public class Bullet : MonoBehaviour {
     public float speed = 70f;
     public float explosionRadius = 0f;
     public GameObject impactEffect;
+    public GameObject impactSoundEffect;
     [SerializeField] private int bulletDamage;
     [SerializeField] private ElementEffectInfo _data;
     [SerializeField] private ElementInfo elementInfo;
     private bool isPassingThroughBullet;
+    private bool isImpactSoundActive;
 
     public void SetBulletInfo(TowerInfo towerInfo) {
         this.speed = towerInfo.speed;
@@ -18,6 +20,7 @@ public class Bullet : MonoBehaviour {
         this._data = !towerInfo.element ? null : towerInfo.element.effect;
         this.elementInfo = !towerInfo.element ? null : towerInfo.element;
         this.impactEffect = towerInfo.impactPrefab;
+        this.impactSoundEffect = towerInfo.impactSound;
         this.isPassingThroughBullet = towerInfo.penetratesEnemy;
     }
 
@@ -60,7 +63,12 @@ public class Bullet : MonoBehaviour {
     protected virtual void HitTarget(bool toDestroyThisFrame = true, Collider hitEnemy = null) {
         if (impactEffect) {
             GameObject impactEffectParticle = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-            Destroy(impactEffectParticle, 5f);
+            Destroy(impactEffectParticle, 2f);
+        }
+
+        if (isImpactSoundActive) {
+            GameObject impactSoundEffectParticle = (GameObject)Instantiate(impactSoundEffect, transform.position, transform.rotation);
+            Destroy(impactSoundEffectParticle, 2f);
         }
 
         if (explosionRadius > 0f) {
@@ -104,5 +112,9 @@ public class Bullet : MonoBehaviour {
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    }
+
+    public void SetImpactSoundActive(bool isActive) {
+        isImpactSoundActive = isActive;
     }
 }

@@ -51,6 +51,8 @@ public class TowerInfo : ScriptableObject {
     public bool penetratesEnemy;
     /** Particle effect on collision with enemy. */
     public GameObject impactPrefab;
+    /** Sound effect on collision with enemy. */
+    public GameObject impactSound;
 
     /** TODO: Add bullet information (e.g. damage etc.) which will be passed
      *  to Bullet class on initialization. */
