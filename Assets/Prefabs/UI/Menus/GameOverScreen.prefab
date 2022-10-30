@@ -246,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuScene: Menu-beta
   nextDialogueScene: 
+  loadingScreen: {fileID: 0}
   wavesText: {fileID: 4270917539044299204}
   raycastOccluder: {fileID: 0}
 --- !u!82 &860969111246418808
@@ -257,7 +258,7 @@ AudioSource:
   m_GameObject: {fileID: 4270917539252007430}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 879a7a100c5a1ba4fb725ea5af2294fa, type: 2}
   m_audioClip: {fileID: 8300000, guid: f856b65b15b35c9468b835b574076b61, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1

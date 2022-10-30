@@ -13,8 +13,10 @@ public class GameStateManager : MonoBehaviour {
     }
 
     void Update() {
-        if (isGameEnded)
+        if (isGameEnded) {
+            AudioManager.instance.Stop(AudioManager.instance.currentBGM);
             return;
+        }
 
         if (map && map.currentChunk && map.currentChunk.Base && map.currentChunk.Base.hp <= 0) {
             EndGame();
