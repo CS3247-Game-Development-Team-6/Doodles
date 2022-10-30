@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 0_MortarFire
   m_EditorClassIdentifier: 
   towerName: Fire Mortar
+  sprite: {fileID: 0}
   towerDesc: 
   range: 6
   upgradeNum: 0
@@ -21,14 +22,15 @@ MonoBehaviour:
   cost: 40
   health: 200
   healthDecayRate: 1.8
-  damageFixCost: 0
   damageFixFactor: 0.2
   allowedCellTypes: 00000000
+  stoppable: 0
   speed: 10
   explosionRadius: 2
   damage: 66
   penetratesEnemy: 0
-  impactPrefab: {fileID: 7270330396955014377, guid: 5a87950d3447a57408da16911c4acb8b, type: 3}
+  impactPrefab: {fileID: 4458309670618186649, guid: 67ea2f3b6082d4aeab8bc46a70f2d8c0, type: 3}
+  impactSound: {fileID: 4544203772300719669, guid: f4aeed74d2e164fab882921f6462ae95, type: 3}
   towerPrefab: {fileID: 2689636279851204399, guid: 7104ccf3ae938b24796eff92727f8eb5, type: 3}
   bulletPrefab: {fileID: 5019152116910721628, guid: c675b3cf96e320648bfd610e9fb17be0, type: 3}
   nextUpgrade: {fileID: 11400000, guid: 2a17de3bd8eeb0c42a3af4227a29929d, type: 2}

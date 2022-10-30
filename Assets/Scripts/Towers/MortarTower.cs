@@ -66,6 +66,7 @@ public class MortarTower : Tower {
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         MortarBullet bullet = bulletObj.GetComponent<MortarBullet>();
         bullet.SetBulletInfo(towerInfo);
+        bullet.SetImpactSoundActive(fireEffectCurrValue >= fireEffectTriggerPValue);
         
         if (bullet != null) {
             bullet.Seek(target, PENETRATE_TARGET);

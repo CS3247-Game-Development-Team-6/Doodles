@@ -62,7 +62,7 @@ public class Bullet : MonoBehaviour {
 
     protected virtual void HitTarget(bool toDestroyThisFrame = true, Collider hitEnemy = null) {
         if (impactEffect) {
-            GameObject impactEffectParticle = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
+            GameObject impactEffectParticle = (GameObject)Instantiate(impactEffect, transform.position, Quaternion.Euler(0f, 0f, 0f));
             Destroy(impactEffectParticle, 2f);
         }
 
