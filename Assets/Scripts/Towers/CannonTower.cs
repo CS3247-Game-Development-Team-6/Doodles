@@ -9,6 +9,11 @@ public class CannonTower : Tower {
     private Transform target;
     private const bool PENETRATE_TARGET = false;
 
+    [Header("Effect Prefabs")]
+    public GameObject fireSoundEffect;
+    private int fireSoundEffectCount = 0;
+    private int maxFireSoundEffectCount = 3;
+
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
         rotationBase = transform.Find(Tower.ROTATION_BASE_NAME);
@@ -43,6 +48,15 @@ public class CannonTower : Tower {
 
     public override void Shoot() {
         base.Shoot();
+        
+        if (fireSoundEffectCount == 0) {
+            GameObject fireSoundEffectPrefab = (GameObject)Instantiate(fireSoundEffect, firePoint.position, firePoint.rotation);
+            fireSoundEffectPrefab.transform.SetParent(transform);
+            Destroy(fireSoundEffectPrefab, 2f);
+        }
+        
+        fireSoundEffectCount = (fireSoundEffectCount + 1) % maxFireSoundEffectCount;
+
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         bullet.SetBulletInfo(towerInfo);
