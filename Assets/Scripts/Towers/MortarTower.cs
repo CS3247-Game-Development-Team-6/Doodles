@@ -55,11 +55,11 @@ public class MortarTower : Tower {
         
         fireEffectCurrValue = Random.Range(0, 100);
         if (fireEffectCurrValue >= fireEffectTriggerPValue) {
-            GameObject fireSoundEffectPrefab = (GameObject)Instantiate(fireSoundEffect, firePoint.position, firePoint.rotation);
-            fireSoundEffectPrefab.transform.SetParent(transform);
+            // GameObject fireSoundEffectPrefab = (GameObject)Instantiate(fireSoundEffect, firePoint.position, firePoint.rotation);
+            // fireSoundEffectPrefab.transform.SetParent(transform);
+            // Destroy(fireSoundEffectPrefab, 2f);
             GameObject fireVisualEffectPrefab = (GameObject)Instantiate(fireVisualEffect, firePoint.position, firePoint.rotation);
             fireVisualEffectPrefab.transform.SetParent(transform);
-            Destroy(fireSoundEffectPrefab, 2f);
             Destroy(fireVisualEffectPrefab, 2f);
         }
 
