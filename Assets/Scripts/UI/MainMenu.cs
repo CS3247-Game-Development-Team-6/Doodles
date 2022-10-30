@@ -24,15 +24,6 @@ public class MainMenu : MonoBehaviour {
         MenuSceneName = SceneManager.GetActiveScene().name;
     }
 
-    /*    public void LoadLevel(int index) {
-            if (levelSceneNames == null || levelSceneNames.Length <= index) {
-                Debug.LogError($"Level {index} not found!");
-                return;
-            }
-
-            SceneManager.LoadScene(levelSceneNames[index]);
-        }*/
-
     public void StartNewGame() {
         if (dialogueSceneNames == null || dialogueSceneNames.Length == 0) {
             Debug.LogError("No dialogues found!");
