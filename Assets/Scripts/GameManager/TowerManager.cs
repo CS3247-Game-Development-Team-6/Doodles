@@ -10,6 +10,7 @@ public class TowerManager : MonoBehaviour {
     [SerializeField] private GameObject smokeEffectPrefab;
     [SerializeField] private GameObject soundEffectPrefab;
     [SerializeField] private GameObject contructionEffectPrefab;
+    [SerializeField] private GameObject destroyEffectPrefab;
     private TowerInfo towerToBuild;
     private Node selectedNode;
     private TMP_Text actionTimer;
@@ -62,6 +63,10 @@ public class TowerManager : MonoBehaviour {
 
     public GameObject GetConstructionEffectPrefab() {
         return contructionEffectPrefab;
+    }
+
+    public GameObject GetDestroyEffectPrefab() {
+        return destroyEffectPrefab;
     }
 
     public GameObject GetSoundEffectPrefab() {

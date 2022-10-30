@@ -64,6 +64,9 @@ public class Node : MonoBehaviour
     }
 
     public void DestroyTower() {
+        GameObject towerDestroyEffect = Instantiate(TowerManager.instance.GetDestroyEffectPrefab(), this.towerObj.transform.position, this.towerObj.transform.rotation);
+        Destroy(towerDestroyEffect, 2f);
+
         Destroy(this.towerObj);
         tower = null;
         towerObj = null;
