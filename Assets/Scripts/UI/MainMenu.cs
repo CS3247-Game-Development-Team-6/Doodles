@@ -22,6 +22,10 @@ public class MainMenu : MonoBehaviour {
             PlayerPrefs.GetInt(SettingsMenu.FullScreenPref) == 1);
 
         MenuSceneName = SceneManager.GetActiveScene().name;
+
+        if (transform.Find("Continue").gameObject && !PlayerPrefs.HasKey("latestSceneIndex")) { // dont show continue button for first time playing
+            transform.Find("Continue").gameObject.SetActive(false);
+        }
     }
 
     public void StartNewGame() {
