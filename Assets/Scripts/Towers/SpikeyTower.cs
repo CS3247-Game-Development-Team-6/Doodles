@@ -52,10 +52,10 @@ public class SpikeyTower : Tower {
         if (shootEffectCurrValue >= shootEffectTriggerPValue) {
             GameObject shootingEffectPrefab = (GameObject)Instantiate(shootingEffect, firePoint.position, firePoint.rotation);
             shootingEffectPrefab.transform.SetParent(transform);
-            GameObject shootingSoundPrefab = (GameObject)Instantiate(shootingSound, firePoint.position, firePoint.rotation);
-            shootingSoundPrefab.transform.SetParent(transform);
+            // GameObject shootingSoundPrefab = (GameObject)Instantiate(shootingSound, firePoint.position, firePoint.rotation);
+            // shootingSoundPrefab.transform.SetParent(transform);
             Destroy(shootingEffectPrefab, 2f);
-            Destroy(shootingSoundPrefab, 1f);
+            // Destroy(shootingSoundPrefab, 1f);
         }
 
         foreach (var targetTransform in targetTransforms) {
