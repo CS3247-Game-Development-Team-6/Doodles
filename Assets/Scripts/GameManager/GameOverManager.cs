@@ -14,6 +14,10 @@ public class GameOverManager : MonoBehaviour {
 
     // Enabled when game is running
     void OnEnable() {
+        if (this.gameObject.name == "WinScreen") {
+            loadingScreen.SaveSceneToPref(nextDialogueScene);
+        }
+
         wavesText.text = FindObjectOfType<Map>().WavesCleared.ToString();
 
         raycastOccluder.SetActive(true);
@@ -53,6 +57,11 @@ public class GameOverManager : MonoBehaviour {
     public void GotoNextDialogue() {
         if (nextDialogueScene == "") {
             Debug.LogWarning("empty name for next dialogue scene ");
+            return;
+        }
+
+        if (nextDialogueScene == "story-end") {
+            Debug.LogWarning("story and game end here");
             return;
         }
         loadingScreen.GotoScene(nextDialogueScene);

@@ -2801,6 +2801,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6746603345004858393, guid: 3264e8e83c9ab954bacafa13fe961991, type: 3}
   m_PrefabInstance: {fileID: 5310809397145771870}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1446630734479758154 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6746603345004858388, guid: 3264e8e83c9ab954bacafa13fe961991, type: 3}
+  m_PrefabInstance: {fileID: 5310809397145771870}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22be951dbbdcbbf4d96d349868dd1380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7889651949353190416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3081,8 +3092,20 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2674894648917291456, guid: b120c3298ee82f041a5fa30ce881abc5, type: 3}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 1446630734479758154}
+    - target: {fileID: 2674894648917291456, guid: b120c3298ee82f041a5fa30ce881abc5, type: 3}
+      propertyPath: mainMenuScene
+      value: Menu-beta
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674894648917291456, guid: b120c3298ee82f041a5fa30ce881abc5, type: 3}
       propertyPath: raycastOccluder
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674894648917291456, guid: b120c3298ee82f041a5fa30ce881abc5, type: 3}
+      propertyPath: nextDialogueScene
+      value: story-end
       objectReference: {fileID: 0}
     - target: {fileID: 4083160813030831407, guid: b120c3298ee82f041a5fa30ce881abc5, type: 3}
       propertyPath: m_Name

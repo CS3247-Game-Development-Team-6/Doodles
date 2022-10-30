@@ -23,7 +23,8 @@ public class MainMenu : MonoBehaviour {
 
         MenuSceneName = SceneManager.GetActiveScene().name;
 
-        if (transform.Find("Continue").gameObject && !PlayerPrefs.HasKey("latestSceneIndex")) { // dont show continue button for first time playing
+        if (transform.Find("Continue").gameObject &&
+            (!PlayerPrefs.HasKey("latestSceneIndex") || PlayerPrefs.GetInt("latestSceneIndex") > (mapInfos.Length + dialogueSceneNames.Length))) {
             transform.Find("Continue").gameObject.SetActive(false);
         }
     }

@@ -64,6 +64,7 @@ namespace Yarn.Unity.Example {
 
         private void Update() {
             if (FindObjectOfType<DialogueRunner>().IsDialogueRunning == false) {
+                loadingScreen.SaveSceneToPref(level.gameSceneName);
                 GotoButton.gameObject.SetActive(true);
                 return;
             }

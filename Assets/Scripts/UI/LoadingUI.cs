@@ -32,7 +32,7 @@ public class LoadingUI : MonoBehaviour {
     }
 
     public void GotoScene(string sceneName) {
-        SaveSceneToPref(sceneName);
+        //SaveSceneToPref(sceneName);
         this.gameObject.SetActive(true);
         AddSceneToLoad(sceneName);
         StartLoad();
@@ -68,6 +68,9 @@ public class LoadingUI : MonoBehaviour {
                 break;
             case "ClownScene-beta":
                 currSceneIndex = 8;
+                break;
+            case "story-end":
+                currSceneIndex = 9;
                 break;
             default: // loadout and menu-beta
                 break;
