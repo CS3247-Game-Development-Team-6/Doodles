@@ -22,8 +22,9 @@ public class LaserTower : Tower {
 
     [Header("Effect Prefabs")]
     public GameObject fireSoundEffect;
-    private float fireSoundEffectCurrTimeCount = 4;
-    private float fireSoundEffectTriggerDuration = 5;
+    public GameObject fireVisualEffect;
+    private float fireEffectCurrTimeCount = 4;
+    private float fireEffectTriggerDuration = 5;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
@@ -93,12 +94,15 @@ public class LaserTower : Tower {
         base.DecreaseHealth(Time.deltaTime);
 
         // laser sound effect
-        fireSoundEffectCurrTimeCount += Time.deltaTime;
-        if (fireSoundEffectCurrTimeCount >= fireSoundEffectTriggerDuration) {
-            fireSoundEffectCurrTimeCount = 0;
+        fireEffectCurrTimeCount += Time.deltaTime;
+        if (fireEffectCurrTimeCount >= fireEffectTriggerDuration) {
+            fireEffectCurrTimeCount = 0;
             GameObject fireSoundEffectPrefab = (GameObject)Instantiate(fireSoundEffect, firePoint.position, firePoint.rotation);
             fireSoundEffectPrefab.transform.SetParent(transform);
-            Destroy(fireSoundEffectPrefab, 5f);
+            GameObject fireVisualEffectPrefab = (GameObject)Instantiate(fireVisualEffect, firePoint.position, firePoint.rotation);
+            fireVisualEffectPrefab.transform.SetParent(transform);
+            Destroy(fireSoundEffectPrefab, 2f);
+            Destroy(fireVisualEffectPrefab, 2f);
         }
 
         // laser graphics
