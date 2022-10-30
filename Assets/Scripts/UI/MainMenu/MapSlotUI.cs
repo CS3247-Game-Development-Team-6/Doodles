@@ -14,7 +14,6 @@ public class MapSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     public Sprite unselectedBg;
     public MapInfo mapInfo;
     private MapInventoryUI inventoryUI;
-    public Color lockedBgColor;
 
     void Start() {
         inventoryUI = GetComponentInParent<MapInventoryUI>();
@@ -25,14 +24,9 @@ public class MapSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
             if (labelText != null) labelText.text = mapInfo.levelName;
         }
         background.sprite = inventoryUI.selectedSlot == this ? selectedBg : unselectedBg;
-        if (PlayerPrefs.HasKey("latestSceneIndex")) {
-            if (index <= PlayerPrefs.GetInt("latestSceneIndex") / 2 - 1) {
-                background.color = inventoryUI.selectedSlot == this ? selectedBgColor : unselectedBgColor;
-            } else {
-                background.color = lockedBgColor;
-            }
-        } else {
-            background.color = lockedBgColor;
+        background.color = inventoryUI.selectedSlot == this ? selectedBgColor : unselectedBgColor;
+        if (!PlayerPrefs.HasKey("latestSceneIndex") || index > PlayerPrefs.GetInt("latestSceneIndex") / 2 - 1) {
+            transform.Find("lock-image").gameObject.SetActive(true);
         }
     }
 
