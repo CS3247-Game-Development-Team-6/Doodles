@@ -7,18 +7,28 @@ Dan loves drawing, especially doodling and building his own fantasy castle fortr
 His first and favourite character that he drew as Doodle. 
 Such a drawn character was a personified representation of Dan himself and his adventurous nature. 
 In his dreams, Dan would join in with Doodle in his imaginary world as they went on countless adventures to places wild and unknown.
-<<Act Dan dan_sleepy left 0.38 green>>
+
+<<Act Dan dan_sleepy left 0.61 green>>
 Dan: .........
 A strange voice: “Hey Dan, wake up!”
-<<Hide dan_sleepy>>
-<<Act Dan dan_normal left 0.38 green>>
 Dan: Five more minutes mom…
-<<Act Doodle doodle_angry 1.25 0.38 #226677>>
-<<Move Doodle right 0.38 0.5>>
+
+<<Act Doodle doodle_happy 1.25 0.63 #226677>>
+<<Move Doodle right 0.63 0.5>>
 Doodle: It’s me, silly. It’s not time for school now, it’s time for adventure!
+
+<<Hide dan_sleepy>>
+<<Act Dan dan_normal left 0.61 green>>
 Dan: Oh it’s you, Doodle. What’s up?
+
+<<Hide doodle_happy>>
+<<Act Dan doodle_angry left 0.63 green>>
 Doodle: Help me defend against these evil invaders attacking our world!
+
+<<Hide dan_normal>>
+<<Act Dan dan_happy left 0.61 green>>
 Dan: Evil invaders?! Alright, let’s do this Doodle!
+
 <<StopAudioAll>>
 <<Fade black 0.0 1.0 2.0>>
 ===
