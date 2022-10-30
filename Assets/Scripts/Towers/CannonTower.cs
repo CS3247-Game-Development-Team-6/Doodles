@@ -50,7 +50,7 @@ public class CannonTower : Tower {
         base.Shoot();
 
         fireSoundEffectCurrValue = Random.Range(0, 100);
-        if (fireSoundEffectCurrValue >= fireSoundEffectTriggerPValue) {
+        if (fireSoundEffect && fireSoundEffectCurrValue >= fireSoundEffectTriggerPValue) {
             GameObject fireSoundEffectPrefab = (GameObject)Instantiate(fireSoundEffect, firePoint.position, firePoint.rotation);
             fireSoundEffectPrefab.transform.SetParent(transform);
             Destroy(fireSoundEffectPrefab, 2f);
