@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour {
     [SerializeField] private ElementEffectInfo _data;
     [SerializeField] private ElementInfo elementInfo;
     private bool isPassingThroughBullet;
-    private bool isImpactSoundActive;
+    private bool isImpactSoundActive = false;
 
     public void SetBulletInfo(TowerInfo towerInfo) {
         this.speed = towerInfo.speed;
@@ -66,7 +66,7 @@ public class Bullet : MonoBehaviour {
             Destroy(impactEffectParticle, 2f);
         }
 
-        if (isImpactSoundActive) {
+        if (isImpactSoundActive && impactSoundEffect) {
             GameObject impactSoundEffectParticle = (GameObject)Instantiate(impactSoundEffect, transform.position, transform.rotation);
             Destroy(impactSoundEffectParticle, 2f);
         }
