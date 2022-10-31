@@ -102,7 +102,7 @@ public class Node : MonoBehaviour
         if (towerInfo.element != null) 
             TowerManager.instance.SpawnEffect("swap", towerObj.transform);
 
-        if (towerInfo.upgradeNum == 1) 
+        if (towerInfo.nextUpgrade == null) 
             TowerManager.instance.SpawnEffect("upgrade", towerObj.transform);
 
         tower = towerObj.GetComponent<Tower>();
