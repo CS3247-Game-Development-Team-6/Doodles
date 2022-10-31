@@ -28,6 +28,7 @@ public class MainMenu : MonoBehaviour {
             transform.Find("Continue").gameObject.SetActive(false);
         }
         staticMapInfos = mapInfos;
+
     }
 
     public void StartNewGame() {
@@ -36,6 +37,7 @@ public class MainMenu : MonoBehaviour {
             return;
         }
 
+        loadingScreen.SaveSceneToPref(mapInfos[0].dialogueSceneName);
         loadingScreen.GotoScene(mapInfos[0].dialogueSceneName);
         Destroy(this);
     }
@@ -47,16 +49,26 @@ public class MainMenu : MonoBehaviour {
             return;
         }
         int latestSceneIndex = PlayerPrefs.GetInt("latestSceneIndex");
-        if (latestSceneIndex % 2 == 0) {
-            // load chapter
-            Loadout.mapToLoad = mapInfos[latestSceneIndex / 2 - 1];
+        if (IsLevelIndex(latestSceneIndex)) {
+            Loadout.mapToLoad = GetLatestMapInfo(latestSceneIndex);
             loadingScreen.GotoScene(loadoutSceneName);
             Destroy(this);
         } else {
-            // load dialogue
-            loadingScreen.GotoScene(mapInfos[(latestSceneIndex - 1) / 2].dialogueSceneName);
+            loadingScreen.GotoScene(GetLatestDialogueName(latestSceneIndex));
             Destroy(this);
         }
+    }
+
+    private bool IsLevelIndex(int index) {
+        return index % 2 == 0 && index > 0;
+    }
+
+    private string GetLatestDialogueName(int index) {
+        return mapInfos[(index - 1) / 2].dialogueSceneName;
+    }
+
+    private MapInfo GetLatestMapInfo(int index) {
+        return mapInfos[index / 2 - 1];
     }
 
     public void QuitGame() {

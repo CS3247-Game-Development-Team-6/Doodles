@@ -44,19 +44,19 @@ public class LoadingUI : MonoBehaviour {
 
         if (sceneName == MainMenu.staticMapInfos[0].dialogueSceneName) {
             currSceneIndex = 1;
-        } else if (sceneName == MainMenu.staticMapInfos[0].levelName) {
+        } else if (sceneName == MainMenu.staticMapInfos[0].gameSceneName) {
             currSceneIndex = 2;
         } else if (sceneName == MainMenu.staticMapInfos[1].dialogueSceneName) {
             currSceneIndex = 3;
-        } else if (sceneName == MainMenu.staticMapInfos[1].levelName) {
+        } else if (sceneName == MainMenu.staticMapInfos[1].gameSceneName) {
             currSceneIndex = 4;
         } else if (sceneName == MainMenu.staticMapInfos[2].dialogueSceneName) {
             currSceneIndex = 5;
-        } else if (sceneName == MainMenu.staticMapInfos[2].levelName) {
+        } else if (sceneName == MainMenu.staticMapInfos[2].gameSceneName) {
             currSceneIndex = 6;
         } else if (sceneName == MainMenu.staticMapInfos[3].dialogueSceneName) {
             currSceneIndex = 7;
-        } else if (sceneName == MainMenu.staticMapInfos[3].levelName) {
+        } else if (sceneName == MainMenu.staticMapInfos[3].gameSceneName) {
             currSceneIndex = 8;
         } else if (sceneName == "story-end") {
             currSceneIndex = 9;
