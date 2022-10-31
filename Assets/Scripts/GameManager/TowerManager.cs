@@ -207,4 +207,11 @@ public class TowerManager : MonoBehaviour {
     public void TriggerInsufficientInk() {
         Instantiate(insufficientInkEffect, playerObj.transform.position, Quaternion.identity);
     }
+
+    public void SpawnContructEffect(GameObject towerObj) {
+        // Prepare tower construction effect
+        GameObject constructionPrefab = Instantiate(contructionEffectPrefab, towerObj.transform.position, towerObj.transform.rotation);
+        constructionPrefab.transform.SetParent(transform);
+        Destroy(constructionPrefab, 2f);
+    }
 }

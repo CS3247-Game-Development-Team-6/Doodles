@@ -30,7 +30,6 @@ public class Tower : MonoBehaviour {
     // Prefabs
     protected GameObject bulletPrefab;
     protected GameObject smokePrefab;
-    protected GameObject constructionEffectPrefab;
     protected AudioSource damagedSound;
 
     // Image
@@ -95,11 +94,6 @@ public class Tower : MonoBehaviour {
         GameObject damagedSoundPrefab = Instantiate(TowerManager.instance.GetSoundEffectPrefab(), transform.position, transform.rotation);
         damagedSoundPrefab.transform.SetParent(transform);
         this.damagedSound = damagedSoundPrefab.GetComponent<AudioSource>();
-
-        // Prepare tower construction effect
-        GameObject constructionPrefab = Instantiate(TowerManager.instance.GetConstructionEffectPrefab(), transform.position, transform.rotation);
-        constructionPrefab.transform.SetParent(transform);
-        this.constructionEffectPrefab = constructionPrefab;
     }
 
     /** Function accessable by enemy to damage tower. */

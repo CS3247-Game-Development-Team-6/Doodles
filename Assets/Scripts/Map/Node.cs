@@ -85,8 +85,10 @@ public class Node : MonoBehaviour
     public Tower BuildTower(TowerInfo towerInfo) {
         towerBuildPosition = tileMesh.transform.position + towerOffset;
         towerObj = Instantiate(towerInfo.towerPrefab, towerBuildPosition, Quaternion.identity);
+        TowerManager.instance.SpawnContructEffect(towerObj);
         tower = towerObj.GetComponent<Tower>();
         tower.SetTowerInfo(towerInfo);
+
         if (decorationMesh != null) Destroy(decorationMesh);    // Destroy the flora on the tile.
         
         return towerObj.GetComponent<Tower>();
@@ -100,7 +102,6 @@ public class Node : MonoBehaviour
         towerObj = Instantiate(towerInfo.towerPrefab, towerBuildPosition, Quaternion.identity);
         tower = towerObj.GetComponent<Tower>();
         tower.SetTowerInfo(towerInfo);
-
         return towerObj.GetComponent<Tower>();
     }
 
@@ -150,5 +151,7 @@ public class Node : MonoBehaviour
             decorationMesh.gameObject.GetComponent<Outline>().enabled = false;
         }
     }
+
+
 
 }
