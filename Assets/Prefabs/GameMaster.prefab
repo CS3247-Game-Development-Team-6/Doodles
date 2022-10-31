@@ -62,12 +62,21 @@ MonoBehaviour:
   insufficientInkEffect: {fileID: 8998585739324249827, guid: 1ae7d1e1c28d77444a3ba9f1bdf97d38, type: 3}
   playerObj: {fileID: 0}
   healthBarPrefab: {fileID: 9038127182088754521, guid: 23da22333cba243218fac5b7096ef31b, type: 3}
-  smokeEffectPrefab: {fileID: 100000, guid: 785f7f2ed47b94fbfa109bc55f7d1c07, type: 3}
-  soundEffectPrefab: {fileID: 1983200342343509110, guid: 75b77af14971248619980a0e1c41f97a, type: 3}
-  contructionEffectPrefab: {fileID: 3346424597309072969, guid: 98fb5e84e53344c8599fe93335bbb761, type: 3}
-  destroyEffectPrefab: {fileID: 6218976510778761981, guid: 6b68964c4e283414eb8b7d7c9430bdc1, type: 3}
-  upgradeEffectPrefab: {fileID: 3390857913139134451, guid: 8f940cbb9b26b43dca71b3197ec057fb, type: 3}
-  elementSwapEffectPrefab: {fileID: 7304656958245363131, guid: a0baf1bf95cf64e9a8cecfa3bb4f6589, type: 3}
+  effectPrefabList:
+  - effectName: build
+    effectPrefab: {fileID: 3346424597309072969, guid: 98fb5e84e53344c8599fe93335bbb761, type: 3}
+  - effectName: fix
+    effectPrefab: {fileID: 5738902741420421222, guid: a61927fb837594775a5a9754753205b3, type: 3}
+  - effectName: destroy
+    effectPrefab: {fileID: 6218976510778761981, guid: 6b68964c4e283414eb8b7d7c9430bdc1, type: 3}
+  - effectName: swap
+    effectPrefab: {fileID: 7304656958245363131, guid: a0baf1bf95cf64e9a8cecfa3bb4f6589, type: 3}
+  - effectName: upgrade
+    effectPrefab: {fileID: 3390857913139134451, guid: 8f940cbb9b26b43dca71b3197ec057fb, type: 3}
+  - effectName: smoke
+    effectPrefab: {fileID: 100000, guid: 785f7f2ed47b94fbfa109bc55f7d1c07, type: 3}
+  - effectName: damageSound
+    effectPrefab: {fileID: 1983200342343509110, guid: 75b77af14971248619980a0e1c41f97a, type: 3}
 --- !u!114 &3530550689427115615
 MonoBehaviour:
   m_ObjectHideFlags: 0

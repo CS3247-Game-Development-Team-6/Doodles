@@ -16,6 +16,7 @@ public class Tower : MonoBehaviour {
     public const string ENEMY_TAG = "Enemy";
     public const string ROTATION_BASE_NAME = "RotationBase";
     public const string FIRE_POINT_NAME = "FirePoint";
+    public const string TOWER_DAMAGE_EFFECT_NAME = "smoke";
 
     // Tower Attack Attributes
     protected float range;
@@ -75,10 +76,10 @@ public class Tower : MonoBehaviour {
             this.nextElement.Add(pair.element, pair.tower);
         }
 
-        // Prepare Smoke Effect to be played
-        this.smokePrefab = Instantiate(TowerManager.instance.GetSmokeEffectPrefab(), transform.position, transform.rotation);
+        // Prepare Damage Effect to be played
+        this.smokePrefab = Instantiate(TowerManager.instance.GetEffectPrefab(TOWER_DAMAGE_EFFECT_NAME), transform.position, transform.rotation);
         this.smokePrefab.transform.SetParent(transform);
-        this.smokePrefab.GetComponent<ParticleSystem>().Stop();
+        this.smokePrefab.GetComponentInChildren<ParticleSystem>().Stop();
 
         // Create health bar UI for each tower
         GameObject healthBarPrefab = Instantiate(TowerManager.instance.GetHealthBarPrefab(), transform.position, transform.rotation);
@@ -91,7 +92,7 @@ public class Tower : MonoBehaviour {
         this.healthBar = healthBarPrefab.transform.Find("HealthBG/HealthBar").GetComponent<Image>();
 
         // Prepare audio to be played
-        GameObject damagedSoundPrefab = Instantiate(TowerManager.instance.GetSoundEffectPrefab(), transform.position, transform.rotation);
+        GameObject damagedSoundPrefab = Instantiate(TowerManager.instance.GetEffectPrefab("damageSound"), transform.position, transform.rotation);
         damagedSoundPrefab.transform.SetParent(transform);
         this.damagedSound = damagedSoundPrefab.GetComponent<AudioSource>();
     }
@@ -112,6 +113,7 @@ public class Tower : MonoBehaviour {
         if (health > maxHealth) {
             health = maxHealth;
         }
+        TowerManager.instance.SpawnEffect("fix", transform);
     }
 
     /** Function to increase tower health. */

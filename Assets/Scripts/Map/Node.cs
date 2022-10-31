@@ -64,8 +64,7 @@ public class Node : MonoBehaviour
     }
 
     public void DestroyTower() {
-        GameObject towerDestroyEffect = Instantiate(TowerManager.instance.GetDestroyEffectPrefab(), this.towerObj.transform.position, this.towerObj.transform.rotation);
-        Destroy(towerDestroyEffect, 2f);
+        TowerManager.instance.SpawnEffect("destroy", this.towerObj.transform, false);
 
         Destroy(this.towerObj);
         tower = null;
@@ -85,7 +84,7 @@ public class Node : MonoBehaviour
     public Tower BuildTower(TowerInfo towerInfo) {
         towerBuildPosition = tileMesh.transform.position + towerOffset;
         towerObj = Instantiate(towerInfo.towerPrefab, towerBuildPosition, Quaternion.identity);
-        TowerManager.instance.SpawnContructEffect(towerObj);
+        TowerManager.instance.SpawnEffect("build", towerObj.transform);
         tower = towerObj.GetComponent<Tower>();
         tower.SetTowerInfo(towerInfo);
 
@@ -101,10 +100,10 @@ public class Node : MonoBehaviour
         towerBuildPosition = tileMesh.transform.position + towerOffset;
         towerObj = Instantiate(towerInfo.towerPrefab, towerBuildPosition, Quaternion.identity);
         if (towerInfo.element != null) 
-            TowerManager.instance.SpawnElementSwapEffect(towerObj);
+            TowerManager.instance.SpawnEffect("swap", towerObj.transform);
 
         if (towerInfo.upgradeNum == 1) 
-            TowerManager.instance.SpawnUpgradeEffect(towerObj);
+            TowerManager.instance.SpawnEffect("upgrade", towerObj.transform);
 
         tower = towerObj.GetComponent<Tower>();
         tower.SetTowerInfo(towerInfo);
