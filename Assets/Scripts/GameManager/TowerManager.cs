@@ -11,6 +11,7 @@ public class TowerManager : MonoBehaviour {
     [SerializeField] private GameObject soundEffectPrefab;
     [SerializeField] private GameObject contructionEffectPrefab;
     [SerializeField] private GameObject destroyEffectPrefab;
+    [SerializeField] private GameObject upgradeEffectPrefab;
     private TowerInfo towerToBuild;
     private Node selectedNode;
     private TMP_Text actionTimer;
@@ -209,9 +210,14 @@ public class TowerManager : MonoBehaviour {
     }
 
     public void SpawnContructEffect(GameObject towerObj) {
-        // Prepare tower construction effect
         GameObject constructionPrefab = Instantiate(contructionEffectPrefab, towerObj.transform.position, towerObj.transform.rotation);
         constructionPrefab.transform.SetParent(transform);
         Destroy(constructionPrefab, 2f);
+    }
+
+    public void SpawnUpgradeEffect(GameObject towerObj) {
+        GameObject upgradePrefab = Instantiate(upgradeEffectPrefab, towerObj.transform.position, towerObj.transform.rotation);
+        upgradePrefab.transform.SetParent(transform);
+        Destroy(upgradePrefab, 2f);
     }
 }
