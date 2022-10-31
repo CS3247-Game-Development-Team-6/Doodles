@@ -18,9 +18,11 @@ public class ElementPanelUI : NodeButtonUI {
     public override void SetTower(Tower tower) {
         base.SetTower(tower);
         if (tower.element == element) {
+            costUi.text = "";
             canvasGroup.blocksRaycasts = false;
             return;
         } else if (tower.element != null) {
+            costUi.text = "";
             canvasGroup.alpha = 0.5f;
             canvasGroup.blocksRaycasts = false;
             return;

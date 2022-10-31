@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 
 public class NodePanelUI : MonoBehaviour {
+    private RectTransform parentContainer;
     private CanvasGroup panelCanvas;
     private Node selectedNode;
     public TextMeshProUGUI healthUi;
@@ -10,6 +11,7 @@ public class NodePanelUI : MonoBehaviour {
     public TextMeshProUGUI speedUi;
     public TextMeshProUGUI rateUi;
     public TextMeshProUGUI rangeUi;
+    public GameObject[] backgrounds;
 
     [SerializeField] private Color positiveIndicator;
     [SerializeField] private Color negativeIndicator;
@@ -19,6 +21,7 @@ public class NodePanelUI : MonoBehaviour {
     private TowerInfo newTower;
 
     private void Start() {
+        parentContainer = GetComponentInParent<RectTransform>();
         panelCanvas = GetComponent<CanvasGroup>();
         panelCanvas.alpha = 0f;
         defaultColor = healthUi.color;
@@ -27,7 +30,7 @@ public class NodePanelUI : MonoBehaviour {
     private void Update() {
         // Right clicking away when NodeUI is on now deactivates the NodeUI
         if (Input.GetMouseButtonDown(1)) {
-            panelCanvas.alpha = 0f;
+            Hide();
         }
         if (!selectedNode || !selectedNode.tower) return;
 
@@ -67,7 +70,8 @@ public class NodePanelUI : MonoBehaviour {
             button.SetTower(tower);
         }
 
-        panelCanvas.alpha = 1f;
+        Unhide();
+        parentContainer.position = target.transform.position + new Vector3(0, 2, 0);
     }
 
     private void CompareValues(float orig, float val, TextMeshProUGUI ui) {
@@ -100,6 +104,16 @@ public class NodePanelUI : MonoBehaviour {
     }
 
     public void Hide() {
+        foreach (var bg in backgrounds) {
+            bg.SetActive(false);
+        }
         panelCanvas.alpha = 0f;
+    }
+
+    public void Unhide() {
+        foreach (var bg in backgrounds) {
+            bg.SetActive(true);
+        }
+        panelCanvas.alpha = 1f;
     }
 }
