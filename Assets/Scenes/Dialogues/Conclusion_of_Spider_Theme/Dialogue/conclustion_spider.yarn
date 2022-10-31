@@ -4,27 +4,56 @@ colorID: 0
 position: 0,0
 ---
 <<Scene forest>>
-<<Act Dan dan_normal left 0.38 green>>
-<<Act Doodle doodle_happy 1.25  0.38 #226677>>
-<<Move Doodle right  0.38 0.5>>
+<<Act Dan dan_happy left 0.61 green>>
+<<Act Doodle doodle_happy 1.25 0.63 #226677>>
+<<Move Doodle right 0.63 0.5>>
 Doodle: Pow! Those spiders are no match for us!
 Dan: Yeah! They’re just slightly larger spiders of the real world! 
 Dan: Seeing so many of them up close, they really don’t seem too scary after all.
+
 <<Scene forest>>
 <<Hide Doodle>>
-<<Act Queen queen_normal 1.25 0.45 #226677>>
-<<Move Queen right 0.45 0.5>>
+<<Act Queen queen_angry 1.25 0.66 #226677>>
+<<Move Queen right 0.66 0.5>>
+
+<<Hide dan_happy>>
+<<Act Dan dan_shocked left 0.61 green>>
 The Queen appears.
 Queen: (Tsk. What a bother.)
-Queen: Seems to me you’re still cheerful and upbeat, little boy. Not to worry, everyone fears many things. Let’s move on to the next one, shall we?
+
+<<Hide queen_angry>>
+<<Act Queen queen_normal right 0.66 #226677>>
+Queen: Seems to me you’re still cheerful and upbeat, little boy. Not to worry, everyone fears many things. 
+
+<<Hide queen_normal>>
+<<Act Queen queen_smiling right 0.66 #226677>>
+Queen: Let’s move on to the next one, shall we?
+
+<<Hide dan_shocked>>
+<<Act Dan dan_normal left 0.61 green>>
 Dan: Hey, if I face all of my fears, will you let me out of this world?
+
+<<Hide queen_normal>>
+<<Act Queen queen_happy right 0.66 #226677>>
 Queen: Silly boy, a little one like you stands no chance, as you will learn in due time. 
 Queen: If you decide to join me now, however, we can stop the scary theatrics right now. Isn’t that just swell?
+
+<<Hide dan_normal>>
+<<Act Dan dan_angry left 0.61 green>>
 Dan: No way! I just want to go back to the real world!
-Queen: Stubborn and naive as those that came before you. But as you can see, I have all the time in the world. See ya later, little one!
-The Queen fades away, with a smaller smirk this time.
-<<Move Queen 1.25 0.45 0.5>>
+
+<<Hide queen_happy>>
+<<Act Queen queen_normal right 0.66 #226677>>
+Queen: Stubborn and naive as those that came before you. But as you can see, I have all the time in the world. 
+
+<<Hide queen_normal>>
+<<Act Queen queen_attacking right 0.66 #226677>>
+<<Shake Queen>>
+Queen: See ya later, little one!
+<<Move Queen 1.25 0.66 0.5>>
+The Queen fades away, with a slightly smaller smirk this time.
 <<Hide Queen>>
+
 <<StopAudioAll>>
 <<Fade black 0.0 1.0 2.0>>
 ===

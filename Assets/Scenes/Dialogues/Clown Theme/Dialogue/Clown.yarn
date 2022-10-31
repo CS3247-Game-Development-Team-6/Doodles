@@ -3,19 +3,29 @@ tags:
 colorID: 0
 position: 0,0
 ---
-<<Act Dan dan_worries left 0.38 green>>
-<<Act Doodle doodle_sad 1.25 0.38 #226677>>
-<<Move Doodle right 0.38 0.5>>
+<<Act Dan dan_sad left 0.61 green>>
+<<Act Doodle doodle_happy 1.25 0.63 #226677>>
+<<Move Doodle right 0.63 0.5>>
 Doodle: A circus? Isn’t this a place of fun and laughter? What a weird choice...
 Sinister voice: Hahahhhahhaha... hahhhahahhaa...!
+
+<<Hide doodle_happy>>
+<<Act Doodle doodle_sad right 0.63 #226677>>
 Doodle: Ah, that doesn’t bode well. That laughter doesn’t sound fun in the slightest. Dan, are you okay? You seem shocked.
 Dan: I hate clowns, they’re sinister and scary and have large feet and hands! Just like that horror movie! 
 Dan: I never want to see them, so I never drew them in my sketchbook.
 Doodle: That explains why even I didn’t know about this. Seems like the Queen can read your deepest fears very clearly. 
 Doodle: I don’t know much about these “clown” things, so I can’t be of much help.
 Dan: It’s okay, I don’t think I will need it. I already know too much about clowns, and they’re really scary!
+
+<<Hide doodle_sad>>
+<<Act Doodle doodle_happy right 0.63 #226677>>
 Doodle: Don’t worry Dan! We’ll do this just like before! We’ve come so far, after all, remember what you have to do!
+
+<<Hide dan_sad>>
+<<Act Dan dan_normal left 0.61 green>>
 Dan: You’re right... I... I have to d-do this! No matter how s-scary it g-gets!
+
 <<StopAudioAll>>
 <<Fade black 0.0 1.0 2.0>>
 ===

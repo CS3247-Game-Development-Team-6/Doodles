@@ -3,17 +3,29 @@ tags:
 colorID: 0
 position: 0,0
 ---
-<<Act Dan dan_worries left 0.38 green>>
+<<Act Dan dan_annoyed left 0.61 green>>
 Dan: Ahh! I can’t see anything through all this smoke! 
 Strange voices: Uuoohh... Arrghh...... Wouuhh...
+
+<<Hide dan_annoyed>>
+<<Act Dan dan_shocked left 0.61 green>>
 Dan: There's also ghostly voices! What is going on here, Doodle?!
-<<Act Doodle doodle_sad 1.25  0.38 #226677>>
-<<Move Doodle right  0.38 0.5>>
+
+<<Act Doodle doodle_happy 1.25 0.63 #226677>>
+<<Move Doodle right 0.63 0.5>>
 Doodle: Calm down, Dan. This isn’t smoke, it's fog.
+
+<<Hide dan_shocked>>
+<<Act Dan dan_annoyed left 0.61 green>>
 Dan: But where are we? I can’t see a thing!
 Doodle: You’re in a graveyard, it seems. 
 Doodle: The Queen is probably using your fear of ghosts and getting lost against you in the form of this graveyard.
 Doodle: Nothing to fear Dan, ghosts are merely a product of your imagination that only appear in your nightmares!”
+
+<<Hide dan_annoyed>>
+<<Act Dan dan_normal left 0.61 green>>
 Dan: Alright, thanks Doodle! We’ll get through this together!
+
+<<StopAudioAll>>
 <<Fade black 0.0 1.0 2.0>>
 ===
