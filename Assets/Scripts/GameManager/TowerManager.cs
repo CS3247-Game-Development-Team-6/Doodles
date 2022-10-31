@@ -12,6 +12,9 @@ public class TowerManager : MonoBehaviour {
     [SerializeField] private GameObject contructionEffectPrefab;
     [SerializeField] private GameObject destroyEffectPrefab;
     [SerializeField] private GameObject upgradeEffectPrefab;
+    [SerializeField] private GameObject elementSwapEffectPrefab;
+
+
     private TowerInfo towerToBuild;
     private Node selectedNode;
     private TMP_Text actionTimer;
@@ -219,5 +222,11 @@ public class TowerManager : MonoBehaviour {
         GameObject upgradePrefab = Instantiate(upgradeEffectPrefab, towerObj.transform.position, towerObj.transform.rotation);
         upgradePrefab.transform.SetParent(transform);
         Destroy(upgradePrefab, 2f);
+    }
+
+    public void SpawnElementSwapEffect(GameObject towerObj) {
+        GameObject elementSwapPrefab = Instantiate(elementSwapEffectPrefab, towerObj.transform.position, towerObj.transform.rotation);
+        elementSwapPrefab.transform.SetParent(transform);
+        Destroy(elementSwapPrefab, 2f);
     }
 }

@@ -100,7 +100,12 @@ public class Node : MonoBehaviour
         Destroy(towerObj);
         towerBuildPosition = tileMesh.transform.position + towerOffset;
         towerObj = Instantiate(towerInfo.towerPrefab, towerBuildPosition, Quaternion.identity);
-        TowerManager.instance.SpawnUpgradeEffect(towerObj);
+        if (towerInfo.element != null) 
+            TowerManager.instance.SpawnElementSwapEffect(towerObj);
+
+        if (towerInfo.upgradeNum == 1) 
+            TowerManager.instance.SpawnUpgradeEffect(towerObj);
+
         tower = towerObj.GetComponent<Tower>();
         tower.SetTowerInfo(towerInfo);
         return towerObj.GetComponent<Tower>();
