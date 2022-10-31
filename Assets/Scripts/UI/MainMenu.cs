@@ -6,9 +6,9 @@ public class MainMenu : MonoBehaviour {
     public static string MenuSceneName { get; private set; }
     public LoadingUI loadingScreen;
     [SerializeField] private string loadoutSceneName;
-    //[SerializeField] private string[] levelSceneNames;
-    [SerializeField] private MapInfo[] mapInfos;
-    [SerializeField] private string[] dialogueSceneNames;
+    [SerializeField] private MapInfo[] mapInfos; // contain levelSceneNames and dialogueSceneNames
+
+    public static MapInfo[] staticMapInfos;
 
     public void Awake() {
         if (!PlayerPrefs.HasKey(SettingsMenu.ResolutionHeightPref)) {
@@ -24,18 +24,19 @@ public class MainMenu : MonoBehaviour {
         MenuSceneName = SceneManager.GetActiveScene().name;
 
         if (transform.Find("Continue").gameObject &&
-            (!PlayerPrefs.HasKey("latestSceneIndex") || PlayerPrefs.GetInt("latestSceneIndex") > (mapInfos.Length + dialogueSceneNames.Length))) {
+            (!PlayerPrefs.HasKey("latestSceneIndex") || PlayerPrefs.GetInt("latestSceneIndex") > (2 * mapInfos.Length))) {
             transform.Find("Continue").gameObject.SetActive(false);
         }
+        staticMapInfos = mapInfos;
     }
 
     public void StartNewGame() {
-        if (dialogueSceneNames == null || dialogueSceneNames.Length == 0) {
+        if (mapInfos == null || mapInfos.Length == 0 || mapInfos[0].dialogueSceneName == "") {
             Debug.LogError("No dialogues found!");
             return;
         }
 
-        loadingScreen.GotoScene(dialogueSceneNames[0]);
+        loadingScreen.GotoScene(mapInfos[0].dialogueSceneName);
         Destroy(this);
     }
 
@@ -53,7 +54,7 @@ public class MainMenu : MonoBehaviour {
             Destroy(this);
         } else {
             // load dialogue
-            loadingScreen.GotoScene(dialogueSceneNames[(latestSceneIndex - 1) / 2]);
+            loadingScreen.GotoScene(mapInfos[(latestSceneIndex - 1) / 2].dialogueSceneName);
             Destroy(this);
         }
     }

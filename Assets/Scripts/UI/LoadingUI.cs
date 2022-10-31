@@ -39,45 +39,29 @@ public class LoadingUI : MonoBehaviour {
     }
 
     public void SaveSceneToPref(string sceneName) {
-        int latestSceneIndex = 1;
         int currSceneIndex = 0;
-        if (PlayerPrefs.HasKey("latestSceneIndex")) {
-            latestSceneIndex = PlayerPrefs.GetInt("latestSceneIndex");
+        int latestSceneIndex = PlayerPrefs.HasKey("latestSceneIndex") ? PlayerPrefs.GetInt("latestSceneIndex") : 1;
+
+        if (sceneName == MainMenu.staticMapInfos[0].dialogueSceneName) {
+            currSceneIndex = 1;
+        } else if (sceneName == MainMenu.staticMapInfos[0].levelName) {
+            currSceneIndex = 2;
+        } else if (sceneName == MainMenu.staticMapInfos[1].dialogueSceneName) {
+            currSceneIndex = 3;
+        } else if (sceneName == MainMenu.staticMapInfos[1].levelName) {
+            currSceneIndex = 4;
+        } else if (sceneName == MainMenu.staticMapInfos[2].dialogueSceneName) {
+            currSceneIndex = 5;
+        } else if (sceneName == MainMenu.staticMapInfos[2].levelName) {
+            currSceneIndex = 6;
+        } else if (sceneName == MainMenu.staticMapInfos[3].dialogueSceneName) {
+            currSceneIndex = 7;
+        } else if (sceneName == MainMenu.staticMapInfos[3].levelName) {
+            currSceneIndex = 8;
+        } else if (sceneName == "story-end") {
+            currSceneIndex = 9;
         }
-        switch (sceneName) {
-            case "tutorial_scene_dialogue":
-                currSceneIndex = 1;
-                break;
-            case "spider_theme_dialogue":
-                currSceneIndex = 3;
-                break;
-            case "graveyard_theme_dialogue":
-                currSceneIndex = 5;
-                break;
-            case "clown_theme_dialogue":
-                currSceneIndex = 7;
-                break;
-            case "TutorialScene-beta":
-                currSceneIndex = 2;
-                break;
-            case "SpiderScene-beta":
-                currSceneIndex = 4;
-                break;
-            case "GhostScene-beta":
-                currSceneIndex = 6;
-                break;
-            case "ClownScene-beta":
-                currSceneIndex = 8;
-                break;
-            case "story-end":
-                currSceneIndex = 9;
-                break;
-            default: // loadout and menu-beta
-                break;
-        }
-        if (currSceneIndex > latestSceneIndex) {
-            latestSceneIndex = currSceneIndex;
-        }
+        latestSceneIndex = currSceneIndex > latestSceneIndex ? currSceneIndex : latestSceneIndex;
         PlayerPrefs.SetInt("latestSceneIndex", latestSceneIndex);
     }
 
