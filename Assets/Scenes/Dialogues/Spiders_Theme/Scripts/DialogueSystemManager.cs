@@ -107,7 +107,6 @@ namespace Yarn.Unity.Example {
         /// SetActor(actorName,spriteName,positionX,positionY,color) main
         /// function for moving / adjusting characters</summary>
         public void SetActor(string actorName, string spriteName, string positionX = "", string positionY = "", string colorHex = "") {
-
             // have to use SetSprite() because par[2] and par[3] might be
             // keywords (e.g. "left", "right")
             var newActor = SetSpriteUnity(spriteName, positionX, positionY);

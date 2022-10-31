@@ -9,9 +9,11 @@ Such a drawn character was a personified representation of Dan himself and his a
 In his dreams, Dan would join in with Doodle in his imaginary world as they went on countless adventures to places wild and unknown.
 
 <<Act Dan dan_sleepy left 0.61 green>>
+<<Act StrangeVoice dan_worries -1.00 0.61 grey>>
 Dan: .........
-A strange voice: “Hey Dan, wake up!”
+StrangeVoice: “Hey Dan, wake up!”
 Dan: Five more minutes mom…
+<<Hide StrangeVoice>>
 
 <<Act Doodle doodle_happy 1.25 0.63 #226677>>
 <<Move Doodle right 0.63 0.5>>
@@ -22,7 +24,7 @@ Doodle: It’s me, silly. It’s not time for school now, it’s time for advent
 Dan: Oh it’s you, Doodle. What’s up?
 
 <<Hide doodle_happy>>
-<<Act Dan doodle_angry left 0.63 green>>
+<<Act Doodle doodle_angry right 0.63 green>>
 Doodle: Help me defend against these evil invaders attacking our world!
 
 <<Hide dan_normal>>

@@ -7,7 +7,10 @@ position: 0,0
 <<Act Doodle doodle_happy 1.25 0.63 #226677>>
 <<Move Doodle right 0.63 0.5>>
 Doodle: A circus? Isn’t this a place of fun and laughter? What a weird choice...
-Sinister voice: Hahahhhahhaha... hahhhahahhaa...!
+
+<<Act SinisterVoice dan_worries -1.00 0.61 grey>>
+SinisterVoice: Hahahhhahhaha... hahhhahahhaa...!
+<<Hide SinisterVoice>>
 
 <<Hide doodle_happy>>
 <<Act Doodle doodle_sad right 0.63 #226677>>

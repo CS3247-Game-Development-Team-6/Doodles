@@ -4,13 +4,20 @@ colorID: 0
 position: 0,0
 ---
 <<Act Dan dan_annoyed left 0.61 green>>
+<<Flip Dan>>
 Dan: Ahh! I can’t see anything through all this smoke! 
-Strange voices: Uuoohh... Arrghh...... Wouuhh...
+<<Flip Dan>>
+
+<<Act StrangeVoices dan_worries -1.00 0.61 grey>>
+StrangeVoices: Uuoohh... Arrghh...... Wouuhh...
+<<Hide StrangeVoices>>
 
 <<Hide dan_annoyed>>
 <<Act Dan dan_shocked left 0.61 green>>
+<<Flip Dan>>
 Dan: There's also ghostly voices! What is going on here, Doodle?!
 
+<<Flip Dan>>
 <<Act Doodle doodle_happy 1.25 0.63 #226677>>
 <<Move Doodle right 0.63 0.5>>
 Doodle: Calm down, Dan. This isn’t smoke, it's fog.
