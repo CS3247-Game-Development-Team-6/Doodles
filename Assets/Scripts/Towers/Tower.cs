@@ -16,7 +16,7 @@ public class Tower : MonoBehaviour {
     public const string ENEMY_TAG = "Enemy";
     public const string ROTATION_BASE_NAME = "RotationBase";
     public const string FIRE_POINT_NAME = "FirePoint";
-    public const string TOWER_DAMAGE_EFFECT_NAME = "smoke";
+    public const string TOWER_DAMAGE_EFFECT_NAME = "damage";
 
     // Tower Attack Attributes
     protected float range;
@@ -30,8 +30,7 @@ public class Tower : MonoBehaviour {
 
     // Prefabs
     protected GameObject bulletPrefab;
-    protected GameObject smokePrefab;
-    protected AudioSource damagedSound;
+    protected GameObject damageEffectPrefab;
 
     // Image
     protected Image healthBar;
@@ -77,9 +76,9 @@ public class Tower : MonoBehaviour {
         }
 
         // Prepare Damage Effect to be played
-        this.smokePrefab = Instantiate(TowerManager.instance.GetEffectPrefab(TOWER_DAMAGE_EFFECT_NAME), transform.position, transform.rotation);
-        this.smokePrefab.transform.SetParent(transform);
-        this.smokePrefab.GetComponentInChildren<ParticleSystem>().Stop();
+        this.damageEffectPrefab = Instantiate(TowerManager.instance.GetEffectPrefab(TOWER_DAMAGE_EFFECT_NAME), transform.position, transform.rotation);
+        this.damageEffectPrefab.transform.SetParent(transform);
+        this.damageEffectPrefab.GetComponentInChildren<ParticleSystem>().Stop();
 
         // Create health bar UI for each tower
         GameObject healthBarPrefab = Instantiate(TowerManager.instance.GetHealthBarPrefab(), transform.position, transform.rotation);
@@ -90,11 +89,6 @@ public class Tower : MonoBehaviour {
             healthBarPrefab.transform.position.z + 0.5f);
         healthBarPrefab.transform.rotation = Quaternion.Euler(50, 0, 0);
         this.healthBar = healthBarPrefab.transform.Find("HealthBG/HealthBar").GetComponent<Image>();
-
-        // Prepare audio to be played
-        GameObject damagedSoundPrefab = Instantiate(TowerManager.instance.GetEffectPrefab("damageSound"), transform.position, transform.rotation);
-        damagedSoundPrefab.transform.SetParent(transform);
-        this.damagedSound = damagedSoundPrefab.GetComponent<AudioSource>();
     }
 
     /** Function accessable by enemy to damage tower. */
@@ -140,14 +134,14 @@ public class Tower : MonoBehaviour {
 
     public virtual void Update() {
         healthBar.fillAmount = health / maxHealth;
-        UpdateDamageFixCost(); // still have error, UI not updated as expected with the actual value
+        UpdateDamageFixCost();
         if (health <= 0 && !damageEffectPlayed) {
-            this.smokePrefab.GetComponent<ParticleSystem>().Play();
-            this.damagedSound.Play();
+            this.damageEffectPrefab.GetComponent<AudioSource>().Play();
+            this.damageEffectPrefab.GetComponentInChildren<ParticleSystem>().Play();
             damageEffectPlayed = true;
         } else if (health > 0 && damageEffectPlayed) {
-            this.smokePrefab.GetComponent<ParticleSystem>().Stop();
-            this.damagedSound.Stop();
+            this.damageEffectPrefab.GetComponent<AudioSource>().Stop();
+            this.damageEffectPrefab.GetComponentInChildren<ParticleSystem>().Stop();
             damageEffectPlayed = false;
         }
     }
