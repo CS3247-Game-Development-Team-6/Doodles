@@ -62,9 +62,12 @@ public class NodeUI : MonoBehaviour {
     }
 
     private void Update() {
-        if (ui.activeSelf && IsPlayerTooFar())
-            ui.SetActive(false);
-            // TooltipSystem.Hide();
+        if (ui.activeSelf) {
+            if (IsPlayerTooFar())
+                ui.SetActive(false);
+        } else {
+            TooltipSystem.Hide();
+        }
     }
 
     public void SetTarget(Node target)

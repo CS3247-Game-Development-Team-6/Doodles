@@ -39,5 +39,4 @@ public class NodeUITooltipTrigger : TooltipTrigger {
             TooltipSystem.Show(FormatContent(), FormatHeader());
         }
     }
-
 }
