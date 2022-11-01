@@ -1031,9 +1031,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5253943536085481846}
-  - component: {fileID: 5253943536085481801}
   m_Layer: 0
-  m_Name: NodeUI
+  m_Name: NodeUIDeprecated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1054,47 +1053,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5253943536085481801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5253943536085481847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99335f9d627563347b4e34fb82fd22e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ui: {fileID: 5253943536834382600}
-  playerGO: {fileID: 7828996249860865855, guid: f4e9a02ecb6b9ac48a0cbcf1e9a649a0, type: 3}
-  zOffsetMultiplier: 10
-  xOffsetMultiplier: 3
-  xOffsetUpperShift: 2
-  fire:
-    defaultSprite: {fileID: 21300000, guid: eace385b694764d439657ec190a851f7, type: 3}
-    activeSprite: {fileID: 21300000, guid: 871e386ebd9809c45a17db1cf277dc14, type: 3}
-    disabledSprite: {fileID: 21300000, guid: 6ed70b278693f024ab9a4cb2ba935665, type: 3}
-  ice:
-    defaultSprite: {fileID: 21300000, guid: 9d54a0e5c116f554ea27e3633bcfe11e, type: 3}
-    activeSprite: {fileID: 21300000, guid: c436c7a825a77b0429e6d8beee56c50d, type: 3}
-    disabledSprite: {fileID: 21300000, guid: 90011919f83bb834c860612d686769b3, type: 3}
-  water:
-    defaultSprite: {fileID: 21300000, guid: 214cab270c55a01428a563b2650e0b31, type: 3}
-    activeSprite: {fileID: 21300000, guid: 00a2794ea16fe2942b834f6318c0ce38, type: 3}
-    disabledSprite: {fileID: 21300000, guid: 22f2509cbbd9a6f4da949ddbd5ff7a7b, type: 3}
-  upgrade:
-    defaultSprite: {fileID: 21300000, guid: 03a583774c87d794091578f1d51630e5, type: 3}
-    activeSprite: {fileID: 0}
-    disabledSprite: {fileID: 21300000, guid: bb04f84d301f70b41be513d6e7f291b0, type: 3}
-  destroy:
-    defaultSprite: {fileID: 21300000, guid: 99ce2bf6e4f6726418edea8780c8a350, type: 3}
-    activeSprite: {fileID: 0}
-    disabledSprite: {fileID: 0}
-  fix:
-    defaultSprite: {fileID: 21300000, guid: 3d517f94bb2874dd5b81772700c47396, type: 3}
-    activeSprite: {fileID: 0}
-    disabledSprite: {fileID: 21300000, guid: 5f07fd80e0c27471485a5ce3e457ea8b, type: 3}
 --- !u!1 &5253943536834382600
 GameObject:
   m_ObjectHideFlags: 0

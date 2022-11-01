@@ -18,7 +18,6 @@ public class TowerManager : MonoBehaviour {
     private TowerInfo towerToBuild;
     private Node selectedNode;
     private TMP_Text actionTimer;
-    // private NodeUI nodeUI;
     private NodePanelUI nodeUI;
     
     /* Getters */
@@ -55,7 +54,6 @@ public class TowerManager : MonoBehaviour {
         // initialize action timer text
         actionTimer = GameObject.Find("ActionTimer").GetComponent<TMP_Text>();
         actionTimer.text = "";
-        // nodeUI = GameObject.FindObjectOfType<NodeUI>().GetComponent<NodeUI>();
         nodeUI =  GameObject.FindObjectOfType<NodePanelUI>().GetComponent<NodePanelUI>();
     }
 
