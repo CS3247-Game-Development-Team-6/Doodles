@@ -10,6 +10,7 @@ public class NodeButtonInfo {
     public Sprite defaultSprite;
     public Sprite activeSprite;
     public Sprite disabledSprite;
+    
 
     public void Setup(GameObject button) {
         this.button = button;
@@ -18,8 +19,7 @@ public class NodeButtonInfo {
     }
 }
 
-public class NodeUI : MonoBehaviour
-{
+public class NodeUI : MonoBehaviour {
     public GameObject ui;
     public GameObject playerGO;
     private Node selectedNode;
@@ -57,7 +57,16 @@ public class NodeUI : MonoBehaviour
     private void FixedUpdate() {
         // Right clicking away when NodeUI is on now deactivates the NodeUI
         if (Input.GetMouseButtonDown(1) && ui.activeSelf) {
-            ui.SetActive (false);
+            ui.SetActive(false);
+        }
+    }
+
+    private void Update() {
+        if (ui.activeSelf) {
+            if (IsPlayerTooFar())
+                ui.SetActive(false);
+        } else {
+            TooltipSystem.Hide();
         }
     }
 
@@ -116,5 +125,10 @@ public class NodeUI : MonoBehaviour
 
     public void Hide() {
         ui.SetActive (false);
+    }
+
+    public bool IsPlayerTooFar() {
+        float maxDistance = playerGO.GetComponent<PlayerMovement>().GetBuildDistance();
+        return (selectedNode.transform.position - playerGO.transform.position).magnitude > maxDistance;
     }
 }

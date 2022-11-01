@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,19 +9,22 @@ namespace CartoonFX
     {
         static CFXR_WelcomeScreen()
         {
-            if (SessionState.GetBool("CFXR_WelcomeScreen_Shown", false))
+            EditorApplication.delayCall += () =>
             {
-                return;
-            }
+                if (SessionState.GetBool("CFXR_WelcomeScreen_Shown", false))
+                {
+                    return;
+                }
             SessionState.SetBool("CFXR_WelcomeScreen_Shown", true);
 
-            var importer = AssetImporter.GetAtPath(AssetDatabase.GUIDToAssetPath("bfd03f272fe010b4ba558a3bc456ffeb"));
-            if (importer.userData == "dontshow")
-            {
-                return;
-            }
+                var importer = AssetImporter.GetAtPath(AssetDatabase.GUIDToAssetPath("bfd03f272fe010b4ba558a3bc456ffeb"));
+                if (importer != null && importer.userData == "dontshow")
+                {
+                    return;
+                }
 
-            EditorApplication.delayCall += Open;
+                Open();
+            };
         }
 
         [MenuItem("Tools/Cartoon FX Remaster FREE - Welcome Screen")]

@@ -34,7 +34,11 @@ public class NodePanelUI : MonoBehaviour {
         if (Input.GetMouseButtonDown(1)) {
             Hide();
         }
+
         if (!selectedNode || !selectedNode.tower) return;
+
+        if (IsPlayerTooFar())
+            Hide();
 
         Tower tower = selectedNode.tower;
 
@@ -120,5 +124,10 @@ public class NodePanelUI : MonoBehaviour {
             // bg.SetActive(true);
         }
         panelCanvas.LeanAlpha(1, 0.5f);
+    }
+
+    public bool IsPlayerTooFar() {
+        float maxDistance = FindObjectOfType<PlayerMovement>().GetBuildDistance();
+        return (selectedNode.transform.position - player.position).magnitude > maxDistance;
     }
 }

@@ -2,19 +2,48 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+[System.Serializable]
+public class EffectPrefabKeyValue {
+    public string effectName;
+    public GameObject effectPrefab;
+}
+
 public class TowerManager : MonoBehaviour {
     public static TowerManager instance { get; private set; }
     [SerializeField] private ParticleSystem insufficientInkEffect;
     [SerializeField] private GameObject playerObj;
     [SerializeField] private GameObject healthBarPrefab;
-    [SerializeField] private GameObject smokeEffectPrefab;
-    [SerializeField] private GameObject soundEffectPrefab;
+    [SerializeField] private EffectPrefabKeyValue[] effectPrefabList;
+
     private TowerInfo towerToBuild;
     private Node selectedNode;
     private TMP_Text actionTimer;
     // private NodeUI nodeUI;
     private NodePanelUI nodeUI;
     
+    /* Getters */
+    public GameObject GetHealthBarPrefab() {
+        return healthBarPrefab;
+    }
+
+    public GameObject GetEffectPrefab(string effectName) {
+        foreach (EffectPrefabKeyValue effect in effectPrefabList) {
+            if (effect.effectName == effectName) {
+                return effect.effectPrefab;
+            }
+        }
+        return null;
+    }
+
+    /* Effect Spawn */
+    public void SpawnEffect(string effectName, Transform parentTransform, bool setParent=true) {
+        GameObject effect = Instantiate(GetEffectPrefab(effectName), parentTransform.position, parentTransform.rotation);
+        if (setParent) 
+            effect.transform.SetParent(parentTransform);
+        Destroy(effect, 3f);
+    }
+
+
     private void Awake() {
         if (instance != null) {
             Debug.Log("TowerManager should be a singleton! Only 1 should exist in a scene.");
@@ -57,17 +86,7 @@ public class TowerManager : MonoBehaviour {
         return towerToBuild.cost;
     }
 
-    public GameObject GetSmokeEffectPrefab() {
-        return smokeEffectPrefab;
-    }
 
-    public GameObject GetSoundEffectPrefab() {
-        return soundEffectPrefab;
-    }
-
-    public GameObject GetHealthBarPrefab() {
-        return healthBarPrefab;
-    }
     
     public bool CanBuildTower(Node node) {
         if (towerToBuild == null) {

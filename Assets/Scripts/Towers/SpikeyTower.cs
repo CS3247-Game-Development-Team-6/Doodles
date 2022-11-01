@@ -8,8 +8,13 @@ public class SpikeyTower : Tower {
     private Transform firePoint;
     private float fireCountdown = 0f;
     private bool isShooting;
-
     private const bool PENETRATE_TARGET = true;
+
+    [Header("Effect Prefabs")]
+    public GameObject shootingEffect;
+    public GameObject shootingSound;
+    private float shootEffectCurrValue;
+    private float shootEffectTriggerPValue = 70;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
@@ -42,6 +47,17 @@ public class SpikeyTower : Tower {
 
     public override void Shoot() {
         base.Shoot();
+
+        shootEffectCurrValue = Random.Range(0, 100);
+        if (shootEffectCurrValue >= shootEffectTriggerPValue) {
+            GameObject shootingEffectPrefab = (GameObject)Instantiate(shootingEffect, firePoint.position, firePoint.rotation);
+            shootingEffectPrefab.transform.SetParent(transform);
+            // GameObject shootingSoundPrefab = (GameObject)Instantiate(shootingSound, firePoint.position, firePoint.rotation);
+            // shootingSoundPrefab.transform.SetParent(transform);
+            Destroy(shootingEffectPrefab, 2f);
+            // Destroy(shootingSoundPrefab, 1f);
+        }
+
         foreach (var targetTransform in targetTransforms) {
             GameObject bulletObj = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
             Bullet bullet = bulletObj.GetComponent<Bullet>();
@@ -56,6 +72,7 @@ public class SpikeyTower : Tower {
     public override void Update() {
         base.Update();
         if (health <= 0) return;
+
         if (isStopShooting) return;
 
         if (isShooting && fireCountdown <= 0f) {
