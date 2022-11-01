@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class Tower : MonoBehaviour {
 
     // Tower info
-    protected string towerName;
-    protected int versionNum;
-    protected int cost;
-    protected float damageFixFactor;
-    public float damageFixCost;
+    public string towerName { get; protected set; }
+    public int versionNum { get; protected set; }
+    public int cost { get; protected set; }
+    public float damageFixFactor { get; protected set; }
+    public float damageFixCost { get; protected set; }
 
     // Macros
     public const string ENEMY_TAG = "Enemy";
@@ -19,12 +19,12 @@ public class Tower : MonoBehaviour {
     public const string TOWER_DAMAGE_EFFECT_NAME = "damage";
 
     // Tower Attack Attributes
-    protected float range;
-    protected float fireRate;
+    public float range;
+    public float fireRate;
 
     // Tower Durability Attributes
-    protected float health;
-    protected float maxHealth;
+    public float health;
+    public float maxHealth;
     protected float healthDecayRate;
     private bool damageEffectPlayed = false;
 
