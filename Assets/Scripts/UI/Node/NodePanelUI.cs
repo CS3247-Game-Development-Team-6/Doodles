@@ -109,7 +109,6 @@ public class NodePanelUI : MonoBehaviour {
         foreach (var bg in backgrounds) {
             // bg.LeanMoveLocalY(-100, 0.9f).setOnComplete(() => bg.SetActive(false));
             bg.SetActive(false);
-            Debug.Log("Hiding");
         }
         panelCanvas.LeanAlpha(0, 0.5f);
     }
@@ -119,7 +118,6 @@ public class NodePanelUI : MonoBehaviour {
             bg.SetActive(true);
             // bg.LeanMoveLocalY(150, 0.9f).setEasePunch().setOnComplete(() => bg.SetActive(true));
             // bg.SetActive(true);
-            Debug.Log("UnHiding");
         }
         panelCanvas.LeanAlpha(1, 0.5f);
     }
