@@ -8,6 +8,11 @@ public class BallistaTower : Tower {
     private float fireCountdown = 0f;
     private Transform target;
 
+    [Header("Effect Prefabs")]
+    public GameObject fireSoundEffect;
+    private float fireSoundEffectCurrValue;
+    private float fireSoundEffectTriggerPValue = 70;
+
     private const bool PENETRATE_TARGET = false;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
@@ -44,9 +49,18 @@ public class BallistaTower : Tower {
 
     public override void Shoot() {
         base.Shoot();
+
+        fireSoundEffectCurrValue = Random.Range(0, 100);
+        if (fireSoundEffect && fireSoundEffectCurrValue >= fireSoundEffectTriggerPValue) {
+            GameObject fireSoundEffectPrefab = (GameObject)Instantiate(fireSoundEffect, firePoint.position, firePoint.rotation);
+            fireSoundEffectPrefab.transform.SetParent(transform);
+            Destroy(fireSoundEffectPrefab, 2f);
+        }
+
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         bullet.SetBulletInfo(towerInfo);
+        bullet.SetImpactSoundActive(fireSoundEffectCurrValue >= fireSoundEffectTriggerPValue);
 
         if (bullet != null) {
             bullet.Seek(target, PENETRATE_TARGET);
