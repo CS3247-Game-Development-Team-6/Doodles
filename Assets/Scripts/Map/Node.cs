@@ -9,8 +9,7 @@ public class TileType {
     [Range(0, 1)] public float frequencyMax;
 }
 
-public class Node : MonoBehaviour
-{
+public class Node : MonoBehaviour {
     public Color hoverColor;
     public Color tooFarColor;
     public Color invalidColor;
@@ -36,8 +35,7 @@ public class Node : MonoBehaviour
 
     public ParticleSystem invalidAction;
 
-    private void Start()
-    {
+    private void Start() {
         tileRenderer = tileMesh.GetComponent<Renderer>();
         startColor = tileRenderer.material.color;
 
