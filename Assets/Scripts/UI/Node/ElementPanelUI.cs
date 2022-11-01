@@ -33,7 +33,6 @@ public class ElementPanelUI : NodeButtonUI {
         foreach (ElementKeyValue info in tower.towerInfo.nextElements) {
             if (info.element == element.type) { 
                 myTowerInfo = info.tower;
-                Debug.Log($"{myTowerInfo}, {costUi}, {myTowerInfo.cost}");
                 costUi.text = myTowerInfo.cost.ToString();
                 break;
             }
