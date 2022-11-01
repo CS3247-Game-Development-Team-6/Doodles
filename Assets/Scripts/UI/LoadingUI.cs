@@ -42,25 +42,20 @@ public class LoadingUI : MonoBehaviour {
         int currSceneIndex = 0;
         int latestSceneIndex = PlayerPrefs.HasKey("latestSceneIndex") ? PlayerPrefs.GetInt("latestSceneIndex") : 1;
 
-        if (sceneName == MainMenu.staticMapInfos[0].dialogueSceneName) {
-            currSceneIndex = 1;
-        } else if (sceneName == MainMenu.staticMapInfos[0].gameSceneName) {
-            currSceneIndex = 2;
-        } else if (sceneName == MainMenu.staticMapInfos[1].dialogueSceneName) {
-            currSceneIndex = 3;
-        } else if (sceneName == MainMenu.staticMapInfos[1].gameSceneName) {
-            currSceneIndex = 4;
-        } else if (sceneName == MainMenu.staticMapInfos[2].dialogueSceneName) {
-            currSceneIndex = 5;
-        } else if (sceneName == MainMenu.staticMapInfos[2].gameSceneName) {
-            currSceneIndex = 6;
-        } else if (sceneName == MainMenu.staticMapInfos[3].dialogueSceneName) {
-            currSceneIndex = 7;
-        } else if (sceneName == MainMenu.staticMapInfos[3].gameSceneName) {
-            currSceneIndex = 8;
-        } else if (sceneName == "story-end") {
-            currSceneIndex = 9;
+        for (int i = 0; i < MainMenu.staticMapInfos.Length; i++) {
+            if (sceneName == MainMenu.staticMapInfos[i].dialogueSceneName) {
+                currSceneIndex = GetDialogueSceneIndex(i);
+            } else if (sceneName == MainMenu.staticMapInfos[i].gameSceneName) {
+                currSceneIndex = GetGameSceneIndex(i);
+            } else if (sceneName == "story-end") {
+                currSceneIndex = 9;
+                break;
+            }
         }
+
+        int GetDialogueSceneIndex(int lvl) => lvl * 2 + 1;
+        int GetGameSceneIndex(int lvl) => (lvl + 1) * 2;
+
         latestSceneIndex = currSceneIndex > latestSceneIndex ? currSceneIndex : latestSceneIndex;
         PlayerPrefs.SetInt("latestSceneIndex", latestSceneIndex);
     }
