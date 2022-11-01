@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6724195651195510102}
   - component: {fileID: 1718193169022641333}
   - component: {fileID: -8713943443938158730}
+  - component: {fileID: 7758659994499469654}
   m_Layer: 0
   m_Name: 0_LandmineIce
   m_TagString: Landmine
@@ -65,8 +66,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596bcc1a915784a1aabce0abda56d4a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageFixCost: 0
   selfDestructEffect: {fileID: 1892078723244562, guid: a790dec8f42a24f778a330e3e35699ed, type: 3}
   selfDestructSound: {fileID: 1983200342343509110, guid: 4ac285ee1217346ce9499817613b340c, type: 3}
+--- !u!114 &7758659994499469654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210837861978277857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98458dcd6d1b70a46a1b8d2bb054e8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6784695300214318728
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,29 +1104,29 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0.15555558
-          inSlope: 4.050603
-          outSlope: 4.050603
+          inSlope: 2.3173704
+          outSlope: 2.3173704
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.03867317
-          value: 0.31220523
-          inSlope: 3.167425
-          outSlope: 3.167425
+          time: 0.04104591
+          value: 0.25067416
+          inSlope: 1.0459924
+          outSlope: 1.0459924
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.1919696
         - serializedVersion: 3
           time: 0.6267395
           value: 0.1357966
-          inSlope: -2.8977928
-          outSlope: -2.8977928
+          inSlope: -1.8951178
+          outSlope: -1.8951178
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.08621934
+          inWeight: 0.2103089
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2

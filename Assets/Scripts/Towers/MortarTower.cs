@@ -14,7 +14,7 @@ public class MortarTower : Tower {
     public GameObject fireSoundEffect;
     public GameObject fireVisualEffect;
     private float fireEffectCurrValue;
-    private float fireEffectTriggerPValue = 70;
+    private float fireEffectTriggerPValue = 0;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
