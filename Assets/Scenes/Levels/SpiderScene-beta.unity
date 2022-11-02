@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44970167, g: 0.49976736, b: 0.5756334, a: 1}
+  m_IndirectSpecularColor: {r: 0.4497019, g: 0.49976808, b: 0.57563424, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2485,6 +2485,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2390909938755016286, guid: ff2bd7890cc215943a4adf0dc5a84eed, type: 3}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 827046485}
     - target: {fileID: 2390909938755016286, guid: ff2bd7890cc215943a4adf0dc5a84eed, type: 3}
       propertyPath: gameplayCanvas
       value: 

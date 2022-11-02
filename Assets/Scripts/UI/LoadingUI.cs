@@ -42,6 +42,11 @@ public class LoadingUI : MonoBehaviour {
         int currSceneIndex = 0;
         int latestSceneIndex = PlayerPrefs.HasKey("latestSceneIndex") ? PlayerPrefs.GetInt("latestSceneIndex") : 1;
 
+        if (MainMenu.staticMapInfos == null) {
+            Debug.LogWarning("No mapInfos found, please reload from MainMenu");
+            return;
+        }
+
         for (int i = 0; i < MainMenu.staticMapInfos.Length; i++) {
             if (sceneName == MainMenu.staticMapInfos[i].dialogueSceneName) {
                 currSceneIndex = GetDialogueSceneIndex(i);
