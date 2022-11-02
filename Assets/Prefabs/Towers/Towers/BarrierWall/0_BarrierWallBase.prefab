@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6724195651195510102}
   - component: {fileID: 1718193169022641333}
   - component: {fileID: 6933413661606786637}
+  - component: {fileID: 7050793653228410430}
   m_Layer: 0
   m_Name: 0_BarrierWallBase
   m_TagString: PlayerWall
@@ -63,6 +64,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0aca0bc2b246a614f842cbe4568dbd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 0
+  fireRate: 0
+  health: 0
+  maxHealth: 0
+--- !u!114 &7050793653228410430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210837861978277857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98458dcd6d1b70a46a1b8d2bb054e8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4351897866740249889
@@ -338,6 +355,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 62ebcc014f412f54db027fbbcba93ee0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 030279b43da78cb45bbdd83b64af6904, type: 2}
     - target: {fileID: 919132149155446097, guid: 62ebcc014f412f54db027fbbcba93ee0, type: 3}
       propertyPath: m_Name
       value: barrier_basic
