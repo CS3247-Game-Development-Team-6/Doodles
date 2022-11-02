@@ -73,7 +73,8 @@ public class SettingsMenu : MonoBehaviour {
         }
     }
 
-    public void SetOutlineValue(float value) {
+    public void SetOutlineValue(float invertValue) {
+        float value = 1 - invertValue;
         if (outlineSettings) outlineSettings.depthThreshold.value = value;
         PlayerPrefs.SetFloat(OutlineDepthThreshold, value);
 
