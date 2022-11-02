@@ -15,6 +15,9 @@ public class MapSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     public MapInfo mapInfo;
     private MapInventoryUI inventoryUI;
 
+    //lock/unlocked
+    public bool locked = true;
+
     void Start() {
         inventoryUI = GetComponentInParent<MapInventoryUI>();
         if (inventoryUI != null) inventoryUI.Subscribe(this); //has removed index since it is not fixed, depends on who started mapSlotUI first
@@ -25,13 +28,13 @@ public class MapSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         }
         background.sprite = inventoryUI.selectedSlot == this ? selectedBg : unselectedBg;
         background.color = inventoryUI.selectedSlot == this ? selectedBgColor : unselectedBgColor;
-        if (!PlayerPrefs.HasKey("latestSceneIndex") || index > PlayerPrefs.GetInt("latestSceneIndex") / 2 - 1) {
+        if (locked) {
             transform.Find("lock-image").gameObject.SetActive(true);
         }
     }
 
     public void OnPointerDown(PointerEventData eventData) {
-        if (index > PlayerPrefs.GetInt("latestSceneIndex") / 2 - 1) {
+        if (locked) {
             return;
         }
 
@@ -41,7 +44,7 @@ public class MapSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        if (index > PlayerPrefs.GetInt("latestSceneIndex") / 2 - 1) {
+        if (locked) {
             return;
         }
         background.sprite = selectedBg;
@@ -49,7 +52,7 @@ public class MapSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        if (index > PlayerPrefs.GetInt("latestSceneIndex") / 2 - 1) {
+        if (locked) {
             return;
         }
         background.sprite = inventoryUI.selectedSlot == this ? selectedBg : unselectedBg;
