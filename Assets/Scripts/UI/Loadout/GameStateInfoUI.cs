@@ -22,7 +22,7 @@ public class GameStateInfoUI : MonoBehaviour{
         this.chunkSpawner = chunkSpawner;
     }
 
-    private void Start(){
+    private void Start() {
         mapInfo = Loadout.mapToLoad;
         if (!mapInfo){
             Debug.Log("No map loaded.");
@@ -42,20 +42,20 @@ public class GameStateInfoUI : MonoBehaviour{
         textCountDown.gameObject.SetActive(false);
     }
 
-    private string GetWaveStatus(){
+    private string GetWaveStatus() {
         int chunkNum = chunkSpawner.chunkIndex;
         int waveNum = chunkSpawner.WavesStarted;
         int totalWavesInChunk = chunkSpawner.waves.Length;
         return $"\nWave {waveNum} / {totalWavesInChunk}\nin level {chunkNum} / {totalChunks}";
     }
 
-    private float GetChunkCompletion(){
+    private float GetChunkCompletion() {
         float waveNum = chunkSpawner.waveIndex;
         float totalWavesInChunk = chunkSpawner.waves.Length;
         return totalWavesInChunk == 0 ? 0 : waveNum / totalWavesInChunk;
     }
 
-    private void Update(){
+    private void Update() {
         if (inkManager != null){
             inkSlider.fillAmount = inkManager.InkFraction;
             inkText.text = inkManager.InkString;
