@@ -9,8 +9,7 @@ public class TileType {
     [Range(0, 1)] public float frequencyMax;
 }
 
-public class Node : MonoBehaviour
-{
+public class Node : MonoBehaviour {
     public Color hoverColor;
     public Color tooFarColor;
     public Color invalidColor;
@@ -36,8 +35,7 @@ public class Node : MonoBehaviour
 
     public ParticleSystem invalidAction;
 
-    private void Start()
-    {
+    private void Start() {
         tileRenderer = tileMesh.GetComponent<Renderer>();
         startColor = tileRenderer.material.color;
 
@@ -64,6 +62,8 @@ public class Node : MonoBehaviour
     }
 
     public void DestroyTower() {
+        TowerManager.instance.SpawnEffect("destroy", this.towerObj.transform, false);
+
         Destroy(this.towerObj);
         tower = null;
         towerObj = null;
@@ -82,8 +82,10 @@ public class Node : MonoBehaviour
     public Tower BuildTower(TowerInfo towerInfo) {
         towerBuildPosition = tileMesh.transform.position + towerOffset;
         towerObj = Instantiate(towerInfo.towerPrefab, towerBuildPosition, Quaternion.identity);
+        TowerManager.instance.SpawnEffect("build", towerObj.transform);
         tower = towerObj.GetComponent<Tower>();
         tower.SetTowerInfo(towerInfo);
+
         if (decorationMesh != null) Destroy(decorationMesh);    // Destroy the flora on the tile.
         
         return towerObj.GetComponent<Tower>();
@@ -95,9 +97,14 @@ public class Node : MonoBehaviour
         Destroy(towerObj);
         towerBuildPosition = tileMesh.transform.position + towerOffset;
         towerObj = Instantiate(towerInfo.towerPrefab, towerBuildPosition, Quaternion.identity);
+        if (towerInfo.element != null) 
+            TowerManager.instance.SpawnEffect("swap", towerObj.transform);
+
+        if (towerInfo.nextUpgrade == null) 
+            TowerManager.instance.SpawnEffect("upgrade", towerObj.transform);
+
         tower = towerObj.GetComponent<Tower>();
         tower.SetTowerInfo(towerInfo);
-
         return towerObj.GetComponent<Tower>();
     }
 
@@ -147,5 +154,4 @@ public class Node : MonoBehaviour
             decorationMesh.gameObject.GetComponent<Outline>().enabled = false;
         }
     }
-
 }

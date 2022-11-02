@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 2670180140298441906}
   - component: {fileID: -6015835010169577183}
   - component: {fileID: -5198108677338182736}
+  - component: {fileID: 9091030992746239612}
   m_Layer: 0
   m_Name: 0_CannonBase
   m_TagString: Turret
@@ -206,6 +207,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2322c46afa9c01e46a28623f37ec842a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageFixCost: 0
+  fireSoundEffect: {fileID: 0}
+--- !u!114 &9091030992746239612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5135174605016635187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98458dcd6d1b70a46a1b8d2bb054e8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1350558320003785143

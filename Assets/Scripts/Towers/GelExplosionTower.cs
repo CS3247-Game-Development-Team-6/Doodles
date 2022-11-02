@@ -8,8 +8,12 @@ public class GelExplosionTower : Tower {
     private Transform firePoint;
     private float fireCountdown = 0f;
     private Transform target;
-
     private const bool PENETRATE_TARGET = false;
+
+    [Header("Effect Prefabs")]
+    public GameObject fireSoundEffect;
+    private float fireSoundEffectCurrValue;
+    private float fireSoundEffectTriggerPValue = 70;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
@@ -45,9 +49,18 @@ public class GelExplosionTower : Tower {
 
     public override void Shoot() {
         base.Shoot();
+
+        fireSoundEffectCurrValue = Random.Range(0, 100);
+        if (fireSoundEffect && fireSoundEffectCurrValue >= fireSoundEffectTriggerPValue) {
+            GameObject fireSoundEffectPrefab = (GameObject)Instantiate(fireSoundEffect, firePoint.position, firePoint.rotation);
+            fireSoundEffectPrefab.transform.SetParent(transform);
+            Destroy(fireSoundEffectPrefab, 2f);
+        }
+
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         GelExplosionBullet bullet = bulletObj.GetComponent<GelExplosionBullet>();
         bullet.SetBulletInfo(towerInfo);
+        bullet.SetImpactSoundActive(fireSoundEffectCurrValue >= fireSoundEffectTriggerPValue);
 
         if (bullet != null) {
             bullet.Seek(target, PENETRATE_TARGET);
