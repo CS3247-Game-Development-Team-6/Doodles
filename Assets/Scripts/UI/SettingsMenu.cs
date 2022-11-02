@@ -3,9 +3,13 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Rendering.PostProcessing;
 
 public class SettingsMenu : MonoBehaviour {
 
+    private PostProcessOutline outlineSettings;
+    private PostProcessBundle outlineBundle;
+    private PostProcessVolume postProcessVolume;
     private List<Resolution> resolutions;
     public TMP_Dropdown resolutionPicker;
     public Toggle fullScreenToggle;
@@ -13,8 +17,15 @@ public class SettingsMenu : MonoBehaviour {
     public static readonly string FullScreenPref = "FullScreenPref";
     public static readonly string ResolutionWidthPref = "ResolutionWidthPref";
     public static readonly string ResolutionHeightPref = "ResolutionHeightPref";
+    public static readonly string OutlineDepthThreshold = "OutlineDepthThreshold";
 
-    private void Start() {
+    private void Awake() {
+        postProcessVolume = Camera.main.GetComponent<PostProcessVolume>();
+        // outlineBundle = postProcessVolume.GetBundle<PostProcessOutline>();
+        // Debug.Log("OKAYU" + outlineBundle);
+        // outlineSettings = (PostProcessOutline)outlineBundle.settings;
+        postProcessVolume.profile.TryGetSettings<PostProcessOutline>(out outlineSettings);
+
         resolutions = new List<Resolution>();
         int pickedIndex = 0;
 
@@ -55,5 +66,20 @@ public class SettingsMenu : MonoBehaviour {
         audioMixer.SetFloat("volume", Mathf.Log10(volume)*20);
         // immediately save pref volume
         PlayerPrefs.SetFloat(AudioManager.VolumePref, volume);
+    }
+
+    public void SetOutlineValue(float value) {
+        outlineSettings.depthThreshold.value = value;
+        // postProcessLayer.Render()
+        PlayerPrefs.SetFloat(OutlineDepthThreshold, value);
+
+        Debug.Log($"value set to {value}");
+    }
+
+    public void LoadOutlineValue() {
+        if (PlayerPrefs.HasKey(OutlineDepthThreshold)) {
+            float value = PlayerPrefs.GetFloat(OutlineDepthThreshold);
+             outlineSettings.depthThreshold.value = value;
+        }
     }
 }
