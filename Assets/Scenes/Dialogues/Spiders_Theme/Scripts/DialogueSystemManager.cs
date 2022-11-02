@@ -42,11 +42,20 @@ namespace Yarn.Unity.Example {
 
         static Vector2 screenSize = new Vector2(1280f, 720f); // needed for position calcuations, e.g. what does "left" mean?
 
-        public string NextSceneName;
+        [Header("Scene loading")]
+        public string LoadoutScene;
         public Button GotoButton;
+        public MapInfo level;
+        public LoadingUI loadingScreen;
 
         public void GotoOnClick() {
-            SceneManager.LoadScene(NextSceneName);
+            if (!loadingScreen || !level) {
+                Debug.Log("Missing loading screen or level not selected.");
+                return;
+            }
+            Loadout.mapToLoad = level;
+            loadingScreen.GotoScene(LoadoutScene);
+            Destroy(this);
         }
 
         private void Start() {
@@ -54,7 +63,8 @@ namespace Yarn.Unity.Example {
         }
 
         private void Update() {
-            if (FindObjectOfType<DialogueRunner>().IsDialogueRunning == false) {
+            if (FindObjectOfType<DialogueRunner>().IsDialogueRunning == false && MainMenu.staticMapInfos != null) {
+                loadingScreen.SaveSceneToPref(level.gameSceneName);
                 GotoButton.gameObject.SetActive(true);
                 return;
             }
@@ -107,7 +117,6 @@ namespace Yarn.Unity.Example {
         /// SetActor(actorName,spriteName,positionX,positionY,color) main
         /// function for moving / adjusting characters</summary>
         public void SetActor(string actorName, string spriteName, string positionX = "", string positionY = "", string colorHex = "") {
-
             // have to use SetSprite() because par[2] and par[3] might be
             // keywords (e.g. "left", "right")
             var newActor = SetSpriteUnity(spriteName, positionX, positionY);
@@ -552,7 +561,7 @@ namespace Yarn.Unity.Example {
                 case "right":
                 case "top":
                 case "upper":
-                    return 0.75f;
+                    return 1.15f;
                 case "rightedge":
                 case "topedge":
                 case "upperedge":
@@ -560,7 +569,13 @@ namespace Yarn.Unity.Example {
                 case "offleft":
                     return -0.33f;
                 case "offright":
-                    return 1.33f;
+                    return 2.0f;
+                case "queenheight":
+                    return 0.75f;
+                case "doodleheight":
+                    return 0.57f;
+                case "danheight":
+                    return 0.61f;
             }
 
             // if none of those worked, then let's try parsing it as a

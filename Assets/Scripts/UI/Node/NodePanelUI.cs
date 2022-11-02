@@ -77,7 +77,7 @@ public class NodePanelUI : MonoBehaviour {
         }
 
         Unhide();
-        parentContainer.position = target.transform.position + new Vector3(0, 2, 0);
+        parentContainer.position = target.transform.position + new Vector3(0, 4, 0);
     }
 
     private void CompareValues(float orig, float val, TextMeshProUGUI ui) {

@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour {
     public GameObject pauseMenuUI;
     public GameObject gameplayCanvas;
     public GameObject raycastOccluder;
-    public LoadingUI loadingScreen;
+    private LoadingUI loadingScreen;
 
     private void Start() {
         if (menuSceneName.Length == 0) {
@@ -16,6 +16,7 @@ public class PauseMenu : MonoBehaviour {
         } else if (SceneManager.GetSceneByName(menuSceneName).IsValid()) {
             Debug.LogError($"menuSceneName not found: {menuSceneName}\nSet in {name}");
         }
+        loadingScreen = FindObjectOfType<LoadingUI>();
     }
 
     void Update() {
@@ -89,6 +90,7 @@ public class PauseMenu : MonoBehaviour {
         Resume();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
     public bool IsPaused() {
         return GameIsPaused;
     }

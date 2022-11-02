@@ -7,11 +7,17 @@ using System.Collections;
  */
 public class GameOverManager : MonoBehaviour {
     public string mainMenuScene;
+    public string nextDialogueScene;
+    public LoadingUI loadingScreen;
     public Text wavesText;
     public GameObject raycastOccluder;
 
     // Enabled when game is running
     void OnEnable() {
+        if (this.gameObject.name == "WinScreen") {
+            loadingScreen.SaveSceneToPref(nextDialogueScene);
+        }
+
         wavesText.text = FindObjectOfType<Map>().WavesCleared.ToString();
 
         raycastOccluder.SetActive(true);
@@ -32,14 +38,35 @@ public class GameOverManager : MonoBehaviour {
     }
 
     public void Retry() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // TODO: add loadingUI
         Time.timeScale = 1f;
         raycastOccluder.SetActive(false);
     }
 
     public void GotoMainMenu() {
-        SceneManager.LoadScene(mainMenuScene);
+        if (mainMenuScene == "") {
+            Debug.LogWarning("empty name for main menu scene ");
+            return;
+        }
+        loadingScreen.GotoScene(mainMenuScene);
         Time.timeScale = 1f;
         raycastOccluder.SetActive(false);
+        Destroy(this);
+    }
+
+    public void GotoNextDialogue() {
+        if (nextDialogueScene == "") {
+            Debug.LogWarning("empty name for next dialogue scene ");
+            return;
+        }
+
+        if (nextDialogueScene == "story-end") {
+            Debug.LogWarning("story and game end here");
+            return;
+        }
+        loadingScreen.GotoScene(nextDialogueScene);
+        Time.timeScale = 1f;
+        raycastOccluder.SetActive(false);
+        Destroy(this);
     }
 }
