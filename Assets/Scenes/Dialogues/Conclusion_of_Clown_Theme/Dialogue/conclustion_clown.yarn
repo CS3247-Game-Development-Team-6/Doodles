@@ -3,8 +3,10 @@ tags:
 colorID: 0
 position: 0,0
 ---
+<<Scene forest>>
 <<Act Dan dan_sad left danheight green>>
 <<Act Doodle doodle_angry offright doodleheight #226677>>
+<<Flip Doodle>>
 <<Move Doodle right doodleheight 0.5>>
 Doodle: Wow, those clowns are more horrifying than I thought. I’m still in disbelief. Are you okay, Dan?
 Dan: I’m still sweating all over, but I guess I’m getting better at dealing with it.
@@ -13,6 +15,7 @@ Doodle: We’ll talk about our future adventures after we escape this prison of 
 <<Hide doodle_angry>>
 
 <<Act Queen queen_angry offright queenheight #226677>>
+<<Flip Queen>>
 <<Move Queen right queenheight 0.5>>
 The Queen appears yet again. Where is she watching from?
 
@@ -22,6 +25,7 @@ Queen: (Tsk, that was the last of his fears!)
 
 <<Hide queen_angry>>
 <<Act Queen queen_happy right queenheight #226677>>
+<<Flip Queen>>
 Queen: Well well well, an amazing performance, Erdan my boy! Have you changed your mind about joining me in sculpting this world?
 
 <<Hide dan_shocked>>
@@ -30,6 +34,7 @@ Dan: Not in the slightest! I have my own real world to get back to, a world much
 
 <<Hide queen_happy>>
 <<Act Queen queen_angry right queenheight #226677>>
+<<Flip Queen>>
 Queen: Tsk, ever the stubborn little one. Whatever, you are becoming an eyesore! 
 
 <<Shake Queen>>

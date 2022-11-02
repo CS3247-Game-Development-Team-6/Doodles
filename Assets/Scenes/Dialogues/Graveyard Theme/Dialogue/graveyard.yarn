@@ -3,6 +3,7 @@ tags:
 colorID: 0
 position: 0,0
 ---
+<<Scene forest>>
 <<Act Dan dan_annoyed left danheight green>>
 <<Flip Dan>>
 Dan: Ahh! I can’t see anything through all this smoke! 
@@ -18,7 +19,8 @@ StrangeVoices: Uuoohh... Arrghh...... Wouuhh...
 Dan: There's also ghostly voices! What is going on here, Doodle?!
 
 <<Flip Dan>>
-<<Act Doodle doodle_happy 1.25 doodleheight #226677>>
+<<Act Doodle doodle_surprised offright doodleheight green>>
+<<Flip Doodle>>
 <<Move Doodle right doodleheight 0.5>>
 Doodle: Calm down, Dan. This isn’t smoke, it's fog.
 
@@ -27,6 +29,10 @@ Doodle: Calm down, Dan. This isn’t smoke, it's fog.
 Dan: But where are we? I can’t see a thing!
 Doodle: You’re in a graveyard, it seems. 
 Doodle: The Queen is probably using your fear of ghosts and getting lost against you in the form of this graveyard.
+
+<<Hide doodle_surprised>>
+<<Act Doodle doodle_happy right doodleheight green>>
+<<Flip Doodle>>
 Doodle: Nothing to fear Dan, ghosts are merely a product of your imagination that only appear in your nightmares!”
 
 <<Hide dan_annoyed>>
