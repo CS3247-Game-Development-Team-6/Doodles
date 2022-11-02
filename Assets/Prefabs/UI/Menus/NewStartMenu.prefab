@@ -60,11 +60,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 15e7eaca847a3b743b6278a914a5b5ca, type: 2}
   - {fileID: 11400000, guid: df8d702a85508484d9666901dedba1f2, type: 2}
   - {fileID: 11400000, guid: ef7f039f16db220409d251de686c72b5, type: 2}
-  dialogueSceneNames:
-  - tutorial_scene_dialogue
-  - spider_theme_dialogue
-  - graveyard_theme_dialogue
-  - clown_theme_dialogue
 --- !u!114 &4413762795389943738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,7 +759,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8100830434497455976}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.368591, y: 28.299988, z: -106.51849}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4413762796857372541}
@@ -984,6 +979,7 @@ MonoBehaviour:
     loop: 0
     group: {fileID: 0}
     source: {fileID: 0}
+  currentBGM: 
 --- !u!1 &9007620636528669155
 GameObject:
   m_ObjectHideFlags: 0
