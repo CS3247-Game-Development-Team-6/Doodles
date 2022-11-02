@@ -41,9 +41,7 @@ public class MapInventoryUI : MonoBehaviour {
         }
         Debug.Log($"Loading {selectedSlot.mapInfo.levelName}");
         Loadout.mapToLoad = selectedSlot.mapInfo;
-        loadingScreen.gameObject.SetActive(true);
-        loadingScreen.AddSceneToLoad(loadoutSceneName);
-        loadingScreen.StartLoad();
+        loadingScreen.GotoScene(loadoutSceneName);
         Destroy(this);
     }
 
