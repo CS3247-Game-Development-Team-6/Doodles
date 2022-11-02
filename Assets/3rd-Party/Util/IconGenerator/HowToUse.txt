@@ -1,0 +1,15 @@
+How to use IconGenerator asset
+
+-> VIDEO TUTORIAL: https://www.youtube.com/watch?v=KkjPPeyaxkI
+
+1) Open IconGenerator - scene
+2) Drag your prefabs / 3D Objects into "IconGenerator" GameObject's "Targets" section.
+3) Select "Use Prefab Names" OR enter a custom name into "File Names" section.
+4) OPTIONAL: Set custom folder for icons. Default location is Assets folder. If you type in "Icons", it will save into "Assets/Icons"!
+5) Play the scene, you should see icons of the prefabs you created on-screen.
+6) Icons are generated into .PNG files inside your specified folder!
+
+!! USING OVERLAYS !!
+- Set your overlays at "IconGenerator" GameObject's "Overlays" section.
+- You can add multiple overlays into one image.
+- Higher number = on top (for example the first overlay (0) of the array will be right on top of the image, and the second (1) will be over the first overlay.. )
