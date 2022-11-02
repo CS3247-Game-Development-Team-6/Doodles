@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class Beyblade : Tower {
+    
     private float spinningDetectRadius = 2.0f;
     private Collider[] enemyInRange;
     private Collider[] enemyInDamageRange;

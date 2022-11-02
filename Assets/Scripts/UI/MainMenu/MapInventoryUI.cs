@@ -18,11 +18,17 @@ public class MapInventoryUI : MonoBehaviour {
         startGameButton.interactable = canStart;
     }
 
-    public int Subscribe(MapSlotUI slot) {
+    public void Subscribe(MapSlotUI slot) {
         if (mapList == null) mapList = new List<MapSlotUI>();
-        int index = mapList.Count;
         mapList.Add(slot);
-        return index;
+
+        if (PlayerPrefs.HasKey("allLevelSelectionUnlocked") && PlayerPrefs.GetInt("allLevelSelectionUnlocked") == 1) {
+            slot.locked = false;
+        } else if (!PlayerPrefs.HasKey("latestSceneIndex") || slot.index > PlayerPrefs.GetInt("latestSceneIndex") / 2 - 1) {
+            slot.locked = true;
+        } else {
+            slot.locked = false;
+        }
     }
 
     public void SelectMap(MapSlotUI map) {
@@ -41,9 +47,7 @@ public class MapInventoryUI : MonoBehaviour {
         }
         Debug.Log($"Loading {selectedSlot.mapInfo.levelName}");
         Loadout.mapToLoad = selectedSlot.mapInfo;
-        loadingScreen.gameObject.SetActive(true);
-        loadingScreen.AddSceneToLoad(loadoutSceneName);
-        loadingScreen.StartLoad();
+        loadingScreen.GotoScene(loadoutSceneName);
         Destroy(this);
     }
 

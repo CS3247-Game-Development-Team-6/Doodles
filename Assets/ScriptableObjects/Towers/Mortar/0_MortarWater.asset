@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 0_MortarWater
   m_EditorClassIdentifier: 
   towerName: Water Mortar
+  sprite: {fileID: 0}
   towerDesc: 
   range: 6
   upgradeNum: 0
@@ -21,14 +22,15 @@ MonoBehaviour:
   cost: 40
   health: 200
   healthDecayRate: 1.8
-  damageFixCost: 0
   damageFixFactor: 0.2
   allowedCellTypes: 00000000
+  stoppable: 0
   speed: 10
   explosionRadius: 2
   damage: 83
   penetratesEnemy: 0
-  impactPrefab: {fileID: 7270330396955014377, guid: 5a87950d3447a57408da16911c4acb8b, type: 3}
+  impactPrefab: {fileID: 4458309670618186649, guid: 67ea2f3b6082d4aeab8bc46a70f2d8c0, type: 3}
+  impactSound: {fileID: 0}
   towerPrefab: {fileID: 2689636279851204399, guid: 457972c3e99b7764d80b2df2982cd0b0, type: 3}
   bulletPrefab: {fileID: 5191211720614154727, guid: aaae46e9b75d3404e8c6fc5aea8a9c29, type: 3}
   nextUpgrade: {fileID: 11400000, guid: b8c63af150c869942b8c66f1d7fc75dc, type: 2}
