@@ -61,7 +61,9 @@ public class LoadingUI : MonoBehaviour {
         int GetDialogueSceneIndex(int lvl) => lvl * 2 + 1;
         int GetGameSceneIndex(int lvl) => (lvl + 1) * 2;
 
-        latestSceneIndex = currSceneIndex > latestSceneIndex ? currSceneIndex : latestSceneIndex;
+        latestSceneIndex = latestSceneIndex > 2 * MainMenu.staticMapInfos.Length
+            ? currSceneIndex //reset
+            : (currSceneIndex > latestSceneIndex ? currSceneIndex : latestSceneIndex);
         PlayerPrefs.SetInt("latestSceneIndex", latestSceneIndex);
     }
 
