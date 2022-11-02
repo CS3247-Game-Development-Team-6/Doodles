@@ -7,7 +7,7 @@ using UnityEngine.Rendering.PostProcessing;
 public sealed class PostProcessOutline : PostProcessEffectSettings {
     public IntParameter scale = new IntParameter { value = 1 };
     public ColorParameter color = new ColorParameter { value = Color.white };
-    [Range(0f, 1f)]
+    [Range(0.01f, 1f)]
     public FloatParameter normalThreshold = new FloatParameter { value = 0.5f };
     [Range(0f, 1f)]
     public FloatParameter depthThreshold = new FloatParameter { value = 0.5f };
