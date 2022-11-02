@@ -31,12 +31,46 @@ public class LoadingUI : MonoBehaviour {
         if (scenesLoading.Count != 0) StartCoroutine(GetSceneLoadProgress());
     }
 
+    public void GotoScene(string sceneName) {
+        //SaveSceneToPref(sceneName);
+        this.gameObject.SetActive(true);
+        AddSceneToLoad(sceneName);
+        StartLoad();
+    }
+
+    public void SaveSceneToPref(string sceneName) {
+        int currSceneIndex = 0;
+        int latestSceneIndex = PlayerPrefs.HasKey("latestSceneIndex") ? PlayerPrefs.GetInt("latestSceneIndex") : 1;
+
+        if (MainMenu.staticMapInfos == null) {
+            Debug.LogWarning("No mapInfos found, please reload from MainMenu");
+            return;
+        }
+
+        for (int i = 0; i < MainMenu.staticMapInfos.Length; i++) {
+            if (sceneName == MainMenu.staticMapInfos[i].dialogueSceneName) {
+                currSceneIndex = GetDialogueSceneIndex(i);
+            } else if (sceneName == MainMenu.staticMapInfos[i].gameSceneName) {
+                currSceneIndex = GetGameSceneIndex(i);
+            } else if (sceneName == "story-end") {
+                currSceneIndex = 9;
+                break;
+            }
+        }
+
+        int GetDialogueSceneIndex(int lvl) => lvl * 2 + 1;
+        int GetGameSceneIndex(int lvl) => (lvl + 1) * 2;
+
+        latestSceneIndex = currSceneIndex > latestSceneIndex ? currSceneIndex : latestSceneIndex;
+        PlayerPrefs.SetInt("latestSceneIndex", latestSceneIndex);
+    }
+
     public IEnumerator GetSceneLoadProgress() {
         for (int i = 0; i < scenesLoading.Count; i++) {
             while (!scenesLoading[i].isDone) {
                 totalSceneProgress = 0;
 
-                foreach(AsyncOperation op in scenesLoading) {
+                foreach (AsyncOperation op in scenesLoading) {
                     totalSceneProgress += op.progress;
                 }
 

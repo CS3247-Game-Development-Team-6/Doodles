@@ -42,11 +42,20 @@ namespace Yarn.Unity.Example {
 
         static Vector2 screenSize = new Vector2(1280f, 720f); // needed for position calcuations, e.g. what does "left" mean?
 
-        public string NextSceneName;
+        [Header("Scene loading")]
+        public string LoadoutScene;
         public Button GotoButton;
+        public MapInfo level;
+        public LoadingUI loadingScreen;
 
         public void GotoOnClick() {
-            SceneManager.LoadScene(NextSceneName);
+            if (!loadingScreen || !level) {
+                Debug.Log("Missing loading screen or level not selected.");
+                return;
+            }
+            Loadout.mapToLoad = level;
+            loadingScreen.GotoScene(LoadoutScene);
+            Destroy(this);
         }
 
         private void Start() {
@@ -54,7 +63,8 @@ namespace Yarn.Unity.Example {
         }
 
         private void Update() {
-            if (FindObjectOfType<DialogueRunner>().IsDialogueRunning == false) {
+            if (FindObjectOfType<DialogueRunner>().IsDialogueRunning == false && MainMenu.staticMapInfos != null) {
+                loadingScreen.SaveSceneToPref(level.gameSceneName);
                 GotoButton.gameObject.SetActive(true);
                 return;
             }
