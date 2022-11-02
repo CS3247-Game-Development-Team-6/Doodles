@@ -53,13 +53,15 @@ public class LoadingUI : MonoBehaviour {
             } else if (sceneName == MainMenu.staticMapInfos[i].gameSceneName) {
                 currSceneIndex = GetGameSceneIndex(i);
             } else if (sceneName == "story-end") {
-                currSceneIndex = 9;
+                currSceneIndex = GetGameEndsIndex();
+                PlayerPrefs.SetInt("allLevelSelectionUnlocked", 1); // 
                 break;
             }
         }
 
         int GetDialogueSceneIndex(int lvl) => lvl * 2 + 1;
         int GetGameSceneIndex(int lvl) => (lvl + 1) * 2;
+        int GetGameEndsIndex() => 9;
 
         latestSceneIndex = latestSceneIndex > 2 * MainMenu.staticMapInfos.Length
             ? currSceneIndex //reset
