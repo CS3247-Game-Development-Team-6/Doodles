@@ -34,8 +34,7 @@ public class GameStateInfoUI : MonoBehaviour{
         inkText.text = $"{startingInk} / {mapInfo.totalInk}";
         enemySlider.fillAmount = 0f;
         totalWaves = 0;
-        foreach (var chunk in mapInfo.chunkInfo)
-        {
+        foreach (var chunk in mapInfo.chunkInfo) {
             totalWaves += chunk.waves.Length;
         }
         totalChunks = mapInfo.chunkInfo.Length;
@@ -63,10 +62,14 @@ public class GameStateInfoUI : MonoBehaviour{
         }
 
         if (chunkSpawner != null){
-            if (Mathf.RoundToInt(chunkSpawner.countdownTimer) > 0 & Mathf.RoundToInt(chunkSpawner.countdownTimer) != Mathf.RoundToInt(chunkSpawner.timeBetweenWaves)){
-                textCountDown.text = Mathf.RoundToInt(chunkSpawner.countdownTimer).ToString();
+            int timeLeft = Mathf.RoundToInt(chunkSpawner.countdownTimer);
+            if (timeLeft > 0 & timeLeft != Mathf.RoundToInt(chunkSpawner.timeBetweenWaves)) {
+                textCountDown.text = $"{timeLeft}";
                 textCountDown.gameObject.SetActive(true);
-            } else if (Mathf.RoundToInt(chunkSpawner.countdownTimer) == 0 | chunkSpawner.countdownTimer == chunkSpawner.timeBetweenWaves){
+            } else if (timeLeft == 0) {
+                textCountDown.text = "GO!";
+                textCountDown.gameObject.SetActive(false);
+            } else {
                 textCountDown.gameObject.SetActive(false);
             }
 
