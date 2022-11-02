@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverColor: {r: 0.0783949, g: 0.5566038, b: 0, a: 1}
   tooFarColor: {r: 0.9433962, g: 0.39753166, b: 0.39753166, a: 1}
+  invalidColor: {r: 0, g: 0, b: 0, a: 0}
   towerObj: {fileID: 0}
   tileOffset: {x: 0, y: 0.1, z: 0}
   towerOffset: {x: 0, y: 0.05, z: 0}
@@ -63,6 +64,7 @@ MonoBehaviour:
     frequencyMax: 0.9
   - tilePrefab: {fileID: 7800446164947485080, guid: 04f74d18ae1ed5f49bf85a4cfb507067, type: 3}
     frequencyMax: 1
+  invalidAction: {fileID: 0}
 --- !u!65 &5757989866526037988
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -135,7 +137,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7796859627820213912, guid: 86c0316d41822b94faf55e7d1012fb8f, type: 3}
+  - {fileID: 2100000, guid: 749036b56043e4e4fbdbc2502c1907dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
