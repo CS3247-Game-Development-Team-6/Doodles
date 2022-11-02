@@ -77,7 +77,6 @@ public class NodePanelUI : MonoBehaviour {
         }
 
         Unhide();
-        // parentContainer.localScale = Vector3.one * 0.7f;
         parentContainer.position = target.transform.position + new Vector3(0, 4, 0);
     }
 
