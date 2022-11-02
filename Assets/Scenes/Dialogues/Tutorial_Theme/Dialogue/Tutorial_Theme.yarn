@@ -15,16 +15,18 @@ StrangeVoice: “Hey Dan, wake up!”
 Dan: Five more minutes mom…
 <<Hide StrangeVoice>>
 
-<<Act Doodle doodle_happy 1.25 0.63 #226677>>
-<<Move Doodle right 0.63 0.5>>
+<<Act Doodle doodle_excited 1.25 0.55 #226677>>
+<<Flip Doodle>>
+<<Move Doodle right 0.55 0.5>>
 Doodle: It’s me, silly. It’s not time for school now, it’s time for adventure!
 
 <<Hide dan_sleepy>>
 <<Act Dan dan_normal left 0.61 green>>
 Dan: Oh it’s you, Doodle. What’s up?
 
-<<Hide doodle_happy>>
-<<Act Doodle doodle_angry right 0.63 green>>
+<<Hide doodle_excited>>
+<<Act Doodle doodle_angry right 0.55 green>>
+<<Flip Doodle>>
 Doodle: Help me defend against these evil invaders attacking our world!
 
 <<Hide dan_normal>>

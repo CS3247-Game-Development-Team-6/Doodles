@@ -38,8 +38,9 @@ Dan looks around.
 Dan: (It's forest everywhere.)
 <<Flip Dan>>
 
-<<Act Queen queen_normal 1.25 0.66 #226677>> // adds actor "Queen" off-screen right, with blue-ish text label
-<<Move Queen right 0.66 0.5>>
+<<Act Queen queen_normal 1.25 0.75 #226677>> // adds actor "Queen" off-screen right, with blue-ish text label
+<<Flip Queen>>
+<<Move Queen right 0.75 0.5>>
 Queen: Doodle, huh? A peculiar name, yet this world is not theirs, little one.
 
 <<Flip Dan>>
@@ -49,7 +50,8 @@ Dan: ...!!
 Dan: Who are you?
 
 <<Hide queen_normal>>
-<<Act Queen queen_smiling right 0.66 #226677>>
+<<Act Queen queen_smiling right 0.75 #226677>>
+<<Flip Queen>>
 Queen: Why, who am I does not matter, but instead it is you, who has been able to morph my reality into yours, that I want to know. 
 Queen: What is your name, boy?
 
@@ -58,11 +60,13 @@ Queen: What is your name, boy?
 Dan: Err... Dan.
 
 <<Hide queen_smiling>>
-<<Act Queen queen_normal right 0.66 #226677>>
+<<Act Queen queen_normal right 0.75 #226677>>
+<<Flip Queen>>
 Queen: Erdan…? A curious name, not really one befitting of your imaginative ability. 
 
 <<Hide queen_normal>>
-<<Act Queen queen_happy right 0.66 #226677>>
+<<Act Queen queen_happy right 0.75 #226677>>
+<<Flip Queen>>
 Queen: It matters not, little one, for once you join me you can be anything you imagine!
 
 <<Hide dan_normal>>
@@ -77,11 +81,13 @@ Dan: (That has to be the Queen of Illusion! Maybe if I ask her nicely...)
 Dan: I really don’t want to stay here, I just want to get out of here, please?
 
 <<Hide queen_happy>>
-<<Act Queen queen_normal right 0.66 #226677>>
+<<Act Queen queen_normal right 0.75 #226677>>
+<<Flip Queen>>
 Queen: Hmm, that is quite the letdown. Well, I guess you're due for a little test, dear boy.
 
 <<Hide queen_normal>>
-<<Act Queen queen_smiling right 0.66 #226677>>
+<<Act Queen queen_smiling right 0.75 #226677>>
+<<Flip Queen>>
 Queen: Perhaps facing your fears would change your mind to be a little more... open-minded.
 
 <<Hide dan_normal>>
@@ -89,12 +95,13 @@ Queen: Perhaps facing your fears would change your mind to be a little more... o
 Dan: What do you mean?
 
 <<Hide queen_smiling>>
-<<Act Queen queen_attacking right 0.66 #226677>>
+<<Act Queen queen_attacking right 0.75 #226677>>
+<<Flip Queen>>
 <<Shake Queen>>
 The Queen waves her hand, movement ripples through the entire forest.
 Queen: Prepare yourself, boy! And don’t let me down! Ta-ta for now!
 
-<<Move Queen 1.25 0.66 0.5>>
+<<Move Queen 1.25 0.75 0.5>>
 The Queen fades away with a smirk on her face.
 <<Hide Queen>>
 
@@ -108,12 +115,14 @@ The movement gets close.
 Dan winces and braces himself.
 Dan: Ahh! There's spiders everywhere! What do we do, Doodle?
 
-<<Act Doodle doodle_angry 1.25  0.63 #226677>>
-<<Move Doodle right 0.63 0.5>>
+<<Act Doodle doodle_angry 1.25 0.60 green>>
+<<Flip Doodle>>
+<<Move Doodle right 0.60 0.5>>
 Doodle: Fear not, Dan! The Queen seems to be using your fears against us. 
 
 <<Hide doodle_angry>>
-<<Act Doodle doodle_happy right 0.63 #226677>>
+<<Act Doodle doodle_happy right 0.60 green>>
+<<Flip Doodle>>
 Doodle: Don’t worry, spiders are nothing to be afraid of, and you’re not alone!
 
 <<Hide dan_shocked>>
