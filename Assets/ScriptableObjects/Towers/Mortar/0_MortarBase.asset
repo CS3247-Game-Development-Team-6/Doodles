@@ -25,7 +25,6 @@ MonoBehaviour:
   cost: 75
   health: 200
   healthDecayRate: 1.8
-  damageFixCost: 0
   damageFixFactor: 0.2
   allowedCellTypes: 00000000
   stoppable: 0
@@ -33,7 +32,8 @@ MonoBehaviour:
   explosionRadius: 2
   damage: 100
   penetratesEnemy: 0
-  impactPrefab: {fileID: 7270330396955014377, guid: 5a87950d3447a57408da16911c4acb8b, type: 3}
+  impactPrefab: {fileID: 4458309670618186649, guid: 67ea2f3b6082d4aeab8bc46a70f2d8c0, type: 3}
+  impactSound: {fileID: 0}
   towerPrefab: {fileID: 2689636279851204399, guid: 34e6e46d05ef12d4b8dc6bedb2e3c06e, type: 3}
   bulletPrefab: {fileID: 2267716634467308484, guid: ad58ee5444aa2474cab28fdf080713d1, type: 3}
   nextUpgrade: {fileID: 11400000, guid: 2c9114d3e2fc6ac4387a3f835edc5c2b, type: 2}

@@ -7,10 +7,14 @@ public class MortarTower : Tower {
     private Transform firePoint;
     private float fireCountdown = 0f;
     private Transform target;
-    
     private float minimumRange = 3f; // mortar tower cannot shoot at enemies closer than this distance
-
     private const bool PENETRATE_TARGET = false;
+
+    [Header("Effect Prefabs")]
+    public GameObject fireSoundEffect;
+    public GameObject fireVisualEffect;
+    private float fireEffectCurrValue;
+    private float fireEffectTriggerPValue = 0;
 
     public override void SetTowerInfo(TowerInfo towerInfo) {
         base.SetTowerInfo(towerInfo);
@@ -48,9 +52,21 @@ public class MortarTower : Tower {
 
     public override void Shoot() {
         base.Shoot();
+        
+        fireEffectCurrValue = Random.Range(0, 100);
+        if (fireEffectCurrValue >= fireEffectTriggerPValue) {
+            // GameObject fireSoundEffectPrefab = (GameObject)Instantiate(fireSoundEffect, firePoint.position, firePoint.rotation);
+            // fireSoundEffectPrefab.transform.SetParent(transform);
+            // Destroy(fireSoundEffectPrefab, 2f);
+            GameObject fireVisualEffectPrefab = (GameObject)Instantiate(fireVisualEffect, firePoint.position, firePoint.rotation);
+            fireVisualEffectPrefab.transform.SetParent(transform);
+            Destroy(fireVisualEffectPrefab, 2f);
+        }
+
         GameObject bulletObj = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); ;
         MortarBullet bullet = bulletObj.GetComponent<MortarBullet>();
         bullet.SetBulletInfo(towerInfo);
+        bullet.SetImpactSoundActive(fireEffectCurrValue >= fireEffectTriggerPValue);
         
         if (bullet != null) {
             bullet.Seek(target, PENETRATE_TARGET);

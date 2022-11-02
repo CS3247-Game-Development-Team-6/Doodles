@@ -3,18 +3,30 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Rendering.PostProcessing;
 
 public class SettingsMenu : MonoBehaviour {
 
+    private PostProcessOutline outlineSettings;
     private List<Resolution> resolutions;
     public TMP_Dropdown resolutionPicker;
     public Toggle fullScreenToggle;
     public AudioMixer audioMixer;
+    public Slider volumeSlider;
+    public Slider outlineSlider;
     public static readonly string FullScreenPref = "FullScreenPref";
     public static readonly string ResolutionWidthPref = "ResolutionWidthPref";
     public static readonly string ResolutionHeightPref = "ResolutionHeightPref";
+    public static readonly string OutlineDepthThreshold = "OutlineDepthThreshold";
 
-    private void Start() {
+    private void Awake() {
+        PostProcessVolume postProcessVolume = Camera.main.GetComponent<PostProcessVolume>();
+        if (postProcessVolume) {
+            postProcessVolume.profile.TryGetSettings<PostProcessOutline>(out outlineSettings);
+            LoadOutlineValue();
+        }
+        LoadVolume();
+
         resolutions = new List<Resolution>();
         int pickedIndex = 0;
 
@@ -34,7 +46,6 @@ public class SettingsMenu : MonoBehaviour {
             resolutionPicker.RefreshShownValue();
         }
 
-        // SetVolume(0);
     }
 
     public void ToggleFullScreen(bool isFullScreen) {
@@ -53,7 +64,27 @@ public class SettingsMenu : MonoBehaviour {
 
     public void SetVolume (float volume){
         audioMixer.SetFloat("volume", Mathf.Log10(volume)*20);
-        // immediately save pref volume
         PlayerPrefs.SetFloat(AudioManager.VolumePref, volume);
+    }
+
+    public void LoadVolume() {
+        if (PlayerPrefs.HasKey(AudioManager.VolumePref) && volumeSlider) {
+            volumeSlider.value = PlayerPrefs.GetFloat(AudioManager.VolumePref);
+        }
+    }
+
+    public void SetOutlineValue(float value) {
+        if (outlineSettings) outlineSettings.depthThreshold.value = value;
+        PlayerPrefs.SetFloat(OutlineDepthThreshold, value);
+
+        Debug.Log($"value set to {value}");
+    }
+
+    public void LoadOutlineValue() {
+        if (PlayerPrefs.HasKey(OutlineDepthThreshold) && outlineSlider) {
+            float value = PlayerPrefs.GetFloat(OutlineDepthThreshold);
+            outlineSettings.depthThreshold.value = value;
+            outlineSlider.value = value;
+        }
     }
 }
