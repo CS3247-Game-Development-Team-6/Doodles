@@ -1,5 +1,5 @@
 title: Start
-tags: 
+tags: ht
 colorID: 0
 position: 0,0
 ---
@@ -8,29 +8,29 @@ His first and favourite character that he drew as Doodle.
 Such a drawn character was a personified representation of Dan himself and his adventurous nature. 
 In his dreams, Dan would join in with Doodle in his imaginary world as they went on countless adventures to places wild and unknown.
 
-<<Act Dan dan_sleepy left 0.61 green>>
-<<Act StrangeVoice dan_worries -1.00 0.61 grey>>
+<<Act Dan dan_sleepy left danheight green>>
+<<Act StrangeVoice dan_worries -1.00 danheight grey>>
 Dan: .........
 StrangeVoice: “Hey Dan, wake up!”
 Dan: Five more minutes mom…
 <<Hide StrangeVoice>>
 
-<<Act Doodle doodle_excited 1.25 0.55 #226677>>
+<<Act Doodle doodle_excited offright doodleheight #226677>>
 <<Flip Doodle>>
-<<Move Doodle right 0.55 0.5>>
+<<Move Doodle right doodleheight 0.5>>
 Doodle: It’s me, silly. It’s not time for school now, it’s time for adventure!
 
 <<Hide dan_sleepy>>
-<<Act Dan dan_normal left 0.61 green>>
+<<Act Dan dan_normal left danheight green>>
 Dan: Oh it’s you, Doodle. What’s up?
 
 <<Hide doodle_excited>>
-<<Act Doodle doodle_angry right 0.55 green>>
+<<Act Doodle doodle_angry right doodleheight green>>
 <<Flip Doodle>>
 Doodle: Help me defend against these evil invaders attacking our world!
 
 <<Hide dan_normal>>
-<<Act Dan dan_happy left 0.61 green>>
+<<Act Dan dan_happy left danheight green>>
 Dan: Evil invaders?! Alright, let’s do this Doodle!
 
 <<StopAudioAll>>

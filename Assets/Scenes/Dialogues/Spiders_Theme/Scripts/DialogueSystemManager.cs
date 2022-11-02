@@ -561,7 +561,7 @@ namespace Yarn.Unity.Example {
                 case "right":
                 case "top":
                 case "upper":
-                    return 0.75f;
+                    return 1.15f;
                 case "rightedge":
                 case "topedge":
                 case "upperedge":
@@ -569,7 +569,13 @@ namespace Yarn.Unity.Example {
                 case "offleft":
                     return -0.33f;
                 case "offright":
-                    return 1.33f;
+                    return 2.0f;
+                case "queenheight":
+                    return 0.75f;
+                case "doodleheight":
+                    return 0.57f;
+                case "danheight":
+                    return 0.61f;
             }
 
             // if none of those worked, then let's try parsing it as a
