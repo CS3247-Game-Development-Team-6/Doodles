@@ -21,9 +21,11 @@ public class SettingsMenu : MonoBehaviour {
 
     private void Awake() {
         PostProcessVolume postProcessVolume = Camera.main.GetComponent<PostProcessVolume>();
-        postProcessVolume.profile.TryGetSettings<PostProcessOutline>(out outlineSettings);
+        if (postProcessVolume) {
+            postProcessVolume.profile.TryGetSettings<PostProcessOutline>(out outlineSettings);
+            LoadOutlineValue();
+        }
         LoadVolume();
-        LoadOutlineValue();
 
         resolutions = new List<Resolution>();
         int pickedIndex = 0;
