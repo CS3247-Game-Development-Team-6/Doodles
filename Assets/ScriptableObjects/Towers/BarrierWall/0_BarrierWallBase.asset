@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 0_BarrierWallBase
   m_EditorClassIdentifier: 
   towerName: BarrierWall
-  sprite: {fileID: 21300000, guid: 689d468b9a07e4840b86eae3a3575d76, type: 3}
+  sprite: {fileID: 21300000, guid: be8f42dbae8254c7a894b812aa3fb009, type: 3}
   towerDesc: 'Upgrade: $12, +50% Health
 
     A wall that blocks enemies.
@@ -34,6 +34,7 @@ MonoBehaviour:
   damage: 0
   penetratesEnemy: 0
   impactPrefab: {fileID: 4794043405585894037, guid: a22350dbd83d54b0990687ec8d58c950, type: 3}
+  impactSound: {fileID: 0}
   towerPrefab: {fileID: 4210837861978277857, guid: 9b005e46592b4b140b6463910f9cf450, type: 3}
   bulletPrefab: {fileID: 1315704262782356680, guid: e9ded98d34bdc4432874dc24f3e6358f, type: 3}
   nextUpgrade: {fileID: 11400000, guid: 3bfb226650005214bbda698a637874e2, type: 2}
