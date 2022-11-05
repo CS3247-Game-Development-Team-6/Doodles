@@ -3,27 +3,59 @@ tags:
 colorID: 0
 position: 0,0
 ---
-<<Act Dan dan_normal left 0.38 green>>
-<<Act Doodle doodle_angry 1.25  0.38 #226677>>
-<<Move Doodle right  0.38 0.5>>
+<<Scene forest>>
+<<Act Dan dan_sad left danheight green>>
+<<Act Doodle doodle_angry offright doodleheight #226677>>
+<<Flip Doodle>>
+<<Move Doodle right doodleheight 0.5>>
 Doodle: Wow, those clowns are more horrifying than I thought. I’m still in disbelief. Are you okay, Dan?
 Dan: I’m still sweating all over, but I guess I’m getting better at dealing with it.
-Dan: We might even encounter them in our future adventures, hahaha…
+Dan: We might even encounter them in our future adventures, haha...
 Doodle: We’ll talk about our future adventures after we escape this prison of a world!
 <<Hide doodle_angry>>
-*Queen appears again*
-<<Act Queen queen_normal 1.25 0.45 #226677>>
-<<Move Queen right 0.45 0.5>>
-Queen: Tsk, that was the last of his fears! I have nothing left…
+
+<<Act Queen queen_angry offright queenheight #226677>>
+<<Flip Queen>>
+<<Move Queen right queenheight 0.5>>
+The Queen appears yet again. Where is she watching from?
+
+<<Hide dan_sad>>
+<<Act Dan dan_shocked left danheight green>>
+Queen: (Tsk, that was the last of his fears!)
+
+<<Hide queen_angry>>
+<<Act Queen queen_happy right queenheight #226677>>
+<<Flip Queen>>
 Queen: Well well well, an amazing performance, Erdan my boy! Have you changed your mind about joining me in sculpting this world?
-Dan: Never! I have my own real world to get back to, and my own world of imagination in my room. Just let me out!
-Queen: Tsk, ever the stubborn little one. Whatever, you are becoming an eyesore! Leave, boy! And never let me see you again!
+
+<<Hide dan_shocked>>
+<<Act Dan dan_angry left danheight green>>
+Dan: Not in the slightest! I have my own real world to get back to, a world much better than yours. Just let me out!
+
+<<Hide queen_happy>>
+<<Act Queen queen_angry right queenheight #226677>>
+<<Flip Queen>>
+Queen: Tsk, ever the stubborn little one. Whatever, you are becoming an eyesore! 
+
+<<Shake Queen>>
+Queen: Leave, boy! And never let me see you again!
+
+<<Move Queen offright queenheight 0.5>>
+The Queen fades away, hopefully forever this time.
 <<Hide queen_normal>>
-*Dan wakes up again, seeing himself lying in the forest*
+
 <<Scene forest>>
-Voice from afar: Dannnn... Dannnn, where are you?
-Dan: That must be mom and dad. I’m back in the real world!!
+<<Hide dan_angry>>
+<<Act Dan dan_sleepy left danheight green>>
+Dan wakes up again, seeing himself lying in the forest.
+Voice from afar: Dan... Daaaannnn, where are you?
+
+<<Hide dan_sleepy>>
+<<Act Dan dan_happy left danheight green>>
+Dan: That must be mom and dad. I’m back in the real world!
 Dan runs towards the voices of his loved ones.
+It seems the nightmares have come to an end...
+
 <<StopAudioAll>>
 <<Fade black 0.0 1.0 2.0>>
 ===

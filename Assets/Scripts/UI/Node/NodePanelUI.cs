@@ -77,7 +77,7 @@ public class NodePanelUI : MonoBehaviour {
         }
 
         Unhide();
-        parentContainer.position = target.transform.position + new Vector3(0, 2, 0);
+        parentContainer.position = target.transform.position + new Vector3(0, 4, 0);
     }
 
     private void CompareValues(float orig, float val, TextMeshProUGUI ui) {
@@ -111,7 +111,6 @@ public class NodePanelUI : MonoBehaviour {
 
     public void Hide() {
         foreach (var bg in backgrounds) {
-            // bg.LeanMoveLocalY(-100, 0.9f).setOnComplete(() => bg.SetActive(false));
             bg.SetActive(false);
         }
         panelCanvas.LeanAlpha(0, 0.5f);
@@ -120,8 +119,6 @@ public class NodePanelUI : MonoBehaviour {
     public void Unhide() {
         foreach (var bg in backgrounds) {
             bg.SetActive(true);
-            // bg.LeanMoveLocalY(150, 0.9f).setEasePunch().setOnComplete(() => bg.SetActive(true));
-            // bg.SetActive(true);
         }
         panelCanvas.LeanAlpha(1, 0.5f);
     }
