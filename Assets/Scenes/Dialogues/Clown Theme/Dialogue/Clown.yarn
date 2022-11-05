@@ -3,7 +3,7 @@ tags:
 colorID: 0
 position: 0,0
 ---
-<<Scene forest>>
+<<Scene forest-no-queen>>
 <<Act Dan dan_happy left danheight green>>
 <<Act Doodle doodle_happy offright  doodleheight #226677>>
 <<Flip Doodle>>
@@ -13,6 +13,7 @@ Dan: I'm alright, Doodle! Ghosts really only exist in imaginary worlds like this
 
 <<Hide Doodle>>
 <<Hide dan_happy>>
+<<Scene forest>>
 <<Act Dan dan_shocked left danheight green>>
 <<Act Queen queen_angry offright queenheight #226677>>
 <<Flip Queen>>
@@ -35,13 +36,10 @@ Queen: It would be tragic if you were to fail shortly after we join hands, won�
 Dan: I won’t ever be joining you! I’m getting the hang of this, show me your worst!
 
 <<Hide queen_smiling>>
-<<Act Queen queen_normal right queenheight #226677>>
+<<Act Queen queen_angry right queenheight #226677>>
 <<Flip Queen>>
 Queen: Oh! Getting complacent, aren’t we? Then don’t mind if I do! 
 
-<<Hide queen_normal>>
-<<Act Queen queen_angry right queenheight #226677>>
-<<Flip Queen>>
 <<Shake Queen>>
 Queen: This one’s a real doozy, little boy.
 <<Move Queen offright queenheight 0.5>>

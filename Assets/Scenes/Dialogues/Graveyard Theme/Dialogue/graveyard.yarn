@@ -3,7 +3,7 @@ tags:
 colorID: 0
 position: 0,0
 ---
-<<Scene forest>>
+<<Scene forest-no-queen>>
 <<Act Dan dan_happy left danheight green>>
 <<Act Doodle doodle_excited offright doodleheight #226677>>
 <<Flip Doodle>>
@@ -13,17 +13,15 @@ Dan: Yeah! They’re just slightly larger spiders of the real world!
 Dan: Seeing so many of them up close, they really don’t seem too scary after all.
 
 <<Hide Doodle>>
-<<Act Queen queen_angry offright queenheight #226677>>
-<<Flip Queen>>
+<<Act Queen queen_normal offright queenheight #226677>>
 <<Move Queen right queenheight 0.5>>
 
 <<Hide dan_happy>>
 <<Act Dan dan_shocked left danheight green>>
+<<Scene forest>>
 The Queen appears.
 Queen: (Tsk. What a bother.)
 
-<<Hide queen_angry>>
-<<Act Queen queen_normal right queenheight #226677>>
 <<Flip Queen>>
 Queen: Seems to me you’re still cheerful and upbeat, little boy. Not to worry, everyone fears many things. 
 
@@ -73,7 +71,7 @@ Dan: Ahh! I can’t see anything through all this smoke!
 <<Flip Dan>>
 
 <<Act StrangeVoices dan_worries -1.00 danheight grey>>
-StrangeVoices: Uuoohh... Arrghh...... Wouuhh...
+Strange Voices: Uuoohh... Arrghh...... Wouuhh...
 <<Hide StrangeVoices>>
 
 <<Hide dan_annoyed>>

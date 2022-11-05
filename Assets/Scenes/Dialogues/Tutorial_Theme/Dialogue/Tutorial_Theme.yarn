@@ -3,16 +3,20 @@ tags: ht
 colorID: 0
 position: 0,0
 ---
-<<Scene bedroom>>
+<<Scene diary>>
+<<Fade black 0.0 1.0 0.01>>
+<<FadeIn 1.0>>
 Dan loves drawing, especially doodling and building his own fantasy castle fortress with tower blocks. 
-His first and favourite character that he drew as Doodle. 
+<<Scene diary-doodle>>
+His first and favourite character that he drew was Doodle. 
 Such a drawn character was a personified representation of Dan himself and his adventurous nature. 
+<<Scene bedroom>>
 In his dreams, Dan would join in with Doodle in his imaginary world as they went on countless adventures to places wild and unknown.
 
 <<Act Dan dan_sleepy left danheight green>>
 <<Act StrangeVoice dan_worries -1.00 danheight grey>>
 Dan: .........
-StrangeVoice: “Hey Dan, wake up!”
+Strange Voice: “Hey Dan, wake up!”
 Dan: Five more minutes mom...
 <<Hide StrangeVoice>>
 
