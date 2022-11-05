@@ -47,6 +47,7 @@ namespace Yarn.Unity.Example {
         public Button GotoButton;
         public MapInfo level;
         public LoadingUI loadingScreen;
+        public CanvasGroup TheEndUI;
 
         public void GotoOnClick() {
             if (!loadingScreen || !level) {
@@ -93,6 +94,7 @@ namespace Yarn.Unity.Example {
             runner.AddCommandHandler<string, float, float, float>("Fade", SetFade);
             runner.AddCommandHandler<float>("FadeIn", SetFadeIn);
             runner.AddCommandHandler<string, string, float>("CamOffset", SetCameraOffset);
+            runner.AddCommandHandler("TheEnd", ShowTheEnd);
 
             // adds all Resources to internal lists / one big pile... it
             // will scan inside all subfolders too! note: but when
@@ -418,6 +420,14 @@ namespace Yarn.Unity.Example {
         public void HighlightSprite(Image sprite) {
             StopCoroutine("HighlightSpriteCoroutine"); // use StartCoroutine(string) overload so that we can Stop and Start the coroutine (it doesn't work otherwise?)
             StartCoroutine("HighlightSpriteCoroutine", sprite);
+        }
+
+        public void ShowTheEnd() {
+            if (TheEndUI != null) {
+                TheEndUI.interactable = true;
+                TheEndUI.blocksRaycasts = true;
+                TheEndUI.LeanAlpha(1.0f, 1.0f);
+            }
         }
 
         // called by HighlightSprite
