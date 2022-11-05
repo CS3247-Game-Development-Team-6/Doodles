@@ -3,7 +3,54 @@ tags:
 colorID: 0
 position: 0,0
 ---
+<<Scene forest-no-queen>>
+<<Act Dan dan_happy left danheight green>>
+<<Act Doodle doodle_happy offright  doodleheight #226677>>
+<<Flip Doodle>>
+<<Move Doodle right  doodleheight 0.5>>
+Doodle: Phew, that was a lot of ghostly and demonic creatures. How are you feeling, Dan? Are you good for now?
+Dan: I'm alright, Doodle! Ghosts really only exist in imaginary worlds like this one – nothing to be afraid of!
+
+<<Hide Doodle>>
+<<Hide dan_happy>>
 <<Scene forest>>
+<<Act Dan dan_shocked left danheight green>>
+<<Act Queen queen_angry offright queenheight #226677>>
+<<Flip Queen>>
+<<Move Queen right queenheight 0.5>>
+The Queen appears again. Has she been watching this whole time?
+Queen: (Tsk, again?)
+
+<<Hide queen_angry>>
+<<Act Queen queen_normal right queenheight #226677>>
+<<Flip Queen>>
+Queen: Well, what a resilient little boy you are. I admire your tenacity, befitting of one that is going to join me soon enough. 
+
+<<Hide queen_normal>>
+<<Act Queen queen_smiling right queenheight #226677>>
+<<Flip Queen>>
+Queen: It would be tragic if you were to fail shortly after we join hands, won’t it?
+
+<<Hide dan_shocked>>
+<<Act Dan dan_happy left danheight green>>
+Dan: I won’t ever be joining you! I’m getting the hang of this, show me your worst!
+
+<<Hide queen_smiling>>
+<<Act Queen queen_angry right queenheight #226677>>
+<<Flip Queen>>
+Queen: Oh! Getting complacent, aren’t we? Then don’t mind if I do! 
+
+<<Shake Queen>>
+Queen: This one’s a real doozy, little boy.
+<<Move Queen offright queenheight 0.5>>
+The Queen fades away yet again, the smirk notacibly missing this time.
+<<Hide Queen>>
+
+
+// NEXT LEVEL
+
+<<Hide dan_happy>>
+<<Scene circus>>
 <<Act Dan dan_sad left danheight green>>
 <<Act Doodle doodle_excited offright doodleheight #226677>>
 <<Flip Doodle>>
@@ -11,7 +58,7 @@ position: 0,0
 Doodle: A circus? Isn’t this a place of fun and laughter? What a weird choice...
 
 <<Act SinisterVoice dan_worries -1.00 danheight grey>>
-SinisterVoice: Hahahhhahhaha... hahhhahahhaa...!
+Sinister Voice: Hahahhhahhaha... hahhhahahhaa...!
 <<Hide SinisterVoice>>
 
 <<Hide doodle_excited>>
