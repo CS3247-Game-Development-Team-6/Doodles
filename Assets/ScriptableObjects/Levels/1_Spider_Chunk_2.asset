@@ -12,71 +12,80 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4a39bb2062e524580495433674019c, type: 3}
   m_Name: 1_Spider_Chunk_2
   m_EditorClassIdentifier: 
-  levelName: 1_Spider_Chunk_1
+  levelName: 1_Spider_Chunk_2
   startingInkPercentage: 0.5
   waves:
   - enemy: {fileID: 6540121397901334477, guid: e8cb845b01810e14a94462de9bf9e8eb, type: 3}
     count: 10
     rate: 1
-    enemy2: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
+    enemy2: {fileID: 6540121397901334477, guid: e8cb845b01810e14a94462de9bf9e8eb, type: 3}
     count2: 0
     rate2: 0
-    enemy3: {fileID: 6540121397901334477, guid: d28167d135942764db64b15a5e744a61, type: 3}
+    enemy3: {fileID: 6540121397901334477, guid: e8cb845b01810e14a94462de9bf9e8eb, type: 3}
     count3: 0
     rate3: 0
   - enemy: {fileID: 6540121397901334477, guid: e8cb845b01810e14a94462de9bf9e8eb, type: 3}
-    count: 10
+    count: 15
     rate: 1
     enemy2: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
-    count2: 10
-    rate2: 1
-    enemy3: {fileID: 6540121397901334477, guid: 0499648e563aca045bcccccaadb24e15, type: 3}
-    count3: 5
-    rate3: 1.25
-  - enemy: {fileID: 6540121397901334477, guid: bb49b134896cbc7489de7b064bff5f30, type: 3}
-    count: 5
-    rate: 1
-    enemy2: {fileID: 6540121397901334477, guid: 5ec0b27bf3ee0084abd64178985715e5, type: 3}
     count2: 5
     rate2: 1
-    enemy3: {fileID: 6540121397901334477, guid: 0499648e563aca045bcccccaadb24e15, type: 3}
-    count3: 5
-    rate3: 1
-  - enemy: {fileID: 6540121397901334477, guid: 0499648e563aca045bcccccaadb24e15, type: 3}
+    enemy3: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
+    count3: 0
+    rate3: 0
+  - enemy: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
     count: 10
-    rate: 1
+    rate: 1.5
     enemy2: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
-    count2: 10
-    rate2: 1
-    enemy3: {fileID: 6540121397901334477, guid: 0499648e563aca045bcccccaadb24e15, type: 3}
-    count3: 10
-    rate3: 1
-  - enemy: {fileID: 6540121397901334477, guid: bb49b134896cbc7489de7b064bff5f30, type: 3}
-    count: 10
-    rate: 1
+    count2: 0
+    rate2: 0
+    enemy3: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
+    count3: 0
+    rate3: 0
+  - enemy: {fileID: 6540121397901334477, guid: e8cb845b01810e14a94462de9bf9e8eb, type: 3}
+    count: 15
+    rate: 1.5
     enemy2: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
-    count2: 10
-    rate2: 1
-    enemy3: {fileID: 6540121397901334477, guid: bb49b134896cbc7489de7b064bff5f30, type: 3}
-    count3: 10
-    rate3: 1
-  - enemy: {fileID: 6540121397901334477, guid: 5ec0b27bf3ee0084abd64178985715e5, type: 3}
-    count: 10
-    rate: 1
+    count2: 15
+    rate2: 1.5
+    enemy3: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
+    count3: 0
+    rate3: 0
+  - enemy: {fileID: 6540121397901334477, guid: e8cb845b01810e14a94462de9bf9e8eb, type: 3}
+    count: 15
+    rate: 1.5
     enemy2: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
-    count2: 10
-    rate2: 1
-    enemy3: {fileID: 6540121397901334477, guid: 5ec0b27bf3ee0084abd64178985715e5, type: 3}
-    count3: 10
-    rate3: 1
+    count2: 15
+    rate2: 1.5
+    enemy3: {fileID: 6540121397901334477, guid: e8cb845b01810e14a94462de9bf9e8eb, type: 3}
+    count3: 15
+    rate3: 1.5
+  - enemy: {fileID: 6540121397901334477, guid: e8cb845b01810e14a94462de9bf9e8eb, type: 3}
+    count: 15
+    rate: 2
+    enemy2: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
+    count2: 15
+    rate2: 2
+    enemy3: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
+    count3: 15
+    rate3: 2
+  - enemy: {fileID: 6540121397901334477, guid: e8cb845b01810e14a94462de9bf9e8eb, type: 3}
+    count: 20
+    rate: 2
+    enemy2: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
+    count2: 20
+    rate2: 2
+    enemy3: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
+    count3: 20
+    rate3: 2
   isFogChunk: 0
   notes:
   - text: Let's move onwards!
     rectPosition: {x: 231, y: -174, z: 0}
-  - text: I sense elemental energies in the melee spiders, watch out!
+  - text: I sense elemental energies in the ranged spiders, watch out!
     rectPosition: {x: 231, y: -174, z: 0}
   - text: Spiders with elemental energy will be immune to their innate element, but
       will be weak to its opposing element!
     rectPosition: {x: 231, y: -174, z: 0}
-  - text: Use this knowledge to deal with the elemental melee spiders!
+  - text: Use this knowledge to deal with the elemental ranged spiders!
     rectPosition: {x: 231, y: -174, z: 0}
