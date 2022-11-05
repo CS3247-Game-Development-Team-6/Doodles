@@ -15,47 +15,74 @@ MonoBehaviour:
   levelName: 2_Ghost_Chunk_1
   startingInkPercentage: 0.5
   waves:
-  - enemy: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
+  - enemy: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
     count: 5
     rate: 1
-    enemy2: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
-    count2: 0
-    rate2: 0
-    enemy3: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
+    enemy2: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
+    count2: 10
+    rate2: 1
+    enemy3: {fileID: 6540121397901334477, guid: 0499648e563aca045bcccccaadb24e15, type: 3}
+    count3: 10
+    rate3: 1.5
+  - enemy: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
     count: 10
     rate: 1
-    enemy2: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
+    enemy2: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
     count2: 10
     rate2: 1.5
-    enemy3: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
-    count: 10
-    rate: 1.25
-    enemy2: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
-    count2: 10
-    rate2: 3
-    enemy3: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
-    count3: 0
-    rate3: 0
-  - enemy: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
-    count: 10
-    rate: 1.5
-    enemy2: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
-    count2: 10
-    rate2: 3
-    enemy3: {fileID: 6540121397901334477, guid: d416c3b9f443d1f47b4b7eb1a32eed5a, type: 3}
+    enemy3: {fileID: 6540121397901334477, guid: 5ec0b27bf3ee0084abd64178985715e5, type: 3}
+    count3: 10
+    rate3: 1.5
+  - enemy: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
+    count: 15
+    rate: 1
+    enemy2: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
+    count2: 15
+    rate2: 1.5
+    enemy3: {fileID: 6540121397901334477, guid: bb49b134896cbc7489de7b064bff5f30, type: 3}
     count3: 15
-    rate3: 5
-  isFogChunk: 0
+    rate3: 1.75
+  - enemy: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
+    count: 15
+    rate: 1.5
+    enemy2: {fileID: 6540121397901334477, guid: c90e3299c86e73c4884137f1a53a1cac, type: 3}
+    count2: 1
+    rate2: 1
+    enemy3: {fileID: 6540121397901334477, guid: 5ec0b27bf3ee0084abd64178985715e5, type: 3}
+    count3: 15
+    rate3: 2
+  - enemy: {fileID: 6540121397901334477, guid: bb49b134896cbc7489de7b064bff5f30, type: 3}
+    count: 20
+    rate: 2
+    enemy2: {fileID: 6540121397901334477, guid: 0499648e563aca045bcccccaadb24e15, type: 3}
+    count2: 20
+    rate2: 2
+    enemy3: {fileID: 6540121397901334477, guid: 5ec0b27bf3ee0084abd64178985715e5, type: 3}
+    count3: 20
+    rate3: 2
+  - enemy: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
+    count: 10
+    rate: 4
+    enemy2: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
+    count2: 15
+    rate2: 5
+    enemy3: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
+    count3: 20
+    rate3: 6
+  - enemy: {fileID: 6540121397901334477, guid: c90e3299c86e73c4884137f1a53a1cac, type: 3}
+    count: 5
+    rate: 0.75
+    enemy2: {fileID: 6540121397901334477, guid: 991e4d003d86b8146aec13e7694a7dda, type: 3}
+    count2: 20
+    rate2: 7
+    enemy3: {fileID: 6540121397901334477, guid: c90e3299c86e73c4884137f1a53a1cac, type: 3}
+    count3: 5
+    rate3: 1
+  isFogChunk: 1
   notes:
-  - text: Woah, yet another spooky place! Remember Dan, ghosts aren't actually real!
+  - text: We're in the final stretch!
     rectPosition: {x: 231, y: -174, z: 0}
-  - text: 'Remember to save enough ink!
+  - text: 'Let''s show the Queen that ghosts are only part of our imagination!
 
 '
     rectPosition: {x: 200, y: -174, z: 0}
