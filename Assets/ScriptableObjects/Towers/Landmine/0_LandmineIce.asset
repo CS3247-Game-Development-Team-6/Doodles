@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 0_LandmineIce
   m_EditorClassIdentifier: 
   towerName: Ice Landmine
+  sprite: {fileID: 21300000, guid: 5c1a64bb582de4575abf4be05f4f2f73, type: 3}
   towerDesc: 
   range: 2
   upgradeNum: 0
@@ -21,14 +22,15 @@ MonoBehaviour:
   cost: 10
   health: 1
   healthDecayRate: 1
-  damageFixCost: 0
   damageFixFactor: 0
   allowedCellTypes: 0100000002000000
+  stoppable: 0
   speed: 100
   explosionRadius: 0
   damage: 120
   penetratesEnemy: 0
   impactPrefab: {fileID: 4794043405585894037, guid: d8834e505283744789db73bfd6dd2b2d, type: 3}
+  impactSound: {fileID: 0}
   towerPrefab: {fileID: 4210837861978277857, guid: 688b6b479daac489597ecc72018be33e, type: 3}
   bulletPrefab: {fileID: 1315704262782356680, guid: 86345362c099a427aab01cbc0feaf33b, type: 3}
   nextUpgrade: {fileID: 0}

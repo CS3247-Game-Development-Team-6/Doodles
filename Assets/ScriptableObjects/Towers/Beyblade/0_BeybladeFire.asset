@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 0_BeybladeFire
   m_EditorClassIdentifier: 
   towerName: Fire Beyblade
+  sprite: {fileID: 21300000, guid: 516fc8049347245758d9d40b44a60aef, type: 3}
   towerDesc: 
   range: 0.8
   upgradeNum: 0
@@ -21,14 +22,15 @@ MonoBehaviour:
   cost: 10
   health: 60
   healthDecayRate: 1.2
-  damageFixCost: 0
   damageFixFactor: 1.05
   allowedCellTypes: 0100000002000000
+  stoppable: 0
   speed: 100
   explosionRadius: 0
   damage: 40
   penetratesEnemy: 0
   impactPrefab: {fileID: 4794043405585894037, guid: 17bcec16e01704bdea95658f439c002a, type: 3}
+  impactSound: {fileID: 0}
   towerPrefab: {fileID: 4210837861978277857, guid: e8d06ea424a5242cc9360c2801fe255c, type: 3}
   bulletPrefab: {fileID: 1315704262782356680, guid: 94be42b48bc6e41c2aa5695b86ee2cc1, type: 3}
   nextUpgrade: {fileID: 11400000, guid: 1174cc7cf090149998932c072e1c212d, type: 2}

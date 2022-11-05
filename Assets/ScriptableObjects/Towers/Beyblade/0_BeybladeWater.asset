@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 0_BeybladeWater
   m_EditorClassIdentifier: 
   towerName: Water Beyblade
+  sprite: {fileID: 21300000, guid: 55ca8386a01194f3c943415f79c487bb, type: 3}
   towerDesc: 
   range: 0.8
   upgradeNum: 0
@@ -21,14 +22,15 @@ MonoBehaviour:
   cost: 10
   health: 60
   healthDecayRate: 1.2
-  damageFixCost: 0
   damageFixFactor: 1.05
   allowedCellTypes: 0100000002000000
+  stoppable: 0
   speed: 100
   explosionRadius: 0
   damage: 40
   penetratesEnemy: 0
   impactPrefab: {fileID: 4794043405585894037, guid: 7d76c8a86e5494a8796d20165968bdf5, type: 3}
+  impactSound: {fileID: 0}
   towerPrefab: {fileID: 4210837861978277857, guid: 7e64d7d2bfdcb4a9e86e2af7a153b0c6, type: 3}
   bulletPrefab: {fileID: 1315704262782356680, guid: 4fe2b7c7eb4884500a73bf4136cedb27, type: 3}
   nextUpgrade: {fileID: 11400000, guid: 8e931c4266fc3435e821d421c13ba87d, type: 2}
