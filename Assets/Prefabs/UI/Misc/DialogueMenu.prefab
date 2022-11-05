@@ -242,7 +242,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2080188934208423881}
+  - {fileID: 3403831313210829559}
   - {fileID: 4375401062763962}
   - {fileID: 224915738641848798}
   - {fileID: 1699893074}
@@ -1750,7 +1750,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2080188934208423881}
+  - component: {fileID: 3403831313210829559}
   - component: {fileID: 6167349947878513351}
   m_Layer: 0
   m_Name: Visual Novel Manager
@@ -1759,8 +1759,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2080188934208423881
-Transform:
+--- !u!224 &3403831313210829559
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1773,6 +1773,11 @@ Transform:
   m_Father: {fileID: 4626815408203434}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6167349947878513351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1787,8 +1792,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runner: {fileID: 2678071618908635071}
   loadSprites:
-  - {fileID: 21300000, guid: ff025247e729c5c43919845800b7bbc3, type: 3}
-  - {fileID: 21300000, guid: 90370a09be1229f4ea63a01d4e46a7a3, type: 3}
   - {fileID: 21300000, guid: f76d1ada18020b547ab2834bb446a7f1, type: 3}
   - {fileID: 21300000, guid: 96fd800b4fec5784a83142ca4ec499e6, type: 3}
   - {fileID: 21300000, guid: 1b0514f4a30c5f7499947779e120d564, type: 3}
@@ -1808,7 +1811,19 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ad47ddaaa2422fa4a8a422304a08cf45, type: 3}
   - {fileID: 21300000, guid: d7ab4234116b5674ea7e66502f56396e, type: 3}
   - {fileID: 21300000, guid: 93642c479d1e4a240abcb30ee2e4b71a, type: 3}
-  - {fileID: 21300000, guid: feeda744458769a459fcd01a9edd368c, type: 3}
+  - {fileID: 21300000, guid: fbb68a1b21d226a4fb29af0cf2bda6bd, type: 3}
+  - {fileID: 21300000, guid: 3673966bd1d5492499e4542b4d84cf0b, type: 3}
+  - {fileID: 21300000, guid: 7bc47d8a048c79847920160fc204cf7f, type: 3}
+  - {fileID: 21300000, guid: 90370a09be1229f4ea63a01d4e46a7a3, type: 3}
+  - {fileID: 21300000, guid: 3f49c0d7f1610774690ded6714fca00f, type: 3}
+  - {fileID: 21300000, guid: 7aa75dcfdbe108840b3b9d4cecb520a3, type: 3}
+  - {fileID: 21300000, guid: 6f68854502c7daa469069a7964fec856, type: 3}
+  - {fileID: 21300000, guid: 3c066dcc7d298114bb74bd100e7d4f07, type: 3}
+  - {fileID: 21300000, guid: 92589073f5acc3a4fa514d5ec5e2129e, type: 3}
+  - {fileID: 21300000, guid: 4d8592895a8103643b6a8bc042f42865, type: 3}
+  - {fileID: 21300000, guid: 849238b7da2382f40bc9e00cf0ce4605, type: 3}
+  - {fileID: 21300000, guid: 0c34ef1e209dd334da7c86cc561e2105, type: 3}
+  - {fileID: 21300000, guid: 11a2b42e5e515ed4f839ee4b63ed1f18, type: 3}
   loadAudio:
   - {fileID: 8300000, guid: 1f9607a7d89d843439ab1d3467d2f54a, type: 3}
   - {fileID: 8300000, guid: 6076163f000d35246a5a23e13ae9de25, type: 3}
