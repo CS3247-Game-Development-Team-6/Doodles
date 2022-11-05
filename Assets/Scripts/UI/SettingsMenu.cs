@@ -85,7 +85,7 @@ public class SettingsMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey(OutlineDepthThreshold) && outlineSlider) {
             float value = PlayerPrefs.GetFloat(OutlineDepthThreshold);
             outlineSettings.depthThreshold.value = value;
-            outlineSlider.value = value;
+            outlineSlider.value = 1 - value;
         }
     }
 }
