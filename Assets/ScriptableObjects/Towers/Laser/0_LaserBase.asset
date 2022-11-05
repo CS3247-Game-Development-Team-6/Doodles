@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 0_LaserBase
   m_EditorClassIdentifier: 
   towerName: Laser
-  sprite: {fileID: 21300000, guid: c8f486dfbae1bc143b9fabf3e95aabd3, type: 3}
+  sprite: {fileID: 21300000, guid: ad5fa528c992848b9bc2494cae976ab8, type: 3}
   towerDesc: 'Locks on moving target, damage increases over time attached.
 
     Upgrade:
@@ -35,6 +35,7 @@ MonoBehaviour:
   damage: 15
   penetratesEnemy: 0
   impactPrefab: {fileID: 0}
+  impactSound: {fileID: 0}
   towerPrefab: {fileID: 3257071809379412333, guid: 21f81575bafb0a74389cb5cad6aa65f0, type: 3}
   bulletPrefab: {fileID: 0}
   nextUpgrade: {fileID: 11400000, guid: 15523d942bb3b4d459c8a1368bf4ff40, type: 2}

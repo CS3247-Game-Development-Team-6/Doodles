@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 0_LandmineFire
   m_EditorClassIdentifier: 
   towerName: Fire Landmine
+  sprite: {fileID: 21300000, guid: 7be4a17c4b6e34059840e243e14c174c, type: 3}
   towerDesc: 
   range: 2
   upgradeNum: 0
@@ -21,14 +22,15 @@ MonoBehaviour:
   cost: 10
   health: 1
   healthDecayRate: 1
-  damageFixCost: 0
   damageFixFactor: 0
   allowedCellTypes: 0100000002000000
+  stoppable: 0
   speed: 100
   explosionRadius: 0
   damage: 120
   penetratesEnemy: 0
   impactPrefab: {fileID: 4794043405585894037, guid: d2e69b56451ed45b59dd836a01a8929d, type: 3}
+  impactSound: {fileID: 0}
   towerPrefab: {fileID: 4210837861978277857, guid: 00c5c8e6b05774420a69dd6997acb01d, type: 3}
   bulletPrefab: {fileID: 1315704262782356680, guid: 2e71bee40b7044933ab5ead14c4035a1, type: 3}
   nextUpgrade: {fileID: 0}
