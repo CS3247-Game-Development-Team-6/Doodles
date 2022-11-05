@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44970167, g: 0.49976736, b: 0.5756334, a: 1}
+  m_IndirectSpecularColor: {r: 0.4497019, g: 0.49976808, b: 0.57563424, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1024,6 +1024,10 @@ PrefabInstance:
       propertyPath: raycastOccluder
       value: 
       objectReference: {fileID: 26158120}
+    - target: {fileID: 5215887617002473692, guid: 636b4af0198ef8246beebccec196472b, type: 3}
+      propertyPath: nextDialogueScene
+      value: Clown_Conclusion_Scene
+      objectReference: {fileID: 0}
     - target: {fileID: 5247938624539349097, guid: 636b4af0198ef8246beebccec196472b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

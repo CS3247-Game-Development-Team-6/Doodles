@@ -3,7 +3,7 @@ tags:
 colorID: 0
 position: 0,0
 ---
-<<Scene forest>>
+<<Scene forest-no-queen>>
 <<Act Dan dan_sad left danheight green>>
 <<Act Doodle doodle_angry offright doodleheight #226677>>
 <<Flip Doodle>>
@@ -14,6 +14,7 @@ Dan: We might even encounter them in our future adventures, haha...
 Doodle: We’ll talk about our future adventures after we escape this prison of a world!
 <<Hide doodle_angry>>
 
+<<Scene forest>>
 <<Act Queen queen_angry offright queenheight #226677>>
 <<Flip Queen>>
 <<Move Queen right queenheight 0.5>>
@@ -40,11 +41,12 @@ Queen: Tsk, ever the stubborn little one. Whatever, you are becoming an eyesore!
 <<Shake Queen>>
 Queen: Leave, boy! And never let me see you again!
 
+<<Scene forest-no-queen>>
 <<Move Queen offright queenheight 0.5>>
 The Queen fades away, hopefully forever this time.
 <<Hide queen_normal>>
 
-<<Scene forest>>
+<<Scene dark-mysterious-forest>>
 <<Hide dan_angry>>
 <<Act Dan dan_sleepy left danheight green>>
 Dan wakes up again, seeing himself lying in the forest.
@@ -52,10 +54,12 @@ Voice from afar: Dan... Daaaannnn, where are you?
 
 <<Hide dan_sleepy>>
 <<Act Dan dan_happy left danheight green>>
+<<Scene leaving>>
 Dan: That must be mom and dad. I’m back in the real world!
 Dan runs towards the voices of his loved ones.
 It seems the nightmares have come to an end...
 
 <<StopAudioAll>>
 <<Fade black 0.0 1.0 2.0>>
+<<TheEnd>>
 ===

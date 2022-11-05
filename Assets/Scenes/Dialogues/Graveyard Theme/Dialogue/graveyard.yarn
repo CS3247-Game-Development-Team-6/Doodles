@@ -3,14 +3,75 @@ tags:
 colorID: 0
 position: 0,0
 ---
+<<Scene forest-no-queen>>
+<<Act Dan dan_happy left danheight green>>
+<<Act Doodle doodle_excited offright doodleheight #226677>>
+<<Flip Doodle>>
+<<Move Doodle right doodleheight 0.5>>
+Doodle: Pow! Those spiders are no match for us!
+Dan: Yeah! They’re just slightly larger spiders of the real world! 
+Dan: Seeing so many of them up close, they really don’t seem too scary after all.
+
+<<Hide Doodle>>
+<<Act Queen queen_normal offright queenheight #226677>>
+<<Move Queen right queenheight 0.5>>
+
+<<Hide dan_happy>>
+<<Act Dan dan_shocked left danheight green>>
 <<Scene forest>>
+The Queen appears.
+Queen: (Tsk. What a bother.)
+
+<<Flip Queen>>
+Queen: Seems to me you’re still cheerful and upbeat, little boy. Not to worry, everyone fears many things. 
+
+<<Hide queen_normal>>
+<<Act Queen queen_smiling right queenheight #226677>>
+<<Flip Queen>>
+Queen: Let’s move on to the next one, shall we?
+
+<<Hide dan_shocked>>
+<<Act Dan dan_normal left danheight green>>
+Dan: Hey, if I face all of my fears, will you let me out of this world?
+
+<<Hide queen_smiling>>
+<<Act Queen queen_happy right queenheight #226677>>
+<<Flip Queen>>
+Queen: Silly boy, a little one like you stands no chance, as you will learn in due time. 
+Queen: If you decide to join me now, however, we can stop the scary theatrics right now. Isn’t that just swell?
+
+<<Hide dan_normal>>
+<<Act Dan dan_angry left danheight green>>
+Dan: No way! I just want to go back to the real world!
+
+<<Hide queen_happy>>
+<<Act Queen queen_normal right queenheight #226677>>
+<<Flip Queen>>
+Queen: Stubborn and naive as those that came before you. But as you can see, I have all the time in the world. 
+
+<<Hide queen_normal>>
+<<Act Queen queen_attacking right queenheight #226677>>
+<<Flip Queen>>
+<<Shake Queen>>
+The Queen waves her hand once more, as the world and its surroundings start to change.
+Queen: See ya later, little one!
+<<Move Queen offright queenheight 0.5>>
+The Queen fades away, with a slightly smaller smirk this time.
+<<Hide Queen>>
+
+Dan: "Hey, wait!!"
+
+// NEXT LEVEL
+
+<<Hide dan_angry>>
 <<Act Dan dan_annoyed left danheight green>>
+<<Scene graveyard>>
 <<Flip Dan>>
 Dan: Ahh! I can’t see anything through all this smoke! 
 <<Flip Dan>>
 
 <<Act StrangeVoices dan_worries -1.00 danheight grey>>
-StrangeVoices: Uuoohh... Arrghh...... Wouuhh...
+Strange Voices: Uuoohh... Arrghh...... Wouuhh...
 <<Hide StrangeVoices>>
 
 <<Hide dan_annoyed>>
