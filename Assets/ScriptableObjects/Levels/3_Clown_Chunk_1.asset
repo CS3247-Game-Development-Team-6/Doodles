@@ -12,48 +12,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4a39bb2062e524580495433674019c, type: 3}
   m_Name: 3_Clown_Chunk_1
   m_EditorClassIdentifier: 
-  levelName: 1_Spider_Chunk_1
+  levelName: 1_Clown_Chunk_1
   startingInkPercentage: 0.5
   waves:
   - enemy: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
-    count: 1
+    count: 5
     rate: 1
     enemy2: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
-    count2: 2
-    rate2: 1
+    count2: 5
+    rate2: 1.5
     enemy3: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
-    count3: 3
-    rate3: 1
+    count3: 5
+    rate3: 2
   - enemy: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
-    count: 2
+    count: 10
     rate: 1
     enemy2: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
-    count2: 1
+    count2: 5
     rate2: 1
     enemy3: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
-    count3: 2
-    rate3: 1
+    count3: 10
+    rate3: 1.5
   - enemy: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
-    count: 2
-    rate: 1
+    count: 10
+    rate: 1.5
     enemy2: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
-    count2: 1
+    count2: 10
     rate2: 1
     enemy3: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
-    count3: 1
-    rate3: 1
+    count3: 10
+    rate3: 2
   - enemy: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
-    count: 1
-    rate: 1
-    enemy2: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
-    count2: 2
-    rate2: 1
+    count: 10
+    rate: 1.5
+    enemy2: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
+    count2: 10
+    rate2: 2
     enemy3: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
-    count3: 1
-    rate3: 1
+    count3: 10
+    rate3: 4
   isFogChunk: 0
   notes:
-  - text: 'Let''s destroy this Circus of Horrors with Doodle.
+  - text: 'What a sinister place... It seems like the Queen is going all out this
+      time!
+
+'
+    rectPosition: {x: 231, y: -174, z: 0}
+  - text: 'Watch out, some of these enemies are holding explosives!
 
 '
     rectPosition: {x: 231, y: -174, z: 0}
