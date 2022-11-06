@@ -28,7 +28,6 @@ public class TowerInventoryUI : MonoBehaviour {
     }
 
     void Update() {
-        startGameButton.enabled = shop.slots != null && shop.slots.Count == shop.MaxSlots;
         startGameButton.interactable = shop.slots != null && shop.slots.Count == shop.MaxSlots;
     }
 
