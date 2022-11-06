@@ -59,11 +59,6 @@ public class GameOverManager : MonoBehaviour {
             Debug.LogWarning("empty name for next dialogue scene ");
             return;
         }
-
-        if (nextDialogueScene == "story-end") {
-            Debug.LogWarning("story and game end here");
-            return;
-        }
         loadingScreen.GotoScene(nextDialogueScene);
         Time.timeScale = 1f;
         raycastOccluder.SetActive(false);

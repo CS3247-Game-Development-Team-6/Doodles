@@ -24,12 +24,22 @@ public class MainMenu : MonoBehaviour {
         MenuSceneName = SceneManager.GetActiveScene().name;
 
         if (transform.Find("Continue").gameObject &&
-            (!PlayerPrefs.HasKey("latestSceneIndex") || PlayerPrefs.GetInt("latestSceneIndex") > (2 * mapInfos.Length))) {
+            (!PlayerPrefs.HasKey("latestSceneIndex")
+            || !CanContinue(PlayerPrefs.GetInt("latestSceneIndex")))) {
             transform.Find("Continue").gameObject.SetActive(false);
         }
         staticMapInfos = mapInfos;
 
     }
+
+    private bool CanContinue(int index) {
+        if (IsLevelIndex(index)) {
+            return GetLatestLevelName(index) != null;
+        } else {
+            return GetLatestDialogueName(index) != null;
+        }
+    }
+
 
     public void StartNewGame() {
         if (mapInfos == null || mapInfos.Length == 0 || mapInfos[0].dialogueSceneName == "") {
@@ -49,6 +59,13 @@ public class MainMenu : MonoBehaviour {
             return;
         }
         int latestSceneIndex = PlayerPrefs.GetInt("latestSceneIndex");
+
+        if (!CanContinue(latestSceneIndex)) {
+            Debug.LogWarning("cannot continue game");
+            return;
+        }
+
+        // TODO: add check if scene index exceeds
         if (IsLevelIndex(latestSceneIndex)) {
             Loadout.mapToLoad = GetLatestMapInfo(latestSceneIndex);
             loadingScreen.GotoScene(loadoutSceneName);
@@ -64,11 +81,38 @@ public class MainMenu : MonoBehaviour {
     }
 
     private string GetLatestDialogueName(int index) {
-        return mapInfos[(index - 1) / 2].dialogueSceneName;
+        int mapInfosIndex = (index - 1) / 2;
+        if (mapInfosIndex >= mapInfos.Length) {
+            Debug.LogWarning("mapInfos' index exceeds");
+            return null;
+        }
+        if (mapInfos[mapInfosIndex].dialogueSceneName == "") {
+            Debug.LogWarning("dialogue scene name empty");
+            return null;
+        }
+        return mapInfos[mapInfosIndex].dialogueSceneName;
+    }
+
+    private string GetLatestLevelName(int index) {
+        int mapInfosIndex = index / 2 - 1;
+        if (mapInfosIndex >= mapInfos.Length) {
+            Debug.LogWarning("mapInfos' index exceeds");
+            return null;
+        }
+        if (mapInfos[mapInfosIndex].gameSceneName == "") {
+            Debug.LogWarning("game scene name empty");
+            return null;
+        }
+        return mapInfos[mapInfosIndex].gameSceneName;
     }
 
     private MapInfo GetLatestMapInfo(int index) {
-        return mapInfos[index / 2 - 1];
+        int mapInfosIndex = index / 2 - 1;
+        if (mapInfosIndex >= mapInfos.Length) {
+            Debug.LogWarning("mapInfos' index exceeds");
+            return null;
+        }
+        return mapInfos[mapInfosIndex];
     }
 
     public void QuitGame() {
