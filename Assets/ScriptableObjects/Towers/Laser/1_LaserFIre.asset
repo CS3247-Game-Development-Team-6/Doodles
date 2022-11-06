@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1_LaserFIre
   m_EditorClassIdentifier: 
   towerName: Fire Laser 2
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: fe61f374179d841dd98883041d2b21da, type: 3}
   towerDesc: 
   range: 4
   upgradeNum: 1
@@ -30,6 +30,7 @@ MonoBehaviour:
   damage: 30
   penetratesEnemy: 0
   impactPrefab: {fileID: 0}
+  impactSound: {fileID: 0}
   towerPrefab: {fileID: 3257071809379412333, guid: f6db0367f21ae05479b5c778cebe0252, type: 3}
   bulletPrefab: {fileID: 0}
   nextUpgrade: {fileID: 0}
