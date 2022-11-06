@@ -1,19 +1,18 @@
-# Doodles Diary
+# Doodles Diary v2
 
 Updates:
-- Added BGM and SFX
-- Enhance visuals (particle effects, UI)
-- Improved Controls menu
-- Added BGM volume controller
-- Added enemy models and different type of enemies
-- Added Win screen
+
+- Designed 4 new chapters. Each contains a dialogue and a game level (Sea of Spiders, Graveyard of Darkness, Circus of Horror)\*
+- Designed new enemies with unique abilities (damages tower, stop tower shooting, spawn when death and etc)\*
+- Designed 6 new towers (Mortar, Sticky, Laser, Landmine, BarrierWall, BeyBlade)\*
+- Designed 7 new spells (Fireball, IceBolt, SuperDoodle, Overwork, InkBuff, Weakened, ElementBuff)
+- Implemented chunk spawner
+- Implemented progress saving and level selection
+- Revamped visuals (particle effects, UI\*)
+- Added outline controller in pause menu
+
+\*: all artworks designed by our team
 
 Future Improvements:
-- Add dash
-- Add more levels
-- Add story
-- Add more sfx (button clicks)
-- add sfx volume controller, resolution modifier
 
 Bugs:
-- sometimes right clicking doesn't bring up the tower menu (sometimes requires double-clicking)
