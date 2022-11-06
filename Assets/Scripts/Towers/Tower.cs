@@ -133,6 +133,10 @@ public class Tower : MonoBehaviour {
     }
 
     public virtual void Update() {
+        if (health <= 0) {
+            health = 0;
+        }
+
         healthBar.fillAmount = health / maxHealth;
         UpdateDamageFixCost();
         if (health <= 0 && !damageEffectPlayed) {
