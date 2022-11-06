@@ -11,7 +11,7 @@ Updates:
 - Revamped visuals (particle effects, UI\*)
 - Added outline controller in pause menu
 
-\*: visuals designed by our team
+\*: all artworks designed by our team
 
 Future Improvements:
 
