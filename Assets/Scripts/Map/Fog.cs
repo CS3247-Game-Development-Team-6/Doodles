@@ -12,6 +12,8 @@ public class Fog : MonoBehaviour {
 
     public void ClearFog() {
         cell.isFog = false;
+        gameObject.SetActive(cell.isFog);
+        cell.tile.SetActive(!cell.isFog);
     }
     
     private void OnMouseEnter() {
