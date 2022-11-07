@@ -1,19 +1,13 @@
 using UnityEngine;
-using EZCameraShake;
 
 // similar to tower bullet, but diff target
 public class EnemyBullet : MonoBehaviour {
     private Transform target;
     private float speed;
     private int bulletDamage;
-    private Map map;
 
     public GameObject impactEffect;
     public GameObject damageText;
-
-    private void Start() {
-        map = FindObjectOfType<Map>();
-    }
 
     public virtual void Seek(Transform _target, float _speed, int damage) {
         target = _target;
