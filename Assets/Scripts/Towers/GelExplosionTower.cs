@@ -69,6 +69,8 @@ public class GelExplosionTower : Tower {
 
     public override void Update() {
         base.Update();
+
+        if (health <= 0) return;
         if (!target || isStopShooting) return;
 
         // Enemy target lock on 
