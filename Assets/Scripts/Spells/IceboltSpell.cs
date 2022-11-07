@@ -31,8 +31,10 @@ public class IceboltSpell : Spell
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
             Vector3 position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-            Quaternion transRot = Quaternion.LookRotation(player.position - position);
-            targetImage.transform.position = player.position + OFFSET;
+            Vector3 p = new Vector3(player.position.x-0.05f, player.position.y, player.position.z-0.38f);
+            Quaternion transRot = Quaternion.LookRotation(p - position);
+           
+            targetImage.transform.position = p + OFFSET;
             targetImage.rectTransform.localRotation = Quaternion.Euler(0, 0, transRot.eulerAngles.y);
             // LEFT CLICK
             if (Input.GetMouseButtonDown(0)) {
@@ -62,9 +64,13 @@ public class IceboltSpell : Spell
             firstPress = true;
             SpellManager.instance.isCasting = true;
             indicator = Instantiate(indicatorPrefab).GetComponent<Canvas>();
+          
+
             indicator.transform.position = player.position;
+          
             targetImage = indicator.transform.Find("Target").GetComponent<Image>();
             targetImage.rectTransform.sizeDelta = new Vector2(effectWidth, effectLength);
+            
             isSearching = true;
             this.ui = ui;
 
@@ -99,7 +105,7 @@ public class IceboltSpell : Spell
             Vector3 v2 = new Vector3(e.transform.position.x, player.position.y, e.transform.position.z);
             float angle1 = Vector3.Angle(v1, player.position);
             float angle2 = Vector3.Angle(v2, player.position);
-            if (Vector3.Distance(targetImage.transform.position, e.transform.position) <= effectLength && Mathf.Abs(angle1 - angle2) <= 30)
+            if (Vector3.Distance(targetImage.transform.position, e.transform.position) <= effectLength && Mathf.Abs(angle1 - angle2) <= 20)
             {
                 e.TakeDamage(damage, null);
             }
