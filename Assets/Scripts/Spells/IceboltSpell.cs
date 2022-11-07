@@ -105,7 +105,7 @@ public class IceboltSpell : Spell
             Vector3 v2 = new Vector3(e.transform.position.x, player.position.y, e.transform.position.z);
             float angle1 = Vector3.Angle(v1, player.position);
             float angle2 = Vector3.Angle(v2, player.position);
-            if (Vector3.Distance(targetImage.transform.position, e.transform.position) <= effectLength && Mathf.Abs(angle1 - angle2) <= 20)
+            if (Vector3.Distance(targetImage.transform.position, e.transform.position) <= effectLength && Mathf.Abs(angle1 - angle2) <= 25)
             {
                 e.TakeDamage(damage, null);
             }
