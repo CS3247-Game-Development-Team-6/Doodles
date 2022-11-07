@@ -2,17 +2,52 @@
 
 Updates:
 
-- Designed 4 new chapters. Each contains a dialogue and a game level (Sea of Spiders, Graveyard of Darkness, Circus of Horror)\*
-- Designed new enemies with unique abilities (damages tower, stop tower shooting, spawn when death and etc)\*
-- Designed 6 new towers (Mortar, Sticky, Laser, Landmine, BarrierWall, BeyBlade)\*
+- Designed 4 new chapters. Each contains a dialogue and a game level (Sea of Spiders, Graveyard of Darkness, Circus of Horror)
+- Designed new enemies with unique abilities (damages tower, stop tower shooting, spawn when death and etc)
+- Designed 6 new towers (Mortar, Sticky, Laser, Landmine, BarrierWall, BeyBlade)
 - Designed 7 new spells (Fireball, IceBolt, SuperDoodle, Overwork, InkBuff, Weakened, ElementBuff)
 - Implemented chunk spawner
 - Implemented progress saving and level selection
-- Revamped visuals (particle effects, UI\*)
+- Revamped visuals (particle effects, UI)
 - Added outline controller in pause menu
 
-\*: all artworks designed by our team
+## Credits
 
-Future Improvements:
+1. Audio:
+   - Youtube Studios
+   - ExplosionSoundsLite
+   - Free Pack
+   - Leohpaz
+   - Sci-Fi Buildings Dome Basic
+   - ShootingSound
+2. Font:
+   - Bowlby
+   - Komika-font
+   - Sniglet
+3. 3D Models:
+   - 3D Leap Land
+   - BizulkaProduction
+   - DeadTrees
+   - kenney.nl (GraveyardKit, TowerDefenseKit & NatureKit)
+   - Cattleya Weapon Assets
+   - Dwarf Weapons Assets
+4. Particle Effects:
+   - FireIceProjectileExplosion
+   - Inguz Media Studio
+   - JMO Assets
+   - msVFX (Free Smoke Effects Pack)
+   - SimpleFX
+5. Prefabs:
+   - ExplosiveLLC
+   - Kevin Iglesias
+6. Fonts and Shaders:
+   - QuickOutline
+   - TextMesh Pro
+7. Misc:
+   - LeanTween
+   - EZ Camera Shake
+   - Yarn Spinner by Secret Lab
+8. 2D Assets (Backgrounds and art): From Adobe Stock
+9. Soundtrack
 
-Bugs:
+All other uncredited assets are built by the team.
