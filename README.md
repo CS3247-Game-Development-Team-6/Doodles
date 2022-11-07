@@ -11,7 +11,7 @@ Updates:
 - Revamped visuals (particle effects, UI)
 - Added outline controller in pause menu
 
-Credits:
+## Credits
 
 1. Audio:
    - Youtube Studios
@@ -24,11 +24,11 @@ Credits:
    - Bowlby
    - Komika-font
    - Sniglet
-3. Models:
+3. 3D Models:
    - 3D Leap Land
    - BizulkaProduction
    - DeadTrees
-   - Kenneys (GraveyardKit, TowerDefenseKit & NatureKit)
+   - kenney.nl (GraveyardKit, TowerDefenseKit & NatureKit)
    - Cattleya Weapon Assets
    - Dwarf Weapons Assets
 4. Particle Effects:
@@ -40,14 +40,14 @@ Credits:
 5. Prefabs:
    - ExplosiveLLC
    - Kevin Iglesias
-6. Shaders:
+6. Fonts and Shaders:
    - QuickOutline
    - TextMesh Pro
 7. Misc:
    - LeanTween
    - EZ Camera Shake
    - Yarn Spinner by Secret Lab
+8. 2D Assets (Backgrounds and art): From Adobe Stock
+9. Soundtrack
 
-Future Improvements:
-
-Bugs:
+All other uncredited assets are built by the team.
