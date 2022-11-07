@@ -712,9 +712,6 @@ MonoBehaviour:
   waypointIndex: 0
   speedMultiplier: 0
   isShooting: 0
-  healthBar: {fileID: 1929750958}
-  healthText: {fileID: 7627375074670015471}
-  damageText: {fileID: 2675300404428900392, guid: 934f2897b165c6b47b9aa966c0c7d01c, type: 3}
 --- !u!114 &904252060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,6 +729,7 @@ MonoBehaviour:
   firePoint: {fileID: 5410826820070449313}
   partToRotate: {fileID: 6972352779643815576}
   playerTag: Player
+  playerWallTag: PlayerWall
   baseTag: Base
 --- !u!114 &3927220003791629200
 MonoBehaviour:
@@ -772,7 +770,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2, y: 3, z: 1}
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &8790860002384552885
 GameObject:
   m_ObjectHideFlags: 0
