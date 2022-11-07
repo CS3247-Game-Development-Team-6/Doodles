@@ -6,7 +6,6 @@ public class EnemyBullet : MonoBehaviour {
     private Transform target;
     private float speed;
     private int bulletDamage;
-    private bool enableCameraShake;
     private Map map;
 
     public GameObject impactEffect;
@@ -16,11 +15,10 @@ public class EnemyBullet : MonoBehaviour {
         map = FindObjectOfType<Map>();
     }
 
-    public virtual void Seek(Transform _target, float _speed, int damage, bool _enableCameraShake) {
+    public virtual void Seek(Transform _target, float _speed, int damage) {
         target = _target;
         speed = _speed;
         bulletDamage = damage;
-        enableCameraShake = _enableCameraShake;
     }
 
     private void Update() {
@@ -42,10 +40,6 @@ public class EnemyBullet : MonoBehaviour {
     }
 
     private void HitTarget() {
-        if (enableCameraShake) {
-            CameraShaker.Instance.ShakeOnce(4f, 4f, 0.1f, 1f);
-        }
-
         GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(effectIns, 2f);
 
