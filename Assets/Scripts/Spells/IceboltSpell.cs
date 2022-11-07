@@ -2,42 +2,39 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class IceboltSpell : Spell
-{
+public class IceboltSpell : Spell {
     private static readonly Vector3 OFFSET = Vector3.up * 0.001f;
-
     [SerializeField] public float effectWidth;
     [SerializeField] public float effectLength;
-
     [SerializeField] private float damage;
     [SerializeField] private GameObject indicatorPrefab;
     [SerializeField] private GameObject fireballPrefab;
-
     private Canvas indicator;
-    // private GameObject fireball;
+    private GameObject fireball;
     private Image targetImage;
-
     private Transform player;
     private bool isSearching;
     private SpellUI ui;
     private bool firstPress = true;
     
-    private void Update()
-    {
+    private void Update() {
         if (!isSearching) return;
         if (!targetImage) return;
-     
+
+        if (fireball) {
+            fireball.transform.position = player.position;
+        }
+
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
             Vector3 position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
             Quaternion transRot = Quaternion.LookRotation(player.position - position);
-            targetImage.transform.position = player.position + OFFSET;
+            targetImage.transform.position = player.position;
             targetImage.rectTransform.localRotation = Quaternion.Euler(0, 0, transRot.eulerAngles.y);
             // LEFT CLICK
             if (Input.GetMouseButtonDown(0)) {
-                if (firstPress)
-                {
+                if (firstPress) {
                     firstPress = false;
                     return;
                 }
@@ -47,7 +44,7 @@ public class IceboltSpell : Spell
                 ui.ResetCooldownTimer();
                 indicator.gameObject.SetActive(false);
 
-                Attack();
+                Attack(player, transRot);
                 StartCoroutine(Deactivate(ui));
                 Debug.Log("charging cost for icebolt");
                 // RIGHT CLICK
@@ -73,15 +70,13 @@ public class IceboltSpell : Spell
         }
     }
 
-    public override IEnumerator Deactivate(SpellUI ui)
-    {
+    public override IEnumerator Deactivate(SpellUI ui){
         isSearching = false;
 
         yield return new WaitForSeconds(10);
-
     }
-    public void cancelCast()
-    {
+
+    public void cancelCast() {
         if (!isSearching){
             return;
         }
@@ -89,22 +84,21 @@ public class IceboltSpell : Spell
         SpellManager.instance.isCasting = false;
         Destroy(indicator.gameObject);
     }
-    public void Attack()
-    {
-        //fireball = Instantiate(fireballPrefab, targetImage.transform.position + Vector3.up * 10f, Quaternion.identity);
+
+    public void Attack(Transform playerTransform, Quaternion direction) {
+        fireball = Instantiate(fireballPrefab, playerTransform.position, direction);
         Enemy[] allObjects = FindObjectsOfType<Enemy>();
-        foreach (Enemy e in allObjects)
-        {
+        foreach (Enemy e in allObjects) {
             Vector3 v1 = new Vector3(targetImage.transform.position.x, player.position.y, targetImage.transform.position.z);
             Vector3 v2 = new Vector3(e.transform.position.x, player.position.y, e.transform.position.z);
             float angle1 = Vector3.Angle(v1, player.position);
             float angle2 = Vector3.Angle(v2, player.position);
-            if (Vector3.Distance(targetImage.transform.position, e.transform.position) <= effectLength && Mathf.Abs(angle1 - angle2) <= 30)
-            {
+            if (Vector3.Distance(targetImage.transform.position, e.transform.position) <= effectLength && Mathf.Abs(angle1 - angle2) <= 30) {
                 e.TakeDamage(damage, null);
             }
         }
         Destroy(indicator.gameObject);
+        Destroy(fireball, 1f);
     }
 
 }
