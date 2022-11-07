@@ -4,9 +4,9 @@ using UnityEngine;
 public class GelExplosionEffect : IEnemyEffect {
 
     // values that can be set
-    public float gelLifetime = 2.0f; // lifetime of the effect
+    public float gelLifetime = 1f; // lifetime of the effect
     // calls the coroutine Deactivate after yielding for ^ seconds
-    public float gelSlowAmount = 0.6f; // value 0 to 1 applied to speed of enemy
+    public float gelSlowAmount = 0.8f; // value 0 to 1 applied to speed of enemy
 
     public string GetKey() {
         return "Gel";
