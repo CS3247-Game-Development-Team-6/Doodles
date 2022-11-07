@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13.2, y: -28.768}
-  m_SizeDelta: {x: 75.2473, y: 57.5354}
+  m_AnchoredPosition: {x: -8.8827, y: -28.768}
+  m_SizeDelta: {x: 119.4128, y: 57.5354}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2034167096322439276
 CanvasRenderer:
@@ -570,7 +570,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageCooldown: {fileID: 7673514253616851059}
+  effectCooldown: {fileID: 0}
   textCooldown: {fileID: 8627131422509745244}
   button: {fileID: 2188307773214821681}
   textCost: {fileID: 2034167096322439277}
+  spellInfo: {fileID: 0}
   spell: {fileID: 0}

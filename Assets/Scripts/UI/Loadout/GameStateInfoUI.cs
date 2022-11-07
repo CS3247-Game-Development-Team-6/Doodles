@@ -43,7 +43,7 @@ public class GameStateInfoUI : MonoBehaviour{
     }
 
     private string GetWaveStatus() {
-        int chunkNum = chunkSpawner.chunkIndex;
+        int chunkNum = chunkSpawner.chunkIndex + 1;
         int waveNum = chunkSpawner.WavesStarted;
         int totalWavesInChunk = chunkSpawner.waves.Length;
         return $"\nWave {waveNum} / {totalWavesInChunk}\nin level {chunkNum} / {totalChunks}";

@@ -2,8 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FireballSpell : Spell
-{
+public class FireballSpell : Spell {
     private static readonly Vector3 OFFSET = Vector3.up * 0.001f;
 
     [SerializeField] public float radiusOfEffect;
@@ -23,17 +22,14 @@ public class FireballSpell : Spell
     private bool inFalling;
     private bool firstPress = true;
 
-    private void Update()
-    {
+    private void Update() {
         //TODO, this way is working, but probably could change to "standard way later, add collider to fireball and remove the isfalling flag
-        if (inFalling)
-        {
+        if (inFalling) {
 
-            if (player.position.y >= fireball.transform.position.y)
-            {
+            if (player.position.y >= fireball.transform.position.y) {
                 Attack();
                 inFalling = false;
-                Destroy(fireball);
+                Destroy(fireball, 1f);
 
             }
             return;
@@ -44,8 +40,7 @@ public class FireballSpell : Spell
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
             if (hit.collider.gameObject == this.gameObject) return;
 
             var hitPosDir = (hit.point - player.position).normalized;
@@ -56,17 +51,14 @@ public class FireballSpell : Spell
             targetImage.transform.position = player.position + hitPosDir * distance + OFFSET;
 
             // LEFT CLICK
-            if (Input.GetMouseButtonDown(0))
-            {
+            if (Input.GetMouseButtonDown(0)) {
 
-                if (firstPress)
-                {
+                if (firstPress) {
                     firstPress = false;
                     return;
                 }
 
-                if (hit.collider.gameObject.name == "GroundTest" | hit.collider.gameObject.name == "InvisibleWall")
-                {
+                if (hit.collider.gameObject.name == "GroundTest" | hit.collider.gameObject.name == "InvisibleWall") {
 
                     return;
                 }
@@ -82,9 +74,8 @@ public class FireballSpell : Spell
         }
 
     }
-    public void cancelCast()
-    {
-        if(! isSearching){
+    public void cancelCast() {
+        if (!isSearching) {
             return;
         }
         StartCoroutine(Deactivate(ui));
@@ -92,11 +83,9 @@ public class FireballSpell : Spell
         Destroy(indicator.gameObject);
 
     }
-    public override IEnumerator Activate(SpellUI ui)
-    {
+    public override IEnumerator Activate(SpellUI ui) {
         player = FindObjectOfType<PlayerMovement>().transform;
-        if (!isSearching)
-        {
+        if (!isSearching) {
             firstPress = true;
             SpellManager.instance.isCasting = true;
             // is this okay?
@@ -116,8 +105,7 @@ public class FireballSpell : Spell
 
     }
 
-    public override IEnumerator Deactivate(SpellUI ui)
-    {
+    public override IEnumerator Deactivate(SpellUI ui) {
         isSearching = false;
 
         yield return new WaitForSeconds(10);
@@ -125,14 +113,11 @@ public class FireballSpell : Spell
 
     }
 
-    public void Attack()
-    {
+    public void Attack() {
 
         Enemy[] allObjects = FindObjectsOfType<Enemy>();
-        foreach (Enemy e in allObjects)
-        {
-            if (Vector3.Distance(targetImage.transform.position, e.transform.position) <= radiusOfEffect)
-            {
+        foreach (Enemy e in allObjects) {
+            if (Vector3.Distance(targetImage.transform.position, e.transform.position) <= radiusOfEffect) {
                 e.TakeDamage(damage, null);
             }
         }
