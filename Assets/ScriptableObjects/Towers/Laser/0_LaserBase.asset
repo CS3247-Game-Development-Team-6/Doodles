@@ -16,17 +16,14 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: ad5fa528c992848b9bc2494cae976ab8, type: 3}
   towerDesc: 'Locks on moving target, damage increases over time attached.
 
-    Upgrade:
-    $50, +100% DMG
-
 '
   range: 4
   upgradeNum: 0
   fireRate: 1
   element: {fileID: 0}
-  cost: 50
+  cost: 75
   health: 100
-  healthDecayRate: 0.5
+  healthDecayRate: 5
   damageFixFactor: 0.15
   allowedCellTypes: 00000000
   stoppable: 1

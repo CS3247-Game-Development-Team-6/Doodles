@@ -16,15 +16,12 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 0193902b2359c4df7a57618b4e4c3c31, type: 3}
   towerDesc: 'Triggers explosion on path, high damage.
 
-    Upgrade: $10, +17% DMG,
-    +33% range
-
 '
   range: 1.5
   upgradeNum: 0
   fireRate: 0
   element: {fileID: 0}
-  cost: 30
+  cost: 80
   health: 1
   healthDecayRate: 1
   damageFixFactor: 0
@@ -32,7 +29,7 @@ MonoBehaviour:
   stoppable: 0
   speed: 100
   explosionRadius: 0
-  damage: 100
+  damage: 500
   penetratesEnemy: 0
   impactPrefab: {fileID: 4794043405585894037, guid: a22350dbd83d54b0990687ec8d58c950, type: 3}
   impactSound: {fileID: 0}

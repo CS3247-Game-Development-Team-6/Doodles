@@ -14,23 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Mortar
   sprite: {fileID: 21300000, guid: a9591022143374b8bab5f9579b098bb7, type: 3}
-  towerDesc: 'Fires long range mortars, large AOE and damage.
-
-    Upgrade: $25,
-    +20% DMG'
+  towerDesc: Fires mortars at long range, dealing damage to the area of impact. (Doesn't
+    fire short range!)
   range: 6
   upgradeNum: 0
   fireRate: 0.25
   element: {fileID: 0}
   cost: 75
   health: 200
-  healthDecayRate: 1.8
+  healthDecayRate: 15
   damageFixFactor: 0.2
   allowedCellTypes: 00000000
   stoppable: 0
   speed: 10
   explosionRadius: 2
-  damage: 100
+  damage: 80
   penetratesEnemy: 0
   impactPrefab: {fileID: 4458309670618186649, guid: 67ea2f3b6082d4aeab8bc46a70f2d8c0, type: 3}
   impactSound: {fileID: 0}

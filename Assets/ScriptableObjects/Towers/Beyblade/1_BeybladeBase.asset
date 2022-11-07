@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Beyblade 2
   sprite: {fileID: 21300000, guid: e84f7a3465b5e4ac5abf5d027b946cdc, type: 3}
-  towerDesc: 
+  towerDesc: Deals more damage and drains HP more slowly.
   range: 1
   upgradeNum: 1
   fireRate: 0
   element: {fileID: 0}
   cost: 20
-  health: 70
-  healthDecayRate: 1.1
-  damageFixFactor: 1.03
+  health: 80
+  healthDecayRate: 0.2
+  damageFixFactor: 0.4
   allowedCellTypes: 0100000002000000
   stoppable: 0
   speed: 100
   explosionRadius: 0
-  damage: 50
+  damage: 32
   penetratesEnemy: 0
   impactPrefab: {fileID: 4794043405585894037, guid: 593199f920f7c467aa6e73f15b9faf46, type: 3}
   impactSound: {fileID: 0}

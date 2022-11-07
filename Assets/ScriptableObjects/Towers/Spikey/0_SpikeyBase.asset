@@ -14,16 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Spikey
   sprite: {fileID: 21300000, guid: 14bb0084aa66c42eea2e4d9dbb68cb58, type: 3}
-  towerDesc: 'Attacks in all directions.
-
-    Upgrade: $100, +20% DMG
-
-'
+  towerDesc: Fires in all directions.
   range: 1.5
   upgradeNum: 0
   fireRate: 1
   element: {fileID: 0}
-  cost: 100
+  cost: 75
   health: 150
   healthDecayRate: 2.5
   damageFixFactor: 0.4
@@ -31,7 +27,7 @@ MonoBehaviour:
   stoppable: 1
   speed: 1
   explosionRadius: 0
-  damage: 30
+  damage: 40
   penetratesEnemy: 0
   impactPrefab: {fileID: 0}
   impactSound: {fileID: 0}

@@ -16,16 +16,14 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: c8045ef5201f146e6ba74aba3de75c67, type: 3}
   towerDesc: 'Single target, high damage.
 
-    Upgrade: $25, +20% DMG
-
 '
   range: 4
   upgradeNum: 0
   fireRate: 1
   element: {fileID: 0}
-  cost: 30
+  cost: 40
   health: 100
-  healthDecayRate: 1
+  healthDecayRate: 3
   damageFixFactor: 0.15
   allowedCellTypes: 00000000
   stoppable: 1

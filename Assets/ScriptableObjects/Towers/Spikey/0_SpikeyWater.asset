@@ -14,12 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Water Spikey
   sprite: {fileID: 21300000, guid: 386c1acda42b348168f024fa60677f3f, type: 3}
-  towerDesc: 
+  towerDesc: 'Deals DoT to enemies for 5 seconds
+
+    (Water + Ice: Freezes enemies
+    for 3 seconds)
+
+    (Fire + Water: Deal DoT in one burst)'
   range: 1.5
   upgradeNum: 0
   fireRate: 1
   element: {fileID: 11400000, guid: 5f2ac61151ef7e347b4a722691241670, type: 2}
-  cost: 75
+  cost: 45
   health: 160
   healthDecayRate: 2.3
   damageFixFactor: 0.55
@@ -27,7 +32,7 @@ MonoBehaviour:
   stoppable: 1
   speed: 1
   explosionRadius: 0
-  damage: 25
+  damage: 38
   penetratesEnemy: 0
   impactPrefab: {fileID: 0}
   impactSound: {fileID: 0}

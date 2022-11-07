@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Spikey 2
   sprite: {fileID: 21300000, guid: facabc435af514b97a00ed11561ecea5, type: 3}
-  towerDesc: 
+  towerDesc: Fires faster with increased damage.
   range: 1.5
   upgradeNum: 1
-  fireRate: 1
+  fireRate: 1.5
   element: {fileID: 0}
-  cost: 100
+  cost: 75
   health: 180
   healthDecayRate: 2.5
   damageFixFactor: 0.35
@@ -27,7 +27,7 @@ MonoBehaviour:
   stoppable: 1
   speed: 1
   explosionRadius: 0
-  damage: 36
+  damage: 50
   penetratesEnemy: 0
   impactPrefab: {fileID: 0}
   impactSound: {fileID: 0}

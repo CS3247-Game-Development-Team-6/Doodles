@@ -12,39 +12,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4a39bb2062e524580495433674019c, type: 3}
   m_Name: 3_Clown_Chunk_3
   m_EditorClassIdentifier: 
-  levelName: 1_Spider_Chunk_1
+  levelName: 1_Clown_Chunk_3
   startingInkPercentage: 0.5
   waves:
-  - enemy: {fileID: 6540121397901334477, guid: bb654b05217e54e409befc0b55becb13, type: 3}
-    count: 1
+  - enemy: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
+    count: 5
     rate: 1
     enemy2: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
-    count2: 1
-    rate2: 1
-    enemy3: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
-    count3: 2
-    rate3: 1
-  - enemy: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
-    count: 2
+    count2: 5
+    rate2: 1.5
+    enemy3: {fileID: 6540121397901334477, guid: 6e5782a579628664a84c48ecc4beedad, type: 3}
+    count3: 5
+    rate3: 2
+  - enemy: {fileID: 6540121397901334477, guid: 0499648e563aca045bcccccaadb24e15, type: 3}
+    count: 10
     rate: 1
+    enemy2: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
+    count2: 5
+    rate2: 3
+    enemy3: {fileID: 6540121397901334477, guid: bb654b05217e54e409befc0b55becb13, type: 3}
+    count3: 5
+    rate3: 1
+  - enemy: {fileID: 6540121397901334477, guid: 5ec0b27bf3ee0084abd64178985715e5, type: 3}
+    count: 10
+    rate: 1.5
     enemy2: {fileID: 6540121397901334477, guid: bb654b05217e54e409befc0b55becb13, type: 3}
-    count2: 1
+    count2: 5
     rate2: 1
     enemy3: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
-    count3: 1
-    rate3: 1
-  - enemy: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
-    count: 2
+    count3: 10
+    rate3: 2
+  - enemy: {fileID: 6540121397901334477, guid: bb49b134896cbc7489de7b064bff5f30, type: 3}
+    count: 10
+    rate: 1.5
+    enemy2: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
+    count2: 5
+    rate2: 1.5
+    enemy3: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
+    count3: 10
+    rate3: 3
+  - enemy: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
+    count: 10
+    rate: 1.5
+    enemy2: {fileID: 6540121397901334477, guid: 6d15fab1fcff8f24bbc709c2086fc5b3, type: 3}
+    count2: 10
+    rate2: 2
+    enemy3: {fileID: 6540121397901334477, guid: bb654b05217e54e409befc0b55becb13, type: 3}
+    count3: 10
+    rate3: 4
+  - enemy: {fileID: 6540121397901334477, guid: 5ec0b27bf3ee0084abd64178985715e5, type: 3}
+    count: 10
     rate: 1
-    enemy2: {fileID: 6540121397901334477, guid: bb654b05217e54e409befc0b55becb13, type: 3}
-    count2: 3
-    rate2: 1
-    enemy3: {fileID: 6540121397901334477, guid: 2e4d614c9eb966646824cd673d771c08, type: 3}
-    count3: 4
-    rate3: 1
+    enemy2: {fileID: 6540121397901334477, guid: bb49b134896cbc7489de7b064bff5f30, type: 3}
+    count2: 10
+    rate2: 1.5
+    enemy3: {fileID: 6540121397901334477, guid: 0499648e563aca045bcccccaadb24e15, type: 3}
+    count3: 15
+    rate3: 1.5
   isFogChunk: 0
   notes:
-  - text: 'I can feel a big group of clowns are coming, Dan. Prepare to battle.
+  - text: 'You''re doing great Dan!
+
+'
+    rectPosition: {x: 231, y: -174, z: 0}
+  - text: 'I hear spiders skittering about again! Look out for them!
 
 '
     rectPosition: {x: 231, y: -174, z: 0}
