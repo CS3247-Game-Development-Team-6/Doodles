@@ -177,7 +177,7 @@ public class EffectManager : MonoBehaviour, IEffectable {
         // Slow Effect (Ice)
         else if (_data.SlowAmount != 0 && _currentEffectTime > _nextTickTime) {
             if (_nextTickTime == 0) {
-                enemy.ReduceBaseSpeed(_data.SlowAmount * SpellManager.instance.GetElementAugmentationFactor());
+                enemy.ReduceBaseSpeed(_data.SlowAmount / SpellManager.instance.GetElementAugmentationFactor());
                 enemy.SetStatus(Status.CHILL);
             }
             _nextTickTime += _data.TickSpeed;
