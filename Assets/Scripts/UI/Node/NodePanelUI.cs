@@ -12,6 +12,7 @@ public class NodePanelUI : MonoBehaviour {
     public TextMeshProUGUI speedUi;
     public TextMeshProUGUI rateUi;
     public TextMeshProUGUI rangeUi;
+    public TextMeshProUGUI descUI;
     public GameObject[] backgrounds;
 
     [SerializeField] private Color positiveIndicator;
@@ -50,6 +51,11 @@ public class NodePanelUI : MonoBehaviour {
             CompareValues(tower.towerInfo.speed, newTower.speed, speedUi);
             CompareValues(tower.towerInfo.fireRate, newTower.fireRate, rateUi);
             CompareValues(tower.towerInfo.range, newTower.range, rangeUi);
+            if (newTower.upgradeNum - tower.towerInfo.upgradeNum == 0 && newTower.element != null) { 
+                descUI.text = $"{newTower.element.description.Trim()}";
+            } else if (newTower.upgradeNum - tower.towerInfo.upgradeNum > 0) {
+                descUI.text = $"{newTower.towerDesc.Trim()}";
+            }
 
         } else {
             healthUi.text = $"{(int)tower.health} / {(int)tower.maxHealth}";
@@ -59,6 +65,7 @@ public class NodePanelUI : MonoBehaviour {
             rateUi.text = $"{tower.towerInfo.fireRate}";
             rangeUi.text = $"{tower.towerInfo.range}";
             healthUi.color = dmgUi.color = aoeUi.color = speedUi.color = rateUi.color = rangeUi.color = defaultColor;
+            descUI.text = $"{tower.towerInfo.towerDesc.Trim()} {(tower.element != null ? tower.element.description.Trim() : "")}";
         }
     }
 
