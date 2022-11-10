@@ -34,6 +34,7 @@ public class TowerDescriptionUI : MonoBehaviour {
         }
         towerName.text = towerInfo.towerName;
         towerDesc.text = towerInfo.towerDesc;
+        if (towerInfo.element != null) towerDesc.text += $"\n{towerInfo.element.description}";
         cost.text = isBase ? towerInfo.cost.ToString() : $"+{towerInfo.cost}";
         int damageDiff = !lastClicked ? 0 : towerInfo.damage - lastClicked.damage;
         float rangeDiff = !lastClicked ? 0 : towerInfo.range - lastClicked.range;
