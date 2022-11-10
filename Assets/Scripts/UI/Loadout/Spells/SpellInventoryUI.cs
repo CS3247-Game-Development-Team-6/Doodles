@@ -18,6 +18,7 @@ public class SpellInventoryUI : MonoBehaviour {
     public bool isMaxLevelUnlocked => MaxLevelUnlocked >= MAX_LEVEL;
 
     private void OnEnable() {
+        currentSpellSelected = null;
         SpellManager.IsChoosingSpell = true;
     }
 
